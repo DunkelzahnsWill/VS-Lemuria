@@ -1,0 +1,22 @@
+# Downloaded game server, smoke-test worlds and packaged zips (never committed)
+/.cache/
+/Releases/
+
+# Build output of the top-level projects. Anchored on purpose: a broad pattern such as
+# [Bb]in/, [Aa]rm/, [Ll]og/ or [Dd]ebug/ would silently drop mod files in folders with those names.
+/*/bin/
+/*/obj/
+
+# Editors and OS
+.vs/
+.idea/
+*.user
+*.suo
+*.DotSettings.user
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.DS_Store
+Thumbs.db
