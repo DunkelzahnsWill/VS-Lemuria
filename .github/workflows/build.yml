@@ -1,0 +1,65 @@
+name: Build and smoke test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# A new push to a pull request cancels its older run; every commit on main gets its own run.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Cache the game server download
+        uses: actions/cache@v6
+        with:
+          path: .cache/vintagestory/downloads
+          key: vs-server-${{ hashFiles('scripts/versions.env') }}
+
+      - name: Set up the game server (checksum-verified)
+        run: scripts/setup.sh
+
+      - name: Validate, build and package
+        run: ./build.sh
+
+      - name: Smoke test on a headless server
+        run: scripts/smoke-test.sh
+
+      # Uploaded unwrapped, so the download is lemuria_<version>.zip itself, ready for the Mods folder.
+      # Kept even when the smoke test fails, so a failing build can be looked at on a PC.
+      - name: Upload the mod zip
+        if: ${{ !cancelled() && hashFiles('Releases/*.zip') != '' }}
+        uses: actions/upload-artifact@v7
+        with:
+          path: Releases/*.zip
+          archive: false
+          overwrite: true
+
+      - name: Upload the smoke-test server logs
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: smoke-test-logs
+          path: |
+            .cache/smoke/stdout.log
+            .cache/smoke/stdout-restart.log
+            .cache/smoke/data/Logs/
+            .cache/smoke/data/Logs-restart/
+          include-hidden-files: true
+          if-no-files-found: ignore
+          overwrite: true
