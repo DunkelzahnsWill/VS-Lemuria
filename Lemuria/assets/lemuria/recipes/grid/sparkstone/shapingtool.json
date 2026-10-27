@@ -1,0 +1,10 @@
+{
+	"ingredientPattern": "C,U",
+	"ingredients": {
+		"C": { "type": "item", "tags": ["tool-chisel"] },
+		"U": { "type": "block", "code": "lemuria:crystal-unaligned-glittering-up" }
+	},
+	"width": 1,
+	"height": 2,
+	"output": { "type": "item", "code": "lemuria:shapingtool", "quantity": 1 }
+}

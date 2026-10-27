@@ -1,0 +1,12 @@
+{
+	"item-shapingtool": "Shaping tool",
+	"itemdesc-shapingtool": "A chisel with an Unaligned crystal set in its handle. It commands stone.",
+	"shapingtool-charge-0": "Its glyphs are dark: empty.",
+	"shapingtool-charge-1": "One glyph is lit.",
+	"shapingtool-charge-2": "Two glyphs are lit.",
+	"shapingtool-charge-3": "All three glyphs are lit: full.",
+	"shapingtool-draw": "Draw charge from a charged crystal or sparkstone",
+	"shapingtool-awaken": "Hold on polished rock to awaken it",
+	"block-sparkstone-awakened-*": "Awakened sparkstone",
+	"blockdesc-sparkstone-awakened-*": "Polished stone carved with glyphs. It stores charge and shares it with every block of it that it touches."
+}

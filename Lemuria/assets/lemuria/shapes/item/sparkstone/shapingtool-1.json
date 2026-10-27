@@ -1,0 +1,721 @@
+{
+ "textureWidth": 16,
+ "textureHeight": 16,
+ "textures": {
+  "blade": "lemuria:item/sparkstone/blade",
+  "handle": "lemuria:item/sparkstone/handle",
+  "crystal": "lemuria:block/crystals/unaligned",
+  "glyph": "lemuria:block/sparkstone/glyph",
+  "lit": "lemuria:block/sparkstone/glyph-full"
+ },
+ "elements": [
+  {
+   "name": "crystal",
+   "from": [
+    7.1,
+    0,
+    7.1
+   ],
+   "to": [
+    8.9,
+    2,
+    8.9
+   ],
+   "faces": {
+    "north": {
+     "texture": "#crystal",
+     "uv": [
+      0,
+      0,
+      1.8,
+      2
+     ],
+     "glow": 220
+    },
+    "east": {
+     "texture": "#crystal",
+     "uv": [
+      0,
+      0,
+      1.8,
+      2
+     ],
+     "glow": 220
+    },
+    "south": {
+     "texture": "#crystal",
+     "uv": [
+      0,
+      0,
+      1.8,
+      2
+     ],
+     "glow": 220
+    },
+    "west": {
+     "texture": "#crystal",
+     "uv": [
+      0,
+      0,
+      1.8,
+      2
+     ],
+     "glow": 220
+    },
+    "up": {
+     "texture": "#crystal",
+     "uv": [
+      0,
+      0,
+      1.8,
+      1.8
+     ],
+     "glow": 220
+    },
+    "down": {
+     "texture": "#crystal",
+     "uv": [
+      0,
+      0,
+      1.8,
+      1.8
+     ],
+     "glow": 220
+    }
+   }
+  },
+  {
+   "name": "handle",
+   "from": [
+    7,
+    2,
+    7
+   ],
+   "to": [
+    9,
+    8,
+    9
+   ],
+   "faces": {
+    "north": {
+     "texture": "#handle",
+     "uv": [
+      0,
+      0,
+      2,
+      6
+     ]
+    },
+    "east": {
+     "texture": "#handle",
+     "uv": [
+      0,
+      0,
+      2,
+      6
+     ]
+    },
+    "south": {
+     "texture": "#handle",
+     "uv": [
+      0,
+      0,
+      2,
+      6
+     ]
+    },
+    "west": {
+     "texture": "#handle",
+     "uv": [
+      0,
+      0,
+      2,
+      6
+     ]
+    },
+    "up": {
+     "texture": "#handle",
+     "uv": [
+      0,
+      0,
+      2,
+      2
+     ]
+    },
+    "down": {
+     "texture": "#handle",
+     "uv": [
+      0,
+      0,
+      2,
+      2
+     ]
+    }
+   }
+  },
+  {
+   "name": "blade",
+   "from": [
+    7.4,
+    8,
+    7.25
+   ],
+   "to": [
+    8.6,
+    14,
+    8.75
+   ],
+   "faces": {
+    "north": {
+     "texture": "#blade",
+     "uv": [
+      0,
+      0,
+      1.2,
+      6
+     ]
+    },
+    "east": {
+     "texture": "#blade",
+     "uv": [
+      0,
+      0,
+      1.5,
+      6
+     ]
+    },
+    "south": {
+     "texture": "#blade",
+     "uv": [
+      0,
+      0,
+      1.2,
+      6
+     ]
+    },
+    "west": {
+     "texture": "#blade",
+     "uv": [
+      0,
+      0,
+      1.5,
+      6
+     ]
+    },
+    "up": {
+     "texture": "#blade",
+     "uv": [
+      0,
+      0,
+      1.2,
+      1.5
+     ]
+    },
+    "down": {
+     "texture": "#blade",
+     "uv": [
+      0,
+      0,
+      1.2,
+      1.5
+     ]
+    }
+   }
+  },
+  {
+   "name": "edge",
+   "from": [
+    7.6,
+    14,
+    7.6
+   ],
+   "to": [
+    8.4,
+    15.5,
+    8.4
+   ],
+   "faces": {
+    "north": {
+     "texture": "#blade",
+     "uv": [
+      0,
+      0,
+      0.8,
+      1.5
+     ]
+    },
+    "east": {
+     "texture": "#blade",
+     "uv": [
+      0,
+      0,
+      0.8,
+      1.5
+     ]
+    },
+    "south": {
+     "texture": "#blade",
+     "uv": [
+      0,
+      0,
+      0.8,
+      1.5
+     ]
+    },
+    "west": {
+     "texture": "#blade",
+     "uv": [
+      0,
+      0,
+      0.8,
+      1.5
+     ]
+    },
+    "up": {
+     "texture": "#blade",
+     "uv": [
+      0,
+      0,
+      0.8,
+      0.8
+     ]
+    },
+    "down": {
+     "texture": "#blade",
+     "uv": [
+      0,
+      0,
+      0.8,
+      0.8
+     ]
+    }
+   }
+  },
+  {
+   "name": "glyph1n",
+   "from": [
+    7.6,
+    9,
+    7.15
+   ],
+   "to": [
+    8.4,
+    10,
+    7.25
+   ],
+   "faces": {
+    "north": {
+     "texture": "#lit",
+     "uv": [
+      0,
+      0,
+      0.8,
+      1
+     ],
+     "glow": 255
+    },
+    "east": {
+     "texture": "#lit",
+     "uv": [
+      0,
+      0,
+      0.1,
+      1
+     ],
+     "glow": 255
+    },
+    "south": {
+     "texture": "#lit",
+     "uv": [
+      0,
+      0,
+      0.8,
+      1
+     ],
+     "glow": 255
+    },
+    "west": {
+     "texture": "#lit",
+     "uv": [
+      0,
+      0,
+      0.1,
+      1
+     ],
+     "glow": 255
+    },
+    "up": {
+     "texture": "#lit",
+     "uv": [
+      0,
+      0,
+      0.8,
+      0.1
+     ],
+     "glow": 255
+    },
+    "down": {
+     "texture": "#lit",
+     "uv": [
+      0,
+      0,
+      0.8,
+      0.1
+     ],
+     "glow": 255
+    }
+   }
+  },
+  {
+   "name": "glyph1s",
+   "from": [
+    7.6,
+    9,
+    8.75
+   ],
+   "to": [
+    8.4,
+    10,
+    8.85
+   ],
+   "faces": {
+    "north": {
+     "texture": "#lit",
+     "uv": [
+      0,
+      0,
+      0.8,
+      1
+     ],
+     "glow": 255
+    },
+    "east": {
+     "texture": "#lit",
+     "uv": [
+      0,
+      0,
+      0.1,
+      1
+     ],
+     "glow": 255
+    },
+    "south": {
+     "texture": "#lit",
+     "uv": [
+      0,
+      0,
+      0.8,
+      1
+     ],
+     "glow": 255
+    },
+    "west": {
+     "texture": "#lit",
+     "uv": [
+      0,
+      0,
+      0.1,
+      1
+     ],
+     "glow": 255
+    },
+    "up": {
+     "texture": "#lit",
+     "uv": [
+      0,
+      0,
+      0.8,
+      0.1
+     ],
+     "glow": 255
+    },
+    "down": {
+     "texture": "#lit",
+     "uv": [
+      0,
+      0,
+      0.8,
+      0.1
+     ],
+     "glow": 255
+    }
+   }
+  },
+  {
+   "name": "glyph2n",
+   "from": [
+    7.6,
+    10.75,
+    7.15
+   ],
+   "to": [
+    8.4,
+    11.75,
+    7.25
+   ],
+   "faces": {
+    "north": {
+     "texture": "#glyph",
+     "uv": [
+      0,
+      0,
+      0.8,
+      1.0
+     ]
+    },
+    "east": {
+     "texture": "#glyph",
+     "uv": [
+      0,
+      0,
+      0.1,
+      1.0
+     ]
+    },
+    "south": {
+     "texture": "#glyph",
+     "uv": [
+      0,
+      0,
+      0.8,
+      1.0
+     ]
+    },
+    "west": {
+     "texture": "#glyph",
+     "uv": [
+      0,
+      0,
+      0.1,
+      1.0
+     ]
+    },
+    "up": {
+     "texture": "#glyph",
+     "uv": [
+      0,
+      0,
+      0.8,
+      0.1
+     ]
+    },
+    "down": {
+     "texture": "#glyph",
+     "uv": [
+      0,
+      0,
+      0.8,
+      0.1
+     ]
+    }
+   }
+  },
+  {
+   "name": "glyph2s",
+   "from": [
+    7.6,
+    10.75,
+    8.75
+   ],
+   "to": [
+    8.4,
+    11.75,
+    8.85
+   ],
+   "faces": {
+    "north": {
+     "texture": "#glyph",
+     "uv": [
+      0,
+      0,
+      0.8,
+      1.0
+     ]
+    },
+    "east": {
+     "texture": "#glyph",
+     "uv": [
+      0,
+      0,
+      0.1,
+      1.0
+     ]
+    },
+    "south": {
+     "texture": "#glyph",
+     "uv": [
+      0,
+      0,
+      0.8,
+      1.0
+     ]
+    },
+    "west": {
+     "texture": "#glyph",
+     "uv": [
+      0,
+      0,
+      0.1,
+      1.0
+     ]
+    },
+    "up": {
+     "texture": "#glyph",
+     "uv": [
+      0,
+      0,
+      0.8,
+      0.1
+     ]
+    },
+    "down": {
+     "texture": "#glyph",
+     "uv": [
+      0,
+      0,
+      0.8,
+      0.1
+     ]
+    }
+   }
+  },
+  {
+   "name": "glyph3n",
+   "from": [
+    7.6,
+    12.5,
+    7.15
+   ],
+   "to": [
+    8.4,
+    13.5,
+    7.25
+   ],
+   "faces": {
+    "north": {
+     "texture": "#glyph",
+     "uv": [
+      0,
+      0,
+      0.8,
+      1.0
+     ]
+    },
+    "east": {
+     "texture": "#glyph",
+     "uv": [
+      0,
+      0,
+      0.1,
+      1.0
+     ]
+    },
+    "south": {
+     "texture": "#glyph",
+     "uv": [
+      0,
+      0,
+      0.8,
+      1.0
+     ]
+    },
+    "west": {
+     "texture": "#glyph",
+     "uv": [
+      0,
+      0,
+      0.1,
+      1.0
+     ]
+    },
+    "up": {
+     "texture": "#glyph",
+     "uv": [
+      0,
+      0,
+      0.8,
+      0.1
+     ]
+    },
+    "down": {
+     "texture": "#glyph",
+     "uv": [
+      0,
+      0,
+      0.8,
+      0.1
+     ]
+    }
+   }
+  },
+  {
+   "name": "glyph3s",
+   "from": [
+    7.6,
+    12.5,
+    8.75
+   ],
+   "to": [
+    8.4,
+    13.5,
+    8.85
+   ],
+   "faces": {
+    "north": {
+     "texture": "#glyph",
+     "uv": [
+      0,
+      0,
+      0.8,
+      1.0
+     ]
+    },
+    "east": {
+     "texture": "#glyph",
+     "uv": [
+      0,
+      0,
+      0.1,
+      1.0
+     ]
+    },
+    "south": {
+     "texture": "#glyph",
+     "uv": [
+      0,
+      0,
+      0.8,
+      1.0
+     ]
+    },
+    "west": {
+     "texture": "#glyph",
+     "uv": [
+      0,
+      0,
+      0.1,
+      1.0
+     ]
+    },
+    "up": {
+     "texture": "#glyph",
+     "uv": [
+      0,
+      0,
+      0.8,
+      0.1
+     ]
+    },
+    "down": {
+     "texture": "#glyph",
+     "uv": [
+      0,
+      0,
+      0.8,
+      0.1
+     ]
+    }
+   }
+  }
+ ]
+}

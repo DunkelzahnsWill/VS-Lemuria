@@ -1,0 +1,40 @@
+{
+	"code": "shapingtool",
+	"class": "lemuria-shapingtool",
+	"maxstacksize": 1,
+	"shape": { "base": "lemuria:item/sparkstone/shapingtool-0" },
+	"textures": {
+		"blade": { "base": "lemuria:item/sparkstone/blade" },
+		"handle": { "base": "lemuria:item/sparkstone/handle" },
+		"crystal": { "base": "lemuria:block/crystals/unaligned" },
+		"glyph": { "base": "lemuria:block/sparkstone/glyph" },
+		"lit": { "base": "lemuria:block/sparkstone/glyph-full" }
+	},
+	"attributes": {
+		"handbook": { "exclude": true }
+	},
+	"creativeinventory": { "general": ["*"], "items": ["*"] },
+	"heldTpUseAnimation": "knap",
+	"guiTransform": {
+		"rotation": { "x": -77, "y": 46, "z": 8 },
+		"origin": { "x": 0.5, "y": 0, "z": 0.5 },
+		"scale": 2.6
+	},
+	"fpHandTransform": {
+		"translation": { "x": 0, "y": 0.1, "z": 0 },
+		"rotation": { "x": 15, "y": 15, "z": 90 },
+		"origin": { "x": 0.5, "y": 0.2, "z": 0.5 },
+		"scale": 2
+	},
+	"groundTransform": {
+		"rotation": { "x": 0, "y": 0, "z": 0 },
+		"origin": { "x": 0.5, "y": 0, "z": 0.5 },
+		"scale": 3
+	},
+	"tpHandTransform": {
+		"translation": { "x": -0.75, "y": -0.48, "z": -0.52 },
+		"rotation": { "x": 90, "y": 1, "z": 0 },
+		"origin": { "x": 0.5, "y": 0, "z": 0.5 },
+		"scale": 0.8
+	}
+}
