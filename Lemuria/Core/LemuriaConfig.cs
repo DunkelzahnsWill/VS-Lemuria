@@ -9,4 +9,7 @@ namespace Lemuria.Core;
 public partial class LemuriaConfig
 {
     public const string FileName = "lemuria.json";
+
+    /// <summary>Whether every Lemuria feature respects land claims; admins can also flip it with /lemuria claims on|off.</summary>
+    public bool RespectClaims { get; set; } = true;
 }

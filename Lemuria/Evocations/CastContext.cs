@@ -1,3 +1,4 @@
+using Lemuria.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -126,7 +127,7 @@ public class CastContext
 
     /// <summary>Whether the caster may change this block: always, unless it lies in a claim they have no access to.</summary>
     public bool Can(BlockPos pos) =>
-        Player == null || Api.World.Claims.TestAccess(Player, pos, EnumBlockAccessFlags.BuildOrBreak) == EnumWorldAccessResponse.Granted;
+        Player == null || LemuriaClaims.TestAccess(Api.World, Player, pos, EnumBlockAccessFlags.BuildOrBreak);
 
     public bool Can(Entity entity) => Can(entity.Pos.AsBlockPos);
 

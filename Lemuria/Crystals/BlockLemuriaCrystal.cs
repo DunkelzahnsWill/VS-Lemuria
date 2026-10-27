@@ -152,7 +152,7 @@ public class BlockLemuriaCrystal : Block
             return true;
         }
         var player = (byEntity as EntityPlayer)?.Player;
-        if (player != null && !world.Claims.TryAccess(player, blockSel.Position, EnumBlockAccessFlags.Use))
+        if (player != null && !LemuriaClaims.TryAccess(world, player, blockSel.Position, EnumBlockAccessFlags.Use))
         {
             return true;
         }

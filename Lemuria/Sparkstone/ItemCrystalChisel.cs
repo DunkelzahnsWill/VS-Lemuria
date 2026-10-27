@@ -110,7 +110,7 @@ public class ItemCrystalChisel : Item
     public static bool Carve(IWorldAccessor world, IPlayer? player, BlockPos pos, BlockSelection? blockSel = null)
     {
         var carved = CarvedBlock(world, pos, player, blockSel);
-        if (carved == null || (player != null && !world.Claims.TryAccess(player, pos, EnumBlockAccessFlags.BuildOrBreak)))
+        if (carved == null || (player != null && !LemuriaClaims.TryAccess(world, player, pos, EnumBlockAccessFlags.BuildOrBreak)))
         {
             return false;
         }
@@ -203,7 +203,7 @@ public class ItemCrystalChisel : Item
         {
             return false;
         }
-        if (player != null && !world.Claims.TryAccess(player, pos, EnumBlockAccessFlags.BuildOrBreak))
+        if (player != null && !LemuriaClaims.TryAccess(world, player, pos, EnumBlockAccessFlags.BuildOrBreak))
         {
             return false;
         }
