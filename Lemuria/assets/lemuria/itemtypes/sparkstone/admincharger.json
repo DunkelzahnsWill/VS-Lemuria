@@ -31,9 +31,9 @@
 		"scale": 3
 	},
 	"tpHandTransform": {
-		"translation": { "x": -0.75, "y": -0.48, "z": -0.52 },
-		"rotation": { "x": 90, "y": 1, "z": 0 },
+		"translation": { "x": -0.87, "y": -0.05, "z": -0.76 },
+		"rotation": { "x": 0, "y": -25, "z": -59 },
 		"origin": { "x": 0.5, "y": 0, "z": 0.5 },
-		"scale": 0.8
+		"scale": 0.6
 	}
 }
