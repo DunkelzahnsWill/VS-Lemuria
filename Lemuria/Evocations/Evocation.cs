@@ -56,10 +56,13 @@ public static class Evocation
         Math.Clamp(Config.EvocationRangeGlittering, 1, 64) + Math.Clamp(Config.EvocationRangeStep, 0, 32) * (power - 1);
 
     /// <summary>
-    /// The area's size along each axis: the target alone at Glittering, 2×2×2 at Glowing, 3×3×3 for an
-    /// over-driven Glowing crystal, casting as Luminous (the owner, 2026-10-27), one more per Evolution after.
+    /// The area's width: the target alone at Glittering, 3 blocks across at Glowing and for an over-driven
+    /// Glowing crystal, casting as Luminous, 5 beyond (the owner, 2026-10-27).
     /// </summary>
-    public static int AreaSize(int power) => Math.Clamp(power, 1, 5);
+    public static int AreaSize(int power) => power <= 1 ? 1 : power <= 3 ? 3 : 5;
+
+    /// <summary>Whether the area is one block high, a 3×3×1 carpet at Glowing; over-driven, it is a 3×3×3 cube.</summary>
+    public static bool AreaFlat(int power) => power == 2;
 
     /// <summary>
     /// How far a Tremor's sides sink: half its rise, which is TremorRise at Glittering and as much again

@@ -132,9 +132,8 @@ public class CastContext
     public bool Can(Entity entity) => Can(entity.Pos.AsBlockPos);
 
     /// <summary>
-    /// The area's corners. An odd size is a cube centred on the impact block. An even one starts at the
-    /// impact block and reaches forward along the caster's look, up, and to the caster's right (the
-    /// owner, 2026-10-27); a cast straight down or up reaches east and south.
+    /// The area's corners, centred on the impact block: a 3×3×1 carpet at Glowing, level with it, and a
+    /// cube when over-driven (the owner, 2026-10-27).
     /// </summary>
     public (BlockPos Min, BlockPos Max)? Bounds()
     {
@@ -142,17 +141,9 @@ public class CastContext
         {
             return null;
         }
-        int size = AreaSize;
-        if (size % 2 == 1)
-        {
-            int r = size / 2;
-            return (Center.AddCopy(-r, -r, -r), Center.AddCopy(r, r, r));
-        }
-        int n = size - 1;
-        var (fx, fz, rx, rz) = Heading();
-        var far = Center.AddCopy((fx + rx) * n, n, (fz + rz) * n);
-        return (new BlockPos(Math.Min(Center.X, far.X), Center.Y, Math.Min(Center.Z, far.Z), Center.dimension),
-            new BlockPos(Math.Max(Center.X, far.X), far.Y, Math.Max(Center.Z, far.Z), Center.dimension));
+        int r = AreaSize / 2;
+        int ry = Evocation.AreaFlat(Power) ? 0 : r;
+        return (Center.AddCopy(-r, -ry, -r), Center.AddCopy(r, ry, r));
     }
 
     /// <summary>

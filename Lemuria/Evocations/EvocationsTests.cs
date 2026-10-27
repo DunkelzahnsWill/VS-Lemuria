@@ -158,7 +158,7 @@ public class EvocationsTests
             }
             return ice;
         }
-        // A cast straight down reaches east and south of the impact, so the Glowing one aims at the north-west corner.
+        // The Glowing carpet is centred on the impact, so aimed at a corner it covers 2×2 of the pond.
         bool cast = CastAt(Crystal.Ice, 2, pond.ToVec3d().Add(0.5, 4, 0.5), pond.ToVec3d().Add(0.5, 0.9, 0.5), out var context);
         int glowing = Frozen();
         CastAt(Crystal.Ice, 3, eye, pond.ToVec3d().Add(1.5, 0.9, 1.5), out _);

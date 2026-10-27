@@ -138,7 +138,7 @@ public static class Effects
     /// Puts out fires, as rain does, freezes still fresh water surfaces into the game's lake ice, and
     /// waters farmland as a watering can does (the owner, 2026-10-27). At Glittering it acts on the
     /// block aimed at and the face in front of it, or the water surface
-    /// or burning creature aimed at; from Glowing up on everything in the area (2×2×2, 3×3×3 over-driven). The caster's own Quench
+    /// or burning creature aimed at; from Glowing up on everything in the area (3×3×1, 3×3×3 over-driven). The caster's own Quench
     /// puts the caster out when they stand in it.
     /// </summary>
     public static bool Quench(CastContext cast)
