@@ -123,14 +123,16 @@ public static class Effects
     // ------------------------------------------------------------------ Quench
 
     /// <summary>
-    /// Puts out fires, as rain does, and freezes still fresh water surfaces into the game's lake ice.
-    /// At Glittering it acts on the block aimed at and the face in front of it, or the water surface
+    /// Puts out fires, as rain does, freezes still fresh water surfaces into the game's lake ice, and
+    /// waters farmland as a watering can does (the owner, 2026-10-27). At Glittering it acts on the
+    /// block aimed at and the face in front of it, or the water surface
     /// or burning creature aimed at; from Glowing up on everything in the area. The caster's own Quench
     /// puts the caster out when they stand in it.
     /// </summary>
     public static bool Quench(CastContext cast)
     {
         bool acted = false;
+        var watered = new HashSet<BlockPos>();
         IEnumerable<BlockPos> blocks = cast.Power >= 2
             ? cast.Area()
             : cast.Block != null
@@ -138,7 +140,7 @@ public static class Effects
                 : cast.Water != null ? new[] { cast.Water } : Array.Empty<BlockPos>();
         foreach (var pos in blocks)
         {
-            if (cast.Can(pos) && (Extinguish(cast, pos) | Freeze(cast, pos)))
+            if (cast.Can(pos) && (Extinguish(cast, pos) | Freeze(cast, pos) | Water(cast, pos, watered)))
             {
                 acted = true;
             }
@@ -216,6 +218,23 @@ public static class Effects
             return false;
         }
         accessor.SetBlock(ice.BlockId, pos, BlockLayersAccess.Fluid);
+        return true;
+    }
+
+    /// <summary>
+    /// Soaks the farmland at a block, or under the crop growing there, to full moisture through the
+    /// game's own watering, as a full watering can does. Farmland already soaked is left as it is.
+    /// </summary>
+    private static bool Water(CastContext cast, BlockPos pos, HashSet<BlockPos> watered)
+    {
+        var accessor = cast.Api.World.BlockAccessor;
+        var at = accessor.GetBlockEntity(pos) is BlockEntityFarmland ? pos
+            : accessor.GetBlock(pos) is BlockCrop ? pos.DownCopy() : null;
+        if (at == null || !watered.Add(at) || !cast.Can(at) || accessor.GetBlockEntity(at) is not BlockEntityFarmland farmland || farmland.MoistureLevel >= 0.99f)
+        {
+            return false;
+        }
+        farmland.WaterFarmland(2f, false);
         return true;
     }
 
@@ -371,7 +390,7 @@ public static class Effects
 
     /// <summary>
     /// A gust pushes creatures, players and dropped items away from the caster and a little up, about
-    /// 4, 6 or 8 blocks: what is aimed at, or lies where the cast lands, at Glittering, everything in
+    /// 6, 8 or 10 blocks: what is aimed at, or lies where the cast lands, at Glittering, everything in
     /// the area above that. It moves no blocks, and passes over the caster.
     /// </summary>
     public static bool Gale(CastContext cast)

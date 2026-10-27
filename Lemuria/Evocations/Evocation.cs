@@ -58,7 +58,7 @@ public static class Evocation
     /// <summary>How far the area reaches round the target: the target alone, then a 3×3×3 cube, then 5×5×5.</summary>
     public static int Radius(int power) => Math.Clamp(power - 1, 0, 4);
 
-    /// <summary>Blocks Gale pushes: 4, 6 and 8 by default.</summary>
+    /// <summary>Blocks Gale pushes: 6, 8 and 10 by default.</summary>
     public static double GalePush(int power) => Math.Clamp(Config.GalePushGlittering, 0, 32) + 2 * (power - 1);
 
     public static int TremorRise => Math.Clamp(Config.TremorRise, 1, 8);

@@ -209,7 +209,7 @@ public class EvocationsModSystem : ModSystem
                         .HandleWith(_ => TestSite.WithChunk(api, Mod.Logger, "Evocations", 4, -12, column => new EvocationsTests(this, api, Mod.Logger).Fire(column)))
                     .EndSubCommand()
                     .BeginSubCommand("water")
-                        .WithDescription("A Glowing Quench freezes a 3x3 pond into lake ice")
+                        .WithDescription("A Glowing Quench freezes a 3x3 pond into lake ice; Quench soaks farmland")
                         .HandleWith(_ => TestSite.WithChunk(api, Mod.Logger, "Evocations", 4, -20, column => new EvocationsTests(this, api, Mod.Logger).Water(column)))
                     .EndSubCommand()
                     .BeginSubCommand("tremor")

@@ -10,14 +10,18 @@ namespace Lemuria.Evocations;
 
 /// <summary>
 /// The caster's own client while right-click is held (design note, What you see and hear): a softer
-/// voicing of the crystal's note swells over the half-second wind-up, to half the volume of a full
-/// hum at most (the owner, 2026-10-27) and sparks gather at the hand; past two seconds,
-/// with charge for it, a rising whine, a flare of its colour and hairline light running through it.
+/// voicing of the crystal's note swells over the five-second wind-up, to half the volume of a full
+/// hum at most, and sparks gather at the hand; past fifteen seconds, with charge for it, the note
+/// leaps a fifth higher (the owner, 2026-10-27), with a rising whine, a flare of its colour and
+/// hairline light running through it.
 /// </summary>
 public class WindUp : IDisposable
 {
     /// <summary>The loudest the wind-up's note gets.</summary>
     private const float NoteVolume = 0.5f;
+
+    /// <summary>The note's pitch once over-driven: a fifth above its own, so the two stages sound apart.</summary>
+    private const float OverdrivePitch = 1.5f;
 
     private static readonly AssetLocation WhineSound = new(LemuriaModSystem.ModId, "sounds/crystals/whine");
 
@@ -62,6 +66,7 @@ public class WindUp : IDisposable
         {
             state.Whine = Load(WhineSound, entity, 0.6f);
             state.Whine?.Start();
+            state.Note?.SetPitch(OverdrivePitch);
             Flare(hand, Crystal.Rgb(alignment), 40);
         }
         if (state.Whine != null)

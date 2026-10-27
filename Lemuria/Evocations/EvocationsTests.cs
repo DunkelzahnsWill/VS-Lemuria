@@ -157,6 +157,35 @@ public class EvocationsTests
         }
         logger.Notification("Evocations test: a Glowing Quench aimed at {0} cast {1}; {2} of 9 water blocks froze to lake ice",
             context.Water != null ? "the water" : "something else", YesNo(cast), ice);
+
+        // A 3×3 field of dry farmland, out of the pond's reach, with flax sprouting at one corner.
+        Ground(origin.AddCopy(-1, 0, 6), 7, 4, 5);
+        var field = origin.AddCopy(2, -1, 7);
+        for (int x = 0; x < 3; x++)
+        {
+            for (int z = 0; z < 3; z++)
+            {
+                Accessor.SetBlock(Id("game:farmland-dry-medium"), field.AddCopy(x, 0, z));
+            }
+        }
+        Accessor.SetBlock(Id("game:crop-flax-1"), field.AddCopy(0, 1, 0));
+        bool Soaked(BlockPos pos) => Accessor.GetBlockEntity(pos) is IFarmlandBlockEntity farmland && farmland.MoistureLevel >= 0.99f;
+        bool watered = CastAt(Crystal.Ice, 1, origin.ToVec3d().Add(0.5, 1.6, 7.5), field.ToVec3d().Add(0.5, 1.1, 0.5), out _);
+        bool cropSoaked = Soaked(field);
+        bool wateredAll = CastAt(Crystal.Ice, 2, field.ToVec3d().Add(1.5, 4, 1.5), field.ToVec3d().Add(1.5, 0.9, 1.5), out _);
+        int soaked = 0;
+        for (int x = 0; x < 3; x++)
+        {
+            for (int z = 0; z < 3; z++)
+            {
+                if (Soaked(field.AddCopy(x, 0, z)))
+                {
+                    soaked++;
+                }
+            }
+        }
+        logger.Notification("Evocations test: Quench aimed at a crop cast {0}; its farmland soaked: {1}; a Glowing Quench soaked {2} of 9 farmland",
+            YesNo(watered), YesNo(cropSoaked), wateredAll ? soaked : 0);
     }
 
     // ------------------------------------------------------------------ Tremor
@@ -262,8 +291,8 @@ public class EvocationsTests
         var low = new ItemStack(glowing);
         Crystal.SetState(low, 30, 0);
         var empty = new ItemStack(glowing);
-        logger.Notification("Evocations test: let go at 0.3 s {0}, 1 s {1}, 2.5 s {2}; 2.5 s with 30 charge {3}; empty {4}",
-            Caster.Plan(full, 0.3), Caster.Plan(full, 1), Caster.Plan(full, 2.5), Caster.Plan(low, 2.5), Caster.Plan(empty, 1));
+        logger.Notification("Evocations test: let go at 3 s {0}, 6 s {1}, 16 s {2}; 16 s with 30 charge {3}; empty {4}",
+            Caster.Plan(full, 3), Caster.Plan(full, 6), Caster.Plan(full, 16), Caster.Plan(low, 16), Caster.Plan(empty, 6));
 
         var where = sapi.World.DefaultSpawnPosition.XYZ;
         var slot = new DummySlot(Full(glowing));

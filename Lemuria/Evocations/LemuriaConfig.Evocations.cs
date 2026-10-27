@@ -5,10 +5,10 @@ namespace Lemuria.Core;
 public partial class LemuriaConfig
 {
     /// <summary>How long you hold right-click before a cast can fire, in seconds.</summary>
-    public double CastWindUpSeconds { get; set; } = 0.5;
+    public double CastWindUpSeconds { get; set; } = 5;
 
     /// <summary>How long you hold before the crystal over-drives, in seconds.</summary>
-    public double OverdriveSeconds { get; set; } = 2;
+    public double OverdriveSeconds { get; set; } = 15;
 
     /// <summary>Share of a full crystal one cast spends.</summary>
     public double CastCostShare { get; set; } = 0.1;
@@ -29,5 +29,5 @@ public partial class LemuriaConfig
     public int TremorRise { get; set; } = 2;
 
     /// <summary>Blocks Gale pushes at Glittering; each Evolution above adds 2.</summary>
-    public double GalePushGlittering { get; set; } = 4;
+    public double GalePushGlittering { get; set; } = 6;
 }
