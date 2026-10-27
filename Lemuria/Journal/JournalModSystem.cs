@@ -2,8 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Lemuria.Core;
+using Lemuria.Cradle;
+using Lemuria.Crystals;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
+using Vintagestory.API.Config;
 using Vintagestory.API.Server;
 
 namespace Lemuria.Journal;
@@ -13,6 +16,9 @@ namespace Lemuria.Journal;
 /// Chapter 1 is open from the start; later chapters unlock per player through <see cref="Unlock"/>
 /// and are kept with the player on the server, so a new Journal shows everything already unlocked.
 /// Unlocks go to their own player only, over the channel <c>lemuria-journal</c>.
+/// Step 2 (design note "Lemuria step 2: The Four Elementals", The Pilgrim's Journal): chapter 2 opens
+/// when a player first harvests a ripe crystal or first holds an aligned one, chapter 3 when they
+/// first hold a fully charged crystal; what a player carries is looked at every 10 seconds.
 /// </summary>
 public class JournalModSystem : ModSystem
 {
@@ -20,6 +26,9 @@ public class JournalModSystem : ModSystem
 
     /// <summary>The key in a player's server-side data that holds their unlocked chapters, comma-separated.</summary>
     private const string PlayerDataKey = LemuriaModSystem.ModId + "-journal";
+
+    public const string FourElementals = "fourelementals";
+    public const string LivingStone = "livingstone";
 
     private static readonly AssetLocation ChaptersAsset = new(LemuriaModSystem.ModId, "config/journal/chapters.json");
 
@@ -57,6 +66,8 @@ public class JournalModSystem : ModSystem
         sapi = api;
         serverChannel = api.Network.GetChannel(ChannelName);
         api.Event.PlayerJoin += SendUnlocks;
+        BlockEntityCradle.Harvested += OnHarvested;
+        api.Event.RegisterGameTickListener(_ => CheckCarried(), 10_000, 5000);
         api.Event.SaveGameLoaded += () => Mod.Logger.Notification("Journal: {0} recipe(s)",
             api.World.GridRecipes.Count(r => r.Output?.Code?.ToString() == LemuriaModSystem.ModId + ":journal"));
     }
@@ -88,6 +99,8 @@ public class JournalModSystem : ModSystem
         }
         player.ServerData.CustomPlayerData[PlayerDataKey] = string.Join(",", unlocked);
         SendUnlocks(player);
+        string title = Lang.GetL(player.LanguageCode, $"{LemuriaModSystem.ModId}:journal-{chapterCode}-title");
+        player.SendMessage(GlobalConstants.GeneralChatGroup, Lang.GetL(player.LanguageCode, LemuriaModSystem.ModId + ":journal-unlocked", title), EnumChatType.Notification);
         return true;
     }
 
@@ -100,6 +113,43 @@ public class JournalModSystem : ModSystem
     private void SendUnlocks(IServerPlayer player)
     {
         serverChannel?.SendPacket(new JournalUnlocksPacket { Chapters = StoredUnlocks(player).ToList() }, player);
+    }
+
+    private void OnHarvested(IPlayer player)
+    {
+        if (player is IServerPlayer serverPlayer)
+        {
+            Unlock(serverPlayer, FourElementals);
+        }
+    }
+
+    /// <summary>Chapter 2 for anyone carrying an aligned crystal, chapter 3 for anyone carrying a full one.</summary>
+    private void CheckCarried()
+    {
+        if (sapi == null)
+        {
+            return;
+        }
+        foreach (var player in sapi.World.AllOnlinePlayers.OfType<IServerPlayer>())
+        {
+            if (player.ConnectionState != EnumClientState.Playing)
+            {
+                continue;
+            }
+            foreach (var slot in Dialogues.CarriedSlots(player))
+            {
+                var stack = slot.Itemstack;
+                if (stack == null || !Crystal.IsAligned(stack.Collectible))
+                {
+                    continue;
+                }
+                Unlock(player, FourElementals);
+                if (Crystal.Level(Crystal.GetCharge(stack), Crystal.Capacity(Crystal.EvolutionOf(stack.Collectible))) == Crystal.Full)
+                {
+                    Unlock(player, LivingStone);
+                }
+            }
+        }
     }
 
     /// <summary>The chapters this client's player can read, in reading order.</summary>
@@ -127,6 +177,7 @@ public class JournalModSystem : ModSystem
         if (sapi != null)
         {
             sapi.Event.PlayerJoin -= SendUnlocks;
+            BlockEntityCradle.Harvested -= OnHarvested;
         }
     }
 }
