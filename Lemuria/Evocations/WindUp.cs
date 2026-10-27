@@ -9,12 +9,16 @@ using Vintagestory.API.MathTools;
 namespace Lemuria.Evocations;
 
 /// <summary>
-/// The caster's own client while right-click is held (design note, What you see and hear): the
-/// crystal's note swells over the half-second wind-up and sparks gather at the hand; past two seconds,
+/// The caster's own client while right-click is held (design note, What you see and hear): a softer
+/// voicing of the crystal's note swells over the half-second wind-up, to half the volume of a full
+/// hum at most (the owner, 2026-10-27) and sparks gather at the hand; past two seconds,
 /// with charge for it, a rising whine, a flare of its colour and hairline light running through it.
 /// </summary>
 public class WindUp : IDisposable
 {
+    /// <summary>The loudest the wind-up's note gets.</summary>
+    private const float NoteVolume = 0.5f;
+
     private static readonly AssetLocation WhineSound = new(LemuriaModSystem.ModId, "sounds/crystals/whine");
 
     private readonly ICoreClientAPI capi;
@@ -37,7 +41,7 @@ public class WindUp : IDisposable
         End(entity);
         var state = new State
         {
-            Note = Load(new AssetLocation(LemuriaModSystem.ModId, $"sounds/crystals/hum-{alignment}"), entity, 0.15f),
+            Note = Load(new AssetLocation(LemuriaModSystem.ModId, $"sounds/evocations/windup-{alignment}"), entity, 0.15f * NoteVolume),
         };
         state.Note?.Start();
         states[entity.EntityId] = state;
@@ -52,7 +56,7 @@ public class WindUp : IDisposable
         var hand = Hand(entity);
         float windUp = (float)Evocation.WindUpSeconds;
         state.Note?.SetPosition((float)hand.X, (float)hand.Y, (float)hand.Z);
-        state.Note?.SetVolume(Math.Min(1f, 0.15f + 0.85f * seconds / Math.Max(0.05f, windUp)));
+        state.Note?.SetVolume(NoteVolume * Math.Min(1f, 0.15f + 0.85f * seconds / Math.Max(0.05f, windUp)));
         bool overdriven = canOverdrive && seconds >= Evocation.OverdriveSeconds;
         if (overdriven && state.Whine == null)
         {
