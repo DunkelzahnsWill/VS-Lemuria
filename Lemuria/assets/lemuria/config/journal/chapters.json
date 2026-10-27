@@ -1,5 +1,6 @@
 [
 	{ "code": "glowingstone", "pages": 6, "unlockedByDefault": true },
 	{ "code": "fourelementals", "pages": 8, "unlockedByDefault": false },
-	{ "code": "livingstone", "pages": 4, "unlockedByDefault": false }
+	{ "code": "livingstone", "pages": 4, "unlockedByDefault": false },
+	{ "code": "nakedevocations", "pages": 5, "unlockedByDefault": false }
 ]
