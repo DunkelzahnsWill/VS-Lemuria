@@ -18,10 +18,7 @@
 	"attributes": {
 		"clothescategory": "face",
 		"wearableAttachment": true,
-		"warmth": 0,
-		"handbook": {
-			"exclude": true
-		}
+		"warmth": 0
 	},
 	"creativeinventory": {
 		"general": [

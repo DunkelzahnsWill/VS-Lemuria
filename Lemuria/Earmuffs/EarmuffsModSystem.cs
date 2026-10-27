@@ -8,7 +8,7 @@ using Vintagestory.API.Server;
 namespace Lemuria.Earmuffs;
 
 /// <summary>
-/// Ear muffs (step 3 note, After the play-test, Ear muffs): worn in the face slot, they quiet every
+/// Earmuffs (step 3 note, After the play-test, Earmuffs): worn in the face slot, they quiet every
 /// sound the wearer hears by the server's EarMuffsVolume, on the wearer's own client only. Also carries
 /// SoundVolume, which scales every sound Lemuria plays (<see cref="LemuriaSound"/>). The server sends
 /// both settings to each player as they join. Adds <c>/lemuria earmuffs test</c> for the smoke test.
@@ -36,7 +36,7 @@ public class EarmuffsModSystem : ModSystem
         LemuriaSound.Scale = settings.SoundVolume;
         var channel = api.Network.GetChannel(ChannelName);
         api.Event.PlayerJoin += player => channel.SendPacket(settings, player);
-        api.Event.SaveGameLoaded += () => Mod.Logger.Notification("Earmuffs: ear muffs let {0:0.##} of every sound through; Lemuria's sounds play at {1:0.##}",
+        api.Event.SaveGameLoaded += () => Mod.Logger.Notification("Earmuffs: earmuffs let {0:0.##} of every sound through; Lemuria's sounds play at {1:0.##}",
             settings.EarMuffsVolume, settings.SoundVolume);
         RegisterTestCommand(api, settings);
     }
@@ -57,10 +57,10 @@ public class EarmuffsModSystem : ModSystem
             .WithDescription("Lemuria commands")
             .RequiresPrivilege(Privilege.chat)
             .BeginSubCommand("earmuffs")
-                .WithDescription("Ear muffs commands")
+                .WithDescription("Earmuffs commands")
                 .RequiresPrivilege(Privilege.controlserver)
                 .BeginSubCommand("test")
-                    .WithDescription("Checks the ear muffs item, its recipes and the settings sent to players")
+                    .WithDescription("Checks the earmuffs item, its recipes and the settings sent to players")
                     .HandleWith(_ =>
                     {
                         var item = api.World.GetItem(new AssetLocation(LemuriaModSystem.ModId, ItemCode));
@@ -68,7 +68,7 @@ public class EarmuffsModSystem : ModSystem
                         string slot = item?.Attributes?["clothescategory"].AsString() ?? "none";
                         float warmth = item?.Attributes?["warmth"].AsFloat(0) ?? 0;
                         bool wears = item?.Durability <= 1;
-                        Mod.Logger.Notification("Earmuffs test: the item exists: {0}, worn in the {1} slot, warmth {2:0.##}, never wears: {3}; {4} grid recipe(s), one per leather or linen colour; sent to players: ear muffs {5:0.##}, Lemuria's sounds {6:0.##}",
+                        Mod.Logger.Notification("Earmuffs test: the item exists: {0}, worn in the {1} slot, warmth {2:0.##}, never wears: {3}; {4} grid recipe(s), one per leather or linen colour; sent to players: earmuffs {5:0.##}, Lemuria's sounds {6:0.##}",
                             item != null ? "yes" : "no", slot, warmth, wears ? "yes" : "no", recipes, settings.EarMuffsVolume, settings.SoundVolume);
                         return TextCommandResult.Success("Earmuffs test: checked, see the log");
                     })

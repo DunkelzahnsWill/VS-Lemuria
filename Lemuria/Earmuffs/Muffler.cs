@@ -8,10 +8,10 @@ using Vintagestory.Client.NoObf;
 namespace Lemuria.Earmuffs;
 
 /// <summary>
-/// While the player wears ear muffs, their own client lowers its master volume, the OpenAL listener's
+/// While the player wears earmuffs, their own client lowers its master volume, the OpenAL listener's
 /// gain, which every sound and the music pass through. It never writes the player's saved sound
 /// settings: it reads their master volume and plays a share of it, and gives it back in full when the
-/// ear muffs come off or the game closes. If the player moves the master volume slider while wearing
+/// earmuffs come off or the game closes. If the player moves the master volume slider while wearing
 /// them, the game sets the gain back to the slider, and the next check lowers it again. No Harmony.
 /// </summary>
 public class Muffler : IDisposable
@@ -32,7 +32,7 @@ public class Muffler : IDisposable
         listener = capi.Event.RegisterGameTickListener(_ => Check(), CheckMs);
     }
 
-    /// <summary>Whether the player wears ear muffs in their face slot.</summary>
+    /// <summary>Whether the player wears earmuffs in their face slot.</summary>
     public static bool Wearing(IPlayer? player)
     {
         var inventory = player?.InventoryManager?.GetOwnInventory(GlobalConstants.characterInvClassName);
