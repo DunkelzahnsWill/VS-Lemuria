@@ -25,6 +25,7 @@ public class SparkstoneModSystem : ModSystem
     public override void Start(ICoreAPI api)
     {
         api.RegisterItemClass(ItemCrystalChisel.ClassCode, typeof(ItemCrystalChisel));
+        api.RegisterItemClass(ItemAdminCharger.ClassCode, typeof(ItemAdminCharger));
         api.RegisterBlockClass(BlockSparkstone.ClassCode, typeof(BlockSparkstone));
         api.RegisterBlockEntityClass(BlockEntitySparkstone.ClassCode, typeof(BlockEntitySparkstone));
     }
@@ -56,6 +57,10 @@ public class SparkstoneModSystem : ModSystem
                     .BeginSubCommand("carve")
                         .WithDescription("Carves a polished granite block into a cradle and a polished granite slab into a crystal rack")
                         .HandleWith(_ => TestSite.WithChunk(api, Mod.Logger, "Sparkstone", 22, 2, OnTestCarve))
+                    .EndSubCommand()
+                    .BeginSubCommand("admin")
+                        .WithDescription("Fills an empty placed Ice crystal with the admin charger")
+                        .HandleWith(_ => TestSite.WithChunk(api, Mod.Logger, "Sparkstone", 26, 2, OnTestAdmin))
                     .EndSubCommand()
                     .BeginSubCommand("check")
                         .WithDescription("Reports the test network's charge, after a restart")
@@ -129,6 +134,21 @@ public class SparkstoneModSystem : ModSystem
         bool rack = ItemCrystalChisel.Carve(sapi.World, null, pos.EastCopy().UpCopy());
         Mod.Logger.Notification("Sparkstone test: the chisel carved {0} and {1}",
             cradle ? accessor.GetBlock(pos.UpCopy()).Code.Path : "no cradle", rack ? accessor.GetBlock(pos.EastCopy().UpCopy()).Code.Path : "no rack");
+    }
+
+    private void OnTestAdmin(BlockPos column)
+    {
+        var pos = TestSite.Surface(sapi, column).UpCopy();
+        var ice = Crystal.BlockFor(sapi.World, Crystal.Ice, Crystal.Glittering);
+        if (ice == null)
+        {
+            Mod.Logger.Error("Sparkstone test: the Ice crystal is missing");
+            return;
+        }
+        sapi.World.BlockAccessor.SetBlock(ice.Id, pos);
+        string? what = ItemAdminCharger.Fill(sapi.World, pos);
+        float charge = (sapi.World.BlockAccessor.GetBlockEntity(pos) as BlockEntityCrystal)?.Charge ?? -1;
+        Mod.Logger.Notification("Sparkstone test: the admin charger filled the {0}, which holds {1:0}", what ?? "nothing", charge);
     }
 
     private void OnTestCheck()

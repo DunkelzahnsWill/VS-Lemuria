@@ -579,6 +579,25 @@ public class BlockEntityCradle : BlockEntity, IStandingCrystal
     }
 
     /// <summary>Takes up to this much charge out of the resting crystal and returns what it gave. Server only.</summary>
+    /// <summary>Fills a resting aligned crystal to full at once, for the admin charger; false when there is none. Server only.</summary>
+    public bool FillCharge()
+    {
+        if (!CrystalAligned)
+        {
+            return false;
+        }
+        int oldLevel = CrystalLevel;
+        byte oldLight = LightNow()[2];
+        Crystal.SetState(crystal!, Crystal.Capacity(Evolution), Cracks);
+        if (CrystalLevel != oldLevel)
+        {
+            Api.World.PlaySoundAt(ChimeSound, Pos.X + 0.5, Pos.Y + 0.75, Pos.Z + 0.5, null, false, 16f, 0.6f);
+        }
+        MarkDirty(true);
+        UpdateLight(oldLight);
+        return true;
+    }
+
     public float TakeCharge(float max)
     {
         if (!CrystalAligned)

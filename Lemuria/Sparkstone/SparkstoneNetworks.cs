@@ -153,5 +153,14 @@ public class SparkstoneNetworks
         return taken;
     }
 
+    /// <summary>Fills the network a block belongs to, for the admin charger; returns its size.</summary>
+    public int Fill(BlockEntitySparkstone block)
+    {
+        var network = NetworkOf(block);
+        var (total, capacity) = Measure(network);
+        Update(network, feed: false, change: capacity - total);
+        return network.Count;
+    }
+
     public void Clear() => loaded.Clear();
 }
