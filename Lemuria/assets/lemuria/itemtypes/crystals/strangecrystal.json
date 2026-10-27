@@ -1,0 +1,32 @@
+{
+	"code": "strangecrystal",
+	"maxstacksize": 32,
+	"shape": { "base": "lemuria:item/crystals/strangecrystal" },
+	"textures": {
+		"crystal": { "base": "lemuria:item/crystals/strange" }
+	},
+	"attributes": {
+		"handbook": { "exclude": true }
+	},
+	"grindingProps": {
+		"groundStack": { "type": "item", "code": "lemuria:seedling-glittering", "stacksize": 3 }
+	},
+	"creativeinventory": { "general": ["*"], "items": ["*"] },
+	"materialDensity": 2600,
+	"guiTransform": {
+		"rotation": { "x": -30, "y": -45, "z": 0 },
+		"origin": { "x": 0.5, "y": 0.3, "z": 0.5 },
+		"scale": 2.0
+	},
+	"groundTransform": {
+		"rotation": { "x": 0, "y": -45, "z": 0 },
+		"origin": { "x": 0.5, "y": 0, "z": 0.5 },
+		"scale": 2.7
+	},
+	"tpHandTransform": {
+		"translation": { "x": -0.87, "y": -0.1, "z": -0.76 },
+		"rotation": { "x": 0, "y": -25, "z": -59 },
+		"origin": { "x": 0.5, "y": 0, "z": 0.5 },
+		"scale": 0.6
+	}
+}
