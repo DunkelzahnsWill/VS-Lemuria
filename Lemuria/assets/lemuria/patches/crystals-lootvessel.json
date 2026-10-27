@@ -1,0 +1,70 @@
+[
+	{
+		"op": "add",
+		"path": "/attributes/lootListByType/*-ore/-",
+		"value": {
+			"type": "block",
+			"chance": 0.072,
+			"minQuantity": 1,
+			"maxQuantity": 1,
+			"codes": [
+				"lemuria:crystal-fire-glittering-up",
+				"lemuria:crystal-ice-glittering-up",
+				"lemuria:crystal-earth-glittering-up",
+				"lemuria:crystal-sky-glittering-up"
+			]
+		},
+		"file": "game:blocktypes/clay/lootvessel.json"
+	},
+	{
+		"op": "add",
+		"path": "/attributes/lootListByType/*-ore/-",
+		"value": {
+			"type": "block",
+			"chance": 0.018,
+			"minQuantity": 1,
+			"maxQuantity": 1,
+			"codes": [
+				"lemuria:crystal-fire-glowing-up",
+				"lemuria:crystal-ice-glowing-up",
+				"lemuria:crystal-earth-glowing-up",
+				"lemuria:crystal-sky-glowing-up"
+			]
+		},
+		"file": "game:blocktypes/clay/lootvessel.json"
+	},
+	{
+		"op": "add",
+		"path": "/attributes/lootListByType/*-tool/-",
+		"value": {
+			"type": "block",
+			"chance": 0.072,
+			"minQuantity": 1,
+			"maxQuantity": 1,
+			"codes": [
+				"lemuria:crystal-fire-glittering-up",
+				"lemuria:crystal-ice-glittering-up",
+				"lemuria:crystal-earth-glittering-up",
+				"lemuria:crystal-sky-glittering-up"
+			]
+		},
+		"file": "game:blocktypes/clay/lootvessel.json"
+	},
+	{
+		"op": "add",
+		"path": "/attributes/lootListByType/*-tool/-",
+		"value": {
+			"type": "block",
+			"chance": 0.018,
+			"minQuantity": 1,
+			"maxQuantity": 1,
+			"codes": [
+				"lemuria:crystal-fire-glowing-up",
+				"lemuria:crystal-ice-glowing-up",
+				"lemuria:crystal-earth-glowing-up",
+				"lemuria:crystal-sky-glowing-up"
+			]
+		},
+		"file": "game:blocktypes/clay/lootvessel.json"
+	}
+]

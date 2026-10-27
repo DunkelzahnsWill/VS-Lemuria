@@ -1,0 +1,82 @@
+{
+	"code": "crystaljar",
+	"variantgroups": [
+		{ "code": "kind", "states": ["personal", "shielded"] },
+		{ "code": "state", "states": ["raw", "fired"] }
+	],
+	"behaviorsByType": {
+		"*-raw": [
+			{ "name": "GroundStorable", "properties": { "layout": "Quadrants", "placeRemoveSound": "sounds/player/build", "collisionBox": { "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 0.3125, "z2": 1 } } }
+		],
+		"*-fired": [
+			{ "name": "GroundStorable", "properties": { "layout": "Quadrants", "placeRemoveSound": "sounds/player/build", "collisionBox": { "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 0.3125, "z2": 1 } } },
+			{ "name": "HeldBag" }
+		]
+	},
+	"maxstacksizeByType": {
+		"*-raw": 8,
+		"*-fired": 1
+	},
+	"storageFlagsByType": {
+		"*-fired": 3
+	},
+	"shapeByType": {
+		"*-personal-*": { "base": "lemuria:item/storage/crystaljar-personal" },
+		"*-shielded-*": { "base": "lemuria:item/storage/crystaljar-shielded" }
+	},
+	"texturesByType": {
+		"*-personal-raw": { "clay": { "base": "lemuria:item/storage/clay-raw" }, "crystal": { "base": "lemuria:block/crystals/unaligned" } },
+		"*-personal-fired": { "clay": { "base": "lemuria:item/storage/clay-fired" }, "crystal": { "base": "lemuria:block/crystals/unaligned" } },
+		"*-shielded-raw": { "clay": { "base": "lemuria:item/storage/clay-raw" }, "stone": { "base": "game:block/stone/polishedrock/granite" }, "glyph": { "base": "lemuria:block/sparkstone/glyph" } },
+		"*-shielded-fired": { "clay": { "base": "lemuria:item/storage/clay-fired" }, "stone": { "base": "game:block/stone/polishedrock/granite" }, "glyph": { "base": "lemuria:block/sparkstone/glyph-full" } }
+	},
+	"attributesByType": {
+		"*-raw": {
+			"handbook": { "exclude": true },
+			"groundStorageTransform": { "origin": { "x": 0.5, "y": 0, "z": 0.5 } },
+			"beehivekiln": {
+				"0": { "type": "item", "code": "lemuria:crystaljar-{kind}-fired" },
+				"1": { "type": "item", "code": "lemuria:crystaljar-{kind}-fired" },
+				"2": { "type": "item", "code": "lemuria:crystaljar-{kind}-fired" },
+				"3": { "type": "item", "code": "lemuria:crystaljar-{kind}-fired" }
+			}
+		},
+		"*-fired": {
+			"handbook": { "exclude": true },
+			"groundStorageTransform": { "origin": { "x": 0.5, "y": 0, "z": 0.5 } },
+			"crystalJar": true,
+			"backpack": {
+				"quantitySlots": 3,
+				"storageFlags": 131072,
+				"slotBgColor": "#c9bfa4"
+			}
+		}
+	},
+	"combustiblePropsByType": {
+		"*-raw": {
+			"meltingPoint": 600,
+			"meltingDuration": 30,
+			"smeltedRatio": 1,
+			"smeltingType": "fire",
+			"requiresContainer": false,
+			"smeltedStack": { "type": "item", "code": "lemuria:crystaljar-{kind}-fired" }
+		}
+	},
+	"creativeinventory": { "general": ["*"], "items": ["*"] },
+	"materialDensity": 600,
+	"guiTransform": {
+		"rotation": { "x": -22.6, "y": -45, "z": 180 },
+		"origin": { "x": 0.5, "y": 0.25, "z": 0.5 },
+		"scale": 2.4
+	},
+	"groundTransform": {
+		"origin": { "x": 0.5, "y": 0, "z": 0.5 },
+		"scale": 3
+	},
+	"tpHandTransform": {
+		"translation": { "x": -0.75, "y": -0.1, "z": -0.6 },
+		"rotation": { "x": 0, "y": 0, "z": -20 },
+		"origin": { "x": 0.5, "y": 0, "z": 0.5 },
+		"scale": 0.7
+	}
+}

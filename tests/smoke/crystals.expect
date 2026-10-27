@@ -1,3 +1,11 @@
 # Crystals (step 1): the strange crystal and the Unaligned crystal grind into seedlings, and the geode find is on.
 Crystals: [0-9]+ crystals grind into 3 seedlings each
 Crystals: geode find chance 0\.04 per small crystal, 0\.08 per large crystal or cluster
+# Step 2: five alignments in two Evolutions, and the precursor crystals in the ore and tool vessels.
+Crystals: 10 crystal kinds, 8 of them aligned, in 2 Evolutions
+Crystals: precursor crystals in 4 loot list entries of the ore and tool vessels
+Crystals test: beside a burning firepit fire leads at [0-9.]+; after half a day the Fire crystal is (low|high), with 1 crack\(s\)$
+Crystals test: warning heard; Glittering pair now unaligned glittering full and unaligned glittering full; Glowing pair now fire glowing empty( cracked 1)? and ice glowing empty( cracked 1)?$
+Crystals: dialogue at level 1, fire glittering and ice glittering neutralized$
+Crystals: dialogue at level 2, fire glowing and ice glowing discharged, cracked: (none|fire|ice)$
+Crystals test: the chest now holds 2 Unaligned, 2 Fire and 0 Ice crystal\(s\); its jar still holds earth and sky$

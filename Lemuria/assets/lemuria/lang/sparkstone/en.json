@@ -1,0 +1,20 @@
+{
+	"item-crystalchisel": "Crystalline Chisel",
+	"itemdesc-crystalchisel": "An Unaligned crystal struck into a blade on another. It carves polished stone and commands it.",
+	"crystalchisel-charge-0": "Its glyphs are dark: empty.",
+	"crystalchisel-charge-1": "One glyph is lit.",
+	"crystalchisel-charge-2": "Two glyphs are lit.",
+	"crystalchisel-charge-3": "All three glyphs are lit: full.",
+	"crystalchisel-draw": "Draw charge from a charged crystal or sparkstone",
+	"crystalchisel-awaken": "Hold on polished rock to awaken it",
+	"item-admincharger": "Admin charger",
+	"itemdesc-admincharger": "Creative and admins only. Fills a crystal, a cradle's crystal or a sparkstone network at once; sneak to fill everything you carry.",
+	"admincharger-fill": "Fill to full",
+	"admincharger-fillcarried": "Fill everything you carry",
+	"admincharger-filled": "Filled the {0}.",
+	"admincharger-carried": "Filled {0} crystal(s) and chisel(s) you carry.",
+	"admincharger-nothing": "Nothing here holds charge.",
+	"crystalchisel-carve": "Carve polished rock into a cradle, or a polished slab into a crystal rack",
+	"block-sparkstone-awakened-*": "Awakened sparkstone",
+	"blockdesc-sparkstone-awakened-*": "Polished stone carved with glyphs. It stores charge and shares it with every block of it that it touches."
+}

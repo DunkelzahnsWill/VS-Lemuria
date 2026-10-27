@@ -1,0 +1,39 @@
+{
+	"code": "admincharger",
+	"class": "lemuria-admincharger",
+	"maxstacksize": 1,
+	"shape": { "base": "lemuria:item/sparkstone/crystalchisel-3" },
+	"textures": {
+		"blade": { "base": "lemuria:block/crystals/sky" },
+		"handle": { "base": "lemuria:block/crystals/fire" },
+		"crystal": { "base": "lemuria:block/crystals/ice" },
+		"glyph": { "base": "lemuria:block/sparkstone/glyph" },
+		"lit": { "base": "lemuria:block/sparkstone/glyph-full" }
+	},
+	"attributes": {
+		"handbook": { "exclude": true }
+	},
+	"creativeinventory": { "general": ["*"], "items": ["*"] },
+	"lightHsv": [10, 1, 5],
+	"guiTransform": {
+		"rotation": { "x": -77, "y": 46, "z": 8 },
+		"origin": { "x": 0.5, "y": 0, "z": 0.5 },
+		"scale": 2.6
+	},
+	"fpHandTransform": {
+		"translation": { "x": 0, "y": 0.1, "z": 0 },
+		"rotation": { "x": 15, "y": 15, "z": 90 },
+		"origin": { "x": 0.5, "y": 0.2, "z": 0.5 },
+		"scale": 2
+	},
+	"groundTransform": {
+		"origin": { "x": 0.5, "y": 0, "z": 0.5 },
+		"scale": 3
+	},
+	"tpHandTransform": {
+		"translation": { "x": -0.87, "y": -0.05, "z": -0.76 },
+		"rotation": { "x": 0, "y": -25, "z": -59 },
+		"origin": { "x": 0.5, "y": 0, "z": 0.5 },
+		"scale": 0.6
+	}
+}

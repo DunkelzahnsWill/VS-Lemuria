@@ -1,5 +1,6 @@
 {
 	"block-cradle-*": "Cradle",
 	"blockdesc-cradle-*": "A carved stone basin.",
-	"cradle-plant": "Set a seedling"
+	"cradle-plant": "Set a seedling",
+	"cradle-setcrystal": "Set a crystal to refine, charge or mend"
 }

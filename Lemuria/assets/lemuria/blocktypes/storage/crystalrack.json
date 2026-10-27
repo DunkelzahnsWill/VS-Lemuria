@@ -1,0 +1,58 @@
+{
+	"code": "crystalrack",
+	"class": "lemuria-crystalrack",
+	"entityClass": "lemuria-crystalrack",
+	"behaviors": [{ "name": "HorizontalOrientable" }],
+	"variantgroups": [
+		{ "code": "rock", "states": ["andesite", "chalk", "chert", "conglomerate", "limestone", "claystone", "granite", "sandstone", "shale", "basalt", "peridotite", "phyllite", "slate", "redmarble", "whitemarble", "greenmarble", "bauxite", "suevite", "kimberlite"] },
+		{ "code": "side", "loadFromProperties": "abstract/horizontalorientation" }
+	],
+	"attributes": {
+		"handbook": { "exclude": true }
+	},
+	"shapebytype": {
+		"*-north": { "base": "lemuria:block/storage/crystalrack", "rotateY": 180 },
+		"*-east": { "base": "lemuria:block/storage/crystalrack", "rotateY": 90 },
+		"*-south": { "base": "lemuria:block/storage/crystalrack", "rotateY": 0 },
+		"*-west": { "base": "lemuria:block/storage/crystalrack", "rotateY": 270 }
+	},
+	"textures": {
+		"rock": { "base": "game:block/stone/polishedrock/{rock}" }
+	},
+	"creativeinventory": { "general": ["*-north"], "decorative": ["*-north"] },
+	"maxstacksize": 8,
+	"drawtype": "json",
+	"blockmaterial": "Stone",
+	"resistance": 2,
+	"requiredMiningTier": 1,
+	"lightAbsorption": 0,
+	"replaceable": 100,
+	"sidesolid": { "all": false },
+	"sideopaque": { "all": false },
+	"emitSideAo": { "all": false },
+	"sounds": {
+		"walk": "game:walk/stone",
+		"place": "game:block/rock-hit-pickaxe",
+		"hit": "game:block/rock-hit-pickaxe",
+		"break": "game:block/rock-break-pickaxe"
+	},
+	"drops": [
+		{ "type": "block", "code": "lemuria:crystalrack-{rock}-north", "quantity": { "avg": 1, "var": 0 } }
+	],
+	"collisionboxbytype": {
+		"*-north": { "x1": 0.0125, "y1": 0, "z1": 0.5625, "x2": 0.9875, "y2": 1, "z2": 1, "rotateY": 180 },
+		"*-east": { "x1": 0.0125, "y1": 0, "z1": 0.5625, "x2": 0.9875, "y2": 1, "z2": 1, "rotateY": 90 },
+		"*-south": { "x1": 0.0125, "y1": 0, "z1": 0.5625, "x2": 0.9875, "y2": 1, "z2": 1 },
+		"*-west": { "x1": 0.0125, "y1": 0, "z1": 0.5625, "x2": 0.9875, "y2": 1, "z2": 1, "rotateY": 270 }
+	},
+	"guiTransform": {
+		"rotation": { "x": -22.6, "y": 135, "z": 0 },
+		"origin": { "x": 0.5, "y": 0.5, "z": 0.5 },
+		"scale": 1.1
+	},
+	"tpHandTransform": {
+		"translation": { "x": -1.2, "y": -0.6, "z": -0.8 },
+		"rotation": { "x": -2, "y": 25, "z": -78 },
+		"scale": 0.5
+	}
+}

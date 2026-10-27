@@ -1,0 +1,2 @@
+# Log lines for tests/smoke/crystals.restart.commands.
+Crystals test: the fire crystal at -?[0-9]+, [0-9]+, -?[0-9]+ \(from spawn\) is (low|high), with 1 crack\(s\)$

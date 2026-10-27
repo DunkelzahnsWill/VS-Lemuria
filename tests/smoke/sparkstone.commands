@@ -1,0 +1,5 @@
+# Sparkstone (step 2): a full Crystalline Chisel awakens two polished granite blocks, and a full Fire
+# crystal placed on them feeds the network; the chisel carves polished granite into a cradle and a rack.
+/lemuria sparkstone test awaken
+/lemuria sparkstone test carve
+/lemuria sparkstone test admin
