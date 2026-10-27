@@ -19,3 +19,5 @@ Evocations test: Gale over the patch cast yes; grown leaves gone: yes, placed le
 Evocations test: over-driven Gale cast yes; ripe flax reaped: yes, young flax stays: yes, bush picked and standing: yes, legacy bush picked: yes; drops in some stack\(s\), all different: yes$
 Evocations test: over-driven Fire at granite cast yes, 3 of 3 granite blocks melted, the ore stays: yes; a Glowing one melts rock: no; Quench cast yes, 3 of 3 cooled to rock, lava left 0$
 Evocations test: over-driven Quench at lake ice cast yes; lake to glacier: yes and yes, glacier to packed: yes, packed stays: yes, beyond the 2×2 stays lake ice: yes$
+Evocations test: Glittering Fire at lake ice cast yes, 1 of 9 melted to water; Glowing cast yes, 8 of 9 melted, glacier ice stays: yes; snow cast yes, snow gone: yes$
+Evocations test: over-driven Fire at glacier ice cast yes, 9 of 9 melted to water; a Glowing one boils water: no; over-driven at the pool cast yes, 9 of 9 boiled away, salt water too: yes$

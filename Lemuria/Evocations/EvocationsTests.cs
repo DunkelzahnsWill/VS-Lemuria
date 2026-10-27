@@ -465,6 +465,85 @@ public class EvocationsTests
             YesNo(Accessor.GetBlock(ice.AddCopy(2, 0, 0), BlockLayersAccess.Fluid).Code?.Path == "lakeice"));
     }
 
+    // ------------------------------------------------------------------ melting ice and boiling water
+
+    /// <summary>
+    /// Ignite against ice, snow and water (step 3 note rev 178): Glittering melts the lake ice aimed at,
+    /// a Glowing carpet melts a pool of it but not glacier ice, and snow; over-driven melts glacier and
+    /// packed ice and boils a pool, salt water included, away. A Glowing one boils nothing.
+    /// </summary>
+    public void Thaw(BlockPos column)
+    {
+        var origin = TestSite.Surface(sapi, column);
+        Ground(origin.AddCopy(-1, 0, -2), 12, 5, 14);
+        string Fluid(BlockPos pos) => Accessor.GetBlock(pos, BlockLayersAccess.Fluid).Code?.Path ?? "air";
+        string Solid(BlockPos pos) => Accessor.GetBlock(pos, BlockLayersAccess.Solid).Code?.Path ?? "air";
+        // A 3×3 pool let into the floor around a middle block, each cell from fill(dx, dz).
+        BlockPos Pool(int x, int z, Action<BlockPos, int, int> fill)
+        {
+            var mid = origin.AddCopy(x, -1, z);
+            for (int dx = -1; dx <= 1; dx++)
+            {
+                for (int dz = -1; dz <= 1; dz++)
+                {
+                    var pos = mid.AddCopy(dx, 0, dz);
+                    Accessor.SetBlock(Id("game:rock-granite"), pos.DownCopy());
+                    Accessor.SetBlock(0, pos);
+                    Accessor.SetBlock(0, pos, BlockLayersAccess.Fluid);
+                    fill(pos, dx, dz);
+                }
+            }
+            return mid;
+        }
+        int Count(BlockPos mid, System.Func<BlockPos, bool> match)
+        {
+            int n = 0;
+            for (int dx = -1; dx <= 1; dx++)
+            {
+                for (int dz = -1; dz <= 1; dz++)
+                {
+                    n += match(mid.AddCopy(dx, 0, dz)) ? 1 : 0;
+                }
+            }
+            return n;
+        }
+        bool CastDown(int power, BlockPos at) =>
+            CastAt(Crystal.Fire, power, at.ToVec3d().Add(0.5, 4, 0.5), at.ToVec3d().Add(0.5, 0.9, 0.5), out _);
+        void Lake(BlockPos pos, int dx, int dz) => Accessor.SetBlock(Id("game:lakeice"), pos, BlockLayersAccess.Fluid);
+
+        var a = Pool(2, 1, Lake);
+        bool glittering = CastDown(1, a);
+        var b = Pool(7, 1, (pos, dx, dz) =>
+        {
+            if (dx == 1 && dz == 1)
+            {
+                Accessor.SetBlock(Id("game:glacierice"), pos);
+            }
+            else
+            {
+                Lake(pos, dx, dz);
+            }
+        });
+        bool glowing = CastDown(2, b);
+        var snow = origin.AddCopy(6, 0, 4);
+        Accessor.SetBlock(Id("game:snowlayer-1"), snow);
+        Accessor.SetBlock(Id("game:snowblock"), snow.AddCopy(1, 0, 0));
+        bool snowCast = CastDown(2, snow);
+        logger.Notification("Evocations test: Glittering Fire at lake ice cast {0}, {1} of 9 melted to water; Glowing cast {2}, {3} of 9 melted, glacier ice stays: {4}; snow cast {5}, snow gone: {6}",
+            YesNo(glittering), Count(a, p => Fluid(p) == "water-still-7"), YesNo(glowing), Count(b, p => Fluid(p) == "water-still-7"),
+            YesNo(Solid(b.AddCopy(1, 0, 1)) == "glacierice"), YesNo(snowCast), YesNo(Solid(snow) == "air" && Solid(snow.AddCopy(1, 0, 0)) == "air"));
+
+        var c = Pool(2, 7, (pos, dx, dz) => Accessor.SetBlock(Id((dx + dz) % 2 == 0 ? "game:glacierice" : "game:packedglacierice"), pos));
+        bool overdriven = CastDown(3, c);
+        var water = Id("game:water-still-7");
+        var d = Pool(7, 7, (pos, dx, dz) => Accessor.SetBlock(dx == 1 && dz == 1 ? Id("game:saltwater-still-7") : water, pos, BlockLayersAccess.Fluid));
+        bool glowingBoils = CastDown(2, d) && Count(d, p => Fluid(p) == "air") > 0;
+        bool boiled = CastDown(3, d);
+        logger.Notification("Evocations test: over-driven Fire at glacier ice cast {0}, {1} of 9 melted to water; a Glowing one boils water: {2}; over-driven at the pool cast {3}, {4} of 9 boiled away, salt water too: {5}",
+            YesNo(overdriven), Count(c, p => Fluid(p) == "water-still-7" && Solid(p) == "air"), YesNo(glowingBoils), YesNo(boiled),
+            Count(d, p => Fluid(p) == "air"), YesNo(Fluid(d.AddCopy(1, 0, 1)) == "air"));
+    }
+
     // ------------------------------------------------------------------ casting rules
 
     public void Overdrive()

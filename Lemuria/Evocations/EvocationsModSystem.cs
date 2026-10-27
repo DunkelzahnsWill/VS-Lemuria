@@ -232,6 +232,10 @@ public class EvocationsModSystem : ModSystem
                         .WithDescription("Gale reaps leaves, reeds and mushrooms and pans sand, over-driven also crops and berries; over-driven Fire melts granite to lava, Quench cools it, over-driven Quench packs ice")
                         .HandleWith(_ => TestSite.WithChunk(api, Mod.Logger, "Evocations", 4, -44, column => new EvocationsTests(this, api, Mod.Logger).Reap(column)))
                     .EndSubCommand()
+                    .BeginSubCommand("thaw")
+                        .WithDescription("Fire melts lake ice and snow, over-driven melts glacier ice and boils a pool away")
+                        .HandleWith(_ => TestSite.WithChunk(api, Mod.Logger, "Evocations", 4, -60, column => new EvocationsTests(this, api, Mod.Logger).Thaw(column)))
+                    .EndSubCommand()
                     .BeginSubCommand("overdrive")
                         .WithDescription("Checks the wind-up and over-drive times, what casts cost, cracks, shattering and casting from a stack")
                         .HandleWith(_ =>
