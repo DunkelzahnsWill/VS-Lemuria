@@ -148,10 +148,12 @@ public class BlockEntityCrystalRack : BlockEntity
                 continue;
             }
             var (x, y) = BlockCrystalRack.PlaceCenter(i);
-            float scale = Crystal.EvolutionOf(stack.Collectible) == Crystal.Glowing ? 0.26f : 0.21f;
+            // Lying lengthwise in its cell like a bottle in a wine rack, pointing into the wall.
+            float scale = Crystal.EvolutionOf(stack.Collectible) == Crystal.Glowing ? 0.38f : 0.32f;
             var placed = mesh.Clone()
-                .Scale(new Vec3f(0.5f, 0f, 0.5f), scale, scale, scale)
-                .Translate(x / 16f - 0.5f, (y - 1.75f) / 16f, 12.5f / 16f - 0.5f)
+                .Scale(center, scale, scale, scale)
+                .Rotate(center, GameMath.PIHALF, 0, 0)
+                .Translate(x / 16f - 0.5f, y / 16f - 0.5f, (BlockCrystalRack.Front + BlockCrystalRack.Back) / 32f - 0.5f)
                 .Rotate(center, 0, angle, 0);
             mesher.AddMeshData(placed);
         }

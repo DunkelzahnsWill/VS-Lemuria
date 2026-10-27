@@ -8,6 +8,6 @@
 	"item-crystaljar-shielded-fired": "Shielded crystal jar",
 	"itemdesc-crystaljar-shielded-fired": "Carried in a bag slot. Its three slots take only crystals, and hold any of them safely.",
 	"block-crystalrack-*": "Crystal rack",
-	"blockdesc-crystalrack-*": "A carved stone panel with sixteen places for crystals. Crystals stored here stay quiet.",
+	"blockdesc-crystalrack-*": "A stone wine rack with sixteen cells, where crystals lie on their sides. Crystals stored here stay quiet.",
 	"crystalrack-holds": "Holds {0} of {1} crystals"
 }
