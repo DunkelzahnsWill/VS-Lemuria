@@ -228,7 +228,7 @@ public class EvocationsModSystem : ModSystem
                         .HandleWith(_ => TestSite.WithChunk(api, Mod.Logger, "Evocations", 4, -36, column => new EvocationsTests(this, api, Mod.Logger).Gale(column)))
                     .EndSubCommand()
                     .BeginSubCommand("reap")
-                        .WithDescription("Gale reaps leaves and crops and pans sand; over-driven Fire melts granite to lava, and Quench cools it")
+                        .WithDescription("Gale reaps leaves, reeds and mushrooms and pans sand, over-driven also crops and berries; over-driven Fire melts granite to lava, Quench cools it, over-driven Quench packs ice")
                         .HandleWith(_ => TestSite.WithChunk(api, Mod.Logger, "Evocations", 4, -44, column => new EvocationsTests(this, api, Mod.Logger).Reap(column)))
                     .EndSubCommand()
                     .BeginSubCommand("overdrive")

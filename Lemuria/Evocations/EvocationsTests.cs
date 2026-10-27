@@ -133,14 +133,18 @@ public class EvocationsTests
             }
         }
         var water = sapi.World.GetBlock(new AssetLocation("game:water-still-7"));
-        for (int x = 0; x < 3; x++)
+        void Fill()
         {
-            for (int z = 0; z < 3; z++)
+            for (int x = 0; x < 3; x++)
             {
-                Accessor.SetBlock(0, pond.AddCopy(x, 0, z));
-                Accessor.SetBlock(water?.Id ?? 0, pond.AddCopy(x, 0, z), BlockLayersAccess.Fluid);
+                for (int z = 0; z < 3; z++)
+                {
+                    Accessor.SetBlock(0, pond.AddCopy(x, 0, z));
+                    Accessor.SetBlock(water?.Id ?? 0, pond.AddCopy(x, 0, z), BlockLayersAccess.Fluid);
+                }
             }
         }
+        Fill();
         // Cast from straight above the pond's middle, so the ray meets that block's water first.
         var eye = pond.ToVec3d().Add(1.5, 4, 1.5);
         int Frozen()
@@ -161,8 +165,10 @@ public class EvocationsTests
         // The Glowing carpet is centred on the impact, so aimed at a corner it covers 2×2 of the pond.
         bool cast = CastAt(Crystal.Ice, 2, pond.ToVec3d().Add(0.5, 4, 0.5), pond.ToVec3d().Add(0.5, 0.9, 0.5), out var context);
         int glowing = Frozen();
+        // Over-driven and aimed at ice it would pack that instead, so the pond thaws first.
+        Fill();
         CastAt(Crystal.Ice, 3, eye, pond.ToVec3d().Add(1.5, 0.9, 1.5), out _);
-        logger.Notification("Evocations test: a Glowing Quench aimed at {0} cast {1}; {2} of 9 water blocks froze to lake ice, {3} after an over-driven one",
+        logger.Notification("Evocations test: a Glowing Quench aimed at {0} cast {1}; {2} of 9 water blocks froze to lake ice, {3} after an over-driven one on the open pond",
             context.Water != null ? "the water" : "something else", YesNo(cast), glowing, Frozen());
 
         // A 3×3 field of dry farmland, out of the pond's reach, with flax sprouting at one corner.
@@ -329,15 +335,23 @@ public class EvocationsTests
     // ------------------------------------------------------------------ reaping, panning and lava
 
     /// <summary>
-    /// A Glowing Gale's carpet over leaves, crops and sand; an over-driven Fire melting rock into lava;
-    /// a Glowing Quench cooling it back to obsidian.
+    /// A Glowing Gale's carpet over leaves, reeds, mushrooms, crops, bushes and sand, then an over-driven
+    /// one; an over-driven Fire melting rock into lava; a Glowing Quench cooling it back to obsidian; an
+    /// over-driven Quench packing ice.
     /// </summary>
     public void Reap(BlockPos column)
     {
         var origin = TestSite.Surface(sapi, column);
         Ground(origin.AddCopy(-1, 0, -2), 9, 5, 9);
-        // A 3×3 patch on the granite floor, its middle 3 blocks east: sand in the middle, leaves, crops.
+        // A 3×3 patch on the granite floor, its middle 3 blocks east: sand in the middle, leaves, crops,
+        // a cattail, a mushroom and two ripe berry bushes on soil.
         var mid = origin.AddCopy(3, 0, 2);
+        string Path(BlockPos pos) => Accessor.GetBlock(pos).Code?.Path ?? "air";
+        void OnSoil(string code, BlockPos pos)
+        {
+            Accessor.SetBlock(Id("game:soil-medium-none"), pos.DownCopy());
+            Accessor.SetBlock(Id(code), pos);
+        }
         Accessor.SetBlock(Id("game:sand-granite"), mid);
         Accessor.SetBlock(Id("game:leaves-grown-oak"), mid.AddCopy(-1, 0, 0));
         Accessor.SetBlock(Id("game:leaves-placed-oak"), mid.AddCopy(1, 0, 0));
@@ -345,17 +359,47 @@ public class EvocationsTests
         Accessor.SetBlock(Id("game:crop-flax-9"), mid.AddCopy(0, 0, -1));
         Accessor.SetBlock(Id("game:farmland-moist-medium"), mid.AddCopy(0, -1, 1));
         Accessor.SetBlock(Id("game:crop-flax-3"), mid.AddCopy(0, 0, 1));
-        string Path(BlockPos pos) => Accessor.GetBlock(pos).Code?.Path ?? "air";
-        bool reaped = CastAt(Crystal.Sky, 2, mid.ToVec3d().Add(0.5, 4, 0.5), mid.ToVec3d().Add(0.5, 0.9, 0.5), out _);
-        var drops = sapi.World.GetEntitiesAround(mid.ToVec3d().Add(0.5, 0.5, 0.5), 3, 3, e => e is EntityItem).ToList();
-        logger.Notification("Evocations test: Gale over the patch cast {0}; grown leaves gone: {1}, placed leaves stay: {2}, ripe flax reaped: {3}, young flax stays: {4}, sand panned out: {5}; drops in {6} stack(s), all different: {7}",
-            YesNo(reaped), YesNo(Path(mid.AddCopy(-1, 0, 0)) == "air"), YesNo(Path(mid.AddCopy(1, 0, 0)).StartsWith("leaves-placed")),
-            YesNo(Path(mid.AddCopy(0, 0, -1)) == "air"), YesNo(Path(mid.AddCopy(0, 0, 1)) == "crop-flax-3"), YesNo(Path(mid) == "air"),
-            drops.Count > 0 ? "some" : "no", YesNo(drops.Select(d => ((EntityItem)d).Itemstack.Collectible.Code.ToString()).Distinct().Count() == drops.Count));
-        foreach (var item in drops)
+        OnSoil("game:tallplant-coopersreed-land-normal-free", mid.AddCopy(-1, 0, -1));
+        OnSoil("game:mushroom-fieldmushroom-normal", mid.AddCopy(1, 0, -1));
+        var bushPos = mid.AddCopy(-1, 0, 1);
+        OnSoil("game:fruitingbush-grown-blueberry-free", bushPos);
+        if (Accessor.GetBlockEntity(bushPos) == null)
         {
-            item.Die(EnumDespawnReason.Removed);
+            Accessor.SpawnBlockEntity("Generic", bushPos);
         }
+        var bush = Accessor.GetBlockEntity(bushPos)?.GetBehavior<BEBehaviorFruitingBush>();
+        if (bush?.BState != null)
+        {
+            bush.BState.Growthstate = EnumFruitingBushGrowthState.Ripe;
+        }
+        OnSoil("game:smallberrybush-blueberry-ripe", mid.AddCopy(1, 0, 1));
+        var above = mid.ToVec3d().Add(0.5, 4, 0.5);
+        var at = mid.ToVec3d().Add(0.5, 0.9, 0.5);
+        bool reaped = CastAt(Crystal.Sky, 2, above, at, out _);
+        string Drops()
+        {
+            var drops = sapi.World.GetEntitiesAround(mid.ToVec3d().Add(0.5, 0.5, 0.5), 3, 3, e => e is EntityItem && e.Alive).ToList();
+            bool different = drops.Select(d => ((EntityItem)d).Itemstack.Collectible.Code.ToString()).Distinct().Count() == drops.Count;
+            foreach (var item in drops)
+            {
+                item.Die(EnumDespawnReason.Removed);
+            }
+            return (drops.Count > 0 ? "some" : "no") + " stack(s), all different: " + YesNo(different);
+        }
+        string reapDrops = Drops();
+        logger.Notification("Evocations test: Gale over the patch cast {0}; grown leaves gone: {1}, placed leaves stay: {2}, cattail cut and regrowing: {3}, mushroom picked: {4}, sand panned out: {5}; left for over-driving: ripe flax {6}, ripe bush {7}, ripe legacy bush {8}; drops in {9}",
+            YesNo(reaped), YesNo(Path(mid.AddCopy(-1, 0, 0)) == "air"), YesNo(Path(mid.AddCopy(1, 0, 0)).StartsWith("leaves-placed")),
+            YesNo(Path(mid.AddCopy(-1, 0, -1)) == "tallplant-coopersreed-land-harvested-free"), YesNo(Path(mid.AddCopy(1, 0, -1)) == "air"),
+            YesNo(Path(mid) == "air"), YesNo(Path(mid.AddCopy(0, 0, -1)) == "crop-flax-9"),
+            YesNo(bush?.BState?.Growthstate == EnumFruitingBushGrowthState.Ripe), YesNo(Path(mid.AddCopy(1, 0, 1)).EndsWith("-ripe")), reapDrops);
+        // Something to stop the ray in the middle again, which Gale leaves alone, so the over-driven
+        // cube is centred on the patch, not the floor under it.
+        Accessor.SetBlock(Id("game:leaves-placed-oak"), mid);
+        bool overdriven = CastAt(Crystal.Sky, 3, above, at, out _);
+        logger.Notification("Evocations test: over-driven Gale cast {0}; ripe flax reaped: {1}, young flax stays: {2}, bush picked and standing: {3}, legacy bush picked: {4}; drops in {5}",
+            YesNo(overdriven), YesNo(Path(mid.AddCopy(0, 0, -1)) == "air"), YesNo(Path(mid.AddCopy(0, 0, 1)) == "crop-flax-3"),
+            YesNo(bush?.BState?.Growthstate == EnumFruitingBushGrowthState.Mature && Path(bushPos).StartsWith("fruitingbush-")),
+            YesNo(Path(mid.AddCopy(1, 0, 1)) == "smallberrybush-blueberry-empty"), Drops());
 
         // Granite to melt, 6 blocks south of the patch; ore beside it stays.
         var rock = origin.AddCopy(3, -1, 5);
@@ -391,6 +435,34 @@ public class EvocationsTests
         }
         logger.Notification("Evocations test: over-driven Fire at granite cast {0}, {1} of 3 granite blocks melted, the ore stays: {2}; a Glowing one melts rock: {3}; Quench cast {4}, {5} of 3 cooled to rock, lava left {6}",
             YesNo(melted), lava, YesNo(oreStays), YesNo(glowingMelts), YesNo(cooled), obsidian, Lava());
+
+        // Ice to pack, 6 blocks south of the rock, laid into the floor: lake ice, glacier ice, packed ice
+        // and lake ice in the 2×2, more lake ice just beyond it.
+        Ground(origin.AddCopy(-1, 0, 9), 9, 5, 5);
+        var ice = origin.AddCopy(3, -1, 11);
+        for (int x = -1; x <= 2; x++)
+        {
+            for (int z = -1; z <= 2; z++)
+            {
+                Accessor.SetBlock(Id("game:rock-granite"), ice.AddCopy(x, -1, z));
+            }
+        }
+        void Lake(BlockPos pos)
+        {
+            Accessor.SetBlock(0, pos);
+            Accessor.SetBlock(Id("game:lakeice"), pos, BlockLayersAccess.Fluid);
+        }
+        Lake(ice);
+        Accessor.SetBlock(Id("game:glacierice"), ice.AddCopy(1, 0, 0));
+        Accessor.SetBlock(Id("game:packedglacierice"), ice.AddCopy(0, 0, 1));
+        Lake(ice.AddCopy(1, 0, 1));
+        Lake(ice.AddCopy(2, 0, 0));
+        var iceEye = ice.ToVec3d().Add(-2.5, 2.6, 0.5);
+        bool packed = CastAt(Crystal.Ice, 3, iceEye, ice.ToVec3d().Add(0.5, 0.95, 0.5), out _);
+        logger.Notification("Evocations test: over-driven Quench at lake ice cast {0}; lake to glacier: {1} and {2}, glacier to packed: {3}, packed stays: {4}, beyond the 2×2 stays lake ice: {5}",
+            YesNo(packed), YesNo(Path(ice) == "glacierice"), YesNo(Path(ice.AddCopy(1, 0, 1)) == "glacierice"),
+            YesNo(Path(ice.AddCopy(1, 0, 0)) == "packedglacierice"), YesNo(Path(ice.AddCopy(0, 0, 1)) == "packedglacierice"),
+            YesNo(Accessor.GetBlock(ice.AddCopy(2, 0, 0), BlockLayersAccess.Fluid).Code?.Path == "lakeice"));
     }
 
     // ------------------------------------------------------------------ casting rules

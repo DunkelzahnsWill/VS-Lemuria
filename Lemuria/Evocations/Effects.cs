@@ -193,6 +193,11 @@ public static class Effects
     /// </summary>
     public static bool Quench(CastContext cast)
     {
+        var aimed = cast.Block?.Position;
+        if (aimed != null && cast.Power >= 3 && PackedFrom(cast.Api.World, aimed) != null)
+        {
+            return Pack(cast, aimed);
+        }
         bool acted = false;
         var watered = new HashSet<BlockPos>();
         IEnumerable<BlockPos> blocks = cast.Power >= 2
@@ -281,6 +286,77 @@ public static class Effects
         }
         accessor.SetBlock(ice.BlockId, pos, BlockLayersAccess.Fluid);
         return true;
+    }
+
+    private static readonly AssetLocation GlacierIceCode = new("game", "glacierice");
+    private static readonly AssetLocation PackedIceCode = new("game", "packedglacierice");
+
+    /// <summary>
+    /// What a block of ice packs into, and the layer it lies in: lake ice (fluid layer) to glacier ice,
+    /// glacier ice (the world's, or the meltable ice-glacier) to packed glacier ice. Null for anything
+    /// else, packed ice included.
+    /// </summary>
+    private static (Block Into, int Layer)? PackedFrom(IWorldAccessor world, BlockPos pos)
+    {
+        var accessor = world.BlockAccessor;
+        foreach (int layer in new[] { BlockLayersAccess.Solid, BlockLayersAccess.Fluid })
+        {
+            var code = accessor.GetBlock(pos, layer).Code;
+            if (code?.Domain != "game")
+            {
+                continue;
+            }
+            var into = code.Path switch
+            {
+                "lakeice" => world.GetBlock(GlacierIceCode),
+                "glacierice" or "ice-glacier" => world.GetBlock(PackedIceCode),
+                _ => null,
+            };
+            if (into != null)
+            {
+                return (into, layer);
+            }
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// At power 3 (an over-driven Glowing crystal; Luminous in step 6), ice aimed at packs (the owner,
+    /// 2026-10-27; note rev 143): a 2×2×1 placed as Ignite's melt is, lake ice to glacier ice and glacier
+    /// ice to packed glacier ice, the game's natural blocks, which don't melt where they stand. Each block
+    /// is claim-checked; a block with something else in the solid layer over lake ice stays. If nothing
+    /// packs, the cast fizzles free.
+    /// </summary>
+    private static bool Pack(CastContext cast, BlockPos aimed)
+    {
+        var world = cast.Api.World;
+        var accessor = world.BlockAccessor;
+        var (fx, fz, rx, rz) = cast.Heading();
+        Block? last = null;
+        foreach (var (dx, dz) in new[] { (0, 0), (fx, fz), (rx, rz), (fx + rx, fz + rz) })
+        {
+            var pos = aimed.AddCopy(dx, 0, dz);
+            if (PackedFrom(world, pos) is not var (into, layer) || !cast.Can(pos))
+            {
+                continue;
+            }
+            if (layer == BlockLayersAccess.Fluid)
+            {
+                if (accessor.GetBlock(pos, BlockLayersAccess.Solid).BlockId != 0)
+                {
+                    continue;
+                }
+                accessor.SetBlock(0, pos, BlockLayersAccess.Fluid);
+            }
+            accessor.SetBlock(into.BlockId, pos);
+            accessor.TriggerNeighbourBlockUpdate(pos);
+            last = into;
+        }
+        if (last?.Sounds?.Place.Location is { } sound)
+        {
+            world.PlaySoundAt(sound, aimed.X + 0.5, aimed.Y + 0.5, aimed.Z + 0.5, null, true, 16f, LemuriaSound.Volume(1f));
+        }
+        return last != null;
     }
 
     /// <summary>

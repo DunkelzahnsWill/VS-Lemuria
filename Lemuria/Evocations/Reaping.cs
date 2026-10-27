@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Lemuria.Core;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
@@ -12,11 +13,14 @@ using Vintagestory.GameContent;
 namespace Lemuria.Evocations;
 
 /// <summary>
-/// What Gale's gust does to blocks after its push (step 3 note, Gale; the owner, 2026-10-27): in its
-/// usual area it strips grown leaves and ripe crops as a hand would, with the game's drops, and pans
-/// every pannable block out whole, one panning per layer, as the game's wooden pan rolls them. The
-/// drops land in the area, the same kinds stacked together. Placed leaves, unripe crops, berry bushes
-/// and fruit trees are left alone, and nothing is replanted.
+/// What Gale's gust does to blocks after its push (step 3 note, Gale; the owner, 2026-10-27, rev 143):
+/// in its usual area it strips grown leaves, picks mushrooms and cuts cattails, papyrus and tule as a
+/// knife does (they regrow), and pans every pannable block out whole, one panning per layer, as the
+/// game's wooden pan rolls them. Over-driven (power 3) it also takes ripe crops and picks ripe berries
+/// and fruit as a hand does, so bushes and trees stay. The drops land in the area, the same kinds
+/// stacked together. Placed leaves and anything unripe are left alone, and nothing is replanted.
+/// The two game fields it sets by reflection (a bush's growth state, a fruit tree's harvested mark)
+/// have no public setter; no Harmony.
 /// </summary>
 public static class Reaping
 {
@@ -59,12 +63,33 @@ public static class Reaping
         var world = cast.Api.World;
         var accessor = world.BlockAccessor;
         var block = accessor.GetBlock(pos);
-        if (IsGrownLeaves(block) || IsRipeCrop(block))
+        bool overdriven = cast.Power >= 3;
+        if (IsGrownLeaves(block) || block is BlockMushroom || (overdriven && IsRipeCrop(block)))
         {
             drops.AddRange(block.GetDrops(world, pos, cast.Player) ?? Array.Empty<ItemStack>());
             var farmland = accessor.GetBlockEntity(pos.DownCopy()) as BlockEntityFarmland;
             accessor.SetBlock(0, pos);
             farmland?.OnCropBlockBroken();
+        }
+        else if (IsUncutReed(block))
+        {
+            // As a knife cuts them (BlockReeds.OnBlockBroken): the tops drop, the plant regrows.
+            foreach (var drop in block.Drops ?? Array.Empty<BlockDropItemStack>())
+            {
+                if (drop.GetNextItemStack() is { } stack)
+                {
+                    drops.Add(stack);
+                }
+            }
+            accessor.SetBlock(world.GetBlock(block.CodeWithVariants(["habitat", "state"], ["land", "harvested"]))?.BlockId ?? 0, pos);
+        }
+        else if (overdriven && PickBerries(cast, block, pos, drops))
+        {
+            return true;
+        }
+        else if (overdriven && accessor.GetBlockEntity(pos) is BlockEntityFruitTreePart fruit && PickFruit(fruit, drops))
+        {
+            return true;
         }
         else if (block.Attributes?.IsTrue("pannable") == true && accessor.GetBlockEntity(pos) == null)
         {
@@ -76,6 +101,88 @@ public static class Reaping
             return false;
         }
         accessor.TriggerNeighbourBlockUpdate(pos);
+        return true;
+    }
+
+    /// <summary>Cattails, papyrus and tule standing whole (brown sedge is grass, not a reed).</summary>
+    public static bool IsUncutReed(Block block) =>
+        block is BlockReeds && block.Variant["state"] == "normal" && block.Variant["type"] is "coopersreed" or "papyrus" or "tule";
+
+    private static readonly MethodInfo? setGrowthState =
+        typeof(BEBehaviorFruitingBush).GetMethod("setGrowthState", BindingFlags.Instance | BindingFlags.NonPublic);
+
+    /// <summary>
+    /// Picks a ripe berry bush as by hand, so the bush stays: a fruiting bush with the game's ripe drops,
+    /// then back to mature as the hand leaves it; a legacy bush with its harvestable drops, then empty.
+    /// </summary>
+    private static bool PickBerries(CastContext cast, Block block, BlockPos pos, List<ItemStack> drops)
+    {
+        var world = cast.Api.World;
+        var accessor = world.BlockAccessor;
+        if (accessor.GetBlockEntity(pos)?.GetBehavior<BEBehaviorFruitingBush>() is { } bush)
+        {
+            if (bush.BState?.Growthstate != EnumFruitingBushGrowthState.Ripe || setGrowthState == null)
+            {
+                return false;
+            }
+            drops.AddRange(bush.GetRipeDrops(cast.Player) ?? Array.Empty<ItemStack>());
+            setGrowthState.Invoke(bush, new object[] { EnumFruitingBushGrowthState.Mature });
+            return true;
+        }
+        if (block is BlockBerryBush && block.Variant["state"] == "ripe"
+            && block.GetBehavior<BlockBehaviorHarvestable>() is { harvestedStacks: { } stacks }
+            && world.GetBlock(block.CodeWithVariant("state", "empty")) is { } empty)
+        {
+            float rate = block.Attributes?.IsTrue("forageStatAffected") == true && cast.Caster != null
+                ? cast.Caster.Stats.GetBlended("forageDropRate") : 1f;
+            foreach (var drop in stacks)
+            {
+                if (drop?.GetNextItemStack(rate) is { } stack)
+                {
+                    drops.Add(stack);
+                }
+            }
+            accessor.ExchangeBlock(empty.BlockId, pos);
+            return true;
+        }
+        return false;
+    }
+
+    private static readonly FieldInfo? fruitHarvested =
+        typeof(BlockEntityFruitTreePart).GetField("harvested", BindingFlags.Instance | BindingFlags.NonPublic);
+
+    /// <summary>Picks a ripe fruit tree's foliage as by hand (BlockEntityFruitTreePart.OnBlockInteractStop): the tree stays.</summary>
+    private static bool PickFruit(BlockEntityFruitTreePart part, List<ItemStack> drops)
+    {
+        if (part.FoliageState != EnumFoliageState.Ripe || part.PartType == EnumTreePartType.Stem || part.TreeType == null)
+        {
+            return false;
+        }
+        var branchCode = part.Block.Attributes?["branchBlock"].AsString();
+        if (branchCode == null || part.Api.World.GetBlock(AssetLocation.Create(branchCode, part.Block.Code.Domain)) is not BlockFruitTreeBranch branch
+            || !branch.TypeProps.TryGetValue(part.TreeType, out var props))
+        {
+            return false;
+        }
+        if (fruitHarvested == null)
+        {
+            return false;
+        }
+        part.FoliageState = EnumFoliageState.Plain;
+        // Without this mark the tree turns ripe again on its next update.
+        fruitHarvested.SetValue(part, true);
+        part.MarkDirty(true);
+        foreach (var drop in props.FruitStacks)
+        {
+            if (drop.GetNextItemStack(1) is { } stack)
+            {
+                drops.Add(stack);
+            }
+            if (drop.LastDrop)
+            {
+                break;
+            }
+        }
         return true;
     }
 
