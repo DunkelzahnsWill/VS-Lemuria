@@ -53,7 +53,7 @@ public class CollectibleBehaviorJarFiller : CollectibleBehavior
             return;
         }
         var player = (byEntity as EntityPlayer)?.Player;
-        if (player == null || !world.Claims.TryAccess(player, blockSel.Position, EnumBlockAccessFlags.Use))
+        if (player == null || !LemuriaClaims.TryAccess(world, player, blockSel.Position, EnumBlockAccessFlags.Use))
         {
             return;
         }
@@ -76,6 +76,6 @@ public class CollectibleBehaviorJarFiller : CollectibleBehavior
             slot.TakeOut(1);
             slot.MarkDirty();
         }
-        world.PlaySoundAt(new AssetLocation("game:sounds/player/build"), blockSel.Position, -0.25, null);
+        world.PlaySoundAt(new AssetLocation("game:sounds/player/build"), blockSel.Position, -0.25, null, true, 32f, LemuriaSound.Volume(1f));
     }
 }

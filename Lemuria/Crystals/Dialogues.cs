@@ -151,13 +151,13 @@ public class Dialogues
         b.SetWarning(false);
         if (level <= 1)
         {
-            sapi.World.PlaySoundAt(ThudSound, mid.X, mid.Y, mid.Z, null, false, 24f, 1f);
+            sapi.World.PlaySoundAt(ThudSound, mid.X, mid.Y, mid.Z, null, false, 24f, LemuriaSound.Volume(1f));
             a.Neutralize();
             b.Neutralize();
             system.Mod.Logger.Notification("Crystals: dialogue at level 1, {0} neutralized", describe);
             return;
         }
-        sapi.World.PlaySoundAt(CrackleSound, mid.X, mid.Y, mid.Z, null, true, 24f, 1f);
+        sapi.World.PlaySoundAt(CrackleSound, mid.X, mid.Y, mid.Z, null, true, 24f, LemuriaSound.Volume(1f));
         a.Discharge();
         b.Discharge();
         string cracked = "none";
@@ -410,11 +410,11 @@ public class Dialogues
         }
         if (thud)
         {
-            sapi.World.PlaySoundAt(ThudSound, where.X, where.Y, where.Z, null, false, 24f, 1f);
+            sapi.World.PlaySoundAt(ThudSound, where.X, where.Y, where.Z, null, false, 24f, LemuriaSound.Volume(1f));
         }
         if (crackle)
         {
-            sapi.World.PlaySoundAt(CrackleSound, where.X, where.Y, where.Z, null, true, 24f, 1f);
+            sapi.World.PlaySoundAt(CrackleSound, where.X, where.Y, where.Z, null, true, 24f, LemuriaSound.Volume(1f));
         }
     }
 
@@ -441,7 +441,7 @@ public class Dialogues
         int cracks = Crystal.GetCracks(stack) + 1;
         if (cracks >= Math.Max(1, LemuriaModSystem.Config.CracksToShatter))
         {
-            sapi.World.PlaySoundAt(new AssetLocation(LemuriaModSystem.ModId, "sounds/crystals/shatter"), where.X, where.Y, where.Z, null, true, 24f, 1f);
+            sapi.World.PlaySoundAt(new AssetLocation(LemuriaModSystem.ModId, "sounds/crystals/shatter"), where.X, where.Y, where.Z, null, true, 24f, LemuriaSound.Volume(1f));
             system.SendBurst(where, Crystal.AlignmentOf(stack.Collectible));
             return null;
         }

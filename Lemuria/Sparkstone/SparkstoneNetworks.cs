@@ -112,7 +112,7 @@ public class SparkstoneNetworks
         if (level != oldLevel)
         {
             var at = network[0].Pos;
-            sapi.World.PlaySoundAt(ChimeSound, at.X + 0.5, at.Y + 0.5, at.Z + 0.5, null, false, 16f, 0.5f);
+            sapi.World.PlaySoundAt(ChimeSound, at.X + 0.5, at.Y + 0.5, at.Z + 0.5, null, false, 16f, LemuriaSound.Volume(0.5f));
         }
     }
 

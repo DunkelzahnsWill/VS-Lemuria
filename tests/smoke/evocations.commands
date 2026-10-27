@@ -1,0 +1,8 @@
+# Evocations (step 3): each evocation cast at a fixed scene by the same ray and effects a player's
+# cast uses, and the casting rules (wind-up, over-drive, cost, cracks, stacks).
+/lemuria evocations test fire
+/lemuria evocations test water
+/lemuria evocations test tremor
+/lemuria evocations test gale
+/lemuria evocations test reap
+/lemuria evocations test overdrive

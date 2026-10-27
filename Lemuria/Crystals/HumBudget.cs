@@ -1,4 +1,5 @@
 using System;
+using Lemuria.Core;
 using System.Collections.Generic;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
@@ -30,7 +31,7 @@ public static class HumBudget
 
     private static volatile float share = 1f;
 
-    /// <summary>What each note's hum is multiplied by: 1 shared among the notes the player hears.</summary>
+    /// <summary>What each note's hum is multiplied by: 1 shared among the notes the player hears, times Lemuria's sound volume.</summary>
     public static float Share => share;
 
     /// <summary>A block entity whose block hums through its ambient sound (crystal, cradle, sparkstone).</summary>
@@ -81,7 +82,7 @@ public static class HumBudget
                 notes.Add(ambient.ToString());
             }
         }
-        share = 1f / Math.Max(1, notes.Count);
+        share = LemuriaSound.Scale / Math.Max(1, notes.Count);
 
         var nearest = new Dictionary<string, (ILoadedSound Sound, double DistanceSq)>();
         foreach (var (sound, loop) in loops)
@@ -94,7 +95,7 @@ public static class HumBudget
         }
         foreach (var (sound, loop) in loops)
         {
-            sound.SetVolume(nearest[loop.Group].Sound == sound ? loop.Volume : 0f);
+            sound.SetVolume(nearest[loop.Group].Sound == sound ? LemuriaSound.Volume(loop.Volume) : 0f);
         }
     }
 

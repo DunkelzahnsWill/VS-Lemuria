@@ -1,0 +1,79 @@
+{
+	"code": "earmuffs",
+	"maxstacksize": 1,
+	"storageFlags": 128,
+	"behaviors": [
+		{
+			"name": "Wearable"
+		}
+	],
+	"shape": {
+		"base": "lemuria:item/earmuffs/earmuffs"
+	},
+	"textures": {
+		"seraph": {
+			"base": "game:block/transparent"
+		}
+	},
+	"attributes": {
+		"clothescategory": "face",
+		"wearableAttachment": true,
+		"warmth": 0
+	},
+	"creativeinventory": {
+		"general": [
+			"*"
+		],
+		"items": [
+			"*"
+		],
+		"clothing": [
+			"*"
+		]
+	},
+	"renderAlphaTest": 0.25,
+	"guiTransform": {
+		"rotation": {
+			"x": -20,
+			"y": -122,
+			"z": -167
+		},
+		"origin": {
+			"x": 0.5,
+			"y": 1.73,
+			"z": 0.54
+		},
+		"scale": 3.23
+	},
+	"tpHandTransform": {
+		"translation": {
+			"x": -0.9,
+			"y": -2.84,
+			"z": -0.63
+		},
+		"rotation": {
+			"x": 31,
+			"y": 96,
+			"z": 105
+		},
+		"origin": {
+			"x": 0.5,
+			"y": 1.5,
+			"z": 0.5
+		},
+		"scale": 0.55
+	},
+	"groundTransform": {
+		"rotation": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"origin": {
+			"x": 0.5,
+			"y": 1.5,
+			"z": 0.5299
+		},
+		"scale": 2.58
+	}
+}

@@ -100,6 +100,9 @@ public static class Crystal
         }
     }
 
+    /// <summary>Whether a player is sneaking, which sets crystals down and strikes chisels.</summary>
+    public static bool Sneaking(EntityAgent entity) => entity.Controls.Sneak || entity.Controls.ShiftKey;
+
     public static Block? BlockFor(IWorldAccessor world, string alignment, string evolution, string position = "up") =>
         world.GetBlock(new AssetLocation(LemuriaModSystem.ModId, $"crystal-{alignment}-{evolution}-{position}"));
 

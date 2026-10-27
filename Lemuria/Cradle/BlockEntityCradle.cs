@@ -163,7 +163,7 @@ public class BlockEntityCradle : BlockEntity, IStandingCrystal
                     slot.TakeOut(1);
                     slot.MarkDirty();
                 }
-                Api.World.PlaySoundAt(new AssetLocation("game:sounds/block/plant"), Pos, -0.25, null);
+                Api.World.PlaySoundAt(new AssetLocation("game:sounds/block/plant"), Pos, -0.25, null, true, 32f, LemuriaSound.Volume(1f));
             }
             return true;
         }
@@ -179,7 +179,7 @@ public class BlockEntityCradle : BlockEntity, IStandingCrystal
                     slot.MarkDirty();
                 }
                 SetCrystal(one);
-                Api.World.PlaySoundAt(new AssetLocation("game:sounds/block/ceramicplace"), Pos, -0.25, null);
+                Api.World.PlaySoundAt(new AssetLocation("game:sounds/block/ceramicplace"), Pos, -0.25, null, true, 32f, LemuriaSound.Volume(1f));
             }
             return true;
         }
@@ -215,7 +215,7 @@ public class BlockEntityCradle : BlockEntity, IStandingCrystal
         {
             Api.World.SpawnItemEntity(stack, Pos.ToVec3d().Add(0.5, 0.75, 0.5));
         }
-        Api.World.PlaySoundAt(new AssetLocation("game:sounds/player/collect"), Pos, -0.25, null);
+        Api.World.PlaySoundAt(new AssetLocation("game:sounds/player/collect"), Pos, -0.25, null, true, 32f, LemuriaSound.Volume(1f));
     }
 
     /// <summary>Sets a seedling growing at its first stage. Server only.</summary>
@@ -280,7 +280,7 @@ public class BlockEntityCradle : BlockEntity, IStandingCrystal
         SetStage(newStage);
         if (newStage == Ripe)
         {
-            Api.World.PlaySoundAt(ChimeSound, Pos.X + 0.5, Pos.Y + 0.75, Pos.Z + 0.5, null, false, 24f, 1f);
+            Api.World.PlaySoundAt(ChimeSound, Pos.X + 0.5, Pos.Y + 0.75, Pos.Z + 0.5, null, false, 24f, LemuriaSound.Volume(1f));
         }
     }
 
@@ -303,7 +303,7 @@ public class BlockEntityCradle : BlockEntity, IStandingCrystal
         {
             ringStages++;
             // A rising note: the chime a little higher with every stage the ring has held.
-            Api.World.PlaySoundAt(RingSound, center.X, center.Y, center.Z, null, 1f + 0.06f * ringStages, 16f, 0.8f);
+            Api.World.PlaySoundAt(RingSound, center.X, center.Y, center.Z, null, 1f + 0.06f * ringStages, 16f, LemuriaSound.Volume(0.8f));
             foreach (string alignment in colours)
             {
                 CrystalCharging.Sparks(Api.World, center, Crystal.Rgb(alignment), 6, 0.3f);
@@ -311,7 +311,7 @@ public class BlockEntityCradle : BlockEntity, IStandingCrystal
         }
         else
         {
-            Api.World.PlaySoundAt(DullSound, center.X, center.Y, center.Z, null, false, 16f, 0.8f);
+            Api.World.PlaySoundAt(DullSound, center.X, center.Y, center.Z, null, false, 16f, LemuriaSound.Volume(0.8f));
         }
     }
 
@@ -390,7 +390,7 @@ public class BlockEntityCradle : BlockEntity, IStandingCrystal
         if (mended > 0)
         {
             Crystal.SetState(crystal, Charge, cracks);
-            Api.World.PlaySoundAt(ChimeSound, Pos.X + 0.5, Pos.Y + 0.75, Pos.Z + 0.5, null, false, 16f, 0.5f);
+            Api.World.PlaySoundAt(ChimeSound, Pos.X + 0.5, Pos.Y + 0.75, Pos.Z + 0.5, null, false, 16f, LemuriaSound.Volume(0.5f));
             MarkDirty(true);
         }
     }
@@ -426,7 +426,7 @@ public class BlockEntityCradle : BlockEntity, IStandingCrystal
             Crystal.SetState(crystal, charge, Cracks);
             if (CrystalLevel != oldLevel)
             {
-                Api.World.PlaySoundAt(ChimeSound, Pos.X + 0.5, Pos.Y + 0.75, Pos.Z + 0.5, null, false, 16f, 0.6f);
+                Api.World.PlaySoundAt(ChimeSound, Pos.X + 0.5, Pos.Y + 0.75, Pos.Z + 0.5, null, false, 16f, LemuriaSound.Volume(0.6f));
                 MarkDirty(true);
                 UpdateLight(oldLight);
             }
@@ -470,7 +470,7 @@ public class BlockEntityCradle : BlockEntity, IStandingCrystal
         refineTarget = null;
         refineProgress = 0;
         sparkAlignment = null;
-        Api.World.PlaySoundAt(ChimeSound, Pos.X + 0.5, Pos.Y + 0.75, Pos.Z + 0.5, null, false, 24f, 1f);
+        Api.World.PlaySoundAt(ChimeSound, Pos.X + 0.5, Pos.Y + 0.75, Pos.Z + 0.5, null, false, 24f, LemuriaSound.Volume(1f));
         MarkDirty(true);
         UpdateLight(oldLight);
     }
@@ -552,7 +552,7 @@ public class BlockEntityCradle : BlockEntity, IStandingCrystal
         {
             var center = Pos.ToVec3d().Add(0.5, 0.6, 0.5);
             string alignment = Alignment ?? Crystal.Unaligned;
-            Api.World.PlaySoundAt(new AssetLocation(LemuriaModSystem.ModId, "sounds/crystals/shatter"), center.X, center.Y, center.Z, null, true, 24f, 1f);
+            Api.World.PlaySoundAt(new AssetLocation(LemuriaModSystem.ModId, "sounds/crystals/shatter"), center.X, center.Y, center.Z, null, true, 24f, LemuriaSound.Volume(1f));
             CrystalsModSystem.Server?.SendBurst(center, alignment);
             SetCrystal(null);
             return;
@@ -591,7 +591,7 @@ public class BlockEntityCradle : BlockEntity, IStandingCrystal
         Crystal.SetState(crystal!, Crystal.Capacity(Evolution), Cracks);
         if (CrystalLevel != oldLevel)
         {
-            Api.World.PlaySoundAt(ChimeSound, Pos.X + 0.5, Pos.Y + 0.75, Pos.Z + 0.5, null, false, 16f, 0.6f);
+            Api.World.PlaySoundAt(ChimeSound, Pos.X + 0.5, Pos.Y + 0.75, Pos.Z + 0.5, null, false, 16f, LemuriaSound.Volume(0.6f));
         }
         MarkDirty(true);
         UpdateLight(oldLight);
@@ -614,7 +614,7 @@ public class BlockEntityCradle : BlockEntity, IStandingCrystal
         Crystal.SetState(crystal!, Charge - taken, Cracks);
         if (CrystalLevel != oldLevel)
         {
-            Api.World.PlaySoundAt(ChimeSound, Pos.X + 0.5, Pos.Y + 0.75, Pos.Z + 0.5, null, false, 16f, 0.6f);
+            Api.World.PlaySoundAt(ChimeSound, Pos.X + 0.5, Pos.Y + 0.75, Pos.Z + 0.5, null, false, 16f, LemuriaSound.Volume(0.6f));
         }
         MarkDirty(true);
         UpdateLight(oldLight);

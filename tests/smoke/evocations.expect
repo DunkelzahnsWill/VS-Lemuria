@@ -1,0 +1,21 @@
+# Step 3: the eight Elemental crystals cast; the two Fire ones light firepits within reach.
+Evocations: 8 crystal kinds cast, 2 of them light firepits within reach
+Evocations: wind-up 5 s, over-drive at 15 s; a cast costs 10 of a Glittering crystal's 100; range 8, 12 and 16 blocks
+Evocations: Gale pans at 0\.5 of a hand pan's chance$
+Evocations test: Ignite aimed at the firepit 6 blocks away, cast yes; the firepit burns: yes; the hen is alight: yes$
+Evocations test: Quench cast yes; the firepit burns: no, fuel kept: yes; the hen is out: yes$
+Evocations test: a cast at the open sky fizzles: yes$
+Evocations test: a Glowing Quench aimed at the water cast yes; 4 of 9 water blocks froze to lake ice, 9 after an over-driven one on the open pond$
+Evocations test: Quench aimed at a crop cast yes; its farmland soaked: yes; an over-driven Quench soaked 9 of 9 farmland$
+Evocations test: Glowing Tremor cast yes, 4 of 4 columns rose 4, 8 of 8 sides sank 2, the hen beside it dropped 2$
+Evocations test: Glittering Tremor cast yes, 4 of 4 columns rose 2, 8 of 8 sides sank 1, corners stay: yes; the ore rose with its column: yes; the hen rode up 2; blocks before ([0-9]+), after \1$
+Evocations test: Tremor beside a chest Failed, the ground unchanged: yes; at the sky Nothing$
+Evocations test: Gale cast at the item yes, pushed away at 0\.171; at the hen yes, pushed away at 0\.229$
+Evocations test: let go at 3 s Nothing, 6 s Cast, 16 s Overdrive; 16 s with 30 charge Cast; empty TooEmpty$
+Evocations test: a full Glowing crystal after a cast holds 180, after an over-driven cast 140 with 0 crack\(s\), after a cracking one 100 with 1 crack\(s\)$
+Evocations test: its last crack shatters it: yes, hand empty: yes$
+Evocations test: casting from a stack of 3 full crystals leaves 2 full in hand, and one holding 90 leaves the stack: yes$
+Evocations test: Gale over the patch cast yes; grown leaves gone: yes, placed leaves stay: yes, cattail cut and regrowing: yes, mushroom picked: yes, sand panned out: yes; left for over-driving: ripe flax yes, ripe bush yes, ripe legacy bush yes; drops in some stack\(s\), all different: yes$
+Evocations test: over-driven Gale cast yes; ripe flax reaped: yes, young flax stays: yes, bush picked and standing: yes, legacy bush picked: yes; drops in some stack\(s\), all different: yes$
+Evocations test: over-driven Fire at granite cast yes, 3 of 3 granite blocks melted, the ore stays: yes; a Glowing one melts rock: no; Quench cast yes, 3 of 3 cooled to rock, lava left 0$
+Evocations test: over-driven Quench at lake ice cast yes; lake to glacier: yes and yes, glacier to packed: yes, packed stays: yes, beyond the 2×2 stays lake ice: yes$

@@ -43,8 +43,42 @@ public class LemuriaModSystem : ModSystem
         api.StoreModConfig(Config, LemuriaConfig.FileName);
     }
 
+    /// <summary>Carries the claims switch to each client (<see cref="LemuriaClaims"/>).</summary>
+    public const string ChannelName = ModId + "-core";
+
+    public override void Start(ICoreAPI api)
+    {
+        api.Network.RegisterChannel(ChannelName).RegisterMessageType<ClaimsPacket>();
+    }
+
     public override void StartServerSide(ICoreServerAPI api)
     {
+        LemuriaClaims.Respect = Config.RespectClaims;
+        var channel = api.Network.GetChannel(ChannelName);
+        api.Event.PlayerJoin += player => channel.SendPacket(new ClaimsPacket { Respect = LemuriaClaims.Respect }, player);
+        api.Event.SaveGameLoaded += () => Mod.Logger.Notification("Claims: Lemuria {0} land claims", LemuriaClaims.Respect ? "respects" : "ignores");
+        api.ChatCommands.GetOrCreate(ModId)
+            .WithDescription("Lemuria commands")
+            .RequiresPrivilege(Privilege.chat)
+            .BeginSubCommand("claims")
+                .WithDescription("Whether every Lemuria feature respects land claims (RespectClaims): on or off")
+                .RequiresPrivilege(Privilege.controlserver)
+                .WithArgs(api.ChatCommands.Parsers.OptionalWord("on|off"))
+                .HandleWith(args =>
+                {
+                    string? word = args[0] as string;
+                    if (word != "on" && word != "off")
+                    {
+                        return TextCommandResult.Success($"Lemuria {(LemuriaClaims.Respect ? "respects" : "ignores")} land claims. Use /{ModId} claims on or off.");
+                    }
+                    Config.RespectClaims = LemuriaClaims.Respect = word == "on";
+                    api.StoreModConfig(Config, LemuriaConfig.FileName);
+                    channel.BroadcastPacket(new ClaimsPacket { Respect = LemuriaClaims.Respect });
+                    Mod.Logger.Notification("Claims: set {0} by {1}; Lemuria {2} land claims", word, args.Caller.GetName(), LemuriaClaims.Respect ? "respects" : "ignores");
+                    return TextCommandResult.Success($"Lemuria now {(LemuriaClaims.Respect ? "respects" : "ignores")} land claims, saved to {LemuriaConfig.FileName}.");
+                })
+            .EndSubCommand();
+
         // scripts/smoke-test.sh checks for this line (tests/smoke/core.expect). The check looks for the
         // file rather than a translation, which would be missing whenever the server language is not English.
         bool assetsLoaded = api.Assets.Exists(new AssetLocation(ModId, "lang/en.json"));
@@ -58,5 +92,6 @@ public class LemuriaModSystem : ModSystem
     public override void StartClientSide(ICoreClientAPI api)
     {
         Mod.Logger.Notification("Client side started, version {0}", Mod.Info.Version);
+        api.Network.GetChannel(ChannelName).SetMessageHandler<ClaimsPacket>(packet => LemuriaClaims.Respect = packet.Respect);
     }
 }

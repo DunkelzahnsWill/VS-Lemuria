@@ -1,0 +1,73 @@
+[
+	{
+		"ingredientPattern": "SSS,P_P",
+		"ingredients": {
+			"S": {
+				"type": "item",
+				"code": "game:stick"
+			},
+			"P": {
+				"type": "item",
+				"code": "game:leather-normal-*",
+				"name": "color",
+				"allowedVariants": [
+					"plain",
+					"orange",
+					"black",
+					"red",
+					"blue",
+					"purple",
+					"pink",
+					"white",
+					"yellow",
+					"gray",
+					"green"
+				],
+				"quantity": 1
+			}
+		},
+		"width": 3,
+		"height": 2,
+		"output": {
+			"type": "item",
+			"code": "lemuria:earmuffs",
+			"quantity": 1
+		}
+	},
+	{
+		"ingredientPattern": "SSS,P_P",
+		"ingredients": {
+			"S": {
+				"type": "item",
+				"code": "game:stick"
+			},
+			"P": {
+				"type": "item",
+				"code": "game:cloth-*",
+				"name": "color",
+				"allowedVariants": [
+					"plain",
+					"blue",
+					"red",
+					"yellow",
+					"green",
+					"purple",
+					"pink",
+					"orange",
+					"brown",
+					"gray",
+					"black",
+					"white"
+				],
+				"quantity": 1
+			}
+		},
+		"width": 3,
+		"height": 2,
+		"output": {
+			"type": "item",
+			"code": "lemuria:earmuffs",
+			"quantity": 1
+		}
+	}
+]

@@ -1,3 +1,4 @@
+using Lemuria.Core;
 using Vintagestory.API.Common;
 using Vintagestory.API.MathTools;
 
@@ -59,7 +60,7 @@ public class BlockCrystalRack : Block
 
     public override bool OnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
     {
-        if (!world.Claims.TryAccess(byPlayer, blockSel.Position, EnumBlockAccessFlags.Use))
+        if (!LemuriaClaims.TryAccess(world, byPlayer, blockSel.Position, EnumBlockAccessFlags.Use))
         {
             return false;
         }

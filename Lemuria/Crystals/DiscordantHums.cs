@@ -68,7 +68,7 @@ public class DiscordantHums
             DisposeOnFinish = false,
             Position = pos?.ToVec3f() ?? new Vec3f(),
             Range = 24f,
-            Volume = 0.25f,
+            Volume = LemuriaSound.Volume(0.25f),
             SoundType = EnumSoundType.Ambient,
         });
         if (sound == null)
@@ -148,7 +148,7 @@ public class DiscordantHums
         foreach (var hum in hums.Values)
         {
             float t = Math.Clamp((capi.ElapsedMilliseconds - hum.StartMs) / 1000f / hum.Grace, 0f, 1f);
-            hum.Sound.SetVolume(nearest == null || hum == nearest ? 0.25f + 0.65f * t : 0f);
+            hum.Sound.SetVolume(nearest == null || hum == nearest ? LemuriaSound.Volume(0.25f + 0.65f * t) : 0f);
             hum.Sound.SetPitch(1f + 0.6f * t);
         }
     }

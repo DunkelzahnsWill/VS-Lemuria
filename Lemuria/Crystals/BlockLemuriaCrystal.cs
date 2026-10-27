@@ -1,9 +1,11 @@
 using System;
 using System.Text;
 using Lemuria.Core;
+using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.API.MathTools;
+using Vintagestory.API.Util;
 
 namespace Lemuria.Crystals;
 
@@ -103,6 +105,31 @@ public class BlockLemuriaCrystal : Block
     }
 
     /// <summary>
+    /// Sneak and right-click sets a crystal down; the game places it after this, since nothing here
+    /// handles a sneaking click (design note "Lemuria step 3: Naked evocations", question 1). A plain
+    /// right-click is the crystal's own: its behaviors (Evocations casts with aligned ones) get it
+    /// first, and what they leave is swallowed, so a crystal is never set down without sneaking.
+    /// Blocks you can use, such as a cradle or rack, still take a plain right-click before this runs.
+    /// </summary>
+    public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling)
+    {
+        base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
+        if (handling == EnumHandHandling.NotHandled && !Crystal.Sneaking(byEntity))
+        {
+            handling = EnumHandHandling.PreventDefault;
+        }
+    }
+
+    public override WorldInteraction[] GetHeldInteractionHelp(ItemSlot inSlot)
+    {
+        var place = new WorldInteraction { ActionLangCode = LemuriaModSystem.ModId + ":crystal-place", MouseButton = EnumMouseButton.Right, HotKeyCode = "sneak" };
+        var own = Aligned
+            ? new[] { place }
+            : new[] { place, new WorldInteraction { ActionLangCode = LemuriaModSystem.ModId + ":crystal-strike", MouseButton = EnumMouseButton.Left, HotKeyCode = "sneak" } };
+        return own.Append(base.GetHeldInteractionHelp(inSlot));
+    }
+
+    /// <summary>
     /// Strikes the Unaligned crystal (or strange crystal) in hand on a placed Unaligned crystal, while
     /// sneaking, into a Crystalline Chisel (Sparkstone): one from the hand is used up, the placed one
     /// stays. Returns whether this was a strike, on both sides; the server makes the chisel.
@@ -110,8 +137,7 @@ public class BlockLemuriaCrystal : Block
     public static bool TryStrike(ItemSlot slot, EntityAgent byEntity, BlockSelection? blockSel)
     {
         var world = byEntity.World;
-        bool sneaking = byEntity.Controls.Sneak || byEntity.Controls.ShiftKey;
-        if (!sneaking || blockSel == null || world.BlockAccessor.GetBlock(blockSel.Position) is not BlockLemuriaCrystal target
+        if (!Crystal.Sneaking(byEntity) || blockSel == null || world.BlockAccessor.GetBlock(blockSel.Position) is not BlockLemuriaCrystal target
             || Crystal.AlignmentOf(target) != Crystal.Unaligned)
         {
             return false;
@@ -126,7 +152,7 @@ public class BlockLemuriaCrystal : Block
             return true;
         }
         var player = (byEntity as EntityPlayer)?.Player;
-        if (player != null && !world.Claims.TryAccess(player, blockSel.Position, EnumBlockAccessFlags.Use))
+        if (player != null && !LemuriaClaims.TryAccess(world, player, blockSel.Position, EnumBlockAccessFlags.Use))
         {
             return true;
         }
@@ -142,7 +168,7 @@ public class BlockLemuriaCrystal : Block
         {
             world.SpawnItemEntity(tool, byEntity.Pos.XYZ.Add(0, 0.5, 0));
         }
-        world.PlaySoundAt(new AssetLocation(LemuriaModSystem.ModId, "sounds/crystals/ring"), blockSel.Position.X + 0.5, blockSel.Position.Y + 0.5, blockSel.Position.Z + 0.5, null, true, 16f, 1f);
+        world.PlaySoundAt(new AssetLocation(LemuriaModSystem.ModId, "sounds/crystals/ring"), blockSel.Position.X + 0.5, blockSel.Position.Y + 0.5, blockSel.Position.Z + 0.5, null, true, 16f, LemuriaSound.Volume(1f));
         return true;
     }
 

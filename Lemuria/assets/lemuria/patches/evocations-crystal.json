@@ -1,0 +1,8 @@
+[
+	{
+		"op": "add",
+		"path": "/behaviors/-",
+		"value": { "name": "lemuria-evocation" },
+		"file": "lemuria:blocktypes/crystals/crystal.json"
+	}
+]

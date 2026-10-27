@@ -110,12 +110,12 @@ public class ItemCrystalChisel : Item
     public static bool Carve(IWorldAccessor world, IPlayer? player, BlockPos pos, BlockSelection? blockSel = null)
     {
         var carved = CarvedBlock(world, pos, player, blockSel);
-        if (carved == null || (player != null && !world.Claims.TryAccess(player, pos, EnumBlockAccessFlags.BuildOrBreak)))
+        if (carved == null || (player != null && !LemuriaClaims.TryAccess(world, player, pos, EnumBlockAccessFlags.BuildOrBreak)))
         {
             return false;
         }
         world.BlockAccessor.SetBlock(carved.Id, pos);
-        world.PlaySoundAt(new AssetLocation("game:sounds/block/rock-hit-pickaxe"), pos.X + 0.5, pos.Y + 0.5, pos.Z + 0.5, null, true, 16f, 1f);
+        world.PlaySoundAt(new AssetLocation("game:sounds/block/rock-hit-pickaxe"), pos.X + 0.5, pos.Y + 0.5, pos.Z + 0.5, null, true, 16f, LemuriaSound.Volume(1f));
         return true;
     }
 
@@ -191,7 +191,7 @@ public class ItemCrystalChisel : Item
         }
         SetCharge(stack, GetCharge(stack) + taken);
         slot.MarkDirty();
-        api.World.PlaySoundAt(DrawSound, pos.X + 0.5, pos.Y + 0.5, pos.Z + 0.5, null, true, 12f, 0.4f);
+        api.World.PlaySoundAt(DrawSound, pos.X + 0.5, pos.Y + 0.5, pos.Z + 0.5, null, true, 12f, LemuriaSound.Volume(0.4f));
     }
 
     /// <summary>Awakens a placed polished rock block into Awakened sparkstone of the same rock, where the player may build. Server only.</summary>
@@ -203,7 +203,7 @@ public class ItemCrystalChisel : Item
         {
             return false;
         }
-        if (player != null && !world.Claims.TryAccess(player, pos, EnumBlockAccessFlags.BuildOrBreak))
+        if (player != null && !LemuriaClaims.TryAccess(world, player, pos, EnumBlockAccessFlags.BuildOrBreak))
         {
             return false;
         }
@@ -215,7 +215,7 @@ public class ItemCrystalChisel : Item
         world.BlockAccessor.SetBlock(stone.Id, pos);
         SetCharge(stack, GetCharge(stack) - Cost);
         slot.MarkDirty();
-        world.PlaySoundAt(new AssetLocation(LemuriaModSystem.ModId, "sounds/sparkstone/awaken"), pos.X + 0.5, pos.Y + 0.5, pos.Z + 0.5, null, true, 16f, 1f);
+        world.PlaySoundAt(new AssetLocation(LemuriaModSystem.ModId, "sounds/sparkstone/awaken"), pos.X + 0.5, pos.Y + 0.5, pos.Z + 0.5, null, true, 16f, LemuriaSound.Volume(1f));
         return true;
     }
 

@@ -4,6 +4,7 @@ using System.Linq;
 using Lemuria.Core;
 using Lemuria.Cradle;
 using Lemuria.Crystals;
+using Lemuria.Evocations;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
@@ -19,6 +20,9 @@ namespace Lemuria.Journal;
 /// Step 2 (design note "Lemuria step 2: The Four Elementals", The Pilgrim's Journal): chapter 2 opens
 /// when a player first harvests a ripe crystal or first holds an aligned one, chapter 3 when they
 /// first hold a fully charged crystal; what a player carries is looked at every 10 seconds.
+/// Step 3 (design note "Lemuria step 3: Naked evocations", The Pilgrim's Journal): chapter 4 opens the
+/// first time a player takes a charged aligned crystal in their hand, looked at whenever they change
+/// hotbar slots, on the same 10-second look, and when they cast.
 /// </summary>
 public class JournalModSystem : ModSystem
 {
@@ -29,6 +33,7 @@ public class JournalModSystem : ModSystem
 
     public const string FourElementals = "fourelementals";
     public const string LivingStone = "livingstone";
+    public const string NakedEvocations = "nakedevocations";
 
     private static readonly AssetLocation ChaptersAsset = new(LemuriaModSystem.ModId, "config/journal/chapters.json");
 
@@ -67,6 +72,8 @@ public class JournalModSystem : ModSystem
         serverChannel = api.Network.GetChannel(ChannelName);
         api.Event.PlayerJoin += SendUnlocks;
         BlockEntityCradle.Harvested += OnHarvested;
+        EvocationsModSystem.Cast += OnCast;
+        api.Event.AfterActiveSlotChanged += OnActiveSlotChanged;
         api.Event.RegisterGameTickListener(_ => CheckCarried(), 10_000, 5000);
         api.Event.SaveGameLoaded += () => Mod.Logger.Notification("Journal: {0} recipe(s)",
             api.World.GridRecipes.Count(r => r.Output?.Code?.ToString() == LemuriaModSystem.ModId + ":journal"));
@@ -123,7 +130,24 @@ public class JournalModSystem : ModSystem
         }
     }
 
-    /// <summary>Chapter 2 for anyone carrying an aligned crystal, chapter 3 for anyone carrying a full one.</summary>
+    private void OnCast(IServerPlayer player) => Unlock(player, NakedEvocations);
+
+    private void OnActiveSlotChanged(IServerPlayer player, ActiveSlotChangeEventArgs args) => CheckHand(player);
+
+    /// <summary>Chapter 4 for a player holding a charged aligned crystal in their hand.</summary>
+    private void CheckHand(IServerPlayer player)
+    {
+        var stack = player.InventoryManager?.ActiveHotbarSlot?.Itemstack;
+        if (stack != null && Crystal.IsAligned(stack.Collectible) && Crystal.GetCharge(stack) > 0)
+        {
+            Unlock(player, NakedEvocations);
+        }
+    }
+
+    /// <summary>
+    /// Chapter 2 for anyone carrying an aligned crystal, chapter 3 for anyone carrying a full one, and
+    /// chapter 4 for anyone holding a charged one in their hand.
+    /// </summary>
     private void CheckCarried()
     {
         if (sapi == null)
@@ -136,6 +160,7 @@ public class JournalModSystem : ModSystem
             {
                 continue;
             }
+            CheckHand(player);
             foreach (var slot in Dialogues.CarriedSlots(player))
             {
                 var stack = slot.Itemstack;
@@ -178,6 +203,8 @@ public class JournalModSystem : ModSystem
         {
             sapi.Event.PlayerJoin -= SendUnlocks;
             BlockEntityCradle.Harvested -= OnHarvested;
+            EvocationsModSystem.Cast -= OnCast;
+            sapi.Event.AfterActiveSlotChanged -= OnActiveSlotChanged;
         }
     }
 }

@@ -1,0 +1,3 @@
+# The claims switch (step 3, RespectClaims): an admin turns it off and on again; the config file keeps the last.
+/lemuria claims off
+/lemuria claims on
