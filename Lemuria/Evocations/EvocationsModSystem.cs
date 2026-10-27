@@ -82,6 +82,7 @@ public class EvocationsModSystem : ModSystem
             Mod.Logger.Notification("Evocations: wind-up {0:0.##} s, over-drive at {1:0.##} s; a cast costs {2:0.##} of a Glittering crystal's {3:0}; range {4:0.#}, {5:0.#} and {6:0.#} blocks",
                 Evocation.WindUpSeconds, Evocation.OverdriveSeconds, Evocation.Cost(Crystal.Glittering, false), Crystal.Capacity(Crystal.Glittering),
                 Evocation.Range(1), Evocation.Range(2), Evocation.Range(3));
+            Mod.Logger.Notification("Evocations: Gale pans at {0:0.##} of a hand pan's chance", Evocation.GalePanningYield);
         };
         RegisterTestCommands(api);
     }

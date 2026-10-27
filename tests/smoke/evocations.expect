@@ -1,6 +1,7 @@
 # Step 3: the eight Elemental crystals cast; the two Fire ones light firepits within reach.
 Evocations: 8 crystal kinds cast, 2 of them light firepits within reach
 Evocations: wind-up 5 s, over-drive at 15 s; a cast costs 10 of a Glittering crystal's 100; range 8, 12 and 16 blocks
+Evocations: Gale pans at 0\.5 of a hand pan's chance$
 Evocations test: Ignite aimed at the firepit 6 blocks away, cast yes; the firepit burns: yes; the hen is alight: yes$
 Evocations test: Quench cast yes; the firepit burns: no, fuel kept: yes; the hen is out: yes$
 Evocations test: a cast at the open sky fizzles: yes$

@@ -73,5 +73,8 @@ public static class Evocation
     /// <summary>Blocks Gale pushes: 6, 8 and 10 by default.</summary>
     public static double GalePush(int power) => Math.Clamp(Config.GalePushGlittering, 0, 32) + 2 * (power - 1);
 
+    /// <summary>Share of a hand pan's chance Gale's pannings get (the owner, 2026-10-27: less efficient than panning by hand).</summary>
+    public static double GalePanningYield => Math.Clamp(Config.GalePanningYield, 0, 1);
+
     public static int TremorRise => Math.Clamp(Config.TremorRise, 1, 8);
 }

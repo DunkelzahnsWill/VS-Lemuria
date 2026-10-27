@@ -195,7 +195,8 @@ public static class Reaping
     /// <summary>
     /// Pans a pannable block out whole: one panning per layer, 8 for a full block, each rolled as the
     /// wooden pan rolls it (its panningDrops for that material, at most one find a panning, the
-    /// panner's drop-rate stats).
+    /// panner's drop-rate stats), but each chance scaled by GalePanningYield (0.5), so a gust is less
+    /// efficient than panning by hand (the owner, 2026-10-27 22:33Z).
     /// </summary>
     public static List<ItemStack> Pan(IWorldAccessor world, Block block, EntityAgent? by)
     {
@@ -212,11 +213,12 @@ public static class Reaping
             return finds;
         }
         string? rock = material.Variant["rock"];
+        double yield = Evocation.GalePanningYield;
         for (int i = 0; i < pannings; i++)
         {
             foreach (var drop in drops.OrderBy(_ => world.Rand.Next()))
             {
-                float chance = drop.Chance.nextFloat() * (drop.DropModbyStat != null && by != null ? by.Stats.GetBlended(drop.DropModbyStat) : 1f);
+                double chance = drop.Chance.nextFloat() * (drop.DropModbyStat != null && by != null ? by.Stats.GetBlended(drop.DropModbyStat) : 1f) * yield;
                 var stack = drop.Code.Path.Contains("{rocktype}") ? Resolve(world, drop, rock) : drop.ResolvedItemstack;
                 if (world.Rand.NextDouble() < chance && stack != null)
                 {

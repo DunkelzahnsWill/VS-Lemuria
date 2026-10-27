@@ -30,4 +30,7 @@ public partial class LemuriaConfig
 
     /// <summary>Blocks Gale pushes at Glittering; each Evolution above adds 2.</summary>
     public double GalePushGlittering { get; set; } = 6;
+
+    /// <summary>Share of a hand pan's chance each of Gale's pannings finds something: 0.5 halves the finds.</summary>
+    public double GalePanningYield { get; set; } = 0.5;
 }
