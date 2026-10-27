@@ -36,10 +36,10 @@ public class CradleModSystem : ModSystem
     public override void StartServerSide(ICoreServerAPI api)
     {
         sapi = api;
-        // One recipe per rock type and chisel metal; the log counts the rock types.
-        api.Event.SaveGameLoaded += () => Mod.Logger.Notification("Cradle: recipes for {0} rock type(s)",
-            api.World.GridRecipes.Where(r => r.Output?.Code?.Domain == LemuriaModSystem.ModId && r.Output.Code.Path.StartsWith("cradle-"))
-                .Select(r => r.Output!.Code!.Path).Distinct().Count());
+        // Cradles are carved from placed polished rock with the Crystalline Chisel (Sparkstone), never made on the grid.
+        api.Event.SaveGameLoaded += () => Mod.Logger.Notification("Cradle: cradles in {0} rock type(s), {1} grid recipe(s)",
+            api.World.Blocks.Count(b => b is BlockCradle),
+            api.World.GridRecipes.Count(r => r.Output?.Code?.Domain == LemuriaModSystem.ModId && r.Output.Code.Path.StartsWith("cradle-")));
         var parsers = api.ChatCommands.Parsers;
         // The shared root needs a privilege of its own; each feature's subcommand sets the one it needs.
         api.ChatCommands.GetOrCreate(LemuriaModSystem.ModId)

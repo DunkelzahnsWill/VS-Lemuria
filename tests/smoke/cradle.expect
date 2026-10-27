@@ -2,8 +2,8 @@
 Cradle test: planted lemuria:seedling-glittering in lemuria:cradle-granite at -?[0-9]+, [0-9]+, -?[0-9]+ \(from spawn\), stage 1$
 Cradle test: time moved on 2\.5 days, stage 2$
 Cradle test: time moved on 9 days, stage ripe$
-# A chisel over polished rock makes a cradle of that rock, in all 19 rock types.
-Cradle: recipes for 19 rock type\(s\)
+# Cradles come in all 19 rock types, carved with the Crystalline Chisel; no grid recipe since the step 2 play-test.
+Cradle: cradles in 19 rock type\(s\), 0 grid recipe\(s\)
 # Step 2: the evolution ring, repair and refining.
 Cradle test: inside a ring of fire and fire the seedling is at stage ripe and gives unaligned glowing$
 Cradle test: a twice-cracked Ice crystal is ice glittering cracked 1 after one stage and ice glittering after two$

@@ -51,6 +51,7 @@ public class CrystalsModSystem : ModSystem
     public override void Start(ICoreAPI api)
     {
         api.RegisterBlockClass(BlockLemuriaCrystal.ClassCode, typeof(BlockLemuriaCrystal));
+        api.RegisterItemClass(ItemStrangeCrystal.ClassCode, typeof(ItemStrangeCrystal));
         api.RegisterBlockEntityClass(BlockEntityCrystal.ClassCode, typeof(BlockEntityCrystal));
         api.Network.RegisterChannel(ChannelName).RegisterMessageType<DiscordPacket>();
     }

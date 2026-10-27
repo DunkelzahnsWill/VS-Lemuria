@@ -91,35 +91,44 @@ public class BlockLemuriaCrystal : Block
         }
     }
 
-    /// <summary>
-    /// Sneak and left-click a placed Unaligned crystal with an Unaligned crystal in hand to strike the held
-    /// one into a Crystalline Chisel (Sparkstone): one crystal from the hand is used up, the placed one stays.
-    /// </summary>
+    /// <summary>Sneak and left-click a placed Unaligned crystal with an Unaligned crystal in hand: see <see cref="TryStrike"/>.</summary>
     public override void OnHeldAttackStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, ref EnumHandHandling handling)
+    {
+        if (!Aligned && TryStrike(slot, byEntity, blockSel))
+        {
+            handling = EnumHandHandling.PreventDefault;
+            return;
+        }
+        base.OnHeldAttackStart(slot, byEntity, blockSel, entitySel, ref handling);
+    }
+
+    /// <summary>
+    /// Strikes the Unaligned crystal (or strange crystal) in hand on a placed Unaligned crystal, while
+    /// sneaking, into a Crystalline Chisel (Sparkstone): one from the hand is used up, the placed one
+    /// stays. Returns whether this was a strike, on both sides; the server makes the chisel.
+    /// </summary>
+    public static bool TryStrike(ItemSlot slot, EntityAgent byEntity, BlockSelection? blockSel)
     {
         var world = byEntity.World;
         bool sneaking = byEntity.Controls.Sneak || byEntity.Controls.ShiftKey;
-        if (!sneaking || blockSel == null || Aligned || world.BlockAccessor.GetBlock(blockSel.Position) is not BlockLemuriaCrystal target
+        if (!sneaking || blockSel == null || world.BlockAccessor.GetBlock(blockSel.Position) is not BlockLemuriaCrystal target
             || Crystal.AlignmentOf(target) != Crystal.Unaligned)
         {
-            base.OnHeldAttackStart(slot, byEntity, blockSel, entitySel, ref handling);
-            return;
+            return false;
         }
         var chisel = world.GetItem(new AssetLocation(LemuriaModSystem.ModId, "crystalchisel"));
         if (chisel == null)
         {
-            base.OnHeldAttackStart(slot, byEntity, blockSel, entitySel, ref handling);
-            return;
+            return false;
         }
-        handling = EnumHandHandling.PreventDefault;
         if (world.Side != EnumAppSide.Server || slot.Itemstack == null)
         {
-            return;
+            return true;
         }
         var player = (byEntity as EntityPlayer)?.Player;
         if (player != null && !world.Claims.TryAccess(player, blockSel.Position, EnumBlockAccessFlags.Use))
         {
-            return;
+            return true;
         }
         slot.TakeOut(1);
         slot.MarkDirty();
@@ -134,6 +143,7 @@ public class BlockLemuriaCrystal : Block
             world.SpawnItemEntity(tool, byEntity.Pos.XYZ.Add(0, 0.5, 0));
         }
         world.PlaySoundAt(new AssetLocation(LemuriaModSystem.ModId, "sounds/crystals/ring"), blockSel.Position.X + 0.5, blockSel.Position.Y + 0.5, blockSel.Position.Z + 0.5, null, true, 16f, 1f);
+        return true;
     }
 
     private static string CracksText(int cracks) => cracks switch

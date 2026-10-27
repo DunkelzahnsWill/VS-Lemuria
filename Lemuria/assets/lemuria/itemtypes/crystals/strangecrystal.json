@@ -1,5 +1,6 @@
 {
 	"code": "strangecrystal",
+	"class": "lemuria-strangecrystal",
 	"maxstacksize": 32,
 	"shape": { "base": "lemuria:item/crystals/strangecrystal" },
 	"textures": {
