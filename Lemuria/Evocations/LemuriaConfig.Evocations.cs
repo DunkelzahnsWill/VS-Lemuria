@@ -25,7 +25,7 @@ public partial class LemuriaConfig
     /// <summary>Blocks of range each Evolution above Glittering adds.</summary>
     public double EvocationRangeStep { get; set; } = 4;
 
-    /// <summary>Blocks the ground rises.</summary>
+    /// <summary>Blocks the ground rises at Glittering; each Evolution above adds as much again (2, 4, 6), and its sides sink half as much.</summary>
     public int TremorRise { get; set; } = 2;
 
     /// <summary>Blocks Gale pushes at Glittering; each Evolution above adds 2.</summary>

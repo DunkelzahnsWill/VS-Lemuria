@@ -61,8 +61,11 @@ public static class Evocation
     /// </summary>
     public static int AreaSize(int power) => Math.Clamp(power, 1, 5);
 
-    /// <summary>Tremor's reach round the aimed column, as first built: a pillar, a 3×3 mound, a 5×5 mound.</summary>
-    public static int TremorRadius(int power) => Math.Clamp(power - 1, 0, 4);
+    /// <summary>
+    /// How far a Tremor's sides sink: half its rise, which is TremorRise at Glittering and as much again
+    /// per Evolution above (2, 4, 6 by default), kept even so the sides pay for the rise exactly.
+    /// </summary>
+    public static int TremorSink(int power) => Math.Max(1, TremorRise * Math.Clamp(power, 1, 5) / 2);
 
     /// <summary>Blocks Gale pushes: 6, 8 and 10 by default.</summary>
     public static double GalePush(int power) => Math.Clamp(Config.GalePushGlittering, 0, 32) + 2 * (power - 1);

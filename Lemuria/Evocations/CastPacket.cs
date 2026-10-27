@@ -11,7 +11,7 @@ namespace Lemuria.Evocations;
 [ProtoContract]
 public class CastPacket
 {
-    public const int Cast = 0, Fizzle = 1;
+    public const int Cast = 0, Fizzle = 1, Failed = 2;
 
     [ProtoMember(1)]
     public string Alignment { get; set; } = "";

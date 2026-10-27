@@ -149,6 +149,18 @@ public class CastContext
             return (Center.AddCopy(-r, -r, -r), Center.AddCopy(r, r, r));
         }
         int n = size - 1;
+        var (fx, fz, rx, rz) = Heading();
+        var far = Center.AddCopy((fx + rx) * n, n, (fz + rz) * n);
+        return (new BlockPos(Math.Min(Center.X, far.X), Center.Y, Math.Min(Center.Z, far.Z), Center.dimension),
+            new BlockPos(Math.Max(Center.X, far.X), far.Y, Math.Max(Center.Z, far.Z), Center.dimension));
+    }
+
+    /// <summary>
+    /// Forward, one block along the dominant horizontal axis of the look (east for a cast straight down
+    /// or up), and the caster's right of it, as the hand sits in Caster.Hand.
+    /// </summary>
+    public (int Fx, int Fz, int Rx, int Rz) Heading()
+    {
         bool alongX = Math.Abs(Dir.X) >= Math.Abs(Dir.Z);
         int fx = alongX ? Math.Sign(Dir.X) : 0;
         int fz = alongX ? 0 : Math.Sign(Dir.Z);
@@ -156,11 +168,7 @@ public class CastContext
         {
             fx = 1;
         }
-        // The right of a heading (fx, fz), as the hand sits in Caster.Hand.
-        int rx = -fz, rz = fx;
-        var far = Center.AddCopy((fx + rx) * n, n, (fz + rz) * n);
-        return (new BlockPos(Math.Min(Center.X, far.X), Center.Y, Math.Min(Center.Z, far.Z), Center.dimension),
-            new BlockPos(Math.Max(Center.X, far.X), far.Y, Math.Max(Center.Z, far.Z), Center.dimension));
+        return (fx, fz, -fz, fx);
     }
 
     /// <summary>The blocks of the area.</summary>

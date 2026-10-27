@@ -12,7 +12,8 @@ namespace Lemuria.Evocations;
 /// <summary>
 /// The four naked evocations (design note "Lemuria step 3: Naked evocations", The four evocations).
 /// Each acts through the game's own hooks, on the server, and returns whether it found anything to
-/// act on; a cast that found nothing fizzles and costs nothing. Every block and creature inside a
+/// act on; a cast that found nothing fizzles and costs nothing, and a Tremor that cannot rise whole
+/// fails with its cost spent. Every block and creature inside a
 /// claim the caster has no access to is spared.
 /// </summary>
 public static class Effects
@@ -24,14 +25,24 @@ public static class Effects
     private static readonly AssetLocation LakeIceCode = new("game", "lakeice");
     private static readonly AssetLocation ExtinguishSound = new("game", "sounds/effect/extinguish");
 
-    public static bool Apply(CastContext cast) => Evocation.Of(cast.Alignment) switch
+    /// <summary>What a cast came to: nothing to act on (a free miss), done, or failed with its cost spent (Tremor).</summary>
+    public enum Outcome
     {
-        Evocation.Ignite => Ignite(cast),
-        Evocation.Quench => Quench(cast),
+        Nothing,
+        Acted,
+        Failed,
+    }
+
+    public static Outcome Apply(CastContext cast) => Evocation.Of(cast.Alignment) switch
+    {
+        Evocation.Ignite => Done(Ignite(cast)),
+        Evocation.Quench => Done(Quench(cast)),
         Evocation.Tremor => Tremor(cast),
-        Evocation.Gale => Gale(cast),
-        _ => false,
+        Evocation.Gale => Done(Gale(cast)),
+        _ => Outcome.Nothing,
     };
+
+    private static Outcome Done(bool acted) => acted ? Outcome.Acted : Outcome.Nothing;
 
     private static bool IsCreature(Entity e) => e is EntityAgent { Alive: true };
 
@@ -241,143 +252,229 @@ public static class Effects
 
     // ------------------------------------------------------------------ Tremor
 
-    private static readonly EnumBlockMaterial[] Ground =
+    /// <summary>A block the ground is made of, which Tremor may move: soil, sand, gravel, clay, peat, natural rock and ore.</summary>
+    private static bool Movable(Block block)
     {
-        EnumBlockMaterial.Soil, EnumBlockMaterial.Sand, EnumBlockMaterial.Gravel, EnumBlockMaterial.Stone, EnumBlockMaterial.Ore,
-    };
-
-    private class Column
-    {
-        public BlockPos Top = null!;
-        public Block Surface = null!;
-        public Block Filler = null!;
-        public Block? Plant;
-    }
-
-    /// <summary>
-    /// The ground aimed at rises: one column at Glittering, a 3×3 mound at Glowing, 5×5 over-driven.
-    /// Its surface stays on top and the rise is filled with what lies beneath, rock in place of ore. A
-    /// column stays put when it holds a block entity or lacks open air or plants above it. Creatures,
-    /// players and items standing on it ride up, the caster included, and the rise stays.
-    /// </summary>
-    public static bool Tremor(CastContext cast)
-    {
-        var aimed = cast.Block?.Position ?? cast.Entity?.Pos.AsBlockPos.DownCopy();
-        if (aimed == null)
+        if (block.Id == 0 || block.IsLiquid())
         {
             return false;
         }
-        int rise = Evocation.TremorRise;
-        int r = Evocation.TremorRadius(cast.Power);
-        var columns = new List<Column>();
-        for (int dx = -r; dx <= r; dx++)
+        return block.BlockMaterial switch
         {
-            for (int dz = -r; dz <= r; dz++)
-            {
-                var column = Plan(cast, new BlockPos(aimed.X + dx, aimed.Y, aimed.Z + dz, aimed.dimension), rise);
-                if (column != null)
-                {
-                    columns.Add(column);
-                }
-            }
-        }
-        if (columns.Count == 0)
-        {
-            return false;
-        }
-        var center = aimed.ToVec3d().Add(0.5, 0.5, 0.5);
-        var riders = cast.Api.World.GetEntitiesAround(center, r + 2, rise + 6, e => e is EntityItem || IsCreature(e))
-            .Select(e => (Entity: e, Column: columns.FirstOrDefault(c =>
-                c.Top.X == (int)Math.Floor(e.Pos.X) && c.Top.Z == (int)Math.Floor(e.Pos.Z)
-                && e.Pos.Y >= c.Top.Y + 0.5 && e.Pos.Y <= c.Top.Y + 1.5 + rise)))
-            .Where(p => p.Column != null)
-            .ToList();
-        var accessor = cast.Api.World.BlockAccessor;
-        foreach (var column in columns)
-        {
-            accessor.SetBlock(column.Surface.BlockId, column.Top.UpCopy(rise));
-            for (int i = 0; i < rise; i++)
-            {
-                accessor.SetBlock(column.Filler.BlockId, column.Top.UpCopy(i));
-            }
-            var plantPos = column.Top.UpCopy(rise + 1);
-            if (column.Plant != null && accessor.GetBlock(plantPos).Id == 0 && accessor.GetBlock(plantPos, BlockLayersAccess.Fluid).Id == 0)
-            {
-                accessor.SetBlock(column.Plant.BlockId, plantPos);
-            }
-            accessor.TriggerNeighbourBlockUpdate(column.Top.UpCopy(rise));
-        }
-        foreach (var (entity, _) in riders)
-        {
-            entity.TeleportToDouble(entity.Pos.X, entity.Pos.Y + rise, entity.Pos.Z);
-        }
-        return true;
+            EnumBlockMaterial.Soil or EnumBlockMaterial.Sand or EnumBlockMaterial.Gravel or EnumBlockMaterial.Ore => true,
+            // Stone counts only as the world's own rock, never cobblestone, bricks or polished stone.
+            EnumBlockMaterial.Stone => block.Code?.Path.StartsWith("rock-") == true,
+            _ => false,
+        };
     }
 
-    private static bool IsGround(Block block) => block.Id != 0 && block.IsLiquid() == false && Ground.Contains(block.BlockMaterial);
-
-    /// <summary>Open for the rise: air, or a plant, snow or the like with no block entity, and no liquid.</summary>
+    /// <summary>Open for rising ground: air, water, or a plant or thin snow with no block entity. Never lava.</summary>
     private static bool IsOpen(IBlockAccessor accessor, BlockPos pos)
     {
+        var fluid = accessor.GetBlock(pos, BlockLayersAccess.Fluid);
+        if (fluid.Id != 0 && fluid.LiquidCode != "water" && fluid.LiquidCode != "saltwater")
+        {
+            return false;
+        }
         var block = accessor.GetBlock(pos);
-        return accessor.GetBlock(pos, BlockLayersAccess.Fluid).Id == 0
-            && (block.Id == 0 || (block.Replaceable >= 6000 && accessor.GetBlockEntity(pos) == null));
+        return block.Id == 0 || (block.Replaceable >= 6000 && accessor.GetBlockEntity(pos) == null);
     }
 
-    /// <summary>Finds the ground's top block near the aimed height in one column and checks it may rise.</summary>
-    private static Column? Plan(CastContext cast, BlockPos start, int rise)
+    /// <summary>The top block of the ground in one column, within 3 blocks of the given height; null when there is none.</summary>
+    private static BlockPos? GroundTop(IBlockAccessor accessor, BlockPos start)
     {
-        var world = cast.Api.World;
-        var accessor = world.BlockAccessor;
         var top = start.Copy();
-        if (IsGround(accessor.GetBlock(top)))
+        if (Movable(accessor.GetBlock(top)))
         {
-            for (int i = 0; i < 3 && IsGround(accessor.GetBlock(top.UpCopy())); i++)
+            for (int i = 0; i < 3 && Movable(accessor.GetBlock(top.UpCopy())); i++)
             {
                 top.Up();
             }
+            return top;
         }
-        else
+        for (int i = 0; i < 3; i++)
         {
-            int i = 0;
-            while (i < 3 && !IsGround(accessor.GetBlock(top)))
+            top.Down();
+            if (Movable(accessor.GetBlock(top)))
             {
-                top.Down();
-                i++;
+                return top;
             }
         }
-        var surface = accessor.GetBlock(top);
-        var beneath = accessor.GetBlock(top.DownCopy());
-        if (!IsGround(surface) || !IsGround(beneath) || accessor.GetBlockEntity(top) != null || accessor.GetBlockEntity(top.DownCopy()) != null)
-        {
-            return null;
-        }
-        for (int i = 1; i <= rise; i++)
-        {
-            if (!IsOpen(accessor, top.UpCopy(i)))
-            {
-                return null;
-            }
-        }
-        if (!cast.Can(top) || !cast.Can(top.UpCopy(rise)))
-        {
-            return null;
-        }
-        var filler = beneath.BlockMaterial == EnumBlockMaterial.Ore ? RockOf(world, beneath) : beneath;
-        if (filler == null)
-        {
-            return null;
-        }
-        var plant = accessor.GetBlock(top.UpCopy());
-        return new Column { Top = top, Surface = surface, Filler = filler, Plant = plant.Id == 0 ? null : plant };
+        return null;
     }
 
-    /// <summary>The rock an ore block sits in, so a rise never copies ore.</summary>
-    private static Block? RockOf(IWorldAccessor world, Block ore)
+    /// <summary>One column of a Tremor: its ground top and the plant or thin snow on it, read before anything moves.</summary>
+    private class Column
     {
-        string? rock = ore.Variant["rock"];
-        return rock == null ? null : world.GetBlock(new AssetLocation("game", "rock-" + rock));
+        public BlockPos Top = null!;
+        public Block? Cover;
+        public readonly List<Block> Blocks = new();
     }
+
+    /// <summary>
+    /// A 2×2 of real ground rises (step 3 note, Tremor; the owner, 2026-10-27): the aimed column and the
+    /// ones forward, right and forward-right of it lift their own top blocks 2, 4 or 6 with Evolution,
+    /// surface on top. The blocks that fill in beneath come from the 8 columns on its four sides, never
+    /// its corners: each gives up the blocks just under its surface and sinks half the rise, keeping its
+    /// surface and any plant or thin snow on top. Nothing is copied or made. Water is never moved:
+    /// rising ground pushes it aside and it flows into the sunken ground. It happens whole or not at all:
+    /// a block that is not natural ground, a block entity, a claim or no open space above fails it with
+    /// its cost spent; no ground at all is a free miss. Riders on the rise go up; whatever stands on the
+    /// sides drops.
+    /// </summary>
+    public static Outcome Tremor(CastContext cast)
+    {
+        var accessor = cast.Api.World.BlockAccessor;
+        var aimed = cast.Block?.Position ?? cast.Entity?.Pos.AsBlockPos.DownCopy();
+        var start = aimed == null ? null : GroundTop(accessor, aimed);
+        if (start == null)
+        {
+            return Outcome.Nothing;
+        }
+        int sink = Evocation.TremorSink(cast.Power);
+        int rise = 2 * sink;
+        var (fx, fz, rx, rz) = cast.Heading();
+        var footprint = new[] { (0, 0), (fx, fz), (rx, rz), (fx + rx, fz + rz) };
+        var risers = new List<Column>();
+        var sides = new List<(Column Side, Column Riser)>();
+        foreach (var (dx, dz) in footprint)
+        {
+            var top = GroundTop(accessor, new BlockPos(start.X + dx, start.Y, start.Z + dz, start.dimension));
+            if (top == null)
+            {
+                return Outcome.Failed;
+            }
+            risers.Add(new Column { Top = top });
+        }
+        foreach (var riser in risers)
+        {
+            foreach (var face in BlockFacing.HORIZONTALS)
+            {
+                int x = riser.Top.X + face.Normali.X, z = riser.Top.Z + face.Normali.Z;
+                if (footprint.Any(c => start.X + c.Item1 == x && start.Z + c.Item2 == z))
+                {
+                    continue;
+                }
+                var top = GroundTop(accessor, new BlockPos(x, riser.Top.Y, z, start.dimension));
+                if (top == null)
+                {
+                    return Outcome.Failed;
+                }
+                sides.Add((new Column { Top = top }, riser));
+            }
+        }
+        // Read every block that moves and check it, before anything changes.
+        foreach (var riser in risers)
+        {
+            for (int i = rise - 1; i >= 0; i--)
+            {
+                if (!Readable(cast, accessor, riser.Top.DownCopy(i), riser.Blocks))
+                {
+                    return Outcome.Failed;
+                }
+            }
+            for (int i = 1; i <= rise; i++)
+            {
+                if (!IsOpen(accessor, riser.Top.UpCopy(i)) || !cast.Can(riser.Top.UpCopy(i)))
+                {
+                    return Outcome.Failed;
+                }
+            }
+            riser.Cover = Cover(accessor, riser.Top);
+        }
+        foreach (var (side, _) in sides)
+        {
+            for (int i = sink; i >= 0; i--)
+            {
+                if (!Readable(cast, accessor, side.Top.DownCopy(i), side.Blocks))
+                {
+                    return Outcome.Failed;
+                }
+            }
+            if (accessor.GetBlockEntity(side.Top.UpCopy()) != null || !cast.Can(side.Top.UpCopy()))
+            {
+                return Outcome.Failed;
+            }
+            side.Cover = Cover(accessor, side.Top);
+        }
+
+        var world = cast.Api.World;
+        var riders = world.GetEntitiesAround(start.ToVec3d().Add(0.5 + (fx + rx) * 0.5, 0.5, 0.5 + (fz + rz) * 0.5), 4, rise + 6, e => e is EntityItem || IsCreature(e))
+            .Select(e => (Entity: e, Drop: Standing(e, risers) != null ? rise : Standing(e, sides.Select(s => s.Side)) != null ? -sink : 0))
+            .Where(p => p.Drop != 0)
+            .ToList();
+
+        foreach (var riser in risers)
+        {
+            // From the bottom up: the sides' blocks, then the column's own top blocks, then its cover.
+            var fill = sides.Where(s => s.Riser == riser).SelectMany(s => s.Side.Blocks.Take(sink)).ToList();
+            var column = fill.Concat(riser.Blocks).ToList();
+            var bottom = riser.Top.DownCopy(rise - 1);
+            for (int i = 0; i < column.Count; i++)
+            {
+                var pos = bottom.UpCopy(i);
+                accessor.SetBlock(0, pos, BlockLayersAccess.Fluid);
+                accessor.SetBlock(column[i].BlockId, pos);
+            }
+            var coverPos = riser.Top.UpCopy(rise + 1);
+            if (riser.Cover != null && accessor.GetBlock(coverPos).Id == 0)
+            {
+                accessor.SetBlock(riser.Cover.BlockId, coverPos);
+            }
+        }
+        foreach (var (side, _) in sides)
+        {
+            // The surface drops onto what is left; the cover follows it; the rest is open air.
+            var surface = side.Blocks[^1];
+            var newTop = side.Top.DownCopy(sink);
+            accessor.SetBlock(surface.BlockId, newTop);
+            for (int i = 1; i <= sink; i++)
+            {
+                accessor.SetBlock(0, newTop.UpCopy(i));
+            }
+            if (side.Cover != null)
+            {
+                accessor.SetBlock(0, side.Top.UpCopy());
+                accessor.SetBlock(side.Cover.BlockId, newTop.UpCopy());
+            }
+        }
+        foreach (var column in risers.Concat(sides.Select(s => s.Side)))
+        {
+            for (int i = -sink - 1; i <= rise + 1; i++)
+            {
+                accessor.TriggerNeighbourBlockUpdate(column.Top.UpCopy(i));
+            }
+        }
+        foreach (var (entity, drop) in riders)
+        {
+            entity.TeleportToDouble(entity.Pos.X, entity.Pos.Y + drop, entity.Pos.Z);
+        }
+        return Outcome.Acted;
+    }
+
+    /// <summary>Reads one block that will move, if it may: natural ground, no block entity, not in a claim the caster may not build in.</summary>
+    private static bool Readable(CastContext cast, IBlockAccessor accessor, BlockPos pos, List<Block> into)
+    {
+        var block = accessor.GetBlock(pos);
+        if (!Movable(block) || accessor.GetBlockEntity(pos) != null || !cast.Can(pos))
+        {
+            return false;
+        }
+        into.Add(block);
+        return true;
+    }
+
+    /// <summary>The plant or thin snow on a column's top, which rides with its surface.</summary>
+    private static Block? Cover(IBlockAccessor accessor, BlockPos top)
+    {
+        var above = accessor.GetBlock(top.UpCopy());
+        return above.Id != 0 && above.Replaceable >= 6000 && accessor.GetBlockEntity(top.UpCopy()) == null ? above : null;
+    }
+
+    /// <summary>The column an entity stands on, if it is one of these.</summary>
+    private static Column? Standing(Entity entity, IEnumerable<Column> columns) =>
+        columns.FirstOrDefault(c => c.Top.X == (int)Math.Floor(entity.Pos.X) && c.Top.Z == (int)Math.Floor(entity.Pos.Z)
+            && entity.Pos.Y >= c.Top.Y + 0.5 && entity.Pos.Y <= c.Top.Y + 2.5);
 
     // ------------------------------------------------------------------ Gale
 

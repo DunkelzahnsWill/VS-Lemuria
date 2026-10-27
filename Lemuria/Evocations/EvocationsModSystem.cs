@@ -95,7 +95,7 @@ public class EvocationsModSystem : ModSystem
     }
 
     /// <summary>Tells the players near a cast to show it.</summary>
-    public void SendCast(CastContext cast, Vec3d hand, bool acted)
+    public void SendCast(CastContext cast, Vec3d hand, Effects.Outcome outcome)
     {
         if (serverChannel == null)
         {
@@ -104,7 +104,7 @@ public class EvocationsModSystem : ModSystem
         var packet = new CastPacket
         {
             Alignment = cast.Alignment,
-            Kind = acted ? CastPacket.Cast : CastPacket.Fizzle,
+            Kind = outcome switch { Effects.Outcome.Acted => CastPacket.Cast, Effects.Outcome.Failed => CastPacket.Failed, _ => CastPacket.Fizzle },
             Power = cast.Power,
             FromX = hand.X,
             FromY = hand.Y,
@@ -162,6 +162,13 @@ public class EvocationsModSystem : ModSystem
             streak.AddPos.Set(0.08, 0.08, 0.08);
             world.SpawnParticles(streak);
         }
+        if (packet.Kind == CastPacket.Failed)
+        {
+            // The crystal's note wavers and breaks off: the cast failed and its charge is spent.
+            Spray(to, rgb, 6, 0.4f);
+            world.PlaySoundAt(new AssetLocation(LemuriaModSystem.ModId, "sounds/evocations/warble"), from.X, from.Y, from.Z, null, false, 16f, LemuriaSound.Volume(0.8f));
+            return;
+        }
         if (packet.Kind == CastPacket.Fizzle)
         {
             Spray(to, rgb, 8, 0.3f);
@@ -213,7 +220,7 @@ public class EvocationsModSystem : ModSystem
                         .HandleWith(_ => TestSite.WithChunk(api, Mod.Logger, "Evocations", 4, -20, column => new EvocationsTests(this, api, Mod.Logger).Water(column)))
                     .EndSubCommand()
                     .BeginSubCommand("tremor")
-                        .WithDescription("Tremor raises a pillar and a 3x3 mound; ore stays below, a chest stays put, a hen rides up")
+                        .WithDescription("Tremor raises a 2x2 of real ground 2 and 4 blocks from its sides; ore moves with it, a chest beside it fails it, hens ride")
                         .HandleWith(_ => TestSite.WithChunk(api, Mod.Logger, "Evocations", 4, -28, column => new EvocationsTests(this, api, Mod.Logger).Tremor(column)))
                     .EndSubCommand()
                     .BeginSubCommand("gale")

@@ -53,7 +53,7 @@ public class EvocationsTests
     private bool CastAt(string alignment, int power, Vec3d from, Vec3d at, out CastContext cast)
     {
         cast = CastContext.Aim(sapi, null, null, alignment, power, from, at.SubCopy(from));
-        return Effects.Apply(cast);
+        return Effects.Apply(cast) == Effects.Outcome.Acted;
     }
 
     private Entity? Spawn(string code, Vec3d at)
@@ -200,52 +200,101 @@ public class EvocationsTests
     public void Tremor(BlockPos column)
     {
         var origin = TestSite.Surface(sapi, column);
-        int rise = Evocation.TremorRise;
-        // A strip of grassy soil over plain soil over granite, 12 blocks long and 5 wide.
-        for (int x = -1; x < 11; x++)
+        // A field of grassy soil over three blocks of plain soil over granite, open sky above.
+        for (int x = -1; x <= 13; x++)
         {
-            for (int z = -2; z <= 2; z++)
+            for (int z = -5; z <= 4; z++)
             {
                 var pos = origin.AddCopy(x, 0, z);
-                Accessor.SetBlock(Id("game:rock-granite"), pos.AddCopy(0, -3, 0));
-                Accessor.SetBlock(Id("game:soil-medium-none"), pos.AddCopy(0, -2, 0));
+                for (int y = -7; y <= -5; y++)
+                {
+                    Accessor.SetBlock(Id("game:rock-granite"), pos.AddCopy(0, y, 0));
+                }
+                for (int y = -4; y <= -2; y++)
+                {
+                    Accessor.SetBlock(Id("game:soil-medium-none"), pos.AddCopy(0, y, 0));
+                }
                 Accessor.SetBlock(Id("game:soil-medium-normal"), pos.AddCopy(0, -1, 0));
-                for (int y = 0; y < rise + 4; y++)
+                for (int y = 0; y < 10; y++)
                 {
                     Accessor.SetBlock(0, pos.AddCopy(0, y, 0));
+                    Accessor.SetBlock(0, pos.AddCopy(0, y, 0), BlockLayersAccess.Fluid);
                 }
             }
         }
         var top = origin.AddCopy(0, -1, 0);
-        // Ore under one column of the mound, and a chest on another.
-        Accessor.SetBlock(Id("game:ore-poor-nativecopper-granite"), top.AddCopy(7, -1, 0));
-        Accessor.SetBlock(Id("game:chest-east"), top.AddCopy(6, 1, 1));
-        var eye = origin.ToVec3d().Add(-0.5, 1.6, 0.5);
-        // The mound first, so the pillar does not stand in the way of its ray.
-        var hen = Spawn("game:chicken-hen", top.ToVec3d().Add(6.5, 1, 0.5));
-        double henBefore = hen?.Pos.Y ?? 0;
-        bool mound = CastAt(Crystal.Earth, 2, eye, top.ToVec3d().Add(6.5, 0.95, 0.5), out _);
-        bool pillar = CastAt(Crystal.Earth, 1, eye, top.ToVec3d().Add(2.5, 0.95, 0.5), out _);
-        bool pillarRose = Accessor.GetBlock(top.AddCopy(2, rise, 0)).Code?.Path == "soil-medium-normal"
-            && Accessor.GetBlock(top.AddCopy(2, 0, 0)).Code?.Path == "soil-medium-none"
-            && Accessor.GetBlock(top.AddCopy(3, rise, 0)).Id == 0;
-        int risen = 0;
-        for (int dx = 5; dx <= 7; dx++)
+        int Solid(int x0, int x1, int z0, int z1)
         {
-            for (int dz = -1; dz <= 1; dz++)
+            int count = 0;
+            for (int x = x0; x <= x1; x++)
             {
-                if (Accessor.GetBlock(top.AddCopy(dx, rise, dz)).Code?.Path == "soil-medium-normal")
+                for (int z = z0; z <= z1; z++)
                 {
-                    risen++;
+                    for (int y = -7; y <= 8; y++)
+                    {
+                        if (Accessor.GetBlock(top.AddCopy(x, y, z)).Id != 0)
+                        {
+                            count++;
+                        }
+                    }
                 }
             }
+            return count;
         }
-        string filler = Accessor.GetBlock(top.AddCopy(7, rise - 1, 0)).Code?.Path ?? "air";
-        string underOre = Accessor.GetBlock(top.AddCopy(7, -1, 0)).Code?.Path ?? "air";
+        string Path(int x, int y, int z) => Accessor.GetBlock(top.AddCopy(x, y, z)).Code?.Path ?? "air";
+        // Looking east from the west edge: forward is east, right is south.
+        var eye = origin.ToVec3d().Add(-0.5, 1.6, 0.5);
+        int before = Solid(-1, 13, -5, 4);
+
+        // Glowing first, far off, so the Glittering rise does not stand in its ray: a 2×2 at x 8-9, z 0-1 rises 4.
+        var sideHen = Spawn("game:chicken-hen", top.ToVec3d().Add(10.5, 1, 0.5));
+        double sideHenBefore = sideHen?.Pos.Y ?? 0;
+        bool glowing = CastAt(Crystal.Earth, 2, eye, top.ToVec3d().Add(8.5, 0.95, 0.5), out _);
+        int glowingRose = 0, glowingSunk = 0;
+        foreach (var (x, z) in new[] { (8, 0), (9, 0), (8, 1), (9, 1) })
+        {
+            glowingRose += Path(x, 4, z) == "soil-medium-normal" && Path(x, 5, z) == "air" ? 1 : 0;
+        }
+        foreach (var (x, z) in new[] { (7, 0), (7, 1), (10, 0), (10, 1), (8, -1), (9, -1), (8, 2), (9, 2) })
+        {
+            glowingSunk += Path(x, -2, z) == "soil-medium-normal" && Path(x, -1, z) == "air" ? 1 : 0;
+        }
+        double sideHenDrop = sideHen == null ? 0 : sideHenBefore - sideHen.Pos.Y;
+        sideHen?.Die(EnumDespawnReason.Removed);
+
+        // Glittering: ore in one rising column, a hen on another; a 2×2 at x 2-3, z 0-1 rises 2, its sides sink 1.
+        Accessor.SetBlock(Id("game:ore-poor-nativecopper-granite"), top.AddCopy(3, -1, 0));
+        var hen = Spawn("game:chicken-hen", top.ToVec3d().Add(2.5, 1, 0.5));
+        double henBefore = hen?.Pos.Y ?? 0;
+        bool glittering = CastAt(Crystal.Earth, 1, eye, top.ToVec3d().Add(2.5, 0.95, 0.5), out _);
+        int rose = 0, sunk = 0;
+        foreach (var (x, z) in new[] { (2, 0), (3, 0), (2, 1), (3, 1) })
+        {
+            rose += Path(x, 2, z) == "soil-medium-normal" && Path(x, 3, z) == "air" ? 1 : 0;
+        }
+        foreach (var (x, z) in new[] { (1, 0), (1, 1), (4, 0), (4, 1), (2, -1), (3, -1), (2, 2), (3, 2) })
+        {
+            sunk += Path(x, -1, z) == "soil-medium-normal" && Path(x, 0, z) == "air" ? 1 : 0;
+        }
+        bool cornersStay = Path(1, 0, -1) == "soil-medium-normal" && Path(4, 0, 2) == "soil-medium-normal";
+        bool oreMoved = Path(3, 1, 0).StartsWith("ore-") && !Path(3, -1, 0).StartsWith("ore-");
         double henRose = hen == null ? 0 : hen.Pos.Y - henBefore;
         hen?.Die(EnumDespawnReason.Removed);
-        logger.Notification("Evocations test: Tremor pillar cast {0}, rose {1}; mound cast {2}, {3} of 9 columns rose; over ore the rise is {4} and the ore is still {5}; the hen rode up {6:0.#} blocks",
-            YesNo(pillar), YesNo(pillarRose), YesNo(mound), risen, filler, underOre, henRose);
+        int after = Solid(-1, 13, -5, 4);
+
+        // A chest beside the rise fails it whole, with its cost spent; aimed at the sky, a free miss.
+        Accessor.SetBlock(Id("game:chest-east"), top.AddCopy(7, 1, -3));
+        var failEye = origin.ToVec3d().Add(0.5, 1.6, -2.5);
+        var failed = Effects.Apply(CastContext.Aim(sapi, null, null, Crystal.Earth, 1, failEye, top.ToVec3d().Add(5.5, 0.95, -2.5).SubCopy(failEye)));
+        bool unchanged = Path(5, 0, -3) == "soil-medium-normal" && Path(5, 1, -3) == "air";
+        var sky = Effects.Apply(CastContext.Aim(sapi, null, null, Crystal.Earth, 1, eye, new Vec3d(0, 1, 0)));
+
+        logger.Notification("Evocations test: Glowing Tremor cast {0}, {1} of 4 columns rose 4, {2} of 8 sides sank 2, the hen beside it dropped {3:0.#}",
+            YesNo(glowing), glowingRose, glowingSunk, sideHenDrop);
+        logger.Notification("Evocations test: Glittering Tremor cast {0}, {1} of 4 columns rose 2, {2} of 8 sides sank 1, corners stay: {3}; the ore rose with its column: {4}; the hen rode up {5:0.#}; blocks before {6}, after {7}",
+            YesNo(glittering), rose, sunk, YesNo(cornersStay), YesNo(oreMoved), henRose, before, after);
+        logger.Notification("Evocations test: Tremor beside a chest {0}, the ground unchanged: {1}; at the sky {2}",
+            failed, YesNo(unchanged), sky);
     }
 
     // ------------------------------------------------------------------ Gale

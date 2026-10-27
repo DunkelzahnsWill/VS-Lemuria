@@ -57,14 +57,18 @@ public static class Caster
         var eye = entity.Pos.XYZ.Add(entity.LocalEyePos);
         var look = entity.Pos.GetViewVector();
         var cast = CastContext.Aim(system.Api, player, entity, alignment, Evocation.Power(evolution, overdrive), eye, new Vec3d(look.X, look.Y, look.Z));
-        bool acted = Effects.Apply(cast);
-        system.SendCast(cast, Hand(eye, cast.Dir), acted);
-        if (!acted)
+        var outcome = Effects.Apply(cast);
+        system.SendCast(cast, Hand(eye, cast.Dir), outcome);
+        if (outcome == Effects.Outcome.Nothing)
         {
             return;
         }
+        // A failed Tremor still spends its charge and risks its crack (the owner, 2026-10-27).
         Spend(entity.World, slot, entity, entity.Pos.XYZ.Add(0, 1, 0), overdrive, entity.World.Rand.NextDouble());
-        system.OnCast(player, cast);
+        if (outcome == Effects.Outcome.Acted)
+        {
+            system.OnCast(player, cast);
+        }
     }
 
     public enum Release
