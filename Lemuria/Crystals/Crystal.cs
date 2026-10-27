@@ -103,13 +103,13 @@ public static class Crystal
     public static Block? BlockFor(IWorldAccessor world, string alignment, string evolution, string position = "up") =>
         world.GetBlock(new AssetLocation(LemuriaModSystem.ModId, $"crystal-{alignment}-{evolution}-{position}"));
 
-    /// <summary>A crystal's colour, for sparks and bursts: Fire ember red, Ice frost blue, Earth jade green, Sky storm violet, Unaligned ivory.</summary>
+    /// <summary>A crystal's colour, for sparks and bursts: Fire ruby red, Ice sapphire blue, Earth dark brown, Sky steely grey, Unaligned ivory.</summary>
     public static int Rgb(string alignment) => alignment switch
     {
-        Fire => ColorUtil.ToRgba(255, 230, 80, 40),
-        Ice => ColorUtil.ToRgba(255, 150, 200, 255),
-        Earth => ColorUtil.ToRgba(255, 70, 190, 110),
-        Sky => ColorUtil.ToRgba(255, 160, 110, 240),
+        Fire => ColorUtil.ToRgba(255, 225, 30, 70),
+        Ice => ColorUtil.ToRgba(255, 60, 110, 240),
+        Earth => ColorUtil.ToRgba(255, 150, 100, 60),
+        Sky => ColorUtil.ToRgba(255, 170, 180, 195),
         _ => ColorUtil.ToRgba(255, 240, 228, 196),
     };
 
