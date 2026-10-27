@@ -34,13 +34,16 @@ public class BlockCrystalRack : Block
         boxes[Places] = new Cuboidf(0.2f / 16f, 0, Back / 16f, 15.8f / 16f, 1f, 1f).RotatedCopy(0, angle, 0, new Vec3d(0.5, 0.5, 0.5));
     }
 
-    /// <summary>The rack's turn about the vertical, as the game's horizontal orientations turn shapes.</summary>
+    /// <summary>
+    /// The rack's turn about the vertical. The shape's open front faces north unturned; the side variant
+    /// names the side the player stood on, so the front turns to face them.
+    /// </summary>
     public static float RotationY(string? side) => side switch
     {
-        "east" => 270,
-        "south" => 180,
-        "west" => 90,
-        _ => 0,
+        "east" => 90,
+        "south" => 0,
+        "west" => 270,
+        _ => 180,
     };
 
     /// <summary>A cell's centre on the unturned rack, in pixels: four rows of four, every other row shifted.</summary>

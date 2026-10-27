@@ -11,10 +11,10 @@
 		"handbook": { "exclude": true }
 	},
 	"shapebytype": {
-		"*-north": { "base": "lemuria:block/storage/crystalrack", "rotateY": 0 },
-		"*-east": { "base": "lemuria:block/storage/crystalrack", "rotateY": 270 },
-		"*-south": { "base": "lemuria:block/storage/crystalrack", "rotateY": 180 },
-		"*-west": { "base": "lemuria:block/storage/crystalrack", "rotateY": 90 }
+		"*-north": { "base": "lemuria:block/storage/crystalrack", "rotateY": 180 },
+		"*-east": { "base": "lemuria:block/storage/crystalrack", "rotateY": 90 },
+		"*-south": { "base": "lemuria:block/storage/crystalrack", "rotateY": 0 },
+		"*-west": { "base": "lemuria:block/storage/crystalrack", "rotateY": 270 }
 	},
 	"textures": {
 		"rock": { "base": "game:block/stone/polishedrock/{rock}" }
@@ -40,10 +40,10 @@
 		{ "type": "block", "code": "lemuria:crystalrack-{rock}-north", "quantity": { "avg": 1, "var": 0 } }
 	],
 	"collisionboxbytype": {
-		"*-north": { "x1": 0.0125, "y1": 0, "z1": 0.5625, "x2": 0.9875, "y2": 1, "z2": 1 },
-		"*-east": { "x1": 0.0125, "y1": 0, "z1": 0.5625, "x2": 0.9875, "y2": 1, "z2": 1, "rotateY": 270 },
-		"*-south": { "x1": 0.0125, "y1": 0, "z1": 0.5625, "x2": 0.9875, "y2": 1, "z2": 1, "rotateY": 180 },
-		"*-west": { "x1": 0.0125, "y1": 0, "z1": 0.5625, "x2": 0.9875, "y2": 1, "z2": 1, "rotateY": 90 }
+		"*-north": { "x1": 0.0125, "y1": 0, "z1": 0.5625, "x2": 0.9875, "y2": 1, "z2": 1, "rotateY": 180 },
+		"*-east": { "x1": 0.0125, "y1": 0, "z1": 0.5625, "x2": 0.9875, "y2": 1, "z2": 1, "rotateY": 90 },
+		"*-south": { "x1": 0.0125, "y1": 0, "z1": 0.5625, "x2": 0.9875, "y2": 1, "z2": 1 },
+		"*-west": { "x1": 0.0125, "y1": 0, "z1": 0.5625, "x2": 0.9875, "y2": 1, "z2": 1, "rotateY": 270 }
 	},
 	"guiTransform": {
 		"rotation": { "x": -22.6, "y": 135, "z": 0 },
