@@ -9,11 +9,14 @@ namespace Lemuria.Crystals;
 /// Reads the four environments round a refining cradle or a charging crystal and gives each Elemental
 /// a strength from 0 to 1 (design note, The four environments and Purity). Every reading is the game's
 /// own: heat sources and their fall-off, the climate's temperature and rainfall, wind, and the rain
-/// map that tells open sky. About 500 block reads and one climate reading per call.
+/// map that tells open sky. About 250 block reads and one climate reading per call.
 /// </summary>
 public static class CrystalEnvironment
 {
     public const int FireIndex = 0, IceIndex = 1, EarthIndex = 2, SkyIndex = 3;
+
+    /// <summary>How far the reading looks in every direction, diagonals included: a 5x5x5 cube.</summary>
+    public const int Reach = 2;
 
     /// <summary>Strengths of Fire, Ice, Earth and Sky before twins cancel, each capped at 1.</summary>
     public static float[] Read(IWorldAccessor world, BlockPos pos, bool skyBoost)
@@ -28,18 +31,18 @@ public static class CrystalEnvironment
         int stone = 0;
         int around = 0;
         var tmp = new BlockPos(pos.dimension);
-        for (int dx = -3; dx <= 3; dx++)
+        // Every environment reads the same 5x5x5 cube round the crystal (the owner, step 2 play-test).
+        for (int dx = -Reach; dx <= Reach; dx++)
         {
-            for (int dy = -3; dy <= 3; dy++)
+            for (int dy = -Reach; dy <= Reach; dy++)
             {
-                for (int dz = -3; dz <= 3; dz++)
+                for (int dz = -Reach; dz <= Reach; dz++)
                 {
                     tmp.Set(pos.X + dx, pos.Y + dy, pos.Z + dz);
                     var solid = accessor.GetBlock(tmp, BlockLayersAccess.Solid);
                     var fluid = accessor.GetBlock(tmp, BlockLayersAccess.Fluid);
                     heat += HeatFrom(world, solid, tmp, pos) + HeatFrom(world, fluid, tmp, pos);
-                    bool near = Math.Abs(dx) <= 2 && Math.Abs(dy) <= 2 && Math.Abs(dz) <= 2;
-                    if (!near || (dx == 0 && dy == 0 && dz == 0))
+                    if (dx == 0 && dy == 0 && dz == 0)
                     {
                         continue;
                     }
@@ -99,7 +102,7 @@ public static class CrystalEnvironment
         {
             return 0;
         }
-        // Full beside it, about half three blocks away: the fall-off EntityBehaviorBodyTemperature uses outdoors.
+        // Full beside it, falling off two blocks away: the fall-off EntityBehaviorBodyTemperature uses outdoors.
         double dsq = sourcePos.DistanceSqToNearerEdge(crystalPos.X + 0.5, crystalPos.Y + 0.25, crystalPos.Z + 0.5);
         float falloff = Math.Min(1f, 9f / (8f + (float)Math.Pow(dsq, 1.25)));
         return source.GetHeatStrength(world, sourcePos, crystalPos) * falloff;
