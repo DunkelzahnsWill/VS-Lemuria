@@ -1,10 +1,11 @@
 {
 	"code": "crystal",
 	"class": "lemuria-crystal",
+	"entityClass": "lemuria-crystal",
 	"behaviors": [{ "name": "OmniAttachable", "properties": { "facingCode": "position" } }],
 	"variantgroups": [
-		{ "code": "alignment", "states": ["unaligned"] },
-		{ "code": "evolution", "states": ["glittering"] },
+		{ "code": "alignment", "states": ["unaligned", "fire", "ice", "earth", "sky"] },
+		{ "code": "evolution", "states": ["glittering", "glowing"] },
 		{ "code": "position", "states": ["up", "down"], "loadFromProperties": "game:abstract/horizontalorientation" }
 	],
 	"attributes": {
@@ -12,23 +13,47 @@
 		"humStrength": 0.5
 	},
 	"shapebytype": {
-		"*-up": { "base": "lemuria:block/crystals/crystal" },
-		"*-down": { "base": "lemuria:block/crystals/crystal", "rotateX": 180 },
-		"*-north": { "base": "lemuria:block/crystals/crystal", "rotateX": 90, "rotateZ": 180 },
-		"*-east": { "base": "lemuria:block/crystals/crystal", "rotateX": 90, "rotateZ": 270 },
-		"*-south": { "base": "lemuria:block/crystals/crystal", "rotateX": 90, "rotateZ": 0 },
-		"*-west": { "base": "lemuria:block/crystals/crystal", "rotateX": 90, "rotateZ": 90 }
+		"*-glittering-up": { "base": "lemuria:block/crystals/crystal" },
+		"*-glittering-down": { "base": "lemuria:block/crystals/crystal", "rotateX": 180 },
+		"*-glittering-north": { "base": "lemuria:block/crystals/crystal", "rotateX": 90, "rotateZ": 180 },
+		"*-glittering-east": { "base": "lemuria:block/crystals/crystal", "rotateX": 90, "rotateZ": 270 },
+		"*-glittering-south": { "base": "lemuria:block/crystals/crystal", "rotateX": 90, "rotateZ": 0 },
+		"*-glittering-west": { "base": "lemuria:block/crystals/crystal", "rotateX": 90, "rotateZ": 90 },
+		"*-glowing-up": { "base": "lemuria:block/crystals/crystal-glowing" },
+		"*-glowing-down": { "base": "lemuria:block/crystals/crystal-glowing", "rotateX": 180 },
+		"*-glowing-north": { "base": "lemuria:block/crystals/crystal-glowing", "rotateX": 90, "rotateZ": 180 },
+		"*-glowing-east": { "base": "lemuria:block/crystals/crystal-glowing", "rotateX": 90, "rotateZ": 270 },
+		"*-glowing-south": { "base": "lemuria:block/crystals/crystal-glowing", "rotateX": 90, "rotateZ": 0 },
+		"*-glowing-west": { "base": "lemuria:block/crystals/crystal-glowing", "rotateX": 90, "rotateZ": 90 }
 	},
-	"shapeInventory": { "base": "lemuria:item/crystals/crystal-held" },
+	"shapeInventoryByType": {
+		"*-glittering-*": { "base": "lemuria:item/crystals/crystal-held" },
+		"*-glowing-*": { "base": "lemuria:item/crystals/crystal-held-glowing" }
+	},
 	"textures": {
-		"crystal": { "base": "lemuria:block/crystals/unaligned" }
+		"crystal": { "base": "lemuria:block/crystals/{alignment}" },
+		"crack1": { "base": "lemuria:block/crystals/{alignment}-crack1" },
+		"crack2": { "base": "lemuria:block/crystals/{alignment}-crack2" }
 	},
-	"grindingProps": {
-		"groundStack": { "type": "item", "code": "lemuria:seedling-glittering", "stacksize": 3 }
+	"grindingPropsByType": {
+		"*-unaligned-glittering-*": { "groundStack": { "type": "item", "code": "lemuria:seedling-glittering", "stacksize": 3 } },
+		"*-unaligned-glowing-*": { "groundStack": { "type": "item", "code": "lemuria:seedling-glowing", "stacksize": 3 } }
 	},
 	"creativeinventory": { "general": ["*-up"], "decorative": ["*-up"] },
 	"maxstacksize": 32,
-	"lightHsv": [10, 1, 5],
+	"storageFlags": 131073,
+	"lightHsvByType": {
+		"*-unaligned-glittering-*": [10, 1, 5],
+		"*-unaligned-glowing-*": [10, 1, 7],
+		"*-fire-glittering-*": [0, 6, 2],
+		"*-fire-glowing-*": [0, 6, 3],
+		"*-ice-glittering-*": [36, 4, 2],
+		"*-ice-glowing-*": [36, 4, 3],
+		"*-earth-glittering-*": [24, 5, 2],
+		"*-earth-glowing-*": [24, 5, 3],
+		"*-sky-glittering-*": [47, 5, 2],
+		"*-sky-glowing-*": [47, 5, 3]
+	},
 	"lightAbsorption": 0,
 	"drawtype": "json",
 	"replaceable": 90,
@@ -39,18 +64,23 @@
 	"sideopaque": { "all": false },
 	"sideao": { "all": false },
 	"vertexFlags": { "zOffset": 2, "reflective": true },
-	"sounds": {
-		"walk": "game:walk/stone",
-		"place": "game:block/ceramicplace",
-		"break": "game:block/ceramicbreak",
-		"hit": "game:block/ceramichit",
-		"ambient": "lemuria:sounds/crystals/hum",
-		"ambientBlockCount": 1
+	"soundsByType": {
+		"*-unaligned-*": { "walk": "game:walk/stone", "place": "game:block/ceramicplace", "break": "game:block/ceramicbreak", "hit": "game:block/ceramichit", "ambient": "lemuria:sounds/crystals/hum", "ambientBlockCount": 1 },
+		"*-fire-*": { "walk": "game:walk/stone", "place": "game:block/ceramicplace", "break": "game:block/ceramicbreak", "hit": "game:block/ceramichit", "ambient": "lemuria:sounds/crystals/hum-fire", "ambientBlockCount": 1 },
+		"*-ice-*": { "walk": "game:walk/stone", "place": "game:block/ceramicplace", "break": "game:block/ceramicbreak", "hit": "game:block/ceramichit", "ambient": "lemuria:sounds/crystals/hum-ice", "ambientBlockCount": 1 },
+		"*-earth-*": { "walk": "game:walk/stone", "place": "game:block/ceramicplace", "break": "game:block/ceramicbreak", "hit": "game:block/ceramichit", "ambient": "lemuria:sounds/crystals/hum-earth", "ambientBlockCount": 1 },
+		"*-sky-*": { "walk": "game:walk/stone", "place": "game:block/ceramicplace", "break": "game:block/ceramicbreak", "hit": "game:block/ceramichit", "ambient": "lemuria:sounds/crystals/hum-sky", "ambientBlockCount": 1 }
 	},
 	"drops": [
 		{ "type": "block", "code": "lemuria:crystal-{alignment}-{evolution}-up", "quantity": { "avg": 1, "var": 0 } }
 	],
 	"collisionSelectionBoxByType": {
+		"*-glowing-up": { "x1": 0.1875, "y1": 0, "z1": 0.1875, "x2": 0.8125, "y2": 0.9375, "z2": 0.8125 },
+		"*-glowing-down": { "x1": 0.1875, "y1": 0, "z1": 0.1875, "x2": 0.8125, "y2": 0.9375, "z2": 0.8125, "rotateX": 180 },
+		"*-glowing-west": { "x1": 0.0625, "y1": 0.1875, "z1": 0.1875, "x2": 1, "y2": 0.8125, "z2": 0.8125 },
+		"*-glowing-north": { "x1": 0.0625, "y1": 0.1875, "z1": 0.1875, "x2": 1, "y2": 0.8125, "z2": 0.8125, "rotateY": 270 },
+		"*-glowing-east": { "x1": 0.0625, "y1": 0.1875, "z1": 0.1875, "x2": 1, "y2": 0.8125, "z2": 0.8125, "rotateY": 180 },
+		"*-glowing-south": { "x1": 0.0625, "y1": 0.1875, "z1": 0.1875, "x2": 1, "y2": 0.8125, "z2": 0.8125, "rotateY": 90 },
 		"*-up": { "x1": 0.25, "y1": 0, "z1": 0.25, "x2": 0.75, "y2": 0.75, "z2": 0.75 },
 		"*-down": { "x1": 0.25, "y1": 0, "z1": 0.25, "x2": 0.75, "y2": 0.75, "z2": 0.75, "rotateX": 180 },
 		"*-west": { "x1": 0.25, "y1": 0.25, "z1": 0.25, "x2": 1, "y2": 0.75, "z2": 0.75 },

@@ -1,10 +1,16 @@
 {
 	"code": "seedling",
 	"variantgroups": [
-		{ "code": "evolution", "states": ["glittering"] }
+		{ "code": "evolution", "states": ["glittering", "glowing"] }
+	],
+	"behaviors": [
+		{ "name": "lemuria-jarfiller", "properties": { "kind": "personal" } }
 	],
 	"maxstacksize": 64,
-	"shape": { "base": "lemuria:item/crystals/seedling" },
+	"shapeByType": {
+		"*-glittering": { "base": "lemuria:item/crystals/seedling" },
+		"*-glowing": { "base": "lemuria:item/crystals/seedling-glowing" }
+	},
 	"textures": {
 		"crystal": { "base": "lemuria:block/crystals/unaligned" }
 	},
