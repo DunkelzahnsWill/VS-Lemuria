@@ -10,6 +10,11 @@
 	"shape": {
 		"base": "lemuria:item/earmuffs/earmuffs"
 	},
+	"textures": {
+		"seraph": {
+			"base": "game:block/transparent"
+		}
+	},
 	"attributes": {
 		"clothescategory": "face",
 		"wearableAttachment": true,
