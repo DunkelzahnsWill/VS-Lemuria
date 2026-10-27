@@ -1,0 +1,3 @@
+# Ear muffs (step 3, after the play-test): the server's sound settings at start, then the item and its recipes.
+Earmuffs: ear muffs let 0\.75 of every sound through; Lemuria's sounds play at 1
+Earmuffs test: the item exists: yes, worn in the face slot, warmth 0, never wears: yes; 23 grid recipe\(s\), one per leather or linen colour; sent to players: ear muffs 0\.75, Lemuria's sounds 1$
