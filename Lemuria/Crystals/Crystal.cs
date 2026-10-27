@@ -109,7 +109,7 @@ public static class Crystal
         Fire => ColorUtil.ToRgba(255, 225, 30, 70),
         Ice => ColorUtil.ToRgba(255, 60, 110, 240),
         Earth => ColorUtil.ToRgba(255, 150, 100, 60),
-        Sky => ColorUtil.ToRgba(255, 170, 180, 195),
+        Sky => ColorUtil.ToRgba(255, 135, 146, 165),
         _ => ColorUtil.ToRgba(255, 240, 228, 196),
     };
 
