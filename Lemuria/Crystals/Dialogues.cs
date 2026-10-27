@@ -32,7 +32,8 @@ public class Dialogues
     private class ContainerWatch
     {
         public long LastSeenMs;
-        public long StartMs = -1;
+        /// <summary>When the warning began, or null while there is none; a test may set it before the server clock's zero.</summary>
+        public long? StartMs;
     }
 
     private readonly Dictionary<InventoryBase, ContainerWatch> containers = new();
@@ -258,18 +259,18 @@ public class Dialogues
             string key = inventory.Pos == null ? "" : $"pos:{inventory.Pos.X},{inventory.Pos.Y},{inventory.Pos.Z}";
             if (pairs.Count == 0)
             {
-                if (watch.StartMs >= 0 && key.Length > 0)
+                if (watch.StartMs != null && key.Length > 0)
                 {
                     system.SendDiscord(key, false, inventory.Pos!.ToVec3d().Add(0.5, 0.5, 0.5), 0, 0);
                 }
-                watch.StartMs = -1;
+                watch.StartMs = null;
                 if (stale || Units(inventory).Count == 0)
                 {
                     gone.Add(inventory);
                 }
                 continue;
             }
-            if (watch.StartMs < 0)
+            if (watch.StartMs == null)
             {
                 watch.StartMs = now;
                 if (key.Length > 0)
@@ -278,11 +279,11 @@ public class Dialogues
                 }
                 continue;
             }
-            if ((now - watch.StartMs) / 1000f < Grace)
+            if ((now - watch.StartMs.Value) / 1000f < Grace)
             {
                 continue;
             }
-            watch.StartMs = -1;
+            watch.StartMs = null;
             if (key.Length > 0)
             {
                 system.SendDiscord(key, false, inventory.Pos!.ToVec3d().Add(0.5, 0.5, 0.5), 0, 0);
@@ -302,7 +303,7 @@ public class Dialogues
         long now = sapi.World.ElapsedMilliseconds;
         foreach (var watch in containers.Values)
         {
-            if (watch.StartMs >= 0)
+            if (watch.StartMs != null)
             {
                 watch.StartMs = now - (long)(elapsedSeconds * 1000);
             }
