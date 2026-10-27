@@ -57,6 +57,10 @@ public static class Effects
     {
         bool acted = false;
         var aimed = cast.Block?.Position;
+        if (aimed != null && cast.Power >= 3 && IsRawRock(cast.Api.World.BlockAccessor.GetBlock(aimed)))
+        {
+            return Melt(cast, aimed);
+        }
         if (aimed != null && cast.Can(aimed))
         {
             var lit = TryIgnite(cast, aimed);
@@ -82,6 +86,51 @@ public static class Effects
             }
         }
         return acted;
+    }
+
+    private static readonly AssetLocation LavaCode = new("game", "lava-still-7");
+    private static readonly AssetLocation SizzleSound = new("game", "sounds/sizzle");
+
+    /// <summary>The world's own rock, never ore, cobblestone or polished rock.</summary>
+    private static bool IsRawRock(Block block) => block.Code?.Domain == "game" && block.Code.Path.StartsWith("rock-");
+
+    /// <summary>
+    /// At power 3 (an over-driven Glowing crystal; Luminous in step 6), raw rock aimed at melts: a 2×2×1
+    /// on its level, the aimed block and the ones forward, right and forward-right of it, into still
+    /// lava, which runs as lava does (the owner, 2026-10-27, "let it run"). The block under the caster's
+    /// feet never melts, and each melted block is claim-checked and written to the audit log. If nothing
+    /// melts, the cast fizzles free.
+    /// </summary>
+    private static bool Melt(CastContext cast, BlockPos aimed)
+    {
+        var world = cast.Api.World;
+        var accessor = world.BlockAccessor;
+        var lava = world.GetBlock(LavaCode);
+        if (lava == null)
+        {
+            return false;
+        }
+        var underFeet = cast.Caster?.Pos.AsBlockPos.DownCopy();
+        var (fx, fz, rx, rz) = cast.Heading();
+        int melted = 0;
+        foreach (var (dx, dz) in new[] { (0, 0), (fx, fz), (rx, rz), (fx + rx, fz + rz) })
+        {
+            var pos = aimed.AddCopy(dx, 0, dz);
+            if (!IsRawRock(accessor.GetBlock(pos)) || pos.Equals(underFeet) || !cast.Can(pos))
+            {
+                continue;
+            }
+            accessor.SetBlock(0, pos);
+            accessor.SetBlock(lava.BlockId, pos, BlockLayersAccess.Fluid);
+            accessor.TriggerNeighbourBlockUpdate(pos);
+            cast.Api.Logger.Audit("{0} melted rock to lava with a Fire crystal at {1}", cast.Player?.PlayerName ?? "the test command", pos);
+            melted++;
+        }
+        if (melted > 0)
+        {
+            world.PlaySoundAt(SizzleSound, aimed.X + 0.5, aimed.Y + 0.5, aimed.Z + 0.5, null, true, 24f, LemuriaSound.Volume(1f));
+        }
+        return melted > 0;
     }
 
     private enum Lighting
@@ -138,7 +187,8 @@ public static class Effects
     /// Puts out fires, as rain does, freezes still fresh water surfaces into the game's lake ice, and
     /// waters farmland as a watering can does (the owner, 2026-10-27). At Glittering it acts on the
     /// block aimed at and the face in front of it, or the water surface
-    /// or burning creature aimed at; from Glowing up on everything in the area (3×3×1, 3×3×3 over-driven). The caster's own Quench
+    /// or burning creature aimed at; from Glowing up on everything in the area (3×3×1, 3×3×3 over-driven).
+    /// It also cools lava as water does: a source to obsidian, flowing lava to basalt. The caster's own Quench
     /// puts the caster out when they stand in it.
     /// </summary>
     public static bool Quench(CastContext cast)
@@ -152,7 +202,7 @@ public static class Effects
                 : cast.Water != null ? new[] { cast.Water } : Array.Empty<BlockPos>();
         foreach (var pos in blocks)
         {
-            if (cast.Can(pos) && (Extinguish(cast, pos) | Freeze(cast, pos) | Water(cast, pos, watered)))
+            if (cast.Can(pos) && (Extinguish(cast, pos) | Freeze(cast, pos) | Water(cast, pos, watered) | Cool(cast, pos)))
             {
                 acted = true;
             }
@@ -230,6 +280,31 @@ public static class Effects
             return false;
         }
         accessor.SetBlock(ice.BlockId, pos, BlockLayersAccess.Fluid);
+        return true;
+    }
+
+    /// <summary>
+    /// Cools lava as water does in the game: a source to obsidian, flowing lava to basalt (the owner,
+    /// 2026-10-27).
+    /// </summary>
+    private static bool Cool(CastContext cast, BlockPos pos)
+    {
+        var world = cast.Api.World;
+        var accessor = world.BlockAccessor;
+        var fluid = accessor.GetBlock(pos, BlockLayersAccess.Fluid);
+        if (fluid.LiquidCode != "lava")
+        {
+            return false;
+        }
+        var rock = world.GetBlock(new AssetLocation("game", fluid.Code.Path == "lava-still-7" ? "rock-obsidian" : "rock-basalt"));
+        if (rock == null)
+        {
+            return false;
+        }
+        accessor.SetBlock(0, pos, BlockLayersAccess.Fluid);
+        accessor.SetBlock(rock.BlockId, pos);
+        accessor.TriggerNeighbourBlockUpdate(pos);
+        world.PlaySoundAt(SizzleSound, pos.X + 0.5, pos.Y + 0.5, pos.Z + 0.5, null, true, 16f, LemuriaSound.Volume(1f));
         return true;
     }
 
@@ -489,7 +564,8 @@ public static class Effects
     /// <summary>
     /// A gust pushes creatures, players and dropped items away from the caster and a little up, about
     /// 6, 8 or 10 blocks: what is aimed at, or lies where the cast lands, at Glittering, everything in
-    /// the area above that. It moves no blocks, and passes over the caster.
+    /// the area above that, passing over the caster. Then, in the same area, it strips grown leaves and ripe
+    /// crops and pans sand and gravel out (<see cref="Reaping"/>).
     /// </summary>
     public static bool Gale(CastContext cast)
     {
@@ -512,6 +588,11 @@ public static class Effects
             }
             away.Normalize();
             Push(entity, away.X * speed, Lift, away.Z * speed);
+            acted = true;
+        }
+        // Then the gust strips leaves and ripe crops and pans sand and gravel out (Reaping).
+        if (Reaping.Reap(cast))
+        {
             acted = true;
         }
         return acted;

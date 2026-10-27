@@ -14,3 +14,5 @@ Evocations test: let go at 3 s Nothing, 6 s Cast, 16 s Overdrive; 16 s with 30 c
 Evocations test: a full Glowing crystal after a cast holds 180, after an over-driven cast 140 with 0 crack\(s\), after a cracking one 100 with 1 crack\(s\)$
 Evocations test: its last crack shatters it: yes, hand empty: yes$
 Evocations test: casting from a stack of 3 full crystals leaves 2 full in hand, and one holding 90 leaves the stack: yes$
+Evocations test: Gale over the patch cast yes; grown leaves gone: yes, placed leaves stay: yes, ripe flax reaped: yes, young flax stays: yes, sand panned out: yes; drops in some stack\(s\), all different: yes$
+Evocations test: over-driven Fire at granite cast yes, 3 of 3 granite blocks melted, the ore stays: yes; a Glowing one melts rock: no; Quench cast yes, 3 of 3 cooled to rock, lava left 0$

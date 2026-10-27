@@ -30,7 +30,7 @@ public class CastContext
     /// <summary>The creature, player or item the ray hit, when nearer than any block.</summary>
     public Entity? Entity { get; private set; }
 
-    /// <summary>The first still water surface along the ray, when nearer than anything else (Quench only).</summary>
+    /// <summary>The first still water surface or lava along the ray, when nearer than anything else (Quench only).</summary>
     public BlockPos? Water { get; private set; }
 
     /// <summary>Where the cast lands: the hit point, or the end of the ray on a miss.</summary>
@@ -95,13 +95,13 @@ public class CastContext
         {
             return;
         }
-        // Water has no selection box, so Quench walks the ray itself in tenths of a block.
+        // Water and lava have no selection box, so Quench walks the ray itself in tenths of a block.
         var accessor = world.BlockAccessor;
         var pos = new BlockPos(0);
         for (double d = 0.5; d < best; d += 0.1)
         {
             pos.Set((int)Math.Floor(From.X + Dir.X * d), (int)Math.Floor(From.Y + Dir.Y * d), (int)Math.Floor(From.Z + Dir.Z * d));
-            if (IsFreezable(accessor, pos))
+            if (IsFreezable(accessor, pos) || accessor.GetBlock(pos, BlockLayersAccess.Fluid).LiquidCode == "lava")
             {
                 Water = pos.Copy();
                 Block = null;

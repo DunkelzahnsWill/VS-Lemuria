@@ -326,6 +326,73 @@ public class EvocationsTests
             YesNo(pushed), itemSpeed, YesNo(pushedHen), henPush);
     }
 
+    // ------------------------------------------------------------------ reaping, panning and lava
+
+    /// <summary>
+    /// A Glowing Gale's carpet over leaves, crops and sand; an over-driven Fire melting rock into lava;
+    /// a Glowing Quench cooling it back to obsidian.
+    /// </summary>
+    public void Reap(BlockPos column)
+    {
+        var origin = TestSite.Surface(sapi, column);
+        Ground(origin.AddCopy(-1, 0, -2), 9, 5, 9);
+        // A 3×3 patch on the granite floor, its middle 3 blocks east: sand in the middle, leaves, crops.
+        var mid = origin.AddCopy(3, 0, 2);
+        Accessor.SetBlock(Id("game:sand-granite"), mid);
+        Accessor.SetBlock(Id("game:leaves-grown-oak"), mid.AddCopy(-1, 0, 0));
+        Accessor.SetBlock(Id("game:leaves-placed-oak"), mid.AddCopy(1, 0, 0));
+        Accessor.SetBlock(Id("game:farmland-moist-medium"), mid.AddCopy(0, -1, -1));
+        Accessor.SetBlock(Id("game:crop-flax-9"), mid.AddCopy(0, 0, -1));
+        Accessor.SetBlock(Id("game:farmland-moist-medium"), mid.AddCopy(0, -1, 1));
+        Accessor.SetBlock(Id("game:crop-flax-3"), mid.AddCopy(0, 0, 1));
+        string Path(BlockPos pos) => Accessor.GetBlock(pos).Code?.Path ?? "air";
+        bool reaped = CastAt(Crystal.Sky, 2, mid.ToVec3d().Add(0.5, 4, 0.5), mid.ToVec3d().Add(0.5, 0.9, 0.5), out _);
+        var drops = sapi.World.GetEntitiesAround(mid.ToVec3d().Add(0.5, 0.5, 0.5), 3, 3, e => e is EntityItem).ToList();
+        logger.Notification("Evocations test: Gale over the patch cast {0}; grown leaves gone: {1}, placed leaves stay: {2}, ripe flax reaped: {3}, young flax stays: {4}, sand panned out: {5}; drops in {6} stack(s), all different: {7}",
+            YesNo(reaped), YesNo(Path(mid.AddCopy(-1, 0, 0)) == "air"), YesNo(Path(mid.AddCopy(1, 0, 0)).StartsWith("leaves-placed")),
+            YesNo(Path(mid.AddCopy(0, 0, -1)) == "air"), YesNo(Path(mid.AddCopy(0, 0, 1)) == "crop-flax-3"), YesNo(Path(mid) == "air"),
+            drops.Count > 0 ? "some" : "no", YesNo(drops.Select(d => ((EntityItem)d).Itemstack.Collectible.Code.ToString()).Distinct().Count() == drops.Count));
+        foreach (var item in drops)
+        {
+            item.Die(EnumDespawnReason.Removed);
+        }
+
+        // Granite to melt, 6 blocks south of the patch; ore beside it stays.
+        var rock = origin.AddCopy(3, -1, 5);
+        for (int x = -1; x <= 2; x++)
+        {
+            for (int z = -1; z <= 2; z++)
+            {
+                Accessor.SetBlock(Id("game:rock-granite"), rock.AddCopy(x, 0, z));
+                Accessor.SetBlock(Id("game:rock-granite"), rock.AddCopy(x, -1, z));
+            }
+        }
+        Accessor.SetBlock(Id("game:ore-poor-nativecopper-granite"), rock.AddCopy(0, 0, 1));
+        // Cast from the west: forward is east, right is south; the ore sits right of the aimed block.
+        var eye = rock.ToVec3d().Add(-2.5, 2.6, 0.5);
+        bool melted = CastAt(Crystal.Fire, 3, eye, rock.ToVec3d().Add(0.5, 0.95, 0.5), out _);
+        int Lava()
+        {
+            int n = 0;
+            foreach (var (dx, dz) in new[] { (0, 0), (1, 0), (0, 1), (1, 1) })
+            {
+                n += Accessor.GetBlock(rock.AddCopy(dx, 0, dz), BlockLayersAccess.Fluid).LiquidCode == "lava" ? 1 : 0;
+            }
+            return n;
+        }
+        int lava = Lava();
+        bool oreStays = Path(rock.AddCopy(0, 0, 1)).StartsWith("ore-");
+        bool glowingMelts = CastAt(Crystal.Fire, 2, eye, rock.ToVec3d().Add(-0.5, 0.95, 0.5), out _) && Path(rock.AddCopy(-1, 0, 0)) != "rock-granite";
+        bool cooled = CastAt(Crystal.Ice, 2, rock.ToVec3d().Add(1, 4, 1), rock.ToVec3d().Add(1, 0.5, 1), out _);
+        int obsidian = 0;
+        foreach (var (dx, dz) in new[] { (0, 0), (1, 0), (0, 1), (1, 1) })
+        {
+            obsidian += Path(rock.AddCopy(dx, 0, dz)) is "rock-obsidian" or "rock-basalt" ? 1 : 0;
+        }
+        logger.Notification("Evocations test: over-driven Fire at granite cast {0}, {1} of 3 granite blocks melted, the ore stays: {2}; a Glowing one melts rock: {3}; Quench cast {4}, {5} of 3 cooled to rock, lava left {6}",
+            YesNo(melted), lava, YesNo(oreStays), YesNo(glowingMelts), YesNo(cooled), obsidian, Lava());
+    }
+
     // ------------------------------------------------------------------ casting rules
 
     public void Overdrive()

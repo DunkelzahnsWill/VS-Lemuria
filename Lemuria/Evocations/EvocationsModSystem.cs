@@ -227,6 +227,10 @@ public class EvocationsModSystem : ModSystem
                         .WithDescription("Gale pushes a dropped item and a hen away from the caster")
                         .HandleWith(_ => TestSite.WithChunk(api, Mod.Logger, "Evocations", 4, -36, column => new EvocationsTests(this, api, Mod.Logger).Gale(column)))
                     .EndSubCommand()
+                    .BeginSubCommand("reap")
+                        .WithDescription("Gale reaps leaves and crops and pans sand; over-driven Fire melts granite to lava, and Quench cools it")
+                        .HandleWith(_ => TestSite.WithChunk(api, Mod.Logger, "Evocations", 4, -44, column => new EvocationsTests(this, api, Mod.Logger).Reap(column)))
+                    .EndSubCommand()
                     .BeginSubCommand("overdrive")
                         .WithDescription("Checks the wind-up and over-drive times, what casts cost, cracks, shattering and casting from a stack")
                         .HandleWith(_ =>
