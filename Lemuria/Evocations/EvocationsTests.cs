@@ -143,20 +143,27 @@ public class EvocationsTests
         }
         // Cast from straight above the pond's middle, so the ray meets that block's water first.
         var eye = pond.ToVec3d().Add(1.5, 4, 1.5);
-        bool cast = CastAt(Crystal.Ice, 2, eye, pond.ToVec3d().Add(1.5, 0.9, 1.5), out var context);
-        int ice = 0;
-        for (int x = 0; x < 3; x++)
+        int Frozen()
         {
-            for (int z = 0; z < 3; z++)
+            int ice = 0;
+            for (int x = 0; x < 3; x++)
             {
-                if (Accessor.GetBlock(pond.AddCopy(x, 0, z), BlockLayersAccess.Fluid).Code?.Path == "lakeice")
+                for (int z = 0; z < 3; z++)
                 {
-                    ice++;
+                    if (Accessor.GetBlock(pond.AddCopy(x, 0, z), BlockLayersAccess.Fluid).Code?.Path == "lakeice")
+                    {
+                        ice++;
+                    }
                 }
             }
+            return ice;
         }
-        logger.Notification("Evocations test: a Glowing Quench aimed at {0} cast {1}; {2} of 9 water blocks froze to lake ice",
-            context.Water != null ? "the water" : "something else", YesNo(cast), ice);
+        // A cast straight down reaches east and south of the impact, so the Glowing one aims at the north-west corner.
+        bool cast = CastAt(Crystal.Ice, 2, pond.ToVec3d().Add(0.5, 4, 0.5), pond.ToVec3d().Add(0.5, 0.9, 0.5), out var context);
+        int glowing = Frozen();
+        CastAt(Crystal.Ice, 3, eye, pond.ToVec3d().Add(1.5, 0.9, 1.5), out _);
+        logger.Notification("Evocations test: a Glowing Quench aimed at {0} cast {1}; {2} of 9 water blocks froze to lake ice, {3} after an over-driven one",
+            context.Water != null ? "the water" : "something else", YesNo(cast), glowing, Frozen());
 
         // A 3×3 field of dry farmland, out of the pond's reach, with flax sprouting at one corner.
         Ground(origin.AddCopy(-1, 0, 6), 7, 4, 5);
@@ -172,7 +179,7 @@ public class EvocationsTests
         bool Soaked(BlockPos pos) => Accessor.GetBlockEntity(pos) is IFarmlandBlockEntity farmland && farmland.MoistureLevel >= 0.99f;
         bool watered = CastAt(Crystal.Ice, 1, origin.ToVec3d().Add(0.5, 1.6, 7.5), field.ToVec3d().Add(0.5, 1.1, 0.5), out _);
         bool cropSoaked = Soaked(field);
-        bool wateredAll = CastAt(Crystal.Ice, 2, field.ToVec3d().Add(1.5, 4, 1.5), field.ToVec3d().Add(1.5, 0.9, 1.5), out _);
+        bool wateredAll = CastAt(Crystal.Ice, 3, field.ToVec3d().Add(1.5, 4, 1.5), field.ToVec3d().Add(1.5, 0.9, 1.5), out _);
         int soaked = 0;
         for (int x = 0; x < 3; x++)
         {
@@ -184,7 +191,7 @@ public class EvocationsTests
                 }
             }
         }
-        logger.Notification("Evocations test: Quench aimed at a crop cast {0}; its farmland soaked: {1}; a Glowing Quench soaked {2} of 9 farmland",
+        logger.Notification("Evocations test: Quench aimed at a crop cast {0}; its farmland soaked: {1}; an over-driven Quench soaked {2} of 9 farmland",
             YesNo(watered), YesNo(cropSoaked), wateredAll ? soaked : 0);
     }
 

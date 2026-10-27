@@ -38,7 +38,7 @@ public class CastContext
     /// <summary>The block the area is centred on, or null on a miss.</summary>
     public BlockPos? Center { get; private set; }
 
-    public int Radius => Evocation.Radius(Power);
+    public int AreaSize => Evocation.AreaSize(Power);
 
     private CastContext(ICoreServerAPI api, IServerPlayer? player, EntityAgent? caster, string alignment, int power, Vec3d from, Vec3d dir)
     {
@@ -130,40 +130,80 @@ public class CastContext
 
     public bool Can(Entity entity) => Can(entity.Pos.AsBlockPos);
 
-    /// <summary>The blocks of the area: the centre block, or the cube within the radius of it.</summary>
-    public IEnumerable<BlockPos> Area()
+    /// <summary>
+    /// The area's corners. An odd size is a cube centred on the impact block. An even one starts at the
+    /// impact block and reaches forward along the caster's look, up, and to the caster's right (the
+    /// owner, 2026-10-27); a cast straight down or up reaches east and south.
+    /// </summary>
+    public (BlockPos Min, BlockPos Max)? Bounds()
     {
         if (Center == null)
         {
+            return null;
+        }
+        int size = AreaSize;
+        if (size % 2 == 1)
+        {
+            int r = size / 2;
+            return (Center.AddCopy(-r, -r, -r), Center.AddCopy(r, r, r));
+        }
+        int n = size - 1;
+        bool alongX = Math.Abs(Dir.X) >= Math.Abs(Dir.Z);
+        int fx = alongX ? Math.Sign(Dir.X) : 0;
+        int fz = alongX ? 0 : Math.Sign(Dir.Z);
+        if (fx == 0 && fz == 0)
+        {
+            fx = 1;
+        }
+        // The right of a heading (fx, fz), as the hand sits in Caster.Hand.
+        int rx = -fz, rz = fx;
+        var far = Center.AddCopy((fx + rx) * n, n, (fz + rz) * n);
+        return (new BlockPos(Math.Min(Center.X, far.X), Center.Y, Math.Min(Center.Z, far.Z), Center.dimension),
+            new BlockPos(Math.Max(Center.X, far.X), far.Y, Math.Max(Center.Z, far.Z), Center.dimension));
+    }
+
+    /// <summary>The blocks of the area.</summary>
+    public IEnumerable<BlockPos> Area()
+    {
+        if (Bounds() is not var (min, max))
+        {
             yield break;
         }
-        int r = Radius;
-        for (int dx = -r; dx <= r; dx++)
+        for (int x = min.X; x <= max.X; x++)
         {
-            for (int dy = -r; dy <= r; dy++)
+            for (int y = min.Y; y <= max.Y; y++)
             {
-                for (int dz = -r; dz <= r; dz++)
+                for (int z = min.Z; z <= max.Z; z++)
                 {
-                    yield return Center.AddCopy(dx, dy, dz);
+                    yield return new BlockPos(x, y, z, min.dimension);
                 }
             }
         }
     }
 
     /// <summary>
-    /// The entities in the area: inside a box round the point the cast lands on, one block across at
-    /// Glittering (what lies on the block aimed at), three or five across above that.
+    /// The entities in the area: at Glittering, inside a block-wide box round the point the cast lands
+    /// on (what lies on the block aimed at); above that, standing in or on the area's blocks.
     /// </summary>
     public List<Entity> EntitiesInArea(System.Func<Entity, bool> match)
     {
-        if (Center == null)
+        if (Bounds() is not var (min, max))
         {
             return new List<Entity>();
         }
-        double half = Radius + 0.5;
-        return Api.World.GetEntitiesAround(Point, (float)half + 2, (float)half + 2, e => match(e))
-            .Where(e => Math.Abs(e.Pos.X - Point.X) <= half && Math.Abs(e.Pos.Z - Point.Z) <= half
-                && e.Pos.Y <= Point.Y + half && e.Pos.Y + e.SelectionBox.Y2 >= Point.Y - half)
+        if (AreaSize <= 1)
+        {
+            const double half = 0.5;
+            return Api.World.GetEntitiesAround(Point, (float)half + 2, (float)half + 2, e => match(e))
+                .Where(e => Math.Abs(e.Pos.X - Point.X) <= half && Math.Abs(e.Pos.Z - Point.Z) <= half
+                    && e.Pos.Y <= Point.Y + half && e.Pos.Y + e.SelectionBox.Y2 >= Point.Y - half)
+                .ToList();
+        }
+        var middle = new Vec3d((min.X + max.X + 1) / 2.0, (min.Y + max.Y + 1) / 2.0, (min.Z + max.Z + 1) / 2.0);
+        float reach = AreaSize + 2;
+        return Api.World.GetEntitiesAround(middle, reach, reach, e => match(e))
+            .Where(e => e.Pos.X >= min.X && e.Pos.X <= max.X + 1 && e.Pos.Z >= min.Z && e.Pos.Z <= max.Z + 1
+                && e.Pos.Y <= max.Y + 1 && e.Pos.Y + e.SelectionBox.Y2 >= min.Y)
             .ToList();
     }
 }

@@ -168,7 +168,7 @@ public class EvocationsModSystem : ModSystem
             world.PlaySoundAt(new AssetLocation(LemuriaModSystem.ModId, "sounds/evocations/fizzle"), to.X, to.Y, to.Z, null, true, 16f, LemuriaSound.Volume(0.6f));
             return;
         }
-        Spray(to, rgb, 12 + 12 * packet.Power, 0.5f + 0.5f * Evocation.Radius(packet.Power));
+        Spray(to, rgb, 12 + 12 * packet.Power, 0.5f + 0.5f * (Evocation.AreaSize(packet.Power) - 1));
         var sound = SoundOf(packet.Alignment);
         if (sound != null)
         {
@@ -209,7 +209,7 @@ public class EvocationsModSystem : ModSystem
                         .HandleWith(_ => TestSite.WithChunk(api, Mod.Logger, "Evocations", 4, -12, column => new EvocationsTests(this, api, Mod.Logger).Fire(column)))
                     .EndSubCommand()
                     .BeginSubCommand("water")
-                        .WithDescription("A Glowing Quench freezes a 3x3 pond into lake ice; Quench soaks farmland")
+                        .WithDescription("A Glowing Quench freezes 2x2 of a 3x3 pond into lake ice and an over-driven one the rest; Quench soaks farmland")
                         .HandleWith(_ => TestSite.WithChunk(api, Mod.Logger, "Evocations", 4, -20, column => new EvocationsTests(this, api, Mod.Logger).Water(column)))
                     .EndSubCommand()
                     .BeginSubCommand("tremor")

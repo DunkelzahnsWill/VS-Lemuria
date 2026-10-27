@@ -55,8 +55,14 @@ public static class Evocation
     public static double Range(int power) =>
         Math.Clamp(Config.EvocationRangeGlittering, 1, 64) + Math.Clamp(Config.EvocationRangeStep, 0, 32) * (power - 1);
 
-    /// <summary>How far the area reaches round the target: the target alone, then a 3×3×3 cube, then 5×5×5.</summary>
-    public static int Radius(int power) => Math.Clamp(power - 1, 0, 4);
+    /// <summary>
+    /// The area's size along each axis: the target alone at Glittering, 2×2×2 at Glowing, 3×3×3 for an
+    /// over-driven Glowing crystal, casting as Luminous (the owner, 2026-10-27), one more per Evolution after.
+    /// </summary>
+    public static int AreaSize(int power) => Math.Clamp(power, 1, 5);
+
+    /// <summary>Tremor's reach round the aimed column, as first built: a pillar, a 3×3 mound, a 5×5 mound.</summary>
+    public static int TremorRadius(int power) => Math.Clamp(power - 1, 0, 4);
 
     /// <summary>Blocks Gale pushes: 6, 8 and 10 by default.</summary>
     public static double GalePush(int power) => Math.Clamp(Config.GalePushGlittering, 0, 32) + 2 * (power - 1);
