@@ -91,17 +91,20 @@ public class CastContext
                 Center = entitySel.Entity.Pos.AsBlockPos;
             }
         }
-        if (Evocation.Of(Alignment) != Evocation.Quench)
+        var evocation = Evocation.Of(Alignment);
+        bool boils = evocation == Evocation.Ignite && Power >= 3;
+        if (evocation != Evocation.Quench && !boils)
         {
             return;
         }
-        // Water and lava have no selection box, so Quench walks the ray itself in tenths of a block.
+        // Water and lava have no selection box, so Quench, and Ignite strong enough to boil water, walk
+        // the ray themselves in tenths of a block.
         var accessor = world.BlockAccessor;
         var pos = new BlockPos(0);
         for (double d = 0.5; d < best; d += 0.1)
         {
             pos.Set((int)Math.Floor(From.X + Dir.X * d), (int)Math.Floor(From.Y + Dir.Y * d), (int)Math.Floor(From.Z + Dir.Z * d));
-            if (IsFreezable(accessor, pos) || accessor.GetBlock(pos, BlockLayersAccess.Fluid).LiquidCode == "lava")
+            if (boils ? IsBoilable(accessor, pos) : IsFreezable(accessor, pos) || accessor.GetBlock(pos, BlockLayersAccess.Fluid).LiquidCode == "lava")
             {
                 Water = pos.Copy();
                 Block = null;
@@ -112,6 +115,10 @@ public class CastContext
             }
         }
     }
+
+    /// <summary>Water an over-driven Ignite boils away: fresh or salt, still or running.</summary>
+    public static bool IsBoilable(IBlockAccessor accessor, BlockPos pos) =>
+        accessor.GetBlock(pos, BlockLayersAccess.Fluid).LiquidCode is "water" or "saltwater";
 
     /// <summary>Still fresh water with open air above it: a surface the game freezes into lake ice.</summary>
     public static bool IsFreezable(IBlockAccessor accessor, BlockPos pos)

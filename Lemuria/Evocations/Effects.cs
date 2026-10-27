@@ -61,6 +61,14 @@ public static class Effects
         {
             return Melt(cast, aimed);
         }
+        if (aimed != null && Thawed(cast.Api.World, aimed, cast.Power) != null)
+        {
+            return Thaw(cast, aimed);
+        }
+        if (cast.Water != null)
+        {
+            return Boil(cast);
+        }
         if (aimed != null && cast.Can(aimed))
         {
             var lit = TryIgnite(cast, aimed);
@@ -132,6 +140,132 @@ public static class Effects
         }
         return melted > 0;
     }
+
+    private static readonly AssetLocation WaterCode = new("game", "water-still-7");
+
+    private enum Thawing
+    {
+        /// <summary>Ice that melts to still water, as the game's lake ice does.</summary>
+        ToWater,
+        /// <summary>Snow that vanishes with no water.</summary>
+        Away,
+        /// <summary>A block that sheds its snow cover.</summary>
+        Uncover,
+    }
+
+    /// <summary>
+    /// How a block thaws under Ignite (step 3 note rev 178, "Melting ice and boiling water"): lake ice and
+    /// the loose glacier ice melt to water at every Evolution, the world's glacier and packed glacier ice
+    /// only at the power of Luminous; snow layers and snow blocks vanish; snow cover comes off.
+    /// </summary>
+    private static (Thawing How, int Layer)? Thawed(IWorldAccessor world, BlockPos pos, int power)
+    {
+        var accessor = world.BlockAccessor;
+        foreach (int layer in new[] { BlockLayersAccess.Fluid, BlockLayersAccess.Solid })
+        {
+            var block = accessor.GetBlock(pos, layer);
+            if (block.Code?.Domain != "game")
+            {
+                continue;
+            }
+            string path = block.Code.Path;
+            if (path is "lakeice" or "ice-glacier" or "ice-packedglacier" || (power >= 3 && path is "glacierice" or "packedglacierice"))
+            {
+                return (Thawing.ToWater, layer);
+            }
+            if (layer == BlockLayersAccess.Solid && (block is BlockSnow || path.StartsWith("snowlayer-")))
+            {
+                return (Thawing.Away, layer);
+            }
+            if (layer == BlockLayersAccess.Solid && block.snowLevel > 0 && block.notSnowCovered != null && block.notSnowCovered != block)
+            {
+                return (Thawing.Uncover, layer);
+            }
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// Aimed at ice or snow, Ignite melts it instead of setting a fire: the block aimed at at
+    /// Glittering, all ice and snow in the area from Glowing up (the 3×3×1 carpet, or the 3×3×3 at the
+    /// power of Luminous). Each block is claim-checked.
+    /// </summary>
+    private static bool Thaw(CastContext cast, BlockPos aimed)
+    {
+        var world = cast.Api.World;
+        var accessor = world.BlockAccessor;
+        var water = world.GetBlock(WaterCode);
+        int thawed = 0;
+        foreach (var pos in cast.Power >= 2 ? cast.Area() : new[] { aimed })
+        {
+            if (Thawed(world, pos, cast.Power) is not var (how, layer) || !cast.Can(pos))
+            {
+                continue;
+            }
+            switch (how)
+            {
+                case Thawing.ToWater:
+                    if (water == null)
+                    {
+                        continue;
+                    }
+                    accessor.SetBlock(0, pos, layer);
+                    accessor.SetBlock(water.BlockId, pos, BlockLayersAccess.Fluid);
+                    break;
+                case Thawing.Away:
+                    accessor.SetBlock(0, pos);
+                    break;
+                case Thawing.Uncover:
+                    accessor.SetBlock(accessor.GetBlock(pos).notSnowCovered.BlockId, pos);
+                    break;
+            }
+            accessor.TriggerNeighbourBlockUpdate(pos);
+            thawed++;
+        }
+        if (thawed > 0)
+        {
+            world.PlaySoundAt(SizzleSound, aimed.X + 0.5, aimed.Y + 0.5, aimed.Z + 0.5, null, true, 16f, LemuriaSound.Volume(1f));
+        }
+        return thawed > 0;
+    }
+
+    /// <summary>
+    /// At the power of Luminous, Ignite aimed at water, fresh or salt, still or running, boils every
+    /// water block within one block of the hit away to nothing, with a hiss and steam (step 3 note rev
+    /// 178). Salt from salt water is a machine's work, not this. Lakes refill by the game's own rules.
+    /// </summary>
+    private static bool Boil(CastContext cast)
+    {
+        var world = cast.Api.World;
+        var accessor = world.BlockAccessor;
+        int boiled = 0;
+        foreach (var pos in cast.Area())
+        {
+            if (!CastContext.IsBoilable(accessor, pos) || !cast.Can(pos))
+            {
+                continue;
+            }
+            accessor.SetBlock(0, pos, BlockLayersAccess.Fluid);
+            accessor.TriggerNeighbourBlockUpdate(pos);
+            Steam.MinPos.Set(pos.X, pos.Y + 0.5, pos.Z);
+            world.SpawnParticles(Steam);
+            boiled++;
+        }
+        if (boiled > 0)
+        {
+            world.PlaySoundAt(SizzleSound, cast.Water!.X + 0.5, cast.Water.Y + 0.5, cast.Water.Z + 0.5, null, true, 24f, LemuriaSound.Volume(1f));
+        }
+        return boiled > 0;
+    }
+
+    private static readonly SimpleParticleProperties Steam = new(
+        6, 10, ColorUtil.ToRgba(90, 230, 230, 230), new Vec3d(), new Vec3d(1, 0.5, 1),
+        new Vec3f(-0.2f, 0.4f, -0.2f), new Vec3f(0.2f, 1f, 0.2f), 1.5f, -0.02f, 0.5f, 1.5f, EnumParticleModel.Quad)
+    {
+        WindAffected = true,
+        SelfPropelled = true,
+        OpacityEvolve = EvolvingNatFloat.create(EnumTransformFunction.LINEAR, -90),
+    };
 
     private enum Lighting
     {
