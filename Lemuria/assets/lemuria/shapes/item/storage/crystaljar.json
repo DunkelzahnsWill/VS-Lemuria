@@ -1,0 +1,367 @@
+{
+ "textureWidth": 16,
+ "textureHeight": 16,
+ "textures": {
+  "clay": "lemuria:item/storage/clay-raw",
+  "band": "lemuria:block/crystals/unaligned"
+ },
+ "elements": [
+  {
+   "name": "body",
+   "from": [
+    5,
+    0,
+    5
+   ],
+   "to": [
+    11,
+    6.5,
+    11
+   ],
+   "faces": {
+    "north": {
+     "texture": "#clay",
+     "uv": [
+      0,
+      0,
+      6,
+      6.5
+     ]
+    },
+    "east": {
+     "texture": "#clay",
+     "uv": [
+      0,
+      0,
+      6,
+      6.5
+     ]
+    },
+    "south": {
+     "texture": "#clay",
+     "uv": [
+      0,
+      0,
+      6,
+      6.5
+     ]
+    },
+    "west": {
+     "texture": "#clay",
+     "uv": [
+      0,
+      0,
+      6,
+      6.5
+     ]
+    },
+    "up": {
+     "texture": "#clay",
+     "uv": [
+      0,
+      0,
+      6,
+      6
+     ]
+    },
+    "down": {
+     "texture": "#clay",
+     "uv": [
+      0,
+      0,
+      6,
+      6
+     ]
+    }
+   }
+  },
+  {
+   "name": "band",
+   "from": [
+    4.8,
+    2.5,
+    4.8
+   ],
+   "to": [
+    11.2,
+    4,
+    11.2
+   ],
+   "faces": {
+    "north": {
+     "texture": "#band",
+     "uv": [
+      0,
+      0,
+      6.4,
+      1.5
+     ],
+     "glow": 80
+    },
+    "east": {
+     "texture": "#band",
+     "uv": [
+      0,
+      0,
+      6.4,
+      1.5
+     ],
+     "glow": 80
+    },
+    "south": {
+     "texture": "#band",
+     "uv": [
+      0,
+      0,
+      6.4,
+      1.5
+     ],
+     "glow": 80
+    },
+    "west": {
+     "texture": "#band",
+     "uv": [
+      0,
+      0,
+      6.4,
+      1.5
+     ],
+     "glow": 80
+    },
+    "up": {
+     "texture": "#band",
+     "uv": [
+      0,
+      0,
+      6.4,
+      6.4
+     ],
+     "glow": 80
+    },
+    "down": {
+     "texture": "#band",
+     "uv": [
+      0,
+      0,
+      6.4,
+      6.4
+     ],
+     "glow": 80
+    }
+   }
+  },
+  {
+   "name": "neck",
+   "from": [
+    6,
+    6.5,
+    6
+   ],
+   "to": [
+    10,
+    7.5,
+    10
+   ],
+   "faces": {
+    "north": {
+     "texture": "#clay",
+     "uv": [
+      0,
+      0,
+      4,
+      1.0
+     ]
+    },
+    "east": {
+     "texture": "#clay",
+     "uv": [
+      0,
+      0,
+      4,
+      1.0
+     ]
+    },
+    "south": {
+     "texture": "#clay",
+     "uv": [
+      0,
+      0,
+      4,
+      1.0
+     ]
+    },
+    "west": {
+     "texture": "#clay",
+     "uv": [
+      0,
+      0,
+      4,
+      1.0
+     ]
+    },
+    "up": {
+     "texture": "#clay",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ]
+    },
+    "down": {
+     "texture": "#clay",
+     "uv": [
+      0,
+      0,
+      4,
+      4
+     ]
+    }
+   }
+  },
+  {
+   "name": "lid",
+   "from": [
+    5.5,
+    7.5,
+    5.5
+   ],
+   "to": [
+    10.5,
+    8.5,
+    10.5
+   ],
+   "faces": {
+    "north": {
+     "texture": "#clay",
+     "uv": [
+      0,
+      0,
+      5.0,
+      1.0
+     ]
+    },
+    "east": {
+     "texture": "#clay",
+     "uv": [
+      0,
+      0,
+      5.0,
+      1.0
+     ]
+    },
+    "south": {
+     "texture": "#clay",
+     "uv": [
+      0,
+      0,
+      5.0,
+      1.0
+     ]
+    },
+    "west": {
+     "texture": "#clay",
+     "uv": [
+      0,
+      0,
+      5.0,
+      1.0
+     ]
+    },
+    "up": {
+     "texture": "#clay",
+     "uv": [
+      0,
+      0,
+      5.0,
+      5.0
+     ]
+    },
+    "down": {
+     "texture": "#clay",
+     "uv": [
+      0,
+      0,
+      5.0,
+      5.0
+     ]
+    }
+   }
+  },
+  {
+   "name": "knob",
+   "from": [
+    7.25,
+    8.5,
+    7.25
+   ],
+   "to": [
+    8.75,
+    9.5,
+    8.75
+   ],
+   "faces": {
+    "north": {
+     "texture": "#band",
+     "uv": [
+      0,
+      0,
+      1.5,
+      1.0
+     ],
+     "glow": 80
+    },
+    "east": {
+     "texture": "#band",
+     "uv": [
+      0,
+      0,
+      1.5,
+      1.0
+     ],
+     "glow": 80
+    },
+    "south": {
+     "texture": "#band",
+     "uv": [
+      0,
+      0,
+      1.5,
+      1.0
+     ],
+     "glow": 80
+    },
+    "west": {
+     "texture": "#band",
+     "uv": [
+      0,
+      0,
+      1.5,
+      1.0
+     ],
+     "glow": 80
+    },
+    "up": {
+     "texture": "#band",
+     "uv": [
+      0,
+      0,
+      1.5,
+      1.5
+     ],
+     "glow": 80
+    },
+    "down": {
+     "texture": "#band",
+     "uv": [
+      0,
+      0,
+      1.5,
+      1.5
+     ],
+     "glow": 80
+    }
+   }
+  }
+ ]
+}

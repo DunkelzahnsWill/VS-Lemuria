@@ -1,0 +1,13 @@
+{
+	"item-crystaljar-personal-raw": "Unfired crystal jar",
+	"itemdesc-crystaljar-personal-raw": "A crock with a seedling pressed into its clay. Fire it where it stands, in a pit kiln or kiln.",
+	"item-crystaljar-personal-fired": "Crystal jar",
+	"itemdesc-crystaljar-personal-fired": "Carried in a bag slot. Its three slots take only crystals, and keep them quiet.",
+	"item-crystaljar-shielded-raw": "Unfired shielded crystal jar",
+	"itemdesc-crystaljar-shielded-raw": "A crock bound with Awakened sparkstone. Fire it where it stands, in a pit kiln or kiln.",
+	"item-crystaljar-shielded-fired": "Shielded crystal jar",
+	"itemdesc-crystaljar-shielded-fired": "Carried in a bag slot. Its three slots take only crystals, and hold any of them safely.",
+	"block-crystalrack-*": "Crystal rack",
+	"blockdesc-crystalrack-*": "A carved stone panel with sixteen places for crystals. Crystals stored here stay quiet.",
+	"crystalrack-holds": "Holds {0} of {1} crystals"
+}
