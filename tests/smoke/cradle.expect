@@ -1,0 +1,6 @@
+# Replies and log lines for tests/smoke/cradle.commands.
+Cradle test: planted lemuria:seedling-glittering in lemuria:cradle-granite at -?[0-9]+, [0-9]+, -?[0-9]+ \(from spawn\), stage 1$
+Cradle test: time moved on 2\.5 days, stage 2$
+Cradle test: time moved on 9 days, stage ripe$
+# A chisel over polished rock makes a cradle of that rock, in all 19 rock types.
+Cradle: recipes for 19 rock type\(s\)

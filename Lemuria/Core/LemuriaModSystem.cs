@@ -1,3 +1,4 @@
+using System;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Server;
@@ -12,6 +13,35 @@ public class LemuriaModSystem : ModSystem
 {
     /// <summary>The asset domain, and the prefix for every code the mod registers (blocks, items, behaviors, commands).</summary>
     public const string ModId = "lemuria";
+
+    /// <summary>
+    /// The server's settings (ModConfig/lemuria.json), loaded before any feature starts. On a client
+    /// that is not also the server it keeps the defaults and nothing reads it.
+    /// </summary>
+    public static LemuriaConfig Config { get; private set; } = new();
+
+    /// <summary>Runs before the feature systems, so their start-up code can read <see cref="Config"/>.</summary>
+    public override double ExecuteOrder() => 0.01;
+
+    public override void StartPre(ICoreAPI api)
+    {
+        if (api.Side != EnumAppSide.Server)
+        {
+            return;
+        }
+        try
+        {
+            Config = api.LoadModConfig<LemuriaConfig>(LemuriaConfig.FileName) ?? new LemuriaConfig();
+        }
+        catch (Exception e)
+        {
+            Mod.Logger.Error("ModConfig/{0} could not be read, so the defaults apply this session: {1}", LemuriaConfig.FileName, e.Message);
+            Config = new LemuriaConfig();
+            return;
+        }
+        // Writes the file back, so settings added by a newer version show up in it with their defaults.
+        api.StoreModConfig(Config, LemuriaConfig.FileName);
+    }
 
     public override void StartServerSide(ICoreServerAPI api)
     {

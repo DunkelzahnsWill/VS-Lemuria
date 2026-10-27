@@ -1,0 +1,83 @@
+{
+	"code": "crystal",
+	"class": "lemuria-crystal",
+	"behaviors": [{ "name": "OmniAttachable", "properties": { "facingCode": "position" } }],
+	"variantgroups": [
+		{ "code": "alignment", "states": ["unaligned"] },
+		{ "code": "evolution", "states": ["glittering"] },
+		{ "code": "position", "states": ["up", "down"], "loadFromProperties": "game:abstract/horizontalorientation" }
+	],
+	"attributes": {
+		"handbook": { "exclude": true },
+		"humStrength": 0.5
+	},
+	"shapebytype": {
+		"*-up": { "base": "lemuria:block/crystals/crystal" },
+		"*-down": { "base": "lemuria:block/crystals/crystal", "rotateX": 180 },
+		"*-north": { "base": "lemuria:block/crystals/crystal", "rotateX": 90, "rotateZ": 180 },
+		"*-east": { "base": "lemuria:block/crystals/crystal", "rotateX": 90, "rotateZ": 270 },
+		"*-south": { "base": "lemuria:block/crystals/crystal", "rotateX": 90, "rotateZ": 0 },
+		"*-west": { "base": "lemuria:block/crystals/crystal", "rotateX": 90, "rotateZ": 90 }
+	},
+	"shapeInventory": { "base": "lemuria:item/crystals/crystal-held" },
+	"textures": {
+		"crystal": { "base": "lemuria:block/crystals/unaligned" }
+	},
+	"grindingProps": {
+		"groundStack": { "type": "item", "code": "lemuria:seedling-glittering", "stacksize": 3 }
+	},
+	"creativeinventory": { "general": ["*-up"], "decorative": ["*-up"] },
+	"maxstacksize": 32,
+	"lightHsv": [10, 1, 5],
+	"lightAbsorption": 0,
+	"drawtype": "json",
+	"replaceable": 90,
+	"resistance": 0.5,
+	"requiredMiningTier": 0,
+	"blockmaterial": "Glass",
+	"sidesolid": { "all": false },
+	"sideopaque": { "all": false },
+	"sideao": { "all": false },
+	"vertexFlags": { "zOffset": 2, "reflective": true },
+	"sounds": {
+		"walk": "game:walk/stone",
+		"place": "game:block/ceramicplace",
+		"break": "game:block/ceramicbreak",
+		"hit": "game:block/ceramichit",
+		"ambient": "lemuria:sounds/crystals/hum",
+		"ambientBlockCount": 1
+	},
+	"drops": [
+		{ "type": "block", "code": "lemuria:crystal-{alignment}-{evolution}-up", "quantity": { "avg": 1, "var": 0 } }
+	],
+	"collisionSelectionBoxByType": {
+		"*-up": { "x1": 0.25, "y1": 0, "z1": 0.25, "x2": 0.75, "y2": 0.75, "z2": 0.75 },
+		"*-down": { "x1": 0.25, "y1": 0, "z1": 0.25, "x2": 0.75, "y2": 0.75, "z2": 0.75, "rotateX": 180 },
+		"*-west": { "x1": 0.25, "y1": 0.25, "z1": 0.25, "x2": 1, "y2": 0.75, "z2": 0.75 },
+		"*-north": { "x1": 0.25, "y1": 0.25, "z1": 0.25, "x2": 1, "y2": 0.75, "z2": 0.75, "rotateY": 270 },
+		"*-east": { "x1": 0.25, "y1": 0.25, "z1": 0.25, "x2": 1, "y2": 0.75, "z2": 0.75, "rotateY": 180 },
+		"*-south": { "x1": 0.25, "y1": 0.25, "z1": 0.25, "x2": 1, "y2": 0.75, "z2": 0.75, "rotateY": 90 }
+	},
+	"guiTransform": {
+		"rotation": { "x": -20, "y": -45, "z": 0 },
+		"origin": { "x": 0.5, "y": 0.5, "z": 0.5 },
+		"scale": 1.1
+	},
+	"groundTransform": {
+		"rotation": { "x": 0, "y": -45, "z": 0 },
+		"origin": { "x": 0.5, "y": 0, "z": 0.5 },
+		"scale": 2.4
+	},
+	"fpHandTransform": {
+		"translation": { "x": 0, "y": 0.1, "z": 0 },
+		"rotation": { "x": 0, "y": -20, "z": 0 },
+		"origin": { "x": 0.5, "y": 0.5, "z": 0.5 },
+		"scale": 1.4
+	},
+	"tpHandTransform": {
+		"translation": { "x": -0.75, "y": -0.2, "z": -0.6 },
+		"rotation": { "x": 0, "y": 0, "z": 0 },
+		"origin": { "x": 0.5, "y": 0.5, "z": 0.5 },
+		"scale": 0.45
+	}
+}

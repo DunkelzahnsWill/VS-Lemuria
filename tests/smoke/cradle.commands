@@ -1,0 +1,6 @@
+# The cradle (step 1): plant a seedling in a test cradle by the world spawn, then move time on.
+# A stage lasts 2 days +-10% at the smoke world's default 9-day month, so after 2.5 days the
+# seedling is at stage 2, and after 11.5 days (more than 5 x 2.2) it is surely ripe.
+/lemuria cradle test plant
+/lemuria cradle test advance 2.5
+/lemuria cradle test advance 9

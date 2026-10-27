@@ -1,0 +1,32 @@
+{
+	"code": "seedling",
+	"variantgroups": [
+		{ "code": "evolution", "states": ["glittering"] }
+	],
+	"maxstacksize": 64,
+	"shape": { "base": "lemuria:item/crystals/seedling" },
+	"textures": {
+		"crystal": { "base": "lemuria:block/crystals/unaligned" }
+	},
+	"attributes": {
+		"handbook": { "exclude": true }
+	},
+	"creativeinventory": { "general": ["*"], "items": ["*"] },
+	"materialDensity": 2600,
+	"guiTransform": {
+		"rotation": { "x": -30, "y": -45, "z": 0 },
+		"origin": { "x": 0.5, "y": 0.15, "z": 0.5 },
+		"scale": 3.2
+	},
+	"groundTransform": {
+		"rotation": { "x": 0, "y": -45, "z": 0 },
+		"origin": { "x": 0.5, "y": 0, "z": 0.5 },
+		"scale": 3.4
+	},
+	"tpHandTransform": {
+		"translation": { "x": -0.87, "y": -0.1, "z": -0.76 },
+		"rotation": { "x": 0, "y": -25, "z": -59 },
+		"origin": { "x": 0.5, "y": 0, "z": 0.5 },
+		"scale": 0.6
+	}
+}
