@@ -6,8 +6,9 @@ namespace Lemuria.Crystals;
 
 /// <summary>
 /// The strange crystal found in vugs (step 1). Since the step 2 play-test it is a grown Unaligned
-/// Glittering crystal by another name: a right-click on a block sets it down as one, and in hand it
+/// Glittering crystal by another name: sneak and right-click on a block sets it down as one, and in hand it
 /// strikes a placed Unaligned crystal into a Crystalline Chisel, so two finds make the first chisel.
+/// Since step 3 it is set down with sneak and right-click, as crystals are.
 /// </summary>
 public class ItemStrangeCrystal : Item
 {
@@ -26,7 +27,7 @@ public class ItemStrangeCrystal : Item
     public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling)
     {
         var block = Crystal.BlockFor(byEntity.World, Crystal.Unaligned, Crystal.Glittering);
-        if (!firstEvent || blockSel == null || block == null || byEntity is not EntityPlayer { Player: { } player })
+        if (!firstEvent || blockSel == null || block == null || !Crystal.Sneaking(byEntity) || byEntity is not EntityPlayer { Player: { } player })
         {
             base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
             return;
@@ -52,7 +53,7 @@ public class ItemStrangeCrystal : Item
     {
         return new[]
         {
-            new WorldInteraction { ActionLangCode = LemuriaModSystem.ModId + ":strangecrystal-place", MouseButton = EnumMouseButton.Right },
+            new WorldInteraction { ActionLangCode = LemuriaModSystem.ModId + ":strangecrystal-place", MouseButton = EnumMouseButton.Right, HotKeyCode = "sneak" },
             new WorldInteraction { ActionLangCode = LemuriaModSystem.ModId + ":crystal-strike", MouseButton = EnumMouseButton.Left, HotKeyCode = "sneak" },
         };
     }
