@@ -1,11 +1,11 @@
 {
-	"code": "shapingtool",
-	"class": "lemuria-shapingtool",
+	"code": "crystalchisel",
+	"class": "lemuria-crystalchisel",
 	"maxstacksize": 1,
-	"shape": { "base": "lemuria:item/sparkstone/shapingtool-0" },
+	"shape": { "base": "lemuria:item/sparkstone/crystalchisel-0" },
 	"textures": {
-		"blade": { "base": "lemuria:item/sparkstone/blade" },
-		"handle": { "base": "lemuria:item/sparkstone/handle" },
+		"blade": { "base": "lemuria:block/crystals/unaligned" },
+		"handle": { "base": "lemuria:block/crystals/unaligned" },
 		"crystal": { "base": "lemuria:block/crystals/unaligned" },
 		"glyph": { "base": "lemuria:block/sparkstone/glyph" },
 		"lit": { "base": "lemuria:block/sparkstone/glyph-full" }

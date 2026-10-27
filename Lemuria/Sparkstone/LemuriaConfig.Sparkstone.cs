@@ -4,8 +4,8 @@ namespace Lemuria.Core;
 // the config file). Charge is in the units where a Glittering crystal holds 100.
 public partial class LemuriaConfig
 {
-    /// <summary>Charge the shaping tool holds.</summary>
-    public double ShapingToolCapacity { get; set; } = 100;
+    /// <summary>Charge the Crystalline Chisel holds.</summary>
+    public double ChiselCapacity { get; set; } = 100;
 
     /// <summary>Charge one awakening costs.</summary>
     public double AwakenCost { get; set; } = 25;

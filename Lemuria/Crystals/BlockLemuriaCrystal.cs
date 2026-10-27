@@ -91,6 +91,51 @@ public class BlockLemuriaCrystal : Block
         }
     }
 
+    /// <summary>
+    /// Sneak and left-click a placed Unaligned crystal with an Unaligned crystal in hand to strike the held
+    /// one into a Crystalline Chisel (Sparkstone): one crystal from the hand is used up, the placed one stays.
+    /// </summary>
+    public override void OnHeldAttackStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, ref EnumHandHandling handling)
+    {
+        var world = byEntity.World;
+        bool sneaking = byEntity.Controls.Sneak || byEntity.Controls.ShiftKey;
+        if (!sneaking || blockSel == null || Aligned || world.BlockAccessor.GetBlock(blockSel.Position) is not BlockLemuriaCrystal target
+            || Crystal.AlignmentOf(target) != Crystal.Unaligned)
+        {
+            base.OnHeldAttackStart(slot, byEntity, blockSel, entitySel, ref handling);
+            return;
+        }
+        var chisel = world.GetItem(new AssetLocation(LemuriaModSystem.ModId, "crystalchisel"));
+        if (chisel == null)
+        {
+            base.OnHeldAttackStart(slot, byEntity, blockSel, entitySel, ref handling);
+            return;
+        }
+        handling = EnumHandHandling.PreventDefault;
+        if (world.Side != EnumAppSide.Server || slot.Itemstack == null)
+        {
+            return;
+        }
+        var player = (byEntity as EntityPlayer)?.Player;
+        if (player != null && !world.Claims.TryAccess(player, blockSel.Position, EnumBlockAccessFlags.Use))
+        {
+            return;
+        }
+        slot.TakeOut(1);
+        slot.MarkDirty();
+        var tool = new ItemStack(chisel);
+        if (slot.Empty)
+        {
+            slot.Itemstack = tool;
+            slot.MarkDirty();
+        }
+        else if (!byEntity.TryGiveItemStack(tool))
+        {
+            world.SpawnItemEntity(tool, byEntity.Pos.XYZ.Add(0, 0.5, 0));
+        }
+        world.PlaySoundAt(new AssetLocation(LemuriaModSystem.ModId, "sounds/crystals/ring"), blockSel.Position.X + 0.5, blockSel.Position.Y + 0.5, blockSel.Position.Z + 0.5, null, true, 16f, 1f);
+    }
+
     private static string CracksText(int cracks) => cracks switch
     {
         <= 0 => "",

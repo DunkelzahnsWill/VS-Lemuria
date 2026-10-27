@@ -13,25 +13,28 @@ using Vintagestory.API.Util;
 namespace Lemuria.Sparkstone;
 
 /// <summary>
-/// The shaping tool (design note, The shaping tool): a chisel with an Unaligned crystal set in its
-/// handle. It holds charge like a Glittering crystal and has no durability. Right-click a charged
-/// crystal, placed or resting in a cradle, or any block of a sparkstone network to draw as much as it
-/// has room for; hold right-click for a second on a placed polished rock block to awaken it, for
-/// AwakenCost. Three glyphs on the blade light one by one with its charge level.
+/// The Crystalline Chisel (design note, The Crystalline Chisel; the owner's merge of the shaping tool and
+/// a chisel, step 2 play-test): an Unaligned crystal struck into a blade on another, placed one
+/// (BlockLemuriaCrystal.OnHeldAttackStart). It holds charge like a Glittering crystal and has no
+/// durability. Right-click a charged crystal, placed or resting in a cradle, or any block of a sparkstone
+/// network to draw as much as it has room for; hold right-click for a second on a placed polished rock
+/// block to awaken it, for AwakenCost. Left-click a placed polished rock block to carve it into a cradle,
+/// or a polished rock slab into a crystal rack, for no charge. Three glyphs on the blade light one by one
+/// with its charge level. It carries no tool-chisel tag, so vanilla chiselling never starts.
 /// </summary>
-public class ItemShapingTool : Item
+public class ItemCrystalChisel : Item
 {
-    public const string ClassCode = "lemuria-shapingtool";
+    public const string ClassCode = "lemuria-crystalchisel";
 
     /// <summary>The charge level as last set on the server, which the client draws the glyphs and light from.</summary>
     public const string LevelKey = "lemuriaToolLevel";
 
-    private const string MeshCacheKey = LemuriaModSystem.ModId + "-shapingtoolmeshes";
+    private const string MeshCacheKey = LemuriaModSystem.ModId + "-crystalchiselmeshes";
     private const float AwakenSeconds = 1f;
 
     private static readonly AssetLocation DrawSound = new(LemuriaModSystem.ModId, "sounds/crystals/chime");
 
-    public static float Capacity => (float)Math.Clamp(LemuriaModSystem.Config.ShapingToolCapacity, 1, 100_000);
+    public static float Capacity => (float)Math.Clamp(LemuriaModSystem.Config.ChiselCapacity, 1, 100_000);
 
     public static float Cost => (float)Math.Clamp(LemuriaModSystem.Config.AwakenCost, 0, 100_000);
 
@@ -56,6 +59,64 @@ public class ItemShapingTool : Item
             return null;
         }
         return code.Path["rockpolished-".Length..];
+    }
+
+    /// <summary>The rock of a placed polished rock slab, when the block is the game's own.</summary>
+    public static string? PolishedSlab(Block block)
+    {
+        var code = block.Code;
+        if (code == null || code.Domain != "game" || !code.Path.StartsWith("polishedrockslab-", StringComparison.Ordinal))
+        {
+            return null;
+        }
+        return block.Variant["rock"];
+    }
+
+    public override void OnHeldAttackStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, ref EnumHandHandling handling)
+    {
+        if (blockSel != null && CarvedBlock(byEntity.World, blockSel.Position, (byEntity as EntityPlayer)?.Player, blockSel) != null)
+        {
+            handling = EnumHandHandling.PreventDefault;
+            if (byEntity.World.Side == EnumAppSide.Server)
+            {
+                Carve(byEntity.World, (byEntity as EntityPlayer)?.Player, blockSel.Position, blockSel);
+            }
+            return;
+        }
+        base.OnHeldAttackStart(slot, byEntity, blockSel, entitySel, ref handling);
+    }
+
+    /// <summary>What a left-click would carve the block into: a cradle from polished rock, a rack from a polished slab.</summary>
+    public static Block? CarvedBlock(IWorldAccessor world, BlockPos pos, IPlayer? player, BlockSelection? blockSel)
+    {
+        var block = world.BlockAccessor.GetBlock(pos);
+        if (PolishedRock(block) is { } rock)
+        {
+            return world.GetBlock(new AssetLocation(LemuriaModSystem.ModId, "cradle-" + rock));
+        }
+        if (PolishedSlab(block) is { } slabRock)
+        {
+            string side = "north";
+            if (player != null && blockSel != null)
+            {
+                side = Block.SuggestedHVOrientation(player, blockSel)[0].Code;
+            }
+            return world.GetBlock(new AssetLocation(LemuriaModSystem.ModId, $"crystalrack-{slabRock}-{side}"));
+        }
+        return null;
+    }
+
+    /// <summary>Carves a placed polished rock block or slab, where the player may build. Server only.</summary>
+    public static bool Carve(IWorldAccessor world, IPlayer? player, BlockPos pos, BlockSelection? blockSel = null)
+    {
+        var carved = CarvedBlock(world, pos, player, blockSel);
+        if (carved == null || (player != null && !world.Claims.TryAccess(player, pos, EnumBlockAccessFlags.BuildOrBreak)))
+        {
+            return false;
+        }
+        world.BlockAccessor.SetBlock(carved.Id, pos);
+        world.PlaySoundAt(new AssetLocation("game:sounds/block/rock-hit-pickaxe"), pos.X + 0.5, pos.Y + 0.5, pos.Z + 0.5, null, true, 16f, 1f);
+        return true;
     }
 
     public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling)
@@ -177,7 +238,7 @@ public class ItemShapingTool : Item
             var refs = ObjectCacheUtil.GetOrCreate(capi, MeshCacheKey, () => new Dictionary<int, MultiTextureMeshRef?>());
             if (!refs.TryGetValue(level, out var meshRef))
             {
-                var shape = Vintagestory.API.Common.Shape.TryGet(capi, new AssetLocation(LemuriaModSystem.ModId, $"shapes/item/sparkstone/shapingtool-{level}.json"));
+                var shape = Vintagestory.API.Common.Shape.TryGet(capi, new AssetLocation(LemuriaModSystem.ModId, $"shapes/item/sparkstone/crystalchisel-{level}.json"));
                 if (shape != null)
                 {
                     capi.Tesselator.TesselateShape(this, shape, out var mesh);
@@ -198,7 +259,7 @@ public class ItemShapingTool : Item
         base.GetHeldItemInfo(inSlot, dsc, world, withDebugInfo);
         if (inSlot.Itemstack != null)
         {
-            dsc.AppendLine(Lang.Get($"{LemuriaModSystem.ModId}:shapingtool-charge-{GetLevel(inSlot.Itemstack)}"));
+            dsc.AppendLine(Lang.Get($"{LemuriaModSystem.ModId}:crystalchisel-charge-{GetLevel(inSlot.Itemstack)}"));
         }
     }
 
@@ -206,8 +267,9 @@ public class ItemShapingTool : Item
     {
         return new[]
         {
-            new WorldInteraction { ActionLangCode = LemuriaModSystem.ModId + ":shapingtool-draw", MouseButton = EnumMouseButton.Right },
-            new WorldInteraction { ActionLangCode = LemuriaModSystem.ModId + ":shapingtool-awaken", MouseButton = EnumMouseButton.Right },
+            new WorldInteraction { ActionLangCode = LemuriaModSystem.ModId + ":crystalchisel-draw", MouseButton = EnumMouseButton.Right },
+            new WorldInteraction { ActionLangCode = LemuriaModSystem.ModId + ":crystalchisel-awaken", MouseButton = EnumMouseButton.Right },
+            new WorldInteraction { ActionLangCode = LemuriaModSystem.ModId + ":crystalchisel-carve", MouseButton = EnumMouseButton.Left },
         };
     }
 }

@@ -2,8 +2,8 @@
  "textureWidth": 16,
  "textureHeight": 16,
  "textures": {
-  "blade": "lemuria:item/sparkstone/blade",
-  "handle": "lemuria:item/sparkstone/handle",
+  "blade": "lemuria:block/crystals/unaligned",
+  "handle": "lemuria:block/crystals/unaligned",
   "crystal": "lemuria:block/crystals/unaligned",
   "glyph": "lemuria:block/sparkstone/glyph",
   "lit": "lemuria:block/sparkstone/glyph-full"
@@ -305,58 +305,64 @@
    ],
    "faces": {
     "north": {
-     "texture": "#glyph",
+     "texture": "#lit",
      "uv": [
       0,
       0,
       0.8,
       1
-     ]
+     ],
+     "glow": 255
     },
     "east": {
-     "texture": "#glyph",
+     "texture": "#lit",
      "uv": [
       0,
       0,
       0.1,
       1
-     ]
+     ],
+     "glow": 255
     },
     "south": {
-     "texture": "#glyph",
+     "texture": "#lit",
      "uv": [
       0,
       0,
       0.8,
       1
-     ]
+     ],
+     "glow": 255
     },
     "west": {
-     "texture": "#glyph",
+     "texture": "#lit",
      "uv": [
       0,
       0,
       0.1,
       1
-     ]
+     ],
+     "glow": 255
     },
     "up": {
-     "texture": "#glyph",
+     "texture": "#lit",
      "uv": [
       0,
       0,
       0.8,
       0.1
-     ]
+     ],
+     "glow": 255
     },
     "down": {
-     "texture": "#glyph",
+     "texture": "#lit",
      "uv": [
       0,
       0,
       0.8,
       0.1
-     ]
+     ],
+     "glow": 255
     }
    }
   },
@@ -374,58 +380,64 @@
    ],
    "faces": {
     "north": {
-     "texture": "#glyph",
+     "texture": "#lit",
      "uv": [
       0,
       0,
       0.8,
       1
-     ]
+     ],
+     "glow": 255
     },
     "east": {
-     "texture": "#glyph",
+     "texture": "#lit",
      "uv": [
       0,
       0,
       0.1,
       1
-     ]
+     ],
+     "glow": 255
     },
     "south": {
-     "texture": "#glyph",
+     "texture": "#lit",
      "uv": [
       0,
       0,
       0.8,
       1
-     ]
+     ],
+     "glow": 255
     },
     "west": {
-     "texture": "#glyph",
+     "texture": "#lit",
      "uv": [
       0,
       0,
       0.1,
       1
-     ]
+     ],
+     "glow": 255
     },
     "up": {
-     "texture": "#glyph",
+     "texture": "#lit",
      "uv": [
       0,
       0,
       0.8,
       0.1
-     ]
+     ],
+     "glow": 255
     },
     "down": {
-     "texture": "#glyph",
+     "texture": "#lit",
      "uv": [
       0,
       0,
       0.8,
       0.1
-     ]
+     ],
+     "glow": 255
     }
    }
   },
@@ -443,58 +455,64 @@
    ],
    "faces": {
     "north": {
-     "texture": "#glyph",
+     "texture": "#lit",
      "uv": [
       0,
       0,
       0.8,
       1.0
-     ]
+     ],
+     "glow": 255
     },
     "east": {
-     "texture": "#glyph",
+     "texture": "#lit",
      "uv": [
       0,
       0,
       0.1,
       1.0
-     ]
+     ],
+     "glow": 255
     },
     "south": {
-     "texture": "#glyph",
+     "texture": "#lit",
      "uv": [
       0,
       0,
       0.8,
       1.0
-     ]
+     ],
+     "glow": 255
     },
     "west": {
-     "texture": "#glyph",
+     "texture": "#lit",
      "uv": [
       0,
       0,
       0.1,
       1.0
-     ]
+     ],
+     "glow": 255
     },
     "up": {
-     "texture": "#glyph",
+     "texture": "#lit",
      "uv": [
       0,
       0,
       0.8,
       0.1
-     ]
+     ],
+     "glow": 255
     },
     "down": {
-     "texture": "#glyph",
+     "texture": "#lit",
      "uv": [
       0,
       0,
       0.8,
       0.1
-     ]
+     ],
+     "glow": 255
     }
    }
   },
@@ -512,58 +530,64 @@
    ],
    "faces": {
     "north": {
-     "texture": "#glyph",
+     "texture": "#lit",
      "uv": [
       0,
       0,
       0.8,
       1.0
-     ]
+     ],
+     "glow": 255
     },
     "east": {
-     "texture": "#glyph",
+     "texture": "#lit",
      "uv": [
       0,
       0,
       0.1,
       1.0
-     ]
+     ],
+     "glow": 255
     },
     "south": {
-     "texture": "#glyph",
+     "texture": "#lit",
      "uv": [
       0,
       0,
       0.8,
       1.0
-     ]
+     ],
+     "glow": 255
     },
     "west": {
-     "texture": "#glyph",
+     "texture": "#lit",
      "uv": [
       0,
       0,
       0.1,
       1.0
-     ]
+     ],
+     "glow": 255
     },
     "up": {
-     "texture": "#glyph",
+     "texture": "#lit",
      "uv": [
       0,
       0,
       0.8,
       0.1
-     ]
+     ],
+     "glow": 255
     },
     "down": {
-     "texture": "#glyph",
+     "texture": "#lit",
      "uv": [
       0,
       0,
       0.8,
       0.1
-     ]
+     ],
+     "glow": 255
     }
    }
   },
@@ -581,58 +605,64 @@
    ],
    "faces": {
     "north": {
-     "texture": "#glyph",
+     "texture": "#lit",
      "uv": [
       0,
       0,
       0.8,
       1.0
-     ]
+     ],
+     "glow": 255
     },
     "east": {
-     "texture": "#glyph",
+     "texture": "#lit",
      "uv": [
       0,
       0,
       0.1,
       1.0
-     ]
+     ],
+     "glow": 255
     },
     "south": {
-     "texture": "#glyph",
+     "texture": "#lit",
      "uv": [
       0,
       0,
       0.8,
       1.0
-     ]
+     ],
+     "glow": 255
     },
     "west": {
-     "texture": "#glyph",
+     "texture": "#lit",
      "uv": [
       0,
       0,
       0.1,
       1.0
-     ]
+     ],
+     "glow": 255
     },
     "up": {
-     "texture": "#glyph",
+     "texture": "#lit",
      "uv": [
       0,
       0,
       0.8,
       0.1
-     ]
+     ],
+     "glow": 255
     },
     "down": {
-     "texture": "#glyph",
+     "texture": "#lit",
      "uv": [
       0,
       0,
       0.8,
       0.1
-     ]
+     ],
+     "glow": 255
     }
    }
   },
@@ -650,58 +680,64 @@
    ],
    "faces": {
     "north": {
-     "texture": "#glyph",
+     "texture": "#lit",
      "uv": [
       0,
       0,
       0.8,
       1.0
-     ]
+     ],
+     "glow": 255
     },
     "east": {
-     "texture": "#glyph",
+     "texture": "#lit",
      "uv": [
       0,
       0,
       0.1,
       1.0
-     ]
+     ],
+     "glow": 255
     },
     "south": {
-     "texture": "#glyph",
+     "texture": "#lit",
      "uv": [
       0,
       0,
       0.8,
       1.0
-     ]
+     ],
+     "glow": 255
     },
     "west": {
-     "texture": "#glyph",
+     "texture": "#lit",
      "uv": [
       0,
       0,
       0.1,
       1.0
-     ]
+     ],
+     "glow": 255
     },
     "up": {
-     "texture": "#glyph",
+     "texture": "#lit",
      "uv": [
       0,
       0,
       0.8,
       0.1
-     ]
+     ],
+     "glow": 255
     },
     "down": {
-     "texture": "#glyph",
+     "texture": "#lit",
      "uv": [
       0,
       0,
       0.8,
       0.1
-     ]
+     ],
+     "glow": 255
     }
    }
   }

@@ -2,8 +2,8 @@
  "textureWidth": 16,
  "textureHeight": 16,
  "textures": {
-  "blade": "lemuria:item/sparkstone/blade",
-  "handle": "lemuria:item/sparkstone/handle",
+  "blade": "lemuria:block/crystals/unaligned",
+  "handle": "lemuria:block/crystals/unaligned",
   "crystal": "lemuria:block/crystals/unaligned",
   "glyph": "lemuria:block/sparkstone/glyph",
   "lit": "lemuria:block/sparkstone/glyph-full"

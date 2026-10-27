@@ -34,9 +34,9 @@ public class StorageModSystem : ModSystem
         api.Event.SaveGameLoaded += () =>
         {
             int jars = api.World.Items.Count(i => i?.Code?.Domain == LemuriaModSystem.ModId && i.Code.Path.StartsWith("crystaljar-"));
-            int racks = api.World.GridRecipes.Where(r => r.Output?.Code?.Domain == LemuriaModSystem.ModId && r.Output.Code.Path.StartsWith("crystalrack-"))
-                .Select(r => r.Output!.Code!.Path).Distinct().Count();
-            Mod.Logger.Notification("Storage: {0} crystal jar kinds, rack recipes for {1} rock type(s)", jars, racks);
+            // Racks are carved from polished slabs with the Crystalline Chisel (Sparkstone), not made on the grid.
+            int racks = api.World.Blocks.Count(b => b?.Code?.Domain == LemuriaModSystem.ModId && b.Code.Path.StartsWith("crystalrack-") && b.Code.Path.EndsWith("-north"));
+            Mod.Logger.Notification("Storage: {0} crystal jar kinds, racks in {1} rock type(s)", jars, racks);
         };
         api.ChatCommands.GetOrCreate(LemuriaModSystem.ModId)
             .WithDescription("Lemuria commands")
