@@ -26,9 +26,18 @@ public class BlockCradle : Block
                 seedlings.Add(new ItemStack(item));
             }
         }
+        var crystals = new List<ItemStack>();
+        foreach (var block in api.World.Blocks)
+        {
+            if (Crystals.Crystal.IsCrystal(block) && block.Variant["position"] == "up")
+            {
+                crystals.Add(new ItemStack(block));
+            }
+        }
         plantHelp = new[]
         {
             new WorldInteraction { ActionLangCode = "lemuria:cradle-plant", MouseButton = EnumMouseButton.Right, Itemstacks = seedlings.ToArray() },
+            new WorldInteraction { ActionLangCode = "lemuria:cradle-setcrystal", MouseButton = EnumMouseButton.Right, Itemstacks = crystals.ToArray() },
         };
     }
 

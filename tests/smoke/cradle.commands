@@ -4,3 +4,8 @@
 /lemuria cradle test plant
 /lemuria cradle test advance 2.5
 /lemuria cradle test advance 9
+# Step 2: a seedling in a ring of two Fire crystals ripens Glowing; a cracked crystal mends a crack a stage.
+/lemuria cradle test ring
+/lemuria cradle test mend
+# Refining comes last, since the tests above move the clock on and a refining cradle counts that time.
+/lemuria cradle test refine

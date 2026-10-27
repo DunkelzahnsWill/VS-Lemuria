@@ -1,2 +1,5 @@
 # Log lines for tests/smoke/cradle.restart.commands.
 Cradle test: the cradle at -?[0-9]+, [0-9]+, -?[0-9]+ \(from spawn\) is at stage ripe$
+# Step 2: a refined crystal, its crack and a refining cradle's progress are still there after a restart.
+Cradle test: the refining cradle holds fire glittering cracked 1$
+Cradle test: the second refining cradle holds unaligned glittering, 0\.[0-9][0-9] of the way to fire$
