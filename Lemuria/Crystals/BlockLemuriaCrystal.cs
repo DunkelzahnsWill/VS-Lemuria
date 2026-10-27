@@ -168,7 +168,7 @@ public class BlockLemuriaCrystal : Block
         {
             world.SpawnItemEntity(tool, byEntity.Pos.XYZ.Add(0, 0.5, 0));
         }
-        world.PlaySoundAt(new AssetLocation(LemuriaModSystem.ModId, "sounds/crystals/ring"), blockSel.Position.X + 0.5, blockSel.Position.Y + 0.5, blockSel.Position.Z + 0.5, null, true, 16f, 1f);
+        world.PlaySoundAt(new AssetLocation(LemuriaModSystem.ModId, "sounds/crystals/ring"), blockSel.Position.X + 0.5, blockSel.Position.Y + 0.5, blockSel.Position.Z + 0.5, null, true, 16f, LemuriaSound.Volume(1f));
         return true;
     }
 

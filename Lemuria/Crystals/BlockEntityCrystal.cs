@@ -150,7 +150,7 @@ public class BlockEntityCrystal : BlockEntity, IStandingCrystal
         int level = Level;
         if (level != oldLevel)
         {
-            Api.World.PlaySoundAt(ChimeSound, Pos.X + 0.5, Pos.Y + 0.5, Pos.Z + 0.5, null, 0.85f + 0.1f * level, 16f, 0.6f);
+            Api.World.PlaySoundAt(ChimeSound, Pos.X + 0.5, Pos.Y + 0.5, Pos.Z + 0.5, null, 0.85f + 0.1f * level, 16f, LemuriaSound.Volume(0.6f));
             MarkDirty(true);
             UpdateLight(Crystal.LightLevel(Evolution, oldLevel));
             if (level == Crystal.Full)
@@ -231,7 +231,7 @@ public class BlockEntityCrystal : BlockEntity, IStandingCrystal
     public void Shatter()
     {
         var center = Pos.ToVec3d().Add(0.5, 0.4, 0.5);
-        Api.World.PlaySoundAt(new AssetLocation(LemuriaModSystem.ModId, "sounds/crystals/shatter"), center.X, center.Y, center.Z, null, true, 24f, 1f);
+        Api.World.PlaySoundAt(new AssetLocation(LemuriaModSystem.ModId, "sounds/crystals/shatter"), center.X, center.Y, center.Z, null, true, 24f, LemuriaSound.Volume(1f));
         CrystalsModSystem.Server?.SendBurst(center, Alignment ?? Crystal.Unaligned);
         Api.World.BlockAccessor.SetBlock(0, Pos);
     }
@@ -365,7 +365,7 @@ public class BlockEntityCrystal : BlockEntity, IStandingCrystal
                     DisposeOnFinish = false,
                     Position = Pos.ToVec3f().Add(0.5f, 0.5f, 0.5f),
                     Range = 12f,
-                    Volume = 0.12f,
+                    Volume = LemuriaSound.Volume(0.12f),
                     SoundType = EnumSoundType.Ambient,
                 });
                 whine?.Start();

@@ -45,7 +45,7 @@ public class ItemStrangeCrystal : Item
         {
             slot.TakeOut(1);
             slot.MarkDirty();
-            world.PlaySoundAt(new AssetLocation("game:sounds/block/ceramicplace"), place.Position.X + 0.5, place.Position.Y + 0.5, place.Position.Z + 0.5, null, true, 12f, 1f);
+            world.PlaySoundAt(new AssetLocation("game:sounds/block/ceramicplace"), place.Position.X + 0.5, place.Position.Y + 0.5, place.Position.Z + 0.5, null, true, 12f, LemuriaSound.Volume(1f));
         }
     }
 

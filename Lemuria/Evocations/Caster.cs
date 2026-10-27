@@ -27,7 +27,7 @@ public static class Caster
     /// <summary>The dull click of a crystal too empty to cast, heard by everyone near, the caster included.</summary>
     public static void Dull(IWorldAccessor world, Entity entity)
     {
-        world.PlaySoundAt(DullSound, entity.Pos.X, entity.Pos.Y + 1, entity.Pos.Z, null, true, 12f, 0.6f);
+        world.PlaySoundAt(DullSound, entity.Pos.X, entity.Pos.Y + 1, entity.Pos.Z, null, true, 12f, LemuriaSound.Volume(0.6f));
     }
 
     /// <summary>
@@ -132,7 +132,7 @@ public static class Caster
                 slot.Itemstack = null;
             }
             slot.MarkDirty();
-            world.PlaySoundAt(ShatterSound, where.X, where.Y, where.Z, null, true, 24f, 1f);
+            world.PlaySoundAt(ShatterSound, where.X, where.Y, where.Z, null, true, 24f, LemuriaSound.Volume(1f));
             CrystalsModSystem.Server?.SendBurst(where, alignment);
             return new Spent(0, cracks, true, split);
         }
@@ -144,11 +144,11 @@ public static class Caster
         slot.MarkDirty();
         if (cracked)
         {
-            world.PlaySoundAt(CrackleSound, where.X, where.Y, where.Z, null, true, 16f, 0.8f);
+            world.PlaySoundAt(CrackleSound, where.X, where.Y, where.Z, null, true, 16f, LemuriaSound.Volume(0.8f));
         }
         if (Crystal.Level(after, capacity) != Crystal.Level(before, capacity))
         {
-            world.PlaySoundAt(ChimeSound, where.X, where.Y, where.Z, null, true, 16f, 0.6f);
+            world.PlaySoundAt(ChimeSound, where.X, where.Y, where.Z, null, true, 16f, LemuriaSound.Volume(0.6f));
         }
         return new Spent(after, cracks, false, split);
     }

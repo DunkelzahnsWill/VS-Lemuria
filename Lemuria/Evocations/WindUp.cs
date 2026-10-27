@@ -60,7 +60,7 @@ public class WindUp : IDisposable
         var hand = Hand(entity);
         float windUp = (float)Evocation.WindUpSeconds;
         state.Note?.SetPosition((float)hand.X, (float)hand.Y, (float)hand.Z);
-        state.Note?.SetVolume(NoteVolume * Math.Min(1f, 0.15f + 0.85f * seconds / Math.Max(0.05f, windUp)));
+        state.Note?.SetVolume(LemuriaSound.Volume(NoteVolume) * Math.Min(1f, 0.15f + 0.85f * seconds / Math.Max(0.05f, windUp)));
         bool overdriven = canOverdrive && seconds >= Evocation.OverdriveSeconds;
         if (overdriven && state.Whine == null)
         {
@@ -112,7 +112,7 @@ public class WindUp : IDisposable
             DisposeOnFinish = false,
             Position = new Vec3f((float)hand.X, (float)hand.Y, (float)hand.Z),
             Range = 16,
-            Volume = volume,
+            Volume = LemuriaSound.Volume(volume),
             SoundType = EnumSoundType.Sound,
         });
     }

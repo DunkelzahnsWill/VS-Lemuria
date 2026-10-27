@@ -165,14 +165,14 @@ public class EvocationsModSystem : ModSystem
         if (packet.Kind == CastPacket.Fizzle)
         {
             Spray(to, rgb, 8, 0.3f);
-            world.PlaySoundAt(new AssetLocation(LemuriaModSystem.ModId, "sounds/evocations/fizzle"), to.X, to.Y, to.Z, null, true, 16f, 0.6f);
+            world.PlaySoundAt(new AssetLocation(LemuriaModSystem.ModId, "sounds/evocations/fizzle"), to.X, to.Y, to.Z, null, true, 16f, LemuriaSound.Volume(0.6f));
             return;
         }
         Spray(to, rgb, 12 + 12 * packet.Power, 0.5f + 0.5f * Evocation.Radius(packet.Power));
         var sound = SoundOf(packet.Alignment);
         if (sound != null)
         {
-            world.PlaySoundAt(sound, to.X, to.Y, to.Z, null, true, 32f, 1f);
+            world.PlaySoundAt(sound, to.X, to.Y, to.Z, null, true, 32f, LemuriaSound.Volume(1f));
         }
         if (Evocation.Of(packet.Alignment) == Evocation.Tremor && world.Player?.Entity?.Pos.XYZ.DistanceTo(to) <= 16)
         {

@@ -1,3 +1,4 @@
+using Lemuria.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -189,7 +190,7 @@ public static class Effects
         if (entity?.GetBehavior<BEBehaviorBurning>() is { IsBurning: true } burning)
         {
             burning.KillFire(false);
-            world.PlaySoundAt(ExtinguishSound, pos.X + 0.5, pos.Y + 0.5, pos.Z + 0.5, null, false, 16);
+            world.PlaySoundAt(ExtinguishSound, pos.X + 0.5, pos.Y + 0.5, pos.Z + 0.5, null, false, 16, LemuriaSound.Volume(1f));
             return true;
         }
         if (entity is BlockEntityGroundStorage { IsBurning: true } storage)
@@ -202,7 +203,7 @@ public static class Effects
         if (block is BlockTorch && block.Variant["state"] == "lit" && world.GetBlock(block.CodeWithVariant("state", "extinct")) is { } extinct)
         {
             accessor.SetBlock(extinct.BlockId, pos);
-            world.PlaySoundAt(ExtinguishSound, pos.X + 0.5, pos.Y + 0.5, pos.Z + 0.5, null, false, 16);
+            world.PlaySoundAt(ExtinguishSound, pos.X + 0.5, pos.Y + 0.5, pos.Z + 0.5, null, false, 16, LemuriaSound.Volume(1f));
             return true;
         }
         return false;

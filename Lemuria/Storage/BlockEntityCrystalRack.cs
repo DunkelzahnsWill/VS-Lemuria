@@ -52,7 +52,7 @@ public class BlockEntityCrystalRack : BlockEntity
                 slot.MarkDirty();
                 target.Itemstack = one;
                 target.MarkDirty();
-                Api.World.PlaySoundAt(new AssetLocation("game:sounds/block/ceramicplace"), Pos, -0.25, null);
+                Api.World.PlaySoundAt(new AssetLocation("game:sounds/block/ceramicplace"), Pos, -0.25, null, true, 32f, LemuriaSound.Volume(1f));
                 MarkDirty(true);
             }
             return true;
@@ -67,7 +67,7 @@ public class BlockEntityCrystalRack : BlockEntity
                 {
                     Api.World.SpawnItemEntity(stack, Pos.ToVec3d().Add(0.5, 0.5, 0.5));
                 }
-                Api.World.PlaySoundAt(new AssetLocation("game:sounds/player/collect"), Pos, -0.25, null);
+                Api.World.PlaySoundAt(new AssetLocation("game:sounds/player/collect"), Pos, -0.25, null, true, 32f, LemuriaSound.Volume(1f));
                 MarkDirty(true);
             }
             return true;

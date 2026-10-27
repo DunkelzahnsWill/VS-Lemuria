@@ -76,6 +76,6 @@ public class CollectibleBehaviorJarFiller : CollectibleBehavior
             slot.TakeOut(1);
             slot.MarkDirty();
         }
-        world.PlaySoundAt(new AssetLocation("game:sounds/player/build"), blockSel.Position, -0.25, null);
+        world.PlaySoundAt(new AssetLocation("game:sounds/player/build"), blockSel.Position, -0.25, null, true, 32f, LemuriaSound.Volume(1f));
     }
 }
