@@ -1,0 +1,354 @@
+{
+ "textureWidth": 16,
+ "textureHeight": 16,
+ "textures": {
+  "rock": "game:block/stone/polishedrock/granite"
+ },
+ "elements": [
+  {
+   "name": "floor",
+   "from": [
+    1,
+    0,
+    1
+   ],
+   "to": [
+    15,
+    4.0,
+    15
+   ],
+   "faces": {
+    "north": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      14,
+      4.0
+     ]
+    },
+    "east": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      14,
+      4.0
+     ]
+    },
+    "south": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      14,
+      4.0
+     ]
+    },
+    "west": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      14,
+      4.0
+     ]
+    },
+    "up": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      14,
+      14
+     ]
+    },
+    "down": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      14,
+      14
+     ]
+    }
+   }
+  },
+  {
+   "name": "wall north",
+   "from": [
+    1,
+    4.0,
+    1
+   ],
+   "to": [
+    15,
+    7,
+    3
+   ],
+   "faces": {
+    "north": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      14,
+      3.0
+     ]
+    },
+    "east": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      2,
+      3.0
+     ]
+    },
+    "south": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      14,
+      3.0
+     ]
+    },
+    "west": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      2,
+      3.0
+     ]
+    },
+    "up": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      14,
+      2
+     ]
+    },
+    "down": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      14,
+      2
+     ]
+    }
+   }
+  },
+  {
+   "name": "wall south",
+   "from": [
+    1,
+    4.0,
+    13
+   ],
+   "to": [
+    15,
+    7,
+    15
+   ],
+   "faces": {
+    "north": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      14,
+      3.0
+     ]
+    },
+    "east": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      2,
+      3.0
+     ]
+    },
+    "south": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      14,
+      3.0
+     ]
+    },
+    "west": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      2,
+      3.0
+     ]
+    },
+    "up": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      14,
+      2
+     ]
+    },
+    "down": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      14,
+      2
+     ]
+    }
+   }
+  },
+  {
+   "name": "wall west",
+   "from": [
+    1,
+    4.0,
+    3
+   ],
+   "to": [
+    3,
+    7,
+    13
+   ],
+   "faces": {
+    "north": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      2,
+      3.0
+     ]
+    },
+    "east": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      10,
+      3.0
+     ]
+    },
+    "south": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      2,
+      3.0
+     ]
+    },
+    "west": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      10,
+      3.0
+     ]
+    },
+    "up": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      2,
+      10
+     ]
+    },
+    "down": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      2,
+      10
+     ]
+    }
+   }
+  },
+  {
+   "name": "wall east",
+   "from": [
+    13,
+    4.0,
+    3
+   ],
+   "to": [
+    15,
+    7,
+    13
+   ],
+   "faces": {
+    "north": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      2,
+      3.0
+     ]
+    },
+    "east": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      10,
+      3.0
+     ]
+    },
+    "south": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      2,
+      3.0
+     ]
+    },
+    "west": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      10,
+      3.0
+     ]
+    },
+    "up": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      2,
+      10
+     ]
+    },
+    "down": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      2,
+      10
+     ]
+    }
+   }
+  }
+ ]
+}

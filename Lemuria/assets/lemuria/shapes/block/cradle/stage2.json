@@ -1,0 +1,159 @@
+{
+ "textureWidth": 16,
+ "textureHeight": 16,
+ "textures": {
+  "crystal": "lemuria:block/crystals/unaligned"
+ },
+ "elements": [
+  {
+   "name": "main",
+   "from": [
+    7.1,
+    4.0,
+    7.1
+   ],
+   "to": [
+    8.9,
+    8.05,
+    8.9
+   ],
+   "faces": {
+    "north": {
+     "texture": "#crystal",
+     "uv": [
+      0,
+      0,
+      1.8,
+      4.05
+     ],
+     "glow": 80
+    },
+    "east": {
+     "texture": "#crystal",
+     "uv": [
+      0,
+      0,
+      1.8,
+      4.05
+     ],
+     "glow": 80
+    },
+    "south": {
+     "texture": "#crystal",
+     "uv": [
+      0,
+      0,
+      1.8,
+      4.05
+     ],
+     "glow": 80
+    },
+    "west": {
+     "texture": "#crystal",
+     "uv": [
+      0,
+      0,
+      1.8,
+      4.05
+     ],
+     "glow": 80
+    },
+    "up": {
+     "texture": "#crystal",
+     "uv": [
+      0,
+      0,
+      1.8,
+      1.8
+     ],
+     "glow": 80
+    },
+    "down": {
+     "texture": "#crystal",
+     "uv": [
+      0,
+      0,
+      1.8,
+      1.8
+     ],
+     "glow": 80
+    }
+   }
+  },
+  {
+   "name": "main tip",
+   "from": [
+    7.55,
+    8.05,
+    7.55
+   ],
+   "to": [
+    8.45,
+    9.4,
+    8.45
+   ],
+   "faces": {
+    "north": {
+     "texture": "#crystal",
+     "uv": [
+      0,
+      0,
+      0.9,
+      1.35
+     ],
+     "glow": 80
+    },
+    "east": {
+     "texture": "#crystal",
+     "uv": [
+      0,
+      0,
+      0.9,
+      1.35
+     ],
+     "glow": 80
+    },
+    "south": {
+     "texture": "#crystal",
+     "uv": [
+      0,
+      0,
+      0.9,
+      1.35
+     ],
+     "glow": 80
+    },
+    "west": {
+     "texture": "#crystal",
+     "uv": [
+      0,
+      0,
+      0.9,
+      1.35
+     ],
+     "glow": 80
+    },
+    "up": {
+     "texture": "#crystal",
+     "uv": [
+      0,
+      0,
+      0.9,
+      0.9
+     ],
+     "glow": 80
+    },
+    "down": {
+     "texture": "#crystal",
+     "uv": [
+      0,
+      0,
+      0.9,
+      0.9
+     ],
+     "glow": 80
+    }
+   }
+  }
+ ]
+}

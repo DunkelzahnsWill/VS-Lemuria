@@ -1,0 +1,10 @@
+{
+	"ingredientPattern": "C,P",
+	"ingredients": {
+		"C": { "type": "item", "tags": ["tool-chisel"], "isTool": true },
+		"P": { "type": "block", "code": "game:rockpolished-*", "name": "rock", "allowedVariants": ["andesite", "chalk", "chert", "conglomerate", "limestone", "claystone", "granite", "sandstone", "shale", "basalt", "peridotite", "phyllite", "slate", "redmarble", "whitemarble", "greenmarble", "bauxite", "suevite", "kimberlite"] }
+	},
+	"width": 1,
+	"height": 2,
+	"output": { "type": "block", "code": "lemuria:cradle-{rock}", "quantity": 1 }
+}
