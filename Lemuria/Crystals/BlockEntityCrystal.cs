@@ -80,6 +80,7 @@ public class BlockEntityCrystal : BlockEntity, IStandingCrystal
         }
         else
         {
+            HumBudget.AddSource(this);
             UpdateClientSounds();
             sparkListener = RegisterGameTickListener(_ => ClientSparks(), 500, api.World.Rand.Next(500));
         }
@@ -370,10 +371,15 @@ public class BlockEntityCrystal : BlockEntity, IStandingCrystal
                 whine?.Start();
             }
             whine?.SetPitch(cracks >= 2 ? 1.3f : 1f);
-            whine?.SetVolume(cracks >= 2 ? 0.18f : 0.12f);
+            if (whine != null)
+            {
+                // Only the nearest cracked crystal whines, so a shelf of them is no louder than one.
+                HumBudget.SetLoop(whine, "whine", Pos.ToVec3d().Add(0.5, 0.5, 0.5), cracks >= 2 ? 0.18f : 0.12f);
+            }
         }
         else
         {
+            HumBudget.RemoveLoop(whine);
             whine?.Stop();
             whine?.Dispose();
             whine = null;
@@ -383,6 +389,8 @@ public class BlockEntityCrystal : BlockEntity, IStandingCrystal
     private void StopClientSounds()
     {
         CrystalsModSystem.Client?.Hums?.Stop(DiscordKey);
+        HumBudget.RemoveSource(this);
+        HumBudget.RemoveLoop(whine);
         whine?.Stop();
         whine?.Dispose();
         whine = null;

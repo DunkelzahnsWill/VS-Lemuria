@@ -1,3 +1,4 @@
+using Lemuria.Crystals;
 using Vintagestory.API.Common;
 using Vintagestory.API.MathTools;
 
@@ -10,6 +11,7 @@ public class BlockSparkstone : Block
 
     public override float GetAmbientSoundStrength(IWorldAccessor world, BlockPos pos)
     {
-        return (world.BlockAccessor.GetBlockEntity(pos) as BlockEntitySparkstone)?.HumStrength ?? 0.1f;
+        float strength = (world.BlockAccessor.GetBlockEntity(pos) as BlockEntitySparkstone)?.HumStrength ?? 0.1f;
+        return world.Side == EnumAppSide.Client ? strength * HumBudget.Share : strength;
     }
 }

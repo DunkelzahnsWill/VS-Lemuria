@@ -15,6 +15,9 @@ public class BlockCradle : Block
 
     private WorldInteraction[]? plantHelp;
 
+    /// <summary>The basin's sounds with each alignment's note as its ambient, for a resting aligned crystal.</summary>
+    private readonly Dictionary<string, BlockSounds> alignedSounds = new();
+
     public override void OnLoaded(ICoreAPI api)
     {
         base.OnLoaded(api);
@@ -32,6 +35,16 @@ public class BlockCradle : Block
             if (Crystals.Crystal.IsCrystal(block) && block.Variant["position"] == "up")
             {
                 crystals.Add(new ItemStack(block));
+            }
+        }
+        foreach (string alignment in Crystals.Crystal.Elementals)
+        {
+            var ambient = Crystals.Crystal.BlockFor(api.World, alignment, Crystals.Crystal.Glittering)?.Sounds?.Ambient;
+            if (Sounds != null && ambient != null)
+            {
+                var sounds = Sounds.Clone();
+                sounds.Ambient = ambient;
+                alignedSounds[alignment] = sounds;
             }
         }
         plantHelp = new[]
@@ -89,7 +102,22 @@ public class BlockCradle : Block
 
     public override float GetAmbientSoundStrength(IWorldAccessor world, BlockPos pos)
     {
-        return (world.BlockAccessor.GetBlockEntity(pos) as BlockEntityCradle)?.HumStrength ?? 0f;
+        float strength = (world.BlockAccessor.GetBlockEntity(pos) as BlockEntityCradle)?.HumStrength ?? 0f;
+        return world.Side == EnumAppSide.Client ? strength * Crystals.HumBudget.Share : strength;
+    }
+
+    /// <summary>
+    /// A resting aligned crystal hums its own note through the basin's ambient sound, so it merges with
+    /// placed crystals of the same note instead of adding to them.
+    /// </summary>
+    public override BlockSounds GetSounds(IBlockAccessor blockAccessor, BlockSelection blockSel, ItemStack? stack = null)
+    {
+        if (blockSel?.Position != null && blockAccessor.GetBlockEntity(blockSel.Position) is BlockEntityCradle cradle
+            && cradle.HumAlignment is { } alignment && alignedSounds.TryGetValue(alignment, out var sounds))
+        {
+            return sounds;
+        }
+        return base.GetSounds(blockAccessor, blockSel, stack);
     }
 
     /// <summary>The look-at text shows only the block's name: the stage is read by eye and ear.</summary>

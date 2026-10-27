@@ -27,14 +27,14 @@ public class BlockLemuriaCrystal : Block
 
     private bool Aligned => Crystal.AlignmentOf(this) != Crystal.Unaligned;
 
-    // The client sums nearby hums; with sounds.ambientBlockCount 1 a single crystal plays at this strength.
+    // The client plays every crystal of one note within 32 blocks as one sound at one crystal's strength
+    // (sounds.ambientBlockCount 1, ambientMaxDistanceMerge 32), shared among the notes nearby (HumBudget).
     public override float GetAmbientSoundStrength(IWorldAccessor world, BlockPos pos)
     {
-        if (world.BlockAccessor.GetBlockEntity(pos) is BlockEntityCrystal crystal)
-        {
-            return crystal.HumStrength;
-        }
-        return Aligned ? Crystal.Hum(Crystal.Empty) : humStrength;
+        float strength = world.BlockAccessor.GetBlockEntity(pos) is BlockEntityCrystal crystal
+            ? crystal.HumStrength
+            : Aligned ? Crystal.Hum(Crystal.Empty) : humStrength;
+        return world.Side == EnumAppSide.Client ? strength * HumBudget.Share : strength;
     }
 
     public override byte[] GetLightHsv(IBlockAccessor blockAccessor, BlockPos pos, ItemStack? stack = null)

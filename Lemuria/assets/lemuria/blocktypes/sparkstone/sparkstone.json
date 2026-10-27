@@ -33,7 +33,8 @@
 		"hit": "game:block/rock-hit-pickaxe",
 		"break": "game:block/rock-break-pickaxe",
 		"ambient": "lemuria:sounds/sparkstone/hum",
-		"ambientBlockCount": 1
+		"ambientBlockCount": 1,
+		"ambientMaxDistanceMerge": 32
 	},
 	"drops": [
 		{ "type": "block", "code": "lemuria:sparkstone-awakened-{rock}", "quantity": { "avg": 1, "var": 0 } }

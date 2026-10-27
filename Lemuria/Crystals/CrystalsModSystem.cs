@@ -119,6 +119,7 @@ public class CrystalsModSystem : ModSystem
     {
         Client = this;
         Hums = new DiscordantHums(api);
+        api.Event.RegisterGameTickListener(_ => HumBudget.Update(api), 1000);
         api.Network.GetChannel(ChannelName).SetMessageHandler<DiscordPacket>(packet => Hums.OnPacket(packet));
     }
 
@@ -500,6 +501,10 @@ public class CrystalsModSystem : ModSystem
     public override void Dispose()
     {
         Hums?.Dispose();
+        if (Hums != null)
+        {
+            HumBudget.Clear();
+        }
         if (sapi != null)
         {
             var weather = sapi.ModLoader.GetModSystem<WeatherSystemServer>();

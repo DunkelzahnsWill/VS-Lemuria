@@ -45,14 +45,14 @@
 	"lightHsvByType": {
 		"*-unaligned-glittering-*": [10, 1, 5],
 		"*-unaligned-glowing-*": [10, 1, 7],
-		"*-fire-glittering-*": [0, 6, 2],
-		"*-fire-glowing-*": [0, 6, 3],
-		"*-ice-glittering-*": [36, 4, 2],
-		"*-ice-glowing-*": [36, 4, 3],
-		"*-earth-glittering-*": [24, 5, 2],
-		"*-earth-glowing-*": [24, 5, 3],
-		"*-sky-glittering-*": [47, 5, 2],
-		"*-sky-glowing-*": [47, 5, 3]
+		"*-fire-glittering-*": [62, 7, 2],
+		"*-fire-glowing-*": [62, 7, 3],
+		"*-ice-glittering-*": [40, 6, 2],
+		"*-ice-glowing-*": [40, 6, 3],
+		"*-earth-glittering-*": [4, 5, 2],
+		"*-earth-glowing-*": [4, 5, 3],
+		"*-sky-glittering-*": [37, 1, 2],
+		"*-sky-glowing-*": [37, 1, 3]
 	},
 	"lightAbsorption": 0,
 	"drawtype": "json",
@@ -65,11 +65,11 @@
 	"sideao": { "all": false },
 	"vertexFlags": { "zOffset": 2, "reflective": true },
 	"soundsByType": {
-		"*-unaligned-*": { "walk": "game:walk/stone", "place": "game:block/ceramicplace", "break": "game:block/ceramicbreak", "hit": "game:block/ceramichit", "ambient": "lemuria:sounds/crystals/hum", "ambientBlockCount": 1 },
-		"*-fire-*": { "walk": "game:walk/stone", "place": "game:block/ceramicplace", "break": "game:block/ceramicbreak", "hit": "game:block/ceramichit", "ambient": "lemuria:sounds/crystals/hum-fire", "ambientBlockCount": 1 },
-		"*-ice-*": { "walk": "game:walk/stone", "place": "game:block/ceramicplace", "break": "game:block/ceramicbreak", "hit": "game:block/ceramichit", "ambient": "lemuria:sounds/crystals/hum-ice", "ambientBlockCount": 1 },
-		"*-earth-*": { "walk": "game:walk/stone", "place": "game:block/ceramicplace", "break": "game:block/ceramicbreak", "hit": "game:block/ceramichit", "ambient": "lemuria:sounds/crystals/hum-earth", "ambientBlockCount": 1 },
-		"*-sky-*": { "walk": "game:walk/stone", "place": "game:block/ceramicplace", "break": "game:block/ceramicbreak", "hit": "game:block/ceramichit", "ambient": "lemuria:sounds/crystals/hum-sky", "ambientBlockCount": 1 }
+		"*-unaligned-*": { "walk": "game:walk/stone", "place": "game:block/ceramicplace", "break": "game:block/ceramicbreak", "hit": "game:block/ceramichit", "ambient": "lemuria:sounds/crystals/hum", "ambientBlockCount": 1, "ambientMaxDistanceMerge": 32 },
+		"*-fire-*": { "walk": "game:walk/stone", "place": "game:block/ceramicplace", "break": "game:block/ceramicbreak", "hit": "game:block/ceramichit", "ambient": "lemuria:sounds/crystals/hum-fire", "ambientBlockCount": 1, "ambientMaxDistanceMerge": 32 },
+		"*-ice-*": { "walk": "game:walk/stone", "place": "game:block/ceramicplace", "break": "game:block/ceramicbreak", "hit": "game:block/ceramichit", "ambient": "lemuria:sounds/crystals/hum-ice", "ambientBlockCount": 1, "ambientMaxDistanceMerge": 32 },
+		"*-earth-*": { "walk": "game:walk/stone", "place": "game:block/ceramicplace", "break": "game:block/ceramicbreak", "hit": "game:block/ceramichit", "ambient": "lemuria:sounds/crystals/hum-earth", "ambientBlockCount": 1, "ambientMaxDistanceMerge": 32 },
+		"*-sky-*": { "walk": "game:walk/stone", "place": "game:block/ceramicplace", "break": "game:block/ceramicbreak", "hit": "game:block/ceramichit", "ambient": "lemuria:sounds/crystals/hum-sky", "ambientBlockCount": 1, "ambientMaxDistanceMerge": 32 }
 	},
 	"drops": [
 		{ "type": "block", "code": "lemuria:crystal-{alignment}-{evolution}-up", "quantity": { "avg": 1, "var": 0 } }
@@ -105,9 +105,9 @@
 		"scale": 1.4
 	},
 	"tpHandTransform": {
-		"translation": { "x": -0.75, "y": -0.2, "z": -0.6 },
-		"rotation": { "x": 0, "y": 0, "z": 0 },
-		"origin": { "x": 0.5, "y": 0.5, "z": 0.5 },
-		"scale": 0.45
+		"translation": { "x": -0.87, "y": -0.05, "z": -0.76 },
+		"rotation": { "x": 0, "y": -25, "z": -59 },
+		"origin": { "x": 0.5, "y": 0, "z": 0.5 },
+		"scale": 0.5
 	}
 }

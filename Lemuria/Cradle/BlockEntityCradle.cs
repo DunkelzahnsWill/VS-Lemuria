@@ -68,7 +68,6 @@ public class BlockEntityCradle : BlockEntity, IStandingCrystal
     private bool sparkRefining;
     private int ticks;
 
-    private ILoadedSound? note;
     private byte placedLight;
 
     public int Stage => stage;
@@ -100,10 +99,13 @@ public class BlockEntityCradle : BlockEntity, IStandingCrystal
             {
                 return Hum[stage];
             }
-            // An aligned crystal hums its own note from the block entity; the basin's ambient is Unaligned's.
-            return CrystalAligned ? 0f : 0.5f;
+            // An aligned crystal hums its own note through the basin's ambient (BlockCradle.GetSounds), silent under a warning.
+            return CrystalAligned ? (warning ? 0f : Crystal.Hum(CrystalLevel)) : 0.5f;
         }
     }
+
+    /// <summary>The alignment whose note the basin hums, or null for Unaligned's own hum.</summary>
+    public string? HumAlignment => CrystalAligned ? Alignment : null;
 
     public byte[] LightHsv => LightNow();
 
@@ -127,6 +129,7 @@ public class BlockEntityCradle : BlockEntity, IStandingCrystal
         }
         else
         {
+            HumBudget.AddSource(this);
             UpdateNote();
             RegisterGameTickListener(_ => ClientSparks(), 500, api.World.Rand.Next(500));
         }
@@ -776,7 +779,7 @@ public class BlockEntityCradle : BlockEntity, IStandingCrystal
 
     private string DiscordKey => $"pos:{Pos.X},{Pos.Y},{Pos.Z}";
 
-    /// <summary>On the client: an aligned crystal's own note, or the discordant hum in its place.</summary>
+    /// <summary>On the client: the discordant hum in place of the crystal's note, which the basin's ambient plays.</summary>
     private void UpdateNote(float grace = 30)
     {
         if (Api is not ICoreClientAPI capi)
@@ -792,36 +795,16 @@ public class BlockEntityCradle : BlockEntity, IStandingCrystal
         {
             hums?.Stop(DiscordKey);
         }
-        note?.Stop();
-        note?.Dispose();
-        note = null;
-        if (CrystalAligned && !warning)
-        {
-            note = capi.World.LoadSound(new SoundParams
-            {
-                Location = new AssetLocation(LemuriaModSystem.ModId, $"sounds/crystals/hum-{Alignment}"),
-                ShouldLoop = true,
-                DisposeOnFinish = false,
-                Position = Pos.ToVec3f().Add(0.5f, 0.6f, 0.5f),
-                Range = 16f,
-                Volume = Crystal.Hum(CrystalLevel),
-                SoundType = EnumSoundType.Ambient,
-            });
-            note?.Start();
-        }
     }
 
     private void StopNote()
     {
         CrystalsModSystem.Client?.Hums?.Stop(DiscordKey);
-        note?.Stop();
-        note?.Dispose();
-        note = null;
+        HumBudget.RemoveSource(this);
     }
 
     private void ClientSparks()
     {
-        note?.SetVolume(Crystal.Hum(CrystalLevel));
         if (sparkAlignment != null)
         {
             CrystalCharging.Sparks(Api.World, Pos.ToVec3d().Add(0.5, Floor + 0.2, 0.5), Crystal.Rgb(sparkAlignment), sparkRefining ? 3 : 1);

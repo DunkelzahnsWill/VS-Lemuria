@@ -125,14 +125,31 @@ public class DiscordantHums
         }
     }
 
+    /// <summary>Raises each hum over its warning; only the nearest one sounds, so many dialogues are no louder than one.</summary>
     private void Update()
     {
+        Hum? nearest = null;
+        double best = double.MaxValue;
+        var at = capi.World.Player?.Entity?.Pos.XYZ;
+        foreach (var hum in hums.Values)
+        {
+            Place(hum);
+            if (at != null)
+            {
+                var p = hum.Sound.Params.Position;
+                double d = at.SquareDistanceTo(p.X, p.Y, p.Z);
+                if (d < best)
+                {
+                    best = d;
+                    nearest = hum;
+                }
+            }
+        }
         foreach (var hum in hums.Values)
         {
             float t = Math.Clamp((capi.ElapsedMilliseconds - hum.StartMs) / 1000f / hum.Grace, 0f, 1f);
-            hum.Sound.SetVolume(0.25f + 0.65f * t);
+            hum.Sound.SetVolume(nearest == null || hum == nearest ? 0.25f + 0.65f * t : 0f);
             hum.Sound.SetPitch(1f + 0.6f * t);
-            Place(hum);
         }
     }
 

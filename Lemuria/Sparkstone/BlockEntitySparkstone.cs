@@ -39,6 +39,10 @@ public class BlockEntitySparkstone : BlockEntity
         {
             SparkstoneModSystem.Networks?.Add(this);
         }
+        else
+        {
+            HumBudget.AddSource(this);
+        }
     }
 
     /// <summary>Sets this block's share and its network's level; syncs to clients only when something shows. Server only.</summary>
@@ -66,6 +70,10 @@ public class BlockEntitySparkstone : BlockEntity
         {
             SparkstoneModSystem.Networks?.Remove(this);
         }
+        else
+        {
+            HumBudget.RemoveSource(this);
+        }
     }
 
     public override void OnBlockUnloaded()
@@ -74,6 +82,10 @@ public class BlockEntitySparkstone : BlockEntity
         if (Api?.Side == EnumAppSide.Server)
         {
             SparkstoneModSystem.Networks?.Remove(this);
+        }
+        else if (Api != null)
+        {
+            HumBudget.RemoveSource(this);
         }
     }
 
