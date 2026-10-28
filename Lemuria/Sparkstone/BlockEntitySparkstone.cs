@@ -74,8 +74,14 @@ public class BlockEntitySparkstone : BlockEntity
 
     public int UsedRoom => sockets.Sum(c => c.Size);
 
-    /// <summary>The charge this block can hold: its own, and its capacitors' while Free.</summary>
-    public float Capacity => SparkstoneNetworks.CapacityPerBlock + (IsFree ? sockets.Sum(c => c.Capacity) : 0);
+    /// <summary>Whether its aligned crystals are capacitors, adding their store to the block's: a Free block's are.</summary>
+    public virtual bool StoresInSockets => IsFree;
+
+    /// <summary>The charge the block itself holds, before its capacitors: 50 by default.</summary>
+    protected virtual float OwnCapacity => SparkstoneNetworks.CapacityPerBlock;
+
+    /// <summary>The charge this block can hold: its own, and its capacitors'.</summary>
+    public float Capacity => OwnCapacity + (StoresInSockets ? sockets.Sum(c => c.Capacity) : 0);
 
     /// <summary>How full this block is, which is how full its network is.</summary>
     public float Fraction => Capacity <= 0.0001f ? 0 : Math.Clamp(share / Capacity, 0, 1);

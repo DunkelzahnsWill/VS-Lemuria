@@ -48,7 +48,7 @@ public class SocketCrystal : IStandingCrystal
 
     public float Capacity => IsAligned ? Crystal.Capacity(Evolution) : 0;
 
-    public bool IsCapacitor => stone.IsFree && IsAligned;
+    public bool IsCapacitor => stone.StoresInSockets && IsAligned;
 
     public float Charge => IsCapacitor ? Capacity * stone.Fraction : IsAligned ? Crystal.GetCharge(Stack) : 0;
 
