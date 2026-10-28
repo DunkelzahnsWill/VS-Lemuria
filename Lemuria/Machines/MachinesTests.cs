@@ -17,7 +17,7 @@ namespace Lemuria.Machines;
 /// built: Smoke tests). Each builds its machines from Awakened granite with no player, so no claim
 /// applies, fills their network, makes them work once and reports to the log.
 /// </summary>
-public class MachinesTests
+public partial class MachinesTests
 {
     private const string Rock = "granite";
     private const string NetworkKey = LemuriaModSystem.ModId + "-machinestest-network";

@@ -1,2 +1,4 @@
 # Machines (step 4 part 1): what the network test left is still there after a restart.
 /lemuria machines test check
+# Step 4 part 2: the shelf's items, the Memory's crystals and the Dead Socket are kept.
+/lemuria machines test kept

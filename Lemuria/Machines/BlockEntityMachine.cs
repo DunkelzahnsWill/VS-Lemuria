@@ -38,6 +38,9 @@ public class BlockEntityMachine : BlockEntitySparkstone
     private bool contextDirty = true;
     private BlockPos? amplifierPos;
     private BlockPos? containerPos;
+    private BlockPos? shelfPos;
+    private BlockPos? memoryPos;
+    private bool overflowed;
 
     // Pace, not saved: an unloaded machine pauses and does not catch up.
     private double workSeconds;
@@ -104,12 +107,19 @@ public class BlockEntityMachine : BlockEntitySparkstone
     /// <summary>Reads what touches the machine again on its next look.</summary>
     public void MarkContextDirty() => contextDirty = true;
 
-    /// <summary>The Amplify block and the container touching the machine, face to face.</summary>
+    /// <summary>
+    /// The Amplify block, the container, and for a Focus or Scatter its Control Shelf and Memory touching
+    /// the machine, face to face (step 4 part 2: a shelf's back on a side, never the front; Memory on any
+    /// face but the front; one of each).
+    /// </summary>
     public void ReadContext()
     {
         contextDirty = false;
         amplifierPos = null;
         containerPos = null;
+        shelfPos = null;
+        memoryPos = null;
+        bool works = Form is Machine.Focus or Machine.Scatter;
         var accessor = Api.World.BlockAccessor;
         foreach (var face in BlockFacing.ALLFACES)
         {
@@ -119,9 +129,103 @@ public class BlockEntityMachine : BlockEntitySparkstone
             {
                 amplifierPos = pos;
             }
+            else if (be is BlockEntityControlShelf shelf)
+            {
+                if (works && shelfPos == null && face.IsHorizontal && face != Front && shelf.Side == face)
+                {
+                    shelfPos = pos;
+                }
+            }
+            else if (be is BlockEntityMemory)
+            {
+                if (works && memoryPos == null && face != Front)
+                {
+                    memoryPos = pos;
+                }
+            }
             else if (be is IBlockEntityContainer and not BlockEntitySparkstone && containerPos == null)
             {
                 containerPos = pos;
+            }
+        }
+    }
+
+    /// <summary>The Control Shelf set against this Focus or Scatter, or null.</summary>
+    public BlockEntityControlShelf? Shelf => shelfPos == null ? null : Api.World.BlockAccessor.GetBlockEntity(shelfPos) as BlockEntityControlShelf;
+
+    /// <summary>The Memory set against this Focus or Scatter, or null.</summary>
+    public BlockEntityMemory? Memory => memoryPos == null ? null : Api.World.BlockAccessor.GetBlockEntity(memoryPos) as BlockEntityMemory;
+
+    /// <summary>Where stock comes from: the container on top of the shelf; none without a shelf.</summary>
+    public IInventory? Input => Shelf?.Input?.Inventory;
+
+    /// <summary>
+    /// Where yields go (G2): the container under the shelf; with no shelf, any container touching the
+    /// machine, as in part 1. Null for nowhere, when yields drop where the work happened.
+    /// </summary>
+    public IInventory? Output
+    {
+        get
+        {
+            if (shelfPos != null)
+            {
+                return Shelf?.Output?.Inventory;
+            }
+            return containerPos != null && Api.World.BlockAccessor.GetBlockEntity(containerPos) is IBlockEntityContainer container ? container.Inventory : null;
+        }
+    }
+
+    /// <summary>The output's block position, for a liquid container's own calls; null without one.</summary>
+    public BlockPos? OutputPos => shelfPos != null ? (Shelf?.Output != null ? Shelf.OutputPos : null) : containerPos;
+
+    /// <summary>Whether the shelf itself uses up this stack as stock (G2: a product it uses goes back to the input).</summary>
+    public bool ShelfUses(ItemStack stack) => Shelf is { } shelf && ShelfWork.UsesUp(Api.World, shelf, stack);
+
+    /// <summary>
+    /// Whether these yields all fit where they would go: stock the shelf uses into the input if it has
+    /// room, the rest into the output. With no output they drop, which always fits.
+    /// </summary>
+    public bool CanYield(IEnumerable<ItemStack> stacks)
+    {
+        var merged = Stock.Merge(Api.World, stacks);
+        var input = Input;
+        var output = Output;
+        var toOutput = new List<ItemStack>();
+        var toInput = new List<ItemStack>();
+        foreach (var stack in merged)
+        {
+            if (input != null && ShelfUses(stack) && Stock.Fits(Api.World, input, toInput.Append(stack)))
+            {
+                toInput.Add(stack);
+            }
+            else
+            {
+                toOutput.Add(stack);
+            }
+        }
+        return toOutput.Count == 0 || output == null || Stock.Fits(Api.World, output, toOutput);
+    }
+
+    /// <summary>Puts one yield where it goes, the stock the shelf uses into the input first; returns what fit nowhere, or null.</summary>
+    public ItemStack? Route(ItemStack stack)
+    {
+        ItemStack? left = stack;
+        if (Input is { } input && ShelfUses(stack))
+        {
+            left = Stock.Put(Api.World, input, stack);
+        }
+        return left == null ? null : Collect(left);
+    }
+
+    /// <summary>Puts yields where they go (see <see cref="CanYield"/>); what fits nowhere drops at the point given.</summary>
+    public void Yield(IEnumerable<ItemStack> stacks, Vec3d dropAt)
+    {
+        foreach (var stack in Stock.Merge(Api.World, stacks))
+        {
+            var left = Route(stack);
+            if (left != null && left.StackSize > 0)
+            {
+                Api.World.SpawnItemEntity(left, dropAt);
             }
         }
     }
@@ -139,28 +243,23 @@ public class BlockEntityMachine : BlockEntitySparkstone
         return amp.Working.Select(c => Crystal.Rank(c.Evolution)).DefaultIfEmpty(0).Max();
     }
 
-    /// <summary>Puts a yield into the container touching the machine; returns what did not fit, or null.</summary>
+    /// <summary>
+    /// Puts a yield into the output; returns what did not fit, or null. A yield that did not fit an output
+    /// sends the machine Dormant once its working is done (question 7), as one that a working could not
+    /// test beforehand, such as a part 1 harvest, overflows.
+    /// </summary>
     public ItemStack? Collect(ItemStack stack)
     {
-        if (containerPos == null || Api.World.BlockAccessor.GetBlockEntity(containerPos) is not IBlockEntityContainer container || container.Inventory == null)
+        if (Output is not { } output)
         {
             return stack;
         }
-        var source = new DummySlot(stack);
-        for (int i = 0; i < 64 && !source.Empty; i++)
+        var left = Stock.Put(Api.World, output, stack);
+        if (left != null)
         {
-            var best = container.Inventory.GetBestSuitedSlot(source);
-            if (best.slot == null)
-            {
-                break;
-            }
-            if (source.TryPutInto(Api.World, best.slot, source.StackSize) <= 0)
-            {
-                break;
-            }
-            best.slot.MarkDirty();
+            overflowed = true;
         }
-        return source.Empty ? null : source.Itemstack;
+        return left;
     }
 
     /// <summary>
@@ -246,8 +345,36 @@ public class BlockEntityMachine : BlockEntitySparkstone
         {
             ReadContext();
         }
-        var crystal = working[turn++ % working.Count];
-        return MachineWork.Work(this, crystal);
+        var crystal = working[turn % working.Count];
+        overflowed = false;
+        var result = MachineWork.Work(this, crystal);
+        if (result == MachineWork.Result.Full || overflowed)
+        {
+            // An output with no room for the yield: Dormant, drawing and checking nothing, until a rod tap (question 7).
+            GoDormantFull();
+            if (result != MachineWork.Result.Full)
+            {
+                result = MachineWork.Result.Full;
+            }
+        }
+        // Memory cycles the crystal that just took its turn out and the next one in; the one in its place works next.
+        if (Memory is not { } memory || !memory.Rotate(this, crystal))
+        {
+            turn++;
+        }
+        return result;
+    }
+
+    /// <summary>Whether the machine last went Dormant because its output was full; a rod tap clears it.</summary>
+    public bool StoppedFull { get; private set; }
+
+    private static readonly AssetLocation FullSound = new(LemuriaModSystem.ModId, "sounds/machines/switch-off");
+
+    private void GoDormantFull()
+    {
+        StoppedFull = true;
+        SetActive(false);
+        Api.World.PlaySoundAt(FullSound, Pos.X + 0.5, Pos.Y + 0.5, Pos.Z + 0.5, null, true, 16f, LemuriaSound.Volume(0.6f));
     }
 
     /// <summary>The crystal that works next, for the test command.</summary>
@@ -378,7 +505,7 @@ public class BlockEntityMachine : BlockEntitySparkstone
     public float MotorTorque()
     {
         int amp = AmplifyRank();
-        return Working.Sum(c => Machine.MotorTorque(c.Evolution) * (amp >= Crystal.Rank(c.Evolution) ? 2f : 1f));
+        return Working.Sum(c => (c.IsFitting ? Machine.DeadSocketTorque : Machine.MotorTorque(c.Evolution)) * (amp >= Crystal.Rank(c.Evolution) ? 2f : 1f));
     }
 
     /// <summary>Pays the Motor's charge for the hours since the last look; it turns only while that is paid. Public for the test command.</summary>
@@ -396,8 +523,10 @@ public class BlockEntityMachine : BlockEntitySparkstone
         else
         {
             int amp = AmplifyRank();
-            double cost = working.Sum(c => Machine.MotorChargePerHour(c.Evolution) * (amp >= Crystal.Rank(c.Evolution) ? Machine.AmplifyCost : 1)) * hours;
-            motorPowered = hours <= 0 ? networks.CanPay(this, 0.0001f) : networks.TryPay(this, (float)cost);
+            double cost = working.Sum(c => (c.IsFitting ? Machine.DeadSocketChargePerHour : Machine.MotorChargePerHour(c.Evolution)) * (amp >= Crystal.Rank(c.Evolution) ? Machine.AmplifyCost : 1)) * hours;
+            // A line that holds nothing never pays, however short the time (the network's own rounding
+            // would let an empty line "pay" 0.0001): a Dead Socket has nothing else to run on.
+            motorPowered = networks.CanPay(this, Math.Max((float)cost, 0.001f)) && (hours <= 0 || networks.TryPay(this, (float)cost));
         }
         if (motorPowered != was)
         {
@@ -419,8 +548,15 @@ public class BlockEntityMachine : BlockEntitySparkstone
 
     // ------------------------------------------------------------------ show
 
+    /// <summary>A Crystal Motor also takes a Dead Socket, a fitting; every other machine takes crystals only (note, The Dead Socket).</summary>
+    public override bool Accepts(ItemStack stack) => Form == Machine.Motor ? Socketable(stack) : base.Accepts(stack);
+
     protected override void OnActiveChanged()
     {
+        if (Active)
+        {
+            StoppedFull = false;
+        }
         if (!Active)
         {
             motorPowered = false;
@@ -440,6 +576,7 @@ public class BlockEntityMachine : BlockEntitySparkstone
     public override void ToTreeAttributes(ITreeAttribute tree)
     {
         base.ToTreeAttributes(tree);
+        tree.SetBool("stoppedFull", StoppedFull);
         if (carverUid != null)
         {
             tree.SetString("carverUid", carverUid);
@@ -452,6 +589,7 @@ public class BlockEntityMachine : BlockEntitySparkstone
         base.FromTreeAttributes(tree, worldForResolving);
         carverUid = tree.GetString("carverUid");
         carverName = tree.GetString("carverName");
+        StoppedFull = tree.GetBool("stoppedFull");
         contextDirty = true;
     }
 
@@ -493,6 +631,7 @@ public class BlockEntityMachine : BlockEntitySparkstone
     /// </summary>
     public override bool CanWork(SocketCrystal crystal) => Form switch
     {
+        _ when crystal.IsFitting => Form == Machine.Motor,
         Machine.Gather => crystal.IsAligned,
         Machine.Scatter => Crystal.Rank(crystal.Evolution) > 1,
         _ => true,
@@ -502,6 +641,10 @@ public class BlockEntityMachine : BlockEntitySparkstone
     {
         base.GetBlockInfo(forPlayer, dsc);
         int dormant = sockets.Count(c => c.Dormant);
+        if (StoppedFull && !Active)
+        {
+            dsc.AppendLine(Vintagestory.API.Config.Lang.Get(LemuriaModSystem.ModId + ":machine-stoppedfull"));
+        }
         if (dormant > 0)
         {
             dsc.AppendLine(Vintagestory.API.Config.Lang.Get(LemuriaModSystem.ModId + ":machine-dormantcrystals", dormant));

@@ -1,0 +1,35 @@
+{
+	"code": "deadsocket",
+	"maxstacksize": 16,
+	"shape": { "base": "lemuria:item/machines/deadsocket" },
+	"textures": {
+		"rock": { "base": "game:block/stone/polishedrock/granite" },
+		"metal": { "base": "game:block/metal/sheet/copper1" }
+	},
+	"attributes": {
+		"handbook": { "exclude": true },
+		"lemuriaSocketFitting": true
+	},
+	"creativeinventory": { "general": ["*"], "items": ["*"] },
+	"guiTransform": {
+		"rotation": { "x": -30, "y": 45, "z": 0 },
+		"origin": { "x": 0.5, "y": 0.08, "z": 0.5 },
+		"scale": 5
+	},
+	"fpHandTransform": {
+		"translation": { "x": 0, "y": 0.2, "z": 0 },
+		"rotation": { "x": 0, "y": 0, "z": 0 },
+		"origin": { "x": 0.5, "y": 0.1, "z": 0.5 },
+		"scale": 3
+	},
+	"groundTransform": {
+		"origin": { "x": 0.5, "y": 0, "z": 0.5 },
+		"scale": 4
+	},
+	"tpHandTransform": {
+		"translation": { "x": -0.8, "y": -0.1, "z": -0.6 },
+		"rotation": { "x": 0, "y": 0, "z": 0 },
+		"origin": { "x": 0.5, "y": 0, "z": 0.5 },
+		"scale": 1
+	}
+}

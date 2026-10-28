@@ -1,6 +1,7 @@
 using System.Linq;
 using Lemuria.Core;
 using Lemuria.Crystals;
+using Lemuria.Evocations;
 using Lemuria.Sparkstone;
 using Vintagestory.API.Common;
 using Vintagestory.API.MathTools;
@@ -27,11 +28,16 @@ public class MachinesModSystem : ModSystem
         api.RegisterBlockEntityBehaviorClass(BEBehaviorCrystalMotor.Name, typeof(BEBehaviorCrystalMotor));
         api.RegisterBlockBehaviorClass(BlockBehaviorRodMaker.Name, typeof(BlockBehaviorRodMaker));
         api.RegisterItemClass(ItemCrystalRod.ClassCode, typeof(ItemCrystalRod));
+        api.RegisterBlockClass(BlockControlShelf.ClassCode, typeof(BlockControlShelf));
+        api.RegisterBlockEntityClass(BlockEntityControlShelf.EntityClassCode, typeof(BlockEntityControlShelf));
+        api.RegisterBlockEntityClass(BlockEntityMemory.ClassCode, typeof(BlockEntityMemory));
+        api.RegisterBlockClass(BlockReclamationPlate.ClassCode, typeof(BlockReclamationPlate));
         ItemCrystalChisel.StoneCarver = new MachineCarver();
     }
 
     public override void StartServerSide(ICoreServerAPI api)
     {
+        Effects.Boiled += BlockReclamationPlate.OnBoiled;
         var tests = new MachinesTests(api, Mod.Logger);
         api.Event.SaveGameLoaded += () =>
         {
@@ -93,6 +99,50 @@ public class MachinesModSystem : ModSystem
                         .WithDescription("An Unaligned Focus quickens a seedling in a cradle")
                         .HandleWith(_ => Test(-44, 32, tests.Quicken))
                     .EndSubCommand()
+                    .BeginSubCommand("shelf")
+                        .WithDescription("A Control Shelf sows a 3×3, picks its first item with work, and sends firewood to its output or back to its input")
+                        .HandleWith(_ => Test(-60, 20, tests.ShelfScene))
+                    .EndSubCommand()
+                    .BeginSubCommand("dig")
+                        .WithDescription("A shelf plants a sapling and digs charcoal into its output; a full output sends the machine Dormant")
+                        .HandleWith(_ => Test(-60, 36, tests.DigScene))
+                    .EndSubCommand()
+                    .BeginSubCommand("pit")
+                        .WithDescription("One Focus with an axe, shovel, firewood and firestarter builds and lights a roofed charcoal pit from a chest of logs")
+                        .HandleWith(_ => Test(-60, 52, tests.Pit))
+                    .EndSubCommand()
+                    .BeginSubCommand("fell")
+                        .WithDescription("A Sky Focus fells a tree into a chest, paying by its logs")
+                        .HandleWith(_ => Test(-76, 20, tests.Fell))
+                    .EndSubCommand()
+                    .BeginSubCommand("memory")
+                        .WithDescription("A Memory cycles its crystals through a Focus")
+                        .HandleWith(_ => Test(-76, 36, tests.MemoryScene))
+                    .EndSubCommand()
+                    .BeginSubCommand("plate")
+                        .WithDescription("A Fire Focus boils salt water over a reclamation plate, the chance set to 1")
+                        .HandleWith(_ => Test(-76, 52, tests.Plate))
+                    .EndSubCommand()
+                    .BeginSubCommand("bore")
+                        .WithDescription("An Earth Focus facing east bores a 2×2 into a chest")
+                        .HandleWith(_ => Test(-90, 20, tests.Bore))
+                    .EndSubCommand()
+                    .BeginSubCommand("deadsocket")
+                        .WithDescription("A Dead Socket turns a Crystal Motor on a quern from its line")
+                        .HandleWith(_ => Test(-90, 36, tests.DeadSocket))
+                    .EndSubCommand()
+                    .BeginSubCommand("deadsocketcheck")
+                        .WithDescription("Reports whether the Dead Socket's quern turns, then cuts its line")
+                        .HandleWith(_ => Test(-90, 36, _ => tests.DeadSocketCheck()))
+                    .EndSubCommand()
+                    .BeginSubCommand("deadsocketstopped")
+                        .WithDescription("Reports whether the Dead Socket's quern stopped once its line was cut")
+                        .HandleWith(_ => Test(-90, 36, _ => tests.DeadSocketStopped()))
+                    .EndSubCommand()
+                    .BeginSubCommand("kept")
+                        .WithDescription("Reports the test shelf's items, Memory's crystals and Dead Socket, after a restart")
+                        .HandleWith(_ => Test(-60, 20, _ => TestSite.WithChunk(api, Mod.Logger, "Machines", -76, 36, _ => TestSite.WithChunk(api, Mod.Logger, "Machines", -90, 36, _ => tests.Kept()))))
+                    .EndSubCommand()
                     .BeginSubCommand("check")
                         .WithDescription("Reports the test blocks' crystals, Dormant block and refining, after a restart")
                         .HandleWith(_ => Test(-34, 36, _ => tests.Check()))
@@ -103,6 +153,7 @@ public class MachinesModSystem : ModSystem
 
     public override void Dispose()
     {
+        Effects.Boiled -= BlockReclamationPlate.OnBoiled;
         ItemCrystalChisel.StoneCarver = null;
     }
 }

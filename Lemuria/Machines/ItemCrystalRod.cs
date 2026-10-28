@@ -59,7 +59,7 @@ public class ItemCrystalRod : Item
                 world.PlaySoundAt(TurnSound, pos.X + 0.5, pos.Y + 0.5, pos.Z + 0.5, null, true, 12f, LemuriaSound.Volume(0.5f));
             }
         }
-        else if (stone is BlockEntityMachine && stone.CrystalAt(blockSel.Face, blockSel.HitPosition) is { } crystal)
+        else if (stone is BlockEntityMachine or BlockEntityMemory && stone.CrystalAt(blockSel.Face, blockSel.HitPosition) is { } crystal)
         {
             crystal.Dormant = !crystal.Dormant;
             stone.OnSocketsChanged();
