@@ -591,7 +591,23 @@ public class BlockEntityMachine : BlockEntitySparkstone
         carverName = tree.GetString("carverName");
         StoppedFull = tree.GetBool("stoppedFull");
         contextDirty = true;
+        if (Api?.Side == EnumAppSide.Client && Form == Machine.Motor)
+        {
+            // The Motor's behaviour sends whether the line pays; the glyphs follow it.
+            bool was = motorPowered;
+            motorPowered = tree.GetBool("motorPowered");
+            if (was != motorPowered)
+            {
+                MarkDirty(true);
+            }
+        }
     }
+
+    /// <summary>
+    /// A Motor that turns lights its glyphs, at least to the lowest level, even on a line too low to show
+    /// one: a Dead Socket stores nothing, so its Motor's own level is the line's (play-test, Oct 28).
+    /// </summary>
+    protected override int ShownLevel => Form == Machine.Motor && MotorPowered ? Math.Max(base.ShownLevel, 1) : base.ShownLevel;
 
     protected override MeshData? BuildMesh(ICoreClientAPI capi, ITesselatorAPI tesselator, int shown)
     {
