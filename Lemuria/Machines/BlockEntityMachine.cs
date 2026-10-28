@@ -461,6 +461,20 @@ public class BlockEntityMachine : BlockEntitySparkstone
         return drawn;
     }
 
+    /// <summary>
+    /// What a crystal can do here, for its collar's light: Gather gathers only with aligned crystals, and a
+    /// Glittering crystal has no power to give up in a Scatter; every other verb uses any crystal.
+    /// </summary>
+    public override bool CanWork(SocketCrystal crystal) => Form switch
+    {
+        Machine.Gather => crystal.IsAligned,
+        Machine.Scatter => Crystal.Rank(crystal.Evolution) > 1,
+        _ => true,
+    };
+
+    /// <summary>The Motor's sockets sit on its hub, which stands a little proud of the front.</summary>
+    protected override float SocketLift => Form == Machine.Motor ? 0.04f : 0;
+
     /// <summary>Whether the sockets are drawn with the block; the Motor turns its crystals with its hub instead.</summary>
     protected override bool DrawSocketsWithBlock => Form != Machine.Motor;
 

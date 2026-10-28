@@ -3,7 +3,7 @@
  "textureHeight": 16,
  "textures": {
   "rock": "game:block/stone/polishedrock/granite",
-  "glyph": "lemuria:block/sparkstone/glyph",
+  "frame": "lemuria:block/machines/frame",
   "form": "lemuria:block/machines/gather"
  },
  "elements": [
@@ -90,7 +90,7 @@
    ],
    "faces": {
     "east": {
-     "texture": "#glyph",
+     "texture": "#frame",
      "uv": [
       0,
       0,
@@ -99,7 +99,7 @@
      ]
     },
     "south": {
-     "texture": "#glyph",
+     "texture": "#frame",
      "uv": [
       0,
       0,
@@ -108,7 +108,7 @@
      ]
     },
     "west": {
-     "texture": "#glyph",
+     "texture": "#frame",
      "uv": [
       0,
       0,
@@ -117,7 +117,7 @@
      ]
     },
     "up": {
-     "texture": "#glyph",
+     "texture": "#frame",
      "uv": [
       0,
       0,
@@ -126,7 +126,7 @@
      ]
     },
     "down": {
-     "texture": "#glyph",
+     "texture": "#frame",
      "uv": [
       0,
       0,
