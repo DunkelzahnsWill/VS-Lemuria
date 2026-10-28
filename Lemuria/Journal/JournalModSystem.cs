@@ -5,6 +5,7 @@ using Lemuria.Core;
 using Lemuria.Cradle;
 using Lemuria.Crystals;
 using Lemuria.Evocations;
+using Lemuria.Machines;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
@@ -23,6 +24,9 @@ namespace Lemuria.Journal;
 /// Step 3 (design note "Lemuria step 3: Naked evocations", The Pilgrim's Journal): chapter 4 opens the
 /// first time a player takes a charged aligned crystal in their hand, looked at whenever they change
 /// hotbar slots, on the same 10-second look, and when they cast.
+/// Step 4 (design note "Lemuria step 4: Machines", The Pilgrim's Journal): chapter 5 opens the first
+/// time a player carves a machine; the hidden page "Quicken" opens for a machine's carver the first
+/// time their Focus or Scatter quickens a cradle, while they are online.
 /// </summary>
 public class JournalModSystem : ModSystem
 {
@@ -34,6 +38,8 @@ public class JournalModSystem : ModSystem
     public const string FourElementals = "fourelementals";
     public const string LivingStone = "livingstone";
     public const string NakedEvocations = "nakedevocations";
+    public const string BasicVocabulary = "basicvocabulary";
+    public const string Quicken = "quicken";
 
     private static readonly AssetLocation ChaptersAsset = new(LemuriaModSystem.ModId, "config/journal/chapters.json");
 
@@ -73,6 +79,8 @@ public class JournalModSystem : ModSystem
         api.Event.PlayerJoin += SendUnlocks;
         BlockEntityCradle.Harvested += OnHarvested;
         EvocationsModSystem.Cast += OnCast;
+        MachineCarver.Carved += OnCarved;
+        MachineWork.Quickened += OnQuickened;
         api.Event.AfterActiveSlotChanged += OnActiveSlotChanged;
         api.Event.RegisterGameTickListener(_ => CheckCarried(), 10_000, 5000);
         api.Event.SaveGameLoaded += () => Mod.Logger.Notification("Journal: {0} recipe(s)",
@@ -131,6 +139,22 @@ public class JournalModSystem : ModSystem
     }
 
     private void OnCast(IServerPlayer player) => Unlock(player, NakedEvocations);
+
+    private void OnCarved(IPlayer player)
+    {
+        if (player is IServerPlayer serverPlayer)
+        {
+            Unlock(serverPlayer, BasicVocabulary);
+        }
+    }
+
+    private void OnQuickened(BlockEntityMachine machine)
+    {
+        if (machine.CarverUid != null && sapi?.World.PlayerByUid(machine.CarverUid) is IServerPlayer { ConnectionState: EnumClientState.Playing } carver)
+        {
+            Unlock(carver, Quicken);
+        }
+    }
 
     private void OnActiveSlotChanged(IServerPlayer player, ActiveSlotChangeEventArgs args) => CheckHand(player);
 
@@ -204,6 +228,8 @@ public class JournalModSystem : ModSystem
             sapi.Event.PlayerJoin -= SendUnlocks;
             BlockEntityCradle.Harvested -= OnHarvested;
             EvocationsModSystem.Cast -= OnCast;
+            MachineCarver.Carved -= OnCarved;
+            MachineWork.Quickened -= OnQuickened;
             sapi.Event.AfterActiveSlotChanged -= OnActiveSlotChanged;
         }
     }
