@@ -56,6 +56,13 @@ public class BlockCrystalMotor : BlockMPBase, IMPPowered
 
     public override bool HasMechPowerConnectorAt(IWorldAccessor world, BlockPos pos, BlockFacing face, BlockMPBase forBlock) => face == front;
 
+    /// <summary>
+    /// Joins what the hub touches. The game's own search, used when carving or turning a block into a
+    /// Motor, looks only at the four sides, so a hub facing up or down would never meet its quern.
+    /// </summary>
+    public override void WasPlaced(IWorldAccessor world, BlockPos ownPos, BlockFacing connectedOnFacing) =>
+        base.WasPlaced(world, ownPos, connectedOnFacing ?? front);
+
     /// <summary>The stone's hum, rising with the shaft's speed.</summary>
     public override float GetAmbientSoundStrength(IWorldAccessor world, BlockPos pos)
     {

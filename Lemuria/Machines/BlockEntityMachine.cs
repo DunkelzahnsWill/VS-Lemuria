@@ -384,6 +384,7 @@ public class BlockEntityMachine : BlockEntitySparkstone
     /// <summary>Pays the Motor's charge for the hours since the last look; it turns only while that is paid. Public for the test command.</summary>
     public bool PayMotor(double? forHours = null)
     {
+        bool was = motorPowered;
         double now = Api.World.Calendar.TotalHours;
         double hours = forHours ?? (lastMotorHours < 0 ? 0 : Math.Max(0, now - lastMotorHours));
         lastMotorHours = now;
@@ -391,12 +392,29 @@ public class BlockEntityMachine : BlockEntitySparkstone
         if (!Active || working.Count == 0 || SparkstoneModSystem.Networks is not { } networks)
         {
             motorPowered = false;
-            return false;
         }
-        int amp = AmplifyRank();
-        double cost = working.Sum(c => Machine.MotorChargePerHour(c.Evolution) * (amp >= Crystal.Rank(c.Evolution) ? Machine.AmplifyCost : 1)) * hours;
-        motorPowered = hours <= 0 ? networks.CanPay(this, 0.0001f) : networks.TryPay(this, (float)cost);
+        else
+        {
+            int amp = AmplifyRank();
+            double cost = working.Sum(c => Machine.MotorChargePerHour(c.Evolution) * (amp >= Crystal.Rank(c.Evolution) ? Machine.AmplifyCost : 1)) * hours;
+            motorPowered = hours <= 0 ? networks.CanPay(this, 0.0001f) : networks.TryPay(this, (float)cost);
+        }
+        if (motorPowered != was)
+        {
+            // The clients' rotors read it from the block entity.
+            MarkDirty();
+        }
         return motorPowered;
+    }
+
+    /// <summary>A crystal set in, taken out, rested or woken changes a Motor's power at once, not on its next ten-second look.</summary>
+    public override void OnSocketsChanged()
+    {
+        base.OnSocketsChanged();
+        if (Form == Machine.Motor && Api?.Side == EnumAppSide.Server)
+        {
+            PayMotor();
+        }
     }
 
     // ------------------------------------------------------------------ show
@@ -406,6 +424,11 @@ public class BlockEntityMachine : BlockEntitySparkstone
         if (!Active)
         {
             motorPowered = false;
+        }
+        else if (Form == Machine.Motor && Api?.Side == EnumAppSide.Server)
+        {
+            // Switched Active, a Motor starts at once rather than on its next look.
+            PayMotor();
         }
         workSeconds = 0;
     }

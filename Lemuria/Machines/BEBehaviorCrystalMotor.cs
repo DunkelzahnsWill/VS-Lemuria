@@ -35,7 +35,8 @@ public class BEBehaviorCrystalMotor : BEBehaviorMPRotor
 
     protected override AssetLocation? Sound => null;
 
-    protected override float Resistance => 0.003f;
+    /// <summary>Light while it drives; unpowered, the stone brakes, so the shaft stops within seconds instead of coasting on.</summary>
+    protected override float Resistance => (Api?.Side == EnumAppSide.Server ? Machine?.MotorPowered == true : powered) ? 0.003f : 0.1f;
 
     protected override double AccelerationFactor => 0.05d;
 

@@ -404,16 +404,21 @@ public class MachinesTests
         var origin = TestSite.Surface(sapi, column);
         Ground(origin, 3, 3, 3);
         var pos = origin.AddCopy(1, 0, 1);
-        // As the note's play-test sets it up: a quern below, the hub down on it and the sockets up.
-        var motor = Place(pos, Machine.Motor, "down");
+        // As the note's play-test sets it up: a quern first, an Amplify on it struck on top into a Motor,
+        // so the hub faces down onto the quern and the sockets up. Carving must join the quern by itself.
         var quern = World.GetBlock(new AssetLocation("game:quern-granite")) as BlockMPBase;
-        if (motor == null || quern == null)
+        if (quern != null)
+        {
+            Accessor.SetBlock(quern.Id, pos.DownCopy());
+        }
+        var amplify = Place(pos, Machine.Amplify, "up");
+        var into = MachineCarver.NextBlock(World, Accessor.GetBlock(pos), BlockFacing.UP, out _);
+        var motor = into != null && MachineCarver.Carve(World, null, pos, into) ? Accessor.GetBlockEntity(pos) as BlockEntityMachine : null;
+        if (amplify == null || motor == null || quern == null)
         {
             logger.Error("Machines test: no Crystal Motor or quern");
             return;
         }
-        Accessor.SetBlock(quern.Id, pos.DownCopy());
-        quern.tryConnect(World, null!, pos.DownCopy(), BlockFacing.UP);
         Put(motor, Crystal.Fire, Crystal.Glittering);
         Fill(motor);
         bool powered = motor.PayMotor(0.1);
@@ -446,6 +451,20 @@ public class MachinesTests
         // A few seconds after it starts, the network is still spinning up toward the Motor's speed.
         float speed = consumer?.Network?.Speed ?? -1;
         logger.Notification("Machines test: the quern turns: {0}", YesNo(speed > 0.001f));
+        // Then the rod rests its only crystal, as in the owner's play-test; motorstopped checks it stops.
+        if (pos != null && Accessor.GetBlockEntity(pos) is BlockEntityMachine motor)
+        {
+            ItemCrystalRod.Tap(World, motor, new BlockSelection { Position = pos, Face = motor.GlyphFace, HitPosition = new Vec3d(0.25, 1, 0.25) }, false);
+        }
+    }
+
+    public void MotorStopped()
+    {
+        var pos = TestSite.ReadPos(sapi, MotorKey);
+        var motor = pos == null ? null : Accessor.GetBlockEntity(pos) as BlockEntityMachine;
+        float speed = pos == null ? -1 : Accessor.GetBlockEntity(pos.DownCopy())?.GetBehavior<BEBehaviorMPConsumer>()?.Network?.Speed ?? -1;
+        logger.Notification("Machines test: with its only crystal resting the Motor is unpowered: {0}, and the quern has stopped: {1} (speed {2:0.0000})",
+            YesNo(motor?.MotorPowered == false), YesNo(speed >= 0 && speed < 0.001f), speed);
     }
 
     // ------------------------------------------------------------------ Quicken

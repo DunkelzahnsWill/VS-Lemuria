@@ -22,3 +22,5 @@ Machines test: a cut-off Motor stores 10 in 100 with one Glittering crystal, run
 Machines test: the quern turns: yes$
 # The first secret: an Unaligned Focus quickens a growing seedling.
 Machines test: an Unaligned Focus over a growing seedling Acted, quickened: yes$
+# Resting its only crystal stops it, and the quern does not coast on.
+Machines test: with its only crystal resting the Motor is unpowered: yes, and the quern has stopped: yes
