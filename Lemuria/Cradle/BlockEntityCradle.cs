@@ -284,6 +284,26 @@ public class BlockEntityCradle : BlockEntity, IStandingCrystal
         }
     }
 
+    /// <summary>Whether a seedling grows here: planted, not yet ripe, and no crystal refining or mending in it.</summary>
+    public bool Growing => stage >= FirstStage && stage < Ripe && crystal == null;
+
+    /// <summary>
+    /// Moves a growing seedling on by this many in-game hours of growth (step 4 note, The first secret:
+    /// Quicken), as if the time had passed, and ends the stages whose time has come. Returns whether it
+    /// grew. Server only.
+    /// </summary>
+    public bool Quicken(double hours)
+    {
+        if (!Growing || hours <= 0)
+        {
+            return false;
+        }
+        nextStageTotalHours -= hours;
+        Advance();
+        MarkDirty(false);
+        return true;
+    }
+
     private string SeedlingEvolution => seedlingCode == null ? Crystal.Glittering : new AssetLocation(seedlingCode).Path["seedling-".Length..];
 
     /// <summary>
