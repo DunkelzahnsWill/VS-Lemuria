@@ -531,7 +531,7 @@ public class BlockEntitySparkstone : BlockEntity
     {
         var capi = (ICoreClientAPI)Api;
         var meshes = ObjectCacheUtil.GetOrCreate(capi, MeshCacheKey, () => new Dictionary<string, MeshData?>());
-        int shown = active ? level : -1;
+        int shown = ShownLevel;
         string key = Block.Code + "/" + shown;
         MeshData? mesh;
         lock (meshes)
@@ -551,12 +551,25 @@ public class BlockEntitySparkstone : BlockEntity
             return false;
         }
         mesher.AddMeshData(mesh);
-        if (SocketMeshes(capi) is { } crystals)
+        // A socket part that cannot be drawn must not take the whole chunk's mesh down with it.
+        MeshData? crystals = null;
+        try
+        {
+            crystals = SocketMeshes(capi);
+        }
+        catch (Exception e)
+        {
+            capi.Logger.Error("[lemuria] Sparkstone: could not draw the sockets at {0}: {1}", Pos, e);
+        }
+        if (crystals != null)
         {
             mesher.AddMeshData(crystals);
         }
         return true;
     }
+
+    /// <summary>The level the glyphs show: the network's, or -1 (dark) while Dormant.</summary>
+    protected virtual int ShownLevel => active ? level : -1;
 
     /// <summary>The glyph textures at a level: lit by the network's level, dark (-1) while Dormant.</summary>
     protected static string GlyphSuffix(int shown) => shown <= 0 ? "" : GlyphCodes[shown]["glyph".Length..];
@@ -666,11 +679,15 @@ public class BlockEntitySparkstone : BlockEntity
         return all;
     }
 
-    /// <summary>A fitting's own item shape, built upright on the block's floor like a crystal; cached per item.</summary>
-    private static MeshData? FittingMesh(ICoreClientAPI capi, ItemStack stack)
+    /// <summary>
+    /// A fitting's own item shape, built upright on the block's floor like a crystal and cached per item
+    /// and rock. It is tesselated as a shape against the block atlas, as the stone is, since an item's own
+    /// mesh points into the item atlas and draws nothing in a block. Its "rock" is the block's own.
+    /// </summary>
+    private MeshData? FittingMesh(ICoreClientAPI capi, ItemStack stack)
     {
         var parts = ObjectCacheUtil.GetOrCreate(capi, PartCacheKey, () => new Dictionary<string, MeshData?>());
-        string key = "fitting/" + stack.Collectible.Code;
+        string key = $"fitting/{stack.Collectible.Code}/{Block.Variant["rock"]}";
         lock (parts)
         {
             if (parts.TryGetValue(key, out var cached))
@@ -679,19 +696,57 @@ public class BlockEntitySparkstone : BlockEntity
             }
         }
         MeshData? mesh = null;
-        if (stack.Item != null)
+        var collectible = stack.Collectible;
+        var shapeBase = stack.Item?.Shape?.Base ?? stack.Block?.Shape?.Base;
+        if (shapeBase != null && Shape.TryGet(capi, shapeBase.Clone().WithPathPrefixOnce("shapes/").WithPathAppendixOnce(".json")) is { } shape)
         {
-            capi.Tesselator.TesselateItem(stack.Item, out mesh);
-        }
-        else if (stack.Block != null)
-        {
-            capi.Tesselator.TesselateBlock(stack.Block, out mesh);
+            var textures = stack.Item?.Textures ?? stack.Block?.Textures;
+            capi.Tesselator.TesselateShape("lemuria-fitting", shape, out mesh, new FittingTextures(capi, capi.Tesselator.GetTextureSource(Block), textures));
         }
         lock (parts)
         {
             parts[key] = mesh;
         }
         return mesh;
+    }
+
+    /// <summary>A fitting's textures in the block atlas, its "rock" the block's own.</summary>
+    private class FittingTextures : ITexPositionSource
+    {
+        private readonly ICoreClientAPI capi;
+        private readonly ITexPositionSource block;
+        private readonly IDictionary<string, CompositeTexture>? textures;
+
+        public FittingTextures(ICoreClientAPI capi, ITexPositionSource block, IDictionary<string, CompositeTexture>? textures)
+        {
+            this.capi = capi;
+            this.block = block;
+            this.textures = textures;
+        }
+
+        public TextureAtlasPosition? this[string textureCode]
+        {
+            get
+            {
+                if (textureCode == "rock")
+                {
+                    return block[textureCode];
+                }
+                if (textures == null || !textures.TryGetValue(textureCode, out var texture))
+                {
+                    return block[textureCode];
+                }
+                var location = texture.Baked?.BakedName ?? texture.Base;
+                var position = capi.BlockTextureAtlas[location];
+                if (position == null)
+                {
+                    capi.BlockTextureAtlas.GetOrInsertTexture(location, out _, out position, null);
+                }
+                return position ?? capi.BlockTextureAtlas.UnknownTexturePosition;
+            }
+        }
+
+        public Size2i? AtlasSize => capi.BlockTextureAtlas.Size;
     }
 
     /// <summary>Stands a mesh built upright on the block's floor on a point of the face, lifted this far off it.</summary>
