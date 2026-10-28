@@ -14,7 +14,7 @@
 	"admincharger-filled": "Filled the {0}.",
 	"admincharger-carried": "Filled {0} crystal(s) and chisel(s) you carry.",
 	"admincharger-nothing": "Nothing here holds charge.",
-	"crystalchisel-carve": "Carve polished rock into a cradle, or a polished slab into a crystal rack",
+	"crystalchisel-carve": "Carve polished rock into a cradle, a polished slab into a crystal rack, or Awakened sparkstone into a machine",
 	"block-sparkstone-awakened-*": "Awakened sparkstone",
 	"blockdesc-sparkstone-awakened-*": "Polished stone carved with glyphs. It stores charge and shares it with every block of it that it touches. Crystals set into its sockets store charge for it.",
 	"sparkstone-dormant": "Dormant: its glyphs are dark, and it passes no charge."

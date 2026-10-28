@@ -220,7 +220,7 @@ public class BlockEntitySparkstone : BlockEntity
     }
 
     /// <summary>Takes a crystal out with its charge: a capacitor leaves as full as its network. Server only.</summary>
-    public ItemStack TakeOut(SocketCrystal crystal)
+    public virtual ItemStack TakeOut(SocketCrystal crystal)
     {
         var stack = crystal.Stack.Clone();
         if (crystal.IsCapacitor)
@@ -524,9 +524,15 @@ public class BlockEntitySparkstone : BlockEntity
             return false;
         }
         mesher.AddMeshData(mesh);
-        AddSocketMeshes(capi, mesher);
+        if (DrawSocketsWithBlock && SocketMeshes(capi) is { } crystals)
+        {
+            mesher.AddMeshData(crystals);
+        }
         return true;
     }
+
+    /// <summary>Whether the crystals in the sockets are drawn with the block; a machine that turns them draws them itself.</summary>
+    protected virtual bool DrawSocketsWithBlock => true;
 
     /// <summary>The glyph textures at a level: lit by the network's level, dark (-1) while Dormant.</summary>
     protected static string GlyphSuffix(int shown) => shown <= 0 ? "" : GlyphCodes[shown]["glyph".Length..];
@@ -554,17 +560,11 @@ public class BlockEntitySparkstone : BlockEntity
         return stone;
     }
 
-    /// <summary>Each crystal in its sockets, pointing out of the socket face, glowing by its level; a resting one dim.</summary>
-    protected void AddSocketMeshes(ICoreClientAPI capi, ITerrainMeshPool mesher)
-    {
-        if (SocketMeshes(capi) is { } mesh)
-        {
-            mesher.AddMeshData(mesh);
-        }
-    }
-
-    /// <summary>The crystals in the sockets as one mesh, in block coordinates; null when there are none.</summary>
-    public MeshData? SocketMeshes(ICoreClientAPI capi, bool onFace = true)
+    /// <summary>
+    /// Each crystal in its sockets as one mesh in block coordinates, pointing out of the socket face and
+    /// glowing by its level, a resting one dim; null when there are none.
+    /// </summary>
+    public MeshData? SocketMeshes(ICoreClientAPI capi)
     {
         var face = SocketFacing;
         if (face == null || sockets.Count == 0)
