@@ -50,7 +50,9 @@ public class BlockBehaviorRodMaker : BlockBehavior
         {
             CrystalCharging.Sparks(world, blockSel.Position.ToVec3d().Add(0.5, 0.4, 0.5), Crystal.Rgb(Crystal.Unaligned), 1, 0.1f);
         }
-        return secondsUsed < HoldSeconds;
+        // As the game's harvestable bushes do: the client holds on, and the server ends the hold, so a
+        // client a little ahead of the server never stops short of the second.
+        return world.Side == EnumAppSide.Client || secondsUsed < HoldSeconds;
     }
 
     public override void OnBlockInteractStop(float secondsUsed, IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, ref EnumHandling handling)

@@ -163,12 +163,13 @@ public class MotorRenderer : IRenderer
         render.GlToggleBlend(true);
         var prog = render.PreparedStandardShader(pos.X, pos.Y, pos.Z);
         prog.Tex2D = capi.BlockTextureAtlas.AtlasTextures[0].TextureId;
-        var n = motor.Front.Normalf;
+        // The same turn the game's mechanical renderers give a part, so the hub turns with the shaft.
+        var axis = motor.AxisSign;
         float angle = motor.HubAngle;
         prog.ModelMatrix = model.Identity()
             .Translate(pos.X - camera.X, pos.Y - camera.Y, pos.Z - camera.Z)
             .Translate(0.5f, 0.5f, 0.5f)
-            .Rotate(angle * Math.Abs(n.X), angle * Math.Abs(n.Y), angle * Math.Abs(n.Z))
+            .Rotate(angle * axis[0], angle * axis[1], angle * axis[2])
             .Translate(-0.5f, -0.5f, -0.5f)
             .Values;
         prog.ViewMatrix = render.CameraMatrixOriginf;
