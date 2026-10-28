@@ -3,6 +3,6 @@
 	{ "code": "fourelementals", "pages": 8, "unlockedByDefault": false },
 	{ "code": "livingstone", "pages": 4, "unlockedByDefault": false },
 	{ "code": "nakedevocations", "pages": 5, "unlockedByDefault": false },
-	{ "code": "basicvocabulary", "pages": 9, "unlockedByDefault": false },
+	{ "code": "basicvocabulary", "pages": 16, "unlockedByDefault": false },
 	{ "code": "quicken", "pages": 1, "unlockedByDefault": false }
 ]
