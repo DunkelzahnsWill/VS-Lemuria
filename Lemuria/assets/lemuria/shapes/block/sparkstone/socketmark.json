@@ -1,0 +1,153 @@
+{
+ "textureWidth": 16,
+ "textureHeight": 16,
+ "textures": {
+  "socket": "lemuria:block/sparkstone/socket"
+ },
+ "elements": [
+  {
+   "name": "mark0",
+   "from": [
+    6.8,
+    0,
+    6.8
+   ],
+   "to": [
+    9.2,
+    0.12,
+    9.2
+   ],
+   "faces": {
+    "north": {
+     "texture": "#socket",
+     "uv": [
+      0,
+      0,
+      2.4,
+      0.12
+     ]
+    },
+    "east": {
+     "texture": "#socket",
+     "uv": [
+      0,
+      0,
+      2.4,
+      0.12
+     ]
+    },
+    "south": {
+     "texture": "#socket",
+     "uv": [
+      0,
+      0,
+      2.4,
+      0.12
+     ]
+    },
+    "west": {
+     "texture": "#socket",
+     "uv": [
+      0,
+      0,
+      2.4,
+      0.12
+     ]
+    },
+    "up": {
+     "texture": "#socket",
+     "uv": [
+      0,
+      0,
+      2.4,
+      2.4
+     ]
+    },
+    "down": {
+     "texture": "#socket",
+     "uv": [
+      0,
+      0,
+      2.4,
+      2.4
+     ]
+    }
+   }
+  },
+  {
+   "name": "mark1",
+   "from": [
+    6.8,
+    0,
+    6.8
+   ],
+   "to": [
+    9.2,
+    0.12,
+    9.2
+   ],
+   "faces": {
+    "north": {
+     "texture": "#socket",
+     "uv": [
+      0,
+      0,
+      2.4,
+      0.12
+     ]
+    },
+    "east": {
+     "texture": "#socket",
+     "uv": [
+      0,
+      0,
+      2.4,
+      0.12
+     ]
+    },
+    "south": {
+     "texture": "#socket",
+     "uv": [
+      0,
+      0,
+      2.4,
+      0.12
+     ]
+    },
+    "west": {
+     "texture": "#socket",
+     "uv": [
+      0,
+      0,
+      2.4,
+      0.12
+     ]
+    },
+    "up": {
+     "texture": "#socket",
+     "uv": [
+      0,
+      0,
+      2.4,
+      2.4
+     ]
+    },
+    "down": {
+     "texture": "#socket",
+     "uv": [
+      0,
+      0,
+      2.4,
+      2.4
+     ]
+    }
+   },
+   "rotationOrigin": [
+    8,
+    0,
+    8
+   ],
+   "rotationY": 45
+  }
+ ]
+}

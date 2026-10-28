@@ -74,7 +74,7 @@ public static class Effects
             var lit = TryIgnite(cast, aimed);
             acted = lit == Lighting.Lit || (lit == Lighting.NotIgnitable && SetFire(cast, cast.Block!));
         }
-        if (cast.Power < 2)
+        if (!cast.Wide)
         {
             return acted;
         }
@@ -84,6 +84,10 @@ public static class Effects
             {
                 acted = true;
             }
+        }
+        if (cast.Power < 2)
+        {
+            return acted;
         }
         foreach (var entity in cast.EntitiesInArea(e => IsCreature(e) && e.EntityId != cast.Caster?.EntityId && !e.IsOnFire))
         {
@@ -131,7 +135,7 @@ public static class Effects
             accessor.SetBlock(0, pos);
             accessor.SetBlock(lava.BlockId, pos, BlockLayersAccess.Fluid);
             accessor.TriggerNeighbourBlockUpdate(pos);
-            cast.Api.Logger.Audit("{0} melted rock to lava with a Fire crystal at {1}", cast.Player?.PlayerName ?? "the test command", pos);
+            cast.Api.Logger.Audit("{0} melted rock to lava with a Fire crystal at {1}", cast.ActorName, pos);
             melted++;
         }
         if (melted > 0)
@@ -196,7 +200,7 @@ public static class Effects
         var accessor = world.BlockAccessor;
         var water = world.GetBlock(WaterCode);
         int thawed = 0;
-        foreach (var pos in cast.Power >= 2 ? cast.Area() : new[] { aimed })
+        foreach (var pos in cast.Wide ? cast.Area() : new[] { aimed })
         {
             if (Thawed(world, pos, cast.Power) is not var (how, layer) || !cast.Can(pos))
             {
@@ -312,6 +316,10 @@ public static class Effects
         }
         accessor.SetBlock(fire.BlockId, pos);
         accessor.GetBlockEntity(pos)?.GetBehavior<BEBehaviorBurning>()?.OnFirePlaced(aimed.Face, cast.Player?.PlayerUID);
+        if (cast.Machine != null)
+        {
+            cast.Api.Logger.Audit("{0} set a fire with a Fire crystal machine at {1}", cast.ActorName, pos);
+        }
         return true;
     }
 
@@ -334,7 +342,7 @@ public static class Effects
         }
         bool acted = false;
         var watered = new HashSet<BlockPos>();
-        IEnumerable<BlockPos> blocks = cast.Power >= 2
+        IEnumerable<BlockPos> blocks = cast.Wide
             ? cast.Area()
             : cast.Block != null
                 ? new[] { cast.Block.Position, cast.Block.Position.AddCopy(cast.Block.Face) }
@@ -346,10 +354,10 @@ public static class Effects
                 acted = true;
             }
         }
-        var burning = cast.Power >= 2
+        var burning = cast.Wide
             ? cast.EntitiesInArea(e => e.IsOnFire)
             : cast.EntitiesInArea(e => e.IsOnFire && e.EntityId == cast.Caster?.EntityId);
-        if (cast.Power < 2 && cast.Entity is { IsOnFire: true } aimedEntity)
+        if (!cast.Wide && cast.Entity is { IsOnFire: true } aimedEntity)
         {
             burning.Add(aimedEntity);
         }
@@ -780,7 +788,7 @@ public static class Effects
     public static bool Gale(CastContext cast)
     {
         bool Pushable(Entity e) => (e is EntityItem || IsCreature(e)) && e.EntityId != cast.Caster?.EntityId;
-        var targets = cast.Power < 2 && cast.Entity != null
+        var targets = !cast.Wide && cast.Entity != null
             ? (Pushable(cast.Entity) ? new List<Entity> { cast.Entity } : new List<Entity>())
             : cast.EntitiesInArea(Pushable);
         double speed = Evocation.GalePush(cast.Power) * PushPerBlock;

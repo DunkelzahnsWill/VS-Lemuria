@@ -1,0 +1,26 @@
+# Step 4 part 1: six forms in every rock, facing north in the creative inventory; the rod from an Unaligned crystal of either Evolution.
+Machines: 114 machine block\(s\) facing north; 2 Unaligned crystal kind\(s\) make the Crystal Rod$
+# Carving: seven strikes go round the six forms and back to Free stone; only the front carves. The
+# struck face keeps the glyph, so the Motor's hub, its {side}, is the face opposite (west).
+Machines test: strikes carve gather-east, refine-east, focus-east, scatter-east, amplify-east, motor-west, free; another face does nothing: yes; the Gather block holds 1 crystal\(s\) on its front$
+Machines test: the rod turned the front up with 1 crystal\(s\); a sneaking tap switches it Dormant: yes$
+Machines test: the Crystal Rod made: yes, the crystal used up: yes, rock left 1$
+# Focus: each Elemental does its evocation's work for a tenth of a cast; Earth rises once and goes Dormant.
+Machines test: a Fire Focus Acted, paid 1\.0, the firepit burns: yes; an Ice Focus Acted, the farmland under the flax soaked: yes$
+Machines test: an Earth Focus Acted, 4 of 4 columns rose 2 to the north and east, Dormant: yes, then Idle$
+# Amplify: a Glowing Sky Focus lifted to Luminous's power reaps ripe crops into a chest and replants them.
+Machines test: a Glowing Sky Focus amplified to 2 Acted; 9 of 9 ripe flax replanted, some item\(s\) in the chest$
+# Scatter: a Glittering crystal does nothing; Glowing Earth tills and Glowing Ice waters the 9×9.
+Machines test: a Scatter with a Glittering crystal Idle; Glowing Earth Acted, 81 of 81 tilled; Glowing Ice Acted, 81 of 81 soaked$
+# Sockets: a capacitor adds its capacity and charge and leaves full; a Dormant block cuts a line in two.
+Machines test: a capacitor raised the capacity from 150 to 250 and brought 100; taken out full it holds 100; a Dormant block splits the line into 1 and 1; the refining is 0\.50 done$
+Machines test: a Refine block refined 3 crystal\(s\) in 1 day\(s\), 4 of 4 are Fire$
+# The Crystal Motor joins the quern's network on its hub, below, and turns it; its sockets face up.
+Machines test: a Crystal Motor on a quern, powered: yes, torque 0\.25, on the quern's network: yes, sockets facing up$
+# A Motor has no store of its own: its aligned crystals are capacitors (note rev 102).
+Machines test: a cut-off Motor stores 10 in 100 with one Glittering crystal, runs an hour: yes, stops when spent: yes; an Unaligned one stores 0 and turns: no$
+Machines test: the quern turns: yes$
+# The first secret: an Unaligned Focus quickens a growing seedling.
+Machines test: an Unaligned Focus over a growing seedling Acted, quickened: yes$
+# Resting its only crystal stops it, and the quern does not coast on.
+Machines test: with its only crystal resting the Motor is unpowered: yes, and the quern has stopped: yes

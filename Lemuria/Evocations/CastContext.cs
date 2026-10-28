@@ -10,9 +10,40 @@ using Vintagestory.API.Server;
 namespace Lemuria.Evocations;
 
 /// <summary>
+/// What a machine changes about a cast (step 4 note "Lemuria step 4: Machines", Focus, Scatter, and
+/// Claims, creatures and players): the claims it may act in, the name the audit log gives it, a
+/// Scatter's flat square, from what power ripe crops are taken and whether they are replanted, where
+/// yields go, and which way a 2×2 reaches.
+/// </summary>
+public class MachineCast
+{
+    /// <summary>Whether the machine may change this block, by its own claim rule.</summary>
+    public System.Func<BlockPos, bool> Claim { get; init; } = _ => true;
+
+    /// <summary>The name the audit log records for fires and melted rock: the player who carved the machine.</summary>
+    public string ActorName { get; init; } = "a machine";
+
+    /// <summary>A Scatter's square, in blocks across, flat and centred on the block aimed at; 0 for a Focus's usual area.</summary>
+    public int Square { get; init; }
+
+    /// <summary>The power from which ripe crops, berries and fruit are taken: 3 for a Focus, as by hand, 2 for a Scatter.</summary>
+    public int CropPower { get; init; } = 3;
+
+    /// <summary>Whether a taken crop is replanted from its own seed.</summary>
+    public bool Replant { get; init; }
+
+    /// <summary>Where yields go, a container touching the machine; null to drop them where the work happened.</summary>
+    public System.Func<ItemStack, ItemStack?>? Collect { get; init; }
+
+    /// <summary>Forward and right for a 2×2, when the machine faces up or down (north and east).</summary>
+    public (int Fx, int Fz, int Rx, int Rz)? Heading { get; init; }
+}
+
+/// <summary>
 /// One cast on the server: who casts, at what power, and what the server's own ray from the caster's
 /// eyes found (design note, Multiplayer and cost). The caster may be missing for the test command,
-/// which casts from a point with nobody's claims to respect.
+/// which casts from a point with nobody's claims to respect. A machine casts too, from its front, with
+/// a <see cref="MachineCast"/> (step 4).
 /// </summary>
 public class CastContext
 {
@@ -23,6 +54,9 @@ public class CastContext
     public int Power { get; }
     public Vec3d From { get; }
     public Vec3d Dir { get; }
+
+    /// <summary>The machine casting, or null for a hand's cast.</summary>
+    public MachineCast? Machine { get; }
 
     /// <summary>The block the ray hit, unless a creature or a water surface was nearer.</summary>
     public BlockSelection? Block { get; private set; }
@@ -39,10 +73,17 @@ public class CastContext
     /// <summary>The block the area is centred on, or null on a miss.</summary>
     public BlockPos? Center { get; private set; }
 
-    public int AreaSize => Evocation.AreaSize(Power);
+    public int AreaSize => Machine?.Square > 0 ? Machine.Square : Evocation.AreaSize(Power);
 
-    private CastContext(ICoreServerAPI api, IServerPlayer? player, EntityAgent? caster, string alignment, int power, Vec3d from, Vec3d dir)
+    /// <summary>Whether the cast works across an area rather than on what it aims at: from Glowing up, and always in a Scatter.</summary>
+    public bool Wide => AreaSize > 1;
+
+    /// <summary>The name the audit log records.</summary>
+    public string ActorName => Machine?.ActorName ?? Player?.PlayerName ?? "the test command";
+
+    private CastContext(ICoreServerAPI api, IServerPlayer? player, EntityAgent? caster, string alignment, int power, Vec3d from, Vec3d dir, MachineCast? machine)
     {
+        Machine = machine;
         Api = api;
         Player = player;
         Caster = caster;
@@ -54,9 +95,9 @@ public class CastContext
     }
 
     /// <summary>Traces the cast's ray from the eyes along the look direction, as far as its range.</summary>
-    public static CastContext Aim(ICoreServerAPI api, IServerPlayer? player, EntityAgent? caster, string alignment, int power, Vec3d from, Vec3d dir)
+    public static CastContext Aim(ICoreServerAPI api, IServerPlayer? player, EntityAgent? caster, string alignment, int power, Vec3d from, Vec3d dir, MachineCast? machine = null)
     {
-        var context = new CastContext(api, player, caster, alignment, power, from, dir.Clone().Normalize());
+        var context = new CastContext(api, player, caster, alignment, power, from, dir.Clone().Normalize(), machine);
         context.Trace();
         return context;
     }
@@ -132,9 +173,12 @@ public class CastContext
         return accessor.GetBlock(above, BlockLayersAccess.Fluid).Id == 0 && accessor.GetBlock(above).Replaceable >= 6000;
     }
 
-    /// <summary>Whether the caster may change this block: always, unless it lies in a claim they have no access to.</summary>
+    /// <summary>
+    /// Whether the caster may change this block: always, unless it lies in a claim they have no access
+    /// to. A machine asks its own claim rule instead.
+    /// </summary>
     public bool Can(BlockPos pos) =>
-        Player == null || LemuriaClaims.TestAccess(Api.World, Player, pos, EnumBlockAccessFlags.BuildOrBreak);
+        Machine != null ? Machine.Claim(pos) : Player == null || LemuriaClaims.TestAccess(Api.World, Player, pos, EnumBlockAccessFlags.BuildOrBreak);
 
     public bool Can(Entity entity) => Can(entity.Pos.AsBlockPos);
 
@@ -149,7 +193,7 @@ public class CastContext
             return null;
         }
         int r = AreaSize / 2;
-        int ry = Evocation.AreaFlat(Power) ? 0 : r;
+        int ry = Machine?.Square > 0 || Evocation.AreaFlat(Power) ? 0 : r;
         return (Center.AddCopy(-r, -ry, -r), Center.AddCopy(r, ry, r));
     }
 
@@ -159,6 +203,10 @@ public class CastContext
     /// </summary>
     public (int Fx, int Fz, int Rx, int Rz) Heading()
     {
+        if (Machine?.Heading is { } heading)
+        {
+            return heading;
+        }
         bool alongX = Math.Abs(Dir.X) >= Math.Abs(Dir.Z);
         int fx = alongX ? Math.Sign(Dir.X) : 0;
         int fz = alongX ? 0 : Math.Sign(Dir.Z);

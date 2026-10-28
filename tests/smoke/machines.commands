@@ -1,0 +1,14 @@
+# Machines (step 4 part 1): each scene builds its machines from Awakened granite with no player,
+# fills their network, makes them work once and reports. The Motor starts first and is checked
+# a few commands later, once its mechanical network has spun up; then its crystal rests and,
+# a few commands after that, the quern must have stopped.
+/lemuria machines test carve
+/lemuria machines test motor
+/lemuria machines test focus
+/lemuria machines test harvest
+/lemuria machines test scatter
+/lemuria machines test network
+/lemuria machines test refine
+/lemuria machines test motorcheck
+/lemuria machines test quicken
+/lemuria machines test motorstopped

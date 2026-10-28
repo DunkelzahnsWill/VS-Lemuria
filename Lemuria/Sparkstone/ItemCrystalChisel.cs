@@ -21,10 +21,15 @@ namespace Lemuria.Sparkstone;
 /// block to awaken it, for AwakenCost. Left-click a placed polished rock block to carve it into a cradle,
 /// or a polished rock slab into a crystal rack, for no charge. Three glyphs on the blade light one by one
 /// with its charge level. It carries no tool-chisel tag, so vanilla chiselling never starts.
+/// Step 4: a left-click on a placed Awakened block is handed to <see cref="StoneCarver"/>, which carves
+/// machines (Lemuria/Machines).
 /// </summary>
 public class ItemCrystalChisel : Item
 {
     public const string ClassCode = "lemuria-crystalchisel";
+
+    /// <summary>What carves Awakened sparkstone at a strike of the chisel; set by the feature that owns machines.</summary>
+    public static IStoneCarver? StoneCarver { get; set; }
 
     /// <summary>The charge level as last set on the server, which the client draws the glyphs and light from.</summary>
     public const string LevelKey = "lemuriaToolLevel";
@@ -74,6 +79,15 @@ public class ItemCrystalChisel : Item
 
     public override void OnHeldAttackStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, ref EnumHandHandling handling)
     {
+        if (blockSel != null && StoneCarver != null && StoneCarver.CanStrike(byEntity.World, blockSel))
+        {
+            handling = EnumHandHandling.PreventDefault;
+            if (byEntity.World.Side == EnumAppSide.Server)
+            {
+                StoneCarver.Strike(byEntity.World, (byEntity as EntityPlayer)?.Player, blockSel);
+            }
+            return;
+        }
         if (blockSel != null && CarvedBlock(byEntity.World, blockSel.Position, (byEntity as EntityPlayer)?.Player, blockSel) != null)
         {
             handling = EnumHandHandling.PreventDefault;
@@ -272,4 +286,14 @@ public class ItemCrystalChisel : Item
             new WorldInteraction { ActionLangCode = LemuriaModSystem.ModId + ":crystalchisel-carve", MouseButton = EnumMouseButton.Left },
         };
     }
+}
+
+/// <summary>Carves a placed Awakened block struck with the Crystalline Chisel (step 4 note, Carving machines).</summary>
+public interface IStoneCarver
+{
+    /// <summary>Whether a strike here is a carving, on both sides.</summary>
+    bool CanStrike(IWorldAccessor world, BlockSelection blockSel);
+
+    /// <summary>Carves the struck block on, where the player may build. Server only.</summary>
+    void Strike(IWorldAccessor world, IPlayer? player, BlockSelection blockSel);
 }

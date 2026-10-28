@@ -1,0 +1,36 @@
+{
+	"code": "crystalrod",
+	"class": "lemuria-crystalrod",
+	"maxstacksize": 1,
+	"shape": { "base": "lemuria:item/machines/crystalrod" },
+	"textures": {
+		"rock": { "base": "game:block/stone/polishedrock/granite" },
+		"crystal": { "base": "lemuria:block/crystals/unaligned" }
+	},
+	"attributes": {
+		"handbook": { "exclude": true }
+	},
+	"creativeinventory": { "general": ["*"], "items": ["*"] },
+	"guiTransform": {
+		"rotation": { "x": -77, "y": 46, "z": 8 },
+		"origin": { "x": 0.5, "y": 0.5, "z": 0.5 },
+		"scale": 2.2
+	},
+	"fpHandTransform": {
+		"translation": { "x": 0, "y": 0.1, "z": 0 },
+		"rotation": { "x": 15, "y": 15, "z": 90 },
+		"origin": { "x": 0.5, "y": 0.2, "z": 0.5 },
+		"scale": 2
+	},
+	"groundTransform": {
+		"rotation": { "x": 0, "y": 0, "z": 0 },
+		"origin": { "x": 0.5, "y": 0, "z": 0.5 },
+		"scale": 3
+	},
+	"tpHandTransform": {
+		"translation": { "x": -0.87, "y": -0.05, "z": -0.76 },
+		"rotation": { "x": 0, "y": -25, "z": -59 },
+		"origin": { "x": 0.5, "y": 0, "z": 0.5 },
+		"scale": 0.6
+	}
+}

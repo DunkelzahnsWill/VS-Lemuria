@@ -1,0 +1,367 @@
+{
+ "textureWidth": 16,
+ "textureHeight": 16,
+ "textures": {
+  "rock": "game:block/stone/polishedrock/granite",
+  "rim": "lemuria:block/sparkstone/socket-lit"
+ },
+ "elements": [
+  {
+   "name": "plug a0",
+   "from": [
+    2.78,
+    0,
+    6.3
+   ],
+   "to": [
+    6.18,
+    0.8,
+    9.7
+   ],
+   "faces": {
+    "north": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.8
+     ]
+    },
+    "east": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.8
+     ]
+    },
+    "south": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.8
+     ]
+    },
+    "west": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.8
+     ]
+    },
+    "up": {
+     "texture": "#rim",
+     "uv": [
+      0,
+      0,
+      3.4,
+      3.4
+     ]
+    },
+    "down": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      3.4
+     ]
+    }
+   }
+  },
+  {
+   "name": "plug a1",
+   "from": [
+    2.78,
+    0,
+    6.3
+   ],
+   "to": [
+    6.18,
+    0.8,
+    9.7
+   ],
+   "faces": {
+    "north": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.8
+     ]
+    },
+    "east": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.8
+     ]
+    },
+    "south": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.8
+     ]
+    },
+    "west": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.8
+     ]
+    },
+    "up": {
+     "texture": "#rim",
+     "uv": [
+      0,
+      0,
+      3.4,
+      3.4
+     ]
+    },
+    "down": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      3.4
+     ]
+    }
+   },
+   "rotationOrigin": [
+    4.48,
+    0,
+    8
+   ],
+   "rotationY": 45
+  },
+  {
+   "name": "plug b0",
+   "from": [
+    9.82,
+    0,
+    6.3
+   ],
+   "to": [
+    13.219999999999999,
+    0.8,
+    9.7
+   ],
+   "faces": {
+    "north": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.8
+     ]
+    },
+    "east": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.8
+     ]
+    },
+    "south": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.8
+     ]
+    },
+    "west": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.8
+     ]
+    },
+    "up": {
+     "texture": "#rim",
+     "uv": [
+      0,
+      0,
+      3.4,
+      3.4
+     ]
+    },
+    "down": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      3.4
+     ]
+    }
+   }
+  },
+  {
+   "name": "plug b1",
+   "from": [
+    9.82,
+    0,
+    6.3
+   ],
+   "to": [
+    13.219999999999999,
+    0.8,
+    9.7
+   ],
+   "faces": {
+    "north": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.8
+     ]
+    },
+    "east": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.8
+     ]
+    },
+    "south": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.8
+     ]
+    },
+    "west": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.8
+     ]
+    },
+    "up": {
+     "texture": "#rim",
+     "uv": [
+      0,
+      0,
+      3.4,
+      3.4
+     ]
+    },
+    "down": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      3.4
+     ]
+    }
+   },
+   "rotationOrigin": [
+    11.52,
+    0,
+    8
+   ],
+   "rotationY": 45
+  },
+  {
+   "name": "plug bar",
+   "from": [
+    4.48,
+    0,
+    6.3
+   ],
+   "to": [
+    11.52,
+    0.8,
+    9.7
+   ],
+   "faces": {
+    "north": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      7.04,
+      0.8
+     ]
+    },
+    "east": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.8
+     ]
+    },
+    "south": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      7.04,
+      0.8
+     ]
+    },
+    "west": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.8
+     ]
+    },
+    "up": {
+     "texture": "#rim",
+     "uv": [
+      0,
+      0,
+      7.04,
+      3.4
+     ]
+    },
+    "down": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      7.04,
+      3.4
+     ]
+    }
+   }
+  }
+ ]
+}

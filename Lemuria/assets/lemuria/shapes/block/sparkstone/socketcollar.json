@@ -1,0 +1,154 @@
+{
+ "textureWidth": 16,
+ "textureHeight": 16,
+ "textures": {
+  "rock": "game:block/stone/polishedrock/granite",
+  "rim": "lemuria:block/sparkstone/socket-lit"
+ },
+ "elements": [
+  {
+   "name": "collar0",
+   "from": [
+    6.3,
+    0,
+    6.3
+   ],
+   "to": [
+    9.7,
+    0.8,
+    9.7
+   ],
+   "faces": {
+    "north": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.8
+     ]
+    },
+    "east": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.8
+     ]
+    },
+    "south": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.8
+     ]
+    },
+    "west": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.8
+     ]
+    },
+    "up": {
+     "texture": "#rim",
+     "uv": [
+      0,
+      0,
+      3.4,
+      3.4
+     ]
+    },
+    "down": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      3.4
+     ]
+    }
+   }
+  },
+  {
+   "name": "collar1",
+   "from": [
+    6.3,
+    0,
+    6.3
+   ],
+   "to": [
+    9.7,
+    0.8,
+    9.7
+   ],
+   "faces": {
+    "north": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.8
+     ]
+    },
+    "east": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.8
+     ]
+    },
+    "south": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.8
+     ]
+    },
+    "west": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.8
+     ]
+    },
+    "up": {
+     "texture": "#rim",
+     "uv": [
+      0,
+      0,
+      3.4,
+      3.4
+     ]
+    },
+    "down": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      3.4
+     ]
+    }
+   },
+   "rotationOrigin": [
+    8,
+    0,
+    8
+   ],
+   "rotationY": 45
+  }
+ ]
+}
