@@ -21,7 +21,8 @@ namespace Lemuria.Sparkstone;
 /// carved into a machine, an aligned crystal is a capacitor whose capacity and charge join the
 /// network's. A Dormant block is out of its network, keeps its charge, and its glyphs go dark.
 /// After the owner's play-test (note rev 78, How machines look): lit glyphs are deep cyan, each socket
-/// has a round mark, and a socketed crystal sits in a round collar that is lit while it can work.
+/// has a round mark, and a socketed crystal sits in a plug that is lit while it can work (note rev 96:
+/// each Evolution's plug fills the marks it takes, round for Glittering, long across a row for Glowing).
 /// Machines (Lemuria/Machines) build on this class.
 /// </summary>
 public class BlockEntitySparkstone : BlockEntity
@@ -531,15 +532,12 @@ public class BlockEntitySparkstone : BlockEntity
             return false;
         }
         mesher.AddMeshData(mesh);
-        if (DrawSocketsWithBlock && SocketMeshes(capi) is { } crystals)
+        if (SocketMeshes(capi) is { } crystals)
         {
             mesher.AddMeshData(crystals);
         }
         return true;
     }
-
-    /// <summary>Whether the crystals in the sockets are drawn with the block; a machine that turns them draws them itself.</summary>
-    protected virtual bool DrawSocketsWithBlock => true;
 
     /// <summary>The glyph textures at a level: lit by the network's level, dark (-1) while Dormant.</summary>
     protected static string GlyphSuffix(int shown) => shown <= 0 ? "" : GlyphCodes[shown]["glyph".Length..];
@@ -573,16 +571,13 @@ public class BlockEntitySparkstone : BlockEntity
     /// </summary>
     public virtual bool CanWork(SocketCrystal crystal) => crystal.IsAligned;
 
-    /// <summary>A socketed crystal's collar is lit while it can work: not resting, its block Active, and of use there.</summary>
+    /// <summary>A socketed crystal's plug is lit while it can work: not resting, its block Active, and of use there.</summary>
     public bool Lit(SocketCrystal crystal) => active && !crystal.Resting && CanWork(crystal);
-
-    /// <summary>How far the socket face stands out from the block's face, in blocks: the Motor's hub lifts it.</summary>
-    protected virtual float SocketLift => 0;
 
     /// <summary>
     /// The sockets as one mesh in block coordinates: a round mark for every socket on the socket face,
-    /// and each crystal in a round collar, pointing out of the face and glowing by its level, a resting
-    /// one dim. A machine always shows its marks; a Free block only while it holds a crystal.
+    /// and each crystal in its Evolution's plug, pointing out of the face and glowing by its level, a
+    /// resting one dim. A Glowing crystal's long plug lies along its row. A machine always shows its marks; a Free block only while it holds a crystal.
     /// </summary>
     public MeshData? SocketMeshes(ICoreClientAPI capi)
     {
@@ -619,7 +614,11 @@ public class BlockEntitySparkstone : BlockEntity
             bool lit = Lit(crystal);
             if (Part(capi, glowing ? GlowingCollarShape : CollarShape, glowing ? "collar-glowing" : "collar", lit ? "socket-lit" : "socket") is { } collar)
             {
-                var placed = OnFace(collar, face, point, 0.004f, rx, ry, rz);
+                // The long plug is built along x, which the face's turn keeps along the row except on east and west.
+                var plug = glowing && face.Axis == EnumAxis.X
+                    ? collar.Clone().Rotate(new Vec3f(0.5f, 0.5f, 0.5f), 0, GameMath.PIHALF, 0)
+                    : collar;
+                var placed = OnFace(plug, face, point, 0.004f, rx, ry, rz, plug == collar);
                 CrystalMeshes.SetGlow(placed, lit ? 160 : 0);
                 Add(placed);
             }
@@ -644,11 +643,10 @@ public class BlockEntitySparkstone : BlockEntity
     private MeshData OnFace(MeshData mesh, BlockFacing face, Vec3d point, float lift, float rx, float ry, float rz, bool clone = true)
     {
         var n = face.Normalf;
-        float off = lift + SocketLift;
         return (clone ? mesh.Clone() : mesh)
             .Translate(0, 0.5f, 0)
             .Rotate(new Vec3f(0.5f, 0.5f, 0.5f), rx, ry, rz)
-            .Translate((float)point.X - 0.5f + n.X * off, (float)point.Y - 0.5f + n.Y * off, (float)point.Z - 0.5f + n.Z * off);
+            .Translate((float)point.X - 0.5f + n.X * lift, (float)point.Y - 0.5f + n.Y * lift, (float)point.Z - 0.5f + n.Z * lift);
     }
 
     /// <summary>A socket mark or collar in this block's rock, its top in the groove or the lit texture; cached per rock.</summary>
