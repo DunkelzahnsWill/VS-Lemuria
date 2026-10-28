@@ -48,7 +48,12 @@ public static class Reaping
             var at = cast.Center!.ToVec3d().Add(0.5, 0.5, 0.5);
             foreach (var stack in Stack(drops))
             {
-                world.SpawnItemEntity(stack, at);
+                // A machine's yields go into a container touching it, and only what does not fit drops.
+                var left = cast.Machine?.Collect != null ? cast.Machine.Collect(stack) : stack;
+                if (left != null && left.StackSize > 0)
+                {
+                    world.SpawnItemEntity(left, at);
+                }
             }
         }
         return acted;
@@ -63,13 +68,19 @@ public static class Reaping
         var world = cast.Api.World;
         var accessor = world.BlockAccessor;
         var block = accessor.GetBlock(pos);
-        bool overdriven = cast.Power >= 3;
+        // Ripe crops, berries and fruit come from the power of Luminous by hand, and sooner in a Scatter (step 4).
+        bool overdriven = cast.Power >= (cast.Machine?.CropPower ?? 3);
         if (IsGrownLeaves(block) || block is BlockMushroom || (overdriven && IsRipeCrop(block)))
         {
-            drops.AddRange(block.GetDrops(world, pos, cast.Player) ?? Array.Empty<ItemStack>());
+            var taken = block.GetDrops(world, pos, cast.Player) ?? Array.Empty<ItemStack>();
             var farmland = accessor.GetBlockEntity(pos.DownCopy()) as BlockEntityFarmland;
             accessor.SetBlock(0, pos);
             farmland?.OnCropBlockBroken();
+            if (cast.Machine?.Replant == true && farmland != null && block is BlockCrop)
+            {
+                taken = Replant(world, block, farmland, taken);
+            }
+            drops.AddRange(taken);
         }
         else if (IsUncutReed(block))
         {
@@ -102,6 +113,28 @@ public static class Reaping
         }
         accessor.TriggerNeighbourBlockUpdate(pos);
         return true;
+    }
+
+    /// <summary>
+    /// Replants a taken crop from its own seed, as a farmer would from the harvest (step 4 note, Focus):
+    /// one seed of the crop comes out of the drops and the crop starts again at its first stage through
+    /// the farmland's own planting. With no seed among the drops the farmland stays bare.
+    /// </summary>
+    private static ItemStack[] Replant(IWorldAccessor world, Block crop, BlockEntityFarmland farmland, ItemStack[] drops)
+    {
+        string? type = crop.Variant["type"];
+        var first = world.GetBlock(crop.CodeWithParts("1"));
+        int seed = Array.FindIndex(drops, d => d?.Collectible is ItemPlantableSeed && d.Collectible.Code.Path == "seeds-" + type);
+        if (first?.CropProps == null || seed < 0 || !farmland.TryPlant(first, new DummySlot(), null!, null!))
+        {
+            return drops;
+        }
+        var list = drops.ToList();
+        if (--list[seed].StackSize <= 0)
+        {
+            list.RemoveAt(seed);
+        }
+        return list.ToArray();
     }
 
     /// <summary>Cattails, papyrus and tule standing whole (brown sedge is grass, not a reed).</summary>

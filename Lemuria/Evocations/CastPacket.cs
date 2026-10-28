@@ -39,4 +39,8 @@ public class CastPacket
 
     [ProtoMember(9)]
     public double ToZ { get; set; }
+
+    /// <summary>A machine's working (step 4): its sound plays softer than a cast's.</summary>
+    [ProtoMember(10)]
+    public bool Machine { get; set; }
 }

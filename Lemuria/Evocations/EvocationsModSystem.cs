@@ -113,6 +113,7 @@ public class EvocationsModSystem : ModSystem
             ToX = cast.Point.X,
             ToY = cast.Point.Y,
             ToZ = cast.Point.Z,
+            Machine = cast.Machine != null,
         };
         var near = Api.World.AllOnlinePlayers.OfType<IServerPlayer>()
             .Where(p => p.ConnectionState == EnumClientState.Playing && p.Entity != null && p.Entity.Pos.XYZ.DistanceTo(hand) <= HearingRange)
@@ -163,11 +164,13 @@ public class EvocationsModSystem : ModSystem
             streak.AddPos.Set(0.08, 0.08, 0.08);
             world.SpawnParticles(streak);
         }
+        // A machine's working sounds softer than a cast by hand (step 4 note, Focus).
+        float volume = packet.Machine ? 0.5f : 1f;
         if (packet.Kind == CastPacket.Failed)
         {
             // The crystal's note wavers and breaks off: the cast failed and its charge is spent.
             Spray(to, rgb, 6, 0.4f);
-            world.PlaySoundAt(new AssetLocation(LemuriaModSystem.ModId, "sounds/evocations/warble"), from.X, from.Y, from.Z, null, false, 16f, LemuriaSound.Volume(0.8f));
+            world.PlaySoundAt(new AssetLocation(LemuriaModSystem.ModId, "sounds/evocations/warble"), from.X, from.Y, from.Z, null, false, 16f, LemuriaSound.Volume(0.8f * volume));
             return;
         }
         if (packet.Kind == CastPacket.Fizzle)
@@ -176,11 +179,11 @@ public class EvocationsModSystem : ModSystem
             world.PlaySoundAt(new AssetLocation(LemuriaModSystem.ModId, "sounds/evocations/fizzle"), to.X, to.Y, to.Z, null, true, 16f, LemuriaSound.Volume(0.6f));
             return;
         }
-        Spray(to, rgb, 12 + 12 * packet.Power, 0.5f + 0.5f * (Evocation.AreaSize(packet.Power) - 1));
+        Spray(to, rgb, packet.Machine ? 8 : 12 + 12 * packet.Power, packet.Machine ? 0.4f : 0.5f + 0.5f * (Evocation.AreaSize(packet.Power) - 1));
         var sound = SoundOf(packet.Alignment);
         if (sound != null)
         {
-            world.PlaySoundAt(sound, to.X, to.Y, to.Z, null, true, 32f, LemuriaSound.Volume(1f));
+            world.PlaySoundAt(sound, to.X, to.Y, to.Z, null, true, 32f, LemuriaSound.Volume(volume));
         }
         if (Evocation.Of(packet.Alignment) == Evocation.Tremor && world.Player?.Entity?.Pos.XYZ.DistanceTo(to) <= 16)
         {
