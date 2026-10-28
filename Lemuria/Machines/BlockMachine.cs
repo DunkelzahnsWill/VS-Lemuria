@@ -113,7 +113,8 @@ public static class MachineBlocks
         {
             return false;
         }
-        var facing = world.GetBlock(self.CodeWithVariant("side", FaceToward(byPlayer, blockSel.Position).Code)) ?? self;
+        var toward = Machine.SideFor(self.Variant["form"] ?? Machine.Gather, FaceToward(byPlayer, blockSel.Position));
+        var facing = world.GetBlock(self.CodeWithVariant("side", toward.Code)) ?? self;
         facing.DoPlaceBlock(world, byPlayer, blockSel, itemstack);
         (world.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityMachine)?.SetCarver(byPlayer);
         return true;

@@ -404,28 +404,30 @@ public class MachinesTests
         var origin = TestSite.Surface(sapi, column);
         Ground(origin, 3, 3, 3);
         var pos = origin.AddCopy(1, 0, 1);
-        var motor = Place(pos, Machine.Motor, "up");
+        // As the note's play-test sets it up: a quern below, the hub down on it and the sockets up.
+        var motor = Place(pos, Machine.Motor, "down");
         var quern = World.GetBlock(new AssetLocation("game:quern-granite")) as BlockMPBase;
         if (motor == null || quern == null)
         {
             logger.Error("Machines test: no Crystal Motor or quern");
             return;
         }
-        Accessor.SetBlock(quern.Id, pos.UpCopy());
-        quern.tryConnect(World, null!, pos.UpCopy(), BlockFacing.DOWN);
+        Accessor.SetBlock(quern.Id, pos.DownCopy());
+        quern.tryConnect(World, null!, pos.DownCopy(), BlockFacing.UP);
         Put(motor, Crystal.Fire, Crystal.Glittering);
         Fill(motor);
         bool powered = motor.PayMotor(0.1);
         TestSite.StorePos(sapi, MotorKey, pos);
-        bool joined = Accessor.GetBlockEntity(pos.UpCopy())?.GetBehavior<BEBehaviorMPConsumer>()?.Network != null
-            && Accessor.GetBlockEntity(pos.UpCopy())?.GetBehavior<BEBehaviorMPConsumer>()?.Network == motor.GetBehavior<BEBehaviorCrystalMotor>()?.Network;
-        logger.Notification("Machines test: a Crystal Motor under a quern, powered: {0}, torque {1:0.00}, on the quern's network: {2}", YesNo(powered), motor.MotorTorque(), YesNo(joined));
+        bool joined = Accessor.GetBlockEntity(pos.DownCopy())?.GetBehavior<BEBehaviorMPConsumer>()?.Network != null
+            && Accessor.GetBlockEntity(pos.DownCopy())?.GetBehavior<BEBehaviorMPConsumer>()?.Network == motor.GetBehavior<BEBehaviorCrystalMotor>()?.Network;
+        logger.Notification("Machines test: a Crystal Motor on a quern, powered: {0}, torque {1:0.00}, on the quern's network: {2}, sockets facing {3}",
+            YesNo(powered), motor.MotorTorque(), YesNo(joined), motor.GlyphFace.Code);
     }
 
     public void MotorCheck()
     {
         var pos = TestSite.ReadPos(sapi, MotorKey);
-        var consumer = pos == null ? null : Accessor.GetBlockEntity(pos.UpCopy())?.GetBehavior<BEBehaviorMPConsumer>();
+        var consumer = pos == null ? null : Accessor.GetBlockEntity(pos.DownCopy())?.GetBehavior<BEBehaviorMPConsumer>();
         // A few seconds after it starts, the network is still spinning up toward the Motor's speed.
         float speed = consumer?.Network?.Speed ?? -1;
         logger.Notification("Machines test: the quern turns: {0}", YesNo(speed > 0.001f));

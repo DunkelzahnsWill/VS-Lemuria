@@ -15,8 +15,8 @@ namespace Lemuria.Machines;
 /// speed a little below a windmill's in a strong wind, while the machine is Active and its network
 /// pays. The game's rotor joins its network on the side opposite its code and sets its axis only for
 /// the four sides, so the Motor joins on its front and sets its axis for up and down itself.
-/// Its hub and the crystals on it turn in <see cref="MotorRenderer"/> rather than the game's
-/// instanced renderer, so the crystals turn with it.
+/// Its hub turns in <see cref="MotorRenderer"/> rather than the game's instanced renderer; the glyph,
+/// sockets and crystals sit still on the rear, drawn with the block.
 /// </summary>
 public class BEBehaviorCrystalMotor : BEBehaviorMPRotor
 {
@@ -56,11 +56,8 @@ public class BEBehaviorCrystalMotor : BEBehaviorMPRotor
         }
     }
 
-    /// <summary>The hub and crystals are drawn by the Motor's own renderer, not the game's mechanical power renderer.</summary>
+    /// <summary>The hub is drawn by the Motor's own renderer, not the game's mechanical power renderer.</summary>
     protected override CompositeShape? GetShape() => null;
-
-    /// <summary>The block entity was drawn again: the crystals on the hub may have changed.</summary>
-    public void OnSocketsShown() => renderer?.MarkDirty();
 
     /// <summary>The turn of the hub, which the renderer follows.</summary>
     public float HubAngle => AngleRad;
@@ -99,7 +96,7 @@ public class BEBehaviorCrystalMotor : BEBehaviorMPRotor
     }
 }
 
-/// <summary>Draws a Crystal Motor's hub and the crystals in its sockets, turning with the shaft. Client only.</summary>
+/// <summary>Draws a Crystal Motor's hub, turning with the shaft. Client only.</summary>
 public class MotorRenderer : IRenderer
 {
     private readonly ICoreClientAPI capi;
@@ -119,17 +116,14 @@ public class MotorRenderer : IRenderer
 
     public int RenderRange => 32;
 
-    public void MarkDirty() => dirty = true;
-
     private void Rebuild()
     {
         dirty = false;
         mesh?.Dispose();
         mesh = null;
-        var be = motor.Blockentity as BlockEntityMachine;
         var block = motor.Blockentity.Block;
         var shape = Shape.TryGet(capi, new AssetLocation(LemuriaModSystem.ModId, "shapes/block/machines/hub.json"));
-        if (be == null || block == null || shape == null)
+        if (block == null || shape == null)
         {
             return;
         }
@@ -140,10 +134,6 @@ public class MotorRenderer : IRenderer
         }
         var (rx, ry, rz) = BlockEntityMachine.FrontTurn(motor.Front);
         hub.Rotate(new Vec3f(0.5f, 0.5f, 0.5f), rx, ry, rz);
-        if (be.SocketMeshes(capi) is { } crystals)
-        {
-            hub.AddMeshData(crystals);
-        }
         mesh = capi.Render.UploadMesh(hub);
     }
 

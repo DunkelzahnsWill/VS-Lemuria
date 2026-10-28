@@ -58,7 +58,10 @@ public class BlockEntityMachine : BlockEntitySparkstone
 
     public override bool IsFree => false;
 
-    public override BlockFacing? SocketFacing => Front;
+    /// <summary>The face carved with the glyph and the sockets: the front, or a Motor's rear.</summary>
+    public BlockFacing GlyphFace => Machine.GlyphFace(Form, Front);
+
+    public override BlockFacing? SocketFacing => GlyphFace;
 
     public string? CarverUid => carverUid;
 
@@ -438,7 +441,7 @@ public class BlockEntityMachine : BlockEntitySparkstone
         }
         CrystalMeshes.SetGlow(overlay, GlyphGlowAt(shown));
         stone.AddMeshData(overlay);
-        var (rx, ry, rz) = FrontTurn(Front);
+        var (rx, ry, rz) = FrontTurn(GlyphFace);
         return stone.Rotate(new Vec3f(0.5f, 0.5f, 0.5f), rx, ry, rz);
     }
 
@@ -453,16 +456,8 @@ public class BlockEntityMachine : BlockEntitySparkstone
         _ => (0, 0, 0),
     };
 
-    public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tessThreadTesselator)
-    {
-        bool drawn = base.OnTesselation(mesher, tessThreadTesselator);
-        // The Motor's own renderer draws its turning hub and the crystals on it.
-        GetBehavior<BEBehaviorCrystalMotor>()?.OnSocketsShown();
-        return drawn;
-    }
-
     /// <summary>
-    /// What a crystal can do here, for its collar's light: Gather gathers only with aligned crystals, and a
+    /// What a crystal can do here, for its plug's light: Gather gathers only with aligned crystals, and a
     /// Glittering crystal has no power to give up in a Scatter; every other verb uses any crystal.
     /// </summary>
     public override bool CanWork(SocketCrystal crystal) => Form switch
@@ -471,12 +466,6 @@ public class BlockEntityMachine : BlockEntitySparkstone
         Machine.Scatter => Crystal.Rank(crystal.Evolution) > 1,
         _ => true,
     };
-
-    /// <summary>The Motor's sockets sit on its hub, which stands a little proud of the front.</summary>
-    protected override float SocketLift => Form == Machine.Motor ? 0.04f : 0;
-
-    /// <summary>Whether the sockets are drawn with the block; the Motor turns its crystals with its hub instead.</summary>
-    protected override bool DrawSocketsWithBlock => Form != Machine.Motor;
 
     public override void GetBlockInfo(IPlayer forPlayer, System.Text.StringBuilder dsc)
     {

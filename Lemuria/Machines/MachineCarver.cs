@@ -66,13 +66,14 @@ public class MachineCarver : IStoneCarver
         {
             return block is BlockSparkstone ? world.GetBlock(Machine.Code(Machine.Gather, rock, face.Code)) : null;
         }
-        if (block.Variant["side"] != face.Code)
+        var side = BlockFacing.FromCode(block.Variant["side"]) ?? BlockFacing.NORTH;
+        if (Machine.GlyphFace(block.Variant["form"] ?? Machine.Gather, side) != face)
         {
             refused = true;
             return null;
         }
         string? next = Machine.Next(block.Variant["form"] ?? Machine.Gather);
-        return world.GetBlock(next == null ? Machine.FreeCode(rock) : Machine.Code(next, rock, face.Code));
+        return world.GetBlock(next == null ? Machine.FreeCode(rock) : Machine.Code(next, rock, Machine.SideFor(next, face).Code));
     }
 
     /// <summary>Carves the block at pos into another Awakened block, keeping its share and Active or Dormant. Server only; public for the test command.</summary>

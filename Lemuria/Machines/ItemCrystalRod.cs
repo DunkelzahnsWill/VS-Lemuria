@@ -50,9 +50,9 @@ public class ItemCrystalRod : Item
             stone.SetActive(!stone.Active);
             world.PlaySoundAt(stone.Active ? OnSound : OffSound, pos.X + 0.5, pos.Y + 0.5, pos.Z + 0.5, null, true, 16f, LemuriaSound.Volume(0.7f));
         }
-        else if (stone is BlockEntityMachine machine && blockSel.Face != machine.Front)
+        else if (stone is BlockEntityMachine machine && blockSel.Face != machine.GlyphFace)
         {
-            var into = world.GetBlock(Machine.Code(machine.Form, machine.Block.Variant["rock"] ?? "granite", blockSel.Face.Code));
+            var into = world.GetBlock(Machine.Code(machine.Form, machine.Block.Variant["rock"] ?? "granite", Machine.SideFor(machine.Form, blockSel.Face).Code));
             if (into != null && MachineBlocks.Swap(world, pos, into) is BlockEntitySparkstone turned)
             {
                 stone = turned;

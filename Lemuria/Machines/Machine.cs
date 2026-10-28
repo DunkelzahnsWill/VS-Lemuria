@@ -77,6 +77,15 @@ public static class Machine
     public static double GameHours(IWorldAccessor world, double seconds) =>
         seconds * world.Calendar.SpeedOfTime * world.Calendar.CalendarSpeedMul / 3600.0;
 
+    /// <summary>
+    /// The face a machine's glyph and sockets are on, from its {side}: the front, but a Motor's rear,
+    /// since its hub takes the front that meets the axle (note rev 91, How machines look).
+    /// </summary>
+    public static BlockFacing GlyphFace(string form, BlockFacing side) => form == Motor ? side.Opposite : side;
+
+    /// <summary>The {side} of a machine of this form whose glyph and sockets are on this face.</summary>
+    public static BlockFacing SideFor(string form, BlockFacing glyphFace) => form == Motor ? glyphFace.Opposite : glyphFace;
+
     /// <summary>Where a machine's workings start: just outside the middle of its front.</summary>
     public static Vec3d FrontPoint(BlockPos pos, BlockFacing front) =>
         pos.ToVec3d().Add(0.5 + front.Normalf.X * 0.55, 0.5 + front.Normalf.Y * 0.55, 0.5 + front.Normalf.Z * 0.55);
