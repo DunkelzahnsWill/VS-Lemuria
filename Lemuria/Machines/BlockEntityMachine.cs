@@ -58,6 +58,14 @@ public class BlockEntityMachine : BlockEntitySparkstone
 
     public override bool IsFree => false;
 
+    /// <summary>
+    /// A Motor stores no charge of its own: its aligned crystals are its store, capacitors as in Free
+    /// stone, so it runs on them when cut off and stops when they are spent (note rev 102, The Crystal Motor).
+    /// </summary>
+    public override bool StoresInSockets => Form == Machine.Motor;
+
+    protected override float OwnCapacity => Form == Machine.Motor ? 0 : base.OwnCapacity;
+
     /// <summary>The face carved with the glyph and the sockets: the front, or a Motor's rear.</summary>
     public BlockFacing GlyphFace => Machine.GlyphFace(Form, Front);
 

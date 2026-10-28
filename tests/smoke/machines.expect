@@ -17,6 +17,8 @@ Machines test: a capacitor raised the capacity from 150 to 250 and brought 100; 
 Machines test: a Refine block refined 3 crystal\(s\) in 1 day\(s\), 4 of 4 are Fire$
 # The Crystal Motor joins the quern's network on its hub, below, and turns it; its sockets face up.
 Machines test: a Crystal Motor on a quern, powered: yes, torque 0\.25, on the quern's network: yes, sockets facing up$
+# A Motor has no store of its own: its aligned crystals are capacitors (note rev 102).
+Machines test: a cut-off Motor stores 10 in 100 with one Glittering crystal, runs an hour: yes, stops when spent: yes; an Unaligned one stores 0 and turns: no$
 Machines test: the quern turns: yes$
 # The first secret: an Unaligned Focus quickens a growing seedling.
 Machines test: an Unaligned Focus over a growing seedling Acted, quickened: yes$

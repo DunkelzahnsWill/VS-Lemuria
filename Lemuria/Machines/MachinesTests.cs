@@ -422,6 +422,21 @@ public class MachinesTests
             && Accessor.GetBlockEntity(pos.DownCopy())?.GetBehavior<BEBehaviorMPConsumer>()?.Network == motor.GetBehavior<BEBehaviorCrystalMotor>()?.Network;
         logger.Notification("Machines test: a Crystal Motor on a quern, powered: {0}, torque {1:0.00}, on the quern's network: {2}, sockets facing {3}",
             YesNo(powered), motor.MotorTorque(), YesNo(joined), motor.GlyphFace.Code);
+        // Cut off, a Motor runs on what its crystals store and stops when that is spent; an Unaligned crystal stores nothing.
+        var lone = Place(origin.Copy(), Machine.Motor, "down");
+        var unaligned = Place(origin.AddCopy(2, 0, 0), Machine.Motor, "down");
+        Put(lone, Crystal.Fire, Crystal.Glittering, 10);
+        Put(unaligned, Crystal.Unaligned, Crystal.Glittering);
+        if (lone == null || unaligned == null)
+        {
+            logger.Error("Machines test: no lone Crystal Motor");
+            return;
+        }
+        float charge = Total(lone), stored = Capacity(lone);
+        bool runs = lone.PayMotor(1);
+        bool stops = !lone.PayMotor(10);
+        logger.Notification("Machines test: a cut-off Motor stores {0:0} in {1:0} with one Glittering crystal, runs an hour: {2}, stops when spent: {3}; an Unaligned one stores {4:0} and turns: {5}",
+            charge, stored, YesNo(runs), YesNo(stops), Capacity(unaligned), YesNo(unaligned.PayMotor(1)));
     }
 
     public void MotorCheck()
