@@ -72,6 +72,12 @@ public class BlockEntitySparkstone : BlockEntity
         ? Math.Clamp(LemuriaModSystem.Config.SocketsGlowing, 1, 16)
         : Math.Clamp(LemuriaModSystem.Config.SocketsGlittering, 1, 16);
 
+    /// <summary>Sockets in this block: <see cref="Room"/>, unless the block is made to hold more or fewer.</summary>
+    public virtual int SocketRoom => Room;
+
+    /// <summary>Sockets a crystal fills in this block, by its Evolution unless the block counts otherwise.</summary>
+    public virtual int SizeOf(SocketCrystal crystal) => SocketsFor(crystal.Evolution);
+
     public int UsedRoom => sockets.Sum(c => c.Size);
 
     /// <summary>Whether its aligned crystals are capacitors, adding their store to the block's: a Free block's are.</summary>
@@ -198,12 +204,19 @@ public class BlockEntitySparkstone : BlockEntity
 
     // ------------------------------------------------------------------ sockets
 
-    /// <summary>Whether a crystal can go into a socket at all: any crystal of Lemuria's, never a strange crystal or seedling.</summary>
-    public static bool Socketable(ItemStack? stack) => stack != null && Crystal.IsCrystal(stack.Collectible);
+    /// <summary>
+    /// Whether a stack can go into a socket at all: any crystal of Lemuria's, never a strange crystal or
+    /// seedling, or a fitting whose attributes say so (<c>lemuriaSocketFitting</c>, the Dead Socket).
+    /// </summary>
+    public static bool Socketable(ItemStack? stack) =>
+        stack != null && (Crystal.IsCrystal(stack.Collectible) || stack.Collectible?.Attributes?["lemuriaSocketFitting"].AsBool() == true);
 
-    /// <summary>Whether a crystal of this Evolution fits the room left.</summary>
-    public bool Fits(string evolution) =>
-        Sockets.Pack(sockets.Select(c => c.Size).Append(SocketsFor(evolution)).ToList(), Room) != null;
+    /// <summary>Whether this block takes the stack into its sockets: every crystal, and fittings only where a block says so.</summary>
+    public virtual bool Accepts(ItemStack stack) => Socketable(stack) && Crystal.IsCrystal(stack.Collectible);
+
+    /// <summary>Whether this crystal or fitting fits the room left.</summary>
+    public bool Fits(SocketCrystal incoming) =>
+        Sockets.Pack(sockets.Select(c => c.Size).Append(incoming.Size).ToList(), SocketRoom) != null;
 
     /// <summary>
     /// Sets one crystal into the first free sockets; a Free block's first crystal picks the face. Its
@@ -211,7 +224,7 @@ public class BlockEntitySparkstone : BlockEntity
     /// </summary>
     public bool Insert(ItemStack one, BlockFacing face)
     {
-        if (!Socketable(one) || !Fits(Crystal.EvolutionOf(one.Collectible)))
+        if (!Accepts(one) || !Fits(new SocketCrystal(this, one)))
         {
             return false;
         }
@@ -285,14 +298,14 @@ public class BlockEntitySparkstone : BlockEntity
             return null;
         }
         var (u, v) = Sockets.Uv(face, hit);
-        int cell = Sockets.CellAt(Room, u, v);
+        int cell = Sockets.CellAt(SocketRoom, u, v);
         return sockets.FirstOrDefault(c => cell >= c.Socket && cell < c.Socket + c.Size);
     }
 
     /// <summary>Packs the sockets again, rebalances the network when the capacity moved, and shows the change.</summary>
     public virtual void OnSocketsChanged()
     {
-        var firsts = Sockets.Pack(sockets.Select(c => c.Size).ToList(), Math.Max(Room, UsedRoom));
+        var firsts = Sockets.Pack(sockets.Select(c => c.Size).ToList(), Math.Max(SocketRoom, UsedRoom));
         for (int i = 0; i < sockets.Count; i++)
         {
             sockets[i].Socket = firsts?[i] ?? i;
@@ -434,7 +447,7 @@ public class BlockEntitySparkstone : BlockEntity
         level = Math.Clamp(tree.GetInt("level"), Crystal.Empty, Crystal.Full);
         active = !tree.GetBool("dormant");
         socketFace = tree.GetInt("socketFace", -1);
-        var oldSockets = sockets.Select(c => c.Stack.Collectible?.Code + "/" + c.Cracks + "/" + c.Resting + "/" + c.Level + "/" + c.Warning).ToList();
+        var oldSockets = sockets.Select(c => c.Stack.Collectible?.Code + "/" + c.Cracks + "/" + c.Dormant + "/" + c.Level + "/" + c.Warning).ToList();
         if (Api?.Side == EnumAppSide.Server)
         {
             Unregister();
@@ -448,7 +461,7 @@ public class BlockEntitySparkstone : BlockEntity
                 sockets.Add(crystal);
             }
         }
-        var firsts = Sockets.Pack(sockets.Select(c => c.Size).ToList(), Math.Max(Room, UsedRoom));
+        var firsts = Sockets.Pack(sockets.Select(c => c.Size).ToList(), Math.Max(SocketRoom, UsedRoom));
         for (int i = 0; i < sockets.Count; i++)
         {
             sockets[i].Socket = firsts?[i] ?? i;
@@ -463,7 +476,7 @@ public class BlockEntitySparkstone : BlockEntity
         if (Api?.Side == EnumAppSide.Client)
         {
             UpdateClientSounds(tree.GetFloat("grace", 30));
-            var newSockets = sockets.Select(c => c.Stack.Collectible?.Code + "/" + c.Cracks + "/" + c.Resting + "/" + c.Level + "/" + c.Warning).ToList();
+            var newSockets = sockets.Select(c => c.Stack.Collectible?.Code + "/" + c.Cracks + "/" + c.Dormant + "/" + c.Level + "/" + c.Warning).ToList();
             if (oldLevel != level || oldActive != active || !oldSockets.SequenceEqual(newSockets))
             {
                 MarkDirty(true);
@@ -577,13 +590,13 @@ public class BlockEntitySparkstone : BlockEntity
     /// </summary>
     public virtual bool CanWork(SocketCrystal crystal) => crystal.IsAligned;
 
-    /// <summary>A socketed crystal's plug is lit while it can work: not resting, its block Active, and of use there.</summary>
-    public bool Lit(SocketCrystal crystal) => active && !crystal.Resting && CanWork(crystal);
+    /// <summary>A socketed crystal's plug is lit while it can work: not Dormant, its block Active, and of use there.</summary>
+    public bool Lit(SocketCrystal crystal) => active && !crystal.Dormant && CanWork(crystal);
 
     /// <summary>
     /// The sockets as one mesh in block coordinates: a round mark for every socket on the socket face,
     /// and each crystal in its Evolution's plug, pointing out of the face and glowing by its level, a
-    /// resting one dim. A Glowing crystal's long plug lies along its row. A machine always shows its marks; a Free block only while it holds a crystal.
+    /// Dormant one dim. A Glowing crystal's long plug lies along its row. A machine always shows its marks; a Free block only while it holds a crystal.
     /// </summary>
     public MeshData? SocketMeshes(ICoreClientAPI capi)
     {
@@ -604,7 +617,7 @@ public class BlockEntitySparkstone : BlockEntity
                 all.AddMeshData(part);
             }
         }
-        int room = Math.Max(Room, UsedRoom);
+        int room = Math.Max(SocketRoom, UsedRoom);
         var (rx, ry, rz) = Turn(face);
         if (Part(capi, MarkShape, "mark", "socket") is { } mark)
         {
@@ -628,12 +641,20 @@ public class BlockEntitySparkstone : BlockEntity
                 CrystalMeshes.SetGlow(placed, lit ? 160 : 0);
                 Add(placed);
             }
+            if (crystal.IsFitting)
+            {
+                if (FittingMesh(capi, crystal.Stack) is { } fitting)
+                {
+                    Add(OnFace(fitting, face, point, 0.004f, rx, ry, rz));
+                }
+                continue;
+            }
             var block = Crystal.BlockFor(capi.World, crystal.Alignment ?? Crystal.Unaligned, crystal.Evolution);
             if (block == null)
             {
                 continue;
             }
-            int glow = crystal.Resting ? 20 : crystal.IsAligned ? Crystal.Glow(crystal.Level) : 120;
+            int glow = crystal.Dormant ? 20 : crystal.IsAligned ? Crystal.Glow(crystal.Level) : 120;
             var mesh = CrystalMeshes.Get(capi, block, glow, crystal.Cracks);
             if (mesh == null)
             {
@@ -643,6 +664,34 @@ public class BlockEntitySparkstone : BlockEntity
             Add(OnFace(mesh.Clone().Scale(new Vec3f(0.5f, 0, 0.5f), scale, scale, scale), face, point, -0.02f, rx, ry, rz, false));
         }
         return all;
+    }
+
+    /// <summary>A fitting's own item shape, built upright on the block's floor like a crystal; cached per item.</summary>
+    private static MeshData? FittingMesh(ICoreClientAPI capi, ItemStack stack)
+    {
+        var parts = ObjectCacheUtil.GetOrCreate(capi, PartCacheKey, () => new Dictionary<string, MeshData?>());
+        string key = "fitting/" + stack.Collectible.Code;
+        lock (parts)
+        {
+            if (parts.TryGetValue(key, out var cached))
+            {
+                return cached;
+            }
+        }
+        MeshData? mesh = null;
+        if (stack.Item != null)
+        {
+            capi.Tesselator.TesselateItem(stack.Item, out mesh);
+        }
+        else if (stack.Block != null)
+        {
+            capi.Tesselator.TesselateBlock(stack.Block, out mesh);
+        }
+        lock (parts)
+        {
+            parts[key] = mesh;
+        }
+        return mesh;
     }
 
     /// <summary>Stands a mesh built upright on the block's floor on a point of the face, lifted this far off it.</summary>

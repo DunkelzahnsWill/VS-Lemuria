@@ -9,7 +9,7 @@ namespace Lemuria.Machines;
 /// <summary>
 /// The Crystal Rod (design note "Lemuria step 4: Machines", The Crystal Rod; F6): the maintenance tool.
 /// Sneak and right-click any Awakened block to switch it Active or Dormant. Right-click another face of
-/// a machine to make it the front, crystals and all; right-click a crystal on the front to rest it or
+/// a machine to make it the front, crystals and all; right-click a crystal on the front to switch it Dormant or
 /// wake it. Every tap makes a machine read what touches it again. It holds no charge and never wears out.
 /// </summary>
 public class ItemCrystalRod : Item
@@ -61,9 +61,9 @@ public class ItemCrystalRod : Item
         }
         else if (stone is BlockEntityMachine && stone.CrystalAt(blockSel.Face, blockSel.HitPosition) is { } crystal)
         {
-            crystal.Resting = !crystal.Resting;
+            crystal.Dormant = !crystal.Dormant;
             stone.OnSocketsChanged();
-            world.PlaySoundAt(crystal.Resting ? OffSound : OnSound, pos.X + 0.5, pos.Y + 0.5, pos.Z + 0.5, null, true, 12f, LemuriaSound.Volume(0.4f));
+            world.PlaySoundAt(crystal.Dormant ? OffSound : OnSound, pos.X + 0.5, pos.Y + 0.5, pos.Z + 0.5, null, true, 12f, LemuriaSound.Volume(0.4f));
         }
         (stone as BlockEntityMachine)?.ReadContext();
     }

@@ -78,8 +78,8 @@ public class BlockEntityMachine : BlockEntitySparkstone
     /// <summary>Whether a Crystal Motor's network paid for its turning on its last look. Server only.</summary>
     public bool MotorPowered => motorPowered && Active;
 
-    /// <summary>The crystals that take their turn: every one not resting.</summary>
-    public List<SocketCrystal> Working => sockets.Where(c => !c.Resting).ToList();
+    /// <summary>The crystals that take their turn: every one not Dormant.</summary>
+    public List<SocketCrystal> Working => sockets.Where(c => !c.Dormant).ToList();
 
     public override void Initialize(ICoreAPI api)
     {
@@ -407,7 +407,7 @@ public class BlockEntityMachine : BlockEntitySparkstone
         return motorPowered;
     }
 
-    /// <summary>A crystal set in, taken out, rested or woken changes a Motor's power at once, not on its next ten-second look.</summary>
+    /// <summary>A crystal set in, taken out, switched Dormant or woken changes a Motor's power at once, not on its next ten-second look.</summary>
     public override void OnSocketsChanged()
     {
         base.OnSocketsChanged();
@@ -501,10 +501,10 @@ public class BlockEntityMachine : BlockEntitySparkstone
     public override void GetBlockInfo(IPlayer forPlayer, System.Text.StringBuilder dsc)
     {
         base.GetBlockInfo(forPlayer, dsc);
-        int resting = sockets.Count(c => c.Resting);
-        if (resting > 0)
+        int dormant = sockets.Count(c => c.Dormant);
+        if (dormant > 0)
         {
-            dsc.AppendLine(Vintagestory.API.Config.Lang.Get(LemuriaModSystem.ModId + ":machine-resting", resting));
+            dsc.AppendLine(Vintagestory.API.Config.Lang.Get(LemuriaModSystem.ModId + ":machine-dormantcrystals", dormant));
         }
     }
 }

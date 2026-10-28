@@ -11,7 +11,7 @@ namespace Lemuria.Machines;
 /// <summary>
 /// Machines (design note "Lemuria step 4: Machines", part 1): the Crystalline Chisel carves Awakened
 /// sparkstone into Gather, Refine, Focus, Scatter and Amplify blocks and the Crystal Motor; the Crystal
-/// Rod switches blocks Active or Dormant, turns a machine's front and rests its crystals; an Unaligned
+/// Rod switches blocks Active or Dormant, turns a machine's front and switches its crystals Dormant; an Unaligned
 /// crystal in a Focus quickens cradles. Sockets, capacitors and Active and Dormant live on every
 /// Awakened block in Sparkstone; a machine's working goes through Evocations' own effects. No Harmony.
 /// Adds <c>/lemuria machines test ...</c> for the smoke test and for admins.
@@ -86,7 +86,7 @@ public class MachinesModSystem : ModSystem
                         .HandleWith(_ => Test(-44, 20, _ => tests.MotorCheck()))
                     .EndSubCommand()
                     .BeginSubCommand("motorstopped")
-                        .WithDescription("Reports whether the test quern stopped once its Motor's crystal rested")
+                        .WithDescription("Reports whether the test quern stopped once its Motor's crystal went Dormant")
                         .HandleWith(_ => Test(-44, 20, _ => tests.MotorStopped()))
                     .EndSubCommand()
                     .BeginSubCommand("quicken")

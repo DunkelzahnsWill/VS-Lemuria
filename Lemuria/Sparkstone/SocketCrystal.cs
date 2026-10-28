@@ -27,8 +27,8 @@ public class SocketCrystal : IStandingCrystal
     /// <summary>The crystal as an item. A capacitor's charge on it is stale; <see cref="Charge"/> is the truth.</summary>
     public ItemStack Stack { get; set; }
 
-    /// <summary>Rested with the Crystal Rod: it sits out its turn.</summary>
-    public bool Resting { get; set; }
+    /// <summary>Switched off with the Crystal Rod: a Dormant crystal sits out its turns (step 4 part 2, question 1).</summary>
+    public bool Dormant { get; set; }
 
     /// <summary>The first socket it fills, as the block packs them.</summary>
     public int Socket { get; set; }
@@ -41,10 +41,16 @@ public class SocketCrystal : IStandingCrystal
 
     public string Evolution => Crystal.EvolutionOf(Stack.Collectible);
 
-    public bool IsAligned => Alignment != Crystal.Unaligned;
+    /// <summary>
+    /// A fitting set in a socket in place of a crystal, such as the Dead Socket (step 4 part 2): no alignment,
+    /// no store and no dialogues; it reads as an Unaligned Glittering crystal for its size.
+    /// </summary>
+    public bool IsFitting => !Crystal.IsCrystal(Stack.Collectible);
 
-    /// <summary>Sockets it fills: a Glittering crystal 1, a Glowing one 2 by default.</summary>
-    public int Size => BlockEntitySparkstone.SocketsFor(Evolution);
+    public bool IsAligned => !IsFitting && Alignment != Crystal.Unaligned;
+
+    /// <summary>Sockets it fills: a Glittering crystal 1, a Glowing one 2 by default; its block may say otherwise.</summary>
+    public int Size => stone.SizeOf(this);
 
     public float Capacity => IsAligned ? Crystal.Capacity(Evolution) : 0;
 
@@ -121,7 +127,7 @@ public class SocketCrystal : IStandingCrystal
     public void ToTreeAttributes(ITreeAttribute tree)
     {
         tree.SetItemstack("stack", Stack);
-        tree.SetBool("resting", Resting);
+        tree.SetBool("resting", Dormant);
         tree.SetBool("warning", Warning);
         tree.SetFloat("dialogueSeconds", DialogueSeconds);
     }
@@ -129,13 +135,13 @@ public class SocketCrystal : IStandingCrystal
     public static SocketCrystal? FromTreeAttributes(BlockEntitySparkstone stone, ITreeAttribute tree, IWorldAccessor world)
     {
         var stack = tree.GetItemstack("stack");
-        if (stack == null || !stack.ResolveBlockOrItem(world) || !Crystal.IsCrystal(stack.Collectible))
+        if (stack == null || !stack.ResolveBlockOrItem(world) || !BlockEntitySparkstone.Socketable(stack))
         {
             return null;
         }
         return new SocketCrystal(stone, stack)
         {
-            Resting = tree.GetBool("resting"),
+            Dormant = tree.GetBool("resting"),
             Warning = tree.GetBool("warning"),
             DialogueSeconds = tree.GetFloat("dialogueSeconds"),
         };
