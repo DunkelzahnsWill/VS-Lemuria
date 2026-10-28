@@ -1,0 +1,164 @@
+{
+ "textureWidth": 16,
+ "textureHeight": 16,
+ "textures": {
+  "rock": "game:block/stone/polishedrock/granite",
+  "glyph": "lemuria:block/sparkstone/glyph",
+  "form": "lemuria:block/machines/gather"
+ },
+ "elements": [
+  {
+   "name": "stone",
+   "from": [
+    0,
+    0,
+    0
+   ],
+   "to": [
+    16,
+    16,
+    16
+   ],
+   "faces": {
+    "north": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    },
+    "east": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    },
+    "south": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    },
+    "west": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    },
+    "up": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    },
+    "down": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    }
+   }
+  },
+  {
+   "name": "glyphs",
+   "from": [
+    -0.02,
+    -0.02,
+    -0.02
+   ],
+   "to": [
+    16.02,
+    16.02,
+    16.02
+   ],
+   "faces": {
+    "east": {
+     "texture": "#glyph",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    },
+    "south": {
+     "texture": "#glyph",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    },
+    "west": {
+     "texture": "#glyph",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    },
+    "up": {
+     "texture": "#glyph",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    },
+    "down": {
+     "texture": "#glyph",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    }
+   }
+  },
+  {
+   "name": "front",
+   "from": [
+    -0.02,
+    -0.02,
+    -0.02
+   ],
+   "to": [
+    16.02,
+    16.02,
+    16.02
+   ],
+   "faces": {
+    "north": {
+     "texture": "#form",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    }
+   }
+  }
+ ]
+}

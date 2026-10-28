@@ -1,0 +1,48 @@
+{
+	"code": "machine",
+	"classByType": {
+		"machine-motor-*": "lemuria-crystalmotor",
+		"*": "lemuria-machine"
+	},
+	"entityClass": "lemuria-machine",
+	"entityBehaviorsByType": {
+		"machine-motor-*": [{ "name": "lemuria-crystalmotor" }]
+	},
+	"variantgroups": [
+		{ "code": "form", "states": ["gather", "refine", "focus", "scatter", "amplify", "motor"] },
+		{ "code": "tier", "states": ["awakened"] },
+		{ "code": "rock", "states": ["andesite", "chalk", "chert", "conglomerate", "limestone", "claystone", "granite", "sandstone", "shale", "basalt", "peridotite", "phyllite", "slate", "redmarble", "whitemarble", "greenmarble", "bauxite", "suevite", "kimberlite"] },
+		{ "code": "side", "states": ["north", "east", "south", "west", "up", "down"] }
+	],
+	"attributes": {
+		"handbook": { "exclude": true }
+	},
+	"shape": { "base": "lemuria:block/machines/machine" },
+	"textures": {
+		"rock": { "base": "game:block/stone/polishedrock/{rock}" },
+		"glyph": { "base": "lemuria:block/sparkstone/glyph" },
+		"glyph-low": { "base": "lemuria:block/sparkstone/glyph-low" },
+		"glyph-high": { "base": "lemuria:block/sparkstone/glyph-high" },
+		"glyph-full": { "base": "lemuria:block/sparkstone/glyph-full" },
+		"form": { "base": "lemuria:block/machines/{form}" },
+		"form-low": { "base": "lemuria:block/machines/{form}-low" },
+		"form-high": { "base": "lemuria:block/machines/{form}-high" },
+		"form-full": { "base": "lemuria:block/machines/{form}-full" }
+	},
+	"creativeinventory": { "general": ["*-north"], "construction": ["*-north"] },
+	"drawtype": "json",
+	"blockmaterial": "Stone",
+	"resistance": 4,
+	"requiredMiningTier": 2,
+	"sidesolid": { "all": true },
+	"sideopaque": { "all": true },
+	"sounds": {
+		"walk": "game:walk/stone",
+		"place": "game:block/rock-hit-pickaxe",
+		"hit": "game:block/rock-hit-pickaxe",
+		"break": "game:block/rock-break-pickaxe",
+		"ambient": "lemuria:sounds/sparkstone/hum",
+		"ambientBlockCount": 1,
+		"ambientMaxDistanceMerge": 32
+	}
+}

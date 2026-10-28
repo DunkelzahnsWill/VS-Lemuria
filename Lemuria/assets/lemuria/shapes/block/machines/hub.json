@@ -1,0 +1,178 @@
+{
+ "textureWidth": 16,
+ "textureHeight": 16,
+ "textures": {
+  "rock": "game:block/stone/polishedrock/granite",
+  "form": "lemuria:block/machines/motor"
+ },
+ "elements": [
+  {
+   "name": "hub",
+   "from": [
+    2,
+    2,
+    -0.6
+   ],
+   "to": [
+    14,
+    14,
+    0
+   ],
+   "faces": {
+    "north": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      12,
+      12
+     ]
+    },
+    "east": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      0.6,
+      12
+     ]
+    },
+    "south": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      12,
+      12
+     ]
+    },
+    "west": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      0.6,
+      12
+     ]
+    },
+    "up": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      12,
+      0.6
+     ]
+    },
+    "down": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      12,
+      0.6
+     ]
+    }
+   }
+  },
+  {
+   "name": "hub 45",
+   "from": [
+    3.5,
+    3.5,
+    -0.6
+   ],
+   "to": [
+    12.5,
+    12.5,
+    0
+   ],
+   "faces": {
+    "north": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      9.0,
+      9.0
+     ]
+    },
+    "east": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      0.6,
+      9.0
+     ]
+    },
+    "south": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      9.0,
+      9.0
+     ]
+    },
+    "west": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      0.6,
+      9.0
+     ]
+    },
+    "up": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      9.0,
+      0.6
+     ]
+    },
+    "down": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      9.0,
+      0.6
+     ]
+    }
+   },
+   "rotationOrigin": [
+    8,
+    8,
+    0
+   ],
+   "rotationZ": 45
+  },
+  {
+   "name": "hub face",
+   "from": [
+    2,
+    2,
+    -0.62
+   ],
+   "to": [
+    14,
+    14,
+    -0.6
+   ],
+   "faces": {
+    "north": {
+     "texture": "#form",
+     "uv": [
+      2,
+      2,
+      14,
+      14
+     ]
+    }
+   }
+  }
+ ]
+}
