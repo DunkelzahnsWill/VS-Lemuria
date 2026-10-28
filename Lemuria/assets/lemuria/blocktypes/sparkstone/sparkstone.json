@@ -18,7 +18,9 @@
 		"glyph": { "base": "lemuria:block/sparkstone/glyph" },
 		"glyph-low": { "base": "lemuria:block/sparkstone/glyph-low" },
 		"glyph-high": { "base": "lemuria:block/sparkstone/glyph-high" },
-		"glyph-full": { "base": "lemuria:block/sparkstone/glyph-full" }
+		"glyph-full": { "base": "lemuria:block/sparkstone/glyph-full" },
+		"socket": { "base": "lemuria:block/sparkstone/socket" },
+		"socket-lit": { "base": "lemuria:block/sparkstone/socket-lit" }
 	},
 	"creativeinventory": { "general": ["*"], "construction": ["*"] },
 	"drawtype": "json",

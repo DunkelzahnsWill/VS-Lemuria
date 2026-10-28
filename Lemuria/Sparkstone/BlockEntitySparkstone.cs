@@ -14,12 +14,14 @@ namespace Lemuria.Sparkstone;
 /// <summary>
 /// One block of Awakened sparkstone (design note, Awakened sparkstone and touching charge, Glyphs):
 /// it keeps its share of its network's charge, and its glyphs glow by the network's charge level in a
-/// warm ivory, without lighting the area. The network itself is worked out every 10 seconds by
+/// deep cyan, without lighting the area. The network itself is worked out every 10 seconds by
 /// <see cref="SparkstoneNetworks"/>; clients get the level through the game's block entity sync.
 /// Step 4 (note "Lemuria step 4: Machines", Sockets, Capacitors, Active and Dormant): every Awakened
 /// block has sockets for crystals up to its room, and is Active or Dormant. In a Free block, one not
 /// carved into a machine, an aligned crystal is a capacitor whose capacity and charge join the
 /// network's. A Dormant block is out of its network, keeps its charge, and its glyphs go dark.
+/// After the owner's play-test (note rev 78, How machines look): lit glyphs are deep cyan, each socket
+/// has a round mark, and a socketed crystal sits in a round collar that is lit while it can work.
 /// Machines (Lemuria/Machines) build on this class.
 /// </summary>
 public class BlockEntitySparkstone : BlockEntity
@@ -27,6 +29,11 @@ public class BlockEntitySparkstone : BlockEntity
     public const string ClassCode = "lemuria-sparkstone";
 
     private const string MeshCacheKey = LemuriaModSystem.ModId + "-sparkstonemeshes";
+    private const string PartCacheKey = LemuriaModSystem.ModId + "-socketparts";
+
+    private static readonly AssetLocation MarkShape = new(LemuriaModSystem.ModId, "shapes/block/sparkstone/socketmark.json");
+    private static readonly AssetLocation CollarShape = new(LemuriaModSystem.ModId, "shapes/block/sparkstone/socketcollar.json");
+    private static readonly AssetLocation GlowingCollarShape = new(LemuriaModSystem.ModId, "shapes/block/sparkstone/socketcollar-glowing.json");
 
     private static readonly string[] GlyphCodes = { "glyph", "glyph-low", "glyph-high", "glyph-full" };
     private static readonly int[] GlyphGlow = { 0, 90, 170, 255 };
@@ -561,21 +568,61 @@ public class BlockEntitySparkstone : BlockEntity
     }
 
     /// <summary>
-    /// Each crystal in its sockets as one mesh in block coordinates, pointing out of the socket face and
-    /// glowing by its level, a resting one dim; null when there are none.
+    /// Whether a crystal in this block can do its work here: in Free stone only an aligned crystal, a
+    /// capacitor, does anything. Machines say what their own verb needs.
+    /// </summary>
+    public virtual bool CanWork(SocketCrystal crystal) => crystal.IsAligned;
+
+    /// <summary>A socketed crystal's collar is lit while it can work: not resting, its block Active, and of use there.</summary>
+    public bool Lit(SocketCrystal crystal) => active && !crystal.Resting && CanWork(crystal);
+
+    /// <summary>How far the socket face stands out from the block's face, in blocks: the Motor's hub lifts it.</summary>
+    protected virtual float SocketLift => 0;
+
+    /// <summary>
+    /// The sockets as one mesh in block coordinates: a round mark for every socket on the socket face,
+    /// and each crystal in a round collar, pointing out of the face and glowing by its level, a resting
+    /// one dim. A machine always shows its marks; a Free block only while it holds a crystal.
     /// </summary>
     public MeshData? SocketMeshes(ICoreClientAPI capi)
     {
         var face = SocketFacing;
-        if (face == null || sockets.Count == 0)
+        if (face == null || (sockets.Count == 0 && IsFree))
         {
             return null;
         }
         MeshData? all = null;
-        var center = new Vec3f(0.5f, 0.5f, 0.5f);
+        void Add(MeshData part)
+        {
+            if (all == null)
+            {
+                all = part;
+            }
+            else
+            {
+                all.AddMeshData(part);
+            }
+        }
+        int room = Math.Max(Room, UsedRoom);
         var (rx, ry, rz) = Turn(face);
+        if (Part(capi, MarkShape, "mark", "socket") is { } mark)
+        {
+            for (int i = 0; i < room; i++)
+            {
+                Add(OnFace(mark, face, Sockets.Point(face, room, i, 1), 0.004f, rx, ry, rz));
+            }
+        }
         foreach (var crystal in sockets)
         {
+            var point = Sockets.Point(face, room, crystal.Socket, crystal.Size);
+            bool glowing = crystal.Evolution == Crystal.Glowing;
+            bool lit = Lit(crystal);
+            if (Part(capi, glowing ? GlowingCollarShape : CollarShape, glowing ? "collar-glowing" : "collar", lit ? "socket-lit" : "socket") is { } collar)
+            {
+                var placed = OnFace(collar, face, point, 0.004f, rx, ry, rz);
+                CrystalMeshes.SetGlow(placed, lit ? 160 : 0);
+                Add(placed);
+            }
             var block = Crystal.BlockFor(capi.World, crystal.Alignment ?? Crystal.Unaligned, crystal.Evolution);
             if (block == null)
             {
@@ -587,24 +634,62 @@ public class BlockEntitySparkstone : BlockEntity
             {
                 continue;
             }
-            float scale = crystal.Evolution == Crystal.Glowing ? 0.42f : 0.34f;
-            var point = Sockets.Point(face, Math.Max(Room, UsedRoom), crystal.Socket, crystal.Size);
-            var n = face.Normalf;
-            var placed = mesh.Clone()
-                .Scale(new Vec3f(0.5f, 0, 0.5f), scale, scale, scale)
-                .Translate(0, 0.5f, 0)
-                .Rotate(center, rx, ry, rz)
-                .Translate((float)point.X - 0.5f - n.X * 0.06f, (float)point.Y - 0.5f - n.Y * 0.06f, (float)point.Z - 0.5f - n.Z * 0.06f);
-            if (all == null)
-            {
-                all = placed;
-            }
-            else
-            {
-                all.AddMeshData(placed);
-            }
+            float scale = glowing ? 0.42f : 0.34f;
+            Add(OnFace(mesh.Clone().Scale(new Vec3f(0.5f, 0, 0.5f), scale, scale, scale), face, point, -0.02f, rx, ry, rz, false));
         }
         return all;
+    }
+
+    /// <summary>Stands a mesh built upright on the block's floor on a point of the face, lifted this far off it.</summary>
+    private MeshData OnFace(MeshData mesh, BlockFacing face, Vec3d point, float lift, float rx, float ry, float rz, bool clone = true)
+    {
+        var n = face.Normalf;
+        float off = lift + SocketLift;
+        return (clone ? mesh.Clone() : mesh)
+            .Translate(0, 0.5f, 0)
+            .Rotate(new Vec3f(0.5f, 0.5f, 0.5f), rx, ry, rz)
+            .Translate((float)point.X - 0.5f + n.X * off, (float)point.Y - 0.5f + n.Y * off, (float)point.Z - 0.5f + n.Z * off);
+    }
+
+    /// <summary>A socket mark or collar in this block's rock, its top in the groove or the lit texture; cached per rock.</summary>
+    private MeshData? Part(ICoreClientAPI capi, AssetLocation shapeLocation, string name, string rim)
+    {
+        var parts = ObjectCacheUtil.GetOrCreate(capi, PartCacheKey, () => new Dictionary<string, MeshData?>());
+        string key = $"{Block.Variant["rock"]}/{name}/{rim}";
+        lock (parts)
+        {
+            if (parts.TryGetValue(key, out var cached))
+            {
+                return cached;
+            }
+        }
+        MeshData? mesh = null;
+        if (Shape.TryGet(capi, shapeLocation) is { } shape)
+        {
+            capi.Tesselator.TesselateShape("lemuria-socket", shape, out mesh, new RimTextures(capi.Tesselator.GetTextureSource(Block), rim));
+        }
+        lock (parts)
+        {
+            parts[key] = mesh;
+        }
+        return mesh;
+    }
+
+    /// <summary>The block's own textures, with a part's "rim" drawn in the groove or the lit texture.</summary>
+    private class RimTextures : ITexPositionSource
+    {
+        private readonly ITexPositionSource inner;
+        private readonly string rim;
+
+        public RimTextures(ITexPositionSource inner, string rim)
+        {
+            this.inner = inner;
+            this.rim = rim;
+        }
+
+        public TextureAtlasPosition? this[string textureCode] => inner[textureCode is "rim" or "socket" ? rim : textureCode];
+
+        public Size2i? AtlasSize => inner.AtlasSize;
     }
 
     /// <summary>The turn, in radians about X, Y and Z, that points a standing crystal out of this face.</summary>
