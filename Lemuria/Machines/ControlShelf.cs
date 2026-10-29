@@ -480,7 +480,7 @@ public class BlockEntityControlShelf : BlockEntityDisplay
             return cached;
         }
         var mesh = getDefaultMesh(slot.Itemstack).Clone();
-        Fit(mesh);
+        Fit(mesh, slot.Itemstack?.Class == EnumItemClass.Item);
         if (IsDormant(inventory.GetSlotId(slot)) && mesh.Rgba != null)
         {
             // Dormant, it is drawn dark, as a Dormant crystal's plug is.
@@ -512,7 +512,11 @@ public class BlockEntityControlShelf : BlockEntityDisplay
         return (min, max);
     }
 
-    private static void Fit(MeshData mesh)
+    /// <summary>
+    /// Stands a model upright in its place, shrunk to fit. An item (a tool, seeds) is also turned so its
+    /// broad side faces the player and its outline shows (play-test, Oct 29 03:39Z); a block stays as it is.
+    /// </summary>
+    private static void Fit(MeshData mesh, bool showOutline)
     {
         if (mesh.VerticesCount == 0)
         {
@@ -532,6 +536,13 @@ public class BlockEntityControlShelf : BlockEntityDisplay
         }
         (min, max) = Bounds(mesh);
         size = max - min;
+        if (showOutline && size.X < size.Z)
+        {
+            // Its thin side toward the player, its outline across the shelf.
+            mesh.Rotate(new Vec3f((min.X + max.X) / 2, (min.Y + max.Y) / 2, (min.Z + max.Z) / 2), 0, GameMath.PIHALF, 0);
+            (min, max) = Bounds(mesh);
+            size = max - min;
+        }
         float scale = Math.Min(1f, Math.Min(PlaceWidth / Math.Max(size.X, 0.001f), Math.Min(PlaceHeight / Math.Max(size.Y, 0.001f), PlaceDepth / Math.Max(size.Z, 0.001f))));
         mesh.Translate(0.5f - (min.X + max.X) / 2, -min.Y, 0.5f - (min.Z + max.Z) / 2);
         mesh.Scale(new Vec3f(0.5f, 0, 0.5f), scale, scale, scale);
