@@ -23,6 +23,17 @@ public class ItemCrystalRod : Item
     public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling)
     {
         var world = byEntity.World;
+        if (firstEvent && blockSel != null && world.BlockAccessor.GetBlockEntity(blockSel.Position) is BlockEntityControlShelf shelf)
+        {
+            // On a Control Shelf the rod switches an item, or sneaking wakes the shelf (H4).
+            handling = EnumHandHandling.PreventDefault;
+            var by = (byEntity as EntityPlayer)?.Player;
+            if (world.Side == EnumAppSide.Server && (by == null || LemuriaClaims.TryAccess(world, by, blockSel.Position, EnumBlockAccessFlags.Use)))
+            {
+                shelf.RodTap(blockSel, byEntity.Controls.Sneak || byEntity.Controls.ShiftKey);
+            }
+            return;
+        }
         if (!firstEvent || blockSel == null || world.BlockAccessor.GetBlockEntity(blockSel.Position) is not BlockEntitySparkstone stone)
         {
             base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);

@@ -81,7 +81,8 @@ public static class ShelfWork
         for (int i = 0; i < items.Length; i++)
         {
             var item = items[i];
-            if (shelf.IsDormant(i))
+            // Only an item switched off is passed over as stock; a quiet one keeps its kind back (H4).
+            if (shelf.QuietOf(i) == BlockEntityControlShelf.Quiet.Off)
             {
                 continue;
             }
@@ -99,18 +100,67 @@ public static class ShelfWork
 
     private static bool Same(ItemStack a, ItemStack b) => a.Collectible.Code.Equals(b.Collectible.Code);
 
+    /// <summary>Whether an item of this kind uses stock from the input, so it can run out (H4).</summary>
+    public static bool UsesStock(Kind kind) => kind is Kind.Seeds or Kind.Sapling or Kind.Fertilizer or Kind.Firewood or Kind.Axe;
+
+    /// <summary>Whether a stack is stock for the item in this place: its own kind, or logs an axe splits, of its prefix's kind where it has one.</summary>
+    public static bool IsStockFor(IWorldAccessor world, BlockEntityControlShelf shelf, int place, ItemStack stack)
+    {
+        if (shelf.Items[place] is not { } item)
+        {
+            return false;
+        }
+        return KindOf(item) switch
+        {
+            Kind.Seeds or Kind.Sapling or Kind.Fertilizer or Kind.Firewood => Same(item, stack),
+            Kind.Axe => (shelf.PrefixOf(place) is not { } kind || Same(kind, stack)) && Split(world, stack, item) != null,
+            _ => false,
+        };
+    }
+
+    private static bool HasStock(BlockEntityMachine machine, BlockEntityControlShelf shelf, int place) =>
+        machine.Input is { } input && input.Any(s => s.Itemstack is { } stack && IsStockFor(machine.Api.World, shelf, place, stack));
+
+    /// <summary>
+    /// A turn's work (H4, H5, note rev 56). Items run left to right, the first with work in reach doing
+    /// it. An item that uses stock with none of its kind in the input goes quiet, out of stock; an item
+    /// checked with nothing to do in reach goes quiet, done; a quiet or switched-off item is passed over
+    /// without a check. With a Dead Socket, any awake item out of stock sends the whole shelf Dormant
+    /// before anything works, and a Dormant shelf does nothing.
+    /// </summary>
     public static MachineWork.Result Work(BlockEntityMachine machine, BlockEntityControlShelf shelf, CastContext cast)
     {
-        var reach = Reach(cast);
+        shelf.Listen();
+        if (shelf.Asleep)
+        {
+            return MachineWork.Result.Nothing;
+        }
         var items = shelf.Items;
+        if (shelf.HasSocket)
+        {
+            for (int i = 0; i < items.Length; i++)
+            {
+                if (items[i] != null && !shelf.IsDormant(i) && UsesStock(KindOf(items[i])) && !HasStock(machine, shelf, i))
+                {
+                    shelf.Quieten(i, BlockEntityControlShelf.Quiet.OutOfStock);
+                    return MachineWork.Result.Nothing;
+                }
+            }
+        }
+        List<BlockPos>? reach = null;
         for (int i = 0; i < items.Length; i++)
         {
             var item = items[i];
-            // A Dormant item is passed over, as work and as stock (H2).
-            if (item == null || shelf.IsDormant(i))
+            if (item == null || shelf.IsDormant(i) || KindOf(item) == Kind.None)
             {
                 continue;
             }
+            if (UsesStock(KindOf(item)) && !HasStock(machine, shelf, i))
+            {
+                shelf.Quieten(i, BlockEntityControlShelf.Quiet.OutOfStock);
+                continue;
+            }
+            reach ??= Reach(cast);
             var prefix = shelf.PrefixOf(i);
             var result = KindOf(item) switch
             {
@@ -128,6 +178,7 @@ public static class ShelfWork
             {
                 return result;
             }
+            shelf.Quieten(i, BlockEntityControlShelf.Quiet.Done);
         }
         return MachineWork.Result.Nothing;
     }
@@ -158,14 +209,21 @@ public static class ShelfWork
             {
                 break;
             }
-            if (world.BlockAccessor.GetBlockEntity(pos) is BlockEntityFarmland farmland && farmland.CanPlant() && cast.Can(pos.UpCopy())
-                && farmland.TryPlant(crop, new DummySlot(item.Clone()), null!, new BlockSelection { Position = pos.Copy(), Face = BlockFacing.UP }))
+            if (FarmlandAt(world.BlockAccessor, pos) is { } farmland && farmland.CanPlant() && cast.Can(farmland.Pos.UpCopy())
+                && farmland.TryPlant(crop, new DummySlot(item.Clone()), null!, new BlockSelection { Position = farmland.Pos.Copy(), Face = BlockFacing.UP }))
             {
                 sown++;
             }
         }
         return Used(machine, cast, item, sown, PlantSound);
     }
+
+    /// <summary>
+    /// The farmland at a block of the reach, or under it: once a crop stands where the machine aims, its
+    /// reach is level with the crops, so the farmland beneath each cell is the one worked.
+    /// </summary>
+    private static BlockEntityFarmland? FarmlandAt(IBlockAccessor accessor, BlockPos pos) =>
+        accessor.GetBlockEntity(pos) as BlockEntityFarmland ?? accessor.GetBlockEntity(pos.DownCopy()) as BlockEntityFarmland;
 
     /// <summary>A sapling plants each block of open soil in reach with air above it, one from the input each.</summary>
     private static MachineWork.Result Plant(BlockEntityMachine machine, CastContext cast, List<BlockPos> reach, ItemStack item)
@@ -217,7 +275,7 @@ public static class ShelfWork
             {
                 break;
             }
-            if (world.BlockAccessor.GetBlockEntity(pos) is BlockEntityFarmland farmland && cast.Can(pos) && Fertilize(world, farmland, props, overlay))
+            if (FarmlandAt(world.BlockAccessor, pos) is { } farmland && cast.Can(farmland.Pos) && Fertilize(world, farmland, props, overlay))
             {
                 fed++;
             }

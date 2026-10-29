@@ -7,6 +7,7 @@ using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
+using Vintagestory.API.Util;
 using Vintagestory.GameContent;
 
 namespace Lemuria.Machines;
@@ -67,6 +68,14 @@ public class BlockEntityControlShelf : BlockEntityDisplay
     public BlockEntityControlShelf()
     {
         inventory = new InventoryGeneric(Places, "lemuria-controlshelf-0", null, (id, inv) => new ItemSlotDisplay(inv, "shelf") { MaxSlotStackSize = 1 });
+        // An item put on or taken off starts awake.
+        inventory.SlotModified += place =>
+        {
+            if (place >= 0 && place < Places)
+            {
+                quiet[place] = Quiet.Awake;
+            }
+        };
     }
 
     public override InventoryBase Inventory => inventory;
@@ -106,16 +115,53 @@ public class BlockEntityControlShelf : BlockEntityDisplay
             ? container
             : null;
 
-    private readonly bool[] dormant = new bool[Places];
+    /// <summary>Why an item on the shelf is dark, if it is (H2, note rev 44; H4, note rev 56).</summary>
+    public enum Quiet : byte
+    {
+        Awake,
+        /// <summary>Switched off with the rod; it stays off until a right-click wakes it.</summary>
+        Off,
+        /// <summary>It uses stock and the input holds none of its kind; it wakes when its kind arrives.</summary>
+        OutOfStock,
+        /// <summary>It was checked with nothing to do in its reach; it stays quiet until a rod tap.</summary>
+        Done,
+    }
+
+    private readonly Quiet[] quiet = new Quiet[Places];
+
+    /// <summary>
+    /// The whole shelf Dormant (H5): with a Dead Socket in its socket, an item out of stock sends every
+    /// place dark until that stock arrives or a sneak tap wakes it.
+    /// </summary>
+    private bool asleep;
+
+    /// <summary>The fitting in the socket in the middle of the shelf's top: a Dead Socket, or null.</summary>
+    private ItemStack? socket;
+
+    /// <summary>The input whose change event this shelf listens to, so stock arriving wakes an item. Server only.</summary>
+    private InventoryBase? listened;
 
     /// <summary>The items on the shelf, first to last.</summary>
     public ItemStack?[] Items => Enumerable.Range(0, Places).Select(i => inventory[i].Itemstack).ToArray();
 
+    /// <summary>Why the item in this place is dark, or Awake; an empty place is Awake.</summary>
+    public Quiet QuietOf(int place) => place >= 0 && place < Places && !inventory[place].Empty ? quiet[place] : Quiet.Awake;
+
     /// <summary>
-    /// Whether the item in this place is Dormant (H2, note rev 44): switched with the Crystal Rod, drawn
-    /// dark, and passed over by the machine as work and as stock until it is woken.
+    /// Whether the machine passes over the item in this place: switched off, quiet, or the whole shelf
+    /// Dormant. Only an item switched off is passed over as stock too (H2); a quiet one keeps its kind
+    /// back in the input, so the stock that wakes it is there when it does.
     /// </summary>
-    public bool IsDormant(int place) => place >= 0 && place < Places && dormant[place] && !inventory[place].Empty;
+    public bool IsDormant(int place) => place >= 0 && place < Places && !inventory[place].Empty && (asleep || quiet[place] != Quiet.Awake);
+
+    /// <summary>Whether the whole shelf is Dormant for want of stock (H5).</summary>
+    public bool Asleep => asleep;
+
+    /// <summary>Whether a Dead Socket sits in the shelf's socket.</summary>
+    public bool HasSocket => socket != null;
+
+    /// <summary>Whether this stack is a fitting the shelf's socket takes: the Dead Socket, as any socket takes it.</summary>
+    public static bool IsFitting(ItemStack? stack) => stack?.Collectible?.Attributes?["lemuriaSocketFitting"].AsBool() == true;
 
     /// <summary>
     /// The item in this place that is a shovel's or an axe's prefix (H1): an item that names no action,
@@ -125,8 +171,9 @@ public class BlockEntityControlShelf : BlockEntityDisplay
         place > 0 && inventory[place - 1].Itemstack is { } before && ShelfWork.KindOf(before) == ShelfWork.Kind.None ? before : null;
 
     /// <summary>
-    /// A rod's right-click on a place: an item that names an action switches Dormant or wakes; a prefix,
-    /// an empty place or anything else does nothing. Returns whether it switched. Server only.
+    /// A rod's right-click on a place: an awake item that names an action switches off, and a dark one
+    /// wakes, whatever made it dark, and wakes the shelf with it (H2, H4); a prefix, an empty place or
+    /// anything else does nothing. Returns whether it switched. Server only.
     /// </summary>
     public bool SwitchDormant(int place)
     {
@@ -134,10 +181,192 @@ public class BlockEntityControlShelf : BlockEntityDisplay
         {
             return false;
         }
-        dormant[place] = !dormant[place];
-        Api.World.PlaySoundAt(new AssetLocation(LemuriaModSystem.ModId, dormant[place] ? "sounds/machines/switch-off" : "sounds/machines/switch-on"), Pos, 0, null, true, 12f, LemuriaSound.Volume(0.6f));
+        bool off = !IsDormant(place);
+        quiet[place] = off ? Quiet.Off : Quiet.Awake;
+        if (!off)
+        {
+            asleep = false;
+        }
+        Api.World.PlaySoundAt(new AssetLocation(LemuriaModSystem.ModId, off ? "sounds/machines/switch-off" : "sounds/machines/switch-on"), Pos, 0, null, true, 12f, LemuriaSound.Volume(0.6f));
         Changed();
         return true;
+    }
+
+    /// <summary>
+    /// A sneak and right-click with the rod (H4): the shelf and every quiet item wake together; an item
+    /// switched off by hand stays off. Server only.
+    /// </summary>
+    public void WakeAll()
+    {
+        asleep = false;
+        for (int i = 0; i < Places; i++)
+        {
+            if (quiet[i] != Quiet.Off)
+            {
+                quiet[i] = Quiet.Awake;
+            }
+        }
+        Api.World.PlaySoundAt(new AssetLocation(LemuriaModSystem.ModId, "sounds/machines/switch-on"), Pos, 0, null, true, 12f, LemuriaSound.Volume(0.6f));
+        Changed();
+    }
+
+    /// <summary>
+    /// The machine found an item with nothing to do (H4): out of stock or done, it goes quiet and is
+    /// drawn dark. With a Dead Socket, out of stock sends the whole shelf Dormant (H5). Server only.
+    /// </summary>
+    public void Quieten(int place, Quiet why)
+    {
+        if (QuietOf(place) != Quiet.Awake)
+        {
+            return;
+        }
+        quiet[place] = why;
+        if (why == Quiet.OutOfStock && socket != null)
+        {
+            asleep = true;
+        }
+        MarkDirty(true);
+    }
+
+    /// <summary>
+    /// Listens to the input's own change event, the one the game's chutes listen to, so stock arriving
+    /// wakes an item out of stock without anything polling; a new input is looked over once. Server only;
+    /// called on each of the machine's turns, where it costs one block lookup.
+    /// </summary>
+    public void Listen()
+    {
+        var now = Input?.Inventory as InventoryBase;
+        if (ReferenceEquals(now, listened))
+        {
+            return;
+        }
+        Unlisten();
+        listened = now;
+        if (now != null)
+        {
+            now.SlotModified += OnInputChanged;
+            for (int i = 0; i < now.Count; i++)
+            {
+                OnInputChanged(i);
+            }
+        }
+    }
+
+    private void Unlisten()
+    {
+        if (listened != null)
+        {
+            listened.SlotModified -= OnInputChanged;
+            listened = null;
+        }
+    }
+
+    /// <summary>A slot of the input changed: an item out of stock whose kind is now there wakes, and the shelf with it.</summary>
+    private void OnInputChanged(int slotId)
+    {
+        if (Api?.Side != EnumAppSide.Server || listened == null || slotId < 0 || slotId >= listened.Count || listened[slotId].Itemstack is not { } arrived)
+        {
+            return;
+        }
+        bool woke = false;
+        for (int i = 0; i < Places; i++)
+        {
+            if (QuietOf(i) == Quiet.OutOfStock && ShelfWork.IsStockFor(Api.World, this, i, arrived))
+            {
+                quiet[i] = Quiet.Awake;
+                woke = true;
+            }
+        }
+        if (woke)
+        {
+            asleep = false;
+            MarkDirty(true);
+        }
+    }
+
+    public override void OnBlockRemoved()
+    {
+        Unlisten();
+        base.OnBlockRemoved();
+    }
+
+    public override void OnBlockUnloaded()
+    {
+        Unlisten();
+        base.OnBlockUnloaded();
+    }
+
+    public override void OnBlockBroken(IPlayer? byPlayer = null)
+    {
+        if (socket != null && Api.Side == EnumAppSide.Server)
+        {
+            Api.World.SpawnItemEntity(socket, Pos.ToVec3d().Add(0.5, 1.1, 0.5));
+            socket = null;
+        }
+        base.OnBlockBroken(byPlayer);
+    }
+
+    /// <summary>Sets or clears the fitting in the shelf's socket without a player; for the test command. Server only.</summary>
+    public void SetSocket(ItemStack? stack)
+    {
+        socket = stack;
+        if (stack == null)
+        {
+            asleep = false;
+        }
+        Changed();
+    }
+
+    /// <summary>
+    /// The socket in the middle of the shelf's top (H5): a Dead Socket goes in with a right-click, as it
+    /// does in any socket, and an empty hand takes it out. Server only.
+    /// </summary>
+    private bool InteractSocket(IPlayer player, ItemSlot held)
+    {
+        if (socket == null && IsFitting(held.Itemstack))
+        {
+            if (Api.Side == EnumAppSide.Server)
+            {
+                socket = held.TakeOut(1);
+                held.MarkDirty();
+                Api.World.PlaySoundAt(new AssetLocation("game", "sounds/block/ceramicplace"), Pos, 0, null, true, 12f, LemuriaSound.Volume(0.8f));
+                Changed();
+            }
+            return true;
+        }
+        if (socket != null && held.Empty)
+        {
+            if (Api.Side == EnumAppSide.Server)
+            {
+                var stack = socket;
+                socket = null;
+                asleep = false;
+                if (!player.InventoryManager.TryGiveItemstack(stack, true))
+                {
+                    Api.World.SpawnItemEntity(stack, Pos.ToVec3d().Add(0.5, 1.1, 0.5));
+                }
+                Api.World.PlaySoundAt(new AssetLocation("game", "sounds/player/collect"), Pos, 0, null, true, 12f, LemuriaSound.Volume(0.8f));
+                Changed();
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// A right-click with the Crystal Rod: sneaking, on any face, it wakes the shelf and its quiet items;
+    /// on a place of the open face it switches that item off or wakes it. Server only.
+    /// </summary>
+    public void RodTap(BlockSelection blockSel, bool sneaking)
+    {
+        if (sneaking)
+        {
+            WakeAll();
+        }
+        else if (blockSel.Face == Side)
+        {
+            SwitchDormant(PlaceAt(blockSel.HitPosition));
+        }
     }
 
     /// <summary>The place on the ledge under a hit on the open face, 0 to 3 from left to right as you face it.</summary>
@@ -149,25 +378,31 @@ public class BlockEntityControlShelf : BlockEntityDisplay
 
     public bool OnInteract(IPlayer player, BlockSelection blockSel)
     {
-        if (blockSel.Face != Side)
+        var held = player.InventoryManager.ActiveHotbarSlot;
+        bool rod = held.Itemstack?.Collectible is ItemCrystalRod;
+        bool sneaking = player.Entity.Controls.Sneak || player.Entity.Controls.ShiftKey;
+        if (blockSel.Face != Side && !(rod && sneaking) && !(blockSel.Face == BlockFacing.UP && (socket != null || IsFitting(held.Itemstack))))
         {
             return false;
         }
-        var held = player.InventoryManager.ActiveHotbarSlot;
-        int place = PlaceAt(blockSel.HitPosition);
         if (Api.Side == EnumAppSide.Server && !LemuriaClaims.TryAccess(Api.World, player, Pos, EnumBlockAccessFlags.Use))
         {
             return true;
         }
-        if (held.Itemstack?.Collectible is ItemCrystalRod)
+        if (rod)
         {
-            // The rod switches an item Dormant or wakes it, and never goes on the shelf itself.
+            // The rod switches an item Dormant or wakes it, or wakes the whole shelf, and never goes on the shelf itself.
             if (Api.Side == EnumAppSide.Server)
             {
-                SwitchDormant(place);
+                RodTap(blockSel, sneaking);
             }
             return true;
         }
+        if (blockSel.Face == BlockFacing.UP)
+        {
+            return InteractSocket(player, held);
+        }
+        int place = PlaceAt(blockSel.HitPosition);
         if (held.Empty)
         {
             if (inventory[place].Empty)
@@ -177,7 +412,7 @@ public class BlockEntityControlShelf : BlockEntityDisplay
             if (Api.Side == EnumAppSide.Server)
             {
                 var stack = inventory[place].TakeOutWhole();
-                dormant[place] = false;
+                inventory[place].MarkDirty();
                 if (!player.InventoryManager.TryGiveItemstack(stack, true))
                 {
                     Api.World.SpawnItemEntity(stack, Pos.ToVec3d().Add(0.5, 0.5, 0.5).Add(Side.Normald.Clone().Mul(0.7)));
@@ -195,6 +430,7 @@ public class BlockEntityControlShelf : BlockEntityDisplay
         if (Api.Side == EnumAppSide.Server && held.TryPutInto(Api.World, inventory[target], 1) > 0)
         {
             held.MarkDirty();
+            inventory[target].MarkDirty();
             Api.World.PlaySoundAt(new AssetLocation("game", "sounds/block/ceramicplace"), Pos, 0, null, true, 12f, LemuriaSound.Volume(0.8f));
             Changed();
         }
@@ -301,12 +537,58 @@ public class BlockEntityControlShelf : BlockEntityDisplay
         mesh.Scale(new Vec3f(0.5f, 0, 0.5f), scale, scale, scale);
     }
 
+    /// <summary>The Dead Socket in the shelf's socket, built as its own shape on the block atlas and set on the shelf's top.</summary>
+    public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tessThreadTesselator)
+    {
+        if (socket != null && Api is ICoreClientAPI capi && FittingMesh(capi, socket) is { } fitting)
+        {
+            mesher.AddMeshData(fitting);
+        }
+        return base.OnTesselation(mesher, tessThreadTesselator);
+    }
+
+    private MeshData? FittingMesh(ICoreClientAPI capi, ItemStack stack)
+    {
+        var meshes = ObjectCacheUtil.GetOrCreate(capi, LemuriaModSystem.ModId + "-shelfsocket", () => new System.Collections.Generic.Dictionary<string, MeshData?>());
+        string key = $"{stack.Collectible.Code}/{Block.Code}";
+        lock (meshes)
+        {
+            if (meshes.TryGetValue(key, out var cached))
+            {
+                return cached;
+            }
+        }
+        MeshData? mesh = null;
+        var shapeBase = stack.Item?.Shape?.Base ?? stack.Block?.Shape?.Base;
+        if (shapeBase != null && Shape.TryGet(capi, shapeBase.Clone().WithPathPrefixOnce("shapes/").WithPathAppendixOnce(".json")) is { } shape)
+        {
+            var textures = stack.Item?.Textures ?? stack.Block?.Textures;
+            capi.Tesselator.TesselateShape("lemuria-shelfsocket", shape, out mesh, new Sparkstone.BlockEntitySparkstone.FittingTextures(capi, capi.Tesselator.GetTextureSource(Block), textures));
+            // Standing on the socket's mark, a hair above it.
+            mesh.Translate(0, 1f + 0.13f / 16f, 0);
+        }
+        lock (meshes)
+        {
+            meshes[key] = mesh;
+        }
+        return mesh;
+    }
+
     public override void ToTreeAttributes(ITreeAttribute tree)
     {
         base.ToTreeAttributes(tree);
         for (int i = 0; i < Places; i++)
         {
-            tree.SetBool("dormant" + i, dormant[i]);
+            tree.SetInt("quiet" + i, (int)quiet[i]);
+        }
+        tree.SetBool("asleep", asleep);
+        if (socket != null)
+        {
+            tree.SetItemstack("socket", socket);
+        }
+        else
+        {
+            tree.RemoveAttribute("socket");
         }
     }
 
@@ -315,17 +597,35 @@ public class BlockEntityControlShelf : BlockEntityDisplay
         base.FromTreeAttributes(tree, worldForResolving);
         for (int i = 0; i < Places; i++)
         {
-            dormant[i] = tree.GetBool("dormant" + i);
+            // A shelf saved before quiet items kept only whether an item was switched off.
+            quiet[i] = tree.HasAttribute("quiet" + i) ? (Quiet)Math.Clamp(tree.GetInt("quiet" + i), 0, 3)
+                : tree.GetBool("dormant" + i) ? Quiet.Off : Quiet.Awake;
         }
+        asleep = tree.GetBool("asleep");
+        socket = tree.GetItemstack("socket");
+        socket?.ResolveBlockOrItem(worldForResolving);
         RedrawAfterReceivingTreeAttributes(worldForResolving);
     }
 
     public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
     {
-        var names = Items.Select((s, i) => s == null ? null
-            : $"{i + 1}. {s.GetName()}" + (IsDormant(i) ? " " + Lang.Get(LemuriaModSystem.ModId + ":controlshelf-dormant")
-                : PrefixOf(i + 1) != null && ShelfWork.KindOf(Items.ElementAtOrDefault(i + 1)) is ShelfWork.Kind.Shovel or ShelfWork.Kind.Axe ? " " + Lang.Get(LemuriaModSystem.ModId + ":controlshelf-prefix") : ""))
-            .Where(n => n != null).ToList();
+        // Each dark item says why it is dark: switched off, out of stock or done (H4).
+        string Why(int i) => QuietOf(i) switch
+        {
+            Quiet.Off => " " + Lang.Get(LemuriaModSystem.ModId + ":controlshelf-dormant"),
+            Quiet.OutOfStock => " " + Lang.Get(LemuriaModSystem.ModId + ":controlshelf-outofstock"),
+            Quiet.Done => " " + Lang.Get(LemuriaModSystem.ModId + ":controlshelf-done"),
+            _ => PrefixOf(i + 1) != null && ShelfWork.KindOf(Items.ElementAtOrDefault(i + 1)) is ShelfWork.Kind.Shovel or ShelfWork.Kind.Axe ? " " + Lang.Get(LemuriaModSystem.ModId + ":controlshelf-prefix") : "",
+        };
+        var names = Items.Select((s, i) => s == null ? null : $"{i + 1}. {s.GetName()}" + Why(i)).Where(n => n != null).ToList();
         dsc.AppendLine(names.Count == 0 ? Lang.Get(LemuriaModSystem.ModId + ":controlshelf-empty") : string.Join("\n", names));
+        if (socket != null)
+        {
+            dsc.AppendLine(Lang.Get(LemuriaModSystem.ModId + ":controlshelf-socket", socket.GetName()));
+        }
+        if (asleep)
+        {
+            dsc.AppendLine(Lang.Get(LemuriaModSystem.ModId + ":controlshelf-asleep"));
+        }
     }
 }

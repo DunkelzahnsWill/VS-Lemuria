@@ -153,8 +153,12 @@ public partial class MachinesTests
         var back = focus.WorkOnce();
         int toInput = CountOf(input, "firewood");
         int aboveLogs = CountOf(above, "log-placed-oak-ud");
-        // Its firewood switched Dormant with the rod, for the restart check (H2).
+        // Its firewood switched Dormant with the rod, and a Dead Socket in its socket, for the restart check
+        // (H2, H5): one more turn and the axe, out of logs, sends the whole shelf Dormant.
         shelf.SwitchDormant(1);
+        shelf.SetSocket(Stack(LemuriaModSystem.ModId + ":deadsocket"));
+        Fill(focus);
+        focus.WorkOnce();
         TestSite.StorePos(sapi, ShelfKey, shelf.Pos);
         logger.Notification("Machines test: a shelf of seeds then an axe {0}, {1} of 9 sown, logs left {2}; then {3}, firewood in the output {4}; with firewood on the shelf {5}, firewood in the input {6}; logs left in a chest on top {7}",
             sowed, sown, logsLeft, split, toOutput, back, toInput, aboveLogs);
@@ -291,6 +295,28 @@ public partial class MachinesTests
         logger.Notification("Machines test: the roofed pit after {0} working(s) ({1}): {2} of 5 cells full piles, the front cell holds {3}, lit: {4}, nothing in the output: {5}",
             workings, string.Join(", ", results.OrderBy(r => r.Key).Select(r => $"{r.Key} {r.Value}")), full, Path(front), YesNo(lit),
             YesNo(output?.All(s => s.Empty) == true));
+        // While it burns every item is quiet, done or out of stock, and a turn checks nothing (H4).
+        Fill(focus);
+        var burning = focus.WorkOnce();
+        bool allQuiet = Enumerable.Range(0, BlockEntityControlShelf.Places).All(shelf.IsDormant);
+        // After its 18 in-game hours the pit is charcoal; one sneak tap and the shovel digs it, then firewood stacks the next pit.
+        for (int y = 0; y < 2; y++)
+        {
+            for (int z = 0; z < 3; z++)
+            {
+                Accessor.SetBlock(Id("game:charcoalpile-8"), room.AddCopy(0, y, z));
+            }
+        }
+        shelf.WakeAll();
+        var after = new List<MachineWork.Result>();
+        for (int i = 0; i < 6; i++)
+        {
+            Fill(focus);
+            after.Add(focus.WorkOnce());
+        }
+        bool restarted = Enumerable.Range(0, 2).Any(y => Enumerable.Range(0, 3).Any(z => Accessor.GetBlockEntity(room.AddCopy(0, y, z)) is BlockEntityGroundStorage));
+        logger.Notification("Machines test: the burning pit's turn {0}, every item quiet: {1}; after the burn and one sneak tap, charcoal in the output: {2}, the next pit started: {3}",
+            burning, YesNo(allQuiet), YesNo(CountOf(output, "charcoal") > 0), YesNo(restarted));
     }
 
     // ------------------------------------------------------------------ felling
@@ -566,6 +592,116 @@ public partial class MachinesTests
             YesNo(prefixSwitched), YesNo(switched), asleep, YesNo(woke && !shelf.IsDormant(1)), awake);
     }
 
+    // ------------------------------------------------------------------ quiet items and the shelf's socket (H4, H5)
+
+    private BlockPos Farmland3x3(BlockPos column)
+    {
+        var origin = TestSite.Surface(sapi, column);
+        Ground(origin, 5, 6, 5);
+        var field = origin.AddCopy(1, -1, 1);
+        for (int x = 0; x < 3; x++)
+        {
+            for (int z = 0; z < 3; z++)
+            {
+                Accessor.SetBlock(Id("game:farmland-moist-medium"), field.AddCopy(x, 0, z));
+            }
+        }
+        return field;
+    }
+
+    private int Sown(BlockPos field) =>
+        Enumerable.Range(0, 3).Sum(x => Enumerable.Range(0, 3).Count(z => Path(field.AddCopy(x, 1, z)) == "crop-flax-1"));
+
+    /// <summary>
+    /// Quiet items (H4): seeds run out and go quiet, out of stock, and wake when seeds arrive; sown out,
+    /// they go quiet, done, and stay so with stock until a sneak tap, which leaves a switched-off item off.
+    /// </summary>
+    public void QuietScene(BlockPos column)
+    {
+        var field = Farmland3x3(column);
+        var focusPos = field.AddCopy(1, 3, 1);
+        var focus = Place(focusPos, Machine.Focus, "down");
+        var shelf = Shelf(focusPos, BlockFacing.EAST, "game:seeds-flax", "game:shovel-copper");
+        var input = Port(shelf, true);
+        Add(input, Stack("game:seeds-flax", 3));
+        Put(focus, Crystal.Unaligned, Crystal.Glowing);
+        if (focus == null || shelf == null)
+        {
+            return;
+        }
+        Fill(focus);
+        focus.ReadContext();
+        var first = focus.WorkOnce();
+        Fill(focus);
+        var second = focus.WorkOnce();
+        bool outOfStock = shelf.QuietOf(0) == BlockEntityControlShelf.Quiet.OutOfStock;
+        bool shovelDone = shelf.QuietOf(1) == BlockEntityControlShelf.Quiet.Done;
+        // Seeds put in the input wake them, through its own change event.
+        Add(input, Stack("game:seeds-flax", 2));
+        bool woke = shelf.QuietOf(0) == BlockEntityControlShelf.Quiet.Awake;
+        Fill(focus);
+        focus.WorkOnce();
+        Add(input, Stack("game:seeds-flax", 10));
+        Fill(focus);
+        focus.WorkOnce();
+        Fill(focus);
+        focus.WorkOnce();
+        int sown = Sown(field);
+        bool done = shelf.QuietOf(0) == BlockEntityControlShelf.Quiet.Done;
+        Add(input, Stack("game:seeds-flax", 1));
+        bool stayed = shelf.QuietOf(0) == BlockEntityControlShelf.Quiet.Done;
+        // The shovel, done, wakes with one right-click of the rod and switches off with the next.
+        shelf.SwitchDormant(1);
+        shelf.SwitchDormant(1);
+        shelf.WakeAll();
+        bool tapped = shelf.QuietOf(0) == BlockEntityControlShelf.Quiet.Awake;
+        bool off = shelf.QuietOf(1) == BlockEntityControlShelf.Quiet.Off;
+        logger.Notification("Machines test: quiet seeds {0}, then {1}: out of stock: {2}, the shovel done: {3}; seeds arrive and they wake: {4}; {5} of 9 sown, then done: {6}, still done with stock: {7}; a sneak tap wakes them: {8}, the switched-off shovel stays off: {9}",
+            first, second, YesNo(outOfStock), YesNo(shovelDone), YesNo(woke), sown, YesNo(done), YesNo(stayed), YesNo(tapped), YesNo(off));
+    }
+
+    /// <summary>
+    /// The shelf's socket (H5): with a Dead Socket in it and no compost in the input, compost before seeds
+    /// sends the whole shelf Dormant and nothing is sown; compost arriving wakes it, and it feeds, then sows.
+    /// </summary>
+    public void ShelfSocketScene(BlockPos column)
+    {
+        var field = Farmland3x3(column);
+        var focusPos = field.AddCopy(1, 3, 1);
+        var focus = Place(focusPos, Machine.Focus, "down");
+        var shelf = Shelf(focusPos, BlockFacing.EAST, "game:compost", "game:seeds-flax");
+        var input = Port(shelf, true);
+        Add(input, Stack("game:seeds-flax", 9));
+        Put(focus, Crystal.Unaligned, Crystal.Glowing);
+        if (focus == null || shelf == null)
+        {
+            return;
+        }
+        shelf.SetSocket(Stack(LemuriaModSystem.ModId + ":deadsocket"));
+        Fill(focus);
+        focus.ReadContext();
+        var first = focus.WorkOnce();
+        bool asleep = shelf.Asleep && Enumerable.Range(0, 2).All(shelf.IsDormant);
+        int sownAsleep = Sown(field);
+        // Compost arriving wakes it. It feeds while the farmland takes compost, as your clicks would, then
+        // compost is done, and the seeds sow; compost kept in stock keeps the shelf awake.
+        for (int i = 0; i < 4; i++)
+        {
+            Add(input, Stack("game:compost", 64));
+        }
+        bool woke = !shelf.Asleep;
+        int feedings = 0;
+        var last = MachineWork.Result.Nothing;
+        for (int i = 0; i < 40 && Sown(field) == 0; i++)
+        {
+            Fill(focus);
+            last = focus.WorkOnce();
+            feedings += last == MachineWork.Result.Acted && Sown(field) == 0 ? 1 : 0;
+        }
+        logger.Notification("Machines test: a socketed shelf with no compost {0}, the whole shelf Dormant: {1}, {2} sown; compost arrives and it wakes: {3}; it feeds {4} time(s), compost done: {5}, then {6}, {7} of 9 sown, the shelf awake: {8}",
+            first, YesNo(asleep), sownAsleep, YesNo(woke), feedings, YesNo(shelf.QuietOf(0) == BlockEntityControlShelf.Quiet.Done), last, Sown(field), YesNo(!shelf.Asleep));
+    }
+
     // ------------------------------------------------------------------ what an idle shelf turn costs
 
     /// <summary>The roofed pit's Focus, for the idle timing once its pit burns.</summary>
@@ -676,8 +812,15 @@ public partial class MachinesTests
         var shelf = shelfPos == null ? null : Accessor.GetBlockEntity(shelfPos) as BlockEntityControlShelf;
         var memory = memoryPos == null ? null : Accessor.GetBlockEntity(memoryPos) as BlockEntityMemory;
         var motor = motorPos == null ? null : Accessor.GetBlockEntity(motorPos) as BlockEntityMachine;
-        logger.Notification("Machines test: after the restart the shelf holds {0}, the Memory {1} crystal(s), the Motor {2} Dead Socket(s)",
-            shelf == null ? "nothing" : string.Join(", ", shelf.Items.Select((s, i) => s == null ? null : s.Collectible.Code.Path + (shelf.IsDormant(i) ? " (Dormant)" : "")).Where(n => n != null)),
-            memory?.Crystals.Count ?? -1, motor?.Crystals.Count(c => c.IsFitting) ?? -1);
+        string Why(int i) => shelf!.QuietOf(i) switch
+        {
+            BlockEntityControlShelf.Quiet.Off => " (switched off)",
+            BlockEntityControlShelf.Quiet.OutOfStock => " (out of stock)",
+            BlockEntityControlShelf.Quiet.Done => " (done)",
+            _ => "",
+        };
+        logger.Notification("Machines test: after the restart the shelf holds {0}, a socket: {1}, the whole shelf Dormant: {2}; the Memory {3} crystal(s), the Motor {4} Dead Socket(s)",
+            shelf == null ? "nothing" : string.Join(", ", shelf.Items.Select((s, i) => s == null ? null : s.Collectible.Code.Path + Why(i)).Where(n => n != null)),
+            YesNo(shelf?.HasSocket == true), YesNo(shelf?.Asleep == true), memory?.Crystals.Count ?? -1, motor?.Crystals.Count(c => c.IsFitting) ?? -1);
     }
 }

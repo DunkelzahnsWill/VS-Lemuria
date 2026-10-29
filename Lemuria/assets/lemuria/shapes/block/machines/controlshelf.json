@@ -2,7 +2,8 @@
  "textureWidth": 16,
  "textureHeight": 16,
  "textures": {
-  "rock": "game:block/stone/polishedrock/granite"
+  "rock": "game:block/stone/polishedrock/granite",
+  "socket": "lemuria:block/sparkstone/socket"
  },
  "elements": [
   {
@@ -556,6 +557,150 @@
      ]
     }
    }
+  },
+  {
+   "name": "socket0",
+   "from": [
+    6.3,
+    16,
+    6.3
+   ],
+   "to": [
+    9.7,
+    16.12,
+    9.7
+   ],
+   "faces": {
+    "north": {
+     "texture": "#socket",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.12
+     ]
+    },
+    "east": {
+     "texture": "#socket",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.12
+     ]
+    },
+    "south": {
+     "texture": "#socket",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.12
+     ]
+    },
+    "west": {
+     "texture": "#socket",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.12
+     ]
+    },
+    "up": {
+     "texture": "#socket",
+     "uv": [
+      0,
+      0,
+      3.4,
+      3.4
+     ]
+    },
+    "down": {
+     "texture": "#socket",
+     "uv": [
+      0,
+      0,
+      3.4,
+      3.4
+     ]
+    }
+   }
+  },
+  {
+   "name": "socket1",
+   "from": [
+    6.3,
+    16,
+    6.3
+   ],
+   "to": [
+    9.7,
+    16.11,
+    9.7
+   ],
+   "faces": {
+    "north": {
+     "texture": "#socket",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.12
+     ]
+    },
+    "east": {
+     "texture": "#socket",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.12
+     ]
+    },
+    "south": {
+     "texture": "#socket",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.12
+     ]
+    },
+    "west": {
+     "texture": "#socket",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.12
+     ]
+    },
+    "up": {
+     "texture": "#socket",
+     "uv": [
+      0,
+      0,
+      3.4,
+      3.4
+     ]
+    },
+    "down": {
+     "texture": "#socket",
+     "uv": [
+      0,
+      0,
+      3.4,
+      3.4
+     ]
+    }
+   },
+   "rotationOrigin": [
+    8,
+    16,
+    8
+   ],
+   "rotationY": 45
   }
  ]
 }
