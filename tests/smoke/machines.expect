@@ -52,6 +52,6 @@ Machines test: an Earth Focus facing east Acted, a 2×2 bored 2 deep, 8 block\(s
 Machines test: a gravel-kept shovel Acted, gravel left 0, soil left 4; an oak-kept axe Acted, oak left 0, birch left 2, keeps oak: yes, keeps birch: no, firewood in the output 12$
 Machines test: the rod switches a prefix: no; the axe Dormant: yes, then the machine Nothing; woken: yes, then Acted$
 # Quiet items (H4): out of stock wakes when stock arrives; done stays quiet with stock until a sneak tap, which leaves a switched-off item off.
-Machines test: quiet seeds Acted, then Nothing: out of stock: yes, the shovel done: yes; seeds arrive and they wake: yes; 9 of 9 sown, then done: yes, still done with stock: yes; a sneak tap wakes them: yes, the switched-off shovel stays off: yes$
+Machines test: quiet seeds Acted, then Nothing: out of stock: yes, the shovel done: yes; seeds arrive and they wake: yes; 9 of 9 sown, then done: yes, still done with stock: yes; a sneak tap wakes them: yes, the switched-off shovel stays off: yes; plugs lit dark dark dark$
 # The shelf's socket (H5): a Dead Socket sends the whole shelf Dormant for want of compost; compost wakes it, it feeds until done, then sows.
 Machines test: a socketed shelf with no compost Nothing, the whole shelf Dormant: yes, 0 sown; compost arrives and it wakes: yes; it feeds [0-9]+ time\(s\), compost done: yes, then Acted, 9 of 9 sown, the shelf awake: yes$

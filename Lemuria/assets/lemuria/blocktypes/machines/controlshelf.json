@@ -10,7 +10,13 @@
 	},
 	"shape": { "base": "lemuria:block/machines/controlshelf", "rotateYByType": { "*-north": 0, "*-east": 270, "*-south": 180, "*-west": 90 } },
 	"textures": {
-		"rock": { "base": "game:block/stone/polishedrock/granite" }
+		"rock": { "base": "game:block/stone/polishedrock/granite" },
+		"plug": { "base": "lemuria:block/sparkstone/socket" },
+		"plug-full": { "base": "lemuria:block/sparkstone/socket-lit" },
+		"portin": { "base": "lemuria:block/machines/shelfport-in" },
+		"portin-full": { "base": "lemuria:block/machines/shelfport-in-full" },
+		"portout": { "base": "lemuria:block/machines/shelfport-out" },
+		"portout-full": { "base": "lemuria:block/machines/shelfport-out-full" }
 	},
 	"creativeinventory": { "general": ["*-north"], "construction": ["*-north"] },
 	"drawtype": "json",

@@ -656,8 +656,10 @@ public partial class MachinesTests
         shelf.WakeAll();
         bool tapped = shelf.QuietOf(0) == BlockEntityControlShelf.Quiet.Awake;
         bool off = shelf.QuietOf(1) == BlockEntityControlShelf.Quiet.Off;
-        logger.Notification("Machines test: quiet seeds {0}, then {1}: out of stock: {2}, the shovel done: {3}; seeds arrive and they wake: {4}; {5} of 9 sown, then done: {6}, still done with stock: {7}; a sneak tap wakes them: {8}, the switched-off shovel stays off: {9}",
-            first, second, YesNo(outOfStock), YesNo(shovelDone), YesNo(woke), sown, YesNo(done), YesNo(stayed), YesNo(tapped), YesNo(off));
+        // The plugs under the places (note rev 74): lit for the awake seeds, dark for the switched-off shovel and the empty places.
+        string plugs = string.Concat(Enumerable.Range(0, BlockEntityControlShelf.Places).Select(i => shelf.PlugLit(i) ? "lit " : "dark ")).Trim();
+        logger.Notification("Machines test: quiet seeds {0}, then {1}: out of stock: {2}, the shovel done: {3}; seeds arrive and they wake: {4}; {5} of 9 sown, then done: {6}, still done with stock: {7}; a sneak tap wakes them: {8}, the switched-off shovel stays off: {9}; plugs {10}",
+            first, second, YesNo(outOfStock), YesNo(shovelDone), YesNo(woke), sown, YesNo(done), YesNo(stayed), YesNo(tapped), YesNo(off), plugs);
     }
 
     /// <summary>
@@ -681,7 +683,7 @@ public partial class MachinesTests
         Fill(focus);
         focus.ReadContext();
         var first = focus.WorkOnce();
-        bool asleep = shelf.Asleep && Enumerable.Range(0, 2).All(shelf.IsDormant);
+        bool asleep = shelf.Asleep && Enumerable.Range(0, 2).All(shelf.IsDormant) && !Enumerable.Range(0, 2).Any(shelf.PlugLit);
         int sownAsleep = Sown(field);
         // Compost arriving wakes it. It feeds while the farmland takes compost, as your clicks would, then
         // compost is done, and the seeds sow; compost kept in stock keeps the shelf awake.

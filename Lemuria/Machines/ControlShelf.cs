@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Text;
 using Lemuria.Core;
+using Lemuria.Crystals;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
@@ -212,7 +213,7 @@ public class BlockEntityControlShelf : BlockEntityDisplay
 
     /// <summary>
     /// The machine found an item with nothing to do (H4): out of stock or done, it goes quiet and is
-    /// drawn dark. With a Dead Socket, out of stock sends the whole shelf Dormant (H5). Server only.
+    /// its plug dark. With a Dead Socket, out of stock sends the whole shelf Dormant (H5). Server only.
     /// </summary>
     public void Quieten(int place, Quiet why)
     {
@@ -481,23 +482,9 @@ public class BlockEntityControlShelf : BlockEntityDisplay
         }
         var mesh = getDefaultMesh(slot.Itemstack).Clone();
         Fit(mesh, slot.Itemstack?.Class == EnumItemClass.Item);
-        if (IsDormant(inventory.GetSlotId(slot)) && mesh.Rgba != null)
-        {
-            // Dormant, it is drawn dark, as a Dormant crystal's plug is.
-            for (int i = 0; i < mesh.VerticesCount * 4; i++)
-            {
-                if (i % 4 != 3)
-                {
-                    mesh.Rgba[i] = (byte)(mesh.Rgba[i] * 0.35f);
-                }
-            }
-        }
         MeshCache[getMeshCacheKey(slot)] = mesh;
         return mesh;
     }
-
-    protected override string getMeshCacheKey(ItemSlot slot) =>
-        base.getMeshCacheKey(slot) + (IsDormant(inventory.GetSlotId(slot)) ? "-dormant" : "");
 
     private static (Vec3f Min, Vec3f Max) Bounds(MeshData mesh)
     {
@@ -548,14 +535,105 @@ public class BlockEntityControlShelf : BlockEntityDisplay
         mesh.Scale(new Vec3f(0.5f, 0, 0.5f), scale, scale, scale);
     }
 
-    /// <summary>The Dead Socket in the shelf's socket, built as its own shape on the block atlas and set on the shelf's top.</summary>
+    private static readonly AssetLocation MarksShape = new(LemuriaModSystem.ModId, "shapes/block/machines/controlshelf-marks.json");
+
+    private static readonly string[] PortMarks = { "portin-side", "portin-front", "portout-side", "portout-front" };
+
+    /// <summary>
+    /// Whether the plug under this place is lit (note rev 74): its item is Active, neither switched off
+    /// nor quiet, and the shelf is not Dormant. An empty place or an item that does nothing has a dark
+    /// plug, and a prefix's plug follows its tool's.
+    /// </summary>
+    public bool PlugLit(int place)
+    {
+        if (asleep || place < 0 || place >= Places || inventory[place].Itemstack is not { } stack)
+        {
+            return false;
+        }
+        if (ShelfWork.KindOf(stack) == ShelfWork.Kind.None)
+        {
+            return PrefixOf(place + 1) != null && ShelfWork.KindOf(inventory[place + 1].Itemstack) is ShelfWork.Kind.Shovel or ShelfWork.Kind.Axe && PlugLit(place + 1);
+        }
+        return quiet[place] == Quiet.Awake;
+    }
+
+    /// <summary>
+    /// The Dead Socket in the shelf's socket, built as its own shape on the block atlas and set on the
+    /// shelf's top; a plug under each place, lit or dark; and the port glyphs at its left and right,
+    /// lit while the shelf is awake and dark while it is Dormant.
+    /// </summary>
     public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tessThreadTesselator)
     {
-        if (socket != null && Api is ICoreClientAPI capi && FittingMesh(capi, socket) is { } fitting)
+        if (Api is ICoreClientAPI capi)
         {
-            mesher.AddMeshData(fitting);
+            if (socket != null && FittingMesh(capi, socket) is { } fitting)
+            {
+                mesher.AddMeshData(fitting);
+            }
+            for (int i = 0; i < Places; i++)
+            {
+                if (Mark(capi, "plug" + i, PlugLit(i)) is { } plug)
+                {
+                    mesher.AddMeshData(plug);
+                }
+            }
+            foreach (var name in PortMarks)
+            {
+                if (Mark(capi, name, !asleep) is { } port)
+                {
+                    mesher.AddMeshData(port);
+                }
+            }
         }
         return base.OnTesselation(mesher, tessThreadTesselator);
+    }
+
+    /// <summary>One mark of the shelf, lit or dark, turned with the shelf; cached per mark, state and side.</summary>
+    private MeshData? Mark(ICoreClientAPI capi, string name, bool lit)
+    {
+        var meshes = ObjectCacheUtil.GetOrCreate(capi, LemuriaModSystem.ModId + "-shelfmarks", () => new System.Collections.Generic.Dictionary<string, MeshData?>());
+        string key = $"{name}/{lit}/{Block.Code}";
+        lock (meshes)
+        {
+            if (meshes.TryGetValue(key, out var cached))
+            {
+                return cached;
+            }
+        }
+        MeshData? mesh = null;
+        if (Shape.TryGet(capi, MarksShape) is { } shape)
+        {
+            capi.Tesselator.TesselateShape("lemuria-shelfmarks", shape, out mesh, new LitTextures(capi.Tesselator.GetTextureSource(Block), lit ? "-full" : ""), null, 0, 0, 0, null, new[] { name });
+            if (mesh != null)
+            {
+                CrystalMeshes.SetGlow(mesh, lit ? (name.StartsWith("plug", StringComparison.Ordinal) ? 160 : 255) : 0);
+                // The same turn the block's shape takes for its side, as the items' matrices do.
+                float turn = Block.Shape?.rotateY ?? 0;
+                mesh.MatrixTransform(new Matrixf().Translate(0.5f, 0, 0.5f).RotateYDeg(turn).Translate(-0.5f, 0, -0.5f).Values);
+            }
+        }
+        lock (meshes)
+        {
+            meshes[key] = mesh;
+        }
+        return mesh;
+    }
+
+    /// <summary>The block's textures, each looked up lit ("-full") when the mark is lit.</summary>
+    private class LitTextures : ITexPositionSource
+    {
+        private readonly ITexPositionSource inner;
+        private readonly string suffix;
+
+        public LitTextures(ITexPositionSource inner, string suffix)
+        {
+            this.inner = inner;
+            this.suffix = suffix;
+        }
+
+        public TextureAtlasPosition? this[string textureCode] => inner[textureCode + suffix] ?? inner[textureCode];
+
+        public Size2i? AtlasSize => inner.AtlasSize;
     }
 
     private MeshData? FittingMesh(ICoreClientAPI capi, ItemStack stack)
