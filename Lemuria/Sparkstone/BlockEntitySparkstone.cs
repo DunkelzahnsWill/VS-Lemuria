@@ -172,7 +172,9 @@ public class BlockEntitySparkstone : BlockEntity
         }
         if (on)
         {
-            networks.Update(networks.NetworkOf(this), feed: false);
+            var joined = networks.NetworkOf(this);
+            networks.Update(joined, feed: false);
+            Changed(joined);
             return;
         }
         var visited = new HashSet<BlockEntitySparkstone> { this };
@@ -180,12 +182,27 @@ public class BlockEntitySparkstone : BlockEntity
         {
             if (next.Active && !visited.Contains(next))
             {
-                networks.Update(networks.NetworkOf(next, visited), feed: false);
+                var left = networks.NetworkOf(next, visited);
+                networks.Update(left, feed: false);
+                Changed(left);
+            }
+        }
+
+        static void Changed(List<BlockEntitySparkstone> network)
+        {
+            foreach (var block in network)
+            {
+                block.OnNetworkChanged();
             }
         }
     }
 
     protected virtual void OnActiveChanged()
+    {
+    }
+
+    /// <summary>A block was switched Active or Dormant in this block's network, so its line may be cut or joined. Server only.</summary>
+    protected virtual void OnNetworkChanged()
     {
     }
 
@@ -701,7 +718,9 @@ public class BlockEntitySparkstone : BlockEntity
         if (shapeBase != null && Shape.TryGet(capi, shapeBase.Clone().WithPathPrefixOnce("shapes/").WithPathAppendixOnce(".json")) is { } shape)
         {
             var textures = stack.Item?.Textures ?? stack.Block?.Textures;
-            capi.Tesselator.TesselateShape("lemuria-fitting", shape, out mesh, new FittingTextures(capi, capi.Tesselator.GetTextureSource(Block), textures));
+            // In a socket the socket's own collar stands in for the fitting's, so only what rises above it is drawn.
+            var above = shape.Elements.Where(e => !e.Name.StartsWith("collar", StringComparison.Ordinal)).Select(e => e.Name).ToArray();
+            capi.Tesselator.TesselateShape("lemuria-fitting", shape, out mesh, new FittingTextures(capi, capi.Tesselator.GetTextureSource(Block), textures), null, 0, 0, 0, null, above);
         }
         lock (parts)
         {
