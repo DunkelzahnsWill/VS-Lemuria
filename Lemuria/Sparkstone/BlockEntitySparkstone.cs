@@ -719,7 +719,7 @@ public class BlockEntitySparkstone : BlockEntity
         {
             var textures = stack.Item?.Textures ?? stack.Block?.Textures;
             // In a socket the socket's own collar stands in for the fitting's, so only what rises above it is drawn.
-            var above = shape.Elements.Where(e => !e.Name.StartsWith("collar", StringComparison.Ordinal)).Select(e => e.Name).ToArray();
+            var above = shape.Elements.Where(e => e.Name != null && !e.Name.StartsWith("collar", StringComparison.Ordinal)).Select(e => e.Name!).ToArray();
             capi.Tesselator.TesselateShape("lemuria-fitting", shape, out mesh, new FittingTextures(capi, capi.Tesselator.GetTextureSource(Block), textures), null, 0, 0, 0, null, above);
         }
         lock (parts)
@@ -730,7 +730,7 @@ public class BlockEntitySparkstone : BlockEntity
     }
 
     /// <summary>A fitting's textures in the block atlas, its "rock" the block's own.</summary>
-    private class FittingTextures : ITexPositionSource
+    internal class FittingTextures : ITexPositionSource
     {
         private readonly ICoreClientAPI capi;
         private readonly ITexPositionSource block;
