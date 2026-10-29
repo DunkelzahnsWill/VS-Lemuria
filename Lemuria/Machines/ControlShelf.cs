@@ -168,11 +168,69 @@ public class BlockEntityControlShelf : BlockEntityDisplay
                 .Translate(0.5f, 0, 0.5f)
                 .RotateYDeg(turn)
                 .Translate(x - 0.5f, 5f / 16f, 6.5f / 16f - 0.5f)
-                .Scale(0.42f, 0.42f, 0.42f)
                 .Translate(-0.5f, 0, -0.5f)
                 .Values;
         }
         return matrices;
+    }
+
+    /// <summary>Room for one item in its place on the ledge, in blocks: across, up and deep.</summary>
+    private const float PlaceWidth = 2.6f / 16f, PlaceHeight = 7.4f / 16f, PlaceDepth = 6f / 16f;
+
+    /// <summary>
+    /// Each item stands upright in its own place (play-test, Oct 29): the game's own model, turned so
+    /// its longest side points up, shrunk to fit the place and set on the ledge, so an axe stands
+    /// instead of lying across its neighbours and a block or bush no larger than its place.
+    /// </summary>
+    protected override MeshData getOrCreateMesh(ItemSlot slot, int index)
+    {
+        var cached = getMesh(slot);
+        if (cached != null)
+        {
+            return cached;
+        }
+        var mesh = getDefaultMesh(slot.Itemstack).Clone();
+        Fit(mesh);
+        MeshCache[getMeshCacheKey(slot)] = mesh;
+        return mesh;
+    }
+
+    private static (Vec3f Min, Vec3f Max) Bounds(MeshData mesh)
+    {
+        var min = new Vec3f(float.MaxValue, float.MaxValue, float.MaxValue);
+        var max = new Vec3f(float.MinValue, float.MinValue, float.MinValue);
+        for (int i = 0; i < mesh.VerticesCount; i++)
+        {
+            float x = mesh.xyz[i * 3], y = mesh.xyz[i * 3 + 1], z = mesh.xyz[i * 3 + 2];
+            min.Set(Math.Min(min.X, x), Math.Min(min.Y, y), Math.Min(min.Z, z));
+            max.Set(Math.Max(max.X, x), Math.Max(max.Y, y), Math.Max(max.Z, z));
+        }
+        return (min, max);
+    }
+
+    private static void Fit(MeshData mesh)
+    {
+        if (mesh.VerticesCount == 0)
+        {
+            return;
+        }
+        var (min, max) = Bounds(mesh);
+        var size = max - min;
+        var centre = new Vec3f((min.X + max.X) / 2, (min.Y + max.Y) / 2, (min.Z + max.Z) / 2);
+        // Lying down, it stands up: its longest side turned to point up.
+        if (size.X > size.Y && size.X >= size.Z)
+        {
+            mesh.Rotate(centre, 0, 0, GameMath.PIHALF);
+        }
+        else if (size.Z > size.Y)
+        {
+            mesh.Rotate(centre, GameMath.PIHALF, 0, 0);
+        }
+        (min, max) = Bounds(mesh);
+        size = max - min;
+        float scale = Math.Min(1f, Math.Min(PlaceWidth / Math.Max(size.X, 0.001f), Math.Min(PlaceHeight / Math.Max(size.Y, 0.001f), PlaceDepth / Math.Max(size.Z, 0.001f))));
+        mesh.Translate(0.5f - (min.X + max.X) / 2, -min.Y, 0.5f - (min.Z + max.Z) / 2);
+        mesh.Scale(new Vec3f(0.5f, 0, 0.5f), scale, scale, scale);
     }
 
     public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldForResolving)

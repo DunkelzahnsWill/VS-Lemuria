@@ -477,8 +477,10 @@ public partial class MachinesTests
         // Then its line is cut: the capacitor's block goes Dormant, and the Motor has nothing to draw on.
         if (pos != null && Accessor.GetBlockEntity(pos.EastCopy()) is BlockEntitySparkstone line)
         {
+            // Nothing else is called: the Motor must see at once that its line is cut (play-test, Oct 29).
             line.SetActive(false);
-            (Accessor.GetBlockEntity(pos) as BlockEntityMachine)?.PayMotor(0.1);
+            logger.Notification("Machines test: the moment its line is cut, the Dead Socket's Motor is unpowered: {0}",
+                YesNo((Accessor.GetBlockEntity(pos) as BlockEntityMachine)?.MotorPowered == false));
         }
     }
 

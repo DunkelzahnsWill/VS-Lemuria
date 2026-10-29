@@ -27,6 +27,7 @@ Machines test: with its only crystal Dormant the Motor is unpowered: yes, and th
 # Step 4 part 2, Products and logistics. A Dead Socket turns a Motor from its line, and stops at once when the line is cut.
 Machines test: a Dead Socket fitted in a Motor: yes, refused by a Focus: yes; powered: yes, torque 0\.25$
 Machines test: the Dead Socket's quern turns: yes$
+Machines test: the moment its line is cut, the Dead Socket's Motor is unpowered: yes$
 Machines test: cut off, the Dead Socket's Motor is unpowered: yes, and the quern has stopped: yes$
 # The shelf: the first item with work goes first; a product the shelf uses goes back to the input, else to the output.
 Machines test: a shelf of seeds then an axe Acted, 9 of 9 sown, logs left 2; then Acted, firewood in the output 8; with firewood on the shelf Acted, firewood in the input 4$

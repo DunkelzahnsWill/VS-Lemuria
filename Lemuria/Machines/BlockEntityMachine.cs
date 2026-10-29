@@ -551,6 +551,15 @@ public class BlockEntityMachine : BlockEntitySparkstone
     /// <summary>A Crystal Motor also takes a Dead Socket, a fitting; every other machine takes crystals only (note, The Dead Socket).</summary>
     public override bool Accepts(ItemStack stack) => Form == Machine.Motor ? Socketable(stack) : base.Accepts(stack);
 
+    /// <summary>A Motor looks at once whether its line still pays when a block in it is switched (play-test, Oct 29).</summary>
+    protected override void OnNetworkChanged()
+    {
+        if (Form == Machine.Motor && Api?.Side == EnumAppSide.Server)
+        {
+            PayMotor();
+        }
+    }
+
     protected override void OnActiveChanged()
     {
         if (Active)
