@@ -1,0 +1,28 @@
+{
+	"code": "reclamationplate",
+	"class": "lemuria-reclamationplate",
+	"attributes": {
+		"handbook": { "exclude": true }
+	},
+	"shape": { "base": "lemuria:block/machines/reclamationplate" },
+	"textures": {
+		"rock": { "base": "game:block/stone/polishedrock/granite" },
+		"metal": { "base": "game:block/metal/sheet/copper1" }
+	},
+	"creativeinventory": { "general": ["*"], "construction": ["*"] },
+	"drawtype": "json",
+	"blockmaterial": "Metal",
+	"resistance": 1.5,
+	"lightAbsorption": 0,
+	"sidesolid": { "all": false, "down": true },
+	"sideopaque": { "all": false },
+	"emitSideAo": { "all": false },
+	"collisionbox": { "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 0.075, "z2": 1 },
+	"selectionbox": { "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 0.075, "z2": 1 },
+	"sounds": {
+		"walk": "game:walk/stone",
+		"place": "game:block/chute",
+		"hit": "game:block/chute",
+		"break": "game:block/chute"
+	}
+}

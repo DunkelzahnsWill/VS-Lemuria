@@ -17,7 +17,7 @@ namespace Lemuria.Machines;
 /// built: Smoke tests). Each builds its machines from Awakened granite with no player, so no claim
 /// applies, fills their network, makes them work once and reports to the log.
 /// </summary>
-public class MachinesTests
+public partial class MachinesTests
 {
     private const string Rock = "granite";
     private const string NetworkKey = LemuriaModSystem.ModId + "-machinestest-network";
@@ -451,7 +451,7 @@ public class MachinesTests
         // A few seconds after it starts, the network is still spinning up toward the Motor's speed.
         float speed = consumer?.Network?.Speed ?? -1;
         logger.Notification("Machines test: the quern turns: {0}", YesNo(speed > 0.001f));
-        // Then the rod rests its only crystal, as in the owner's play-test; motorstopped checks it stops.
+        // Then the rod switches its only crystal Dormant, as in the owner's play-test; motorstopped checks it stops.
         if (pos != null && Accessor.GetBlockEntity(pos) is BlockEntityMachine motor)
         {
             ItemCrystalRod.Tap(World, motor, new BlockSelection { Position = pos, Face = motor.GlyphFace, HitPosition = new Vec3d(0.25, 1, 0.25) }, false);
@@ -463,7 +463,7 @@ public class MachinesTests
         var pos = TestSite.ReadPos(sapi, MotorKey);
         var motor = pos == null ? null : Accessor.GetBlockEntity(pos) as BlockEntityMachine;
         float speed = pos == null ? -1 : Accessor.GetBlockEntity(pos.DownCopy())?.GetBehavior<BEBehaviorMPConsumer>()?.Network?.Speed ?? -1;
-        logger.Notification("Machines test: with its only crystal resting the Motor is unpowered: {0}, and the quern has stopped: {1} (speed {2:0.0000})",
+        logger.Notification("Machines test: with its only crystal Dormant the Motor is unpowered: {0}, and the quern has stopped: {1} (speed {2:0.0000})",
             YesNo(motor?.MotorPowered == false), YesNo(speed >= 0 && speed < 0.001f), speed);
     }
 

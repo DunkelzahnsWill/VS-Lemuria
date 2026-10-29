@@ -22,5 +22,36 @@ Machines test: a cut-off Motor stores 10 in 100 with one Glittering crystal, run
 Machines test: the quern turns: yes$
 # The first secret: an Unaligned Focus quickens a growing seedling.
 Machines test: an Unaligned Focus over a growing seedling Acted, quickened: yes$
-# Resting its only crystal stops it, and the quern does not coast on.
-Machines test: with its only crystal resting the Motor is unpowered: yes, and the quern has stopped: yes
+# Switching its only crystal Dormant stops it, and the quern does not coast on.
+Machines test: with its only crystal Dormant the Motor is unpowered: yes, and the quern has stopped: yes
+# Step 4 part 2, Products and logistics. A Dead Socket turns a Motor from its line, and stops at once when the line is cut.
+Machines test: a Dead Socket fitted in a Motor: yes, refused by a Focus: yes; powered: yes, torque 0\.25$
+Machines test: the Dead Socket's quern turns: yes$
+Machines test: the moment its line is cut, the Dead Socket's Motor is unpowered: yes$
+Machines test: cut off, the Dead Socket's Motor is unpowered: yes, and the quern has stopped: yes$
+# The shelf: the first item with work goes first; stock comes from the chest at its left, yields go to the one at its
+# right, and a product the shelf uses goes back to the input; a chest on top is not a port (note rev 33).
+Machines test: a shelf of seeds then an axe Acted, 9 of 9 sown, logs left 2; then Acted, firewood in the output 8; with firewood on the shelf Acted, firewood in the input 4; logs left in a chest on top 4$
+# A sapling, the shovel digging charcoal, and a full output sending the machine Dormant without working.
+Machines test: a shelf sapling Acted: sapling-oak-free; a shovel Acted, 9 of 9 piles dug, charcoal in the output: yes; with the output full Full, the piles kept: yes, Dormant: yes, stopped full: yes$
+# The play-test's gate: one Glowing Unaligned Focus with an Amplify and a shelf of axe, shovel, firewood and
+# firestarter turns a chest of logs into a roofed charcoal pit, keeping the front cell for the firepit, and lights it.
+Machines test: the roofed pit after [0-9]+ working\(s\) \(Acted [0-9]+\): 5 of 5 cells full piles, the front cell holds charcoalpit, lit: yes, nothing in the output: yes$
+# Gate (note rev 56): while it burns every item is quiet; after the burn one sneak tap digs the charcoal and starts the next pit.
+Machines test: the burning pit's turn Nothing, every item quiet: yes; after the burn and one sneak tap, charcoal in the output: yes, the next pit started: yes$
+# Felling pays by the logs: a Glittering crystal fells one log a working.
+Machines test: a Sky Focus at a tree of 5 logs Acted, paid 5 working\(s\), 0 log\(s\) standing, 5 log\(s\) in the chest$
+# Memory: two crystals in Awakened stone, cycled through the Focus one a turn.
+Machines test: a Memory took 2 crystals: yes, a third: no; its Focus worked fire, ice, sky, fire; the magazine holds sky, fire$
+# The plate claims salt from salt water boiled above it, the chance set to 1.
+Machines test: a Fire Focus over a plate Acted, salt water left 0 of 9, salt in the plate's chest 1$
+# An Earth Focus facing sideways bores a 2×2 into its chest and goes Dormant.
+Machines test: an Earth Focus facing east Acted, a 2×2 bored 2 deep, 8 block\(s\) in the chest, Dormant: yes$
+# Prefixes (H1): gravel before a shovel keeps it to gravel, an oak log before an axe keeps it to oak, and only oak
+# goes back as stock. Dormant items (H2): the rod never switches a prefix; a Dormant axe is passed over until woken.
+Machines test: a gravel-kept shovel Acted, gravel left 0, soil left 4; an oak-kept axe Acted, oak left 0, birch left 2, keeps oak: yes, keeps birch: no, firewood in the output 12$
+Machines test: the rod switches a prefix: no; the axe Dormant: yes, then the machine Nothing; woken: yes, then Acted$
+# Quiet items (H4): out of stock wakes when stock arrives; done stays quiet with stock until a sneak tap, which leaves a switched-off item off.
+Machines test: quiet seeds Acted, then Nothing: out of stock: yes, the shovel done: yes; seeds arrive and they wake: yes; 9 of 9 sown, then done: yes, still done with stock: yes; a sneak tap wakes them: yes, the switched-off shovel stays off: yes; plugs lit dark dark dark$
+# The shelf's socket (H5): a Dead Socket sends the whole shelf Dormant for want of compost; compost wakes it, it feeds until done, then sows.
+Machines test: a socketed shelf with no compost Nothing, the whole shelf Dormant: yes, 0 sown; compost arrives and it wakes: yes; it feeds [0-9]+ time\(s\), compost done: yes, then Acted, 9 of 9 sown, the shelf awake: yes$
