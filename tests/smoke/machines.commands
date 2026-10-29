@@ -21,5 +21,6 @@
 /lemuria machines test memory
 /lemuria machines test plate
 /lemuria machines test bore
+/lemuria machines test prefix
 /lemuria machines test motorstopped
 /lemuria machines test deadsocketstopped

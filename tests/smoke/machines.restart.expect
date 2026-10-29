@@ -1,4 +1,4 @@
 # After a restart: the capacitor's charge, the Dormant block and the refining's progress are kept.
 Machines test: after the restart the capacitor holds 100 in 1 crystal\(s\), the middle block is Dormant: yes, the refining is 0\.50 done$
-# Step 4 part 2: shelf items, Memory's crystals and Dead Sockets are saved with their blocks.
-Machines test: after the restart the shelf holds axe-felling-copper, firewood, the Memory 2 crystal\(s\), the Motor 1 Dead Socket\(s\)$
+# Step 4 part 2: shelf items, a Dormant one among them, Memory's crystals and Dead Sockets are saved with their blocks.
+Machines test: after the restart the shelf holds axe-felling-copper, firewood \(Dormant\), the Memory 2 crystal\(s\), the Motor 1 Dead Socket\(s\)$

@@ -153,6 +153,8 @@ public partial class MachinesTests
         var back = focus.WorkOnce();
         int toInput = CountOf(input, "firewood");
         int aboveLogs = CountOf(above, "log-placed-oak-ud");
+        // Its firewood switched Dormant with the rod, for the restart check (H2).
+        shelf.SwitchDormant(1);
         TestSite.StorePos(sapi, ShelfKey, shelf.Pos);
         logger.Notification("Machines test: a shelf of seeds then an axe {0}, {1} of 9 sown, logs left {2}; then {3}, firewood in the output {4}; with firewood on the shelf {5}, firewood in the input {6}; logs left in a chest on top {7}",
             sowed, sown, logsLeft, split, toOutput, back, toInput, aboveLogs);
@@ -500,6 +502,69 @@ public partial class MachinesTests
             YesNo(motor?.MotorPowered == false), YesNo(speed >= 0 && speed < 0.001f));
     }
 
+    // ------------------------------------------------------------------ prefixes and Dormant items (H1, H2)
+
+    public void Prefix(BlockPos column)
+    {
+        var origin = TestSite.Surface(sapi, column);
+        Ground(origin, 5, 6, 5);
+        // A 3×3 floor of gravel and soil in a chequer, under a Glowing Unaligned Focus.
+        var floor = origin.AddCopy(1, -1, 1);
+        for (int x = 0; x < 3; x++)
+        {
+            for (int z = 0; z < 3; z++)
+            {
+                Accessor.SetBlock(Id((x + z) % 2 == 0 ? "game:gravel-granite" : "game:soil-medium-none"), floor.AddCopy(x, 0, z));
+            }
+        }
+        var focusPos = floor.AddCopy(1, 3, 1);
+        var focus = Place(focusPos, Machine.Focus, "down");
+        var shelf = Shelf(focusPos, BlockFacing.EAST, "game:gravel-granite", "game:shovel-copper");
+        var input = Port(shelf, true);
+        var output = Port(shelf, false);
+        Put(focus, Crystal.Unaligned, Crystal.Glowing);
+        if (focus == null || shelf == null)
+        {
+            return;
+        }
+        Fill(focus);
+        focus.ReadContext();
+        // Gravel before the shovel: only the gravel goes.
+        var dug = focus.WorkOnce();
+        int gravelLeft = 0, soilLeft = 0;
+        for (int x = 0; x < 3; x++)
+        {
+            for (int z = 0; z < 3; z++)
+            {
+                string path = Path(floor.AddCopy(x, 0, z));
+                gravelLeft += path.StartsWith("gravel-") ? 1 : 0;
+                soilLeft += path.StartsWith("soil-") ? 1 : 0;
+            }
+        }
+        // An oak log before the axe: only oak is split, and only oak is kept back as stock.
+        SetItems(shelf, "game:log-placed-oak-ud", "game:axe-felling-copper");
+        Add(input, Stack("game:log-placed-oak-ud", 2));
+        Add(input, Stack("game:log-placed-birch-ud", 2));
+        Fill(focus);
+        var split = focus.WorkOnce();
+        int oak = CountOf(input, "log-placed-oak-ud"), birch = CountOf(input, "log-placed-birch-ud");
+        bool keepsOak = Stack("game:log-placed-oak-ud") is { } oakLog && focus.ShelfUses(oakLog);
+        bool keepsBirch = Stack("game:log-placed-birch-ud") is { } birchLog && focus.ShelfUses(birchLog);
+        // The rod: a prefix is never switched; the axe switched Dormant is passed over, and woken it works.
+        bool prefixSwitched = shelf.SwitchDormant(0);
+        bool switched = shelf.SwitchDormant(1);
+        Add(input, Stack("game:log-placed-oak-ud", 1));
+        Fill(focus);
+        var asleep = focus.WorkOnce();
+        bool woke = shelf.SwitchDormant(1);
+        Fill(focus);
+        var awake = focus.WorkOnce();
+        logger.Notification("Machines test: a gravel-kept shovel {0}, gravel left {1}, soil left {2}; an oak-kept axe {3}, oak left {4}, birch left {5}, keeps oak: {6}, keeps birch: {7}, firewood in the output {8}",
+            dug, gravelLeft, soilLeft, split, oak, birch, YesNo(keepsOak), YesNo(keepsBirch), CountOf(output, "firewood"));
+        logger.Notification("Machines test: the rod switches a prefix: {0}; the axe Dormant: {1}, then the machine {2}; woken: {3}, then {4}",
+            YesNo(prefixSwitched), YesNo(switched), asleep, YesNo(woke && !shelf.IsDormant(1)), awake);
+    }
+
     // ------------------------------------------------------------------ after a restart
 
     public void Kept()
@@ -511,7 +576,7 @@ public partial class MachinesTests
         var memory = memoryPos == null ? null : Accessor.GetBlockEntity(memoryPos) as BlockEntityMemory;
         var motor = motorPos == null ? null : Accessor.GetBlockEntity(motorPos) as BlockEntityMachine;
         logger.Notification("Machines test: after the restart the shelf holds {0}, the Memory {1} crystal(s), the Motor {2} Dead Socket(s)",
-            shelf == null ? "nothing" : string.Join(", ", shelf.Items.Where(s => s != null).Select(s => s!.Collectible.Code.Path)),
+            shelf == null ? "nothing" : string.Join(", ", shelf.Items.Select((s, i) => s == null ? null : s.Collectible.Code.Path + (shelf.IsDormant(i) ? " (Dormant)" : "")).Where(n => n != null)),
             memory?.Crystals.Count ?? -1, motor?.Crystals.Count(c => c.IsFitting) ?? -1);
     }
 }

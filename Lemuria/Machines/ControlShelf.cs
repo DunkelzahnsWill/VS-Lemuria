@@ -106,8 +106,39 @@ public class BlockEntityControlShelf : BlockEntityDisplay
             ? container
             : null;
 
+    private readonly bool[] dormant = new bool[Places];
+
     /// <summary>The items on the shelf, first to last.</summary>
     public ItemStack?[] Items => Enumerable.Range(0, Places).Select(i => inventory[i].Itemstack).ToArray();
+
+    /// <summary>
+    /// Whether the item in this place is Dormant (H2, note rev 44): switched with the Crystal Rod, drawn
+    /// dark, and passed over by the machine as work and as stock until it is woken.
+    /// </summary>
+    public bool IsDormant(int place) => place >= 0 && place < Places && dormant[place] && !inventory[place].Empty;
+
+    /// <summary>
+    /// The item in this place that is a shovel's or an axe's prefix (H1): an item that names no action,
+    /// in the place just left of it. Null when there is none.
+    /// </summary>
+    public ItemStack? PrefixOf(int place) =>
+        place > 0 && inventory[place - 1].Itemstack is { } before && ShelfWork.KindOf(before) == ShelfWork.Kind.None ? before : null;
+
+    /// <summary>
+    /// A rod's right-click on a place: an item that names an action switches Dormant or wakes; a prefix,
+    /// an empty place or anything else does nothing. Returns whether it switched. Server only.
+    /// </summary>
+    public bool SwitchDormant(int place)
+    {
+        if (place < 0 || place >= Places || inventory[place].Itemstack is not { } stack || ShelfWork.KindOf(stack) == ShelfWork.Kind.None)
+        {
+            return false;
+        }
+        dormant[place] = !dormant[place];
+        Api.World.PlaySoundAt(new AssetLocation(LemuriaModSystem.ModId, dormant[place] ? "sounds/machines/switch-off" : "sounds/machines/switch-on"), Pos, 0, null, true, 12f, LemuriaSound.Volume(0.6f));
+        Changed();
+        return true;
+    }
 
     /// <summary>The place on the ledge under a hit on the open face, 0 to 3 from left to right as you face it.</summary>
     public int PlaceAt(Vec3d hit)
@@ -128,6 +159,15 @@ public class BlockEntityControlShelf : BlockEntityDisplay
         {
             return true;
         }
+        if (held.Itemstack?.Collectible is ItemCrystalRod)
+        {
+            // The rod switches an item Dormant or wakes it, and never goes on the shelf itself.
+            if (Api.Side == EnumAppSide.Server)
+            {
+                SwitchDormant(place);
+            }
+            return true;
+        }
         if (held.Empty)
         {
             if (inventory[place].Empty)
@@ -137,6 +177,7 @@ public class BlockEntityControlShelf : BlockEntityDisplay
             if (Api.Side == EnumAppSide.Server)
             {
                 var stack = inventory[place].TakeOutWhole();
+                dormant[place] = false;
                 if (!player.InventoryManager.TryGiveItemstack(stack, true))
                 {
                     Api.World.SpawnItemEntity(stack, Pos.ToVec3d().Add(0.5, 0.5, 0.5).Add(Side.Normald.Clone().Mul(0.7)));
@@ -204,9 +245,23 @@ public class BlockEntityControlShelf : BlockEntityDisplay
         }
         var mesh = getDefaultMesh(slot.Itemstack).Clone();
         Fit(mesh);
+        if (IsDormant(inventory.GetSlotId(slot)) && mesh.Rgba != null)
+        {
+            // Dormant, it is drawn dark, as a Dormant crystal's plug is.
+            for (int i = 0; i < mesh.VerticesCount * 4; i++)
+            {
+                if (i % 4 != 3)
+                {
+                    mesh.Rgba[i] = (byte)(mesh.Rgba[i] * 0.35f);
+                }
+            }
+        }
         MeshCache[getMeshCacheKey(slot)] = mesh;
         return mesh;
     }
+
+    protected override string getMeshCacheKey(ItemSlot slot) =>
+        base.getMeshCacheKey(slot) + (IsDormant(inventory.GetSlotId(slot)) ? "-dormant" : "");
 
     private static (Vec3f Min, Vec3f Max) Bounds(MeshData mesh)
     {
@@ -246,15 +301,31 @@ public class BlockEntityControlShelf : BlockEntityDisplay
         mesh.Scale(new Vec3f(0.5f, 0, 0.5f), scale, scale, scale);
     }
 
+    public override void ToTreeAttributes(ITreeAttribute tree)
+    {
+        base.ToTreeAttributes(tree);
+        for (int i = 0; i < Places; i++)
+        {
+            tree.SetBool("dormant" + i, dormant[i]);
+        }
+    }
+
     public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldForResolving)
     {
         base.FromTreeAttributes(tree, worldForResolving);
+        for (int i = 0; i < Places; i++)
+        {
+            dormant[i] = tree.GetBool("dormant" + i);
+        }
         RedrawAfterReceivingTreeAttributes(worldForResolving);
     }
 
     public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
     {
-        var names = Items.Select((s, i) => s == null ? null : $"{i + 1}. {s.GetName()}").Where(n => n != null).ToList();
+        var names = Items.Select((s, i) => s == null ? null
+            : $"{i + 1}. {s.GetName()}" + (IsDormant(i) ? " " + Lang.Get(LemuriaModSystem.ModId + ":controlshelf-dormant")
+                : PrefixOf(i + 1) != null && ShelfWork.KindOf(Items.ElementAtOrDefault(i + 1)) is ShelfWork.Kind.Shovel or ShelfWork.Kind.Axe ? " " + Lang.Get(LemuriaModSystem.ModId + ":controlshelf-prefix") : ""))
+            .Where(n => n != null).ToList();
         dsc.AppendLine(names.Count == 0 ? Lang.Get(LemuriaModSystem.ModId + ":controlshelf-empty") : string.Join("\n", names));
     }
 }

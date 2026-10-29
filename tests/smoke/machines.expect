@@ -45,3 +45,7 @@ Machines test: a Memory took 2 crystals: yes, a third: no; its Focus worked fire
 Machines test: a Fire Focus over a plate Acted, salt water left 0 of 9, salt in the plate's chest 1$
 # An Earth Focus facing sideways bores a 2×2 into its chest and goes Dormant.
 Machines test: an Earth Focus facing east Acted, a 2×2 bored 2 deep, 8 block\(s\) in the chest, Dormant: yes$
+# Prefixes (H1): gravel before a shovel keeps it to gravel, an oak log before an axe keeps it to oak, and only oak
+# goes back as stock. Dormant items (H2): the rod never switches a prefix; a Dormant axe is passed over until woken.
+Machines test: a gravel-kept shovel Acted, gravel left 0, soil left 4; an oak-kept axe Acted, oak left 0, birch left 2, keeps oak: yes, keeps birch: no, firewood in the output 12$
+Machines test: the rod switches a prefix: no; the axe Dormant: yes, then the machine Nothing; woken: yes, then Acted$

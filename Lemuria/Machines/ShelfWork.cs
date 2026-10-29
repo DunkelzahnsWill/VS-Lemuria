@@ -77,13 +77,20 @@ public static class ShelfWork
     /// </summary>
     public static bool UsesUp(IWorldAccessor world, BlockEntityControlShelf shelf, ItemStack stack)
     {
-        foreach (var item in shelf.Items)
+        var items = shelf.Items;
+        for (int i = 0; i < items.Length; i++)
         {
+            var item = items[i];
+            if (shelf.IsDormant(i))
+            {
+                continue;
+            }
             switch (KindOf(item))
             {
                 case Kind.Seeds or Kind.Sapling or Kind.Fertilizer or Kind.Firewood when Same(item!, stack):
                     return true;
-                case Kind.Axe when Split(world, stack, item!) != null:
+                // With a prefix, only logs of its kind are kept back as the axe's stock (H1).
+                case Kind.Axe when Split(world, stack, item!) != null && (shelf.PrefixOf(i) is not { } kind || Same(kind, stack)):
                     return true;
             }
         }
@@ -95,20 +102,24 @@ public static class ShelfWork
     public static MachineWork.Result Work(BlockEntityMachine machine, BlockEntityControlShelf shelf, CastContext cast)
     {
         var reach = Reach(cast);
-        foreach (var item in shelf.Items)
+        var items = shelf.Items;
+        for (int i = 0; i < items.Length; i++)
         {
-            if (item == null)
+            var item = items[i];
+            // A Dormant item is passed over, as work and as stock (H2).
+            if (item == null || shelf.IsDormant(i))
             {
                 continue;
             }
+            var prefix = shelf.PrefixOf(i);
             var result = KindOf(item) switch
             {
                 Kind.Seeds => Sow(machine, cast, reach, item),
                 Kind.Sapling => Plant(machine, cast, reach, item),
                 Kind.Fertilizer => Feed(machine, cast, reach, item),
-                Kind.Shovel => Dig(machine, cast, reach),
+                Kind.Shovel => Dig(machine, cast, reach, prefix),
                 Kind.Bucket => Milk(machine, cast),
-                Kind.Axe => Chop(machine, reach.Count, item),
+                Kind.Axe => Chop(machine, reach.Count, item, prefix),
                 Kind.Firewood => Stack(machine, cast, reach, item),
                 Kind.Firestarter => Light(cast, reach),
                 _ => MachineWork.Result.Nothing,
@@ -286,12 +297,30 @@ public static class ShelfWork
         return block.BlockMaterial is EnumBlockMaterial.Soil or EnumBlockMaterial.Sand or EnumBlockMaterial.Gravel;
     }
 
-    /// <summary>A shovel digs every loose block in reach, from the top down, its drops into the output; all or nothing.</summary>
-    private static MachineWork.Result Dig(BlockEntityMachine machine, CastContext cast, List<BlockPos> reach)
+    /// <summary>
+    /// Whether a block is of a prefix's kind (H1): it is that block, or it drops it, as a charcoal pile
+    /// drops charcoal.
+    /// </summary>
+    public static bool OfKind(IWorldAccessor world, BlockPos pos, ItemStack prefix)
+    {
+        var block = world.BlockAccessor.GetBlock(pos);
+        if (block.Code.Equals(prefix.Collectible.Code))
+        {
+            return true;
+        }
+        var drops = block.GetDrops(world, pos, null);
+        return drops != null && drops.Any(d => d != null && Same(d, prefix));
+    }
+
+    /// <summary>
+    /// A shovel digs every loose block in reach, from the top down, its drops into the output; all or
+    /// nothing. With a prefix it digs only blocks of the prefix's kind.
+    /// </summary>
+    private static MachineWork.Result Dig(BlockEntityMachine machine, CastContext cast, List<BlockPos> reach, ItemStack? prefix)
     {
         var world = cast.Api.World;
         var accessor = world.BlockAccessor;
-        var dug = reach.Where(p => Diggable(accessor, p) && cast.Can(p)).OrderByDescending(p => p.Y).ToList();
+        var dug = reach.Where(p => Diggable(accessor, p) && cast.Can(p) && (prefix == null || OfKind(world, p, prefix))).OrderByDescending(p => p.Y).ToList();
         if (dug.Count == 0)
         {
             return MachineWork.Result.Nothing;
@@ -390,8 +419,11 @@ public static class ShelfWork
         return null;
     }
 
-    /// <summary>An axe splits the input's logs, as many as the reach has blocks, 4 firewood to a log; all or nothing.</summary>
-    private static MachineWork.Result Chop(BlockEntityMachine machine, int reachBlocks, ItemStack axe)
+    /// <summary>
+    /// An axe splits the input's logs, as many as the reach has blocks, 4 firewood to a log; all or
+    /// nothing. With a prefix it splits only logs of that kind.
+    /// </summary>
+    private static MachineWork.Result Chop(BlockEntityMachine machine, int reachBlocks, ItemStack axe, ItemStack? prefix)
     {
         var world = machine.Api.World;
         var input = machine.Input;
@@ -407,7 +439,7 @@ public static class ShelfWork
             {
                 break;
             }
-            if (slot.Itemstack is not { } stack || Split(world, stack, axe) is not { } output)
+            if (slot.Itemstack is not { } stack || (prefix != null && !Same(prefix, stack)) || Split(world, stack, axe) is not { } output)
             {
                 continue;
             }
