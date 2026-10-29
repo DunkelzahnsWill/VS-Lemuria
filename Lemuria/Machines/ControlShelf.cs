@@ -15,7 +15,8 @@ namespace Lemuria.Machines;
 /// The Control Shelf (step 4 part 2 note, How each piece behaves): a stone shelf whose back is set
 /// against a side of a Focus or Scatter, never its front, one to a machine. Its 1 to 4 items, in view,
 /// name the machine's hands, first to last from left to right as you face it; it is also the machine's
-/// port, its input the container on top of it and its output the one under it (G2). Code
+/// port: as you face it, its input is the container touching its left and its output the one touching
+/// its right, so goods cross it the way its order reads (G2; note rev 33). Code
 /// <c>controlshelf-{side}</c>, {side} the way its open face looks; set down, it looks toward you.
 /// </summary>
 public class BlockControlShelf : Block
@@ -80,13 +81,25 @@ public class BlockEntityControlShelf : BlockEntityDisplay
     /// <summary>The block its back is set against: its machine, when it is a Focus or Scatter.</summary>
     public BlockPos MachinePos => Pos.AddCopy(Side.Opposite);
 
-    /// <summary>The input: a container on top of the shelf.</summary>
-    public IBlockEntityContainer? Input => Container(Pos.UpCopy());
+    /// <summary>Your left as you face the shelf's open face: where place 1 is, and the input.</summary>
+    public BlockFacing Left => Side.Code switch
+    {
+        "east" => BlockFacing.SOUTH,
+        "south" => BlockFacing.WEST,
+        "west" => BlockFacing.NORTH,
+        _ => BlockFacing.EAST,
+    };
 
-    /// <summary>The output: a container under the shelf.</summary>
-    public IBlockEntityContainer? Output => Container(Pos.DownCopy());
+    /// <summary>Your right as you face the shelf: the output.</summary>
+    public BlockFacing Right => Left.Opposite;
 
-    public BlockPos OutputPos => Pos.DownCopy();
+    /// <summary>The input: a container touching the shelf's left.</summary>
+    public IBlockEntityContainer? Input => Container(Pos.AddCopy(Left));
+
+    /// <summary>The output: a container touching the shelf's right.</summary>
+    public IBlockEntityContainer? Output => Container(Pos.AddCopy(Right));
+
+    public BlockPos OutputPos => Pos.AddCopy(Right);
 
     private IBlockEntityContainer? Container(BlockPos pos) =>
         Api?.World.BlockAccessor.GetBlockEntity(pos) is IBlockEntityContainer { Inventory: not null } container and not Sparkstone.BlockEntitySparkstone and not BlockEntityControlShelf

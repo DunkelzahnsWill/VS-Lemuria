@@ -67,6 +67,10 @@ public partial class MachinesTests
         return shelf;
     }
 
+    /// <summary>A chest at the shelf's left, its input, or at its right, its output.</summary>
+    private IInventory? Port(BlockEntityControlShelf? shelf, bool input) =>
+        shelf == null ? null : Chest(shelf.Pos.AddCopy(input ? shelf.Left : shelf.Right));
+
     private void SetItems(BlockEntityControlShelf shelf, params string[] items)
     {
         for (int i = 0; i < BlockEntityControlShelf.Places; i++)
@@ -109,10 +113,13 @@ public partial class MachinesTests
         var focusPos = field.AddCopy(1, 3, 1);
         var focus = Place(focusPos, Machine.Focus, "down");
         var shelf = Shelf(focusPos, BlockFacing.EAST, "game:seeds-flax", "game:axe-felling-copper");
-        var input = Chest(focusPos.AddCopy(BlockFacing.EAST).Up());
-        var output = Chest(focusPos.AddCopy(BlockFacing.EAST).Down());
+        var input = Port(shelf, true);
+        var output = Port(shelf, false);
         Add(input, Stack("game:seeds-flax", 9));
         Add(input, Stack("game:log-placed-oak-ud", 2));
+        // A chest on top of the shelf is not its port (note rev 33): its logs stay.
+        var above = shelf == null ? null : Chest(shelf.Pos.UpCopy());
+        Add(above, Stack("game:log-placed-oak-ud", 4));
         Put(focus, Crystal.Unaligned, Crystal.Glowing);
         if (focus == null || shelf == null)
         {
@@ -145,9 +152,10 @@ public partial class MachinesTests
         Fill(focus);
         var back = focus.WorkOnce();
         int toInput = CountOf(input, "firewood");
+        int aboveLogs = CountOf(above, "log-placed-oak-ud");
         TestSite.StorePos(sapi, ShelfKey, shelf.Pos);
-        logger.Notification("Machines test: a shelf of seeds then an axe {0}, {1} of 9 sown, logs left {2}; then {3}, firewood in the output {4}; with firewood on the shelf {5}, firewood in the input {6}",
-            sowed, sown, logsLeft, split, toOutput, back, toInput);
+        logger.Notification("Machines test: a shelf of seeds then an axe {0}, {1} of 9 sown, logs left {2}; then {3}, firewood in the output {4}; with firewood on the shelf {5}, firewood in the input {6}; logs left in a chest on top {7}",
+            sowed, sown, logsLeft, split, toOutput, back, toInput, aboveLogs);
     }
 
     // ------------------------------------------------------------------ the shelf: a sapling, the shovel, a full output
@@ -159,8 +167,7 @@ public partial class MachinesTests
         // A Glittering Unaligned Focus plants a sapling on the soil below it.
         var soil = origin.AddCopy(1, -1, 2);
         var planter = Place(soil.AddCopy(0, 3, 0), Machine.Focus, "down");
-        Shelf(soil.AddCopy(0, 3, 0), BlockFacing.WEST, "game:sapling-oak-free");
-        var saplings = Chest(soil.AddCopy(-1, 4, 0));
+        var saplings = Port(Shelf(soil.AddCopy(0, 3, 0), BlockFacing.WEST, "game:sapling-oak-free"), true);
         Add(saplings, Stack("game:sapling-oak-free", 2));
         Put(planter, Crystal.Unaligned, Crystal.Glittering);
         Fill(planter);
@@ -182,9 +189,9 @@ public partial class MachinesTests
         Lay();
         var focusPos = piles.AddCopy(1, 3, 1);
         var digger = Place(focusPos, Machine.Focus, "down");
-        Shelf(focusPos, BlockFacing.EAST, "game:shovel-copper");
-        Chest(focusPos.AddCopy(BlockFacing.EAST).Up());
-        var output = Chest(focusPos.AddCopy(BlockFacing.EAST).Down());
+        var diggerShelf = Shelf(focusPos, BlockFacing.EAST, "game:shovel-copper");
+        Port(diggerShelf, true);
+        var output = Port(diggerShelf, false);
         Put(digger, Crystal.Unaligned, Crystal.Glowing);
         if (digger == null || output == null)
         {
@@ -239,10 +246,10 @@ public partial class MachinesTests
         var focusPos = room.AddCopy(0, 1, -1);
         var focus = Place(focusPos, Machine.Focus, "south");
         var amplify = Place(focusPos.WestCopy(), Machine.Amplify, "up");
-        // Its shelf on its back, outside, a logs chest on top and an empty chest under it.
+        // Its shelf on its back, outside, a logs chest at its left and an empty chest at its right (note rev 33).
         var shelf = Shelf(focusPos, BlockFacing.NORTH, "game:axe-felling-copper", "game:shovel-copper", "game:firewood", "game:firestarter");
-        var input = Chest(focusPos.NorthCopy().Up());
-        var output = Chest(focusPos.NorthCopy().Down());
+        var input = Port(shelf, true);
+        var output = Port(shelf, false);
         for (int i = 0; i < 4; i++)
         {
             Add(input, Stack("game:log-placed-oak-ud", 16));

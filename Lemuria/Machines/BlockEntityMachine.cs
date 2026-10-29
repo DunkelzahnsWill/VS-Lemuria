@@ -156,11 +156,11 @@ public class BlockEntityMachine : BlockEntitySparkstone
     /// <summary>The Memory set against this Focus or Scatter, or null.</summary>
     public BlockEntityMemory? Memory => memoryPos == null ? null : Api.World.BlockAccessor.GetBlockEntity(memoryPos) as BlockEntityMemory;
 
-    /// <summary>Where stock comes from: the container on top of the shelf; none without a shelf.</summary>
+    /// <summary>Where stock comes from: the container at the shelf's left; none without a shelf.</summary>
     public IInventory? Input => Shelf?.Input?.Inventory;
 
     /// <summary>
-    /// Where yields go (G2): the container under the shelf; with no shelf, any container touching the
+    /// Where yields go (G2): the container at the shelf's right; with no shelf, any container touching the
     /// machine, as in part 1. Null for nowhere, when yields drop where the work happened.
     /// </summary>
     public IInventory? Output

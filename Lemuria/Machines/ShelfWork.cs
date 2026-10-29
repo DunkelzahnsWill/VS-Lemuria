@@ -323,7 +323,7 @@ public static class ShelfWork
 
     /// <summary>
     /// A bucket milks each animal in reach that the game would let you milk now, 10 litres each, into a
-    /// liquid container as the output (a barrel under the shelf). The game's own rules: once a day, for
+    /// liquid container as the output (a barrel at the shelf's right). The game's own rules: once a day, for
     /// 21 days after giving birth, never while stressed. A machine never angers it.
     /// </summary>
     private static MachineWork.Result Milk(BlockEntityMachine machine, CastContext cast)
