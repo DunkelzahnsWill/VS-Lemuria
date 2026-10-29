@@ -264,6 +264,7 @@ public partial class MachinesTests
         }
         Fill(focus);
         focus.ReadContext();
+        pitFocus = focusPos;
         var front = focusPos.AddCopy(BlockFacing.SOUTH);
         int workings = 0;
         bool lit = false;
@@ -563,6 +564,106 @@ public partial class MachinesTests
             dug, gravelLeft, soilLeft, split, oak, birch, YesNo(keepsOak), YesNo(keepsBirch), CountOf(output, "firewood"));
         logger.Notification("Machines test: the rod switches a prefix: {0}; the axe Dormant: {1}, then the machine {2}; woken: {3}, then {4}",
             YesNo(prefixSwitched), YesNo(switched), asleep, YesNo(woke && !shelf.IsDormant(1)), awake);
+    }
+
+    // ------------------------------------------------------------------ what an idle shelf turn costs
+
+    /// <summary>The roofed pit's Focus, for the idle timing once its pit burns.</summary>
+    private BlockPos? pitFocus;
+
+    /// <summary>Microseconds a turn of this machine takes, over this many turns, its line kept full.</summary>
+    private double TimeTurns(BlockEntityMachine machine, int turns, out MachineWork.Result last)
+    {
+        Fill(machine);
+        machine.ReadContext();
+        last = MachineWork.Result.Idle;
+        var watch = System.Diagnostics.Stopwatch.StartNew();
+        for (int i = 0; i < turns; i++)
+        {
+            last = machine.WorkOnce();
+        }
+        watch.Stop();
+        return watch.Elapsed.TotalMilliseconds * 1000 / turns;
+    }
+
+    /// <summary>
+    /// Times idle shelf turns, with nothing to do (planning thread's cost question, Oct 29): a Scatter's
+    /// seeds over a sown 9×9, the roofed pit's Focus once its pit burns, and compost over a fed 3×3.
+    /// Not part of the smoke run; for the log only.
+    /// </summary>
+    public void Idle(BlockPos column)
+    {
+        const int Turns = 200;
+        var origin = TestSite.Surface(sapi, column);
+        Ground(origin, 13, 7, 13);
+        // A Scatter with flax seeds over a 9×9 already sown.
+        var field = origin.AddCopy(2, -1, 2);
+        for (int x = 0; x < 9; x++)
+        {
+            for (int z = 0; z < 9; z++)
+            {
+                Accessor.SetBlock(Id("game:farmland-moist-medium"), field.AddCopy(x, 0, z));
+                Accessor.SetBlock(Id("game:crop-flax-1"), field.AddCopy(x, 1, z));
+            }
+        }
+        var scatterPos = field.AddCopy(4, 5, 4);
+        var scatter = Place(scatterPos, Machine.Scatter, "down");
+        var scatterShelf = Shelf(scatterPos, BlockFacing.EAST, "game:seeds-flax");
+        Add(Port(scatterShelf, true), Stack("game:seeds-flax", 64));
+        Port(scatterShelf, false);
+        Put(scatter, Crystal.Unaligned, Crystal.Glowing);
+        double sown = scatter == null ? -1 : TimeTurns(scatter, Turns, out var sownResult);
+        // The roofed pit's Focus, its pit lit, a chest of firewood as its input.
+        double pit = -1;
+        if (pitFocus != null && Accessor.GetBlockEntity(pitFocus) is BlockEntityMachine pitMachine
+            && Accessor.GetBlockEntity(pitFocus.NorthCopy()) is BlockEntityControlShelf pitShelf)
+        {
+            if (!pitMachine.Active)
+            {
+                pitMachine.SetActive(true);
+            }
+            var input = pitShelf.Input?.Inventory;
+            for (int i = 0; i < 8; i++)
+            {
+                Add(input, Stack("game:firewood", 32));
+            }
+            pit = TimeTurns(pitMachine, Turns, out _);
+        }
+        // Compost over a 3×3 of farmland already fed full.
+        var fed = origin.AddCopy(2, -1, 2);
+        var compostPos = fed.AddCopy(1, 3, 1).AddCopy(0, 0, 0);
+        // Reuse the sown field's corner: clear its crops so the shelf has only compost to think about.
+        for (int x = 0; x < 3; x++)
+        {
+            for (int z = 0; z < 3; z++)
+            {
+                Accessor.SetBlock(0, fed.AddCopy(x, 1, z));
+            }
+        }
+        Accessor.SetBlock(0, scatterPos);
+        var feeder = Place(compostPos, Machine.Focus, "down");
+        var feederShelf = Shelf(compostPos, BlockFacing.WEST, "game:compost");
+        Add(Port(feederShelf, true), Stack("game:compost", 64));
+        Put(feeder, Crystal.Unaligned, Crystal.Glowing);
+        double compost = -1;
+        if (feeder != null)
+        {
+            Fill(feeder);
+            feeder.ReadContext();
+            for (int i = 0; i < 20; i++)
+            {
+                feeder.WorkOnce();
+            }
+            // Stock enough that an idle turn still looks at every block in reach.
+            for (int i = 0; i < 8; i++)
+            {
+                Add(feederShelf?.Input?.Inventory, Stack("game:compost", 64));
+            }
+            compost = TimeTurns(feeder, Turns, out _);
+
+        }
+        logger.Notification("Machines test: an idle turn takes {0:0.0} µs for a Scatter's seeds over a sown 9×9, {1:0.0} µs for the pit's Focus with firewood, {2:0.0} µs for compost over a fed 3×3",
+            sown, pit, compost);
     }
 
     // ------------------------------------------------------------------ after a restart

@@ -203,7 +203,7 @@ public static class ShelfWork
     private static MachineWork.Result Feed(BlockEntityMachine machine, CastContext cast, List<BlockPos> reach, ItemStack item)
     {
         var world = cast.Api.World;
-        var props = item.Collectible.Attributes["fertilizerProps"].AsObject<FertilizerProps>();
+        var props = FertilizerOf(item.Collectible);
         int stock = Stock.Count(machine.Input, s => StockMatches(item, s));
         if (props == null || stock == 0)
         {
@@ -230,8 +230,50 @@ public static class ShelfWork
     /// which needs a player): slow-release nutrients up to 150 each and a permanent boost once. Done
     /// through its saved state, so no field the game keeps to itself is touched. Returns whether it took any.
     /// </summary>
+    private static readonly System.Runtime.CompilerServices.ConditionalWeakTable<CollectibleObject, FertilizerProps> FertilizerCache = new();
+
+    /// <summary>An item's fertilizer properties, parsed from its JSON once rather than on every turn.</summary>
+    private static FertilizerProps? FertilizerOf(CollectibleObject item)
+    {
+        if (FertilizerCache.TryGetValue(item, out var cached))
+        {
+            return cached;
+        }
+        var props = item.Attributes?["fertilizerProps"].AsObject<FertilizerProps>();
+        if (props != null)
+        {
+            FertilizerCache.AddOrUpdate(item, props);
+        }
+        return props;
+    }
+
+    private static readonly System.Reflection.FieldInfo? SlowReleaseField =
+        typeof(BlockEntitySoilNutrition).GetField("slowReleaseNutrients", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+
+    private static readonly System.Reflection.FieldInfo? PermaBoostsField =
+        typeof(BlockEntitySoilNutrition).GetField("PermaBoosts", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+
+    /// <summary>
+    /// Whether farmland would take any of this fertilizer, read from the game's own fields without
+    /// writing the farmland out (the same test as its OnBlockInteract). True when the fields cannot be
+    /// read, so the full check below decides.
+    /// </summary>
+    private static bool MayTake(BlockEntityFarmland farmland, FertilizerProps props)
+    {
+        if (SlowReleaseField?.GetValue(farmland) is not float[] { Length: >= 3 } slow || PermaBoostsField?.GetValue(farmland) is not HashSet<string> boosts)
+        {
+            return true;
+        }
+        return (props.N > 0 && slow[0] < 150) || (props.P > 0 && slow[1] < 150) || (props.K > 0 && slow[2] < 150)
+            || (props.PermaBoost != null && !boosts.Contains(props.PermaBoost.Code));
+    }
+
     private static bool Fertilize(IWorldAccessor world, BlockEntityFarmland farmland, FertilizerProps props, string? overlay)
     {
+        if (!MayTake(farmland, props))
+        {
+            return false;
+        }
         var tree = new TreeAttribute();
         farmland.ToTreeAttributes(tree);
         float n = Math.Min(Math.Max(0, 150 - tree.GetFloat("slowN")), props.N);
@@ -399,8 +441,31 @@ public static class ShelfWork
 
     // ------------------------------------------------------------------ axe
 
-    /// <summary>What one log or block splits into with an axe in the grid (the game's firewood recipes), or null.</summary>
+    private static IWorldAccessor? splitWorld;
+    private static readonly Dictionary<string, ItemStack?> SplitCache = new();
+
+    /// <summary>
+    /// What one log or block splits into with an axe in the grid (the game's firewood recipes), or null.
+    /// Looked up once per axe and item code and cached, since walking every grid recipe on every turn
+    /// cost a gate's Focus tens of milliseconds while its pit burned (timed, Oct 29). Server only.
+    /// </summary>
     public static ItemStack? Split(IWorldAccessor world, ItemStack stack, ItemStack axe)
+    {
+        if (!ReferenceEquals(world, splitWorld))
+        {
+            SplitCache.Clear();
+            splitWorld = world;
+        }
+        string key = axe.Collectible.Code + "|" + stack.Collectible.Code;
+        if (!SplitCache.TryGetValue(key, out var output))
+        {
+            output = FindSplit(world, stack, axe);
+            SplitCache[key] = output;
+        }
+        return output;
+    }
+
+    private static ItemStack? FindSplit(IWorldAccessor world, ItemStack stack, ItemStack axe)
     {
         foreach (var recipe in world.GridRecipes)
         {
