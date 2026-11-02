@@ -234,42 +234,55 @@ public partial class MachinesTests
 
     // ------------------------------------------------------------------ the roofed charcoal pit, as the play-test builds it
 
+    /// <summary>
+    /// The gate as the silo (note rev 91): a 3×3 chamber one block high under a stone roof, a shaft through
+    /// the roof's middle, and a Focus with a Glowing Unaligned crystal on the roof over the shaft, set down
+    /// facing north and turned down by a rod tap on its underside, as the play-test step does. Its shelf
+    /// and chests stand on the roof.
+    /// </summary>
     public void Pit(BlockPos column)
     {
         var origin = TestSite.Surface(sapi, column);
-        Ground(origin, 3, 6, 7);
-        // Solid granite with a room carved in it: 1 wide, 2 high, 3 deep, toward the south, under a roof.
-        Solid(origin, 3, 4, 7);
-        var room = origin.AddCopy(1, 1, 2);
-        for (int y = 0; y < 2; y++)
+        Ground(origin, 5, 6, 5);
+        // Stone 5×5 and three high: floor, chamber, roof.
+        Solid(origin, 5, 3, 5);
+        var chamber = origin.AddCopy(1, 1, 1);
+        for (int x = 0; x < 3; x++)
         {
             for (int z = 0; z < 3; z++)
             {
-                Accessor.SetBlock(0, room.AddCopy(0, y, z));
+                Accessor.SetBlock(0, chamber.AddCopy(x, 0, z));
             }
         }
-        // The Focus in the north end wall at the upper layer, facing in, an Amplify beside it in the rock.
-        var focusPos = room.AddCopy(0, 1, -1);
-        var focus = Place(focusPos, Machine.Focus, "south");
-        var amplify = Place(focusPos.WestCopy(), Machine.Amplify, "up");
-        // Its shelf on its back, outside, a logs chest at its left and an empty chest at its right (note rev 33).
+        var shaft = chamber.AddCopy(1, 1, 1);
+        Accessor.SetBlock(0, shaft);
+        var focusPos = shaft.UpCopy();
+        var focus = Place(focusPos, Machine.Focus, "north");
+        Put(focus, Crystal.Unaligned, Crystal.Glowing);
+        if (focus == null)
+        {
+            return;
+        }
+        // The rod on its underside turns its front down, crystal and all.
+        ItemCrystalRod.Tap(World, focus, new BlockSelection { Position = focusPos.Copy(), Face = BlockFacing.DOWN, HitPosition = new Vec3d(0.5, 0, 0.5) }, false);
+        focus = Accessor.GetBlockEntity(focusPos) as BlockEntityMachine;
+        // Its shelf on the roof against its north side, a logs chest at the shelf's left and an empty chest at its right.
         var shelf = Shelf(focusPos, BlockFacing.NORTH, "game:axe-felling-copper", "game:shovel-copper", "game:firewood", "game:firestarter");
         var input = Port(shelf, true);
         var output = Port(shelf, false);
-        for (int i = 0; i < 4; i++)
+        // Nine full piles of 32 take 72 logs, and the firepit a few more.
+        for (int i = 0; i < 6; i++)
         {
             Add(input, Stack("game:log-placed-oak-ud", 16));
         }
-        Put(focus, Crystal.Unaligned, Crystal.Glowing);
-        Put(amplify, Crystal.Fire, Crystal.Glowing);
         if (focus == null || shelf == null)
         {
             return;
         }
+        bool down = focus.Front == BlockFacing.DOWN && focus.Crystals.Count == 1;
         Fill(focus);
         focus.ReadContext();
         pitFocus = focusPos;
-        var front = focusPos.AddCopy(BlockFacing.SOUTH);
         int workings = 0;
         bool lit = false;
         var results = new Dictionary<MachineWork.Result, int>();
@@ -278,44 +291,45 @@ public partial class MachinesTests
             Fill(focus);
             var result = focus.WorkOnce();
             results[result] = results.GetValueOrDefault(result) + 1;
-            lit = Accessor.GetBlockEntity(front) is BlockEntityCharcoalPit { Lit: true };
+            lit = Accessor.GetBlockEntity(shaft) is BlockEntityCharcoalPit { Lit: true };
         }
         int full = 0;
-        for (int y = 0; y < 2; y++)
+        for (int x = 0; x < 3; x++)
         {
             for (int z = 0; z < 3; z++)
             {
-                var cell = room.AddCopy(0, y, z);
-                if (!cell.Equals(front) && Accessor.GetBlockEntity(cell) is BlockEntityGroundStorage pile && pile.Inventory[0].StackSize >= pile.Capacity)
+                if (Accessor.GetBlockEntity(chamber.AddCopy(x, 0, z)) is BlockEntityGroundStorage pile && pile.Inventory[0].StackSize >= pile.Capacity)
                 {
                     full++;
                 }
             }
         }
-        logger.Notification("Machines test: the roofed pit after {0} working(s) ({1}): {2} of 5 cells full piles, the front cell holds {3}, lit: {4}, nothing in the output: {5}",
-            workings, string.Join(", ", results.OrderBy(r => r.Key).Select(r => $"{r.Key} {r.Value}")), full, Path(front), YesNo(lit),
+        bool roofClear = new[] { BlockFacing.NORTH, BlockFacing.EAST, BlockFacing.SOUTH, BlockFacing.WEST }.All(f => Accessor.GetBlockEntity(focusPos.AddCopy(f)) is not BlockEntityGroundStorage);
+        logger.Notification("Machines test: the silo's Focus turned down by the rod: {0}; after {1} working(s) ({2}): {3} of 9 cells full piles, the shaft holds {4}, lit: {5}, no piles on the roof: {6}, nothing in the output: {7}",
+            YesNo(down), workings, string.Join(", ", results.OrderBy(r => r.Key).Select(r => $"{r.Key} {r.Value}")), full, Path(shaft), YesNo(lit), YesNo(roofClear),
             YesNo(output?.All(s => s.Empty) == true));
         // While it burns every item is quiet, done or out of stock, and a turn checks nothing (H4).
         Fill(focus);
         var burning = focus.WorkOnce();
         bool allQuiet = Enumerable.Range(0, BlockEntityControlShelf.Places).All(shelf.IsDormant);
-        // After its 18 in-game hours the pit is charcoal; one sneak tap and the shovel digs it, then firewood stacks the next pit.
-        for (int y = 0; y < 2; y++)
+        // After its 18 in-game hours the chamber is charcoal and the shaft empty, as the game leaves it;
+        // one sneak tap and the shovel digs it, then firewood stacks the next pit.
+        for (int x = 0; x < 3; x++)
         {
             for (int z = 0; z < 3; z++)
             {
-                Accessor.SetBlock(Id("game:charcoalpile-8"), room.AddCopy(0, y, z));
+                Accessor.SetBlock(Id("game:charcoalpile-8"), chamber.AddCopy(x, 0, z));
             }
         }
+        Accessor.SetBlock(0, shaft);
         shelf.WakeAll();
-        var after = new List<MachineWork.Result>();
         for (int i = 0; i < 6; i++)
         {
             Fill(focus);
-            after.Add(focus.WorkOnce());
+            focus.WorkOnce();
         }
-        bool restarted = Enumerable.Range(0, 2).Any(y => Enumerable.Range(0, 3).Any(z => Accessor.GetBlockEntity(room.AddCopy(0, y, z)) is BlockEntityGroundStorage));
-        logger.Notification("Machines test: the burning pit's turn {0}, every item quiet: {1}; after the burn and one sneak tap, charcoal in the output: {2}, the next pit started: {3}",
+        bool restarted = Enumerable.Range(0, 3).Any(x => Enumerable.Range(0, 3).Any(z => Accessor.GetBlockEntity(chamber.AddCopy(x, 0, z)) is BlockEntityGroundStorage));
+        logger.Notification("Machines test: the burning silo's turn {0}, every item quiet: {1}; after the burn and one sneak tap, charcoal in the output: {2}, the next pit started: {3}",
             burning, YesNo(allQuiet), YesNo(CountOf(output, "charcoal") > 0), YesNo(restarted));
     }
 

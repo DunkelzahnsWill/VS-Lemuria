@@ -34,11 +34,11 @@ Machines test: cut off, the Dead Socket's Motor is unpowered: yes, and the quern
 Machines test: a shelf of seeds then an axe Acted, 9 of 9 sown, logs left 2; then Acted, firewood in the output 8; with firewood on the shelf Acted, firewood in the input 4; logs left in a chest on top 4$
 # A sapling, the shovel digging charcoal, and a full output sending the machine Dormant without working.
 Machines test: a shelf sapling Acted: sapling-oak-free; a shovel Acted, 9 of 9 piles dug, charcoal in the output: yes; with the output full Full, the piles kept: yes, Dormant: yes, stopped full: yes$
-# The play-test's gate: one Glowing Unaligned Focus with an Amplify and a shelf of axe, shovel, firewood and
-# firestarter turns a chest of logs into a roofed charcoal pit, keeping the front cell for the firepit, and lights it.
-Machines test: the roofed pit after [0-9]+ working\(s\) \(Acted [0-9]+\): 5 of 5 cells full piles, the front cell holds charcoalpit, lit: yes, nothing in the output: yes$
-# Gate (note rev 56): while it burns every item is quiet; after the burn one sneak tap digs the charcoal and starts the next pit.
-Machines test: the burning pit's turn Nothing, every item quiet: yes; after the burn and one sneak tap, charcoal in the output: yes, the next pit started: yes$
+# The play-test's gate as the silo (note rev 91): a Glowing Unaligned Focus on the roof, turned down by the rod, with a
+# shelf of axe, shovel, firewood and firestarter, stacks the 3x3 chamber, builds the firepit in the shaft and lights it.
+Machines test: the silo's Focus turned down by the rod: yes; after [0-9]+ working\(s\) \(Acted [0-9]+\): 9 of 9 cells full piles, the shaft holds charcoalpit, lit: yes, no piles on the roof: yes, nothing in the output: yes$
+# Gate (note rev 56, silo rev 91): while it burns every item is quiet; after the burn one sneak tap digs the charcoal and starts the next pit.
+Machines test: the burning silo's turn Nothing, every item quiet: yes; after the burn and one sneak tap, charcoal in the output: yes, the next pit started: yes$
 # Felling pays by the logs: a Glittering crystal fells one log a working.
 Machines test: a Sky Focus at a tree of 5 logs Acted, paid 5 working\(s\), 0 log\(s\) standing, 5 log\(s\) in the chest$
 # Memory: two crystals in Awakened stone, cycled through the Focus one a turn.

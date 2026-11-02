@@ -631,8 +631,9 @@ public static class ShelfWork
 
     /// <summary>
     /// Firewood (Charcoal's second rung): adds 2 to each pile of it in reach that is not full and starts a
-    /// pile in each open cell on solid ground or a full pile, as your clicks would. The cell straight in
-    /// front of the machine, when a solid block roofs it, is kept for last: once nothing else in reach has
+    /// pile in each open cell on solid ground or a full pile, as your clicks would; facing down, also in
+    /// the open cells just above its reach. The cell straight in front of the machine, when a solid block
+    /// roofs it (the silo's shaft), is kept for last: once nothing else in reach has
     /// work, firewood builds the firepit there on the full pile beneath, one stage a working, and the game
     /// makes it a charcoal pit. Firewood comes from the input.
     /// </summary>
@@ -647,9 +648,24 @@ public static class ShelfWork
         }
         var front = machine.Pos.AddCopy(machine.Front);
         bool roofed = accessor.GetBlock(front.UpCopy()).SideSolid[BlockFacing.DOWN.Index];
+        // Facing down (the silo, note rev 91), it works the open cells just above the blocks it reaches
+        // too, as clicks on their tops would, but none higher than the cell in front of it, so it never
+        // stacks on the roof around itself once it aims at the firepit in the shaft.
+        var cells = reach.ToList();
+        if (machine.Front == BlockFacing.DOWN)
+        {
+            foreach (var pos in reach)
+            {
+                var up = pos.UpCopy();
+                if (up.Y <= front.Y && !cells.Any(c => c.Equals(up)))
+                {
+                    cells.Add(up);
+                }
+            }
+        }
         int used = 0;
         bool acted = false;
-        foreach (var pos in reach.OrderBy(p => p.Y))
+        foreach (var pos in cells.OrderBy(p => p.Y))
         {
             if (stock - used <= 0)
             {
@@ -690,7 +706,7 @@ public static class ShelfWork
                 acted = true;
             }
         }
-        if (!acted && roofed && reach.Any(p => p.Equals(front)) && cast.Can(front) && Pile(accessor, front.DownCopy(), firewood) is { Full: true })
+        if (!acted && roofed && cells.Any(p => p.Equals(front)) && cast.Can(front) && Pile(accessor, front.DownCopy(), firewood) is { Full: true })
         {
             acted = BuildFirepit(world, front, firewood);
             used = acted ? 1 : 0;
