@@ -34,6 +34,8 @@ public static class MachineWork
         Acted,
         /// <summary>An Earth Focus that could not rise: it warbles and goes Dormant, free.</summary>
         Failed,
+        /// <summary>The yield would not fit the output: the machine goes Dormant without working, free (step 4 part 2, question 7).</summary>
+        Full,
     }
 
     /// <summary>Raised on the server the first time any Focus or Scatter quickens a cradle, with the machine; the Journal listens.</summary>
@@ -67,19 +69,43 @@ public static class MachineWork
             Square = scatter ? Machine.ScatterSize : 0,
             CropPower = scatter ? 2 : 3,
             Replant = true,
-            Collect = machine.Collect,
+            Collect = machine.Route,
             // Facing up or down, a 2×2 reaches north and east.
             Heading = front.IsVertical ? (0, -1, 1, 0) : null,
         };
         var cast = CastContext.Aim(api, null, null, alignment, power, from, front.Normald.Clone(), options);
         Result result;
+        float paid = cost;
         if (alignment == Crystal.Unaligned)
         {
+            // A cradle comes first; then the shelf's items, first to last (step 4 part 2, G1: only Unaligned crystals work the shelf).
             result = Quicken(machine, cast) ? Result.Acted : Result.Nothing;
+            if (result == Result.Nothing && machine.Shelf is { } shelf)
+            {
+                result = ShelfWork.Work(machine, shelf, cast);
+            }
         }
         else if (alignment == Crystal.Earth && scatter)
         {
             result = Till(cast) ? Result.Acted : Result.Nothing;
+        }
+        else if (alignment == Crystal.Earth && front != BlockFacing.DOWN)
+        {
+            // Facing sideways or up, an Earth Focus bores (question 12), then goes Dormant as a rise does.
+            result = Boring.Bore(machine, cast);
+            if (result == Result.Nothing)
+            {
+                result = Result.Failed;
+            }
+            if (result != Result.Full)
+            {
+                machine.SetActive(false);
+            }
+        }
+        else if (alignment == Crystal.Sky && !scatter && Felling.TreeAt(cast) is { } tree)
+        {
+            // A Sky Focus aimed at a tree's log fells it whole, paying by its logs in reaches (question 6).
+            result = Felling.Fell(machine, cast, tree, cost, out paid);
         }
         else
         {
@@ -101,7 +127,7 @@ public static class MachineWork
         }
         if (result == Result.Acted)
         {
-            networks.TryPay(machine, cost);
+            networks.TryPay(machine, paid);
         }
         if (result is Result.Acted or Result.Failed)
         {

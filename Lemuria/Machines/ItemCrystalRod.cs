@@ -9,7 +9,7 @@ namespace Lemuria.Machines;
 /// <summary>
 /// The Crystal Rod (design note "Lemuria step 4: Machines", The Crystal Rod; F6): the maintenance tool.
 /// Sneak and right-click any Awakened block to switch it Active or Dormant. Right-click another face of
-/// a machine to make it the front, crystals and all; right-click a crystal on the front to rest it or
+/// a machine to make it the front, crystals and all; right-click a crystal on the front to switch it Dormant or
 /// wake it. Every tap makes a machine read what touches it again. It holds no charge and never wears out.
 /// </summary>
 public class ItemCrystalRod : Item
@@ -23,6 +23,17 @@ public class ItemCrystalRod : Item
     public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling)
     {
         var world = byEntity.World;
+        if (firstEvent && blockSel != null && world.BlockAccessor.GetBlockEntity(blockSel.Position) is BlockEntityControlShelf shelf)
+        {
+            // On a Control Shelf the rod switches an item, or sneaking wakes the shelf (H4).
+            handling = EnumHandHandling.PreventDefault;
+            var by = (byEntity as EntityPlayer)?.Player;
+            if (world.Side == EnumAppSide.Server && (by == null || LemuriaClaims.TryAccess(world, by, blockSel.Position, EnumBlockAccessFlags.Use)))
+            {
+                shelf.RodTap(blockSel, byEntity.Controls.Sneak || byEntity.Controls.ShiftKey);
+            }
+            return;
+        }
         if (!firstEvent || blockSel == null || world.BlockAccessor.GetBlockEntity(blockSel.Position) is not BlockEntitySparkstone stone)
         {
             base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
@@ -59,11 +70,11 @@ public class ItemCrystalRod : Item
                 world.PlaySoundAt(TurnSound, pos.X + 0.5, pos.Y + 0.5, pos.Z + 0.5, null, true, 12f, LemuriaSound.Volume(0.5f));
             }
         }
-        else if (stone is BlockEntityMachine && stone.CrystalAt(blockSel.Face, blockSel.HitPosition) is { } crystal)
+        else if (stone is BlockEntityMachine or BlockEntityMemory && stone.CrystalAt(blockSel.Face, blockSel.HitPosition) is { } crystal)
         {
-            crystal.Resting = !crystal.Resting;
+            crystal.Dormant = !crystal.Dormant;
             stone.OnSocketsChanged();
-            world.PlaySoundAt(crystal.Resting ? OffSound : OnSound, pos.X + 0.5, pos.Y + 0.5, pos.Z + 0.5, null, true, 12f, LemuriaSound.Volume(0.4f));
+            world.PlaySoundAt(crystal.Dormant ? OffSound : OnSound, pos.X + 0.5, pos.Y + 0.5, pos.Z + 0.5, null, true, 12f, LemuriaSound.Volume(0.4f));
         }
         (stone as BlockEntityMachine)?.ReadContext();
     }

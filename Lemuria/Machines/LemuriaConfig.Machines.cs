@@ -43,4 +43,13 @@ public partial class LemuriaConfig
 
     /// <summary>Growth a Glittering crystal's working adds, as a share of the growth between workings: 1 doubles the pace; Glowing adds twice this, the power of Luminous four times.</summary>
     public double QuickenShare { get; set; } = 1;
+
+    /// <summary>Chance a reclamation plate claims salt for each block of salt water a Fire Focus boils above it (step 4 part 2).</summary>
+    public double SaltChance { get; set; } = 0.25;
+
+    /// <summary>Torque a Dead Socket gives a Crystal Motor, as a Glittering crystal does (step 4 part 2).</summary>
+    public double DeadSocketTorque { get; set; } = 0.25;
+
+    /// <summary>Charge a Dead Socket draws from its line an in-game hour, twice a Glittering crystal's.</summary>
+    public double DeadSocketChargePerHour { get; set; } = 4;
 }

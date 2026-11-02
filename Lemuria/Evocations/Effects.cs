@@ -234,6 +234,12 @@ public static class Effects
     }
 
     /// <summary>
+    /// Raised on the server for each water block a cast boils away, with the cast, the block's position
+    /// and the water it was; step 4 part 2's reclamation plate listens for a machine's salt water.
+    /// </summary>
+    public static event Action<CastContext, BlockPos, Block>? Boiled;
+
+    /// <summary>
     /// At the power of Luminous, Ignite aimed at water, fresh or salt, still or running, boils every
     /// water block within one block of the hit away to nothing, with a hiss and steam (step 3 note rev
     /// 178). Salt from salt water is a machine's work, not this. Lakes refill by the game's own rules.
@@ -249,7 +255,9 @@ public static class Effects
             {
                 continue;
             }
+            var fluid = accessor.GetBlock(pos, BlockLayersAccess.Fluid);
             accessor.SetBlock(0, pos, BlockLayersAccess.Fluid);
+            Boiled?.Invoke(cast, pos, fluid);
             accessor.TriggerNeighbourBlockUpdate(pos);
             Steam.MinPos.Set(pos.X, pos.Y + 0.5, pos.Z);
             world.SpawnParticles(Steam);
@@ -546,7 +554,7 @@ public static class Effects
     // ------------------------------------------------------------------ Tremor
 
     /// <summary>A block the ground is made of, which Tremor may move: soil, sand, gravel, clay, peat, natural rock and ore.</summary>
-    private static bool Movable(Block block)
+    public static bool Movable(Block block)
     {
         if (block.Id == 0 || block.IsLiquid())
         {

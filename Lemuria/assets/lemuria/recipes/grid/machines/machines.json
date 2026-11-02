@@ -1,0 +1,43 @@
+[
+	{
+		"ingredientPattern": "P,S",
+		"ingredients": {
+			"P": { "type": "block", "code": "game:rockpolished-*" },
+			"S": { "type": "item", "code": "game:stick" }
+		},
+		"width": 1,
+		"height": 2,
+		"output": { "type": "block", "code": "lemuria:controlshelf-north", "quantity": 1 }
+	},
+	{
+		"ingredientPattern": "AC",
+		"ingredients": {
+			"A": { "type": "block", "code": "lemuria:sparkstone-awakened-*", "name": "rock", "allowedVariants": ["andesite", "chalk", "chert", "conglomerate", "limestone", "claystone", "granite", "sandstone", "shale", "basalt", "peridotite", "phyllite", "slate", "redmarble", "whitemarble", "greenmarble", "bauxite", "suevite", "kimberlite"] },
+			"C": { "type": "block", "code": "lemuria:crystal-*-glowing-*" }
+		},
+		"shapeless": true,
+		"width": 2,
+		"height": 1,
+		"output": { "type": "block", "code": "lemuria:memory-awakened-{rock}-north", "quantity": 1 }
+	},
+	{
+		"ingredientPattern": "M,P",
+		"ingredients": {
+			"M": { "type": "item", "code": "game:metalplate-copper" },
+			"P": { "type": "block", "code": "game:rockpolished-*" }
+		},
+		"width": 1,
+		"height": 2,
+		"output": { "type": "block", "code": "lemuria:reclamationplate", "quantity": 1 }
+	},
+	{
+		"ingredientPattern": "N,P",
+		"ingredients": {
+			"N": { "type": "item", "code": "game:metalnailsandstrips-copper" },
+			"P": { "type": "block", "code": "game:rockpolished-*" }
+		},
+		"width": 1,
+		"height": 2,
+		"output": { "type": "item", "code": "lemuria:deadsocket", "quantity": 1 }
+	}
+]

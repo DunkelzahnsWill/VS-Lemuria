@@ -73,6 +73,16 @@ public static class Machine
 
     public static double QuickenShare => Math.Clamp(Config.QuickenShare, 0, 100);
 
+    /// <summary>The chance a reclamation plate claims salt for one block of salt water boiled (step 4 part 2: 1 in 4).</summary>
+    public static double SaltChance => Math.Clamp(Config.SaltChance, 0, 1);
+
+    public static float DeadSocketTorque => (float)Math.Clamp(Config.DeadSocketTorque, 0, 100);
+
+    public static double DeadSocketChargePerHour => Math.Clamp(Config.DeadSocketChargePerHour, 0, 10_000);
+
+    /// <summary>Logs a felling takes for one working, by power: 1 at Glittering's, 9 at Glowing's, 27 at Luminous's (question 6).</summary>
+    public static int LogsPerWorking(int power) => power <= 1 ? 1 : power == 2 ? 9 : 27;
+
     /// <summary>The in-game hours that pass in this many real seconds, at the world's speed of time.</summary>
     public static double GameHours(IWorldAccessor world, double seconds) =>
         seconds * world.Calendar.SpeedOfTime * world.Calendar.CalendarSpeedMul / 3600.0;

@@ -1,0 +1,298 @@
+{
+ "textureWidth": 16,
+ "textureHeight": 16,
+ "textures": {
+  "rock": "game:block/stone/polishedrock/granite",
+  "metal": "game:block/metal/sheet/copper1"
+ },
+ "elements": [
+  {
+   "name": "collar0",
+   "from": [
+    6.3,
+    0,
+    6.3
+   ],
+   "to": [
+    9.7,
+    0.8,
+    9.7
+   ],
+   "faces": {
+    "north": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.8
+     ]
+    },
+    "east": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.8
+     ]
+    },
+    "south": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.8
+     ]
+    },
+    "west": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.8
+     ]
+    },
+    "up": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      3.4
+     ]
+    },
+    "down": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      3.4
+     ]
+    }
+   }
+  },
+  {
+   "name": "collar1",
+   "from": [
+    6.3,
+    0,
+    6.3
+   ],
+   "to": [
+    9.7,
+    0.77,
+    9.7
+   ],
+   "faces": {
+    "north": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.8
+     ]
+    },
+    "east": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.8
+     ]
+    },
+    "south": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.8
+     ]
+    },
+    "west": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      0.8
+     ]
+    },
+    "up": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      3.4
+     ]
+    },
+    "down": {
+     "texture": "#rock",
+     "uv": [
+      0,
+      0,
+      3.4,
+      3.4
+     ]
+    }
+   },
+   "rotationOrigin": [
+    8,
+    0,
+    8
+   ],
+   "rotationY": 45
+  },
+  {
+   "name": "plug0",
+   "from": [
+    6.9,
+    0.8,
+    6.9
+   ],
+   "to": [
+    9.1,
+    2.2,
+    9.1
+   ],
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      0,
+      0,
+      2.2,
+      2.2
+     ]
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      0,
+      0,
+      2.2,
+      2.2
+     ]
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      0,
+      0,
+      2.2,
+      2.2
+     ]
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      0,
+      0,
+      2.2,
+      2.2
+     ]
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      0,
+      0,
+      2.2,
+      2.2
+     ]
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      0,
+      0,
+      2.2,
+      2.2
+     ]
+    }
+   }
+  },
+  {
+   "name": "plug1",
+   "from": [
+    6.9,
+    0.8,
+    6.9
+   ],
+   "to": [
+    9.1,
+    2.17,
+    9.1
+   ],
+   "faces": {
+    "north": {
+     "texture": "#metal",
+     "uv": [
+      0,
+      0,
+      2.2,
+      2.2
+     ]
+    },
+    "east": {
+     "texture": "#metal",
+     "uv": [
+      0,
+      0,
+      2.2,
+      2.2
+     ]
+    },
+    "south": {
+     "texture": "#metal",
+     "uv": [
+      0,
+      0,
+      2.2,
+      2.2
+     ]
+    },
+    "west": {
+     "texture": "#metal",
+     "uv": [
+      0,
+      0,
+      2.2,
+      2.2
+     ]
+    },
+    "up": {
+     "texture": "#metal",
+     "uv": [
+      0,
+      0,
+      2.2,
+      2.2
+     ]
+    },
+    "down": {
+     "texture": "#metal",
+     "uv": [
+      0,
+      0,
+      2.2,
+      2.2
+     ]
+    }
+   },
+   "rotationOrigin": [
+    8,
+    0,
+    8
+   ],
+   "rotationY": 45
+  }
+ ]
+}

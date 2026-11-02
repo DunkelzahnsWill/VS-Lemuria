@@ -1,0 +1,347 @@
+{
+ "textureWidth": 16,
+ "textureHeight": 16,
+ "textures": {
+  "plug": "lemuria:block/sparkstone/socket",
+  "portin": "lemuria:block/machines/shelfport-in",
+  "portout": "lemuria:block/machines/shelfport-out"
+ },
+ "elements": [
+  {
+   "name": "plug0",
+   "from": [
+    11.6,
+    2,
+    -0.3
+   ],
+   "to": [
+    13.4,
+    3.4,
+    0
+   ],
+   "faces": {
+    "north": {
+     "texture": "#plug",
+     "uv": [
+      0,
+      0,
+      1.8,
+      1.4
+     ]
+    },
+    "east": {
+     "texture": "#plug",
+     "uv": [
+      0,
+      0,
+      0.3,
+      1.4
+     ]
+    },
+    "west": {
+     "texture": "#plug",
+     "uv": [
+      0,
+      0,
+      0.3,
+      1.4
+     ]
+    },
+    "up": {
+     "texture": "#plug",
+     "uv": [
+      0,
+      0,
+      1.8,
+      0.3
+     ]
+    },
+    "down": {
+     "texture": "#plug",
+     "uv": [
+      0,
+      0,
+      1.8,
+      0.3
+     ]
+    }
+   }
+  },
+  {
+   "name": "plug1",
+   "from": [
+    8.6,
+    2,
+    -0.3
+   ],
+   "to": [
+    10.4,
+    3.4,
+    0
+   ],
+   "faces": {
+    "north": {
+     "texture": "#plug",
+     "uv": [
+      0,
+      0,
+      1.8,
+      1.4
+     ]
+    },
+    "east": {
+     "texture": "#plug",
+     "uv": [
+      0,
+      0,
+      0.3,
+      1.4
+     ]
+    },
+    "west": {
+     "texture": "#plug",
+     "uv": [
+      0,
+      0,
+      0.3,
+      1.4
+     ]
+    },
+    "up": {
+     "texture": "#plug",
+     "uv": [
+      0,
+      0,
+      1.8,
+      0.3
+     ]
+    },
+    "down": {
+     "texture": "#plug",
+     "uv": [
+      0,
+      0,
+      1.8,
+      0.3
+     ]
+    }
+   }
+  },
+  {
+   "name": "plug2",
+   "from": [
+    5.6,
+    2,
+    -0.3
+   ],
+   "to": [
+    7.4,
+    3.4,
+    0
+   ],
+   "faces": {
+    "north": {
+     "texture": "#plug",
+     "uv": [
+      0,
+      0,
+      1.8,
+      1.4
+     ]
+    },
+    "east": {
+     "texture": "#plug",
+     "uv": [
+      0,
+      0,
+      0.3,
+      1.4
+     ]
+    },
+    "west": {
+     "texture": "#plug",
+     "uv": [
+      0,
+      0,
+      0.3,
+      1.4
+     ]
+    },
+    "up": {
+     "texture": "#plug",
+     "uv": [
+      0,
+      0,
+      1.8,
+      0.3
+     ]
+    },
+    "down": {
+     "texture": "#plug",
+     "uv": [
+      0,
+      0,
+      1.8,
+      0.3
+     ]
+    }
+   }
+  },
+  {
+   "name": "plug3",
+   "from": [
+    2.6,
+    2,
+    -0.3
+   ],
+   "to": [
+    4.4,
+    3.4,
+    0
+   ],
+   "faces": {
+    "north": {
+     "texture": "#plug",
+     "uv": [
+      0,
+      0,
+      1.8,
+      1.4
+     ]
+    },
+    "east": {
+     "texture": "#plug",
+     "uv": [
+      0,
+      0,
+      0.3,
+      1.4
+     ]
+    },
+    "west": {
+     "texture": "#plug",
+     "uv": [
+      0,
+      0,
+      0.3,
+      1.4
+     ]
+    },
+    "up": {
+     "texture": "#plug",
+     "uv": [
+      0,
+      0,
+      1.8,
+      0.3
+     ]
+    },
+    "down": {
+     "texture": "#plug",
+     "uv": [
+      0,
+      0,
+      1.8,
+      0.3
+     ]
+    }
+   }
+  },
+  {
+   "name": "portin-side",
+   "from": [
+    16,
+    4,
+    4
+   ],
+   "to": [
+    16.01,
+    12,
+    12
+   ],
+   "faces": {
+    "east": {
+     "texture": "#portin",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    }
+   }
+  },
+  {
+   "name": "portout-side",
+   "from": [
+    -0.01,
+    4,
+    4
+   ],
+   "to": [
+    0,
+    12,
+    12
+   ],
+   "faces": {
+    "west": {
+     "texture": "#portout",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    }
+   }
+  },
+  {
+   "name": "portin-front",
+   "from": [
+    13.2,
+    13.2,
+    -0.01
+   ],
+   "to": [
+    15.8,
+    15.8,
+    0
+   ],
+   "faces": {
+    "north": {
+     "texture": "#portin",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    }
+   }
+  },
+  {
+   "name": "portout-front",
+   "from": [
+    0.2,
+    13.2,
+    -0.01
+   ],
+   "to": [
+    2.8,
+    15.8,
+    0
+   ],
+   "faces": {
+    "north": {
+     "texture": "#portout",
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ]
+    }
+   }
+  }
+ ]
+}
