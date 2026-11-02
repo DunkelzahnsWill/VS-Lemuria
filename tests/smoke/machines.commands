@@ -28,3 +28,7 @@
 /lemuria machines test shelfsocket
 /lemuria machines test motorstopped
 /lemuria machines test deadsocketstopped
+/lemuria machines test firebattery
+/lemuria machines test icebattery
+/lemuria machines test earthbattery
+/lemuria machines test probe

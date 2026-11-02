@@ -6,10 +6,11 @@
 	},
 	"entityClass": "lemuria-machine",
 	"entityBehaviorsByType": {
-		"machine-motor-*": [{ "name": "lemuria-crystalmotor" }]
+		"machine-motor-*": [{ "name": "lemuria-crystalmotor" }],
+		"machine-probe-*": [{ "name": "AttractsLightning", "properties": { "artificialElevation": 5, "elevationAttractivenessMultiplier": 2 } }]
 	},
 	"variantgroups": [
-		{ "code": "form", "states": ["gather", "refine", "focus", "scatter", "amplify", "motor"] },
+		{ "code": "form", "states": ["gather", "refine", "focus", "scatter", "amplify", "motor", "probe"] },
 		{ "code": "tier", "states": ["awakened"] },
 		{ "code": "rock", "states": ["andesite", "chalk", "chert", "conglomerate", "limestone", "claystone", "granite", "sandstone", "shale", "basalt", "peridotite", "phyllite", "slate", "redmarble", "whitemarble", "greenmarble", "bauxite", "suevite", "kimberlite"] },
 		{ "code": "side", "states": ["north", "east", "south", "west", "up", "down"] }
@@ -17,7 +18,10 @@
 	"attributes": {
 		"handbook": { "exclude": true }
 	},
-	"shape": { "base": "lemuria:block/machines/machine" },
+	"shapeByType": {
+		"machine-probe-*": { "base": "lemuria:block/machines/probe" },
+		"*": { "base": "lemuria:block/machines/machine" }
+	},
 	"textures": {
 		"rock": { "base": "game:block/stone/polishedrock/{rock}" },
 		"frame": { "base": "lemuria:block/machines/frame" },

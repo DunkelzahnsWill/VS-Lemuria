@@ -3,3 +3,5 @@ Machines test: after the restart the capacitor holds 100 in 1 crystal\(s\), the 
 # Step 4 part 2: shelf items with why each is dark, the shelf's Dead Socket and its whole-shelf Dormant,
 # Memory's crystals and Dead Sockets are saved with their blocks.
 Machines test: after the restart the shelf holds axe-felling-copper \(out of stock\), firewood \(switched off\), a socket: yes, the whole shelf Dormant: yes; the Memory 2 crystal\(s\), the Motor 1 Dead Socket\(s\)$
+# Step 4 part 3: the Ice battery's count survives the restart in both stones.
+Machines test: after the restart both Ice battery stones keep the count: yes, stored more than 0: yes$

@@ -126,7 +126,7 @@ public partial class MachinesTests
             return;
         }
         var forms = new List<string>();
-        for (int i = 0; i < 7; i++)
+        for (int i = 0; i <= Machine.Forms.Length; i++)
         {
             var next = MachineCarver.NextBlock(World, Accessor.GetBlock(pos), BlockFacing.EAST, out _);
             if (next == null || !MachineCarver.Carve(World, null, pos, next))
