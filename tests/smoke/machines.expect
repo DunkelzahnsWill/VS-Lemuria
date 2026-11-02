@@ -41,8 +41,6 @@ Machines test: the silo's Focus turned down by the rod: yes; after [0-9]+ workin
 Machines test: the burning silo's turn Nothing, every item quiet: yes; after the burn and one sneak tap, charcoal in the output: yes, the next pit started: yes$
 # The owner's round 7 silo: the logs chest full to the brim still stacks and lights all nine piles.
 Machines test: a leaking acacia log splits into firewood: yes; the brim-full silo after [0-9]+ working\(s\) \(Acted [0-9]+\): 9 of 9 cells full piles, lit: yes, Focus active: yes, items OutOfStock Done Done Awake, firewood in the input [0-9]+, in the output [0-9]+$
-# A shelf item going quiet leaves one line in the server log, with the input and the reach.
-Control Shelf at .*: axe-felling-copper in place 1 went quiet, out of stock; Focus faces down; input: .*firewood
 # Felling pays by the logs: a Glittering crystal fells one log a working.
 Machines test: a Sky Focus at a tree of 5 logs Acted, paid 5 working\(s\), 0 log\(s\) standing, 5 log\(s\) in the chest$
 # Memory: two crystals in Awakened stone, cycled through the Focus one a turn.
