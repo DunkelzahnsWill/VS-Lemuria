@@ -20,7 +20,7 @@ namespace Lemuria.Machines;
 /// and on a Crystal Rod tap (Multiplayer and cost: Context). Server-authoritative; clients get the
 /// sockets and the glyphs through the game's block entity sync.
 /// </summary>
-public class BlockEntityMachine : BlockEntitySparkstone
+public partial class BlockEntityMachine : BlockEntitySparkstone
 {
     public new const string ClassCode = "lemuria-machine";
 
@@ -289,6 +289,11 @@ public class BlockEntityMachine : BlockEntitySparkstone
             motorPowered = false;
             return;
         }
+        if (BatteryTick(dt))
+        {
+            // A stone working a battery does only that (step 4 part 3).
+            return;
+        }
         switch (Form)
         {
             case Machine.Gather:
@@ -320,6 +325,9 @@ public class BlockEntityMachine : BlockEntitySparkstone
                     workSeconds -= Machine.WorkSeconds;
                     WorkOnce();
                 }
+                break;
+            case Machine.Probe:
+                ProbeTick(dt);
                 break;
             case Machine.Motor:
                 if ((sinceMotor += dt) >= SparkstoneNetworks.TickMs / 1000.0 || lastMotorHours < 0)
@@ -407,6 +415,10 @@ public class BlockEntityMachine : BlockEntitySparkstone
 
     public override float TakeGathered(float room)
     {
+        if (Form == Machine.Probe)
+        {
+            return TakeProbe(room);
+        }
         // What the network has no room for is lost.
         float taken = Math.Min(room, gathered);
         gathered = 0;
@@ -586,6 +598,11 @@ public class BlockEntityMachine : BlockEntitySparkstone
     {
         base.ToTreeAttributes(tree);
         tree.SetBool("stoppedFull", StoppedFull);
+        if (struck > 0)
+        {
+            tree.SetFloat("probeStruck", struck);
+        }
+        BatteryToTree(tree);
         if (carverUid != null)
         {
             tree.SetString("carverUid", carverUid);
@@ -599,6 +616,8 @@ public class BlockEntityMachine : BlockEntitySparkstone
         carverUid = tree.GetString("carverUid");
         carverName = tree.GetString("carverName");
         StoppedFull = tree.GetBool("stoppedFull");
+        struck = tree.GetFloat("probeStruck");
+        BatteryFromTree(tree);
         contextDirty = true;
         if (Api?.Side == EnumAppSide.Client && Form == Machine.Motor)
         {
@@ -635,7 +654,8 @@ public class BlockEntityMachine : BlockEntitySparkstone
         }
         CrystalMeshes.SetGlow(overlay, GlyphGlowAt(shown));
         stone.AddMeshData(overlay);
-        var (rx, ry, rz) = FrontTurn(GlyphFace);
+        // A Wind Probe's shape has its glyphs on all four sides and its sockets on top: never turned.
+        var (rx, ry, rz) = Form == Machine.Probe ? (0f, 0f, 0f) : FrontTurn(GlyphFace);
         return stone.Rotate(new Vec3f(0.5f, 0.5f, 0.5f), rx, ry, rz);
     }
 
@@ -658,6 +678,7 @@ public class BlockEntityMachine : BlockEntitySparkstone
     {
         _ when crystal.IsFitting => Form == Machine.Motor,
         Machine.Gather => crystal.IsAligned,
+        Machine.Probe => crystal.Alignment == Crystal.Sky,
         Machine.Scatter => Crystal.Rank(crystal.Evolution) > 1,
         _ => true,
     };
@@ -670,6 +691,11 @@ public class BlockEntityMachine : BlockEntitySparkstone
         {
             dsc.AppendLine(Vintagestory.API.Config.Lang.Get(LemuriaModSystem.ModId + ":machine-stoppedfull"));
         }
+        if (Form == Machine.Probe)
+        {
+            ProbeInfo(dsc);
+        }
+        BatteryInfo(dsc);
         if (dormant > 0)
         {
             dsc.AppendLine(Vintagestory.API.Config.Lang.Get(LemuriaModSystem.ModId + ":machine-dormantcrystals", dormant));

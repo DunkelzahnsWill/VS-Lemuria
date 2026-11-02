@@ -52,4 +52,37 @@ public partial class LemuriaConfig
 
     /// <summary>Charge a Dead Socket draws from its line an in-game hour, twice a Glittering crystal's.</summary>
     public double DeadSocketChargePerHour { get; set; } = 4;
+
+    /// <summary>Charge a Glittering crystal in a Wind Probe gathers in an in-game day, times the weather (step 4 part 3, J2).</summary>
+    public double ProbePerDayGlittering { get; set; } = 400;
+
+    /// <summary>The same for a Glowing crystal.</summary>
+    public double ProbePerDayGlowing { get; set; } = 1200;
+
+    /// <summary>The weather's floor for a Wind Probe: it gathers this share of its rate in still, dry air, plus the wind and half the rain or snow.</summary>
+    public double ProbeCalmShare { get; set; } = 0.25;
+
+    /// <summary>Charge each block of an Elemental battery's medium holds (step 4 part 3).</summary>
+    public double BatteryChargePerBlock { get; set; } = 200;
+
+    /// <summary>Share of what a battery stored that its drain pays back.</summary>
+    public double BatteryReturnShare { get; set; } = 0.8;
+
+    /// <summary>Charge a battery stone moves an in-game hour for each Glittering crystal.</summary>
+    public double BatteryPerHourGlittering { get; set; } = 200;
+
+    /// <summary>The same for each Glowing crystal.</summary>
+    public double BatteryPerHourGlowing { get; set; } = 600;
+
+    /// <summary>A battery's fill takes only what lifts its network above this share of its capacity.</summary>
+    public double BatteryFillAbove { get; set; } = 0.75;
+
+    /// <summary>A battery's drain pays only while its network is below this share, and never lifts it past.</summary>
+    public double BatteryDrainBelow { get; set; } = 0.5;
+
+    /// <summary>Charge one step of an Earth battery's deposit wear pays: ore to rock, rock to cracked rock, cracked rock to gravel, gravel to sand.</summary>
+    public double EarthChargePerStep { get; set; } = 50;
+
+    /// <summary>A battery room's largest side, in blocks.</summary>
+    public int BatteryMaxSide { get; set; } = 7;
 }

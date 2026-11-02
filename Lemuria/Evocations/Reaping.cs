@@ -231,11 +231,18 @@ public static class Reaping
     /// panner's drop-rate stats), but each chance scaled by GalePanningYield (0.5), so a gust is less
     /// efficient than panning by hand (the owner, 2026-10-27 22:33Z).
     /// </summary>
-    public static List<ItemStack> Pan(IWorldAccessor world, Block block, EntityAgent? by)
+    public static List<ItemStack> Pan(IWorldAccessor world, Block block, EntityAgent? by) => Pan(world, block, by, null, Evocation.GalePanningYield);
+
+    /// <summary>
+    /// Pans a pannable block as the wooden pan rolls it, this many pannings (null: one per layer, 8 for a
+    /// full block) with each chance scaled by the yield. Step 4 part 3's Earth battery takes one panning
+    /// at full yield, a pan's worth, for each block of gravel it wears to sand.
+    /// </summary>
+    public static List<ItemStack> Pan(IWorldAccessor world, Block block, EntityAgent? by, int? pannings, double yield)
     {
         var finds = new List<ItemStack>();
         string? layer = block.Variant["layer"];
-        int pannings = layer != null && int.TryParse(layer, out int layers) ? layers : 8;
+        pannings ??= layer != null && int.TryParse(layer, out int layers) ? layers : 8;
         var material = layer != null
             ? world.GetBlock(new AssetLocation(block.Code.Domain, block.FirstCodePart() + "-" + block.FirstCodePart(1))) ?? block
             : block;
@@ -246,7 +253,6 @@ public static class Reaping
             return finds;
         }
         string? rock = material.Variant["rock"];
-        double yield = Evocation.GalePanningYield;
         for (int i = 0; i < pannings; i++)
         {
             foreach (var drop in drops.OrderBy(_ => world.Rand.Next()))

@@ -21,8 +21,11 @@ public static class Machine
     public const string Amplify = "amplify";
     public const string Motor = "motor";
 
+    /// <summary>The Wind Probe, the seventh carved form (step 4 part 3): sockets on top, gathering from the weather.</summary>
+    public const string Probe = "probe";
+
     /// <summary>The forms in the order the chisel carves them; one more strike makes Free stone again.</summary>
-    public static readonly string[] Forms = { Gather, Refine, Focus, Scatter, Amplify, Motor };
+    public static readonly string[] Forms = { Gather, Refine, Focus, Scatter, Amplify, Motor, Probe };
 
     private static LemuriaConfig Config => LemuriaModSystem.Config;
 
@@ -91,10 +94,50 @@ public static class Machine
     /// The face a machine's glyph and sockets are on, from its {side}: the front, but a Motor's rear,
     /// since its hub takes the front that meets the axle (note rev 91, How machines look).
     /// </summary>
-    public static BlockFacing GlyphFace(string form, BlockFacing side) => form == Motor ? side.Opposite : side;
+    public static BlockFacing GlyphFace(string form, BlockFacing side) => form switch
+    {
+        Motor => side.Opposite,
+        // A Wind Probe's sockets are always on its top, whichever face was carved (step 4 part 3, question 9).
+        Probe => BlockFacing.UP,
+        _ => side,
+    };
 
     /// <summary>The {side} of a machine of this form whose glyph and sockets are on this face.</summary>
-    public static BlockFacing SideFor(string form, BlockFacing glyphFace) => form == Motor ? glyphFace.Opposite : glyphFace;
+    public static BlockFacing SideFor(string form, BlockFacing glyphFace) => form switch
+    {
+        Motor => glyphFace.Opposite,
+        Probe => BlockFacing.UP,
+        _ => glyphFace,
+    };
+
+    /// <summary>Charge a crystal in a Wind Probe gathers in an in-game day at a weather of 1 (J2: 400 Glittering, 1,200 Glowing).</summary>
+    public static double ProbePerDay(string evolution) =>
+        Math.Clamp(evolution == Crystal.Glowing ? Config.ProbePerDayGlowing : Config.ProbePerDayGlittering, 0, 100_000);
+
+    /// <summary>What a Wind Probe gathers in still, dry air, as a share of its rate (J2: a quarter).</summary>
+    public static double ProbeCalm => Math.Clamp(Config.ProbeCalmShare, 0, 10);
+
+    /// <summary>Charge one block of a battery's medium holds (part 3: 200, a Glowing crystal's worth).</summary>
+    public static float BatteryPerBlock => (float)Math.Clamp(Config.BatteryChargePerBlock, 1, 100_000);
+
+    /// <summary>Share of what a battery stored that its drain pays back (part 3: 4 in 5).</summary>
+    public static float BatteryReturn => (float)Math.Clamp(Config.BatteryReturnShare, 0, 1);
+
+    /// <summary>Charge a battery stone moves an in-game hour for each crystal (part 3: 200 Glittering, 600 Glowing).</summary>
+    public static double BatteryPerHour(string evolution) =>
+        Math.Clamp(evolution == Crystal.Glowing ? Config.BatteryPerHourGlowing : Config.BatteryPerHourGlittering, 0, 1_000_000);
+
+    /// <summary>The fill takes only what lifts its network above this share of its capacity (question 2: three quarters).</summary>
+    public static float BatteryFillAbove => (float)Math.Clamp(Config.BatteryFillAbove, 0, 1);
+
+    /// <summary>The drain pays only while its network is below this share, never lifting it past (question 2: half).</summary>
+    public static float BatteryDrainBelow => (float)Math.Clamp(Config.BatteryDrainBelow, 0, BatteryFillAbove);
+
+    /// <summary>Charge one step of an Earth deposit's wear pays (question 6: 50).</summary>
+    public static float EarthStep => (float)Math.Clamp(Config.EarthChargePerStep, 1, 100_000);
+
+    /// <summary>A battery room's largest side, in blocks (part 3: 7).</summary>
+    public static int BatteryMaxSide => Math.Clamp(Config.BatteryMaxSide, 2, 16);
 
     /// <summary>Where a machine's workings start: just outside the middle of its front.</summary>
     public static Vec3d FrontPoint(BlockPos pos, BlockFacing front) =>

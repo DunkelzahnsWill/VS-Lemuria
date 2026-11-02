@@ -10,7 +10,7 @@ namespace Lemuria.Machines;
 /// Carving machines (design note "Lemuria step 4: Machines", Carving machines): each left-click of the
 /// Crystalline Chisel on a placed Awakened block carves the next form, free. The face struck on Free
 /// stone becomes the front with the Gather glyph; each strike on that front carves Refine, Focus,
-/// Scatter, Amplify and the Crystal Motor, then Free stone again. A block with crystals in its sockets
+/// Scatter, Amplify, the Crystal Motor and the Wind Probe (step 4 part 3), then Free stone again. A block with crystals in its sockets
 /// does not recarve, and striking another face of a machine does nothing.
 /// </summary>
 public class MachineCarver : IStoneCarver
@@ -67,7 +67,8 @@ public class MachineCarver : IStoneCarver
             return block is BlockSparkstone ? world.GetBlock(Machine.Code(Machine.Gather, rock, face.Code)) : null;
         }
         var side = BlockFacing.FromCode(block.Variant["side"]) ?? BlockFacing.NORTH;
-        if (Machine.GlyphFace(block.Variant["form"] ?? Machine.Gather, side) != face)
+        // A Wind Probe carves on any face: its glyphs are on all four sides and its sockets on top.
+        if (block.Variant["form"] != Machine.Probe && Machine.GlyphFace(block.Variant["form"] ?? Machine.Gather, side) != face)
         {
             refused = true;
             return null;

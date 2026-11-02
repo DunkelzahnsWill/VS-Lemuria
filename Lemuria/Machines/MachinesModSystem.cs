@@ -6,6 +6,7 @@ using Lemuria.Sparkstone;
 using Vintagestory.API.Common;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
+using Vintagestory.GameContent;
 
 namespace Lemuria.Machines;
 
@@ -37,7 +38,14 @@ public class MachinesModSystem : ModSystem
 
     public override void StartServerSide(ICoreServerAPI api)
     {
+        sapi = api;
         Effects.Boiled += BlockReclamationPlate.OnBoiled;
+        // A Wind Probe is struck where the game's lightning finally lands, after any rod moved it (step 4 part 3).
+        weather = api.ModLoader.GetModSystem<WeatherSystemServer>();
+        if (weather != null)
+        {
+            weather.OnLightningImpactEnd += OnLightningLanded;
+        }
         var tests = new MachinesTests(api, Mod.Logger);
         api.Event.SaveGameLoaded += () =>
         {
@@ -163,6 +171,26 @@ public class MachinesModSystem : ModSystem
                         .WithDescription("Times idle shelf turns: seeds over a sown field, the pit's Focus once it burns, compost over a fed field (run after pit)")
                         .HandleWith(_ => Test(-106, 20, tests.Idle))
                     .EndSubCommand()
+                    .BeginSubCommand("firebattery")
+                        .WithDescription("A 2×2×1 battery of granite: its crystals name it; as a Fire battery it melts, pays back and cools; a gap rests it")
+                        .HandleWith(_ => Test(-138, 20, tests.FireBattery))
+                    .EndSubCommand()
+                    .BeginSubCommand("icebattery")
+                        .WithDescription("A 3×3×1 Ice battery freezes still water from the top and thaws the last frozen first")
+                        .HandleWith(_ => Test(-138, 36, tests.IceBattery))
+                    .EndSubCommand()
+                    .BeginSubCommand("earthbattery")
+                        .WithDescription("An Earth battery wears granite to sand into a chest, then feeds the sand")
+                        .HandleWith(_ => Test(-138, 52, tests.EarthBattery))
+                    .EndSubCommand()
+                    .BeginSubCommand("probe")
+                        .WithDescription("A Wind Probe on a mast gathers in a set wind, is struck, and gathers nothing roofed")
+                        .HandleWith(_ => Test(-154, 20, tests.Probe))
+                    .EndSubCommand()
+                    .BeginSubCommand("batterykept")
+                        .WithDescription("Reports whether the Ice battery's stones still keep its count, after a restart")
+                        .HandleWith(_ => Test(-138, 36, _ => tests.BatteryKept()))
+                    .EndSubCommand()
                     .BeginSubCommand("kept")
                         .WithDescription("Reports the test shelf's items, Memory's crystals and Dead Socket, after a restart")
                         .HandleWith(_ => Test(-60, 20, _ => TestSite.WithChunk(api, Mod.Logger, "Machines", -76, 36, _ => TestSite.WithChunk(api, Mod.Logger, "Machines", -90, 36, _ => tests.Kept()))))
@@ -175,8 +203,23 @@ public class MachinesModSystem : ModSystem
             .EndSubCommand();
     }
 
+    private WeatherSystemServer? weather;
+    private ICoreServerAPI? sapi;
+
+    private void OnLightningLanded(ref Vec3d impactPos, ref EnumHandling handling)
+    {
+        if (sapi != null)
+        {
+            BlockEntityMachine.OnLightningLanded(sapi.World, impactPos);
+        }
+    }
+
     public override void Dispose()
     {
+        if (weather != null)
+        {
+            weather.OnLightningImpactEnd -= OnLightningLanded;
+        }
         Effects.Boiled -= BlockReclamationPlate.OnBoiled;
         ItemCrystalChisel.StoneCarver = null;
     }
