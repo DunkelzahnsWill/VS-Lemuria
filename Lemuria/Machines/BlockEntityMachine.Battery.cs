@@ -396,7 +396,7 @@ public partial class BlockEntityMachine
         return paid;
     }
 
-    /// <summary>The block the drain wears: the one it started on, or the deposit nearest its corner. -1 for none left.</summary>
+    /// <summary>The block the drain wears: the one it started on, or the wearable block nearest its corner (rock, ore, cracked rock, gravel). -1 for none left.</summary>
     private int Target(Battery.Room room, Battery.State state)
     {
         var world = Api.World;

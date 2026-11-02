@@ -445,10 +445,22 @@ public static class Battery
         return into == null ? null : (into, byproducts.Where(s => s != null && s.StackSize > 0).ToList());
     }
 
-    /// <summary>Whether a block is a deposit an Earth drain may start to wear: the world's rock or ore that wears at least one step.</summary>
+    /// <summary>
+    /// Whether an Earth drain may wear a block: rock, ore, cracked rock or gravel, wherever it came from,
+    /// so a room of gravel pans (the owner, 2026-11-02 08:23Z); sand and cobblestone never wear.
+    /// </summary>
     public static bool Wearable(IWorldAccessor world, BlockPos pos)
     {
         var cell = Classify(world.BlockAccessor, pos);
-        return cell is Cell.Rock or Cell.Ore && WearStep(world, pos) != null;
+        if (cell is not (Cell.Rock or Cell.Ore or Cell.Weak))
+        {
+            return false;
+        }
+        var block = world.BlockAccessor.GetBlock(pos, BlockLayersAccess.Solid);
+        if (cell == Cell.Weak && !(Game(block, "crackedrock-") || Game(block, "gravel-")))
+        {
+            return false;
+        }
+        return WearStep(world, pos) != null;
     }
 }

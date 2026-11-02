@@ -72,6 +72,8 @@ Machines test: an Ice battery stored 213, 2 of 9 block\(s\) glacier ice; its dra
 # Earth wears the granite nearest the drain to sand at 50 a step, two stones and a pan's worth into its chest; the sand is fed.
 Machines test: an Earth battery's drain wore the granite at its corner to sand-granite, paid 150, stones in its chest 2, pan finds [0-9]+$
 Machines test: the sand left is fed: stored 113 of 200$
+# The owner (Nov 2 08:23Z): placed gravel and cracked rock wear too, so a room of gravel pans.
+Machines test: placed gravel wears: yes, cracked rock: yes, sand: no, cobblestone: no$
 # The Wind Probe: 2 x 1,200 x \(0.25 + 0.5\) in a day; a strike fills its crystals (400) and pours first; roofed, nothing.
 Machines test: a Wind Probe with 2 Glowing Sky crystals, sockets facing up, gathered 1800 in a day of wind 0\.5; a strike filled 400; the line took 200 of its 200, 200 left from the strike$
 Machines test: roofed, the probe gathers 0$

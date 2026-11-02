@@ -197,6 +197,16 @@ public partial class MachinesTests
         Fill(fill);
         fill.WorkBattery(2);
         logger.Notification("Machines test: the sand left is fed: stored {0:0} of {1:0}", fill.BatteryState?.Stored ?? 0, fill.BatteryCapacity);
+        // Placed gravel pans too (the owner, Nov 2 08:23Z); sand and cobblestone never wear.
+        var spot = corner.AddCopy(1, 0, 1);
+        bool Wears(string code)
+        {
+            Accessor.SetBlock(Id(code), spot);
+            return Battery.Wearable(World, spot);
+        }
+        logger.Notification("Machines test: placed gravel wears: {0}, cracked rock: {1}, sand: {2}, cobblestone: {3}",
+            YesNo(Wears("game:gravel-granite")), YesNo(Wears("game:crackedrock-granite")), YesNo(Wears("game:sand-granite")), YesNo(Wears("game:cobblestone-granite")));
+        Accessor.SetBlock(Id("game:rock-granite"), spot);
     }
 
     /// <summary>A Wind Probe on a mast under open sky gathers in a set wind, a strike fills its crystals and pours first; a roofed one gathers nothing.</summary>
