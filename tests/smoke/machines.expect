@@ -69,8 +69,9 @@ Machines test: its drain paid 180 into a line of 400, stored left 0, lava left 0
 Machines test: with a gap in its roof the battery rests: gap, the fill says so: gap$
 # Ice freezes from the top; its drain, alone on its line (50), pays it to half and the last frozen block thaws.
 Machines test: an Ice battery stored 213, 2 of 9 block\(s\) glacier ice; its drain paid the line to half, stored left 181, glacier ice left 1$
-# Earth wears the granite nearest the drain to sand at 50 a step, two stones and a pan's worth into its chest; the sand is fed.
-Machines test: an Earth battery's drain wore the granite at its corner to sand-granite, paid 150, stones in its chest 2, pan finds [0-9]+$
+# Earth wears the granite nearest the drain to sand at 50 a step, two stones and a pan's worth into its chest (a pan can
+# find a stone too, so 2 or 3); the sand is fed.
+Machines test: an Earth battery's drain wore the granite at its corner to sand-granite, paid 150, stones in its chest [23], pan finds [0-9]+$
 Machines test: the sand left is fed: stored 113 of 200$
 # The owner (Nov 2 08:23Z): placed gravel and cracked rock wear too, so a room of gravel pans.
 Machines test: placed gravel wears: yes, cracked rock: yes, sand: no, cobblestone: no$
