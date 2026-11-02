@@ -143,6 +143,7 @@ public static class ShelfWork
                 if (items[i] != null && !shelf.IsDormant(i) && UsesStock(KindOf(items[i])) && !HasStock(machine, shelf, i))
                 {
                     shelf.Quieten(i, BlockEntityControlShelf.Quiet.OutOfStock);
+                    Report(machine, shelf, i, "out of stock, the shelf asleep", null);
                     return MachineWork.Result.Nothing;
                 }
             }
@@ -158,6 +159,7 @@ public static class ShelfWork
             if (UsesStock(KindOf(item)) && !HasStock(machine, shelf, i))
             {
                 shelf.Quieten(i, BlockEntityControlShelf.Quiet.OutOfStock);
+                Report(machine, shelf, i, "out of stock", null);
                 continue;
             }
             reach ??= Reach(cast);
@@ -179,8 +181,24 @@ public static class ShelfWork
                 return result;
             }
             shelf.Quieten(i, BlockEntityControlShelf.Quiet.Done);
+            Report(machine, shelf, i, "done", reach);
         }
         return MachineWork.Result.Nothing;
+    }
+
+    /// <summary>
+    /// One line in the server log when a shelf item goes quiet, with what the input held and where the
+    /// machine aimed, so a play-test log shows why a shelf went dark.
+    /// </summary>
+    private static void Report(BlockEntityMachine machine, BlockEntityControlShelf shelf, int place, string why, List<BlockPos>? reach)
+    {
+        var input = machine.Input?.Where(s => s.Itemstack != null)
+            .GroupBy(s => s.Itemstack!.Collectible.Code.ToShortString())
+            .Select(g => g.Sum(s => s.StackSize) + " " + g.Key).ToList();
+        string aim = reach == null ? "" : reach.Count == 0 ? "; reach: none" : $"; reach: {reach.Count} block(s) from {reach[0]}";
+        machine.Api.Logger.Notification("[lemuria] Control Shelf at {0}: {1} in place {2} went quiet, {3}; Focus faces {4}; input: {5}{6}",
+            shelf.Pos, shelf.Items[place]?.Collectible.Code.ToShortString(), place + 1, why, machine.Front.Code,
+            input == null ? "no chest" : input.Count == 0 ? "empty" : string.Join(", ", input), aim);
     }
 
     /// <summary>The blocks of a working's reach.</summary>

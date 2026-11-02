@@ -240,7 +240,12 @@ public partial class MachinesTests
     /// facing north and turned down by a rod tap on its underside, as the play-test step does. Its shelf
     /// and chests stand on the roof.
     /// </summary>
-    public void Pit(BlockPos column)
+    public void Pit(BlockPos column) => Pit(column, false);
+
+    /// <summary>The silo with its logs chest full to the brim, as the owner's play-test filled it.</summary>
+    public void PitFull(BlockPos column) => Pit(column, true);
+
+    private void Pit(BlockPos column, bool brim)
     {
         var origin = TestSite.Surface(sapi, column);
         Ground(origin, 5, 6, 5);
@@ -271,7 +276,7 @@ public partial class MachinesTests
         var input = Port(shelf, true);
         var output = Port(shelf, false);
         // Nine full piles of 32 take 72 logs, and the firepit a few more.
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < (brim ? input?.Count ?? 0 : 6); i++)
         {
             Add(input, Stack("game:log-placed-oak-ud", 16));
         }
@@ -282,7 +287,10 @@ public partial class MachinesTests
         bool down = focus.Front == BlockFacing.DOWN && focus.Crystals.Count == 1;
         Fill(focus);
         focus.ReadContext();
-        pitFocus = focusPos;
+        if (!brim)
+        {
+            pitFocus = focusPos;
+        }
         int workings = 0;
         bool lit = false;
         var results = new Dictionary<MachineWork.Result, int>();
@@ -305,6 +313,13 @@ public partial class MachinesTests
             }
         }
         bool roofClear = new[] { BlockFacing.NORTH, BlockFacing.EAST, BlockFacing.SOUTH, BlockFacing.WEST }.All(f => Accessor.GetBlockEntity(focusPos.AddCopy(f)) is not BlockEntityGroundStorage);
+        if (brim)
+        {
+            logger.Notification("Machines test: the brim-full silo after {0} working(s) ({1}): {2} of 9 cells full piles, lit: {3}, Focus active: {4}, items {5}, firewood in the input {6}, in the output {7}",
+                workings, string.Join(", ", results.OrderBy(r => r.Key).Select(r => $"{r.Key} {r.Value}")), full, YesNo(lit), YesNo(focus.Active),
+                string.Join(" ", Enumerable.Range(0, 4).Select(i => shelf.QuietOf(i).ToString())), CountOf(input, "firewood"), CountOf(output, "firewood"));
+            return;
+        }
         logger.Notification("Machines test: the silo's Focus turned down by the rod: {0}; after {1} working(s) ({2}): {3} of 9 cells full piles, the shaft holds {4}, lit: {5}, no piles on the roof: {6}, nothing in the output: {7}",
             YesNo(down), workings, string.Join(", ", results.OrderBy(r => r.Key).Select(r => $"{r.Key} {r.Value}")), full, Path(shaft), YesNo(lit), YesNo(roofClear),
             YesNo(output?.All(s => s.Empty) == true));
