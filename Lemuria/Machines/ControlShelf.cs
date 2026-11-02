@@ -373,8 +373,10 @@ public class BlockEntityControlShelf : BlockEntityDisplay
     /// <summary>The place on the ledge under a hit on the open face, 0 to 3 from left to right as you face it.</summary>
     public int PlaceAt(Vec3d hit)
     {
+        // The places are 3 pixels wide between the side walls, 2 to 14 from the left, not quarters of the
+        // face, so a click on an end place lands in it (play-test, Nov 2); a wall counts as its end place.
         var (u, _) = Sparkstone.Sockets.Uv(Side, hit);
-        return Math.Clamp((int)(u * Places), 0, Places - 1);
+        return Math.Clamp((int)Math.Floor((u * 16 - 2) / 3), 0, Places - 1);
     }
 
     public bool OnInteract(IPlayer player, BlockSelection blockSel)
