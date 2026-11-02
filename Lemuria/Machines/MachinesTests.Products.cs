@@ -315,9 +315,11 @@ public partial class MachinesTests
         bool roofClear = new[] { BlockFacing.NORTH, BlockFacing.EAST, BlockFacing.SOUTH, BlockFacing.WEST }.All(f => Accessor.GetBlockEntity(focusPos.AddCopy(f)) is not BlockEntityGroundStorage);
         if (brim)
         {
-            logger.Notification("Machines test: the brim-full silo after {0} working(s) ({1}): {2} of 9 cells full piles, lit: {3}, Focus active: {4}, items {5}, firewood in the input {6}, in the output {7}",
+            var leaking = Stack("game:log-resin-acacia-ud", 1);
+            bool leaks = leaking != null && ShelfWork.Split(World, leaking, shelf.Items[0]!)?.Collectible.Code.Path == "firewood";
+            logger.Notification("Machines test: a leaking acacia log splits into firewood: {8}; the brim-full silo after {0} working(s) ({1}): {2} of 9 cells full piles, lit: {3}, Focus active: {4}, items {5}, firewood in the input {6}, in the output {7}",
                 workings, string.Join(", ", results.OrderBy(r => r.Key).Select(r => $"{r.Key} {r.Value}")), full, YesNo(lit), YesNo(focus.Active),
-                string.Join(" ", Enumerable.Range(0, 4).Select(i => shelf.QuietOf(i).ToString())), CountOf(input, "firewood"), CountOf(output, "firewood"));
+                string.Join(" ", Enumerable.Range(0, 4).Select(i => shelf.QuietOf(i).ToString())), CountOf(input, "firewood"), CountOf(output, "firewood"), YesNo(leaks));
             return;
         }
         logger.Notification("Machines test: the silo's Focus turned down by the rod: {0}; after {1} working(s) ({2}): {3} of 9 cells full piles, the shaft holds {4}, lit: {5}, no piles on the roof: {6}, nothing in the output: {7}",

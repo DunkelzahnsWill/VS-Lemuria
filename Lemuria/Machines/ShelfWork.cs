@@ -557,6 +557,11 @@ public static class ShelfWork
                 return output;
             }
         }
+        // A log the grid has no recipe for, such as a leaking one, splits as the log it drops when broken.
+        if (stack.Block?.Drops is { Length: 1 } drops && drops[0].ResolvedItemstack is { } dropped && !dropped.Collectible.Code.Equals(stack.Collectible.Code))
+        {
+            return FindSplit(world, dropped, axe);
+        }
         return null;
     }
 
