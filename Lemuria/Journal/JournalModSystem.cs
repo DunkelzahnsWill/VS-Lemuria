@@ -41,6 +41,7 @@ public class JournalModSystem : ModSystem
     public const string BasicVocabulary = "basicvocabulary";
     public const string ControlShelf = "controlshelf";
     public const string Quicken = "quicken";
+    public const string Batteries = "batteries";
 
     private static readonly AssetLocation ChaptersAsset = new(LemuriaModSystem.ModId, "config/journal/chapters.json");
 
@@ -129,8 +130,8 @@ public class JournalModSystem : ModSystem
     private void SendUnlocks(IServerPlayer player)
     {
         var unlocked = StoredUnlocks(player);
-        // The Control Shelf's chapter opens with Crystal Machines, also for a player who opened that before it existed.
-        if (unlocked.Contains(BasicVocabulary) && unlocked.Add(ControlShelf))
+        // The Control Shelf's and the batteries' chapters open with Crystal Machines, also for a player who opened that before they existed.
+        if (unlocked.Contains(BasicVocabulary) && (unlocked.Add(ControlShelf) | unlocked.Add(Batteries)))
         {
             player.ServerData.CustomPlayerData[PlayerDataKey] = string.Join(",", unlocked);
         }
@@ -153,6 +154,7 @@ public class JournalModSystem : ModSystem
         {
             Unlock(serverPlayer, BasicVocabulary);
             Unlock(serverPlayer, ControlShelf);
+            Unlock(serverPlayer, Batteries);
         }
     }
 
