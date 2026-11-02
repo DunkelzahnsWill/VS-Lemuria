@@ -120,7 +120,7 @@ public class BlockEntityControlShelf : BlockEntityDisplay
     public enum Quiet : byte
     {
         Awake,
-        /// <summary>Switched off with the rod; it stays off until a right-click wakes it.</summary>
+        /// <summary>Switched off with the rod; it stays off until a right-click or a sneak tap wakes it.</summary>
         Off,
         /// <summary>It uses stock and the input holds none of its kind; it wakes when its kind arrives.</summary>
         OutOfStock,
@@ -194,18 +194,15 @@ public class BlockEntityControlShelf : BlockEntityDisplay
     }
 
     /// <summary>
-    /// A sneak and right-click with the rod (H4): the shelf and every quiet item wake together; an item
-    /// switched off by hand stays off. Server only.
+    /// A sneak and right-click with the rod (H4): the shelf and every dark item wake together, items
+    /// switched off by hand too (the owner, play-test Nov 2). Server only.
     /// </summary>
     public void WakeAll()
     {
         asleep = false;
         for (int i = 0; i < Places; i++)
         {
-            if (quiet[i] != Quiet.Off)
-            {
-                quiet[i] = Quiet.Awake;
-            }
+            quiet[i] = Quiet.Awake;
         }
         Api.World.PlaySoundAt(new AssetLocation(LemuriaModSystem.ModId, "sounds/machines/switch-on"), Pos, 0, null, true, 12f, LemuriaSound.Volume(0.6f));
         Changed();

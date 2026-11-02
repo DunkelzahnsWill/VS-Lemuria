@@ -653,13 +653,15 @@ public partial class MachinesTests
         // The shovel, done, wakes with one right-click of the rod and switches off with the next.
         shelf.SwitchDormant(1);
         shelf.SwitchDormant(1);
+        // The plugs under the places (note rev 74): dark for the done seeds, the switched-off shovel and the empty places.
+        string plugs = string.Concat(Enumerable.Range(0, BlockEntityControlShelf.Places).Select(i => shelf.PlugLit(i) ? "lit " : "dark ")).Trim();
         shelf.WakeAll();
         bool tapped = shelf.QuietOf(0) == BlockEntityControlShelf.Quiet.Awake;
-        bool off = shelf.QuietOf(1) == BlockEntityControlShelf.Quiet.Off;
-        // The plugs under the places (note rev 74): lit for the awake seeds, dark for the switched-off shovel and the empty places.
-        string plugs = string.Concat(Enumerable.Range(0, BlockEntityControlShelf.Places).Select(i => shelf.PlugLit(i) ? "lit " : "dark ")).Trim();
-        logger.Notification("Machines test: quiet seeds {0}, then {1}: out of stock: {2}, the shovel done: {3}; seeds arrive and they wake: {4}; {5} of 9 sown, then done: {6}, still done with stock: {7}; a sneak tap wakes them: {8}, the switched-off shovel stays off: {9}; plugs {10}",
-            first, second, YesNo(outOfStock), YesNo(shovelDone), YesNo(woke), sown, YesNo(done), YesNo(stayed), YesNo(tapped), YesNo(off), plugs);
+        // The sneak tap wakes the whole line, switched-off items too (the owner, play-test Nov 2).
+        bool offWoke = shelf.QuietOf(1) == BlockEntityControlShelf.Quiet.Awake;
+        string plugsAfter = string.Concat(Enumerable.Range(0, BlockEntityControlShelf.Places).Select(i => shelf.PlugLit(i) ? "lit " : "dark ")).Trim();
+        logger.Notification("Machines test: quiet seeds {0}, then {1}: out of stock: {2}, the shovel done: {3}; seeds arrive and they wake: {4}; {5} of 9 sown, then done: {6}, still done with stock: {7}; plugs {8}; a sneak tap wakes them: {9}, the switched-off shovel too: {10}; plugs {11}",
+            first, second, YesNo(outOfStock), YesNo(shovelDone), YesNo(woke), sown, YesNo(done), YesNo(stayed), plugs, YesNo(tapped), YesNo(offWoke), plugsAfter);
     }
 
     /// <summary>
@@ -702,6 +704,30 @@ public partial class MachinesTests
         }
         logger.Notification("Machines test: a socketed shelf with no compost {0}, the whole shelf Dormant: {1}, {2} sown; compost arrives and it wakes: {3}; it feeds {4} time(s), compost done: {5}, then {6}, {7} of 9 sown, the shelf awake: {8}",
             first, YesNo(asleep), sownAsleep, YesNo(woke), feedings, YesNo(shelf.QuietOf(0) == BlockEntityControlShelf.Quiet.Done), last, Sown(field), YesNo(!shelf.Asleep));
+    }
+
+    /// <summary>
+    /// Fertiliser before seeds with no Dead Socket and only seeds in the input (play-test, Nov 2): the
+    /// fertiliser goes quiet, out of stock, and the seeds still sow the tilled 3×3 the same turn.
+    /// </summary>
+    public void FertiliserFirstScene(BlockPos column)
+    {
+        var field = Farmland3x3(column);
+        var focusPos = field.AddCopy(1, 3, 1);
+        var focus = Place(focusPos, Machine.Focus, "down");
+        var shelf = Shelf(focusPos, BlockFacing.EAST, "game:compost", "game:seeds-flax");
+        var input = Port(shelf, true);
+        Add(input, Stack("game:seeds-flax", 9));
+        Put(focus, Crystal.Unaligned, Crystal.Glowing);
+        if (focus == null || shelf == null)
+        {
+            return;
+        }
+        Fill(focus);
+        focus.ReadContext();
+        var result = focus.WorkOnce();
+        logger.Notification("Machines test: compost then seeds, no socket, no compost in the input: {0}, compost out of stock: {1}, seeds awake: {2}, {3} of 9 sown",
+            result, YesNo(shelf.QuietOf(0) == BlockEntityControlShelf.Quiet.OutOfStock), YesNo(!shelf.IsDormant(1)), Sown(field));
     }
 
     // ------------------------------------------------------------------ what an idle shelf turn costs
