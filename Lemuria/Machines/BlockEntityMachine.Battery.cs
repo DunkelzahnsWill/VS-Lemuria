@@ -77,7 +77,7 @@ public partial class BlockEntityMachine
         double now = Api.World.Calendar.TotalHours;
         double hours = forHours ?? (lastBatteryHours < 0 ? 0 : Math.Max(0, now - lastBatteryHours));
         lastBatteryHours = now;
-        var room = Battery.Find(this);
+        var room = Battery.Find(this, check: false);
         inBattery = room != null;
         if (room == null)
         {
@@ -85,25 +85,16 @@ public partial class BlockEntityMachine
             return null;
         }
         var state = Shared(room);
-        float capacity = room.Elemental == null ? 0 : RoomCapacity(room, state);
-        if (room.Problem == null && room.Elemental != null)
+        // Only an empty battery takes a new fill's alignment; a held count keeps its own, the others' crystals idle.
+        Battery.Check(this, room, state.Stored > 0.01f ? state.Elemental : null);
+        if (room.Elemental != null && state.Elemental != room.Elemental)
         {
-            if (state.Elemental != room.Elemental)
-            {
-                if (state.Stored > 0.01f)
-                {
-                    // A count keeps its Elemental until it is spent: the crystals of another rest.
-                    room.Problem = "twoelementals";
-                }
-                else
-                {
-                    state.Elemental = room.Elemental;
-                    state.Rocks.Clear();
-                    state.WearIndex = -1;
-                    state.Wear = 0;
-                }
-            }
+            state.Elemental = room.Elemental;
+            state.Rocks.Clear();
+            state.WearIndex = -1;
+            state.Wear = 0;
         }
+        float capacity = room.Elemental == null ? 0 : RoomCapacity(room, state);
         if (room.Problem == null && room.Elemental != null && hours > 0)
         {
             bool changed = Form == Machine.Focus ? Fill(room, state, capacity, hours) : Drain(room, state, hours);
@@ -152,18 +143,30 @@ public partial class BlockEntityMachine
     {
         bool shown = elemental != null || problem != null || inBattery;
         float stored = battery?.Stored ?? 0;
+        int idle = elemental == null ? 0 : Working.Count(c => c.Alignment != elemental);
         if (shown == batteryShown && elemental == batteryElemental && problem == batteryProblem && Math.Abs(capacity - batteryCapacity) < 0.5f
-            && Math.Abs(stored - lastShownStored) < 1f)
+            && Math.Abs(stored - lastShownStored) < 1f && idle == batteryIdle)
         {
             return;
         }
+        bool redraw = elemental != batteryElemental || shown != batteryShown;
+        batteryIdle = idle;
         batteryShown = shown;
         batteryElemental = elemental;
         batteryCapacity = capacity;
         batteryProblem = problem;
         lastShownStored = stored;
-        MarkDirty(false);
+        // The plugs light only for crystals of the battery's Elemental, so a change of Elemental redraws them.
+        MarkDirty(redraw);
     }
+
+    private int batteryIdle;
+
+    /// <summary>Crystals in this stone that sit idle because they are not the battery's Elemental (J4).</summary>
+    public int BatteryIdle => batteryIdle;
+
+    /// <summary>The Elemental of the battery this stone works, as last shown, or null.</summary>
+    public string? BatteryElemental => batteryShown ? batteryElemental : null;
 
     private float lastShownStored;
 
@@ -439,6 +442,7 @@ public partial class BlockEntityMachine
             tree.SetString("batteryElemental", batteryElemental ?? "");
             tree.SetFloat("batteryCapacity", batteryCapacity);
             tree.SetString("batteryProblem", batteryProblem ?? "");
+            tree.SetInt("batteryIdle", batteryIdle);
         }
     }
 
@@ -451,9 +455,16 @@ public partial class BlockEntityMachine
         {
             battery = loaded;
         }
+        bool wasShown = batteryShown;
+        string? wasElemental = batteryElemental;
         batteryShown = tree.GetBool("batteryShown");
         string elemental = tree.GetString("batteryElemental", "");
         batteryElemental = elemental.Length == 0 ? null : elemental;
+        batteryIdle = tree.GetInt("batteryIdle");
+        if (Api?.Side == EnumAppSide.Client && (wasShown != batteryShown || wasElemental != batteryElemental))
+        {
+            MarkDirty(true);
+        }
         batteryCapacity = tree.GetFloat("batteryCapacity");
         string problem = tree.GetString("batteryProblem", "");
         batteryProblem = problem.Length == 0 ? null : problem;
@@ -473,6 +484,10 @@ public partial class BlockEntityMachine
         if (batteryProblem != null)
         {
             dsc.AppendLine(Lang.Get(prefix + "battery-rests-" + batteryProblem));
+        }
+        if (batteryIdle > 0)
+        {
+            dsc.AppendLine(Lang.Get(prefix + "battery-idle", batteryIdle));
         }
     }
 }

@@ -45,7 +45,7 @@ public partial class MachinesTests
 
     /// <summary>
     /// A 2×2×1 battery in test granite: which Elemental its crystals make it (the owner, Nov 2: the crystal
-    /// decides), then as a Fire battery the fill stores what lifts its line above three quarters as lava,
+    /// decides; Nov 8: the fill's crystals win), then as a Fire battery the fill stores what lifts its line above three quarters as lava,
     /// the drain pays a second line up to half and the lava cools back to granite; a gap in the shell rests it.
     /// </summary>
     public void FireBattery(BlockPos column)
@@ -75,17 +75,23 @@ public partial class MachinesTests
         }
         Put(fill, Crystal.Earth, Crystal.Glittering);
         string earth = Kind();
+        // Two Elementals in its stones: the fill's crystals win and the others sit idle (the owner, J4, Nov 8).
         Put(drain, Crystal.Fire, Crystal.Glittering);
         string both = Kind();
+        fill.WorkBattery(0);
+        int idleFire = drain.BatteryIdle;
         var earthCrystal = fill.Crystals.FirstOrDefault(c => c.Alignment == Crystal.Earth);
         if (earthCrystal != null)
         {
             fill.TakeOut(earthCrystal);
             fill.OnSocketsChanged();
         }
+        Put(drain, Crystal.Earth, Crystal.Glittering);
         Put(fill, Crystal.Fire, Crystal.Glowing);
         string fire = Kind();
-        logger.Notification("Machines test: a 2×2×1 room of granite with an Earth crystal is {0}, with Earth and Fire crystals {1}, with Fire crystals {2}", earth, both, fire);
+        fill.WorkBattery(0);
+        logger.Notification("Machines test: a 2×2×1 room of granite with an Earth crystal in its fill is {0}, with a Fire one in its drain still {1} (the drain's idle: {2}); with Fire in the fill and Earth beside Fire in the drain {3}, the drain's idle: {4}",
+            earth, both, idleFire, fire, drain.BatteryIdle);
 
         fill.ReadContext();
         Fill(fill);

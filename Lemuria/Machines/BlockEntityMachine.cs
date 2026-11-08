@@ -677,6 +677,8 @@ public partial class BlockEntityMachine : BlockEntitySparkstone
     public override bool CanWork(SocketCrystal crystal) => Form switch
     {
         _ when crystal.IsFitting => Form == Machine.Motor,
+        // In a battery's stone only crystals of the battery's Elemental work (J4); the others' plugs stay dark.
+        _ when BatteryElemental is { } elemental => crystal.Alignment == elemental,
         Machine.Gather => crystal.IsAligned,
         Machine.Probe => crystal.Alignment == Crystal.Sky,
         Machine.Scatter => Crystal.Rank(crystal.Evolution) > 1,

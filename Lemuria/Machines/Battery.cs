@@ -327,26 +327,35 @@ public static class Battery
     }
 
     /// <summary>
-    /// Names the room's Elemental by its stones' crystals and checks it: every block that Elemental's
+    /// Names the room's Elemental by its fill's crystals, or by the count it holds, and checks it: every block that Elemental's
     /// medium or its charged form, every block around it solid, the whole room loaded and, with claims
     /// respected, inside a claim its stones may change. Sets the room's Problem when it rests.
     /// </summary>
-    public static void Check(BlockEntityMachine stone, Room room)
+    public static void Check(BlockEntityMachine stone, Room room, string? held = null)
     {
         var accessor = stone.Api.World.BlockAccessor;
-        var alignments = room.Stones.SelectMany(s => s.Working).Where(c => c.IsAligned && Elementals.Contains(c.Alignment))
-            .Select(c => c.Alignment!).Distinct().ToList();
-        if (alignments.Count == 0)
+        if (Elementals.Contains(held))
         {
-            room.Problem = "nocrystal";
-            return;
+            // A battery holding a count stays the Elemental that stored it until the count is spent (note rev 37).
+            room.Elemental = held;
         }
-        if (alignments.Count > 1)
+        else
         {
-            room.Problem = "twoelementals";
-            return;
+            // The fill's crystals name the battery; crystals of any other alignment, in either stone, sit idle (the owner, J4, Nov 8).
+            var alignments = room.Fills.SelectMany(s => s.Working).Where(c => c.IsAligned && Elementals.Contains(c.Alignment))
+                .Select(c => c.Alignment!).Distinct().ToList();
+            if (alignments.Count == 0)
+            {
+                room.Problem = "nocrystal";
+                return;
+            }
+            if (alignments.Count > 1)
+            {
+                room.Problem = "twoelementals";
+                return;
+            }
+            room.Elemental = alignments[0];
         }
-        room.Elemental = alignments[0];
         foreach (var pos in room.Blocks())
         {
             if (accessor.GetChunkAtBlockPos(pos) == null)

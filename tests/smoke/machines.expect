@@ -59,9 +59,9 @@ Machines test: quiet seeds Acted, then Nothing: out of stock: yes, the shovel do
 Machines test: compost then seeds, no socket, no compost in the input: Acted, compost out of stock: yes, seeds awake: yes, 9 of 9 sown$
 # The shelf's socket (H5): a Dead Socket sends the whole shelf Dormant for want of compost; compost wakes it, it feeds until done, then sows.
 Machines test: a socketed shelf with no compost Nothing, the whole shelf Dormant: yes, 0 sown; compost arrives and it wakes: yes; it feeds [0-9]+ time\(s\), compost done: yes, then Acted, 9 of 9 sown, the shelf awake: yes$
-# Step 4 part 3, Elemental batteries. The crystal decides (the owner, Nov 2, J3): a room of granite is Earth with Earth
-# crystals, rests with two Elementals, and is Fire with Fire crystals.
-Machines test: a 2×2×1 room of granite with an Earth crystal is earth, with Earth and Fire crystals twoelementals, with Fire crystals fire$
+# Step 4 part 3, Elemental batteries. The crystal decides (the owner, Nov 2, J3), and with two Elementals in the stones the
+# fill's win, the other crystals idle (J4, Nov 8): a room of granite is Earth with an Earth fill, Fire with a Fire fill.
+Machines test: a 2×2×1 room of granite with an Earth crystal in its fill is earth, with a Fire one in its drain still earth \(the drain's idle: 1\); with Fire in the fill and Earth beside Fire in the drain fire, the drain's idle: 1$
 # The fill takes what lifts its line above three quarters (900 x 0.25) as lava; both stones keep one count.
 Machines test: a Fire battery's fill took 225 of the line's 900 in 900, stored 225 of 800, 2 of 4 block\(s\) lava, the drain keeps the same count: yes$
 # The drain pays 4 in 5 into a line below half; the lava cools back into the granite it was.
