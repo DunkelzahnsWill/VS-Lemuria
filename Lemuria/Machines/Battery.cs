@@ -411,8 +411,8 @@ public static class Battery
     /// <summary>
     /// What one step of Earth's wear turns a block into, and its byproducts (question 7): ore to its
     /// rock with the ore's pieces as mining it gives, rock to cracked rock, cracked rock to gravel with
-    /// two stones, gravel to sand with a pan's worth from the game's panning table whole. Null for a
-    /// block that wears no further.
+    /// two stones, gravel to sand with nothing (panning stays Sky's, the owner Nov 8). Null for a block
+    /// that wears no further.
     /// </summary>
     public static (Block Into, List<ItemStack> Byproducts)? WearStep(IWorldAccessor world, BlockPos pos)
     {
@@ -445,7 +445,6 @@ public static class Battery
         else if (Game(block, "gravel-"))
         {
             into = Get("sand-" + rock);
-            byproducts.AddRange(Evocations.Reaping.Pan(world, block, null, 1, 1));
         }
         else
         {

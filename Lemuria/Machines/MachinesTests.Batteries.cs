@@ -170,7 +170,7 @@ public partial class MachinesTests
 
     /// <summary>
     /// A 2×2×1 Earth battery of granite with a chest touching its drain: the drain wears the granite block
-    /// nearest its corner to sand, paying 50 a step, with two stones and a pan's worth in the chest; the
+    /// nearest its corner to sand, paying 50 a step, with two stones and nothing else in the chest; the
     /// sand left is a weak medium, which the fill then feeds.
     /// </summary>
     public void EarthBattery(BlockPos column)
@@ -198,12 +198,12 @@ public partial class MachinesTests
         }
         float paid = Total(drain) - line;
         int finds = chest?.Where(s => s.Itemstack != null && s.Itemstack.Collectible.Code.Path != "stone-granite").Sum(s => s.StackSize) ?? -1;
-        logger.Notification("Machines test: an Earth battery's drain wore the granite at its corner to {0}, paid {1:0}, stones in its chest {2}, pan finds {3}",
+        logger.Notification("Machines test: an Earth battery's drain wore the granite at its corner to {0}, paid {1:0}, stones in its chest {2}, other finds {3}",
             Path(corner), paid, CountOf(chest, "stone-granite"), finds);
         Fill(fill);
         fill.WorkBattery(2);
         logger.Notification("Machines test: the sand left is fed: stored {0:0} of {1:0}", fill.BatteryState?.Stored ?? 0, fill.BatteryCapacity);
-        // Placed gravel pans too (the owner, Nov 2 08:23Z); sand and cobblestone never wear.
+        // Placed gravel and cracked rock wear too (the owner, Nov 2 08:23Z), with no pan finds (Nov 8); sand and cobblestone never wear.
         var spot = corner.AddCopy(1, 0, 1);
         bool Wears(string code)
         {
