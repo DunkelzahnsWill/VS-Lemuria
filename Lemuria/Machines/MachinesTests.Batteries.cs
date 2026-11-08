@@ -103,6 +103,11 @@ public partial class MachinesTests
         logger.Notification("Machines test: a Fire battery's fill took {0:0} of the line's {1:0} in {2:0}, stored {3:0} of {4:0}, {5} of 4 block(s) lava, the drain keeps the same count: {6}",
             lineBefore - Total(fill), lineBefore, Capacity(fill), stored, fill.BatteryCapacity, lava, YesNo(sameCount));
 
+        // The Energy Sink (owner's testing tool, Nov 8) empties the fill's line and leaves the battery's count.
+        Sparkstone.ItemEnergySink.Empty(sapi.World, fill.Pos.AddCopy(1, 0, 0));
+        logger.Notification("Machines test: the Energy Sink emptied the fill's line to {0:0} and left its battery's count: {1}",
+            Total(fill), YesNo(System.Math.Abs((fill.BatteryState?.Stored ?? -1) - stored) < 0.01f));
+
         float drainLine = Total(drain);
         drain.WorkBattery(2);
         int rock = CountIn(corner, 2, 1, 2, p => Path(p) == "rock-granite");

@@ -64,6 +64,7 @@ Machines test: a socketed shelf with no compost Nothing, the whole shelf Dormant
 Machines test: a 2×2×1 room of granite with an Earth crystal in its fill is earth, with a Fire one in its drain still earth \(the drain's idle: 1\); with Fire in the fill and Earth beside Fire in the drain fire, the drain's idle: 1$
 # The fill takes what lifts its line above three quarters (900 x 0.25) as lava; both stones keep one count.
 Machines test: a Fire battery's fill took 225 of the line's 900 in 900, stored 225 of 800, 2 of 4 block\(s\) lava, the drain keeps the same count: yes$
+Machines test: the Energy Sink emptied the fill's line to 0 and left its battery's count: yes$
 # The drain pays 4 in 5 into a line below half; the lava cools back into the granite it was.
 Machines test: its drain paid 180 into a line of 400, stored left 0, lava left 0, granite back 4 of 4$
 Machines test: with a gap in its roof the battery rests: gap, the fill says so: gap$
