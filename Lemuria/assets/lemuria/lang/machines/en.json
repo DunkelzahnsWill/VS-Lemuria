@@ -70,6 +70,8 @@
 	"battery-rests-unloaded": "The battery rests: part of the room is out of reach of the world.",
 	"battery-rests-claim": "The battery rests: part of the room lies in a claim its stones may not change.",
 	"battery-idle": "{0} crystal(s) idle here: not this battery's Elemental.",
+	"battery-deposit": "Its deposit holds {0} more, paid out as the drain wears it to sand once the stored charge is spent.",
+	"battery-nochest": "This drain needs a chest touching it to wear the deposit.",
 	"alignment-fire": "Fire",
 	"alignment-ice": "Ice",
 	"alignment-earth": "Earth",

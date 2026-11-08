@@ -205,6 +205,8 @@ public partial class MachinesTests
         int finds = chest?.Where(s => s.Itemstack != null && s.Itemstack.Collectible.Code.Path != "stone-granite").Sum(s => s.StackSize) ?? -1;
         logger.Notification("Machines test: an Earth battery's drain wore the granite at its corner to {0}, paid {1:0}, stones in its chest {2}, other finds {3}",
             Path(corner), paid, CountOf(chest, "stone-granite"), finds);
+        // The look-at shows what the deposit still holds (play-test, Nov 8): three granite blocks at 150 each.
+        logger.Notification("Machines test: the Earth battery's deposit shows {0:0} left", drain.BatteryDeposit);
         Fill(fill);
         fill.WorkBattery(2);
         logger.Notification("Machines test: the sand left is fed: stored {0:0} of {1:0}", fill.BatteryState?.Stored ?? 0, fill.BatteryCapacity);

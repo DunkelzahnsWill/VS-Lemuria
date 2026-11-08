@@ -39,6 +39,11 @@ public partial class BlockEntityMachine
     private float batteryCapacity;
     private string? batteryProblem;
     private bool batteryShown;
+    private float batteryDeposit;
+    private bool batteryNoChest;
+
+    /// <summary>What an Earth battery's deposit still holds to wear out, on the last look (play-test, Nov 8).</summary>
+    public float BatteryDeposit => batteryDeposit;
 
     /// <summary>The battery's count as this stone keeps it, or null when it holds none.</summary>
     public Battery.State? BatteryState => battery;
@@ -104,10 +109,11 @@ public partial class BlockEntityMachine
                 capacity = RoomCapacity(room, state);
             }
         }
+        float deposit = room.Elemental == Crystal.Earth ? Deposit(room, state) : 0;
         foreach (var stone in room.Stones)
         {
             stone.battery = state;
-            stone.ShowBattery(room.Elemental, capacity, room.Problem);
+            stone.ShowBattery(room.Elemental, capacity, room.Problem, deposit);
         }
         return room;
     }
@@ -139,16 +145,45 @@ public partial class BlockEntityMachine
         return weak * Machine.BatteryPerBlock;
     }
 
-    private void ShowBattery(string? elemental, float capacity, string? problem)
+    /// <summary>
+    /// The charge an Earth room's deposit still holds: 50 for each step its blocks have left to wear to
+    /// sand (ore 4, rock 3, cracked rock 2, gravel 1), less what the block being worn has paid.
+    /// </summary>
+    private float Deposit(Battery.Room room, Battery.State state)
+    {
+        var accessor = Api.World.BlockAccessor;
+        int steps = 0;
+        for (int i = 0; i < room.Volume; i++)
+        {
+            var block = accessor.GetBlock(room.At(i), BlockLayersAccess.Solid);
+            if (block?.Code?.Domain != "game")
+            {
+                continue;
+            }
+            string path = block.Code.Path;
+            steps += path.StartsWith("ore-") ? 4 : path.StartsWith("rock-") ? 3 : path.StartsWith("crackedrock-") ? 2 : path.StartsWith("gravel-") ? 1 : 0;
+        }
+        return Math.Max(0, steps * Machine.EarthStep - state.Wear);
+    }
+
+    private void ShowBattery(string? elemental, float capacity, string? problem, float deposit = 0)
     {
         bool shown = elemental != null || problem != null || inBattery;
         float stored = battery?.Stored ?? 0;
         int idle = elemental == null ? 0 : Working.Count(c => c.Alignment != elemental);
+        if (contextDirty)
+        {
+            ReadContext();
+        }
+        // An Earth drain needs a container touching it for the deposit's byproducts; say so when it has none.
+        bool noChest = elemental == Crystal.Earth && Form == Machine.Gather && Output == null;
         if (shown == batteryShown && elemental == batteryElemental && problem == batteryProblem && Math.Abs(capacity - batteryCapacity) < 0.5f
-            && Math.Abs(stored - lastShownStored) < 1f && idle == batteryIdle)
+            && Math.Abs(stored - lastShownStored) < 1f && idle == batteryIdle && Math.Abs(deposit - batteryDeposit) < 1f && noChest == batteryNoChest)
         {
             return;
         }
+        batteryDeposit = deposit;
+        batteryNoChest = noChest;
         bool redraw = elemental != batteryElemental || shown != batteryShown;
         batteryIdle = idle;
         batteryShown = shown;
@@ -443,6 +478,8 @@ public partial class BlockEntityMachine
             tree.SetFloat("batteryCapacity", batteryCapacity);
             tree.SetString("batteryProblem", batteryProblem ?? "");
             tree.SetInt("batteryIdle", batteryIdle);
+            tree.SetFloat("batteryDeposit", batteryDeposit);
+            tree.SetBool("batteryNoChest", batteryNoChest);
         }
     }
 
@@ -461,6 +498,8 @@ public partial class BlockEntityMachine
         string elemental = tree.GetString("batteryElemental", "");
         batteryElemental = elemental.Length == 0 ? null : elemental;
         batteryIdle = tree.GetInt("batteryIdle");
+        batteryDeposit = tree.GetFloat("batteryDeposit");
+        batteryNoChest = tree.GetBool("batteryNoChest");
         if (Api?.Side == EnumAppSide.Client && (wasShown != batteryShown || wasElemental != batteryElemental))
         {
             MarkDirty(true);
@@ -480,6 +519,14 @@ public partial class BlockEntityMachine
         if (batteryElemental != null)
         {
             dsc.AppendLine(Lang.Get(prefix + "battery-count", Lang.Get(prefix + "alignment-" + batteryElemental), Math.Round(battery?.Stored ?? 0).ToString("#,0"), Math.Round(batteryCapacity).ToString("#,0")));
+        }
+        if (batteryElemental == Crystal.Earth && batteryDeposit >= 1)
+        {
+            dsc.AppendLine(Lang.Get(prefix + "battery-deposit", Math.Round(batteryDeposit).ToString("#,0")));
+        }
+        if (batteryNoChest)
+        {
+            dsc.AppendLine(Lang.Get(prefix + "battery-nochest"));
         }
         if (batteryProblem != null)
         {
