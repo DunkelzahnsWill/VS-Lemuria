@@ -26,6 +26,7 @@ public class SparkstoneModSystem : ModSystem
     {
         api.RegisterItemClass(ItemCrystalChisel.ClassCode, typeof(ItemCrystalChisel));
         api.RegisterItemClass(ItemAdminCharger.ClassCode, typeof(ItemAdminCharger));
+        api.RegisterItemClass(ItemEnergySink.ClassCode, typeof(ItemEnergySink));
         api.RegisterBlockClass(BlockSparkstone.ClassCode, typeof(BlockSparkstone));
         api.RegisterBlockEntityClass(BlockEntitySparkstone.ClassCode, typeof(BlockEntitySparkstone));
     }
@@ -149,6 +150,9 @@ public class SparkstoneModSystem : ModSystem
         string? what = ItemAdminCharger.Fill(sapi.World, pos);
         float charge = (sapi.World.BlockAccessor.GetBlockEntity(pos) as BlockEntityCrystal)?.Charge ?? -1;
         Mod.Logger.Notification("Sparkstone test: the admin charger filled the {0}, which holds {1:0}", what ?? "nothing", charge);
+        string? emptied = ItemEnergySink.Empty(sapi.World, pos);
+        float left = (sapi.World.BlockAccessor.GetBlockEntity(pos) as BlockEntityCrystal)?.Charge ?? -1;
+        Mod.Logger.Notification("Sparkstone test: the Energy Sink emptied the {0}, which holds {1:0}", emptied ?? "nothing", left);
     }
 
     private void OnTestCheck()
