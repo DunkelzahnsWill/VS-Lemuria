@@ -19,7 +19,7 @@ namespace Lemuria.Sparkstone;
 /// durability. Right-click a charged crystal, placed or resting in a cradle, or any block of a sparkstone
 /// network to draw as much as it has room for; hold right-click for a second on a placed polished rock
 /// block to awaken it, for AwakenCost. Left-click a placed polished rock block to carve it into a cradle,
-/// or a polished rock slab into a crystal rack, for no charge. Three glyphs on the blade light one by one
+/// or a polished rock slab into a crystal rack, or (step 5) a placed glass block into a Glint, for no charge. Three glyphs on the blade light one by one
 /// with its charge level. It carries no tool-chisel tag, so vanilla chiselling never starts.
 /// Step 4: a left-click on a placed Awakened block is handed to <see cref="StoneCarver"/>, which carves
 /// machines (Lemuria/Machines).
@@ -100,10 +100,18 @@ public class ItemCrystalChisel : Item
         base.OnHeldAttackStart(slot, byEntity, blockSel, entitySel, ref handling);
     }
 
-    /// <summary>What a left-click would carve the block into: a cradle from polished rock, a rack from a polished slab.</summary>
+    /// <summary>A placed glass block of the game's own, plain, quartz or coloured; never a pane or slab.</summary>
+    public static bool IsGlass(Block block) =>
+        block.Code?.Domain == "game" && block.Code.Path.StartsWith("glass-", StringComparison.Ordinal);
+
+    /// <summary>What a left-click would carve the block into: a cradle from polished rock, a rack from a polished slab, a Glint from glass.</summary>
     public static Block? CarvedBlock(IWorldAccessor world, BlockPos pos, IPlayer? player, BlockSelection? blockSel)
     {
         var block = world.BlockAccessor.GetBlock(pos);
+        if (IsGlass(block))
+        {
+            return world.GetBlock(new AssetLocation(LemuriaModSystem.ModId, "glint"));
+        }
         if (PolishedRock(block) is { } rock)
         {
             return world.GetBlock(new AssetLocation(LemuriaModSystem.ModId, "cradle-" + rock));
@@ -128,8 +136,9 @@ public class ItemCrystalChisel : Item
         {
             return false;
         }
+        bool glass = IsGlass(world.BlockAccessor.GetBlock(pos));
         world.BlockAccessor.SetBlock(carved.Id, pos);
-        world.PlaySoundAt(new AssetLocation("game:sounds/block/rock-hit-pickaxe"), pos.X + 0.5, pos.Y + 0.5, pos.Z + 0.5, null, true, 16f, LemuriaSound.Volume(1f));
+        world.PlaySoundAt(new AssetLocation(glass ? "game:sounds/block/glass" : "game:sounds/block/rock-hit-pickaxe"), pos.X + 0.5, pos.Y + 0.5, pos.Z + 0.5, null, true, 16f, LemuriaSound.Volume(1f));
         return true;
     }
 

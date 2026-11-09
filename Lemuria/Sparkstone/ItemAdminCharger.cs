@@ -53,6 +53,8 @@ public class ItemAdminCharger : Item
                 return $"{crystal.Alignment} {crystal.Evolution} crystal";
             case BlockEntityCradle cradle when cradle.FillCharge():
                 return $"{cradle.Alignment} {cradle.Evolution} crystal in the cradle";
+            case Mysteries.BlockEntityGlint glint when glint.FillCharge():
+                return $"{glint.Alignment} {glint.Evolution} crystal in the Glint";
             case BlockEntitySparkstone stone when SparkstoneModSystem.Networks != null:
                 return $"sparkstone network of {SparkstoneModSystem.Networks.Fill(stone)} block(s)";
             default:
