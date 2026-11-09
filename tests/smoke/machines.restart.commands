@@ -2,3 +2,5 @@
 /lemuria machines test check
 # Step 4 part 2: the shelf's items, the Memory's crystals and the Dead Socket are kept.
 /lemuria machines test kept
+# Step 4 part 3: a battery's count is kept in both its stones.
+/lemuria machines test batterykept

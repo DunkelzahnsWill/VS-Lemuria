@@ -210,5 +210,14 @@ public class SparkstoneNetworks
         return network.Count;
     }
 
+    /// <summary>Empties a block's whole network at once (the Energy Sink, a testing tool); returns how many blocks.</summary>
+    public int Empty(BlockEntitySparkstone block)
+    {
+        var network = NetworkOf(block);
+        var (total, _) = Measure(network);
+        Update(network, feed: false, change: -total);
+        return network.Count;
+    }
+
     public void Clear() => loaded.Clear();
 }

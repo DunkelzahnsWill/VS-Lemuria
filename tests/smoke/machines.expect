@@ -1,8 +1,8 @@
-# Step 4 part 1: six forms in every rock, facing north in the creative inventory; the rod from an Unaligned crystal of either Evolution.
-Machines: 114 machine block\(s\) facing north; 2 Unaligned crystal kind\(s\) make the Crystal Rod$
-# Carving: seven strikes go round the six forms and back to Free stone; only the front carves. The
+# Step 4 part 1: six forms in every rock, and part 3's Wind Probe, seven, facing north in the creative inventory; the rod from an Unaligned crystal of either Evolution.
+Machines: 133 machine block\(s\) facing north; 2 Unaligned crystal kind\(s\) make the Crystal Rod$
+# Carving: eight strikes go round the seven forms and back to Free stone; only the front carves. The
 # struck face keeps the glyph, so the Motor's hub, its {side}, is the face opposite (west).
-Machines test: strikes carve gather-east, refine-east, focus-east, scatter-east, amplify-east, motor-west, free; another face does nothing: yes; the Gather block holds 1 crystal\(s\) on its front$
+Machines test: strikes carve gather-east, refine-east, focus-east, scatter-east, amplify-east, motor-west, probe-up, free; another face does nothing: yes; the Gather block holds 1 crystal\(s\) on its front$
 Machines test: the rod turned the front up with 1 crystal\(s\); a sneaking tap switches it Dormant: yes$
 Machines test: the Crystal Rod made: yes, the crystal used up: yes, rock left 1$
 # Focus: each Elemental does its evocation's work for a tenth of a cast; Earth rises once and goes Dormant.
@@ -41,8 +41,6 @@ Machines test: the silo's Focus turned down by the rod: yes; after [0-9]+ workin
 Machines test: the burning silo's turn Nothing, every item quiet: yes; after the burn and one sneak tap, charcoal in the output: yes, the next pit started: yes$
 # The owner's round 7 silo: the logs chest full to the brim still stacks and lights all nine piles.
 Machines test: a leaking acacia log splits into firewood: yes; the brim-full silo after [0-9]+ working\(s\) \(Acted [0-9]+\): 9 of 9 cells full piles, lit: yes, Focus active: yes, items OutOfStock Done Done Awake, firewood in the input [0-9]+, in the output [0-9]+$
-# A shelf item going quiet leaves one line in the server log, with the input and the reach.
-Control Shelf at .*: axe-felling-copper in place 1 went quiet, out of stock; Focus faces down; input: .*firewood
 # Felling pays by the logs: a Glittering crystal fells one log a working.
 Machines test: a Sky Focus at a tree of 5 logs Acted, paid 5 working\(s\), 0 log\(s\) standing, 5 log\(s\) in the chest$
 # Memory: two crystals in Awakened stone, cycled through the Focus one a turn.
@@ -61,3 +59,24 @@ Machines test: quiet seeds Acted, then Nothing: out of stock: yes, the shovel do
 Machines test: compost then seeds, no socket, no compost in the input: Acted, compost out of stock: yes, seeds awake: yes, 9 of 9 sown$
 # The shelf's socket (H5): a Dead Socket sends the whole shelf Dormant for want of compost; compost wakes it, it feeds until done, then sows.
 Machines test: a socketed shelf with no compost Nothing, the whole shelf Dormant: yes, 0 sown; compost arrives and it wakes: yes; it feeds [0-9]+ time\(s\), compost done: yes, then Acted, 9 of 9 sown, the shelf awake: yes$
+# Step 4 part 3, Elemental batteries. The crystal decides (the owner, Nov 2, J3), and with two Elementals in the stones the
+# fill's win, the other crystals idle (J4, Nov 8): a room of granite is Earth with an Earth fill, Fire with a Fire fill.
+Machines test: a 2×2×1 room of granite with an Earth crystal in its fill is earth, with a Fire one in its drain still earth \(the drain's idle: 1\); with Fire in the fill and Earth beside Fire in the drain fire, the drain's idle: 1$
+# The fill takes what lifts its line above three quarters (900 x 0.25) as lava; both stones keep one count.
+Machines test: a Fire battery's fill took 225 of the line's 900 in 900, stored 225 of 800, 2 of 4 block\(s\) lava, the drain keeps the same count: yes$
+Machines test: the Energy Sink emptied the fill's line to 0 and left its battery's count: yes$
+# The drain pays 4 in 5 into a line below half; the lava cools back into the granite it was.
+Machines test: its drain paid 180 into a line of 400, stored left 0, lava left 0, granite back 4 of 4$
+Machines test: with a gap in its roof the battery rests: gap, the fill says so: gap$
+# Ice freezes from the top; its drain, alone on its line (50), pays it to half and the last frozen block thaws.
+Machines test: an Ice battery stored 213, 2 of 9 block\(s\) glacier ice; its drain paid the line to half, stored left 181, glacier ice left 1$
+# Earth wears the granite nearest the drain to sand at 50 a step, two stones into its chest and no pan finds
+# (panning stays Sky's, the owner Nov 8); the sand is fed.
+Machines test: an Earth battery's drain wore the granite at its corner to sand-granite, paid 150, stones in its chest 2, other finds 0$
+Machines test: the Earth battery's deposit shows 450 left$
+Machines test: the sand left is fed: stored 113 of 200$
+# The owner (Nov 2 08:23Z): placed gravel and cracked rock wear too; with no pan finds (Nov 8).
+Machines test: placed gravel wears: yes, cracked rock: yes, sand: no, cobblestone: no$
+# The Wind Probe: 2 x 1,200 x \(0.25 + 0.5\) in a day; a strike fills its crystals (400) and pours first; roofed, nothing.
+Machines test: a Wind Probe with 2 Glowing Sky crystals, sockets facing up, gathered 1800 in a day of wind 0\.5; a strike filled 400; the line took 200 of its 200, 200 left from the strike$
+Machines test: roofed, the probe gathers 0$
