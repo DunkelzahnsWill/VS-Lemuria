@@ -6,5 +6,6 @@
 	{ "code": "basicvocabulary", "pages": 13, "unlockedByDefault": false },
 	{ "code": "controlshelf", "pages": 8, "unlockedByDefault": false },
 	{ "code": "quicken", "pages": 1, "unlockedByDefault": false },
-	{ "code": "batteries", "pages": 3, "unlockedByDefault": false }
+	{ "code": "batteries", "pages": 3, "unlockedByDefault": false },
+	{ "code": "fourmysteries", "pages": 10, "unlockedByDefault": false }
 ]
