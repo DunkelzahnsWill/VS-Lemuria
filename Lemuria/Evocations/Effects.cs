@@ -33,12 +33,19 @@ public static class Effects
         Failed,
     }
 
+    /// <summary>
+    /// Evocations another feature works, by evocation code: the Mysteries' Bloom, Wither, Rewind and
+    /// Progress (step 5), cast through this same casting.
+    /// </summary>
+    public static readonly Dictionary<string, System.Func<CastContext, Outcome>> More = new();
+
     public static Outcome Apply(CastContext cast) => Evocation.Of(cast.Alignment) switch
     {
         Evocation.Ignite => Done(Ignite(cast)),
         Evocation.Quench => Done(Quench(cast)),
         Evocation.Tremor => Tremor(cast),
         Evocation.Gale => Done(Gale(cast)),
+        { } other when More.TryGetValue(other, out var effect) => effect(cast),
         _ => Outcome.Nothing,
     };
 
