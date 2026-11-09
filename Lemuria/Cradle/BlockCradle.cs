@@ -37,7 +37,7 @@ public class BlockCradle : Block
                 crystals.Add(new ItemStack(block));
             }
         }
-        foreach (string alignment in Crystals.Crystal.Elementals)
+        foreach (string alignment in Crystals.Crystal.AllAligned)
         {
             var ambient = Crystals.Crystal.BlockFor(api.World, alignment, Crystals.Crystal.Glittering)?.Sounds?.Ambient;
             if (Sounds != null && ambient != null)
