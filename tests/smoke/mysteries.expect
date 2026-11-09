@@ -1,0 +1,25 @@
+# Mysteries (step 5 part 1): the readings, the evocations' measures and Wither's damage load.
+Mysteries: Life, Death, Time and Rust read their signs; temporal stability on; Rewind and Progress move 12, 24 and 48 hours
+Mysteries: Wither deals 1\.5 every 5 s, 6 times; a Glint burns 0\.333 an hour at Glittering
+# The four places: condition alone and sign alone read nothing, both together refine a cradle.
+Mysteries test: Life by torchlight alone reads 0\.00, with 10 crops 1\.00; the cradle refined to life glittering; a Life crystal there charged [1-9][0-9]*
+Mysteries test: Death in the dark with no bones reads 0\.00, four bony remains by torchlight 0\.00, in the dark 1\.00; with 16 bones in a chest the bones count 1\.25; the cradle refined to death glittering
+Mysteries test: two temporal gears read Time 0\.00 where stability is 1 and 1\.00 where it is 1\.5; a storm brings it to 0\.00; the cradle refined to time glittering
+Mysteries test: a storm with no decay reads Rust 0\.00; sixteen rusty gears count 1\.00 and read 0\.00 where stability is 1, 1\.00 in the storm .*; the cradle refined to rust glittering
+# The Elementals still refine; ten crops lit beside a firepit pause a Glowing crystal; twins cancel.
+Mysteries test: a Glowing Unaligned crystal at a firepit refined to fire glowing; with 10 crops lit beside the firepit it holds unaligned glowing, 0\.00 of the way
+Mysteries test: equal twins cancel in a reading: yes; standing Life and Death now unaligned and unaligned; Time and Rust now unaligned and unaligned
+Mysteries test: after a hen died, half an hour charged the Death crystal beside it to [1-9][0-9.]* and the one 12 blocks off to 0\.0
+# The four evocations.
+Mysteries test: Bloom grew flax to crop-flax-2 \(acted\); cast again the same day: refused, still crop-flax-2; a Glowing Bloom grew 9 of 9
+Mysteries test: Wither made the flax deadcrop on farmland-moist-medium; grassy soil is now soil-medium-none; tallgrass-tall-free wilted to nothing
+Mysteries test: a Glittering Wither withers the pig: no; a Glowing one: yes; it dealt 1\.50 in 5 s, 3\.00 in the next 10 s; recast, 9\.00 in 30 s, then 0\.00; the pig went from 15 to 1\.5, alive: yes
+Mysteries test: Rewind \(acted\) turned meat back from 30 to 18 hours and from 5 to 0; the cheese's ripening stays at 100
+Mysteries test: Progress \(acted\) turned salted raw cheese 12 hours from ripe into cheese-cheddar-4slice; a sealed barrel came 12 hours closer
+# Glint: light 10 and 14 at full, two less a level, dark when empty or not Life; every crystal's light 1 to 4.
+Mysteries test: the chisel carved glass into glint \(carved\); its light is 10 with a full Glittering Life crystal, after a day it holds 92; Glowing 14 full, 12 high, 10 low, 0 empty; with Fire 0
+Mysteries test: a Fire crystal's light empty to full is 1, 2, 3, 4; an Unaligned crystal's 4
+Mysteries test: beside a Death crystal the Glint's crystal is now unaligned, its light 0
+# Mystery crystals in machines: a Life Focus blooms once a day, a Refine copies Time, Time and Rust Focus blocks work by the measure.
+Mysteries test: a Life Focus Acted, the flax is now crop-flax-2, then Nothing; a Refine block refined 1 crystal\(s\), 2 of 2 are Time
+Mysteries test: a Time Focus Acted, the meat from 30 to 18 hours; at 5 hours it Nothing, paid 0; a Rust Focus Acted, the cheese from 100 to 112 hours, then Nothing
