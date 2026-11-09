@@ -149,6 +149,21 @@ public class CrystalsModSystem : ModSystem
         }
     }
 
+    /// <summary>A creature died here: Death crystals and cradles within 8 blocks get an hour of full Death (step 5). Server only.</summary>
+    public static int OnDeathAt(BlockPos pos)
+    {
+        if (Standing == null)
+        {
+            return 0;
+        }
+        var near = Standing.Near(pos, CrystalCharging.DeathReach);
+        foreach (var crystal in near)
+        {
+            crystal.OnDeathNearby();
+        }
+        return near.Count;
+    }
+
     private void OnLightning(ref Vec3d impactPos, ref EnumHandling handling)
     {
         if (Standing == null)

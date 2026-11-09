@@ -17,12 +17,22 @@ public static class Crystal
     public const string Ice = "ice";
     public const string Earth = "earth";
     public const string Sky = "sky";
+    public const string Life = "life";
+    public const string Death = "death";
+    public const string Time = "time";
+    public const string Rust = "rust";
 
     public const string Glittering = "glittering";
     public const string Glowing = "glowing";
 
     /// <summary>The four Elementals, in the order <see cref="CrystalEnvironment"/> reads them.</summary>
     public static readonly string[] Elementals = { Fire, Ice, Earth, Sky };
+
+    /// <summary>The four Mysteries (design note "Lemuria step 5: The Four Mysteries"), read after the Elementals.</summary>
+    public static readonly string[] Mysteries = { Life, Death, Time, Rust };
+
+    /// <summary>Every aligned alignment, Elementals then Mysteries, in the order <see cref="CrystalEnvironment"/> reads them.</summary>
+    public static readonly string[] AllAligned = { Fire, Ice, Earth, Sky, Life, Death, Time, Rust };
 
     public const string ChargeKey = "lemuriaCharge";
     public const string CracksKey = "lemuriaCracks";
@@ -38,15 +48,22 @@ public static class Crystal
 
     public static bool IsAligned(CollectibleObject? collectible) => IsCrystal(collectible) && AlignmentOf(collectible!) != Unaligned;
 
-    /// <summary>Fire and Ice, Earth and Sky; Unaligned has none.</summary>
+    /// <summary>Fire and Ice, Earth and Sky, Life and Death, Time and Rust; Unaligned has none.</summary>
     public static string? TwinOf(string alignment) => alignment switch
     {
         Fire => Ice,
         Ice => Fire,
         Earth => Sky,
         Sky => Earth,
+        Life => Death,
+        Death => Life,
+        Time => Rust,
+        Rust => Time,
         _ => null,
     };
+
+    /// <summary>The first of each twin pair (Fire, Earth, Life, Time), so a pair is counted once.</summary>
+    public static bool IsFirstTwin(string alignment) => alignment is Fire or Earth or Life or Time;
 
     /// <summary>Glittering 1, Glowing 2, Luminous 3, Radiant 4, Baleful 5: the numbers a dialogue averages.</summary>
     public static int Rank(string evolution) => evolution switch
@@ -106,20 +123,29 @@ public static class Crystal
     public static Block? BlockFor(IWorldAccessor world, string alignment, string evolution, string position = "up") =>
         world.GetBlock(new AssetLocation(LemuriaModSystem.ModId, $"crystal-{alignment}-{evolution}-{position}"));
 
-    /// <summary>A crystal's colour, for sparks and bursts: Fire ruby red, Ice sapphire blue, Earth dark brown, Sky steely grey, Unaligned ivory.</summary>
+    /// <summary>
+    /// A crystal's colour, for sparks and bursts: Fire ruby red, Ice sapphire blue, Earth dark brown, Sky
+    /// steely grey, Life white-yellow, Death black-purple, Time light cyan, Rust dark rust, Unaligned ivory.
+    /// </summary>
     public static int Rgb(string alignment) => alignment switch
     {
         Fire => ColorUtil.ToRgba(255, 225, 30, 70),
         Ice => ColorUtil.ToRgba(255, 60, 110, 240),
         Earth => ColorUtil.ToRgba(255, 150, 100, 60),
         Sky => ColorUtil.ToRgba(255, 135, 146, 165),
+        Life => ColorUtil.ToRgba(255, 250, 240, 170),
+        Death => ColorUtil.ToRgba(255, 96, 44, 120),
+        Time => ColorUtil.ToRgba(255, 120, 225, 235),
+        Rust => ColorUtil.ToRgba(255, 160, 72, 36),
         _ => ColorUtil.ToRgba(255, 240, 228, 196),
     };
 
-    /// <summary>Light by charge level: Glittering 2, 4, 5, 7 and Glowing 3, 5, 7, 9 (a candle is 7, a torch 14).</summary>
-    public static byte LightLevel(string evolution, int level) => evolution == Glowing
-        ? new byte[] { 3, 5, 7, 9 }[level]
-        : new byte[] { 2, 4, 5, 7 }[level];
+    /// <summary>
+    /// Light by charge level, the same for every alignment and Evolution: 1 empty, 2 low, 3 high, 4 full,
+    /// Unaligned counting as full (step 5 note, K2: a faint light whose glow still shows; a torch is 14).
+    /// The Evolution is kept in the call for the callers, which still pass it.
+    /// </summary>
+    public static byte LightLevel(string evolution, int level) => (byte)(Math.Clamp(level, Empty, Full) + 1);
 
     /// <summary>Glow on the crystal's faces by charge level, 0 to 255.</summary>
     public static int Glow(int level) => new[] { 60, 120, 190, 255 }[level];

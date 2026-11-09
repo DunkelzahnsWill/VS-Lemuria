@@ -40,6 +40,11 @@ public interface IStandingCrystal
 
     /// <summary>A lightning strike within 16 blocks.</summary>
     void OnLightning();
+
+    /// <summary>A creature died within 8 blocks: Death crystals, and cradles, get an hour of full Death (step 5). Nothing by default.</summary>
+    void OnDeathNearby()
+    {
+    }
 }
 
 /// <summary>

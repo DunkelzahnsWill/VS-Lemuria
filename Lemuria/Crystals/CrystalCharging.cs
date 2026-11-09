@@ -18,6 +18,12 @@ public static class CrystalCharging
     /// <summary>Hours of full Sky strength a lightning strike within 16 blocks gives.</summary>
     public const double LightningHours = 6;
 
+    /// <summary>Hours of full Death strength a creature dying within 8 blocks gives (step 5 note, A death nearby).</summary>
+    public const double DeathHours = 1;
+
+    /// <summary>How far a death reaches crystals and cradles, in blocks.</summary>
+    public const int DeathReach = 8;
+
     public static double FillDays(string evolution)
     {
         var config = LemuriaModSystem.Config;
@@ -29,9 +35,9 @@ public static class CrystalCharging
     /// Reads the surroundings for an aligned crystal and returns the strength it charges at: the leading
     /// strength when its own alignment leads and passes, otherwise 0.
     /// </summary>
-    public static float Strength(IWorldAccessor world, BlockPos pos, string alignment, string evolution, bool skyBoost)
+    public static float Strength(IWorldAccessor world, BlockPos pos, string alignment, string evolution, bool skyBoost, bool deathBoost = false)
     {
-        var raw = CrystalEnvironment.Read(world, pos, skyBoost);
+        var raw = CrystalEnvironment.Read(world, pos, skyBoost, deathBoost);
         bool passes = CrystalEnvironment.Lead(raw, Crystal.Rank(evolution), out var leader, out var strength);
         return passes && leader == alignment ? strength : 0f;
     }
