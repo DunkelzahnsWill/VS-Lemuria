@@ -1,2 +1,4 @@
 # Storage (step 2): Fire and Ice crystals side by side on a crystal rack never dialogue.
 /lemuria storage test rack
+# The claims switch for racks and jars (the owner, Nov 10 2026): the game's own claim test is handed a claim's refusal.
+/lemuria storage test claims
