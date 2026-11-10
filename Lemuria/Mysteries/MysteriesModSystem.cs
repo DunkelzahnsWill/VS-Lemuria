@@ -29,7 +29,7 @@ public class MysteriesModSystem : ModSystem
         api.RegisterBlockClass(BlockGlint.ClassCode, typeof(BlockGlint));
         api.RegisterBlockEntityClass(BlockEntityGlint.ClassCode, typeof(BlockEntityGlint));
         // Both sides read the Mysteries, as both read the Elementals; only the server acts on it.
-        CrystalEnvironment.Mysteries = MysteryEnvironment.Fill;
+        CrystalEnvironment.Mysteries = MysteryEnvironment.Count;
     }
 
     public override void StartServerSide(ICoreServerAPI api)

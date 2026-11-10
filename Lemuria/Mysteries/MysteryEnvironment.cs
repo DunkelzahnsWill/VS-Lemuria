@@ -56,24 +56,25 @@ public static class MysteryEnvironment
     /// <summary>The game's temporal stability system, found when the server starts; null where it is missing.</summary>
     public static SystemTemporalStability? StabilitySystem { get; set; }
 
-    /// <summary>Fills a reading's Life, Death, Time and Rust (CrystalEnvironment.Mysteries).</summary>
+    /// <summary>Starts one reading's count (CrystalEnvironment.Mysteries): it sees the Elementals' walk of the cube.</summary>
+    public static CrystalEnvironment.IMysteryCount Count(IWorldAccessor world, BlockPos pos) => new Counter(world, pos);
+
+    /// <summary>Fills a reading's Life, Death, Time and Rust from a walk of its own; for tests and logs.</summary>
     public static void Fill(IWorldAccessor world, BlockPos pos, float[] strengths)
     {
-        var r = Read(world, pos);
-        strengths[CrystalEnvironment.LifeIndex] = r.Light * Math.Min(1f, r.Living);
-        strengths[CrystalEnvironment.DeathIndex] = (1f - r.Light) * Math.Min(1f, r.Bones);
-        strengths[CrystalEnvironment.TimeIndex] = r.Time * Math.Min(1f, r.Gears);
-        strengths[CrystalEnvironment.RustIndex] = r.Rust * Math.Min(1f, r.Decay);
+        var counter = Walk(world, pos);
+        counter.Finish(strengths);
     }
 
-    public static Reading Read(IWorldAccessor world, BlockPos pos)
+    /// <summary>Everything a reading at a position finds, from a walk of its own; for tests and logs.</summary>
+    public static Reading Read(IWorldAccessor world, BlockPos pos) => Walk(world, pos).Total();
+
+    private static Counter Walk(IWorldAccessor world, BlockPos pos)
     {
+        var counter = new Counter(world, pos);
         var accessor = world.BlockAccessor;
-        var reading = new Reading();
         int reach = CrystalEnvironment.Reach;
-        float lamp = 0;
         var tmp = new BlockPos(pos.dimension);
-        int bones = 0, rot = 0, rusty = 0, gears = 0;
         for (int dx = -reach; dx <= reach; dx++)
         {
             for (int dy = -reach; dy <= reach; dy++)
@@ -81,74 +82,112 @@ public static class MysteryEnvironment
                 for (int dz = -reach; dz <= reach; dz++)
                 {
                     tmp.Set(pos.X + dx, pos.Y + dy, pos.Z + dz);
-                    var block = accessor.GetBlock(tmp, BlockLayersAccess.Solid);
-                    var fluid = accessor.GetBlock(tmp, BlockLayersAccess.Fluid);
-                    int distance = Math.Abs(dx) + Math.Abs(dy) + Math.Abs(dz);
-                    lamp = Math.Max(lamp, LampLight(accessor, block, tmp, distance));
-                    lamp = Math.Max(lamp, LampLight(accessor, fluid, tmp, distance));
-                    if (block.Id == 0)
+                    counter.Visit(tmp, accessor.GetBlock(tmp, BlockLayersAccess.Solid), accessor.GetBlock(tmp, BlockLayersAccess.Fluid),
+                        Math.Abs(dx) + Math.Abs(dy) + Math.Abs(dz));
+                }
+            }
+        }
+        return counter;
+    }
+
+    /// <summary>One reading's count of light, living things, bones, gears and decay, block by block.</summary>
+    private sealed class Counter : CrystalEnvironment.IMysteryCount
+    {
+        private readonly IWorldAccessor world;
+        private readonly BlockPos pos;
+        private Reading reading;
+        private float lamp;
+        private int bones, rot, rusty, gears;
+
+        public Counter(IWorldAccessor world, BlockPos pos)
+        {
+            this.world = world;
+            this.pos = pos;
+        }
+
+        public void Visit(BlockPos at, Block block, Block fluid, int distance)
+        {
+            var accessor = world.BlockAccessor;
+            lamp = Math.Max(lamp, LampLight(accessor, block, at, distance));
+            lamp = Math.Max(lamp, LampLight(accessor, fluid, at, distance));
+            if (block.Id == 0)
+            {
+                return;
+            }
+            if (IsLivingBlock(block))
+            {
+                reading.Living += LivingEach;
+            }
+            if (IsBoneBlock(block))
+            {
+                reading.Bones += BoneBlockEach;
+            }
+            // Only blocks that have one carry a block entity, so plain stone and air never look.
+            if (block.EntityClass == null)
+            {
+                return;
+            }
+            var be = accessor.GetBlockEntity(at);
+            if (be == null)
+            {
+                return;
+            }
+            if (IsLivingEntity(be))
+            {
+                reading.Living += LivingEach;
+            }
+            if (be is IBlockEntityContainer container && container.Inventory != null && be is not BlockEntityPlantContainer)
+            {
+                reading.Containers++;
+                foreach (var slot in container.Inventory)
+                {
+                    var code = slot?.Itemstack?.Collectible?.Code;
+                    if (code == null)
                     {
                         continue;
                     }
-                    if (IsLivingBlock(block))
+                    int size = slot!.StackSize;
+                    if (code.Equals(BoneCode))
                     {
-                        reading.Living += LivingEach;
+                        bones += size;
                     }
-                    if (IsBoneBlock(block))
+                    else if (code.Equals(TemporalGearCode))
                     {
-                        reading.Bones += BoneBlockEach;
+                        gears += size;
                     }
-                    var be = accessor.GetBlockEntity(tmp);
-                    if (be == null)
+                    else if (code.Equals(RustyGearCode))
                     {
-                        continue;
+                        rusty += size;
                     }
-                    if (IsLivingEntity(be))
+                    else if (code.Equals(RotCode))
                     {
-                        reading.Living += LivingEach;
-                    }
-                    if (be is IBlockEntityContainer container && container.Inventory != null && be is not BlockEntityPlantContainer)
-                    {
-                        reading.Containers++;
-                        foreach (var slot in container.Inventory)
-                        {
-                            var stack = slot?.Itemstack;
-                            if (stack?.Collectible?.Code == null)
-                            {
-                                continue;
-                            }
-                            var code = stack.Collectible.Code;
-                            if (code.Equals(BoneCode))
-                            {
-                                bones += stack.StackSize;
-                            }
-                            else if (code.Equals(TemporalGearCode))
-                            {
-                                gears += stack.StackSize;
-                            }
-                            else if (code.Equals(RustyGearCode))
-                            {
-                                rusty += stack.StackSize;
-                            }
-                            else if (code.Equals(RotCode))
-                            {
-                                rot += stack.StackSize;
-                            }
-                        }
+                        rot += size;
                     }
                 }
             }
         }
-        reading.Living += LivingEach * CountAnimals(world, pos);
-        reading.Bones += BonesStep * (bones / BonesPerStep);
-        reading.Gears = GearEach * gears;
-        reading.Decay = DecayStep * (rot / RotPerStep + rusty / RustyGearsPerStep);
 
-        int sun = accessor.GetLightLevel(pos, EnumLightLevelType.TimeOfDaySunLight);
-        reading.Light = Math.Clamp(Math.Max(sun / FullSun, lamp / FullLamp), 0f, 1f);
+        public Reading Total()
+        {
+            var total = reading;
+            total.Living += LivingEach * CountAnimals(world, pos);
+            total.Bones += BonesStep * (bones / BonesPerStep);
+            total.Gears = GearEach * gears;
+            total.Decay = DecayStep * (rot / RotPerStep + rusty / RustyGearsPerStep);
+            int sun = world.BlockAccessor.GetLightLevel(pos, EnumLightLevelType.TimeOfDaySunLight);
+            total.Light = Math.Clamp(Math.Max(sun / FullSun, lamp / FullLamp), 0f, 1f);
+            Stability(world, pos, ref total);
+            return total;
+        }
 
-        Stability(world, pos, ref reading);
-        return reading;
+        public void Finish(float[] strengths)
+        {
+            var r = Total();
+            strengths[CrystalEnvironment.LifeIndex] = r.Light * Math.Min(1f, r.Living);
+            strengths[CrystalEnvironment.DeathIndex] = (1f - r.Light) * Math.Min(1f, r.Bones);
+            strengths[CrystalEnvironment.TimeIndex] = r.Time * Math.Min(1f, r.Gears);
+            strengths[CrystalEnvironment.RustIndex] = r.Rust * Math.Min(1f, r.Decay);
+        }
     }
 
     /// <summary>Time and Rust's conditions: the game's stability, storms included, or depth where stability is off.</summary>

@@ -10,6 +10,7 @@ Mysteries test: a storm with no decay reads Rust 0\.00; sixteen rusty gears coun
 Mysteries test: a Glowing Unaligned crystal at a firepit refined to fire glowing; with 10 crops lit beside the firepit it holds unaligned glowing, 0\.00 of the way
 Mysteries test: equal twins cancel in a reading: yes; standing Life and Death now unaligned and unaligned; Time and Rust now unaligned and unaligned
 Mysteries test: after a hen died, half an hour charged the Death crystal beside it to [1-9][0-9.]* and the one 12 blocks off to 0\.0
+Mysteries test: the Gather block beside it gathered [1-9][0-9.]* in that half hour, the one 12 blocks off 0\.0
 # The four evocations.
 Mysteries test: Bloom grew flax to crop-flax-2 \(acted\); cast again the same day: refused, still crop-flax-2; a Glowing Bloom grew 9 of 9
 Mysteries test: Wither made the flax deadcrop on farmland-moist-medium; grassy soil is now soil-medium-none; tallgrass-tall-free wilted to nothing
@@ -22,4 +23,5 @@ Mysteries test: a Fire crystal's light empty to full is 1, 2, 3, 4; an Unaligned
 Mysteries test: beside a Death crystal the Glint's crystal is now unaligned, its light 0
 # Mystery crystals in machines: a Life Focus blooms once a day, a Refine copies Time, Time and Rust Focus blocks work by the measure.
 Mysteries test: a Life Focus Acted, the flax is now crop-flax-2, then Nothing; a Refine block refined 1 crystal\(s\), 2 of 2 are Time
+Mysteries test: a Death Focus Acted, the flower is gone, [1-9][0-9]* item\(s\) in the chest touching it
 Mysteries test: a Time Focus Acted, the meat from 30 to 18 hours; at 5 hours it Nothing, paid 0; a Rust Focus Acted, the cheese from 100 to 112 hours, then Nothing

@@ -306,7 +306,24 @@ public static class MysteryEffects
         }
         if (Wilts(block))
         {
-            accessor.BreakBlock(pos, null);
+            if (cast.Machine?.Collect is { } collect)
+            {
+                // A machine's drops go into a container touching it, as Gale's do; only what does not fit drops.
+                var drops = block.GetDrops(world, pos, null) ?? Array.Empty<ItemStack>();
+                accessor.SetBlock(0, pos);
+                accessor.TriggerNeighbourBlockUpdate(pos);
+                foreach (var stack in drops)
+                {
+                    if (stack != null && collect(stack) is { StackSize: > 0 } left)
+                    {
+                        world.SpawnItemEntity(left, pos.ToVec3d().Add(0.5, 0.5, 0.5));
+                    }
+                }
+            }
+            else
+            {
+                accessor.BreakBlock(pos, null);
+            }
             return true;
         }
         // Grassy soil (soil-{fertility}-{grass}) loses its grass.

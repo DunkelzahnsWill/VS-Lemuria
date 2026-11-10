@@ -473,6 +473,13 @@ public class MysteriesTests
         var farCrystal = PlaceCrystal(far, Crystal.Death, Crystal.Glittering);
         Accessor.SetBlock(Id("game:torch-basic-lit-up"), near.AddCopy(0, 0, 1));
         Accessor.SetBlock(Id("game:torch-basic-lit-up"), far.AddCopy(0, 0, 1));
+        // A Gather block with a Death crystal beside each, as lightning reaches a Gather's Sky crystals.
+        var nearGather = PlaceMachine(near.AddCopy(1, 0, 1), Machines.Machine.Gather, "up");
+        var farGather = PlaceMachine(far.AddCopy(-1, 0, 1), Machines.Machine.Gather, "up");
+        Put(nearGather, Crystal.Death, Crystal.Glittering);
+        Put(farGather, Crystal.Death, Crystal.Glittering);
+        nearGather?.GatherNow(0);
+        farGather?.GatherNow(0);
         var hen = Spawn("game:chicken-hen", near.ToVec3d().Add(2.5, 0, 0.5));
         if (hen == null || nearCrystal == null || farCrystal == null)
         {
@@ -485,6 +492,8 @@ public class MysteriesTests
             farCrystal.ReadSurroundings(0.5);
             logger.Notification("Mysteries test: after a hen died, half an hour charged the Death crystal beside it to {0:0.0} and the one 12 blocks off to {1:0.0}",
                 nearCrystal.Charge, farCrystal.Charge);
+            logger.Notification("Mysteries test: the Gather block beside it gathered {0:0.0} in that half hour, the one 12 blocks off {1:0.0}",
+                nearGather?.GatherNow(0.5) ?? -1, farGather?.GatherNow(0.5) ?? -1);
         }, 500);
     }
 
@@ -762,6 +771,21 @@ public class MysteriesTests
         var moved = rustFocus?.WorkOnce();
         float ripen = TransitionHours(ChestSlot(cheeseChest, 0)?.Itemstack, EnumTransitionType.Ripen);
         var notDue = rustFocus?.WorkOnce();
+        // A Death Focus over flowers, a chest touching it: the wilted flowers go into the chest.
+        var flowers = origin.AddCopy(11, 0, 1);
+        int flowerId = World.Blocks.FirstOrDefault(b => b.Code?.Domain == "game" && b.Code.Path.StartsWith("flower-") && b.Code.Path.EndsWith("-free"))?.Id ?? 0;
+        Accessor.SetBlock(Id("game:soil-medium-none"), flowers.DownCopy());
+        Accessor.SetBlock(flowerId, flowers);
+        var deathFocus = PlaceMachine(flowers.AddCopy(0, 3, 0), Machines.Machine.Focus, "down");
+        var deathChest = flowers.AddCopy(1, 3, 0);
+        Chest(deathChest);
+        Put(deathFocus, Crystal.Death, Crystal.Glittering);
+        Fill(deathFocus);
+        var withered = deathFocus?.WorkOnce();
+        int collected = Accessor.GetBlockEntity(deathChest) is BlockEntityGenericTypedContainer dc ? dc.Inventory.Sum(s => s.StackSize) : -1;
+        logger.Notification("Mysteries test: a Death Focus {0}, the flower is {1}, {2} item(s) in the chest touching it",
+            withered, Accessor.GetBlock(flowers).Id == 0 ? "gone" : Path(flowers), collected);
+
         logger.Notification("Mysteries test: a Time Focus {0}, the meat from 30 to {1:0.#} hours; at 5 hours it {2}, paid {3:0.#}; a Rust Focus {4}, the cheese from 100 to {5:0.#} hours, then {6}",
             rewound, meat, fresh, paid, moved, ripen, notDue);
     }
