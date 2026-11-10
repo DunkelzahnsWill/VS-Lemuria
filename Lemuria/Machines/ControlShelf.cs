@@ -551,7 +551,8 @@ public class BlockEntityControlShelf : BlockEntityDisplay
         }
         if (ShelfWork.KindOf(stack) == ShelfWork.Kind.None)
         {
-            return PrefixOf(place + 1) != null && ShelfWork.KindOf(inventory[place + 1].Itemstack) is ShelfWork.Kind.Shovel or ShelfWork.Kind.Axe && PlugLit(place + 1);
+            // In the last place there is no tool after it, so it is an item that does nothing.
+            return place + 1 < Places && ShelfWork.KindOf(inventory[place + 1].Itemstack) is ShelfWork.Kind.Shovel or ShelfWork.Kind.Axe && PlugLit(place + 1);
         }
         return quiet[place] == Quiet.Awake;
     }

@@ -621,6 +621,10 @@ public partial class MachinesTests
             dug, gravelLeft, soilLeft, split, oak, birch, YesNo(keepsOak), YesNo(keepsBirch), CountOf(output, "firewood"));
         logger.Notification("Machines test: the rod switches a prefix: {0}; the axe Dormant: {1}, then the machine {2}; woken: {3}, then {4}",
             YesNo(prefixSwitched), YesNo(switched), asleep, YesNo(woke && !shelf.IsDormant(1)), awake);
+        // Plugs (note rev 74): a prefix's plug follows its tool's, and an item that does nothing has a dark plug, in the last place too.
+        SetItems(shelf, "game:gravel-granite", "game:shovel-copper", "game:seeds-flax", "game:gravel-granite");
+        string plugs = string.Concat(Enumerable.Range(0, BlockEntityControlShelf.Places).Select(i => shelf.PlugLit(i) ? "lit " : "dark ")).Trim();
+        logger.Notification("Machines test: gravel, a shovel, seeds and gravel on a shelf show plugs {0}", plugs);
     }
 
     // ------------------------------------------------------------------ quiet items and the shelf's socket (H4, H5)
