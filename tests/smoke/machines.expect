@@ -61,6 +61,8 @@ Machines test: gravel, a shovel, seeds and gravel on a shelf show plugs lit lit 
 Machines test: quiet seeds Acted, then Nothing: out of stock: yes, the shovel done: yes; seeds arrive and they wake: yes; 9 of 9 sown, then done: yes, still done with stock: yes; plugs dark dark dark dark; a sneak tap wakes them: yes, the switched-off shovel too: yes; plugs lit lit dark dark$
 # Fertiliser before seeds without a socket (play-test, Nov 2): the fertiliser goes quiet and the seeds sow the same turn.
 Machines test: compost then seeds, no socket, no compost in the input: Acted, compost out of stock: yes, seeds awake: yes, 9 of 9 sown$
+# A Dead Socket set in after an item has run out of stock stops the shelf as well (H5: "an item out of stock sends the whole shelf Dormant").
+Machines test: a Dead Socket set in once the compost is out of stock: Nothing, the whole shelf Dormant: yes, 0 of 9 sown$
 # The shelf's socket (H5): a Dead Socket sends the whole shelf Dormant for want of compost; compost wakes it, it feeds until done, then sows.
 Machines test: a socketed shelf with no compost Nothing, the whole shelf Dormant: yes, 0 sown; compost arrives and it wakes: yes; it feeds [0-9]+ time\(s\), compost done: yes, then Acted, 9 of 9 sown, the shelf awake: yes$
 # Step 4 part 3, Elemental batteries. The crystal decides (the owner, Nov 2, J3), and with two Elementals in the stones the

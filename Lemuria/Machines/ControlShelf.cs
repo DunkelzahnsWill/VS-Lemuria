@@ -214,12 +214,14 @@ public class BlockEntityControlShelf : BlockEntityDisplay
     /// </summary>
     public void Quieten(int place, Quiet why)
     {
-        if (QuietOf(place) != Quiet.Awake)
+        bool stops = why == Quiet.OutOfStock && socket != null;
+        // An item that ran out before the Dead Socket went in is quiet already, and still stops the shelf.
+        if (QuietOf(place) != Quiet.Awake && !(stops && !asleep && QuietOf(place) == Quiet.OutOfStock))
         {
             return;
         }
         quiet[place] = why;
-        if (why == Quiet.OutOfStock && socket != null)
+        if (stops)
         {
             asleep = true;
         }

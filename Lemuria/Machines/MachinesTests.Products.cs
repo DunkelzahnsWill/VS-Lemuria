@@ -763,6 +763,21 @@ public partial class MachinesTests
         var result = focus.WorkOnce();
         logger.Notification("Machines test: compost then seeds, no socket, no compost in the input: {0}, compost out of stock: {1}, seeds awake: {2}, {3} of 9 sown",
             result, YesNo(shelf.QuietOf(0) == BlockEntityControlShelf.Quiet.OutOfStock), YesNo(!shelf.IsDormant(1)), Sown(field));
+        // A Dead Socket set in once the compost is already out of stock stops the shelf as well (H5): the
+        // soil is bared and seeds arrive, and still nothing is sown.
+        for (int x = 0; x < 3; x++)
+        {
+            for (int z = 0; z < 3; z++)
+            {
+                Accessor.SetBlock(0, field.AddCopy(x, 1, z));
+            }
+        }
+        shelf.SetSocket(Stack(LemuriaModSystem.ModId + ":deadsocket"));
+        Add(input, Stack("game:seeds-flax", 9));
+        Fill(focus);
+        var late = focus.WorkOnce();
+        logger.Notification("Machines test: a Dead Socket set in once the compost is out of stock: {0}, the whole shelf Dormant: {1}, {2} of 9 sown",
+            late, YesNo(shelf.Asleep), Sown(field));
     }
 
     // ------------------------------------------------------------------ what an idle shelf turn costs

@@ -125,8 +125,8 @@ public static class ShelfWork
     /// A turn's work (H4, H5, note rev 56). Items run left to right, the first with work in reach doing
     /// it. An item that uses stock with none of its kind in the input goes quiet, out of stock; an item
     /// checked with nothing to do in reach goes quiet, done; a quiet or switched-off item is passed over
-    /// without a check. With a Dead Socket, any awake item out of stock sends the whole shelf Dormant
-    /// before anything works, and a Dormant shelf does nothing.
+    /// without a check. With a Dead Socket, any item out of stock, awake or already quiet for it, sends
+    /// the whole shelf Dormant before anything works, and a Dormant shelf does nothing.
     /// </summary>
     public static MachineWork.Result Work(BlockEntityMachine machine, BlockEntityControlShelf shelf, CastContext cast)
     {
@@ -140,7 +140,9 @@ public static class ShelfWork
         {
             for (int i = 0; i < items.Length; i++)
             {
-                if (items[i] != null && !shelf.IsDormant(i) && UsesStock(KindOf(items[i])) && !HasStock(machine, shelf, i))
+                // An item that ran out before the Dead Socket went in counts too; it was passed over until now.
+                if (items[i] != null && shelf.QuietOf(i) is BlockEntityControlShelf.Quiet.Awake or BlockEntityControlShelf.Quiet.OutOfStock
+                    && UsesStock(KindOf(items[i])) && !HasStock(machine, shelf, i))
                 {
                     shelf.Quieten(i, BlockEntityControlShelf.Quiet.OutOfStock);
                     return MachineWork.Result.Nothing;
