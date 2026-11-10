@@ -328,6 +328,33 @@ public static class Effects
     }
 
     /// <summary>
+    /// Lights one block as a firestarter would, lending the flame to the same holder as a cast, and tells
+    /// whether it caught: a block that still offers to be lit afterwards, as a bloomery with no chimney
+    /// does, took the flame and stayed cold. For the Control Shelf's firestarter (step 4 part 2 note,
+    /// question 5), which pays only for what it changed. Not for a firepit, which smoulders until its
+    /// next tick and would read as cold here; the shelf lights firepits itself.
+    /// </summary>
+    public static bool Light(CastContext cast, BlockPos pos)
+    {
+        if (TryIgnite(cast, pos) != Lighting.Lit)
+        {
+            return false;
+        }
+        var world = cast.Api.World;
+        var igniter = Igniter(cast);
+        try
+        {
+            // Asked of the block that is there now: a torch's flame swaps the block for its lit one.
+            var state = world.BlockAccessor.GetBlock(pos).GetInterface<IIgnitable>(world, pos)?.OnTryIgniteBlock(igniter!, pos, 0);
+            return state is not (EnumIgniteState.Ignitable or EnumIgniteState.IgniteNow);
+        }
+        catch (NullReferenceException) when (igniter == null)
+        {
+            return true;
+        }
+    }
+
+    /// <summary>
     /// Who holds the torch for the game's ignition hooks: the caster; for a machine, the player who carved
     /// it while they are online (the audit log already names them, step 4 note, Claims, creatures and
     /// players), else the nearest player online, as the game's own charcoal pit lights what it reaches
