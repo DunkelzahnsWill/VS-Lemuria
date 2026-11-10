@@ -9,9 +9,9 @@ namespace Lemuria.Evocations;
 /// <summary>
 /// Casting from the hand, on every crystal (patches/evocations-crystal.json); it acts only for the
 /// Elementals (design note "Lemuria step 3: Naked evocations", Casting). Hold right-click: the
-/// crystal winds up for half a second and over-drives past two; let go and the server casts. Like a
-/// bow's draw, the wind-up's note, whine and flare play on the caster's own client. Sneaking passes
-/// the click on, so the game sets the crystal down.
+/// crystal winds up for 5 seconds and over-drives from 15 (both set in the config); let go and the
+/// server casts. Like a bow's draw, the wind-up's note, whine and flare play on the caster's own
+/// client. Sneaking passes the click on, so the game sets the crystal down.
 /// </summary>
 public class CollectibleBehaviorEvocation : CollectibleBehavior
 {
