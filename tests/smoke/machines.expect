@@ -7,6 +7,8 @@ Machines test: the rod turned the front up with 1 crystal\(s\); a sneaking tap s
 Machines test: the Crystal Rod made: yes, the crystal used up: yes, rock left 1$
 # Focus: each Elemental does its evocation's work for a tenth of a cast; Earth rises once and goes Dormant.
 Machines test: a Fire Focus Acted, paid 1\.0, the firepit burns: yes; an Ice Focus Acted, the farmland under the flax soaked: yes$
+# A forge lights only for a player: with nobody online to hold the torch, it waits, free, with no error.
+Machines test: a Fire Focus at a forge with nobody online Nothing, the forge burns: no$
 Machines test: an Earth Focus Acted, 4 of 4 columns rose 2 to the north and east, Dormant: yes, then Idle$
 # Amplify: a Glowing Sky Focus lifted to Luminous's power reaps ripe crops into a chest and replants them.
 Machines test: a Glowing Sky Focus amplified to 2 Acted; 9 of 9 ripe flax replanted, some item\(s\) in the chest$

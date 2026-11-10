@@ -187,6 +187,20 @@ public partial class MachinesTests
         float before = fire == null ? 0 : Total(fire);
         var fireResult = fire?.WorkOnce();
         float paid = fire == null ? 0 : before - Total(fire);
+        // A Fire Focus at a forge with charcoal, with nobody online: the forge's hook reads the world from
+        // whoever holds the torch and lights only for a player, so it waits, free and without an error.
+        var forgePos = origin.AddCopy(5, 0, 3);
+        Accessor.SetBlock(Id("game:forge"), forgePos);
+        if (Accessor.GetBlockEntity(forgePos) is BlockEntityForge forge)
+        {
+            forge.FuelSlot.Itemstack = new ItemStack(World.GetItem(new AssetLocation("game:charcoal")), 4);
+            forge.FuelSlot.MarkDirty();
+        }
+        var forgeFocus = Place(origin.AddCopy(1, 0, 3), Machine.Focus, "east");
+        Put(forgeFocus, Crystal.Fire, Crystal.Glittering);
+        Fill(forgeFocus);
+        var forgeResult = forgeFocus?.WorkOnce();
+        bool forgeBurns = Accessor.GetBlockEntity(forgePos) is BlockEntityForge { IsBurning: true };
         // Ice: a Focus over young flax on dry farmland, facing down.
         var field = origin.AddCopy(1, 0, 4);
         Accessor.SetBlock(Id("game:farmland-dry-medium"), field);
@@ -220,6 +234,8 @@ public partial class MachinesTests
             bool burning = Accessor.GetBlockEntity(firepitPos) is BlockEntityFirepit { IsBurning: true };
             logger.Notification("Machines test: a Fire Focus {0}, paid {1:0.0}, the firepit burns: {2}; an Ice Focus {3}, the farmland under the flax soaked: {4}",
                 fireResult, paid, YesNo(burning), iceResult, YesNo(soaked));
+            logger.Notification("Machines test: a Fire Focus at a forge with nobody online {0}, the forge burns: {1}",
+                forgeResult, YesNo(forgeBurns));
             logger.Notification("Machines test: an Earth Focus {0}, {1} of 4 columns rose 2 to the north and east, Dormant: {2}, then {3}",
                 earthResult, rose, YesNo(dormant), again);
         }, 2000);
