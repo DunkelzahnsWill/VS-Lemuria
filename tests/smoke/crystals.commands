@@ -1,5 +1,7 @@
 # Crystals (step 2): a Fire crystal charges beside a burning firepit; standing twins and twins in a
-# chest dialogue once the warning runs out; twins in a crystal jar in the same chest do not.
+# chest dialogue once the warning runs out; twins in a crystal jar in the same chest do not. A strike
+# drawn to a lightning rod boosts the Sky crystal where it lands, not the one it was aimed at.
 /lemuria crystals test charge
 /lemuria crystals test standing
 /lemuria crystals test chest
+/lemuria crystals test lightning
