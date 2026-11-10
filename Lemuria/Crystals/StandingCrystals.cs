@@ -38,7 +38,7 @@ public interface IStandingCrystal
     /// <summary>Adds one crack; the crack that reaches CracksToShatter shatters the crystal.</summary>
     void Crack();
 
-    /// <summary>A lightning strike within 16 blocks.</summary>
+    /// <summary>A lightning strike within 16 blocks that found this crystal under open sky.</summary>
     void OnLightning();
 }
 

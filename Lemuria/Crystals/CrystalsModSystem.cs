@@ -164,10 +164,27 @@ public class CrystalsModSystem : ModSystem
             return;
         }
         lastFlash = impactPos;
-        var pos = impactPos.AsBlockPos;
-        foreach (var crystal in Standing.Near(pos, 16))
+        StrikeAt(impactPos.AsBlockPos);
+    }
+
+    /// <summary>
+    /// A bolt landed here. Every crystal standing within 16 blocks hears it, in a cradle or a socket too,
+    /// if it stands under open sky as the bolt lands: a strike gives a roofed crystal nothing, then or
+    /// later (the owner, Nov 10 2026; step 2 note, Sky). Public for the test commands. Server only.
+    /// </summary>
+    public void StrikeAt(BlockPos landing)
+    {
+        if (Standing == null)
         {
-            crystal.OnLightning();
+            return;
+        }
+        var accessor = sapi.World.BlockAccessor;
+        foreach (var crystal in Standing.Near(landing, 16))
+        {
+            if (CrystalEnvironment.OpenSky(accessor, crystal.StandPos))
+            {
+                crystal.OnLightning();
+            }
         }
     }
 
@@ -399,7 +416,8 @@ public class CrystalsModSystem : ModSystem
     /// <summary>
     /// A strike aimed at one Sky crystal, 24 blocks from a lightning rod on a mast, which draws it in: the
     /// crystal at the rod's foot, where the bolt lands, has its six hours of full Sky, and the one at the
-    /// aim, more than 16 blocks from the landing, has not (step 2 note, The Four Elementals, Sky).
+    /// aim, more than 16 blocks from the landing, has not (step 2 note, The Four Elementals, Sky). A
+    /// third near the rod stands under a roof as the bolt lands and gets nothing (the owner, Nov 10 2026).
     /// </summary>
     private void OnTestLightning(BlockPos column)
     {
@@ -435,6 +453,8 @@ public class CrystalsModSystem : ModSystem
         accessor.SetBlock(rod.Id, mast.AddCopy(0, 9, 0));
         var byRod = PlaceCrystal(origin.AddCopy(27, 0, 1), Crystal.Sky, Crystal.Glittering, 0, 0);
         var atAim = PlaceCrystal(origin.AddCopy(3, 0, 1), Crystal.Sky, Crystal.Glittering, 0, 0);
+        var underRoof = PlaceCrystal(origin.AddCopy(24, 0, 1), Crystal.Sky, Crystal.Glittering, 0, 0);
+        accessor.SetBlock(granite, origin.AddCopy(24, 2, 1));
         weather.SpawnLightningFlash(new Vec3d(origin.X + 3.5, origin.Y, origin.Z + 1.5));
         bool Boosted(BlockEntityCrystal? crystal)
         {
@@ -450,6 +470,16 @@ public class CrystalsModSystem : ModSystem
         {
             Mod.Logger.Notification("Crystals test: a strike aimed 24 blocks from a lightning rod lands on the rod; the Sky crystal at its foot boosted: {0}, the one at the aim: {1}",
                 Boosted(byRod) ? "yes" : "no", Boosted(atAim) ? "yes" : "no");
+            Mod.Logger.Notification("Crystals test: a Sky crystal four blocks from the rod, under a roof as the bolt landed, boosted: {0}", Boosted(underRoof) ? "yes" : "no");
+            if (byRod == null)
+            {
+                return;
+            }
+            // The six hours need open sky, like the rest of Sky (the owner, Nov 10 2026): a roof set over the struck crystal takes them away.
+            float open = CrystalEnvironment.Read(sapi.World, byRod.Pos, Boosted(byRod))[CrystalEnvironment.SkyIndex];
+            accessor.SetBlock(granite, byRod.Pos.AddCopy(0, 2, 0));
+            float roofed = CrystalEnvironment.Read(sapi.World, byRod.Pos, Boosted(byRod))[CrystalEnvironment.SkyIndex];
+            Mod.Logger.Notification("Crystals test: the struck Sky crystal reads Sky at {0:0.##} under open sky and {1:0.##} with a roof set over it", open, roofed);
         }, 2000);
     }
 

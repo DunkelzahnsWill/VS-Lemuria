@@ -11,3 +11,7 @@ Crystals: dialogue at level 2, fire glowing and ice glowing discharged, cracked:
 Crystals test: the chest now holds 2 Unaligned, 2 Fire and 0 Ice crystal\(s\); its jar still holds earth and sky$
 # Lightning counts where it lands, after a rod drew it in, and only there.
 Crystals test: a strike aimed 24 blocks from a lightning rod lands on the rod; the Sky crystal at its foot boosted: yes, the one at the aim: no$
+# The strike counts only for a crystal under open sky as the bolt lands, and its six hours need open
+# sky too, like the rest of Sky (the owner, Nov 10 2026).
+Crystals test: a Sky crystal four blocks from the rod, under a roof as the bolt landed, boosted: no$
+Crystals test: the struck Sky crystal reads Sky at 1 under open sky and 0 with a roof set over it$
