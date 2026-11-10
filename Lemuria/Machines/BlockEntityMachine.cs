@@ -408,7 +408,7 @@ public partial class BlockEntityMachine : BlockEntitySparkstone
         {
             read ??= CrystalEnvironment.Read(Api.World, Pos, false);
             var raw = (float[])read.Clone();
-            if (crystal.Alignment == Crystal.Sky && now < skyBoostUntil)
+            if (crystal.Alignment == Crystal.Sky && now < skyBoostUntil && OpenSky)
             {
                 raw[CrystalEnvironment.SkyIndex] = 1f;
             }
