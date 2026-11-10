@@ -206,10 +206,18 @@ public class MachinesModSystem : ModSystem
     private WeatherSystemServer? weather;
     private ICoreServerAPI? sapi;
 
+    /// <summary>
+    /// The landing point of the last flash a probe heard. Each flash keeps its own, and the game reports it
+    /// on every tick the flash lives, a third of a second; a network feed in between would let one strike
+    /// fill a probe twice.
+    /// </summary>
+    private Vec3d? lastFlash;
+
     private void OnLightningLanded(ref Vec3d impactPos, ref EnumHandling handling)
     {
-        if (sapi != null)
+        if (sapi != null && !ReferenceEquals(impactPos, lastFlash))
         {
+            lastFlash = impactPos;
             BlockEntityMachine.OnLightningLanded(sapi.World, impactPos);
         }
     }
