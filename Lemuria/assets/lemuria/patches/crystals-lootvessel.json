@@ -66,5 +66,73 @@
 			]
 		},
 		"file": "game:blocktypes/clay/lootvessel.json"
+	},
+	{
+		"op": "add",
+		"path": "/attributes/lootListByType/*-ore/-",
+		"value": {
+			"type": "block",
+			"chance": 0.036,
+			"minQuantity": 1,
+			"maxQuantity": 1,
+			"codes": [
+				"lemuria:crystal-life-glittering-up",
+				"lemuria:crystal-death-glittering-up",
+				"lemuria:crystal-time-glittering-up",
+				"lemuria:crystal-rust-glittering-up"
+			]
+		},
+		"file": "game:blocktypes/clay/lootvessel.json"
+	},
+	{
+		"op": "add",
+		"path": "/attributes/lootListByType/*-ore/-",
+		"value": {
+			"type": "block",
+			"chance": 0.009,
+			"minQuantity": 1,
+			"maxQuantity": 1,
+			"codes": [
+				"lemuria:crystal-life-glowing-up",
+				"lemuria:crystal-death-glowing-up",
+				"lemuria:crystal-time-glowing-up",
+				"lemuria:crystal-rust-glowing-up"
+			]
+		},
+		"file": "game:blocktypes/clay/lootvessel.json"
+	},
+	{
+		"op": "add",
+		"path": "/attributes/lootListByType/*-tool/-",
+		"value": {
+			"type": "block",
+			"chance": 0.036,
+			"minQuantity": 1,
+			"maxQuantity": 1,
+			"codes": [
+				"lemuria:crystal-life-glittering-up",
+				"lemuria:crystal-death-glittering-up",
+				"lemuria:crystal-time-glittering-up",
+				"lemuria:crystal-rust-glittering-up"
+			]
+		},
+		"file": "game:blocktypes/clay/lootvessel.json"
+	},
+	{
+		"op": "add",
+		"path": "/attributes/lootListByType/*-tool/-",
+		"value": {
+			"type": "block",
+			"chance": 0.009,
+			"minQuantity": 1,
+			"maxQuantity": 1,
+			"codes": [
+				"lemuria:crystal-life-glowing-up",
+				"lemuria:crystal-death-glowing-up",
+				"lemuria:crystal-time-glowing-up",
+				"lemuria:crystal-rust-glowing-up"
+			]
+		},
+		"file": "game:blocktypes/clay/lootvessel.json"
 	}
 ]

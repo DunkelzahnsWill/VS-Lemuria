@@ -9,7 +9,7 @@ namespace Lemuria.Crystals;
 /// Reads the environments round a refining cradle or a charging crystal and gives each alignment a
 /// strength from 0 to 1 (design note, The four environments and Purity). Every Elemental reading is the
 /// game's own: heat sources and their fall-off, the climate's temperature and rainfall, wind, and the
-/// rain map that tells open sky. About 250 block reads and one climate reading per call. Since step 5
+/// rain map that tells open sky. About 250 block reads and one climate reading per call, the Mysteries counting their signs among the same blocks. Since step 5
 /// the four Mysteries are read too, by the feature that owns them (<see cref="Mysteries"/>), so a
 /// reading has eight strengths and purity weighs all eight.
 /// </summary>
@@ -21,11 +21,21 @@ public static class CrystalEnvironment
     /// <summary>How many strengths a reading has: the four Elementals, then the four Mysteries.</summary>
     public const int Count = 8;
 
-    /// <summary>Fills a reading's Mystery strengths (Life, Death, Time, Rust) for a position; set by the Mysteries feature.</summary>
-    public delegate void MysteryReader(IWorldAccessor world, BlockPos pos, float[] strengths);
+    /// <summary>
+    /// The Mysteries' count of one reading: it sees every block of the same walk the Elementals read, so
+    /// the cube is walked once, then fills Life, Death, Time and Rust.
+    /// </summary>
+    public interface IMysteryCount
+    {
+        /// <summary>One block of the cube, its solid and fluid layers, at this many steps from the centre.</summary>
+        void Visit(BlockPos at, Block solid, Block fluid, int distance);
 
-    /// <summary>The Mysteries' reading, or null while no feature reads them, when they read nothing.</summary>
-    public static MysteryReader? Mysteries { get; set; }
+        /// <summary>Fills the four Mystery strengths once the walk is done.</summary>
+        void Finish(float[] strengths);
+    }
+
+    /// <summary>Starts the Mysteries' count for one reading; set by the Mysteries feature, or null when they read nothing.</summary>
+    public static System.Func<IWorldAccessor, BlockPos, IMysteryCount>? Mysteries { get; set; }
 
     /// <summary>How far the reading looks in every direction, diagonals included: a 5x5x5 cube.</summary>
     public const int Reach = 2;
@@ -46,6 +56,7 @@ public static class CrystalEnvironment
         int stone = 0;
         int around = 0;
         var tmp = new BlockPos(pos.dimension);
+        var mysteries = Mysteries?.Invoke(world, pos);
         // Every environment reads the same 5x5x5 cube round the crystal (the owner, step 2 play-test).
         for (int dx = -Reach; dx <= Reach; dx++)
         {
@@ -57,6 +68,7 @@ public static class CrystalEnvironment
                     var solid = accessor.GetBlock(tmp, BlockLayersAccess.Solid);
                     var fluid = accessor.GetBlock(tmp, BlockLayersAccess.Fluid);
                     heat += HeatFrom(world, solid, tmp, pos) + HeatFrom(world, fluid, tmp, pos);
+                    mysteries?.Visit(tmp, solid, fluid, Math.Abs(dx) + Math.Abs(dy) + Math.Abs(dz));
                     if (dx == 0 && dy == 0 && dz == 0)
                     {
                         continue;
@@ -100,7 +112,7 @@ public static class CrystalEnvironment
         {
             strengths[SkyIndex] = 1f;
         }
-        Mysteries?.Invoke(world, pos, strengths);
+        mysteries?.Finish(strengths);
         for (int i = LifeIndex; i < Count; i++)
         {
             strengths[i] = Cap(strengths[i]);

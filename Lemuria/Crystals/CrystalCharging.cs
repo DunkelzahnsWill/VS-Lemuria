@@ -37,7 +37,12 @@ public static class CrystalCharging
     /// </summary>
     public static float Strength(IWorldAccessor world, BlockPos pos, string alignment, string evolution, bool skyBoost, bool deathBoost = false)
     {
-        var raw = CrystalEnvironment.Read(world, pos, skyBoost, deathBoost);
+        return Strength(CrystalEnvironment.Read(world, pos, skyBoost, deathBoost), alignment, evolution);
+    }
+
+    /// <summary>The strength an aligned crystal charges at from a reading already made, so several crystals in one place share one read.</summary>
+    public static float Strength(float[] raw, string alignment, string evolution)
+    {
         bool passes = CrystalEnvironment.Lead(raw, Crystal.Rank(evolution), out var leader, out var strength);
         return passes && leader == alignment ? strength : 0f;
     }
