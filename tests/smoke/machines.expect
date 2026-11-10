@@ -82,3 +82,6 @@ Machines test: placed gravel wears: yes, cracked rock: yes, sand: no, cobbleston
 # The Wind Probe: 2 x 1,200 x \(0.25 + 0.5\) in a day; a strike fills its crystals (400) and pours first; roofed, nothing.
 Machines test: a Wind Probe with 2 Glowing Sky crystals, sockets facing up, gathered 1800 in a day of wind 0\.5; a strike filled 400; the line took 200 of its 200, 200 left from the strike$
 Machines test: roofed, the probe gathers 0$
+# Lightning and the Gather block (the owner, Nov 10 2026): the strike counts only under open sky as the bolt lands, and its
+# six hours only while the sky stays open. 200 is a Glittering crystal's day at full strength.
+Machines test: a Gather block struck under open sky gathers 200 of a day's 200; one roofed after the strike gathers 0; one roofed as the bolt landed, its roof gone again, gathers only what the sky gives: yes$

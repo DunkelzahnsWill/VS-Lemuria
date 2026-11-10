@@ -508,4 +508,42 @@ public partial class MachinesTests
 
         void OnQuickened(BlockEntityMachine _) => quickened = true;
     }
+
+    // ------------------------------------------------------------------ Gather and lightning
+
+    /// <summary>
+    /// Lightning and the Gather block (step 4 note, Gather; the owner, Nov 10 2026): a strike counts only
+    /// for a Gather block under open sky as the bolt lands, and its six hours only while the sky stays
+    /// open. Three Gather blocks hear one bolt: one left open, one roofed after it, one roofed as it lands.
+    /// </summary>
+    public void GatherStrike(BlockPos column)
+    {
+        var origin = TestSite.Surface(sapi, column);
+        Ground(origin, 9, 12, 3);
+        var open = Place(origin.AddCopy(1, 0, 1), Machine.Gather, "east");
+        var roofedAfter = Place(origin.AddCopy(4, 0, 1), Machine.Gather, "east");
+        var roofedThen = Place(origin.AddCopy(7, 0, 1), Machine.Gather, "east");
+        if (open == null || roofedAfter == null || roofedThen == null || CrystalsModSystem.Server is not { } crystals)
+        {
+            logger.Error("Machines test: no Gather blocks to strike");
+            return;
+        }
+        foreach (var gather in new[] { open, roofedAfter, roofedThen })
+        {
+            Put(gather, Crystal.Sky, Crystal.Glittering);
+        }
+        int roof = Id("game:rock-granite");
+        Accessor.SetBlock(roof, roofedThen.Pos.UpCopy());
+        crystals.StrikeAt(roofedAfter.Pos.UpCopy());
+        float day = (float)Machine.GatherPerDay(Crystal.Glittering);
+        float struck = open.GatherNow(24);
+        Accessor.SetBlock(roof, roofedAfter.Pos.UpCopy());
+        float after = roofedAfter.GatherNow(24);
+        // Its roof taken away again, the third gathers what the sky gives a Gather block no bolt reached, and no more.
+        Accessor.SetBlock(0, roofedThen.Pos.UpCopy());
+        float plain = day * CrystalCharging.Strength(World, roofedThen.Pos, Crystal.Sky, Crystal.Glittering, false);
+        float then = roofedThen.GatherNow(24);
+        logger.Notification("Machines test: a Gather block struck under open sky gathers {0:0} of a day's {1:0}; one roofed after the strike gathers {2:0}; one roofed as the bolt landed, its roof gone again, gathers only what the sky gives: {3}",
+            struck, day, after, YesNo(System.Math.Abs(then - plain) < 0.01f));
+    }
 }

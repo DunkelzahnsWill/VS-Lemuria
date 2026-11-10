@@ -32,3 +32,5 @@
 /lemuria machines test icebattery
 /lemuria machines test earthbattery
 /lemuria machines test probe
+# The audit (Nov 10 2026): one bolt and three Gather blocks, open, roofed after it, and roofed as it lands.
+/lemuria machines test gatherstrike
