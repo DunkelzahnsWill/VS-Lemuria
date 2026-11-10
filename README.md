@@ -3,8 +3,10 @@
 *The Song of Stone.* A crystal and stone tech mod for Vintage Story 1.22.7: grow resonant crystals,
 refine them through their alignments, and wake sparkstone to work for you.
 
-The mod is in early development. This version is an empty mod that loads; the design lives in the
-pre-production document, and features arrive one step at a time, each with a play-test.
+The mod is in early development. Steps 1 to 4 are built and play-tested: finding and farming
+crystals, the Four Elementals, naked evocations, and machines with their products, logistics,
+elemental batteries and Wind Probes. The design lives in the pre-production document, and features
+arrive one step at a time, each with a play-test.
 
 | Field | Value |
 | --- | --- |
