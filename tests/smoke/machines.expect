@@ -89,3 +89,8 @@ Machines test: roofed, the probe gathers 0$
 # Lightning and the Gather block (the owner, Nov 10 2026): the strike counts only under open sky as the bolt lands, and its
 # six hours only while the sky stays open. 200 is a Glittering crystal's day at full strength.
 Machines test: a Gather block struck under open sky gathers 200 of a day's 200; one roofed after the strike gathers 0; one roofed as the bolt landed, its roof gone again, gathers only what the sky gives: yes$
+# The shelf's firestarter lights what one lights (step 4 part 2, question 5), paying only for what caught. A torch needs
+# nobody to hold the flame; a forge lights only for a player, so with nobody online it waits, free, with no error.
+Machines test: a shelf's firestarter Acted, an extinct torch is now torch-basic-lit-up, a forge with nobody online burns: no; with nothing left to light it Nothing$
+# Never a pile on the ground or a bomb; a pit kiln is ground storage to the game too, and is lit.
+Machines test: the firestarter spares a pile on the ground: yes, a coal pile: yes, a bomb: yes; a pit kiln: no, a forge: no, a bloomery: no, a clay oven: no$

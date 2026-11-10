@@ -752,8 +752,11 @@ public static class ShelfWork
     // ------------------------------------------------------------------ firestarter
 
     /// <summary>
-    /// A firestarter lights what one lights in reach, a built charcoal pit or a firepit with fuel in it,
-    /// but never a pile on the ground or a bomb, so a pit whose wood ran out waits instead of burning.
+    /// A firestarter lights what one lights in reach (step 4 part 2 note, question 5): a built charcoal
+    /// pit and a firepit with fuel in it, and through the hook the game's own firestarter uses a forge, a
+    /// bloomery, a pit kiln, a clay oven and the rest. Never a pile on the ground or a bomb, so a pit
+    /// whose wood ran out waits instead of burning. A forge and its like light only for a player: the
+    /// flame is lent to the machine's carver or the nearest player, and they wait while nobody is online.
     /// </summary>
     private static MachineWork.Result Light(CastContext cast, List<BlockPos> reach)
     {
@@ -775,6 +778,12 @@ public static class ShelfWork
                     firepit.igniteFuel();
                     lit = true;
                     break;
+                default:
+                    if (accessor.GetBlock(pos) is { Id: not 0 } block && !Spared(block) && Effects.Light(cast, pos))
+                    {
+                        lit = true;
+                    }
+                    break;
             }
         }
         if (!lit)
@@ -784,4 +793,10 @@ public static class ShelfWork
         Sound(cast, IgniteSound);
         return MachineWork.Result.Acted;
     }
+
+    /// <summary>
+    /// What the shelf's firestarter never lights: a pile on the ground, of firewood or of coal, and a
+    /// bomb. A pit kiln is ground storage to the game too, and is lit. Public for the test command.
+    /// </summary>
+    public static bool Spared(Block block) => block is BlockCoalPile or BlockBomb || block is BlockGroundStorage and not BlockPitkiln;
 }

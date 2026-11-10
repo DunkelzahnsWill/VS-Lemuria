@@ -780,6 +780,58 @@ public partial class MachinesTests
             late, YesNo(shelf.Asleep), Sown(field));
     }
 
+    // ------------------------------------------------------------------ the firestarter (question 5)
+
+    /// <summary>
+    /// A shelf's firestarter lights what one lights in reach, save a pile on the ground and a bomb (step 4
+    /// part 2 note, question 5). The smoke test has no player, so the scene shows what needs none: an
+    /// extinct torch is relit, and a forge, which lights only for a player, waits with no error. A pile and
+    /// a bomb light only for a player too, so what is spared is asked of the rule, block by block.
+    /// </summary>
+    public void Lights(BlockPos column)
+    {
+        var origin = TestSite.Surface(sapi, column);
+        Ground(origin, 5, 6, 5);
+        // Under a Glowing Unaligned Focus: a forge with charcoal in the middle of its 3×3 and an extinct torch beside it.
+        var forgePos = origin.AddCopy(2, 0, 2);
+        Accessor.SetBlock(Id("game:forge"), forgePos);
+        if (Accessor.GetBlockEntity(forgePos) is BlockEntityForge forge)
+        {
+            forge.FuelSlot.Itemstack = Stack("game:charcoal", 4);
+            forge.FuelSlot.MarkDirty();
+        }
+        var torchPos = forgePos.AddCopy(-1, 0, 0);
+        Accessor.SetBlock(Id("game:torch-basic-extinct-up"), torchPos);
+        var focusPos = forgePos.AddCopy(0, 3, 0);
+        var focus = Place(focusPos, Machine.Focus, "down");
+        var shelf = Shelf(focusPos, BlockFacing.EAST, "game:firestarter");
+        Put(focus, Crystal.Unaligned, Crystal.Glowing);
+        if (focus == null || shelf == null)
+        {
+            return;
+        }
+        Fill(focus);
+        focus.ReadContext();
+        var first = focus.WorkOnce();
+        string torch = Path(torchPos);
+        Fill(focus);
+        var second = focus.WorkOnce();
+        logger.Notification("Machines test: a shelf's firestarter {0}, an extinct torch is now {1}, a forge with nobody online burns: {2}; with nothing left to light it {3}",
+            first, torch, YesNo(Accessor.GetBlockEntity(forgePos) is BlockEntityForge { IsBurning: true }), second);
+        bool Spares(string code)
+        {
+            var block = World.GetBlock(new AssetLocation(code));
+            if (block == null)
+            {
+                logger.Error("Machines test: no block {0}", code);
+            }
+            return block != null && ShelfWork.Spared(block);
+        }
+        logger.Notification("Machines test: the firestarter spares a pile on the ground: {0}, a coal pile: {1}, a bomb: {2}; a pit kiln: {3}, a forge: {4}, a bloomery: {5}, a clay oven: {6}",
+            YesNo(Spares("game:groundstorage")), YesNo(Spares("game:coalpile")), YesNo(Spares("game:bomb-ore")),
+            YesNo(Spares("game:pitkiln")), YesNo(Spares("game:forge")), YesNo(Spares("game:bloomerybase-north")), YesNo(Spares("game:clayoven-north")));
+    }
+
     // ------------------------------------------------------------------ what an idle shelf turn costs
 
     /// <summary>The roofed pit's Focus, for the idle timing once its pit burns.</summary>

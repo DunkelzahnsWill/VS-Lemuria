@@ -34,3 +34,5 @@
 /lemuria machines test probe
 # The audit (Nov 10 2026): one bolt and three Gather blocks, open, roofed after it, and roofed as it lands.
 /lemuria machines test gatherstrike
+# A shelf's firestarter at an extinct torch and at a forge, with nobody online.
+/lemuria machines test lights
