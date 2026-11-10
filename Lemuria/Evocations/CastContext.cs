@@ -23,6 +23,9 @@ public class MachineCast
     /// <summary>The name the audit log records for fires and melted rock: the player who carved the machine.</summary>
     public string ActorName { get; init; } = "a machine";
 
+    /// <summary>The player who carved the machine, who holds the torch for the game's ignition hooks while online; null if unknown.</summary>
+    public string? CarverUid { get; init; }
+
     /// <summary>A Scatter's square, in blocks across, flat and centred on the block aimed at; 0 for a Focus's usual area.</summary>
     public int Square { get; init; }
 

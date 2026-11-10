@@ -5,6 +5,7 @@ using System.Linq;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.MathTools;
+using Vintagestory.API.Server;
 using Vintagestory.GameContent;
 
 namespace Lemuria.Evocations;
@@ -288,7 +289,13 @@ public static class Effects
         Lit,
     }
 
-    /// <summary>Lights a block through the ignition interface torches use, if it can be lit now.</summary>
+    /// <summary>
+    /// Lights a block through the ignition interface torches use, if it can be lit now. Most of the
+    /// game's hooks read the world from whoever holds the torch, and forges, coal piles, ground storage
+    /// and bombs light only for a player, so a cast with no caster (a machine's, or the test command's)
+    /// lends the torch to a player: see <see cref="Igniter"/>. With nobody online to hold it, a block
+    /// whose hook needs a holder waits, as a torch nobody holds lights nothing.
+    /// </summary>
     private static Lighting TryIgnite(CastContext cast, BlockPos pos)
     {
         var world = cast.Api.World;
@@ -297,18 +304,47 @@ public static class Effects
         {
             return Lighting.NotIgnitable;
         }
-        var state = ignitable.OnTryIgniteBlock(cast.Caster!, pos, 0);
-        if (state == EnumIgniteState.NotIgnitable)
+        var igniter = Igniter(cast);
+        try
         {
-            return Lighting.NotIgnitable;
+            var state = ignitable.OnTryIgniteBlock(igniter!, pos, 0);
+            if (state == EnumIgniteState.NotIgnitable)
+            {
+                return Lighting.NotIgnitable;
+            }
+            if (state == EnumIgniteState.NotIgnitablePreventDefault)
+            {
+                return Lighting.NotNow;
+            }
+            var handling = EnumHandling.PassThrough;
+            ignitable.OnTryIgniteBlockOver(igniter!, pos, IgniteSeconds, ref handling);
+            return Lighting.Lit;
         }
-        if (state == EnumIgniteState.NotIgnitablePreventDefault)
+        catch (NullReferenceException) when (igniter == null)
         {
+            // The hook needs someone to hold the torch; firepits, torches and charcoal pits do not, and still light.
             return Lighting.NotNow;
         }
-        var handling = EnumHandling.PassThrough;
-        ignitable.OnTryIgniteBlockOver(cast.Caster!, pos, IgniteSeconds, ref handling);
-        return Lighting.Lit;
+    }
+
+    /// <summary>
+    /// Who holds the torch for the game's ignition hooks: the caster; for a machine, the player who carved
+    /// it while they are online (the audit log already names them, step 4 note, Claims, creatures and
+    /// players), else the nearest player online, as the game's own charcoal pit lights what it reaches
+    /// when whoever lit it has gone. Null with nobody online.
+    /// </summary>
+    private static EntityAgent? Igniter(CastContext cast)
+    {
+        if (cast.Caster != null)
+        {
+            return cast.Caster;
+        }
+        var world = cast.Api.World;
+        if (cast.Machine?.CarverUid is { } uid && world.PlayerByUid(uid) is IServerPlayer { ConnectionState: EnumClientState.Playing, Entity: { } carver })
+        {
+            return carver;
+        }
+        return world.NearestPlayer(cast.From.X, cast.From.Y, cast.From.Z)?.Entity;
     }
 
     /// <summary>The game's fire on the face aimed at, as a torch sets it, in the caster's name for the audit log.</summary>
