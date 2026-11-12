@@ -324,3 +324,32 @@ reads the change before it merges (rule 6 e), and it then waits for the owner's 
 Concerns: the planning thread (the change to the rules); the review thread (rule 6 e); the coordinator (the wake of
 the review thread once the change's PR is ready, and, when the change merges, telling every thread, each of which
 then reads the rules again, rule 4); the precursor, once it is started.
+
+## R18. The owner on the sister project's rules: a reconciliation later, and a small difference is fine
+
+**Raised.** 2026-11-12 03:59Z by the planning thread, in its reply to a remark of the owner's in its thread.
+
+**Answered.** 2026-11-12 04:02Z by the owner, in a message in the planning thread.
+
+**Recorded.** 2026-11-12 04:06Z by the planning thread as deputy.
+
+The owner's remark, 03:59Z: "Its funny, your sister project has made similar mutations in the Commandments. I do
+suppose it was impossible to avoid on an already-established project."
+
+**The question, word for word.** The planning thread's reply, whole:
+
+> It fits. The rules assume a project that starts clean, and both of us had history to put somewhere.
+>
+> One thing to watch: each project now grows its own version 3, with different words under the same number. If you
+> want the two to match, paste me the sister project's paragraph and I'll fold it in. The cheap moment is before
+> Glowie reads mine, because any later change sends it back for a second read.
+
+The owner: "We can have a reconciliation of scripture at a later time, it took ~2 days straight of Q&A on an unrelated
+thread to get it out the door. A small heresy should be fine."
+
+Deputy's note: nothing is to be done now. The change to the rules that R17 orders goes ahead in the words R17 holds,
+without the other project's text, which the planning thread has not read. Bringing the two projects' rules into line
+is for a later time, at the owner's word, and would then be a change to the rules like any other (rule 4).
+
+Concerns: the planning thread; the review thread (rule 6 e: the owner has already spoken on the two texts
+differing).
