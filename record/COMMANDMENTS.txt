@@ -1,5 +1,5 @@
-THE COMMANDMENTS, version 4
-Ratified 2026-11-12. Replaces version 3 (2026-11-12).
+THE COMMANDMENTS, version 5
+Ratified 2026-11-12. Replaces version 4 (2026-11-12).
 
 Standing rules for every thread in a Project.
 
@@ -98,7 +98,7 @@ What the owner says after playing goes into player-diary.md. The coordinator sen
 
 Anything not on this list waits for the owner's merge.
 
-A patch carries a fix and nothing more. It needs no brief of its own, and it does not count as its thread's one unmerged feature under rule 3. If the fix would make a brief untrue, that brief is changed first. A change that adds what no brief describes is a feature, not a patch. A change to code on main that follows a change to its brief is a patch, and its verdict is "out": it waits for the owner's merge.
+A patch carries a fix and nothing more. It needs no brief of its own, and it does not count as its thread's one unmerged feature under rule 3. If the fix would make a brief untrue, that brief is changed first. A change that adds what no brief describes is a feature, not a patch. A change to code on main that follows a change to its brief is a patch, and its verdict is "out": it waits for the owner's merge. Where a thread's feature needs such a change in the folders of another feature that the thread owns or has been handed, the change may instead ride in the PR that carries the feature, once the change to the other feature's brief is merged. That PR's description names each other feature it changes and the merged change to that feature's brief.
 
 When the owner commands a change to the Road Bible, in words that name the change, the coordinator records the command word for word in rulings.md. The planning thread makes exactly that change and no other, citing the entry, and the review thread certifies that it matches before it merges. The PR may then be set to auto-merge, whichever part of the Road Bible it changes. A command that can be read two ways is a rule 1 stop.
 
