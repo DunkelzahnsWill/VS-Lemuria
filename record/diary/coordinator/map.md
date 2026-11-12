@@ -1,11 +1,11 @@
 # The coordinator's map
 
-Written 18:24Z on 2026-11-12 and corrected 18:35Z, after I read the rules (version 5) and the Road Bible whole, as the record thread sent them from main at 8897ca7. It replaces my first map, which was written before I had read either whole (G53).
+Written 18:24Z on 2026-11-12 corrected 18:35Z, and brought up to date after PR #76 merged, after I read the rules (version 5) and the Road Bible whole, as the record thread sent them from main at 8897ca7. It replaces my first map, which was written before I had read either whole (G53).
 
 ## The features, by number
 
 All are mason's (Road Bible, part 4).
-- Features 1 to 9 (crystals, cradle, journal, sparkstone, storage, evocations, earmuffs, machines, mysteries): built in the Precursor steps. Their nine briefs come first, in one batch (PR #55). Until the briefs merge they take only the fixes already ruled (R3).
+- Features 1 to 9 (crystals, cradle, journal, sparkstone, storage, evocations, earmuffs, machines, mysteries): built in the Precursor steps. Their nine briefs are settled (PR #55, changed by PR #72). A change to one goes by the review thread's read and the owner's merge.
 - Step 1: feature 10, duets.
 - Step 2: features 11 to 14, purity, exposure, reactions, strain.
 - Step 3: features 15 to 19, beams, ascendant, goodsbeams, supermedia, kilns.
