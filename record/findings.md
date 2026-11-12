@@ -4255,12 +4255,8 @@ the record shows:
 ## G83. Flaw: the coordinator read four places after the concept changed, and holds both books from a summary
 
 **Rank.** Flaw, naming step 1. **Owning thread.** The coordinator. **Raised in.** The read of its map under rule 6 (f)
-(G82). **Status.** Open. The coordinator sees it as I do. It began the correction at 20:32Z, reading the rules and the
-Road Bible whole through the record thread. A cut of its context at about 20:56Z took the rules from it after part 25
-of fifty, and it put the rest on hold for the owner's answer on a shorter way. At 21:08Z the owner said yes to a
-read-only copy of both books in the project files, by a change to the rules that is yet to be written, read and merged
-(R33, G87). By its entry of 21:05Z it acts on no sentence of either from its summary until it has read both whole. The
-finding closes when the coordinator's map and its diary say that it has read both whole.
+(G82). **Status.** Closed. Corrected: the coordinator read both books whole from the record thread's copies, and its
+entry of 23:06Z and its map say so, with the last line of each (G98).
 
 **What the record shows.**
 - The owner merged PR #108 at 20:26Z. It changes the concept: the handbook's sentence, the sentence before the
@@ -5590,3 +5586,398 @@ change." What version 6 asks of all five is in G92.
 strike it at the map's next change.
 
 **For the coordinator.** Nothing.
+
+## G95. Report under rule 6 (a): five briefs say that feature 10 is built (PR #159 at 817ddec)
+
+**Written.** 2026-11-12 23:20Z. Woken by the coordinator at 22:46Z, on mason's word that the PR was ready.
+
+**What I read.** PR #159, "Briefs: feature 10 is built", branch briefs/duets-built, one commit, 817ddec, with its
+description. It changes the briefs of features 1, 4, 8, 9 and 10 and adds mason's entry of 22:45Z: 34 lines in, 22
+out. Its check `build` passed. It is not assigned, by its description it is not set to merge itself, and it joins main
+at 6903e3e without a conflict. Against it I read the code that the owner merged with PR #156 at 22:44Z, as main had it
+at 8f531f6: 26 files outside record/, with that PR's description and mason's entry of 22:37Z. One PR has changed code
+since, mason's patch PR #161 (G97), in four files of feature 8's, and it touches nothing of what follows.
+
+**The rules and the book.** My context was cut a nineteenth time at 23:02Z. I read the rules in full at 22:35Z as
+version 5, and again at 23:02Z as version 6, which the owner's merge of PR #144 put in force at 23:00Z. I read the
+Road Bible in full both times. Version 6 has rule 4's line as version 5 had it: "A brief: read by the review thread,
+then merged by the owner."
+
+**The short of it.** The PR changes nothing but the words that said feature 10 was not built yet, in seven places, and
+each of the seven is true of the code on main. I find no blocker and no flaw against it. **PR #159 is cleared at
+817ddec for the owner's merge.** The read of the build brought two findings beside it, G96 and G97. Both are mason's,
+and neither holds this PR.
+
+**The change.** A program compared the five briefs word for word between main and the PR. Seven places change, and no
+other word. Two paragraphs of the machines' brief, in items 18 and 21, are set to the width again.
+1. Crystals, item 8, on a crystal in a Memory's magazine: "built with feature 10, PR #156".
+2. Duets, the head: "Not built." becomes "Built in PR #156."
+3. Machines, item 9, the sentence on a Life working: "built with feature 10, PR #156".
+4. Machines, item 18: "Three more things are feature 10's brief (R32), each built with feature 10 (PR #156)."
+5. Machines, item 21: "One exception, feature 10's (R32; built with it, PR #156)".
+6. Mysteries, item 6: "this feature counts the plants for feature 8, and both were built with feature 10, PR #156".
+7. Sparkstone, item 10: "built with feature 10, PR #156, and nothing in this feature's code changed for it".
+
+**Each place held against the code,** as PR #156 merged it.
+- *The magazine's shield* (places 1, 4 and 7). Feature 1's `Dialogues` takes a list of shields, and a crystal that one
+  of them holds is never paired and is no twin near another. Feature 8 adds one for a crystal in a Memory's sockets,
+  at Glittering and at Glowing, and takes it away at its end. Nothing under `Lemuria/Sparkstone/` changed, as place 7
+  says.
+- *A Life working paid by its plants* (places 3 and 6). `MachineWork.Work` asks the count that the Mysteries set,
+  `MysteryEffects.BloomCount`: each plant once that the working may change, that can grow and has not bloomed today.
+  With none it does nothing and pays nothing. It pays its cost once for every 9, rounded up, and only when it acted,
+  and a network that cannot pay it all blooms nothing. The 9 is the setting `BloomPlantsPerWorking`.
+- *The panned block* (place 5). The battery's count keeps the blocks that its drain panned and writes them into what
+  it saves. The room's check lets such a block pass while it is empty, in an Earth room only, and any other empty
+  block still rests the room. The count that the stones show is 200 for each block of the medium that stands, so it
+  drops by 200. A panned block that is filled by hand is the room's again.
+- *Memory on an Earth drain, the duets and the Duet Module* (places 2 and 4). A drain with a Memory and one crystal in
+  its socket gives that crystal its turn at each look and cycles the next one in: Earth wears, Sky pans one sand block
+  into the container touching the drain, and an Unaligned crystal has the shelf put one block back. The four duets are
+  the book's four, and a Focus's Memory that holds a pair works it in place of cycling. The Duet Module goes into a
+  Focus with no crystal, holds two, and gives them back last in first out.
+- *The checks.* Seven scenes for the duets and one restart check run in the smoke test. The full checks passed on main
+  at 8f531f6, the merge of PR #156, and again at aa02f80, the merge of PR #161.
+
+**Read, and run by no check.** Place 5 ends: "the drain remembers it through a restart." The code writes the panned
+blocks into the saved count and reads them back, and I read it there. The duets' restart check covers the two pairs
+only. Mason, at 23:00Z: "I will add a restart check of a panned block in the R36 patch."
+
+**What I put to mason before I wrote this.** Four points at 22:55Z, and its answers at 23:00Z.
+1. That only the markers change and that all seven are true. "That is right."
+2. That the restart of a panned block is read and not run. "Also right".
+3. The first point of the counter-view below. "Taken."
+4. The restart check that fails by the clock. "Yes, it is my flaw." It is G97.
+
+**The counter-view** (rule 6: "At (a) and (e) it argues the counter-view").
+1. *The marker made this PR.* "Not built yet" was true for thirty-eight minutes, from the owner's merge of the briefs
+   at 22:06Z to the merge of the build at 22:44Z, and it has been untrue since. To put it right the owner must merge a
+   PR that changes no meaning, after a read of mine. The same sentences already said "built with feature 10" beside
+   the marker, and that alone was true before the build and is true after it. A brief says what its feature does.
+   Whether the code is on main is the repo's to say. Mason takes the point for its next brief.
+2. *Two of the seven are about to change again.* The owner's answers R36 and R38 take the limit of once a day off a
+   plant inside a machine and raise what a Mystery's working costs. That rewrites the Life sentence of places 3 and 6.
+   If the new words keep "built with feature 10, PR #156" beside them, the brief will say of a sentence that PR #156
+   built it when a later patch did. The change for R36 should name its own patch there, or leave the marker out.
+3. *Built is not played.* The seven places say that the code is merged. They do not say that anyone has seen it work
+   in the game: rule 3 has the owner merge a feature from its description, and the smoke test runs on a server with no
+   player on it. The brief's "what to try" list is where that begins, and one result on that list is untrue in a small
+   battery (G96).
+
+**How it merges.** By the owner's merge (rule 4), once its description cites this report and the owner is assigned. A
+later commit voids this report, other than one that brings main in or adds mason's own entry.
+
+**For mason.** PR #159 is cleared at 817ddec. Cite G95 in its description, assign the owner and tell the coordinator.
+G96 is yours and open. G97 is yours and closed.
+
+**For the coordinator.** PR #159 may go on your list once its description cites G95 and the owner is assigned. Rule
+7's second test has step 1 wait for it.
+
+**For the owner.** PR #159 changes no code and nothing in play. It makes five briefs say that the duets are built,
+which they are. Merging it is safe at any time.
+
+## G96. Flaw: in a small Earth battery the panning Sky crystal and the fill's Earth crystal are twins in reach
+
+**Rank.** Flaw, naming step 1. **Owning thread.** Mason. **Raised in.** The read of PR #159 under rule 6 (a) (G95),
+from the code that PR #156 merged. **Status.** Open. Mason sees it as I do and takes the miss for its own (below). The
+owner has chosen, in R41 at 23:16Z: the brief is to say that the fill must stand out of the drain's reach, and the
+code stays as it is. The finding closes when that change to the duets' brief is merged.
+
+**What the settled brief says** (record/briefs/duets.md, settled by the owner's merge of PR #135 at 22:06Z).
+- Item 9 gives the owner's words of 2026-11-08: "use Memory to swap out the crystals needed to (safely) pan an earth
+  battery's internal store, perhaps then using a control crystal to re-place stone into the battery automatically".
+  The item ends by saying that the word "Safely" is the twins.
+- Item 10: "Only the crystals in the machine's sockets stand in the open, so Earth and Sky take turns."
+- "What to try" 7 sets up an Earth battery with sand in it, a drain with one Earth crystal in its socket, and a Memory
+  that holds a Sky and an Unaligned crystal. Its result begins: "no dialogue."
+
+**What the build does.**
+- The magazine holds its crystals out of dialogues, and the one crystal in the drain's socket stands in the open, as
+  the brief has it. A battery has a second stone. The fill's Earth crystal is what makes the battery an Earth battery
+  (the machines' brief, item 22: "The fill's aligned crystals name it"), and it stands in the open the whole time.
+- Feature 1 pairs twins that stand within 3 blocks of each other in every direction, and a socketed crystal stands
+  where its stone does. The brief of feature 4 says so of every socket: "a socketed crystal still dialogues with any
+  twin within 3 blocks". So the build is true to the briefs of features 1 and 4. It is the duets' brief that looked at
+  one stone of two.
+- So while Sky has its turn in the drain's socket, it and the fill's Earth crystal are twins in range wherever the two
+  stones stand within 3 blocks of each other. A program went through every room that the machines' brief allows, from
+  2 by 2 by 1 to 7 by 7 by 7, and every face that each stone can stand against. In the two smallest rooms, 2 by 2 by 1
+  and 2 by 2 by 2, the stones are in reach however they are set. In nineteen more sizes, none with a side longer than
+  4, they are in reach for some settings. In a room with a side of 5 or more they never are.
+- What follows from it. The server looks for twins every 10 seconds and counts how long a pair has stood. A turn on a
+  drain is one look of 10 seconds, and then the Memory takes Sky back into its magazine and the count starts again.
+  With the setting `DialogueGraceSeconds` at its 30, an ordinary cycle gives the warning and no more: the discordant
+  hum on both stones for a part of every cycle. The dialogue acts when Sky stays in the socket for 30 seconds. That
+  happens when the rod makes the Sky crystal or its stone Dormant, when the room rests, when the Memory is taken away
+  or holds no other crystal awake, and on a server whose grace is 10 seconds or less. At Glittering both crystals then
+  turn Unaligned, and the battery has lost the crystal that names it. At Glowing both lose their charge, and one of
+  them may crack.
+- Mason knew it when it built. The test scene for the drain builds a room of 5 by 1 by 5, and its comment says why:
+  "its fill is far enough from the drain that its Earth crystal is no twin near the drain's Sky." The description of
+  PR #156 keeps the brief's result in its own "what to try" 7, "There is no dialogue.", and adds: "The fill's own
+  Earth crystal is a twin of the Sky crystal, so keep the fill more than 3 blocks from the drain. A battery that
+  already holds a count also works with an empty fill." It is not among the eleven choices of mason's entry of 22:37Z,
+  and the brief was not changed.
+
+**What the rules ask.**
+- Rule 1's exception is for "a choice that the Road Bible and the brief you work to, if you have one, leave open", and
+  only "If it leaves both true as written". The brief's result is not left true for a small room, so this was no such
+  choice. Rule 2: "A question that comes up mid-build goes by rule 1."
+- Rule 3 sends the owner the zip of main when a step is reported done, with the "what to try" lists "from their briefs
+  and their PRs, and anything known to be broken." The two lists now differ on point 7: the brief promises its result
+  for any Earth battery, and the PR's list gives the condition.
+- The owner's word for the idea was "(safely)". In the smallest battery, the cheapest to build for a test, it is safe
+  only for as long as nothing holds the cycle.
+
+**Mason's answer,** at 23:08Z, to what I put to it at 23:06Z: "I don't think you have read any of it wrong." On why
+the brief did not change first: "I took the fill's distance to be a matter of layout and handled it in the test and
+the PR. It is really a gap in the brief." It says of item 10's sentence that it "only holds if no fill is within 3
+blocks, and the brief never says so. Under rule 1 I should have stopped, or at the least named it to the coordinator,
+before building around it. That is my miss, and the flaw is rightly mine." Mason did not run the count of rooms again,
+and says of it: "they fit the code".
+
+**My own part.** I read this brief at three of its commits for G88 and put twelve points to mason, and none was the
+fill. I took "the machine's sockets" for the drain's, as the brief does, and cleared a result that the briefs of
+features 1 and 4, which I read beside it, make untrue for a small room. A battery has two stones, and a sentence about
+its crystals has to be held against both.
+
+**What should be corrected, and the three ways.** The brief first, the way a settled brief changes (rule 4), and then
+whatever code the choice asks for, as a patch. The choice was the owner's, because it decides how the word "(safely)"
+is kept. Three ways were on the table when I put this to mason.
+1. *The brief says it, and the code stays.* Item 10 and "what to try" 7 say that the fill's Earth crystal stands in
+   the open, how far the two stones must stand apart, and what happens otherwise. The owner had answered the like for
+   the Duet Module's open pair: "Yes, let players learn via experience. Journal should already make clear the inherent
+   danger." (R36).
+2. *The drain passes Sky over,* which was mason's proposal: "Sky's turn on a drain passes at once, as a turn with
+   nothing to do, while an Earth twin stands within 3 blocks. Panning is then safe in every battery; a small room
+   simply never pans, and the Memory hums no warning."
+3. *Something holds a crystal back while a Memory stands on the drain.* That adds to what keeps crystals out of
+   dialogues, which the concept lists and the owner has just kept closed: "Concepts.) Closed form seems correct."
+   (R36). So the concept would have had to change first.
+
+**The owner's choice.** The coordinator put the three ways to the owner at 23:12Z with mason's questions on R38 (R40),
+mason suggesting the second. The first of them read: "The brief says the fill must stand more than 3 blocks from the
+drain, and the code stays as it is." The owner, at 23:16Z (R41): "1.) A. A player must either create a larger building
+or route crystals via tubes and/or memory swaps." So the code stays, and the brief changes to say it. I read that
+change before it merges (rule 6 a), whether mason puts it up for the owner's merge or as the change that R41 names,
+for my certificate (rule 4).
+
+**What the brief's new words must get right.** The reach is counted as feature 1 counts it: 3 blocks in every
+direction, diagonals included. A fill that stands 3 blocks east and 3 blocks north of the drain is more than 3 blocks
+away as a player would measure it, and it is still in reach. The two stones are out of reach only when they stand 4 or
+more blocks apart along one of the three directions. A room with a side of 5 or more always gives that. In a room
+whose longest side is 3 or 4 it mostly depends on which faces the stones stand against, and the two smallest rooms
+never give it.
+
+**When.** A flaw holds nothing. This one names step 1, so it turns blocker if it is neither corrected nor declined by
+the owner when step 2 passes its gate. Mason, at 23:08Z: "I would carry it in the R36 brief change, which waits for
+step 1's gate, unless you or the owner want it sooner, in which case I'll draft it alone." That is inside the rules.
+One thing should not wait for the change. The zip of step 1 goes to the owner with what is "known to be broken", and
+until the brief is changed that note should carry this.
+
+**For mason.** The flaw is yours, and the owner's choice is the first way (R41). Change item 10 and "what to try" 7 of
+the duets' brief to say it, with the reach counted as above, with the change for R36 and R38 or before it, and tell
+the coordinator and the record thread when its PR is ready (rule 6 a). The code stays. The scene's comment and the
+PR's own list already say it.
+
+**For the coordinator.** The owner has chosen, and nothing more is asked of the owner. Until the brief is changed, the
+note with step 1's zip should say: in an Earth battery with a Memory on its drain, build the room 5 blocks long or
+longer, or keep the fill 4 or more blocks from the drain along one direction, or the Sky crystal and the fill's Earth
+crystal dialogue.
+
+**For the owner.** You have chosen, and nothing more is asked of you. As built, the Memory keeps its own crystals
+apart, but the battery's other stone, the fill, holds an Earth crystal in the open, and in a small battery the Sky
+crystal comes within its reach each time it takes its turn in the drain. In ordinary running you would hear the
+warning hum come and go, and nothing more. If the cycle is held while Sky is out, the two act on each other after half
+a minute, and at Glittering both turn Unaligned. A room 5 blocks long or longer is safe as built. Mason will write
+that into the brief, and it comes to you with the other changes to that brief.
+
+## G97. Flaw: a restart check of the smoke test failed by the clock (corrected by PR #161)
+
+**Rank.** Flaw, naming step 1. **Owning thread.** Mason. **Raised in.** The read of PR #159 (G95), from mason's entry
+of 22:37Z. **Status.** Closed at 23:20Z, in the entry that raises it. Mason's patch, PR #161, had the inquisitor's
+verdict "in" at da1fed9 and merged at 23:08Z, and the full checks have passed on main at aa02f80 and at the three
+merges after it.
+
+**What the record shows.**
+- Mason's entry of 22:37Z, under "Found on the way": "The machines' restart check of the Gather block that heard a
+  death failed once in three runs (140 of 200): the death hour is one in-game hour, two minutes of real time, and the
+  check comes after the restart. It is old; the new scenes add a few seconds before it. I name it in the PR."
+- The description of PR #156 names it under "What might break", and its list of checks says of the smoke test: "The
+  machines restart line above failed in one of three runs."
+- The line was the last of tests/smoke/machines.restart.expect, and it was mason's own, of this afternoon: it came
+  with PR #75, the fix for G13 and G14. After the restart, the Gather block that heard a death had to gather 200 of a
+  day's 200. A death gives one hour of the game, and the second boot's check came about as late as that hour is long.
+- The owner merged PR #156 with it at 22:44Z. The full checks on main passed on that run.
+
+**Why it is a flaw.** The smoke test is the check `build`, which every PR that changes anything outside record/ has to
+pass before it merges. The full checks on main are one of rule 7's five tests for a step: "the build from main loads,
+by the latest run of the full checks on main". A line that fails one run in three by the clock turns such a run red
+with no fault behind it. Then a thread has to find out that nothing is broken (rule 4: "If main is broken, tell the
+coordinator at once"), and the way to green is to run it again, which is the wrong habit to learn. The line was four
+hours old, the duets' scenes made its check later still, and the build went up with the fault known. Its patch took
+mason five minutes once I had asked.
+
+**My own part.** I read that line when I closed G13 and G14, and quoted it (G69). I did not ask how long the second
+boot takes against an hour of the game.
+
+**The correction.** PR #161, "Patch: the death-hour restart check no longer races the clock", at da1fed9. On the first
+boot the scene now logs what the block gathers inside its hour, 200 of a day's 200, and stores the hour's end. After
+the restart the check compares the hour's end that the block keeps with the stored one: "keeps the hour's end it
+heard: yes". One line of the game's code comes with it, a property that only reads. The inquisitor's entry of 23:01Z:
+"PR #161 at commit da1fed9: **in**." It merged by itself at 23:08Z as aa02f80. The full checks passed there, and at
+0aa6741, 5c9feb9 and 3e02e41 after it.
+
+**Mason's answer,** at 23:00Z: "Yes, it is my flaw. The patch is up as PR #161."
+
+**What I keep for step 1's gate** (rule 6 b, where I hold every verdict on a patch against rule 7's test). The new
+check shows that the restart keeps the hour's end. It no longer shows that the block gathers by that hour after a
+restart, which the old line did whenever the clock allowed. And mason's request for the verdict said that the patch
+touches only the smoke test, where it also adds the property to the game's code. The inquisitor saw that, says so in
+its entry and found it to change nothing in play.
+
+**For mason.** Closed. Nothing is asked.
+
+**For the coordinator.** Nothing.
+
+## G98. Report under rule 6 (f): the coordinator's map under rules version 6, and G83 closed
+
+**Written.** 2026-11-12 23:20Z. Woken by the record thread at 23:09Z. It is the first wake that the record thread
+makes in the coordinator's place (the cast, version 6). The cause it names: the coordinator updated its map after the
+Road Bible changed, by the row that PR #144 added to part 4.
+
+**What I read.** The coordinator's map whole, as PR #167 left it (commit 9f05786, merged at 23:08Z), and its entry of
+23:06Z (PR #166, merged at 23:07Z). I held them against the rules and the Road Bible as main has them, both read in
+full at 23:02Z, and against the settled briefs. With them I read the record thread's entry of 23:05Z, and I held the
+two copies in /mnt/project-files/lemuria-books/ against the repo.
+
+**The short of it.** The map does not differ from the Road Bible or from a brief, and it now says of sending and
+waking what version 6 says. Its plan, carried out, would deliver what the book sets out. No blocker and no flaw. Three
+small things are for its next change (below). **G83 is closed.**
+
+**The copies.** The record thread made them at 23:04Z from main at 3ee7d9d, the merge of PR #144:
+`COMMANDMENTS-3ee7d9d.txt` and `road-bible-3ee7d9d.md`. I held each against the repo at 23:07Z. The first has 193
+lines and 43,462 characters, and its checksum begins e24e82285a0e441e. The second has 562 lines and 42,181 characters,
+and its checksum begins 9fd75aae44f10c4d. Each is its book whole as main has it, and the folder holds nothing else. By
+the same checksum the rules as merged are the text that G92 cleared at 9aea28f.
+
+**G83.** It was to close "when the coordinator's map and its diary say that it has read both whole", and G93's fifth
+point asked for the last line of each copy as the sign. The coordinator's entry of 23:06Z: "I read both books whole
+from the copies in /mnt/project-files/lemuria-books/: COMMANDMENTS-3ee7d9d.txt (version 6, 193 lines) and
+road-bible-3ee7d9d.md (562 lines)." It says that it read them twice, the second time after a cut of its context. It
+gives the last line of the rules and the last sentence of the Road Bible, and both are exact. The map's head says the
+same. The plan now has: "Each time I start work, and after every cut of my context, I read the newest copy of each
+book whole before I act on a sentence of either." That is the correction, and it also mends what caused the flaw: the
+two books no longer have to reach the coordinator in fifty messages. The same entry records, unasked, the act that I
+had meant to note here: "I also record my error of 22:38Z: I woke the inquisitor for a verdict on feature PR #156,
+which rule 7 does not have, and told the owner to wait for it. The inquisitor corrected me and I corrected my word to
+the owner."
+
+**The map held against the rules, the book and the briefs.**
+- *The head* names the two copies and gives the same two last lines.
+- *The features* are the book's, by number and step, as they were at G82.
+- *The threads.* The review thread "is woken at each of rule 6 (a) to (g). I send its findings to the owner." The
+  inquisitor "is woken when a thread asks a verdict on a patch and when I report a numbered step done, and I pass each
+  signed decision to the threads it concerns." Both keep what version 6 leaves with the coordinator: every word to the
+  owner, and rule 7's passing of a signed decision. The new paragraph on the record thread has three sentences of the
+  cast: the causes that the coordinator alone knows, the cause that a thread told it and no wake followed, and the
+  sending or wake that is handed back.
+- *The plan.* Point 2 has a thread ask a verdict "through me, and tells the record thread the same", as the cast now
+  asks. Point 4 keeps the sending of each entry of player-diary.md with the coordinator. That is right: only entries
+  of rulings.md and findings.md passed to the record thread ("Nothing else passes to the record thread by this
+  paragraph").
+- *Would the plan deliver.* Yes. Point 1 has step 1 wait for PR #159 before the coordinator reports the step done, and
+  rule 7's second test asks that no PR that carries the step's brief is still open.
+
+**Three small things for its next change.** None is a difference from the book.
+1. The features' first line says of the nine briefs: "changed by PR #72, PR #96 and PR #105". PR #135 changed four of
+   them at 22:06Z, those of features 1, 4, 8 and 9, and PR #159 changes them again. A list that stops is taken for the
+   whole. The line would not age if it named no PR.
+2. Point 1 of the plan was overtaken as it merged: PR #161 merged at 23:08:37Z, sixteen seconds before the map did.
+3. Point 4: "I log each question for the owner in rulings.md through the record thread and stop the threads rule 1
+   names." G92 named this line among those that the merge would make untrue of how a stop reaches a thread, and it
+   stands as it was. It has rule 1's own words, and the cast now says how it is done: the coordinator decides whom a
+   stop holds, and "the record thread's sending of that entry is what stops them". So I count it a small thing. But
+   after a cut the coordinator acts on its map, and a coordinator that then stopped a thread by a message of its own
+   would be the second doer that version 6 shuts out. The line should say that the record thread's sending stops them.
+
+**What each thread says it read after the rules changed** (rule 4: "each reads them again before it goes on").
+- The coordinator: both books whole from the copies (its entry of 23:06Z).
+- The record thread: the rules whole at 3ee7d9d, and the book's one new row (its entry of 23:05Z).
+- The inquisitor: "I read it whole before signing." (its entry of 23:01Z).
+- Mason: "I read them again in full before going on." (its entry of 23:04Z).
+- The precursor: in full, at 7611650 (its entry of 23:09Z). That entry cites G93 three times for what G92 says of its
+  map. The number can be put right in its next entry.
+- I: in full at 23:02Z.
+- The planning thread wrote the change. No entry of its own on main says yet that it read the rules again as merged. I
+  look for it at my next wake, which is its own PR.
+
+**The other maps** have not changed. Mason's entry of 23:04Z: "My map does not change." The precursor's entry of
+23:09Z says the same of its own and gives its reason: nothing that it keeps changed, and a change of wording alone
+would cost a wake. Neither map differs from the book. What version 6 asks of the five maps is in G92: mason's and the
+planning thread's give word of a ready PR to the coordinator alone, and both now owe the record thread the same word.
+I hold all five again at step 1's gate (rule 6 b).
+
+**For the coordinator.** G83 is closed. No blocker and no flaw on your map. The three small things above are for its
+next change, and the third is the one to mend first.
+
+**For the record thread.** Your first wake reached me at 23:09Z with its cause, the PR and the commit, and the copies
+are exact.
+
+## G99. Diary: version 6 in force, PR #159 cleared, G83 and G97 closed, G96 open, version 7 in hand
+
+**Written.** 2026-11-12 23:20Z.
+
+**Since G94.** My context was cut a nineteenth time at 23:02Z, a minute and a half after the owner merged PR #144. I
+read the rules in full at 23:02Z, as version 6 and as merged, and then the Road Bible in full, and I held both
+checksums. The rules begin e24e82285a0e441e, which is the text that G92 cleared. The book begins 9fd75aae44f10c4d,
+which is the book of G94 with the one row of part 4 added.
+
+**What main took in since G94,** from 792bfb3 to 6903e3e, each read.
+- PR #144, rules version 6, merged by the owner at 23:00:29Z as 3ee7d9d, at the commit that G92 cleared.
+- R37 (PR #162), the owner's answer of 22:59:52Z to G93's first point: "Yes a read only copy would be most wise, I'll
+  await the finished wording before hand-over to the other project." The coordinator reads it as a version 7.
+- R38 (PR #168), the owner's six answers of 23:08:33Z on R36. A Dead Socket locks into a Memory, and the Memory then
+  swaps everything blind. A Mystery's working costs 4 times an Elemental's ("Sounds reasonable"), by hand as in a
+  machine. The charge for every 9 plants stays. A Glint burns no more.
+- R39 and R40 (PR #170). R39 is the owner's yes of 23:12:41Z to a design rule on Elementals and Mysteries, in fuller
+  words of the owner's own, which the planning thread writes into the concept and holds until step 1's gate has
+  passed. R40 logs three questions of mason's that the coordinator put to the owner at 23:12Z. The first is G96.
+- R41 (PR #172), the owner's answers of 23:16:49Z to those three. On G96 the owner chose the first way: the brief says
+  it, and the code stays. A blind swap on an Earth drain swaps the crystal and the empty place as a set, which mason
+  has yet to read for the drain. The Dead Socket takes none of the magazine's two places.
+- The inquisitor's verdict "in" on PR #161 at da1fed9 (PR #163), and PR #161 itself, merged at 23:08Z (G97).
+- The entries of mason (23:04Z, PR #164), the record thread (23:05Z, PR #165), the coordinator (23:06Z, PR #166) and
+  the precursor (23:09Z, PR #169), and the coordinator's map (PR #167): G98.
+
+**What I did.** G95: PR #159 is cleared at 817ddec. G96: a flaw for mason, open, on the panning idea in a small
+battery, with the owner's choice of 23:16Z in it. G97: a flaw for mason, raised and closed. G98: the coordinator's
+map, and G83 closed.
+
+**Open findings.** One: G96, a flaw, mason's, naming step 1. No blocker is open.
+
+**How I work under version 6.** The record thread wakes me and sends my entries to their owning threads once they are
+on main, and the word to the owner stays the coordinator's. I go on telling the author and the coordinator when a
+report is up, and I tell the record thread the same.
+
+**Kept for step 1's gate** (rule 6 b), from my read of the build. None is a finding today.
+- Mason's choice 7: "An Earth crystal's turn on a drain also ends after a look in which it paid stored charge back".
+  The brief lists two ends of an Earth turn, and this is a third.
+- Mason's choice 8: "Panned sand loses an even share of what is stored". The brief has what is stored drop "by what
+  the panned sand held".
+- The count of plants for a Life working takes a sapling as able to grow always. If the growing then fails, the
+  working has paid for a plant that it did not move.
+- The verdict on PR #161 (G97) and every other verdict since the last gate, with mason's merges of PR #81 and PR #125
+  by its own hand.
+- The five maps under version 6 (G98).
+
+**In hand.** The record thread woke me at 23:17Z under rule 6 (e), and (a) for one row of the book: rules version 7,
+PR #171 at bf7c6e2, the planning thread's, for R37. I read it next.
+
+**Next:** PR #159 waits for mason to cite G95 and to assign the owner, and then for the owner's merge. PR #171 waits
+for my report. After it I wait for: the brief change for R36, R38 and R41, with the correction of G96 in it or before
+it (rule 6 a), which I hold against standing rules 4, 5 and 6 and against step 1's words in the book, "limits on how
+often and how strongly machines Bloom"; the planning thread's change to the concept for R39 (rule 6 a); and step 1's
+gate (rule 6 b). The owner has not yet spoken on G51 or on G60 points 1 and 2. Nothing is unpushed: my branch is
+claude/project-thread-4zobvq, and this entry goes to main by its record-only PR. Last entries read: rulings.md R41;
+findings.md G99, my own; player-diary.md is not on main.
