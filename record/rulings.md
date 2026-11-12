@@ -543,3 +543,26 @@ The planning thread will put that into the rules as the next version, and it com
 If "4.)" meant something other than rule 4, tell me." So the reading given with R24 is now the owner's."
 
 Concerns: the planning thread; the review thread; mason, once it starts.
+
+## R26. Question raised: does the owner want G58 and G61 fixed or declined?
+
+**Raised.** 2026-11-12 19:15Z by the coordinator, to the owner in the project chat, out of findings G58 and G61 and
+mason's word on them.
+
+**Recorded.** 2026-11-12 19:15Z by the record thread. The question's words came through the coordinator's hands, as
+the coordinator gave them; mason's words in it are as the coordinator quoted them.
+
+**The question, in the coordinator's words:**
+
+> G58 and G61 are flaws that the owner may decline. Mason wrote at 19:14:57Z: 'G58 and G61 change what a player sees,
+> and the owner may decline either, so I write no code for them until the owner gives a word on each and the machines
+> brief changes.' Does the owner want G58 fixed (a machine's fire takes its carver as starter, so the game holds its
+> spread at a claim) or declined (a machine's fire runs free, as its lava does)? Does the owner want G61 fixed (a
+> machine's containers are asked for a claim) or declined (they are ruled as the game rules a chute)? Asked of the
+> owner in the project chat at 19:15Z. It stops only mason's work on G58 and G61.
+
+**Stopped.** Only mason's work on G58 and G61.
+
+**Open.** Waits for the owner's word, "fix" or "decline", on each.
+
+Concerns: mason; the owner.
