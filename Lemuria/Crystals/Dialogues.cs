@@ -42,6 +42,26 @@ public class Dialogues
     /// <summary>Inventory class names that keep crystals out of dialogues (racks), set by other features.</summary>
     public static readonly HashSet<string> ShieldedInventoryClasses = new();
 
+    /// <summary>
+    /// Shields for crystals standing in blocks, set by other features as the inventory classes are: a
+    /// crystal any of them holds never dialogues and is no twin near to another (feature 1, item 8; a
+    /// Memory's magazine up to Glowing, feature 10).
+    /// </summary>
+    public static readonly List<System.Func<IStandingCrystal, bool>> Shields = new();
+
+    /// <summary>Whether a shield holds this standing crystal out of dialogues.</summary>
+    public static bool Shielded(IStandingCrystal crystal)
+    {
+        foreach (var shield in Shields)
+        {
+            if (shield(crystal))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private long lastTickMs;
 
     public Dialogues(ICoreServerAPI sapi, StandingCrystals standing, CrystalsModSystem system)
@@ -100,8 +120,13 @@ public class Dialogues
         var pairs = new List<(IStandingCrystal A, IStandingCrystal B)>();
         foreach (var a in crystals)
         {
+            if (Shielded(a))
+            {
+                a.TwinNear = false;
+                continue;
+            }
             string? twin = Crystal.TwinOf(a.Alignment!);
-            var near = standing.Near(a.StandPos, 3).Where(b => b != a && b.Alignment == twin).ToList();
+            var near = standing.Near(a.StandPos, 3).Where(b => b != a && b.Alignment == twin && !Shielded(b)).ToList();
             a.TwinNear = near.Count > 0;
             if (paired.Contains(a))
             {

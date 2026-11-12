@@ -122,6 +122,8 @@ public partial class BlockEntityMachine : BlockEntitySparkstone
         shelfPos = null;
         memoryPos = null;
         bool works = Form is Machine.Focus or Machine.Scatter;
+        // A Gather reads a shelf and a Memory too, which only an Earth battery's drain uses (feature 10, way A).
+        bool drains = Form == Machine.Gather;
         var accessor = Api.World.BlockAccessor;
         foreach (var face in BlockFacing.ALLFACES)
         {
@@ -133,14 +135,14 @@ public partial class BlockEntityMachine : BlockEntitySparkstone
             }
             else if (be is BlockEntityControlShelf shelf)
             {
-                if (works && shelfPos == null && face.IsHorizontal && face != Front && shelf.Side == face)
+                if ((works || drains) && shelfPos == null && face.IsHorizontal && face != Front && shelf.Side == face)
                 {
                     shelfPos = pos;
                 }
             }
             else if (be is BlockEntityMemory)
             {
-                if (works && memoryPos == null && face != Front)
+                if ((works || drains) && memoryPos == null && face != Front)
                 {
                     memoryPos = pos;
                 }
@@ -177,7 +179,8 @@ public partial class BlockEntityMachine : BlockEntitySparkstone
     {
         get
         {
-            if (shelfPos != null)
+            // A drain's shelf only puts stone back; its finds go to the container touching it (feature 10, way A).
+            if (shelfPos != null && Form != Machine.Gather)
             {
                 return Shelf is { Output: not null } shelf && MayChange(shelf.OutputPos) ? shelf.OutputPos : null;
             }
@@ -323,7 +326,9 @@ public partial class BlockEntityMachine : BlockEntitySparkstone
                 break;
             case Machine.Focus:
             case Machine.Scatter:
-                int count = Working.Count;
+                // A Memory's pair gives a Focus its turn, once every MachineWorkSeconds, and its own crystals sit
+                // idle; a Focus holding a Duet Module works nothing else (feature 10).
+                int count = DuetPair != null ? 1 : HoldsModule ? 0 : Working.Count;
                 if (count == 0)
                 {
                     workSeconds = 0;
@@ -355,8 +360,7 @@ public partial class BlockEntityMachine : BlockEntitySparkstone
     /// <summary>The next working crystal in turn does one working. Returns what came of it; public for the test command.</summary>
     public MachineWork.Result WorkOnce()
     {
-        var working = Working;
-        if (working.Count == 0 || !Active || (Form != Machine.Focus && Form != Machine.Scatter))
+        if (!Active || (Form != Machine.Focus && Form != Machine.Scatter))
         {
             return MachineWork.Result.Idle;
         }
@@ -364,18 +368,23 @@ public partial class BlockEntityMachine : BlockEntitySparkstone
         {
             ReadContext();
         }
-        var crystal = working[turn % working.Count];
-        overflowed = false;
-        var result = MachineWork.Work(this, crystal);
-        if (result == MachineWork.Result.Full || overflowed)
+        if (DuetPair != null && Memory is { } lender && MachineWork.DuetHook is { } hook)
         {
-            // An output with no room for the yield: Dormant, drawing and checking nothing, until a rod tap (question 7).
-            GoDormantFull();
-            if (result != MachineWork.Result.Full)
+            overflowed = false;
+            var duet = hook(this, lender);
+            if (duet != null)
             {
-                result = MachineWork.Result.Full;
+                return AfterWorking(duet.Value);
             }
         }
+        var working = Working;
+        if (working.Count == 0 || HoldsModule)
+        {
+            return MachineWork.Result.Idle;
+        }
+        var crystal = working[turn % working.Count];
+        overflowed = false;
+        var result = AfterWorking(MachineWork.Work(this, crystal));
         // Memory cycles the crystal that just took its turn out and the next one in; the one in its place works next.
         if (Memory is not { } memory || !memory.Rotate(this, crystal))
         {
@@ -383,6 +392,72 @@ public partial class BlockEntityMachine : BlockEntitySparkstone
         }
         return result;
     }
+
+    /// <summary>An output with no room for the yield: Dormant, drawing and checking nothing, until a rod tap (question 7).</summary>
+    private MachineWork.Result AfterWorking(MachineWork.Result result)
+    {
+        if (result == MachineWork.Result.Full || overflowed)
+        {
+            GoDormantFull();
+            result = MachineWork.Result.Full;
+        }
+        return result;
+    }
+
+    /// <summary>The pair the Memory against this Focus lends it, or null; a Scatter works no duet (feature 10).</summary>
+    public (SocketCrystal A, SocketCrystal B, string Product)? DuetPair => Form == Machine.Focus ? Memory?.Pair : null;
+
+    // ------------------------------------------------------------------ the Duet Module (feature 10)
+
+    /// <summary>Whether a stack is a Duet Module, by its attribute, so this feature never names feature 10's item.</summary>
+    public static bool IsDuetModule(ItemStack? stack) => stack?.Collectible?.Attributes?["lemuriaDuetModule"].AsBool() == true;
+
+    /// <summary>The Duet Module in this Focus's sockets, or null.</summary>
+    public SocketCrystal? Module => Form == Machine.Focus ? sockets.FirstOrDefault(c => IsDuetModule(c.Stack)) : null;
+
+    public bool HoldsModule => Module != null;
+
+    /// <summary>The crystals a Duet Module holds, in the order they went in.</summary>
+    public List<SocketCrystal> ModuleCrystals => HoldsModule ? sockets.Where(c => !c.IsFitting).ToList() : new List<SocketCrystal>();
+
+    /// <summary>Crystals a Duet Module holds: two.</summary>
+    public const int ModuleHolds = 2;
+
+    /// <summary>Takes this crystal out as it is, passing over the module's last-in-first-out order: for the duet's swap. Server only.</summary>
+    public ItemStack TakeOutExactly(SocketCrystal crystal)
+    {
+        exactly = true;
+        try
+        {
+            return TakeOut(crystal);
+        }
+        finally
+        {
+            exactly = false;
+        }
+    }
+
+    private bool exactly;
+
+    /// <summary>Broken, a machine drops everything in its sockets as it is, the Duet Module and its crystals alike.</summary>
+    public override void OnBlockBroken(IPlayer? byPlayer = null)
+    {
+        exactly = true;
+        try
+        {
+            base.OnBlockBroken(byPlayer);
+        }
+        finally
+        {
+            exactly = false;
+        }
+    }
+
+    /// <summary>
+    /// Whether this machine is an Earth battery's drain with a Memory against it, which holds a single
+    /// crystal in its socket and the rest in the magazine (feature 10, way A).
+    /// </summary>
+    public bool DrainWithMemory => Form == Machine.Gather && InBattery && BatteryElemental == Crystal.Earth && Memory != null;
 
     /// <summary>Whether the machine last went Dormant because its output was full; a rod tap clears it.</summary>
     public bool StoppedFull { get; private set; }
@@ -535,6 +610,11 @@ public partial class BlockEntityMachine : BlockEntitySparkstone
 
     public override ItemStack TakeOut(SocketCrystal crystal)
     {
+        if (!exactly && sockets.Contains(crystal) && HoldsModule && ModuleCrystals is { Count: > 0 } held && crystal != held[^1])
+        {
+            // A Duet Module gives its crystals back last in first out, and itself only once empty (feature 10).
+            crystal = held[^1];
+        }
         var stack = base.TakeOut(crystal);
         stack.Attributes.RemoveAttribute(RefineKey);
         return stack;
@@ -593,7 +673,40 @@ public partial class BlockEntityMachine : BlockEntitySparkstone
     // ------------------------------------------------------------------ show
 
     /// <summary>A Crystal Motor also takes a Dead Socket, a fitting; every other machine takes crystals only (note, The Dead Socket).</summary>
-    public override bool Accepts(ItemStack stack) => Form == Machine.Motor ? Socketable(stack) : base.Accepts(stack);
+    /// <summary>
+    /// A Focus also takes a Duet Module, only with no crystal in its sockets; with one, a crystal goes into
+    /// the module, two at most (feature 10). A drain with a Memory against it holds a single crystal.
+    /// </summary>
+    public override bool Accepts(ItemStack stack)
+    {
+        if (Form == Machine.Motor)
+        {
+            return Socketable(stack) && !IsDuetModule(stack);
+        }
+        if (IsDuetModule(stack))
+        {
+            return Form == Machine.Focus && sockets.Count == 0;
+        }
+        if (!base.Accepts(stack))
+        {
+            return false;
+        }
+        if (HoldsModule)
+        {
+            return ModuleCrystals.Count < ModuleHolds;
+        }
+        return !DrainWithMemory || sockets.Count == 0;
+    }
+
+    /// <summary>A Duet Module fills a row of two sockets, and each crystal it holds one, whatever its Evolution (feature 10).</summary>
+    public override int SizeOf(SocketCrystal crystal)
+    {
+        if (IsDuetModule(crystal.Stack))
+        {
+            return 2;
+        }
+        return HoldsModule && !crystal.IsFitting ? 1 : base.SizeOf(crystal);
+    }
 
     /// <summary>A Motor looks at once whether its line still pays when a block in it is switched (play-test, Oct 29).</summary>
     protected override void OnNetworkChanged()
@@ -735,6 +848,10 @@ public partial class BlockEntityMachine : BlockEntitySparkstone
             ProbeInfo(dsc);
         }
         BatteryInfo(dsc);
+        if (HoldsModule && ModuleCrystals.Count < 2)
+        {
+            dsc.AppendLine(Vintagestory.API.Config.Lang.Get(LemuriaModSystem.ModId + ":machine-module-holds", ModuleCrystals.Count));
+        }
         if (dormant > 0)
         {
             dsc.AppendLine(Vintagestory.API.Config.Lang.Get(LemuriaModSystem.ModId + ":machine-dormantcrystals", dormant));

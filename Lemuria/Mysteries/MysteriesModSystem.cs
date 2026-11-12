@@ -43,6 +43,8 @@ public class MysteriesModSystem : ModSystem
         Effects.More[Evocation.Wither] = MysteryEffects.Wither;
         Effects.More[Evocation.Rewind] = MysteryEffects.Rewind;
         Effects.More[Evocation.Progress] = MysteryEffects.Progress;
+        // A machine's Life working pays by the plants it would move on, and asks here how many (feature 10).
+        Machines.MachineWork.BloomCount = MysteryEffects.BloomCount;
         api.Event.OnEntityDeath += OnEntityDeath;
         api.Event.RegisterGameTickListener(_ => Withering?.Tick(), 1000, 500);
         api.Event.SaveGameLoaded += () =>
@@ -76,6 +78,7 @@ public class MysteriesModSystem : ModSystem
             Effects.More.Remove(Evocation.Wither);
             Effects.More.Remove(Evocation.Rewind);
             Effects.More.Remove(Evocation.Progress);
+            Machines.MachineWork.BloomCount = null;
             Withering = null;
             MysteryEnvironment.StabilitySystem = null;
         }

@@ -42,6 +42,8 @@ public class MachinesModSystem : ModSystem
     {
         sapi = api;
         Effects.Boiled += BlockReclamationPlate.OnBoiled;
+        // A Memory's magazine keeps its crystals out of dialogues up to Glowing, as a jar does (feature 10, way A).
+        Dialogues.Shields.Add(BlockEntityMemory.Shields);
         // A Wind Probe is struck where the game's lightning finally lands, after any rod moved it (step 4 part 3).
         weather = api.ModLoader.GetModSystem<WeatherSystemServer>();
         if (weather != null)
@@ -251,6 +253,7 @@ public class MachinesModSystem : ModSystem
             weather.OnLightningImpactEnd -= OnLightningLanded;
         }
         Effects.Boiled -= BlockReclamationPlate.OnBoiled;
+        Dialogues.Shields.Remove(BlockEntityMemory.Shields);
         ItemCrystalChisel.StoneCarver = null;
     }
 }

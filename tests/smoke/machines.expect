@@ -46,7 +46,7 @@ Machines test: a leaking acacia log splits into firewood: yes; the brim-full sil
 # Felling pays by the logs: a Glittering crystal fells one log a working.
 Machines test: a Sky Focus at a tree of 5 logs Acted, paid 5 working\(s\), 0 log\(s\) standing, 5 log\(s\) in the chest$
 # Memory: two crystals in Awakened stone, cycled through the Focus one a turn.
-Machines test: a Memory took 2 crystals: yes, a third: no; its Focus worked fire, ice, sky, fire; the magazine holds sky, fire$
+Machines test: a Memory took 2 crystals: yes, a third: no; its Focus worked fire, ice, unaligned, fire; the magazine holds unaligned, fire$
 # The plate claims salt from salt water boiled above it, the chance set to 1.
 Machines test: a Fire Focus over a plate Acted, salt water left 0 of 9, salt in the plate's chest 1$
 # G61: with the plate's chest in a stranger's claim, the salt has nowhere to go and is lost.

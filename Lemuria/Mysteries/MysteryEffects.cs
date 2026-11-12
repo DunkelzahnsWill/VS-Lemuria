@@ -90,6 +90,31 @@ public static class MysteryEffects
         return acted ? Effects.Outcome.Acted : Effects.Outcome.Nothing;
     }
 
+    /// <summary>
+    /// How many plants a Bloom would move on, without moving any (feature 10's limits for machines that
+    /// Bloom, K4): each plant in reach that the caster may change, that has not taken Bloom today and has a
+    /// stage left to take, counted once however many of its blocks lie in reach. A machine pays by it.
+    /// </summary>
+    public static int BloomCount(CastContext cast)
+    {
+        var world = cast.Api.World;
+        int today = (int)world.Calendar.TotalDays;
+        var counted = new HashSet<BlockPos>();
+        foreach (var pos in Targets(cast, true))
+        {
+            if (!cast.Can(pos) || PlantAt(world, pos) is not { } plant || !plant.CanGrow())
+            {
+                continue;
+            }
+            if (Ledger.Last(Ledger.BloomKey(plant.Key)) is double last && (int)(last / world.Calendar.HoursPerDay) >= today)
+            {
+                continue;
+            }
+            counted.Add(plant.Key);
+        }
+        return counted.Count;
+    }
+
     /// <summary>Whether this position's plant took Bloom today already. For tests and the look-at.</summary>
     public static bool BloomedToday(IWorldAccessor world, BlockPos pos)
     {
@@ -103,10 +128,14 @@ public static class MysteryEffects
         public readonly BlockPos Key;
         public readonly Func<bool> Grow;
 
-        public Plant(BlockPos key, Func<bool> grow)
+        /// <summary>Whether <see cref="Grow"/> has a stage to give, asked without growing anything.</summary>
+        public readonly Func<bool> CanGrow;
+
+        public Plant(BlockPos key, Func<bool> grow, Func<bool> canGrow)
         {
             Key = key;
             Grow = grow;
+            CanGrow = canGrow;
         }
     }
 
@@ -121,24 +150,24 @@ public static class MysteryEffects
         var be = accessor.GetBlockEntity(pos);
         if (block.CropProps != null && block is BlockCrop crop)
         {
-            return new Plant(pos.Copy(), () => GrowCrop(world, pos.Copy(), crop));
+            return new Plant(pos.Copy(), () => GrowCrop(world, pos.Copy(), crop), () => crop.CurrentCropStage < crop.CropProps.GrowthStages);
         }
         if (be?.GetBehavior<BEBehaviorFruitingBush>() is { } bush)
         {
-            return new Plant(pos.Copy(), () => GrowBush(bush));
+            return new Plant(pos.Copy(), () => GrowBush(bush), () => SetBushState != null && NextBushState(bush) != null);
         }
         if (block is BlockBerryBush)
         {
-            return new Plant(pos.Copy(), () => GrowLegacyBush(world, pos.Copy(), block));
+            return new Plant(pos.Copy(), () => GrowLegacyBush(world, pos.Copy(), block), () => block.Variant["state"] is "empty" or "flowering");
         }
         if (be is BlockEntitySapling sapling)
         {
-            return new Plant(pos.Copy(), () => ShortenSapling(world, sapling));
+            return new Plant(pos.Copy(), () => ShortenSapling(world, sapling), () => true);
         }
         if (be is BlockEntityFruitTreePart part && part.RootOff != null && part.TreeType != null)
         {
             var rootPos = pos.AddCopy(part.RootOff.X, part.RootOff.Y, part.RootOff.Z);
-            return new Plant(rootPos, () => GrowFruitTree(world, rootPos, part.TreeType));
+            return new Plant(rootPos, () => GrowFruitTree(world, rootPos, part.TreeType), () => FruitTreeDays(world, rootPos, part.TreeType) > 0);
         }
         return null;
     }
@@ -163,17 +192,18 @@ public static class MysteryEffects
         return true;
     }
 
+    private static EnumFruitingBushGrowthState? NextBushState(BEBehaviorFruitingBush bush) => bush.BState?.Growthstate switch
+    {
+        EnumFruitingBushGrowthState.Young => EnumFruitingBushGrowthState.Mature,
+        EnumFruitingBushGrowthState.Mature => EnumFruitingBushGrowthState.Flowering,
+        EnumFruitingBushGrowthState.Flowering => EnumFruitingBushGrowthState.Ripening,
+        EnumFruitingBushGrowthState.Ripening => EnumFruitingBushGrowthState.Ripe,
+        _ => null,
+    };
+
     private static bool GrowBush(BEBehaviorFruitingBush bush)
     {
-        var state = bush.BState?.Growthstate;
-        EnumFruitingBushGrowthState? next = state switch
-        {
-            EnumFruitingBushGrowthState.Young => EnumFruitingBushGrowthState.Mature,
-            EnumFruitingBushGrowthState.Mature => EnumFruitingBushGrowthState.Flowering,
-            EnumFruitingBushGrowthState.Flowering => EnumFruitingBushGrowthState.Ripening,
-            EnumFruitingBushGrowthState.Ripening => EnumFruitingBushGrowthState.Ripe,
-            _ => null,
-        };
+        var next = NextBushState(bush);
         if (next == null || SetBushState == null)
         {
             return false;
@@ -216,24 +246,30 @@ public static class MysteryEffects
     private static bool GrowFruitTree(IWorldAccessor world, BlockPos rootPos, string treeType)
     {
         var root = world.BlockAccessor.GetBlockEntity(rootPos);
-        var bh = root?.GetBehavior<FruitTreeRootBH>();
-        if (bh == null || !bh.propsByType.TryGetValue(treeType, out var props))
+        double days = FruitTreeDays(world, rootPos, treeType);
+        if (days <= 0 || root?.GetBehavior<FruitTreeRootBH>() is not { } bh || !bh.propsByType.TryGetValue(treeType, out var props))
         {
             return false;
         }
-        double days = props.State switch
+        props.lastStateChangeTotalDays -= days;
+        root.MarkDirty(true);
+        return true;
+    }
+
+    /// <summary>The days a Bloom takes off a fruit tree's present state: its flowering or fruiting days, 0 in other seasons.</summary>
+    private static double FruitTreeDays(IWorldAccessor world, BlockPos rootPos, string treeType)
+    {
+        var bh = world.BlockAccessor.GetBlockEntity(rootPos)?.GetBehavior<FruitTreeRootBH>();
+        if (bh == null || !bh.propsByType.TryGetValue(treeType, out var props))
+        {
+            return 0;
+        }
+        return props.State switch
         {
             EnumFruitTreeState.Flowering => props.FloweringDays,
             EnumFruitTreeState.Fruiting => props.FruitingDays,
             _ => 0,
         };
-        if (days <= 0)
-        {
-            return false;
-        }
-        props.lastStateChangeTotalDays -= days;
-        root!.MarkDirty(true);
-        return true;
     }
 
     // ------------------------------------------------------------------ Wither

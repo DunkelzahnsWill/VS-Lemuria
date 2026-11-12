@@ -1,0 +1,16 @@
+# Ice and Earth: the pair in the Memory gives the Focus its turn and turns the faced sand into raw blue clay, for both crystals' cost; one crystal taken out, the empty Focus does nothing.
+Duets test: a Memory with Ice and Earth lends duet clay, its crystals shielded: yes; the Focus Acted, paid 2\.0, the sand is now rawclay-blue-none; again Nothing; with one crystal taken out Idle$
+# Ice and Sky: nothing and free with no barrel; 10 litres at Glittering, 20 at Glowing.
+Duets test: Ice and Sky with no barrel Nothing, nothing paid: yes; over a barrel Acted, 10 litres; at Glowing Acted, 20 litres more; a barrel: yes$
+# Fire and Sky fire up to 4 raw items a working at Glittering, as the pit kiln fires them.
+Duets test: Fire and Sky Acted, fired bowls in the output 4, raw bowls left in the input 2$
+# Fire and Earth: a bit for each nugget of an ore smelted to an ingot; the iron ores give nothing.
+Duets test: Fire and Earth Acted, copper bits 2, tin bits 2, iron nuggets left 2; again Nothing; every smeltable ore gives a bit: yes$
+# The Duet Module: only in an empty Focus, two crystals, last in first out, and nothing without a pair in the Memory; then the two duets alternate.
+Duets test: a Duet Module refused beside a crystal: yes, fitted in an empty Focus: yes, took 2 crystals: yes, a third: no, gives back last in first sky; alone Idle$
+Duets test: with Ice and Earth in the Memory the Focus made clay Acted \(rawclay-blue-none\), the Memory then holds fire\+sky; fired clay Nothing, the Memory holds ice\+earth; clay again Acted; the module's pair in the open, the Memory's shielded: yes$
+# Limits on Blooming machines (K4): one working's charge for every 9 plants moved on, once a day.
+Duets test: a Glowing Life Scatter over 81 flax Acted, 81 grew a stage, paid 18\.0 for 9 working\(s\); again that day Nothing, paid 0\.0$
+# Way A: a Memory on an Earth drain. Earth cannot wear with the network full, so its turn passes; Sky pans; the shelf puts sand back.
+Duets test: an Earth drain with a Memory refused a second crystal: yes, its magazine shielded: yes; its socket held earth, sky, unaligned, earth$
+Duets test: Sky panned the corner sand: yes, the room's count 5000 then 4800, finds in the chest: yes; the shelf put sand back: yes, sand left in its input 3, the count 5000, the room rests: no$

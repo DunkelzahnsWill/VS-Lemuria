@@ -110,6 +110,11 @@ public static class ShelfWork
         {
             return false;
         }
+        if (Battery.IsStoneKind(item))
+        {
+            // A stone block on a drain's shelf, which puts that kind back into a panned block (feature 10).
+            return Same(item, stack);
+        }
         return KindOf(item) switch
         {
             Kind.Seeds or Kind.Sapling or Kind.Fertilizer or Kind.Firewood => Same(item, stack),

@@ -396,7 +396,8 @@ public partial class MachinesTests
         Accessor.SetBlock(Id($"{LemuriaModSystem.ModId}:memory-awakened-{Rock}-west"), memoryPos);
         var memory = Accessor.GetBlockEntity(memoryPos) as BlockEntityMemory;
         Put(focus, Crystal.Fire, Crystal.Glittering);
-        bool loaded = Put(memory, Crystal.Ice, Crystal.Glittering) & Put(memory, Crystal.Sky, Crystal.Glittering);
+        // Ice and Unaligned make no duet, so the Memory cycles them (feature 10: a pair that makes one gives the turn instead).
+        bool loaded = Put(memory, Crystal.Ice, Crystal.Glittering) & Put(memory, Crystal.Unaligned, Crystal.Glittering);
         bool third = Put(memory, Crystal.Earth, Crystal.Glittering);
         if (focus == null || memory == null)
         {

@@ -85,4 +85,7 @@ public partial class LemuriaConfig
 
     /// <summary>A battery room's largest side, in blocks.</summary>
     public int BatteryMaxSide { get; set; } = 7;
+
+    /// <summary>Plants a machine's Life working moves on for each working's charge it pays (feature 10's limits for machines that Bloom).</summary>
+    public int BloomPlantsPerWorking { get; set; } = 9;
 }
