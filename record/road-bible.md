@@ -158,8 +158,8 @@ changes level, each alignment hums its own note, and twins about to dialogue los
 ### The standing rules of the design
 
 These are the owner's, settled before this book, and every brief keeps them. What among them is not older than this
-book says so in its own place: the last sentence of rule 3, which is new with this book, and what rule 7 names as
-settled after this book's merge.
+book says so in its own place: the last sentence of rule 3, which is new with this book, what rule 7 names as settled
+after this book's merge, and rule 12, which the owner gave after it.
 
 1. **No GUI but the Journal.** Charge is shown by glow and hum, never by a number.
 2. **Four scales, four sets of words,** so that no two can be mixed up: the growth stage (five of them); the
@@ -197,6 +197,14 @@ settled after this book's merge.
     drawn by scripts and judged by the owner in play.
 11. **The owner publishes.** The repository is public and the licence is MIT. The mod is released on ModDB when it is
     ready, by the owner.
+12. **Elementals are basic, and Mysteries work more broadly** (the owner, 2026-11-12, after this book's merge; R36,
+    R38 and R39). The Elementals are basic and simple: they map directly onto the world and the functions within it,
+    and that makes them efficient in how they work. The Mysteries work more broadly, within concepts. It is inherently
+    easier to set fire to an object with a crystal, because the world already has multiple ways to set something on
+    fire, than to force a berry bush to bloom, which runs counter to the natural state of the world. So a Mystery's
+    evocation, cast by hand or worked by a machine, costs more charge than an Elemental's cast or worked the same way
+    at the same Evolution. How much more is for the briefs to say, and a machine's price stays on the one scale of
+    rule 6.
 
 ### What Lemuria is not
 
