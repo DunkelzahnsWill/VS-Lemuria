@@ -46,8 +46,10 @@ And the shared files of part 4: `Lemuria/Core/`, the project and build files, `s
 ## What other threads need from me
 
 - **The review thread.** Each brief and each change to a brief as a PR of its own, ready, with word to the coordinator
-  (rule 6). The corrections of the findings I own.
-- **The coordinator.** Word when a PR is ready for a wake or for the owner's merge, with its number, commit and check.
+  and the record thread (rule 6; rules version 6). The corrections of the findings I own.
+- **The coordinator and the record thread.** Since rules version 6, both get the same word when a PR is ready for a
+  wake or for the owner's merge, with its number, commit and check, and when a blocker is corrected or a verdict is
+  asked for: the record thread does the waking.
   The repair of main first, whenever main is broken by code I own (rule 4).
 - **The owner.** Each feature PR described so that it can be merged from its description (rule 3), and a zip of any
   PR on request.
