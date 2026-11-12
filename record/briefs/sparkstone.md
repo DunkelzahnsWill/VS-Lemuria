@@ -105,9 +105,12 @@ that the player may build there, as placing a block does, so nobody carves or wa
 claim; with it off, they no longer spare a claim (standing rule 7, on the first reading that G40 sets out and PR #46
 writes into the concept). Setting a crystal into a socket, taking one out and drawing charge with the chisel are uses
 by hand of a Lemuria block: with the switch on they need the claim owner's permission, and with it off they open
-inside another player's claim (R9). Breaking or placing a block there stays as the game rules it. **Built so far:**
-the socket asks the switch, but the game refuses a use inside a claim before it asks the block, so with the switch off
-the use is still refused (G16). The fix follows this brief as a patch.
+inside another player's claim (R9). Breaking or placing a block there stays as the game rules it. **When this brief was
+written** (main at a1aae13): the chisel's carving and awakening, a held item's click that the game does not test,
+asked the switch themselves, as built; a socket asked it too, but the game tests a claim before a block's own
+interaction, so with the switch off a socket's use was still refused (G16); and the chisel's draw asked no claim at
+all, so with the switch on a stranger could draw charge from a crystal, a cradle's crystal or a network inside
+another player's claim (the review thread's finding on this brief). Both fixes follow this brief as patches.
 
 ## What it will not do
 
@@ -135,6 +138,6 @@ the use is still refused (G16). The fix follows this brief as a patch.
 1. Do the chisel's carving and awakening follow the switch, or stay as the game rules a player's own building?
    **Answered:** the record already holds the first reading (G40: the rule's own first sentence, the code, and the
    note of old step 3, "One switch covers every claim rule in Lemuria, from evocations to the chisel, racks and
-   jars"), and PR #46 writes it into the concept. If PR #46 does not merge as it stands, this brief follows the
+   jars"), and PR #46 writes it into the concept. If PR #46 does not merge as it stands, this brief is changed to follow the
    concept as merged.
 2. Does R9 cover sockets and drawing charge? **Answered:** R9; sockets were among the six blocks its question named.

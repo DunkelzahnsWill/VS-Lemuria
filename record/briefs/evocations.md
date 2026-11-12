@@ -25,8 +25,8 @@ a1aae13. Where this brief and the old paper differ, this brief is the record.
 3. **A miss is free.** A cast that finds nothing it can act on fizzles in a puff of its colour, costing no charge and
    risking no crack. So does a cast at a block that takes the flame and does not catch, such as a loaded bloomery with
    no chimney: by hand or from a machine, Ignite pays only for what caught (the note of old step 3, Ignite, from the
-   old audit's finding 16; R7). **Built so far:** a cast at such a block still pays (G15); the fix follows this brief
-   as a patch, which waits for the owner's merge (R7).
+   old audit's finding 16; R7). **When this brief was written** (main at a1aae13), a cast at such a block still
+   paid (G15); the fix follows this brief as a patch, which waits for the owner's merge (R7).
 4. Only a crystal in the hand casts: never one in a jar, on a rack, in a bag or a socket, and a standing crystal never
    casts by itself. An Unaligned crystal does not cast; its evocation, Command, works through the Crystalline Chisel
    and machines.
@@ -143,7 +143,13 @@ A naked evocation is one of Lemuria's workings (standing rule 7, on the first re
 writes into the concept). With the claims switch on, inside another player's claim an evocation does nothing unless
 they gave you access, as with building there: blocks, containers, creatures and players in the claim are spared, and
 the rest of the area still works. Lava made by Ignite runs as natural lava does, into a claim too; only the rock it
-melts is claim-checked. With the switch off, evocations no longer spare a claim. This is **built** (`CastContext`).
+melts is claim-checked. A fire Ignite sets is the caster's, so the game's own spread of it stops at any claim where
+the caster may not build, whatever the switch says. With the switch off, evocations no longer spare a claim. This is
+**built** (`CastContext`).
+
+Nothing in Lemuria asks the server's PvP setting. Players are targets like creatures; Wither by hand names its
+caster, so the game's own PvP test holds it, while Ignite's burning and Gale's push name nobody and reach players
+whatever that setting says. This is as built.
 
 ## What it will not do
 
@@ -151,7 +157,8 @@ melts is claim-checked. With the switch off, evocations no longer spare a claim.
   crystals and their exposure are features 11 and 12.
 - Never casts from a jar, rack, bag or socket; never by itself.
 - By hand, boiling salt water gives no salt; salt is a machine's, with feature 8's reclamation plate.
-- A cast never starts a wildfire by itself: only the block aimed at catches.
+- A cast never starts a wildfire by itself: only the block aimed at catches, and any spread after that is the game's
+  own fire.
 
 ## What to try
 
@@ -177,4 +184,4 @@ melts is claim-checked. With the switch off, evocations no longer spare a claim.
    step 3 (Ignite, "my reading of the rule on misses, from the audit") and R7, where the owner's merge of the fix is
    the owner's word on that reading. This brief says it so that the fix leaves the brief true (G12, G15).
 2. Do evocations follow the claims switch? **Answered:** yes, on the record's first reading (G40), which PR #46 writes
-   into the concept; if PR #46 does not merge as it stands, this brief follows the concept as merged.
+   into the concept; if PR #46 does not merge as it stands, this brief is changed to follow the concept as merged.
