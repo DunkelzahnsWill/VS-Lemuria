@@ -49,6 +49,8 @@ Machines test: a Sky Focus at a tree of 5 logs Acted, paid 5 working\(s\), 0 log
 Machines test: a Memory took 2 crystals: yes, a third: no; its Focus worked fire, ice, sky, fire; the magazine holds sky, fire$
 # The plate claims salt from salt water boiled above it, the chance set to 1.
 Machines test: a Fire Focus over a plate Acted, salt water left 0 of 9, salt in the plate's chest 1$
+# G61: with the plate's chest in a stranger's claim, the salt has nowhere to go and is lost.
+Machines test: with the plate's chest in a stranger's claim a second boiling Acted, salt in the chest still 1$
 # An Earth Focus facing sideways bores a 2×2 into its chest and goes Dormant.
 Machines test: an Earth Focus facing east Acted, a 2×2 bored 2 deep, 8 block\(s\) in the chest, Dormant: yes$
 # Prefixes (H1): gravel before a shovel keeps it to gravel, an oak log before an axe keeps it to oak, and only oak
@@ -98,3 +100,5 @@ Machines test: the firestarter spares a pile on the ground: yes, a coal pile: ye
 # crystal opens only to the polished rock that makes it a rod.
 Machines test: with claims respected the game leaves using a Control Shelf LandClaimed; with claims ignored using it is Granted, breaking it LandClaimed; using a Gather block Granted, breaking it LandClaimed; using a Memory Granted; using a Crystal Motor Granted, breaking it LandClaimed$
 Machines test: an Unaligned crystal opens to polished rock in hand: yes, to another item: no, to an empty hand: no$
+# G61 (brief, Claims, "A machine's containers"): a container inside a stranger's claim is not a machine's outside it.
+Machines test: with a chest in a stranger's claim and one outside, a Focus yields into the chest outside; with only the one inside, into none: yes; a shelf's input in the claim is gone: yes, its output outside kept: yes; with claims ignored the input is back: yes, the chest inside taken: yes$

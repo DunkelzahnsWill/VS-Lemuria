@@ -38,3 +38,5 @@
 /lemuria machines test lights
 # R9: with the claims switch off, a stranger may use a Control Shelf and make a rod inside a claim.
 /lemuria machines test claims
+# G61: a container inside a stranger's claim is not a machine's outside it.
+/lemuria machines test containers

@@ -37,7 +37,8 @@ public partial class BlockEntityMachine : BlockEntitySparkstone
     // Context, read on placement, a neighbour's change and a rod tap; never polled.
     private bool contextDirty = true;
     private BlockPos? amplifierPos;
-    private BlockPos? containerPos;
+    /// <summary>The containers touching a machine with no shelf, in the order the faces are read; the first a claim allows takes its yields.</summary>
+    private readonly List<BlockPos> containerPositions = new();
     private BlockPos? shelfPos;
     private BlockPos? memoryPos;
     private bool overflowed;
@@ -117,7 +118,7 @@ public partial class BlockEntityMachine : BlockEntitySparkstone
     {
         contextDirty = false;
         amplifierPos = null;
-        containerPos = null;
+        containerPositions.Clear();
         shelfPos = null;
         memoryPos = null;
         bool works = Form is Machine.Focus or Machine.Scatter;
@@ -144,9 +145,9 @@ public partial class BlockEntityMachine : BlockEntitySparkstone
                     memoryPos = pos;
                 }
             }
-            else if (be is IBlockEntityContainer and not BlockEntitySparkstone && containerPos == null)
+            else if (be is IBlockEntityContainer and not BlockEntitySparkstone)
             {
-                containerPos = pos;
+                containerPositions.Add(pos);
             }
         }
     }
@@ -157,27 +158,33 @@ public partial class BlockEntityMachine : BlockEntitySparkstone
     /// <summary>The Memory set against this Focus or Scatter, or null.</summary>
     public BlockEntityMemory? Memory => memoryPos == null ? null : Api.World.BlockAccessor.GetBlockEntity(memoryPos) as BlockEntityMemory;
 
-    /// <summary>Where stock comes from: the container at the shelf's left; none without a shelf.</summary>
-    public IInventory? Input => Shelf?.Input?.Inventory;
+    /// <summary>
+    /// Where stock comes from: the container at the shelf's left; none without a shelf, and none where a
+    /// claim leaves it out (G61, brief, Claims, "A machine's containers"), so the shelf's items wait as for
+    /// missing stock.
+    /// </summary>
+    public IInventory? Input => Shelf is { } shelf && shelf.Input is { } input && MayChange(shelf.InputPos) ? input.Inventory : null;
 
     /// <summary>
-    /// Where yields go (G2): the container at the shelf's right; with no shelf, any container touching the
-    /// machine, as in part 1. Null for nowhere, when yields drop where the work happened.
+    /// Where yields go (G2): the container at the shelf's right; with no shelf, a container touching the
+    /// machine, as in part 1, the first that a claim does not leave out (G61). Null for nowhere, when
+    /// yields drop where the work happened.
     /// </summary>
-    public IInventory? Output
+    public IInventory? Output => OutputPos is { } pos && Api.World.BlockAccessor.GetBlockEntity(pos) is IBlockEntityContainer container ? container.Inventory : null;
+
+    /// <summary>The output's block position, for a liquid container's own calls; null without one or where a claim leaves it out.</summary>
+    public BlockPos? OutputPos
     {
         get
         {
             if (shelfPos != null)
             {
-                return Shelf?.Output?.Inventory;
+                return Shelf is { Output: not null } shelf && MayChange(shelf.OutputPos) ? shelf.OutputPos : null;
             }
-            return containerPos != null && Api.World.BlockAccessor.GetBlockEntity(containerPos) is IBlockEntityContainer container ? container.Inventory : null;
+            var accessor = Api.World.BlockAccessor;
+            return containerPositions.FirstOrDefault(pos => accessor.GetBlockEntity(pos) is IBlockEntityContainer && MayChange(pos));
         }
     }
-
-    /// <summary>The output's block position, for a liquid container's own calls; null without one.</summary>
-    public BlockPos? OutputPos => shelfPos != null ? (Shelf?.Output != null ? Shelf.OutputPos : null) : containerPos;
 
     /// <summary>Whether the shelf itself uses up this stack as stock (G2: a product it uses goes back to the input).</summary>
     public bool ShelfUses(ItemStack stack) => Shelf is { } shelf && ShelfWork.UsesUp(Api.World, shelf, stack);
@@ -267,14 +274,17 @@ public partial class BlockEntityMachine : BlockEntitySparkstone
     /// The claim rule (note, Claims, creatures and players): with RespectClaims on, a machine changes
     /// nothing inside a land claim unless it stands inside that same claim.
     /// </summary>
-    public bool MayChange(BlockPos pos)
+    public bool MayChange(BlockPos pos) => MayChange(Api.World, Pos, pos);
+
+    /// <summary>The claim rule for whatever stands in for a machine at <paramref name="standing"/>, such as a reclamation plate.</summary>
+    public static bool MayChange(IWorldAccessor world, BlockPos standing, BlockPos pos)
     {
         if (!LemuriaClaims.Respect)
         {
             return true;
         }
-        var claims = Api.World.Claims.Get(pos);
-        return claims == null || claims.Length == 0 || claims.Any(c => c.PositionInside(Pos));
+        var claims = world.Claims.Get(pos);
+        return claims == null || claims.Length == 0 || claims.Any(c => c.PositionInside(standing));
     }
 
     // ------------------------------------------------------------------ the server's look

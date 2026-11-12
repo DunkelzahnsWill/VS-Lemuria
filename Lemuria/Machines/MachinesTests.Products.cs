@@ -472,6 +472,103 @@ public partial class MachinesTests
         }
         logger.Notification("Machines test: a Fire Focus over a plate {0}, salt water left {1} of 9, salt in the plate's chest {2}",
             result, water, CountOf(chest, "salt"));
+        // G61: with the plate's chest in a stranger's claim, the plate has nowhere to put salt, so it is lost.
+        for (int x = -1; x <= 1; x++)
+        {
+            for (int z = -1; z <= 1; z++)
+            {
+                Accessor.SetBlock(Id("game:saltwater-still-7"), middle.AddCopy(x, 1, z), BlockLayersAccess.Fluid);
+            }
+        }
+        Fill(focus);
+        var claim = ClaimOver(middle.DownCopy());
+        bool respect = LemuriaClaims.Respect;
+        MachineWork.Result again;
+        try
+        {
+            LemuriaClaims.Respect = true;
+            LemuriaModSystem.Config.SaltChance = 1;
+            again = focus.WorkOnce();
+        }
+        finally
+        {
+            LemuriaModSystem.Config.SaltChance = chance;
+            LemuriaClaims.Respect = respect;
+            World.Claims.Remove(claim);
+        }
+        logger.Notification("Machines test: with the plate's chest in a stranger's claim a second boiling {0}, salt in the chest still {1}",
+            again, CountOf(chest, "salt"));
+    }
+
+    // ------------------------------------------------------------------ containers inside a claim
+
+    /// <summary>A land claim of one block, a stranger's, as the game would hold one; removed again by the caller.</summary>
+    private LandClaim ClaimOver(BlockPos pos)
+    {
+        var claim = new LandClaim
+        {
+            OwnedByPlayerUid = "lemuria-test-stranger",
+            LastKnownOwnerName = "a stranger",
+            Description = "Lemuria test claim",
+            ProtectionLevel = 1,
+        };
+        claim.Areas.Add(new Cuboidi(pos.X, pos.Y, pos.Z, pos.X + 1, pos.Y + 1, pos.Z + 1));
+        World.Claims.Add(claim);
+        return claim;
+    }
+
+    /// <summary>
+    /// G61 (brief, Claims, "A machine's containers"): with the switch on, a container inside a claim is a
+    /// machine's only if the machine stands in that same claim. A shelf's input and output, the container a
+    /// machine with no shelf yields into, and the plate's container are each tested with a stranger's claim
+    /// over the container alone.
+    /// </summary>
+    public void Containers(BlockPos column)
+    {
+        var origin = TestSite.Surface(sapi, column);
+        Ground(origin, 8, 6, 8);
+        // A Focus with no shelf, facing up, with a chest to its east inside a claim and one to its west outside.
+        var bare = Place(origin.AddCopy(1, 0, 1), Machine.Focus, "up");
+        var claimedPos = origin.AddCopy(2, 0, 1);
+        Chest(claimedPos);
+        var freePos = origin.AddCopy(0, 0, 1);
+        Chest(freePos);
+        // A Focus with a shelf on its south, the input chest at the shelf's left inside a claim, the output outside.
+        var worked = Place(origin.AddCopy(5, 0, 1), Machine.Focus, "up");
+        var shelf = Shelf(origin.AddCopy(5, 0, 1), BlockFacing.SOUTH, "game:firewood");
+        Port(shelf, true);
+        Port(shelf, false);
+        if (bare == null || worked == null || shelf == null)
+        {
+            logger.Error("Machines test: no Focus or Control Shelf for the containers");
+            return;
+        }
+        bare.ReadContext();
+        worked.ReadContext();
+        var claims = new[] { ClaimOver(claimedPos), ClaimOver(shelf.InputPos) };
+        bool before = LemuriaClaims.Respect;
+        try
+        {
+            LemuriaClaims.Respect = true;
+            string bareOut = bare.OutputPos?.Equals(freePos) == true ? "the chest outside" : bare.OutputPos?.Equals(claimedPos) == true ? "the chest inside" : "none";
+            Accessor.SetBlock(0, freePos);
+            bool bareNone = bare.Output == null;
+            bool inputGone = worked.Input == null;
+            bool outputKept = worked.Output != null;
+            LemuriaClaims.Respect = false;
+            bool inputBack = worked.Input != null;
+            bool bareBack = bare.OutputPos?.Equals(claimedPos) == true;
+            logger.Notification("Machines test: with a chest in a stranger's claim and one outside, a Focus yields into {0}; with only the one inside, into none: {1}; a shelf's input in the claim is gone: {2}, its output outside kept: {3}; with claims ignored the input is back: {4}, the chest inside taken: {5}",
+                bareOut, YesNo(bareNone), YesNo(inputGone), YesNo(outputKept), YesNo(inputBack), YesNo(bareBack));
+        }
+        finally
+        {
+            LemuriaClaims.Respect = before;
+            foreach (var claim in claims)
+            {
+                World.Claims.Remove(claim);
+            }
+        }
     }
 
     // ------------------------------------------------------------------ boring
