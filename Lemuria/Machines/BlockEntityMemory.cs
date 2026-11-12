@@ -1,8 +1,10 @@
+using System.Collections.Generic;
 using System.Linq;
 using Lemuria.Crystals;
 using Lemuria.Sparkstone;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
+using Vintagestory.API.Config;
 using Vintagestory.API.MathTools;
 
 namespace Lemuria.Machines;
@@ -36,6 +38,54 @@ public class BlockEntityMemory : BlockEntitySparkstone
     public override int SizeOf(SocketCrystal crystal) => 2;
 
     public override bool CanWork(SocketCrystal crystal) => true;
+
+    /// <summary>
+    /// The highest Evolution a magazine keeps out of dialogues, as a jar does (feature 10, way A, R32):
+    /// Glowing; from Luminous up it holds nothing back.
+    /// </summary>
+    public const int ShieldRank = 2;
+
+    /// <summary>Whether a standing crystal sits in a Memory's magazine, kept out of dialogues; the shield feature 1's dialogues ask.</summary>
+    public static bool Shields(IStandingCrystal crystal) =>
+        crystal is SocketCrystal { Stone: BlockEntityMemory } held && Crystal.Rank(held.Evolution) <= ShieldRank;
+
+    /// <summary>
+    /// The pair the magazine lends its Focus (feature 10): both its crystals, awake, making a duet, in a
+    /// Memory that is Active; null when it holds none, and it cycles as before.
+    /// </summary>
+    public (SocketCrystal A, SocketCrystal B, string Product)? Pair
+    {
+        get
+        {
+            if (!Active || sockets.Count != 2 || sockets.Any(c => c.Dormant || c.IsFitting) || MachineWork.DuetOf is not { } duetOf)
+            {
+                return null;
+            }
+            return duetOf(sockets[0], sockets[1]) is { } product ? (sockets[0], sockets[1], product) : null;
+        }
+    }
+
+    /// <summary>Swaps the magazine's two crystals for these, both together, in their order; returns the two it held. Server only.</summary>
+    public List<ItemStack> SwapPair(List<ItemStack> incoming)
+    {
+        var outgoing = sockets.ToList().Select(TakeOut).ToList();
+        foreach (var stack in incoming)
+        {
+            Insert(stack, Side);
+        }
+        return outgoing;
+    }
+
+    public override void GetBlockInfo(IPlayer forPlayer, System.Text.StringBuilder dsc)
+    {
+        base.GetBlockInfo(forPlayer, dsc);
+        // A looked-at Memory names the duet it lends, so a player who has found one sees it (feature 10, item 12).
+        if (Pair is { } pair)
+        {
+            string prefix = Core.LemuriaModSystem.ModId + ":";
+            dsc.AppendLine(Lang.Get(prefix + "memory-duet", Lang.Get(prefix + "duet-" + pair.Product)));
+        }
+    }
 
     /// <summary>
     /// The machine's crystal that just worked goes to the bottom of the magazine and the first crystal

@@ -1,0 +1,9 @@
+# Duets (feature 10, step 1): each scene builds a Focus, a Memory and what they work on from Awakened
+# granite with no player, works it and reports, then switches its machines Dormant.
+/lemuria duets test clay
+/lemuria duets test water
+/lemuria duets test fired
+/lemuria duets test metal
+/lemuria duets test module
+/lemuria duets test bloom
+/lemuria duets test drain

@@ -1,0 +1,13 @@
+[
+	{
+		"ingredientPattern": "DC",
+		"ingredients": {
+			"D": { "type": "item", "code": "lemuria:deadsocket" },
+			"C": { "type": "block", "code": "lemuria:crystal-*-glowing-*" }
+		},
+		"shapeless": true,
+		"width": 2,
+		"height": 1,
+		"output": { "type": "item", "code": "lemuria:duetmodule", "quantity": 1 }
+	}
+]

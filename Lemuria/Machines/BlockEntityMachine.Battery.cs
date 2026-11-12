@@ -8,6 +8,7 @@ using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
+using Vintagestory.API.Util;
 
 namespace Lemuria.Machines;
 
@@ -90,19 +91,24 @@ public partial class BlockEntityMachine
             return null;
         }
         var state = Shared(room);
+        // A panned block someone filled by hand is the room's again.
+        state.Panned.RemoveWhere(i => i >= room.Volume || !Battery.IsEmpty(Api.World.BlockAccessor, room.At(i)));
         // Only an empty battery takes a new fill's alignment; a held count keeps its own, the others' crystals idle.
-        Battery.Check(this, room, state.Stored > 0.01f ? state.Elemental : null);
+        Battery.Check(this, room, state.Stored > 0.01f ? state.Elemental : null, state.Panned);
         if (room.Elemental != null && state.Elemental != room.Elemental)
         {
             state.Elemental = room.Elemental;
             state.Rocks.Clear();
             state.WearIndex = -1;
             state.Wear = 0;
+            state.Panned.Clear();
         }
         float capacity = room.Elemental == null ? 0 : RoomCapacity(room, state);
         if (room.Problem == null && room.Elemental != null && hours > 0)
         {
-            bool changed = Form == Machine.Focus ? Fill(room, state, capacity, hours) : Drain(room, state, hours);
+            bool changed = Form == Machine.Focus ? Fill(room, state, capacity, hours)
+                : room.Elemental == Crystal.Earth && Memory is { } memory && sockets.Count == 1 ? DrainTurn(room, state, hours, memory)
+                : Drain(room, state, hours);
             if (changed)
             {
                 state.Rev++;
@@ -298,6 +304,229 @@ public partial class BlockEntityMachine
         return changed;
     }
 
+    // ------------------------------------------------------------------ Memory on a drain (feature 10, way A)
+
+    /// <summary>Steps of wear this stone has finished, so an Earth turn knows when it wore one.</summary>
+    private int wornSteps;
+
+    /// <summary>
+    /// One look of an Earth drain with a Memory against it and a single crystal in its socket: the crystal
+    /// there takes its turn, a turn being one block worn, panned or put back, and the Memory cycles the
+    /// next one in when the turn ends. Earth wears as before and its turn ends once it has worn a step or
+    /// cannot wear now (its network at half or above, or nothing left to wear); Sky pans one sand block;
+    /// an Unaligned crystal works the shelf against the drain. A turn with nothing to do passes at once.
+    /// </summary>
+    private bool DrainTurn(Battery.Room room, Battery.State state, double hours, BlockEntityMemory memory)
+    {
+        var crystal = sockets[0];
+        if (crystal.Dormant)
+        {
+            return false;
+        }
+        bool changed;
+        bool ends = true;
+        switch (crystal.Alignment)
+        {
+            case Crystal.Earth:
+                int before = wornSteps;
+                changed = Drain(room, state, hours);
+                // Partway through a step, with the network below half and a block to wear, the turn goes on.
+                ends = wornSteps != before || state.Stored > 0.001f || !Needs() || Target(room, state) < 0 || Output == null;
+                break;
+            case Crystal.Sky:
+                changed = Pan(room, state, crystal);
+                break;
+            case Crystal.Unaligned:
+                changed = PutBack(room, state, crystal);
+                break;
+            default:
+                changed = false;
+                break;
+        }
+        if (ends)
+        {
+            memory.Rotate(this, crystal);
+        }
+        return changed;
+    }
+
+    /// <summary>Whether this stone's network is below the share a drain pays up to.</summary>
+    private bool Needs()
+    {
+        if (SparkstoneModSystem.Networks is not { } networks)
+        {
+            return false;
+        }
+        var (total, capacity) = SparkstoneNetworks.Measure(networks.NetworkOf(this));
+        return Machine.BatteryDrainBelow * capacity - total > 0.001f;
+    }
+
+    /// <summary>The empty blocks a game pan yields from one whole block of sand: a full block takes 8 pannings, one a layer.</summary>
+    public const int PanningsPerBlock = 8;
+
+    /// <summary>One of the game pan's drops, as its <c>panningDrops</c> attribute writes it.</summary>
+    private sealed class PanDrop
+    {
+        public EnumItemClass Type { get; set; }
+        public string Code { get; set; } = "";
+        public NatFloat? Chance { get; set; }
+    }
+
+    private static Dictionary<string, PanDrop[]>? panDrops;
+
+    /// <summary>
+    /// What the game's pan gives from one whole block of this sand, rolled as its own panning rolls: for each
+    /// of the block's eight layers, the drops in a shuffled order, the first whose chance comes up.
+    /// </summary>
+    public static List<ItemStack> PanDrops(IWorldAccessor world, Block sand)
+    {
+        panDrops ??= world.GetBlock(new AssetLocation("game", "pan-wooden"))?.Attributes?["panningDrops"].AsObject<Dictionary<string, PanDrop[]>>()
+            ?? new Dictionary<string, PanDrop[]>();
+        var found = new List<ItemStack>();
+        var drops = panDrops.FirstOrDefault(kv => WildcardUtil.Match(kv.Key, sand.Code.Path)).Value;
+        if (drops == null || drops.Length == 0)
+        {
+            return found;
+        }
+        string rock = sand.Variant["rock"] ?? "granite";
+        var rand = world.Rand;
+        for (int layer = 0; layer < PanningsPerBlock; layer++)
+        {
+            foreach (var drop in drops.OrderBy(_ => rand.Next()))
+            {
+                if (drop.Chance == null || rand.NextDouble() >= drop.Chance.nextFloat())
+                {
+                    continue;
+                }
+                var code = new AssetLocation(drop.Code.Replace("{rocktype}", rock));
+                CollectibleObject? collectible = drop.Type == EnumItemClass.Block ? world.GetBlock(code) : world.GetItem(code);
+                if (collectible != null)
+                {
+                    found.Add(new ItemStack(collectible));
+                }
+                break;
+            }
+        }
+        return found;
+    }
+
+    /// <summary>
+    /// Sky's turn: pans the sand block of the room nearest the drain's corner, at a working's cost; the
+    /// block is gone and keeps its place empty, its finds go into the container touching the drain, and
+    /// what it held of the count is lost. With no sand, no container or no room in it, a free miss.
+    /// </summary>
+    private bool Pan(Battery.Room room, Battery.State state, SocketCrystal crystal)
+    {
+        var world = Api.World;
+        var accessor = world.BlockAccessor;
+        if (contextDirty)
+        {
+            ReadContext();
+        }
+        if (Output is not { } output || SparkstoneModSystem.Networks is not { } networks)
+        {
+            return false;
+        }
+        int best = -1;
+        int bestDistance = int.MaxValue;
+        int weak = 0;
+        for (int i = 0; i < room.Volume; i++)
+        {
+            var pos = room.At(i);
+            if (Battery.Classify(accessor, pos) != Battery.Cell.Weak)
+            {
+                continue;
+            }
+            weak++;
+            int distance = pos.ManhattanDistance(room.DrainCorner);
+            if (distance < bestDistance && Battery.IsSand(accessor.GetBlock(pos, BlockLayersAccess.Solid)))
+            {
+                best = i;
+                bestDistance = distance;
+            }
+        }
+        float cost = Machine.WorkCost(crystal.Evolution, false);
+        if (best < 0 || !networks.CanPay(this, cost))
+        {
+            return false;
+        }
+        var at = room.At(best);
+        var sand = accessor.GetBlock(at, BlockLayersAccess.Solid);
+        var finds = PanDrops(world, sand);
+        if (!Stock.Fits(world, output, finds))
+        {
+            return false;
+        }
+        networks.TryPay(this, cost);
+        state.Stored = Math.Max(0, state.Stored - state.Stored / Math.Max(1, weak));
+        accessor.SetBlock(0, at);
+        state.Panned.Add(best);
+        foreach (var stack in Stock.Merge(world, finds))
+        {
+            Stock.Put(world, output, stack);
+        }
+        world.PlaySoundAt(PanSound, at.X + 0.5, at.Y + 0.5, at.Z + 0.5, null, true, 16f, LemuriaSound.Volume(0.6f));
+        Api.Logger.Audit("{0} panned a sand block of an Earth battery at {1}", CarverName, at);
+        return true;
+    }
+
+    private static readonly AssetLocation PanSound = new("game", "sounds/player/panning");
+
+    /// <summary>
+    /// The Unaligned crystal's turn: the shelf against the drain puts one block of the stone kind standing
+    /// on it, from its input, into the panned block nearest the bottom, at a working's cost. With no stock
+    /// that item waits, out of stock, as a shelf item does; with nothing panned, a free miss.
+    /// </summary>
+    private bool PutBack(Battery.Room room, Battery.State state, SocketCrystal crystal)
+    {
+        var world = Api.World;
+        if (contextDirty)
+        {
+            ReadContext();
+        }
+        if (Shelf is not { } shelf || SparkstoneModSystem.Networks is not { } networks)
+        {
+            return false;
+        }
+        shelf.Listen();
+        int target = state.Panned.Where(i => i < room.Volume).OrderBy(i => room.At(i).Y).ThenBy(i => room.At(i).ManhattanDistance(room.DrainCorner)).DefaultIfEmpty(-1).First();
+        if (target < 0 || shelf.Asleep)
+        {
+            return false;
+        }
+        float cost = Machine.WorkCost(crystal.Evolution, false);
+        var items = shelf.Items;
+        for (int place = 0; place < items.Length; place++)
+        {
+            var kind = items[place];
+            if (!Battery.IsStoneKind(kind) || shelf.IsDormant(place))
+            {
+                continue;
+            }
+            bool Same(ItemStack s) => s.Collectible.Code.Equals(kind!.Collectible.Code);
+            if (Stock.First(Input, Same) == null)
+            {
+                shelf.Quieten(place, BlockEntityControlShelf.Quiet.OutOfStock);
+                continue;
+            }
+            if (!networks.CanPay(this, cost))
+            {
+                return false;
+            }
+            Stock.Take(Input, Same, 1);
+            networks.TryPay(this, cost);
+            var at = room.At(target);
+            world.BlockAccessor.SetBlock(kind!.Block.BlockId, at);
+            state.Panned.Remove(target);
+            if (kind.Block.Sounds?.Place.Location is { } sound)
+            {
+                world.PlaySoundAt(sound, at.X + 0.5, at.Y + 0.5, at.Z + 0.5, null, true, 16f, LemuriaSound.Volume(0.6f));
+            }
+            return true;
+        }
+        return false;
+    }
+
     /// <summary>How many blocks a count has turned: a block turns as soon as the fill starts on it.</summary>
     private static int Charged(float stored) => (int)Math.Ceiling(stored / Machine.BatteryPerBlock - 0.0001);
 
@@ -422,6 +651,7 @@ public partial class BlockEntityMachine
             }
             world.BlockAccessor.SetBlock(into.BlockId, pos);
             state.Wear -= step;
+            wornSteps++;
             if (Battery.WearStep(world, pos) == null)
             {
                 state.WearIndex = -1;

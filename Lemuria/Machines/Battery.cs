@@ -123,6 +123,12 @@ public static class Battery
         /// <summary>New charge paid toward the next step of Earth's wear.</summary>
         public float Wear;
 
+        /// <summary>
+        /// The blocks an Earth drain's Sky turn panned, by index: each keeps its place in the room, empty,
+        /// until stone is put back (feature 10, way A).
+        /// </summary>
+        public readonly HashSet<int> Panned = new();
+
         public void ToTree(ITreeAttribute tree)
         {
             tree.SetString("key", Key);
@@ -137,6 +143,10 @@ public static class Battery
                 rocks.SetString(index.ToString(), code);
             }
             tree["rocks"] = rocks;
+            if (Panned.Count > 0)
+            {
+                tree["panned"] = new IntArrayAttribute(Panned.OrderBy(i => i).ToArray());
+            }
         }
 
         public static State FromTree(ITreeAttribute tree)
@@ -158,6 +168,13 @@ public static class Battery
                     {
                         state.Rocks[i] = code.value;
                     }
+                }
+            }
+            if (tree["panned"] is IntArrayAttribute panned)
+            {
+                foreach (int i in panned.value)
+                {
+                    state.Panned.Add(i);
                 }
             }
             return state;
@@ -235,7 +252,7 @@ public static class Battery
         var world = stone.Api.World;
         var accessor = world.BlockAccessor;
         var aim = stone.Pos.AddCopy(stone.Front);
-        if (!AnyMedium(Classify(accessor, aim)))
+        if (!AnyMedium(Classify(accessor, aim)) && !PannedAt(stone, aim))
         {
             return null;
         }
@@ -266,7 +283,8 @@ public static class Battery
                 {
                     continue;
                 }
-                if (!AnyMedium(Classify(accessor, d)) || !AnyMedium(Classify(accessor, f)))
+                if (!(AnyMedium(Classify(accessor, d)) || PannedAt(drain, d) || PannedAt(fill, d))
+                    || !(AnyMedium(Classify(accessor, f)) || PannedAt(drain, f) || PannedAt(fill, f)))
                 {
                     continue;
                 }
@@ -289,6 +307,30 @@ public static class Battery
             Check(stone, best);
         }
         return best;
+    }
+
+    /// <summary>
+    /// Whether this position is a block the stone's count says an Earth drain panned and is still empty,
+    /// so a panned corner keeps its room (feature 10).
+    /// </summary>
+    private static bool PannedAt(BlockEntityMachine stone, BlockPos pos)
+    {
+        if (stone.BatteryState is not { Panned.Count: > 0 } state || !IsEmpty(stone.Api.World.BlockAccessor, pos))
+        {
+            return false;
+        }
+        var parts = state.Key.Split(';', ',');
+        if (parts.Length != 6 || !parts.All(p => int.TryParse(p, out _)))
+        {
+            return false;
+        }
+        var n = parts.Select(int.Parse).ToArray();
+        if (pos.X < n[0] || pos.Y < n[1] || pos.Z < n[2] || pos.X > n[3] || pos.Y > n[4] || pos.Z > n[5])
+        {
+            return false;
+        }
+        int sizeX = n[3] - n[0] + 1, sizeZ = n[5] - n[2] + 1;
+        return state.Panned.Contains((pos.X - n[0]) + sizeX * ((pos.Z - n[2]) + sizeZ * (pos.Y - n[1])));
     }
 
     /// <summary>Every Gather and Focus whose front block lies within this reach of a position.</summary>
@@ -331,7 +373,7 @@ public static class Battery
     /// medium or its charged form, every block around it solid, the whole room loaded and, with claims
     /// respected, inside a claim its stones may change. Sets the room's Problem when it rests.
     /// </summary>
-    public static void Check(BlockEntityMachine stone, Room room, string? held = null)
+    public static void Check(BlockEntityMachine stone, Room room, string? held = null, ICollection<int>? panned = null)
     {
         var accessor = stone.Api.World.BlockAccessor;
         if (Elementals.Contains(held))
@@ -363,8 +405,9 @@ public static class Battery
                 room.Problem = "unloaded";
                 return;
             }
-            if (!Fits(room.Elemental, Classify(accessor, pos)))
+            if (!Fits(room.Elemental!, Classify(accessor, pos)) && !(room.Elemental == Crystal.Earth && panned != null && panned.Contains(room.IndexOf(pos)) && IsEmpty(accessor, pos)))
             {
+                // A block an Earth drain panned stays in the room, empty (feature 10); any other empty block rests it.
                 room.Problem = "foreign";
                 return;
             }
@@ -379,6 +422,20 @@ public static class Battery
             room.Problem = "gap";
         }
     }
+
+    /// <summary>Whether a block holds nothing, solid or fluid.</summary>
+    public static bool IsEmpty(IBlockAccessor accessor, BlockPos pos) =>
+        accessor.GetBlock(pos, BlockLayersAccess.Solid)?.BlockId == 0 && accessor.GetBlock(pos, BlockLayersAccess.Fluid)?.BlockId == 0;
+
+    /// <summary>Sand of any rock: what an Earth drain's Sky turn pans (feature 10).</summary>
+    public static bool IsSand(Block? block) => block != null && Game(block, "sand-");
+
+    /// <summary>
+    /// A stone block a Control Shelf puts back into a panned block (feature 10): sand, gravel, cobblestone,
+    /// cracked rock or raw rock, all of them an Earth battery's medium.
+    /// </summary>
+    public static bool IsStoneKind(ItemStack? stack) =>
+        stack?.Block is { } block && (Game(block, "sand-") || Game(block, "gravel-") || Game(block, "cobblestone-") || Game(block, "crackedrock-") || Game(block, "rock-"));
 
     /// <summary>Whether every block touching the room from outside is solid on the face toward it; glass is solid.</summary>
     private static bool Closed(IBlockAccessor accessor, Room room)

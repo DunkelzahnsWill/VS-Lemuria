@@ -1,0 +1,10 @@
+{
+	"item-duetmodule": "Duet Module",
+	"itemdesc-duetmodule": "A gilded plug in a stone collar. Set into a Focus with no crystal in its sockets, it holds the two crystals set in after it, in the open, and gives them back last in first out.",
+	"duet-clay": "clay",
+	"duet-water": "water",
+	"duet-firedclay": "fired clay",
+	"duet-metal": "metal",
+	"memory-duet": "Duet: {0}",
+	"machine-module-holds": "The Duet Module holds {0} of 2 crystals"
+}

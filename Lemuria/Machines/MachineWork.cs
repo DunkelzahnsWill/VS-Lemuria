@@ -41,6 +41,27 @@ public static class MachineWork
     /// <summary>Raised on the server the first time any Focus or Scatter quickens a cradle, with the machine; the Journal listens.</summary>
     public static event Action<BlockEntityMachine>? Quickened;
 
+    /// <summary>
+    /// The duets' hook (feature 10, set by it, so this feature never names it): what two crystals make
+    /// together, a product's code such as "clay", or null when they make no duet.
+    /// </summary>
+    public static System.Func<SocketCrystal, SocketCrystal, string?>? DuetOf;
+
+    /// <summary>
+    /// The duets' working (feature 10): asked before the crystal whose turn it is works, while the Memory
+    /// against a Focus lends it a pair; returns what came of the duet, or null to work as before.
+    /// </summary>
+    public static System.Func<BlockEntityMachine, BlockEntityMemory, Result?>? DuetHook;
+
+    /// <summary>
+    /// How many plants a Life working would move on, asked of the Mysteries without moving any (feature 9
+    /// sets it); null where no feature counts them, when a Life working pays once as before.
+    /// </summary>
+    public static System.Func<CastContext, int>? BloomCount;
+
+    /// <summary>Plants a Life working moves on for each working's charge it pays (feature 10, K4): 9.</summary>
+    public static int BloomPlantsPerWorking => Math.Clamp(LemuriaModSystem.Config.BloomPlantsPerWorking, 1, 10_000);
+
     public static Result Work(BlockEntityMachine machine, SocketCrystal crystal)
     {
         var api = (ICoreServerAPI)machine.Api;
@@ -110,6 +131,20 @@ public static class MachineWork
         }
         else
         {
+            if (alignment == Crystal.Life && BloomCount is { } count)
+            {
+                // A Life working pays its cost once for every 9 plants it would move on, in full or not at all (feature 10, K4).
+                int plants = count(cast);
+                if (plants == 0)
+                {
+                    return Result.Nothing;
+                }
+                paid = cost * (int)Math.Ceiling(plants / (double)BloomPlantsPerWorking);
+                if (!networks.CanPay(machine, paid))
+                {
+                    return Result.Unpaid;
+                }
+            }
             result = Effects.Apply(cast) switch
             {
                 Effects.Outcome.Acted => Result.Acted,
