@@ -3129,10 +3129,11 @@ and the code follows the briefs." So the book no longer says what of R9 is built
   of their briefs cites R9 and says that its blocks used by hand open inside another player's claim with the switch
   off, as main has them since the owner merged PR #72 at 19:14Z, and as they stood before it. The briefs of features 3
   and 7 each say that theirs is "an item and no block", and feature 6 has no block.
-- *I find the clause rightly dropped,* for the planning thread's two reasons and for a third. Its reasons: the clause
-  says what main holds, which the briefs now say, each for its own blocks; and the patch for R9 would overtake it. The
-  third is mine: "for racks and jars only" was too narrow on the day it was written. With the switch off, the strike
-  on a placed crystal, the Crystal Rod's taps and the chisel's carving and awakening are open already, because a held
+- *I find the clause rightly dropped,* for the planning thread's reasons, and I go further on one of them. Its
+  reasons: the clause says what main holds, and the patch for R9 is the next to overtake it; the briefs now say what
+  is built of R9, each for its own blocks; and PR #72 gives "a finer account than the clause does". I go further on
+  the last: "for racks and jars only" was too narrow on the day it was written. With the switch off, the strike on a
+  placed crystal, the Crystal Rod's taps and the chisel's carving and awakening are open already, because a held
   item's click asks Lemuria's switch itself (G56, "One sentence of G16 was too wide"). The clause read the code as my
   G16 did. Kept, it would be a sentence of the book that the briefs correct.
 - *What a reader loses.* The book alone no longer tells that the claims switch, turned off, does not yet do all that
@@ -3196,10 +3197,10 @@ in play.
    owner pays with one more merge that changes nothing in the game, on a day when the owner wrote that the PRs are
    hard to sift. The planning thread's new practice (its map's plan, point 1) answers this as far as words can: bring
    such a sentence up to date after the merge, in as few changes as the merges allow, and in words that the next merge
-   does not overtake. PR #76 does that in all four places. Two sentences of the kind are left, and both are still
-   true: part 4's "The shared files table below names what is on main today", for no file outside record/ has been
-   added or taken away since c07322e, and "Glittering and Glowing so far" in the row of feature 1. Step 2's features
-   will overtake the second.
+   does not overtake. PR #76 does that in all four places. Besides the one of point 2, two sentences of the kind are
+   left, and both are still true: part 4's "The shared files table below names what is on main today", for no file
+   outside record/ has been added or taken away since c07322e, and "Glittering and Glowing so far" in the row of
+   feature 1. Step 2's features will overtake the second.
 
 ## G67. Diary: PR #76 is reported, and nothing of mine is in hand
 
