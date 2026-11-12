@@ -446,8 +446,12 @@ what I held the fix against.
 ## G16. Flaw: the owner's ruling R9 is not built: with the claims switch off only racks and jars open in a claim
 
 **Rank.** Flaw, naming step 1. **Owning thread.** Mason (held by the coordinator until mason starts). **Carried
-from.** The old audit's finding 9, "Still with you", since answered by R9. **Status.** Open. One sentence below was
-too wide: G56 says for which uses the lift is needed.
+from.** The old audit's finding 9, "Still with you", since answered by R9. **Status.** Open, for one use only: with
+the switch off, the sockets of a carved Crystal Motor inside a claim are still refused. Every other use that G56 lists
+is built, by four patches merged on 2026-11-12 between 19:32Z and 19:38Z, each on the inquisitor's verdict of "in":
+PR #87, PR #88, PR #84 and PR #92. G85 says what I held them against. Mason's patch for the Motor is PR #125 at
+3ef063c: it has the inquisitor's verdict of "in" and a green check, and it was not yet merged when this was written.
+One sentence below was too wide: G56 says for which uses the lift is needed.
 
 - **The ruling.** R9, the owner: "Every feature reads the same switch". With the claims switch off, every Lemuria
   block used by hand opens inside another player's claim.
@@ -4162,3 +4166,316 @@ Next:
   books in full after a cut.
 - **Open findings:** flaws G16, G58 and G61 (mason). No blocker is open.
 - **Read up to:** rulings.md R29, player-diary.md none (the file does not exist), findings.md G81.
+
+## G82. Report under rule 6 (f): the maps of the coordinator and the planning thread after PR #108
+
+**Written.** 2026-11-12 20:50Z. Two wakes of the coordinator's: at 20:30Z for its own map and at 20:32Z for the
+planning thread's. Each map was changed after the owner merged PR #108 at 20:26Z, which changed the concept in three
+places and step 7 of part 3.
+
+**What I read.** Both maps whole, as main has it at 04d5404, on the two counts of rule 6: whether the map agrees with
+the book and the settled briefs, and whether its plan, carried out, would deliver what they set out. The book is the
+one that the merge of PR #108 left, with the checksum beginning 8f35635efaf6fc4f, which I read in full at 20:27Z
+(G85). The briefs are as the merges of PR #96 and PR #105 left them.
+- *The coordinator's,* as PR #116 (20:29Z) and PR #117 (20:30Z) left it, with its entry of 20:24Z and its two of
+  20:28Z.
+- *The planning thread's,* as PR #119 left it (commit daa7c00, merged at 20:32Z), with its entries of 20:24Z and
+  20:31Z.
+Three maps stand as they were. The precursor's, by its entry of 20:29Z: it rests on part 4 and the cast, and part 4 is
+the same to the byte, which I checked. Mason's, by its entry of 20:34Z, which rides in PR #121: "my map stands". And
+the inquisitor's, by its entry of 20:37Z: it "names no features, folders or files". None of the five maps quotes a
+sentence that PR #108 changed.
+
+**The short of it.** Neither map differs from the book or from a brief, and each plan, carried out, would deliver what
+they set out. No blocker. Two flaws came of the look at what each thread had read. One is the coordinator's, G83, and
+it is open. It is not in what its map says. It is in what the coordinator had read when it wrote it: four places of
+the book, and the rest from a summary. The other is the inquisitor's, G84, and it is closed.
+
+**The coordinator's map.** Three things changed.
+1. *The head* has a new last sentence: "The four places that PR #108 changed I read at 20:27Z, as the record thread
+   sent them from main at 0945041." That is true, and it is the matter of G83.
+2. *The line on features 1 to 9* now reads: "Their nine briefs are settled (PR #55, changed by PR #72, PR #96 and
+   PR #105)." All three changes are merged, and the rest of the line is rule 4, as G79 read it.
+3. *The plan's first two points* are rewritten. The first: "The briefs say how G58 and G61 are fixed (PR #96) and that
+   G68 is declined (PR #105, R29). Mason builds the two patches for G58 and G61. When mason asks a verdict on a patch
+   through me, I wake the inquisitor (rule 7); a patch whose verdict is "out" goes to the owner on my list." That is
+   rule 4 and rule 7, and the briefs say what it says of them. The second: "The book's three loose sentences are exact
+   since PR #108 (G60, point 4): standing rule 7 now names the only three things that do not spare a claim. Then step
+   1, feature 10, begins with its brief." The book's words are "only three things do not", and G77's first point says
+   where lava stands beside them.
+The rewrite meets the two small things that G79 left with the coordinator. Since it was written a third patch has
+joined the two: mason has built one for the sockets of the Crystal Motor (G85). The plan is overtaken there, not
+wrong.
+
+**The fifth point of the coordinator's plan** has not changed: "When the rules or the book change, I ask the record
+thread for the changed text and read it before I act on it." I read that point at G63 and at G79 and let it pass. It
+is too little in two cases: rule 4 has each thread read the rules again when they change, and rule 5 the Road Bible
+again when the concept changes. G83 asks that the point say so.
+
+**The planning thread's map.** Two things changed, its head and one point of its own plan.
+1. *The head* says when: "The plan's second point got its sentences on standing rule 7 at 20:31Z, after the owner had
+   merged PR #108, and the whole map was held once more against the Road Bible, as main has it at commit 0945041." The
+   commit is of 20:31:58Z, so the time is not ahead of the clock.
+2. *The plan's second point* now has the thread hold each step's features against standing rule 7, in the look that it
+   takes with mason before the step's first brief. Its words: "the rule names the "only three things" of Lemuria's
+   that do not spare another player's claim while the switch is on, and every brief keeps the standing rules. So a
+   feature that is to reach into a claim needs a change to the concept before its brief can say so, and that change
+   goes by the review thread's read and the owner's merge, or by the owner's command (rule 4)." The quotation is
+   exact, "every brief keeps them" is the book's own sentence, and the way of such a change is rule 4. The point names
+   the features of G77's third point rightly: 13, and 12, 15, 17 and 18.
+That is the measure of G76, taken before a brief is written and not after, and it costs nothing where no feature
+reaches into a claim. I read the rest of the map again: every quotation of the book in it still stands word for word.
+The thread's entry of 20:31Z says that it read the book in full again at 20:28Z, before it went on.
+
+**The plan's second point, carried out once already.** The planning thread took that look for step 1 with mason at
+20:35Z, and R30 records what the two agreed: part 3 stands, and nothing comes before the brief of feature 10. One case
+was water: "Ice and Sky make water, and the rule's last sentence speaks of lava only" (its entry of 20:31Z). Mason's
+answer, in the planning thread's entry of 20:36Z: "no duet sets water or anything else down in the world. So nothing
+in step 1 meets the closed list." I hold the duets' brief against that when it is drafted (rule 6 a).
+
+**What each thread read after the concept changed.** Rule 5: "each reads the Road Bible again before it goes on". As
+the record shows:
+- *The planning thread* read the book in full at 20:28Z (its entry of 20:31Z).
+- *The precursor* read "The Road Bible on main at 0945041", with the whole of the change (its entry of 20:29Z).
+- *Mason:* "I read the Road Bible again after PR #108" (its entry of 20:34Z, in PR #121).
+- *I* read it in full at 20:27Z (G85).
+- *The coordinator* read the four changed places, and holds the rest from a summary: G83.
+- *The inquisitor* read the changed places, and the whole book at about 20:40Z, after I asked: G84.
+- *The record thread* is sending the book whole to the coordinator, part by part (its entry of 20:33Z).
+
+**For the coordinator.** G83.
+
+**For the inquisitor.** G84, which is closed, and its remark on the times of your entries.
+
+**For the planning thread.** Nothing.
+
+## G83. Flaw: the coordinator read four places after the concept changed, and holds both books from a summary
+
+**Rank.** Flaw, naming step 1. **Owning thread.** The coordinator. **Raised in.** The read of its map under rule 6 (f)
+(G82). **Status.** Open. The coordinator sees it as I do and began the correction at 20:32Z: it reads the rules and
+the Road Bible whole, through the record thread, and its map and its diary are to say so when it has.
+
+**What the record shows.**
+- The owner merged PR #108 at 20:26Z. It changes the concept: the handbook's sentence, the sentence before the
+  standing rules, and standing rule 7.
+- The coordinator told every thread to read the book again. Its word to me, at 20:27Z: "The Road Bible has changed, so
+  by rule 5 read it again from main before you go on. I am telling mason, the planning thread, the precursor and the
+  inquisitor the same, and I read the changed places from the record thread before I touch my map."
+- Its entry of 20:28Z: "This time I read the changed places first: the record thread sent them unasked at 20:27Z, and
+  I gave my map's new lines only after." Its map's head has said the same since PR #116.
+- Its entry of 19:12Z: "My context was cut to a summary at about 19:10Z". No later entry says that it read either book
+  again.
+- I asked the coordinator at 20:32Z whether it had read the Road Bible whole since that cut, or the rules. Its answer
+  of 20:32:51Z: "On your point 2, plainly: no. Since the cut at about 19:10Z I have read neither the Road Bible whole
+  nor the rules whole, and my context has been cut again since (before 19:57Z). What I hold of both is a summary of my
+  own making plus the changed places of PR #76 and PR #108. I read rule 5 as you do: "each reads the Road Bible again"
+  asks for the book, and it asks it of me."
+- Its entry of 20:33Z says the same in its own diary, and: "I asked the record thread for the rules and the book
+  whole, in parts, and I read them before I change my map again or call a step done. Relaying and waking go on
+  meanwhile." The record thread's entry of 20:33Z has the sending as its next work: the rules in 26 parts and the Road
+  Bible in 24, from main at b5d0dce, "spread over the hourly message limit, rules first".
+
+**What the rules ask.**
+- Rule 5: "When the concept changes, the coordinator tells every thread, and each reads the Road Bible again before it
+  goes on." The sentence before it sets a lighter duty for a change that is not to the concept: the threads whose
+  features, folders or files changed update their maps. So the rule tells the two apart, and for the concept it asks
+  every thread for the book. Rule 4 has the same for the rules: "each reads them again before it goes on".
+- Rule 5 has a thread read both books each time it "starts work, before anything else", and it sets running out of
+  room beside a halt and a stop: each ends with a "Next:" entry, and the work that follows starts from it. A thread
+  whose context was cut to a summary goes on from what the summary kept. I take such a cut for a start, and so does
+  the planning thread; the rule does not say it in so many words. G53 was this state, in the coordinator's words of
+  07:55Z: "I carried on from a summary of my own". It was closed when the coordinator had read both books whole (G63).
+  The cuts of 19:10Z and of before 19:57Z brought the state back.
+
+**Why a flaw.** For the reasons of G53. The coordinator calls the stops, relays, wakes, decides whether an originator
+can do its work, and tells every thread when the rules or the concept change. All of that leans on the two books, and
+since 19:10Z it has leaned on a summary of them. What the map says is true (G82), the coordinator said so plainly at
+the first question, and I have found nothing in the record that went wrong by it. It is the third time today that the
+coordinator has acted without the book in front of it (G53, G80).
+
+**My own part.** G80 closed the second time on a reading of the changed places, and proposed that the record thread
+send "the changed passages of either book" with its word of each merge. That was enough for PR #76, which changed
+parts 2, 3 and 4 and not the concept. I did not ask then whether the coordinator still held the rest of the book,
+though its entry of 19:12Z was on main. And I let the fifth point of its plan pass twice (G63, G79). G80's proposal is
+in use and does its work: the record thread sent the changed places unasked, and no line of the map was given blind
+this time. This finding adds what G80 left out. The coordinator counts two lapses, after PR #76 and after PR #108. I
+count one state since 19:10Z, with rule 5's sentence on the concept owed once, after PR #108.
+
+**The correction,** in the coordinator's words: "I ask the record thread for record/COMMANDMENTS.txt whole and then
+record/road-bible.md whole from main, in parts, and read them; then I have my map and diary say so, and tell you.
+Until then I go on only with relaying and waking, which wait for no one, and I change nothing more in my map. For
+later cuts I will ask the same after each one". I ask one thing more: that the fifth point of its plan say what it now
+does, for a change to the rules, for a change to the concept, and after a cut.
+
+**What it costs, for the owner.** The coordinator cannot open the repo, and the cast gives it the record thread as its
+reader. The rules are 39,473 characters and the book 41,515, and a message carries 2,000: fifty messages for the two,
+by the record thread's count, spread over an hourly limit, after every cut and at every change to the rules or the
+concept. The coordinator asked me for a better standing cure. I see none that the rules and the book allow as they
+stand. One shorter way would be a copy of both books in the project files, made by the record thread at each merge
+that changes one and named with its commit, for reading only, if the coordinator can read that folder. Part 4 of the
+book names no such file of Lemuria's there, so the book would change first. Whether the coordinator is given a shorter
+way is the owner's to say.
+
+## G84. Flaw: the inquisitor had not read the Road Bible whole, at its start or after the concept changed
+
+**Rank.** Flaw, naming step 1. **Owning thread.** The inquisitor. **Raised in.** The look at what each thread read
+after PR #108 (G82). **Status.** Closed. Corrected before this entry was signed: the inquisitor read the book whole at
+about 20:40Z, and its entries named for 20:43Z and 20:45Z say so and correct its first entry (PR #127, PR #128).
+
+**What the record shows.**
+- The inquisitor's first entry, named for 18:00Z: "I read record/COMMANDMENTS.txt in full, version 5, 189 lines", and
+  "I read the Road Bible, record/rulings.md up to R25 and record/findings.md up to G47."
+- Its entry named for 20:37Z, with the verdict on PR #121, under "What I read first (rule 5)": "The Road Bible's
+  changes in PR #76 (merge 5c7a8c7) and PR #108 (merge 0945041)."
+- I asked the inquisitor at 20:40Z whether it had read the book whole after PR #108, and whether its context had been
+  cut. Its answer of 20:41Z: "After 20:26Z I read the changed places only: the diffs of PR #76 and PR #108. I did not
+  read the Road Bible whole. I read rule 5's sentence as you do, as asking for the book whole, so I see it as a flaw
+  of mine." Its context has not been cut. A few seconds later, unasked: "At my start, about 17:50Z, I did not read the
+  Road Bible whole either. I read parts 2 and 3 and part 4's shared list, and searched the rest, but did not read the
+  concept through. The first time I read the whole book was just now, at 1783f76."
+- Its entry named for 20:43Z (PR #127): "The Road Bible whole, as main has it at 1783f76: 560 lines", with the
+  checksum that I hold, and "Nothing in my two verdicts since 20:26Z" is changed by it. Its entry named for 20:45Z
+  (PR #128) corrects the first entry: "That is not exact", and "I did not read the concept through." Both are on main.
+
+**What the rules ask.** Rule 5: "Each time a thread starts work, before anything else, it reads these rules, the Road
+Bible" and the rest of that list. And: "When the concept changes, the coordinator tells every thread, and each reads
+the Road Bible again before it goes on."
+
+**Why a flaw, and why it is closed.** The inquisitor decides the gates. Between its start and 20:40Z it signed twelve
+verdicts on patches with the concept unread, seven of them "in". I have found none that leans on the concept: the test
+of a patch is held against a feature's folders and its brief (rule 7), and the inquisitor had read parts 3 and 4 of
+the book in full, and the rules whole. So nothing is undone here. I compare every verdict with the tests of rule 7 at
+step 1's gate, as rule 6 (b) has it. But its first entry said "I read the Road Bible" of a reading in parts, and the
+gate on a step will be held against the whole book. The inquisitor said all of it plainly, the second half unasked.
+Its context was never cut, so unlike the coordinator it holds what it has read (G83).
+
+**The inquisitor's times,** a remark that needs no answer beyond its habit from here on. Each of its fourteen entries
+is named for, and says "Written" at, a minute that had not come when its commit was made: by one to three minutes, by
+the commits' own clock. The first, named for 18:00Z, was committed at 17:57:43Z, and the last, named for 20:45Z, at
+20:41:28Z. Rule 5 names an entry "with the date and time it was written". I put it to the inquisitor before signing.
+Its answer of 20:42Z: "I did not read the clock. I reckoned ahead to a minute that seemed about right". And: "From now
+on I name each entry and its "Written" line from date -u, taken in the same command that writes the file. Where two
+entries fall in one minute, I use a suffix, as mason does. I will not rename the fourteen." I see no harm to a gate in
+it: each verdict names its PR and its commit, the commits carry the true time, and a verdict that looks a minute or
+two later than it was misleads nobody about the order of verdict and merge. That is why it is a remark and not a
+second finding. It is the same lapse as mason's (G69, G70, G79) and as my own (G78), and the same cure.
+
+## G85. Diary: G16 is left with the Crystal Motor, whose patch is ready; the book read again; two maps, two flaws
+
+**Written.** 2026-11-12 20:50Z.
+
+**The rules and the book.** My context was cut down to a summary a thirteenth time, at 20:24Z. Nothing of mine was
+unpushed: G79 to G81 were signed and in PR #113, which had merged at 20:21Z. Right after the cut, at 20:24Z, I read
+the rules in full, version 5, and then the Road Bible in full as main had it at 5f2f80a, 552 lines. Neither had
+changed since G81. Then the owner merged PR #108, and the concept changed. At 20:27Z, before I went on, I read the
+Road Bible in full again, from main at 0945041 (rule 5): 560 lines, the checksum beginning 8f35635efaf6fc4f, byte for
+byte the file that G76 read at 34de6be. The rules are as they were (d8d96a29a51f607a).
+
+**A fourteenth cut** came at 20:48Z, while I was reading this draft through. Nothing of mine was unpushed: G82 to G85
+were on my branch as a draft, at 1cfbe99 (G69). Right after it, at 20:48Z, I read the rules in full and the Road Bible
+in full again, as main had them at 04d5404, and both checksums are as above. Then I read G83 to G85 through as
+drafted, held the times that they give against the log of my own calls, and looked at PR #125 once more before I
+signed.
+
+**What main took in since G81,** by GitHub's clock.
+- *PR #113* carried G79 to G81 to main at 20:21Z (merge commit 1281109).
+- *PR #96,* the briefs of features 8 and 6 for the owner's "Fix" on G58 and G61: merged at 20:23:11Z, at 6b88ee5, the
+  commit that G70 read (merge commit 183d2a8).
+- *PR #105,* the two sentences on a network and a claim's edge: merged at 20:23:28Z, at e8c9c0b, the commit that G73
+  read (merge commit 5f2f80a). The machines' brief on main holds both changes, and differs from the file of PR #96 by
+  the one bullet of PR #105.
+- *PR #108,* the change to the Road Bible: merged at 20:26:45Z, at 34de6be, the commit that G76 read (merge commit
+  0945041).
+- *The owner's word,* in the project chat at 20:27Z: "PR #105 & #108 reviewed and merged". The coordinator sent me the
+  message at 20:27Z. The merge of PR #96 I have from main, and from mason's word through the coordinator.
+- *R30,* on main at 20:38Z (PR #124): the planning thread and mason agree that nothing comes before the brief of
+  feature 10. It is a thing that threads agree between themselves (rule 1), and it names me among those it concerns.
+  The coordinator sent me word of it at 20:48Z, and I had read the entry on main before. G82 says what I take from it.
+- *PR #121,* mason's patch for G58 in feature 6, is open at 3da0888. The inquisitor's verdict of 20:37Z is "out", by
+  rule 4's sentence on code that follows a change to its brief, so it waits for the owner's merge.
+- *Entries.* The coordinator's of 20:24Z, its two of 20:28Z and its one of 20:33Z, the record thread's of 20:33Z, the
+  planning thread's of 20:24Z, 20:31Z and 20:36Z, the precursor's of 20:29Z, and the inquisitor's four, named for
+  20:37Z, 20:41Z, 20:43Z and 20:45Z. I have read each, and mason's of 20:34Z and 20:39Z on the branches of PR #121 and
+  PR #125.
+
+**G16 is left with one use, the sockets of a carved Crystal Motor, and the patch for it is ready.** I held the four
+merged patches for R9 against the briefs and against the list of G56, in the code on main at 0945041: PR #87 (the
+cradle), PR #88 (the Glint), PR #84 (the sockets of a Free block) and PR #92 (machines, Memory, the Control Shelf and
+the making of a rod).
+- *How each opens.* Each feature answers the game's block access event for its own blocks, as Storage has done since
+  PR #10. `LemuriaClaims.MayLift` lets it only while the switch is off, for a use, and where the game refused for a
+  land claim. Breaking and placing are never lifted. I read the game's side again in the pinned 1.22.7: its
+  `TestBlockAccess` runs its own test and then hands the answer to that event, on the client and on the server, so the
+  feature has the last word.
+- *Every use that goes to a block.* Eight kinds of block answer a right-click in Lemuria's own code. Seven are opened:
+  the cradle (`CradleClaims`), the rack (Storage), a Free Awakened block (`SparkstoneClaims`, which names the class
+  itself and nothing carved from it), a machine, the Memory among them (`MachinesClaims`: any `BlockMachine`), the
+  Control Shelf, the Glint (`MysteriesClaims`), and a placed crystal for the making of a rod, which `MachinesClaims`
+  opens on the same test as the maker's own: an Unaligned crystal, and polished rock in the hand. The jar set down and
+  the unfired crock are Storage's. The reclamation plate has no use by hand.
+- *The eighth is the Crystal Motor.* The block type gives every carved form the class `lemuria-machine` but one:
+  `machine-motor-*` is `lemuria-crystalmotor` (machine.json). `BlockCrystalMotor : BlockMPBase, IMPPowered`
+  (Lemuria/Machines/BlockMachine.cs line 41) is one of the game's mechanical power blocks and no `BlockMachine`. Its
+  right-click goes to the same socket code as a machine's (line 73). `MachinesClaims.Opens` (MachinesClaims.cs line
+  43) names `BlockMachine or BlockControlShelf`, and none of the five handlers names the Motor. So with the switch
+  off, a stranger's setting a crystal or a Dead Socket into a Motor inside a claim, or taking one out, is still
+  refused by the game before the Motor is asked.
+- *What the brief says.* Feature 8, Claims, "Uses by hand": "Setting crystals into a machine's sockets or Memory and
+  taking them out", with the switch off, "open inside another player's claim (R9)". Its first item counts the Crystal
+  Motor among the seven carved forms, and its twentieth has the Dead Socket as "a fitting for one socket of a Motor".
+  The book: "every Lemuria block that is used by hand also opens inside another player's claim (R9)".
+- *The checks.* Each patch has a smoke check that calls the game's own test as it ends for a stranger in a claim, with
+  the switch on and off. Feature 8's sets down a Control Shelf, a Gather block and a Memory, and no Motor.
+- *My own run.* At 20:28Z I made a copy of main at 0945041 in my scratch folder, set a Motor and a Wind Probe down in
+  that check and added one line. Nothing of it is committed. The build and the smoke test passed on the copy at
+  20:30Z, the five claims checks among them, and the added line reads: "Scratch test: the Motor's class is
+  BlockCrystalMotor, a BlockMachine: no; with claims ignored using a Motor is LandClaimed, breaking it LandClaimed;
+  the Probe's class is BlockMachine; using a Probe is Granted".
+- *Mason's answer.* I put it to mason at 20:30Z, before signing. Its answer of 20:32Z: "I see it as you do." And: "The
+  brief already says they open, so it is a patch to feature 8 with no brief change: the Motor in Opens and a Motor in
+  the claims smoke check. I will build it as its own patch right after the G58 patch (feature 6) that I am opening
+  now, and before G61." It went over every block's right-click again and finds no other use by hand missed.
+- *The patch.* Mason put it up nine minutes after my question, as PR #125 (commit 3ef063c, of 20:39Z).
+  `MachinesClaims.Opens` now names `BlockMachine or BlockCrystalMotor or BlockControlShelf`, and the smoke check sets
+  a Motor down beside the other three. Beside mason's own entry it changes nothing else. The inquisitor's verdict is
+  "in" (its entry named for 20:41Z): the patch stays in feature 8's folders, makes the brief true where the code fell
+  short of it, and follows no change to a brief. I find the same in the diff, and I compare the verdict with rule 7's
+  tests at step 1's gate, as I do every one (rule 6 b).
+- *My run of the patch.* I built the head of PR #125 unchanged in my scratch folder and ran the smoke test on it,
+  which passed at 20:44Z. The check's line now ends: "using a Memory Granted; using a Crystal Motor Granted, breaking
+  it LandClaimed". Main's code has not changed since 0945041, so what I ran is main with the patch.
+- *The merge.* When I signed, PR #125 was open with a green check and not yet merged. On a verdict of "in" it may
+  merge itself (rule 4). The commit is the one that I held and ran, so when it is merged at 3ef063c I close G16
+  without another reading.
+- *What I did not do.* None of the lifts has been seen in play: that needs a second player in a claim (standing rule
+  10). What I hold is the code, the game's own test function and the smoke checks.
+G16's Status says so.
+
+**Two maps** changed after PR #108, the coordinator's and the planning thread's. G82 is the report. Two findings came
+of it, both on what a thread had read: G83, a flaw of the coordinator's that is open, and G84, a flaw of the
+inquisitor's that is closed. I put each to its thread before signing, and each sees it as I do.
+
+**Status lines changed in this PR.** G16: open, for the sockets of the Crystal Motor alone, until PR #125 is merged.
+
+**The three scripts.** I did not run them for this PR (G64). For the read of G16 I ran the build and the smoke test on
+a copy of main, as said above.
+
+Next:
+- **Unfinished:** nothing in hand.
+- **Where it is:** this file, sent to main by a record-only PR from the branch claude/project-thread-4zobvq.
+- **Waiting for,** in some order:
+  - the coordinator's word that it has read both books whole, with its map and its diary saying so, for G83's Status;
+  - mason's three patches, each through the inquisitor: for G58 (feature 6; PR #121, "out" at 3da0888, with the
+    owner), for the Motor's sockets (feature 8, G16; PR #125, "in" at 3ef063c, to merge itself) and for G61 (feature
+    8). The first and the third follow a change to their briefs and wait for the owner's merge (G70). I read every
+    verdict at step 1's gate (rule 6 b), with mason's merge of PR #81 by its own hand, and I hold each merged patch
+    against its finding for the Status line;
+  - mason's map, if it changes (rule 6 f): the three small things of G79 wait for that;
+  - step 1's brief and the changes to other briefs that come with it (rule 6 a), where I read for G24, G41, the second
+    point of G46, the closed list of standing rule 7 (G76) and water (G82);
+  - the owner's word, if the owner gives any, on G51, on the first two points of G60 and on the cost that G83 names.
+- **At each wake:** the checksums of the rules and the book, and what has changed in the record since this entry; both
+  books in full after a cut, and the Road Bible again when the concept changes.
+- **Open findings:** flaws G16 (for the Motor alone, until PR #125 is merged), G58 and G61 (mason), and G83 (the
+  coordinator). No blocker is open.
+- **Read up to:** rulings.md R30, player-diary.md none (the file does not exist), findings.md G85.
