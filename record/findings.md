@@ -254,9 +254,9 @@ precursor's. I read for it at rule 6 (a). It holds nothing.
 
 ## G7. Flaw: CLAUDE.md and README.md still give the old rules, and every thread is handed CLAUDE.md as binding
 
-**Rank.** Flaw, naming step 1. **Owning thread.** Mason, the one builder (R5, R10, R15). Mason is not started yet,
-so the coordinator holds this for it. **Raised in.** G2. **Status.** Corrected in PR #51 at commit 0bb7c46 (G54). It
-closes when that commit merges.
+**Rank.** Flaw, naming step 1. **Owning thread.** Mason, the one builder (R5, R10, R15). Mason is not started yet, so
+the coordinator holds this for it. **Raised in.** G2. **Status.** Closed. Corrected in PR #51 at commit 0bb7c46 (G54),
+which the owner merged on 2026-11-12 at 18:26Z (merge commit b841cb8).
 
 On main at a83a83a:
 - CLAUDE.md lines 8 to 23 are version 1's five rules, under the heading "The Commandments (the owner's standing
@@ -440,8 +440,9 @@ sit in the same two functions of one file.
 
 ## G16. Flaw: the owner's ruling R9 is not built: with the claims switch off only racks and jars open in a claim
 
-**Rank.** Flaw, naming step 1. **Owning thread.** Mason (held by the coordinator until mason starts).
-**Carried from.** The old audit's finding 9, "Still with you", since answered by R9. **Status.** Open.
+**Rank.** Flaw, naming step 1. **Owning thread.** Mason (held by the coordinator until mason starts). **Carried
+from.** The old audit's finding 9, "Still with you", since answered by R9. **Status.** Open. One sentence below was
+too wide: G56 says for which uses the lift is needed.
 
 - **The ruling.** R9, the owner: "Every feature reads the same switch". With the claims switch off, every Lemuria
   block used by hand opens inside another player's claim.
@@ -1437,8 +1438,8 @@ at commit 84ace1d and close when that commit merges. No blocker is open. G42 is 
 ## G40. Flaw: the new last sentence of standing rule 7 says "by hand", the book's own mark of a naked evocation
 
 **Rank.** Flaw, naming step 1. **Owning thread.** The planning thread. **Raised in.** G39, against part 1 of the book
-(PR #16 at commit 84ace1d). **Status.** Corrected in PR #46 at commit 2e873bf (G49). It closes when that commit
-merges.
+(PR #16 at commit 84ace1d). **Status.** Closed. Corrected in PR #46 at commit 2e873bf (G49), which the owner merged on
+2026-11-12 at 18:25Z (merge commit df41e04).
 
 The sentence is new with the second commit and answers the third point of G25: "What a player breaks or places by hand
 inside another player's claim stays as the game rules it, whatever the switch says: the owner's words open Lemuria's
@@ -1507,8 +1508,8 @@ the record already holds on the question (rule 1).
 ## G41. Flaw: one sentence of "Where features meet" shuts out the fixes that R3 and R7 let in
 
 **Rank.** Flaw, naming step 1. **Owning thread.** The planning thread. It concerns mason. **Raised in.** G39, against
-part 3 of the book (PR #16 at commit 84ace1d). **Status.** Corrected in PR #45 at commit c312aa3 (G48). It closes when
-that commit merges.
+part 3 of the book (PR #16 at commit 84ace1d). **Status.** Closed. Corrected in PR #45 at commit c312aa3 (G48), which
+the owner merged on 2026-11-12 at 18:26Z (merge commit a09f3d2).
 
 Point 2 of the new section says: "No code goes into a feature's folders before that feature's own brief is settled and
 describes it (rule 2)." Further down, part 3 says of the nine built features, which have no briefs yet: "Until then
@@ -1579,7 +1580,8 @@ took from me. None holds anything.
 ## G43. Flaw: the smoke test fails by chance, and each failure holds a PR that should merge itself
 
 **Rank.** Flaw, naming step 1. **Owning thread.** Mason (held by the coordinator until mason starts). **Raised in.**
-This entry. It takes G37 further. **Status.** Open.
+This entry. It takes G37 further. **Status.** Closed. Corrected by PR #59, PR #61 and PR #62, which the owner merged
+on 2026-11-12 between 18:29Z and 18:30Z (G64).
 
 G37 said of one failed run that it "becomes a finding against the test or the Motor if it shows again". It has shown
 again, on another line.
@@ -2276,8 +2278,8 @@ map, what it does about that now, and what the cure costs.
 
 ## G53. Flaw: the coordinator works from parts of the rules and of the book, and its map leaves out the gates
 
-**Rank.** Flaw, naming step 1. **Owning thread.** The coordinator. **Raised in.** G52. **Status.** Open. The
-coordinator does not dispute it, and it has begun the cure (below).
+**Rank.** Flaw, naming step 1. **Owning thread.** The coordinator. **Raised in.** G52. **Status.** Closed. Corrected:
+the coordinator has read both books whole, and its corrected map names the inquisitor and both gates (G63).
 
 **What the record shows.**
 - The coordinator's entry of 07:55Z, after its context was cut: "I carried on from a summary of my own and have not
@@ -2476,3 +2478,598 @@ Next:
   0bb7c46, G40 in PR #46 at commit 2e873bf and G41 in PR #45 at commit c312aa3, and each closes when that commit
   merges. G5 is corrected. No blocker is open.
 - **Read up to:** rulings.md R25, player-diary.md none (the file does not exist), findings.md G55.
+
+## G56. Report under rule 6 (a): the nine briefs of the built features (PR #55 at c0ed1b7)
+
+**Written.** 2026-11-12 19:06Z. Woken by the coordinator at 17:44Z, and again at 17:50Z when the check was green.
+
+**The owner merged PR #55 before this report was signed.** The owner merged it on 2026-11-12 at 18:29:27Z, at commit
+c0ed1b7, its one commit (merge commit b3cf521). By then I had read all nine briefs whole, and between 18:25Z and
+18:26Z I had sent mason what I found, with the word that none of it was a blocker. The report itself was not written.
+The PR was not assigned to the owner, and its description cited no report.
+- *No thread did wrong in it.* What rule 4 holds back until a report is cited is a thread's assigning of the owner. No
+  thread assigned the owner, and the coordinator had not called the owner for this PR. The merge is the owner's own.
+- *Nothing needs undoing.* No blocker stood against the briefs, at the merge or since.
+- *The briefs are settled as c0ed1b7 has them* (rule 2). What I found in their text is G59. It is corrected by a
+  change to the settled briefs, PR #72, which G62 reports on. Mason's answer to my points, commit 6d1a5e2, reached the
+  merged PR's branch at 18:30Z, after the merge, and is not on main: PR #72 carries it.
+- *The owner's word on it.* The owner wrote in the project chat at 18:34:55Z that the merge came too fast, and that
+  the owner will wait longer for an all-clear. The coordinator's entry of 18:35Z records it, with what the coordinator
+  does from now on: it calls the owner only for PRs that are fully cleared, as one list in the order to merge.
+
+**What I read.** PR #55, branch briefs/built-features, at commit c0ed1b7b114ad9a55cb207651acd52de30642f36: the nine
+files of record/briefs/, 1,369 lines, each whole, and mason's entry of 17:44Z, which rides in the PR. I held each
+brief against five things.
+- *Rule 2,* for its form.
+- *The Road Bible,* parts 1 and 3.
+- *The code on main.* Outside record/, main held the same files from commit c07322e, of 03:47Z, until 18:26Z, and the
+  same code until 18:29Z. So the code that the briefs call "main at a1aae13" is the code that I read.
+- *The game itself,* where a brief says what the game does: the libraries of the pinned 1.22.7 server, decompiled into
+  a scratch folder outside the repo, and the game's public source.
+- *The old paper,* by sample: the note of old step 5 for the Mysteries' numbers, and the pre-production document for
+  what it says of claims.
+
+**What I did not do.** I ran nothing in play: the cloud has no client, and a claim that is not the tester's own needs
+a second player. I did not hold the briefs line by line against the old notes: R3 has them written "as built", and the
+code is what I held them against. I did not check looks, sounds or colours.
+
+**The rules and the book.** The rules are version 5 throughout. The book changed twice while I read, by the owner's
+merges of PR #46 at 18:25Z and of PR #45 at 18:26Z. After PR #46 I read the book again in full (rule 5), at 18:26Z.
+PR #45's change is the diff that G48 read and nothing else. The book's checksum (sha256) now begins 2fee058b149f46a2.
+The rulings end at R25.
+
+**The short of it.** The nine briefs have the form that rule 2 asks, they agree with the Road Bible, and they are true
+to the code in all but the sentences that G59 lists. No blocker. The read found three faults in the code, which are
+flaws of mason's (G57, G58 and G61), and one sentence of my own that was too wide (below). The counter-view is G60.
+
+**Rule 2's form.** Each brief says what the player sees and does, what each action leads to, how it is built and which
+existing parts it touches, and what it will not do. Each has its "what to try" list and ends with its open questions.
+No question in any of the nine is marked "needs an experiment", "for the owner" or "find out in play". The counts are
+by program.
+
+| No. | Brief | Lines | "What to try" | Open questions |
+| --- | --- | --- | --- | --- |
+| 1 | crystals | 177 | 11 | 2, both answered |
+| 2 | cradle | 119 | 7 | 1, answered |
+| 3 | journal | 100 | 6 | none |
+| 4 | sparkstone | 140 | 8 | 2, both answered |
+| 5 | storage | 83 | 5 | none |
+| 6 | evocations | 180 | 9 | 2, both answered |
+| 7 | earmuffs | 80 | 5 | none |
+| 8 | machines | 335 | 17 | 4, all answered |
+| 9 | mysteries | 155 | 9 | 1, answered |
+
+**Against the Road Bible.**
+- Each brief names its feature's number, short name and folders as part 3 has them.
+- "The folder decides" is kept where features meet. The Journal's brief says that the text of chapters 5 to 9, and of
+  one page of chapter 1, lies in the lang folders of features 8, 9 and 7 and is theirs. The crystals' brief names the
+  two patches by which features 6 and 8 add behaviours to the crystal block, each in its own feature's folder. The
+  evocations' brief says how machines and the Mysteries work through its effects.
+- The four scales keep their own words (standing rule 2), but for one place that G59 lists.
+- Standing rule 7 has a part headed "Claims" in every brief. The Journal's and the earmuffs' say that an item has no
+  claim rule, feature 5's rule is built, and the briefs of features 1, 2, 4, 6, 8 and 9 say what holds for their
+  blocks and their workings.
+- The briefs of features 4, 6, 8 and 9 were written on the reading of standing rule 7 that PR #46 has since put into
+  the concept. It merged as G49 read it, four minutes before the briefs, so no brief was settled on a sentence that
+  the concept does not hold.
+
+**Against the code.** Every setting that the briefs give is in the code with the same name and the same default: 62 in
+all, which is 8 for the crystals, 4 for the cradle, 6 for sparkstone, 10 for the evocations, 2 for the earmuffs, 27
+for the machines and 5 for the Mysteries. The code has one more, `RespectClaims`, the claims switch itself, in
+Lemuria/Core/. Beyond the settings I held these against the code, and found each as the brief says:
+- *Crystals:* the table of environments; room for charge, the glow and the 30 seconds between readings; the lightning
+  strike's 16 blocks and six hours, and a death's 8 blocks and one hour; the loot chances; the strike; the two patches
+  of features 6 and 8.
+- *Cradle:* the hum for each growth stage, the 19 rocks, the evolution ring and when it is counted, mending and its
+  catching up. The folder holds no claims code.
+- *Journal:* nine chapters with their page counts, where each chapter's text lies, the nine rules that open them, and
+  which items are in the game's handbook.
+- *Sparkstone:* the network's 10 seconds, the two creative-only tools, the claim tests of carving, awakening and the
+  sockets.
+- *Storage:* the jar's three places, the lift of the game's own claim test, which PR #10 built, and the two seconds
+  for which the same player keeps a jar's spot.
+- *Evocations:* a miss is free and a failed Tremor pays; the stack, the crack and the chime; G15 as the brief gives
+  it; the claim test of every cast; who lends the flame.
+- *Earmuffs:* the two volumes, and how often the muffling is looked at.
+- *Machines:* the claim rule of a machine; that Quicken, tilling, boring, felling, the shelf's work on blocks and the
+  battery room all ask it; a machine's cast with its carver's name; sockets, the rod and carving.
+- *Mysteries:* that every effect asks the cast's claim test; the Glint; and, against the note of old step 5, the
+  signs, the death hour, Bloom, Wither, Rewind and the Glint's light.
+
+I followed every call of the claims switch in the code, and every place where a brief says that a claim is asked. That
+is where the three flaws come from.
+
+**One sentence of G16 was too wide.** G16 says that with the switch off "a stranger's right-click on a cradle, a
+placed crystal, a socket, the Control Shelf or Memory inside a claim is still refused". I had that from a comment in
+the code. Today I read the game itself, in the pinned 1.22.7.
+- *What the game tests.* The game tests a land claim before it hands a click to a block: the client's
+  `TryBeginUseBlock` begins with the test, and the server's `HandleBlockInteract` tests before it calls the block. It
+  tests nothing before it hands a click to the item in the hand (`TryBeginUseActiveSlotItem` on the client,
+  `HandleHandInteraction` on the server). The game's own firestarter asks the claim itself for that reason.
+- *Still refused with the switch off,* because the click goes to the block: every use of the cradle, the sockets of
+  sparkstone and of machines, Memory, the Control Shelf, the Glint, and the making of a Crystal Rod from a placed
+  crystal. These need the lift that PR #10 built for racks and jars.
+- *Open already with the switch off,* because the click is a held item's and Lemuria's code asks the switch itself:
+  the strike on a placed crystal, the Crystal Rod's taps, and the chisel's carving and awakening.
+- *Open with the switch on, too:* the chisel's draw, which asks nothing. That is G57.
+
+So "a placed crystal" in G16 is true of the rod's making only, and G16's lift is needed for the second list alone.
+Three briefs had followed my sentence, and G59 lists them. I ran none of this in play.
+
+**What my earlier findings asked of the briefs.**
+- *G12, its last point* (each brief says what its fix makes true). The machines' brief has it for G13 and G14 in item
+  7, and the evocations' brief for G15 in item 3 and question 1.
+- *G16* (R9). The briefs of features 1, 2, 4, 8 and 9 each say which of their blocks are used by hand and that each
+  opens with the switch off, and feature 5's is built. The Glint is among them, which R9's question did not yet name.
+- *G17 and G18* are named in the machines' brief, each as noted and left as it is. *G19* is its question 4, marked
+  "Answered for what this feature does", from the owner's own silo of 2026-11-02. I find that fair.
+- *G20* (what was never looked at in play). The old audit's fixes 1, 12, 13 and 14 are items 5 and 9 of the machines'
+  "what to try", and its fix 9 is item 5 of storage's.
+- *G43* was named in the briefs of features 8 and 9 as still to fix. PR #61 and PR #62 merged 16 and 25 seconds after
+  the briefs, so both sentences were out of date within the minute (G59).
+- *G50, its fourth point* (where a working ends). The briefs of features 6 and 8 said it for lava, which runs "as
+  natural lava does", by the owner's answer in the note of old step 3 ("Let it run, like natural lava"). They did not
+  say it for a fire. That is G58.
+
+**What I asked of mason, and what it answered.** Before I signed I sent mason nine points in four messages, at 18:25Z
+(rule 6). It took all nine in one commit, 6d1a5e2, which I read whole. After the merge I sent five more, at 18:32Z, so
+that the change to the settled briefs would need no second round: the numbers of the findings, the wording of G58 as a
+dated fact and not as the design, what had merged since, a diary entry of its own time, and the order of merging.
+PR #72 has them (G62).
+
+**For step 1's gate.** Rule 7's third test asks whether each merged PR "went the way rule 4 sets for its kind". The
+test is the inquisitor's. For PR #55 I give what I know: rule 4 has a brief "read by the review thread, then merged by
+the owner", and the briefs were read whole before the owner merged them, and merged by the owner. The report is signed
+after the merge, here. No thread assigned the owner before a report was cited. If the inquisitor reads the test
+otherwise, the owner's acceptance in rulings.md settles it (rule 7).
+
+**For the coordinator.** G57, G58, G59 and G61 go to mason and to the owner, and G60 to the owner. PR #72 corrects G59
+and is the next thing for the owner's merge (G62).
+
+**For the owner.** Nothing that you merged needs undoing. The nine briefs say what is built, and one more merge,
+PR #72, puts right the sentences in them that were not exact. The read found three places where another player's claim
+is not safe from Lemuria with the claims switch on: G57, G58 and G61. Each matters only on a shared server.
+
+## G57. Flaw: the Crystalline Chisel draws charge inside another player's claim with the claims switch on
+
+**Rank.** Flaw, naming step 1. **Owning thread.** Mason, the one builder (R5, R15): the code lies in feature 4's
+folder. **Raised in.** The read of the nine briefs (G56). **Status.** Open.
+
+- **The code, main at 15205d9.** Lemuria/Sparkstone/ItemCrystalChisel.cs. A right-click of the chisel on a placed
+  crystal, a cradle or a sparkstone block (`OnHeldInteractStart`, from line 145) calls `Draw` (from line 196), which
+  takes charge from the crystal, from the cradle's crystal or from the whole network (lines 206 to 208) into the
+  chisel. Neither function asks the claims switch. The same file's carving and awakening ask it (lines 135 and 229),
+  and so do the Crystal Rod, the jar filler, the strike and every cast.
+- **Why the game does not stop it.** The game tests a land claim before it hands a click to a block, and not before it
+  hands one to the item in the hand (G56, "One sentence of G16 was too wide"). The draw is the item's click.
+- **What follows in play.** With the switch on, as it is by default, a player with no permission in a claim can still
+  draw the charge of a crystal, of a cradle's crystal or of a sparkstone network that stands in it: up to the chisel's
+  room at a time (`ChiselCapacity`, 100), and again each time the chisel has spent it. Nothing but charge is taken,
+  and nothing is broken.
+- **What it goes against.** Standing rule 7: "With it on, as it is by default, Lemuria's workings spare what lies
+  inside another player's claim". The brief of feature 4 says of the draw, together with setting a crystal into a
+  socket and taking one out: "with the switch on they need the claim owner's permission". At c0ed1b7 its "Built so
+  far" named the socket alone. PR #72 names the draw there as a dated fact, with this number (G62).
+- **What I did not do.** I read it in the code and in the decompiled game, and did not run it. It needs a claim that
+  is not the tester's own, so a second player, and the owner tests in single player until release (standing rule 10).
+- **How it is fixed** is for mason, rule 4 and the inquisitor, not for me. A fix puts a test where the brief already
+  has one, so it leaves the brief true.
+
+## G58. Flaw: a fire that a machine sets is nobody's, so the game lets it burn into another player's claim
+
+**Rank.** Flaw, naming step 1. **Owning thread.** Mason: the code lies in feature 6's folder, and feature 8's machines
+work through it. **Raised in.** The read of the nine briefs (G56), under the fourth point of G50. **Status.** Open.
+The owner may decline it: see "Why a flaw".
+
+- **The code, main at 15205d9.** Where Ignite finds nothing that a flame could light, it sets the game's own fire on
+  the face aimed at (`SetFire`, Lemuria/Evocations/Effects.cs from line 385) and tells the game who started it:
+  `OnFirePlaced(aimed.Face, cast.Player?.PlayerUID)` (line 396). A cast by hand has a player. A machine's cast is
+  built with none (`CastContext.Aim(api, null, null, ...)`, Lemuria/Machines/MachineWork.cs line 77), so its fire is
+  started by nobody.
+- **What the game does with that.** The game's fire spreads by itself. Before each spread the game tests the land
+  claim for the player who started the fire, and the fire does not spread to a place where that player may not build
+  (`BEBehaviorBurning.TrySpreadTo`; the same in the game's public source and in the pinned 1.22.7). A fire with no
+  starter is not tested at all.
+- **What follows in play.**
+  - *By hand.* The fire is the caster's, and it does not spread to where the caster may not build, whatever Lemuria's
+    claims switch says. With the switch off a cast may set a fire inside another player's claim, and that one fire
+    burns what it was set on, but the game still holds its spread.
+  - *From a Fire Focus or a Scatter.* The machine's own claim rule spares the block that the fire is set in
+    (`MayChange`). Nothing holds the spread: a fire that a machine sets beside a claim can burn into it, with the
+    switch on.
+- **What the record says.** Standing rule 7 has Lemuria's workings spare what lies inside another player's claim, "and
+  only a Bale storm's scars do not". The machines' brief has: "With the claims switch on, a machine changes nothing
+  inside a land claim, no block, creature or player, unless it stands inside that same claim." At c0ed1b7 the briefs
+  of features 6 and 8 said of lava that it runs "as natural lava does", which is the owner's answer in the note of old
+  step 3, and of a fire's spread they said nothing. PR #72 gives the machine's fire in the brief of feature 8 as a
+  dated fact with this number, and has the brief of feature 6 say what holds for a fire set by hand (G62).
+- **Why a flaw, and not a note.** The game shuts this door on a player's flame, and Lemuria's machine opens it again.
+  The machine knows who carved it, and already writes that name into the game's audit log for the same fire (line
+  399), so I read the missing starter as an oversight and not as a choice. If the owner would have a machine's fire
+  run free, as its lava does, the owner declines this flaw and the brief says so.
+- **What I did not do.** I read it in the code, in the game's public source and in the decompiled 1.22.7, and did not
+  run it. The game knows a fire's starter only if that player has joined since the server last started, so what holds
+  for a carver who has not I did not find out.
+- **How it is fixed** is for mason, rule 4 and the inquisitor, not for me. Mason's entry of 18:27Z says that a cure
+  would give the fire its carver as starter, and that this changes what a player sees, so it waits for a change to the
+  brief and for the owner.
+
+## G59. Flaw: sentences of the settled briefs that were not true to the code, or that a merged PR had overtaken
+
+**Rank.** Flaw, naming step 1. **Owning thread.** Mason, who wrote the briefs and owns their features. **Raised in.**
+The read of the nine briefs (G56), against the briefs as the owner settled them at c0ed1b7. **Status.** Corrected in
+PR #72 at commit 0060c11 (G62). It closes when that commit merges.
+
+No later work is built on these yet, so none is a blocker. But each is a sentence of a settled brief, and a settled
+brief is what the inquisitor holds a patch against (rule 7), so they should not stay.
+
+1. **"Still refused", said of three uses that are open already.** The crystals' brief said of the strike that with the
+   switch off "the use is still refused (G16)". The machines' brief said the same of all its uses by hand and workings
+   in a player's hand together, the Crystal Rod's taps and the chisel's carving among them. All three are a held
+   item's click, and follow the switch as built (G56, "One sentence of G16 was too wide"). The fault began in my own
+   G16.
+2. **The chisel's draw.** The sparkstone brief says that with the switch on the draw needs the claim owner's
+   permission, and its "Built so far" named the socket alone. As built the draw asks nothing (G57).
+3. **What a machine spares.** The machines' brief had: "Every working is claim-checked block by block before it
+   changes anything". A fire that a machine sets spreads into a claim unchecked (G58), and the containers that a
+   machine draws from or yields into are asked for no claim (G61).
+4. **Two sentences on G43.** The briefs of features 8 and 9 each said of a check of the smoke test that it "fails by
+   chance" and that "its fix follows as a patch, with the waits". PR #61 and PR #62 merged 16 and 25 seconds after the
+   briefs.
+5. **Seven "Built so far" sentences in the present tense:** one each in the briefs of features 1, 2, 4, 6 and 9, and
+   two in the machines' brief. Each says what the code does not do yet, and each goes untrue on the day its fix
+   merges. Rule 7 gives a patch "in" only if it "leaves that feature's brief true as written", and rule 4 has: "If the
+   fix would make a brief untrue, that brief is changed first." As the briefs stand on main, each of the ruled patches
+   (G13 with G14, and G15) and the patch for R9 would make a sentence of a settled brief untrue.
+6. **Four clauses that the merges have emptied.** The briefs of features 4, 6 and 8 each ended a question with the
+   words "if PR #46 does not merge as it stands, this brief follows the concept as merged". PR #46 merged as it stood,
+   and a settled brief follows nothing by itself: it changes by a PR. Item 7 of the machines' brief had its fix follow
+   "once PR #45 merges", and PR #45 is merged.
+7. **Two small things of wording.** The crystals' brief called a dialogue's strength "level 1" and "level 2", where
+   "level" is the charge level's word (standing rule 2). And it listed the making of a Crystal Rod among the uses by
+   hand of a placed crystal, where the machines' brief, whose folder holds it, has it as a working in a player's hand.
+
+**Until PR #72 is merged,** the ruled patches and the patch for R9 should wait: point 5 says why. Mason holds them as
+drafts for that reason.
+
+## G60. Note: the counter-view to the nine briefs (rule 6 a)
+
+**Rank.** Note. **Owning thread.** The coordinator, for the owner. Point 4 is also for the planning thread. **Raised
+in.** The read of PR #55 (G56) and of PR #72 (G62). **Status.** Needs no answer.
+
+The briefs say what is built, as R3 has them do, and I found them true to the code but for G59. So the counter-view is
+not that they are wrong. It is what the owner settles by merging them, said plainly, so that nothing is settled
+unseen. Points 1 and 2 are settled as built when PR #72 merges. Either can still be changed afterwards, by a change to
+its brief.
+
+1. **A dialogue crosses a claim's edge.** Twins dialogue within 3 blocks, and no claim is asked
+   (Lemuria/Crystals/Dialogues.cs line 104). A player who sets a twin down just outside another player's claim
+   neutralizes, discharges or cracks the crystals that stand inside it within 3 blocks: placed ones, those in cradles
+   and in sockets, and the Life crystal that lights a Glint. A third crack shatters a crystal. The twin outside
+   suffers the same, so it costs the one who does it a crystal too. Standing rule 7 says that Lemuria's workings spare
+   what lies inside another player's claim, "and only a Bale storm's scars do not". The old pre-production document
+   gave a claim test to the reactions of Luminous and Radiant crystals, which are not built yet (feature 13), and said
+   nothing of a dialogue below Luminous. PR #72 writes it into the crystals' brief in so many words: "A dialogue asks
+   no claim", and "This is as built." If the owner wants dialogues held at a claim's edge, that is a change to the
+   brief of feature 1, and code after it. If not, the concept's sentence is one for the planning thread to make exact
+   (point 4).
+2. **Players as targets, and the server's PvP setting.** "Players are targets like creatures" (the brief of feature
+   6). Nothing in Lemuria asks the server's PvP setting. Wither by hand names its caster, so the game itself holds it
+   back while PvP is off. Ignite's burning and Gale's push name nobody: with PvP off, a Glowing Fire crystal still
+   sets another player alight wherever no claim spares them. A machine's Wither has no caster either. PR #72 writes
+   the first three of these into the brief of feature 6, as built. Whether that is wanted is the owner's to say, at
+   the latest before the one multiplayer test (standing rule 10).
+3. **Sixty-two numbers become the record.** The briefs give every setting with its default. Now that they are settled,
+   a patch must leave its brief "true as written" (rule 7), so changing a default is a change to a brief, which I read
+   and the owner merges. The loot chances that the owner called testing rates on 2026-11-10 are among them. The book
+   intends this for balance (step 7), and it is the price of every tuning from here on.
+4. **Three sentences of the book that the briefs show to be loose.** None is against a brief. Step 7 says "a page with
+   the Journal (feature 3)": on main the text of chapters 5 to 9, and of one page of chapter 1, lies in the lang
+   folders of features 8, 9 and 7, and by "The folder decides" it is theirs, as the briefs rightly say. The concept
+   says "Lemuria's items stay out of the game's handbook": the Journal and the earmuffs are in it, the earmuffs by the
+   owner's own word ("just for this PPE"), as the briefs of features 3 and 7 say. And standing rule 7's "only a Bale
+   storm's scars do not" leaves out a dialogue below Luminous, if point 1 stays as built. The planning thread could
+   take them into a later change to the book.
+
+## G61. Flaw: a machine's containers are asked for no claim, so its shelf draws stock from a chest in another's claim
+
+**Rank.** Flaw, naming step 1. **Owning thread.** Mason: the code lies in feature 8's folder. **Raised in.** The read
+of PR #72 (G62), from a point of the read of the nine briefs (G56). **Status.** Open. The owner may decline it: see
+"Why a flaw".
+
+- **The code, main at 15205d9.** A machine's stock comes from the container at its Control Shelf's left. Its yields go
+  into the container at the shelf's right or, with no shelf, into a container that touches the machine (`Input` and
+  `Output`, Lemuria/Machines/BlockEntityMachine.cs lines 161 to 177; Lemuria/Machines/ControlShelf.cs lines 107 and
+  110). The shelf's work takes its stock from the input with `Stock.Take` (Lemuria/Machines/ShelfWork.cs lines 376 and
+  725), and yields are put with `Stock.Put`. A reclamation plate puts its salt into any container that touches it
+  (Lemuria/Machines/ReclamationPlate.cs line 59). None of these asks a claim. The machine's claim rule, `MayChange`,
+  is asked for the blocks, creatures and players that a working changes, and not for its containers.
+- **What follows in play.** With the switch on, a player sets a Control Shelf and its machine down outside a claim,
+  with the shelf's left side against a chest that stands just inside the claim. The machine then takes from that chest
+  whatever stock its shelf items use up, firewood for one, and works with it outside the claim. A chest that no
+  stranger may open is emptied of those goods without being opened. Yields can be put into a claimed container the
+  same way, which harms less.
+- **What the record says.** Standing rule 7 has Lemuria's workings spare what lies inside another player's claim. The
+  machines' brief has: "With the claims switch on, a machine changes nothing inside a land claim, no block, creature
+  or player, unless it stands inside that same claim." The evocations' brief counts containers among what a cast
+  spares: "blocks, containers, creatures and players in the claim are spared". At c0ed1b7 the machines' brief said
+  nothing of its containers and claims. PR #72 gives them as a dated fact beside the rule: the containers "asked no
+  claim, so a shelf outside a claim drew stock from an input chest just inside it".
+- **Why a flaw, and why the owner may decline it.** The brief keeps the rule, and gives the containers as a place
+  where the code falls short of it. So it is a fault, as the chisel's draw is (G57), and no part of the design.
+  Against that stands the game itself: its own chute pulls from the container beside it and pushes into it with no
+  claim test (`BlockEntityItemFlow`, read in the pinned 1.22.7), and Lemuria's code counts as a container whatever
+  "the game's chutes and hoppers use" (Lemuria/Machines/Stock.cs). One difference: a container gives a chute only what
+  it offers at that face, where the shelf takes any stock that it uses. If the owner takes a machine's containers as
+  its ports, ruled as the game rules a chute, the owner declines this flaw and the brief says so.
+- **What I did not do.** I read it in the code and in the decompiled game, and did not run it. It needs a second
+  player. Which faces of a chest give to a chute I did not read.
+- **How it is fixed** is for mason, rule 4 and the inquisitor, not for me. I told mason before I signed, and it agreed
+  at 18:49Z that this is a flaw of its own, with the owner free to decline it.
+
+## G62. Report under rule 6 (a): the first change to the settled briefs (PR #72 at 0060c11)
+
+**Written.** 2026-11-12 19:06Z. Woken by the coordinator at 18:34:53Z.
+
+**What I read.** PR #72, "Briefs: the first change after they settled (G56 to G59)", branch briefs/review-points, at
+commit 0060c111ebabdd4ab9214204e33bf8621f1a215e, its second commit, on top of 1f8639d, branched from main at 33193a0.
+I read the whole diff, 108 lines added and 42 taken out: six briefs (crystals, cradle, sparkstone, evocations,
+machines and mysteries), mason's two entries that ride in it, of 18:27Z and 18:34Z, and the description. The check
+"build" ended green on that commit at 18:34:54Z. The PR is not assigned and not set to auto-merge. The briefs of the
+journal, of storage and of the earmuffs are not changed, and nothing outside record/ is.
+- Its first commit, 1f8639d, is line for line the change of 6d1a5e2, which I had read whole on the merged PR's branch.
+- I read the second commit by its own diff, and then each changed part again in its brief as the PR has it.
+- I held each changed sentence against the code on main at 15205d9 and, where it speaks of the game, against the
+  pinned 1.22.7.
+
+**The short of it.** The change corrects G59 whole, and I found nothing in it that is untrue. No blocker. It is ready
+for the owner's merge once its description cites this report.
+
+**Held against G59,** point by point.
+1. The strike is given as built: "it asks the switch itself: this is built". The machines' brief now sorts its uses
+   into the two lists of G56: the rod's taps and the chisel's carving "asked the switch themselves, as built", and
+   sockets, Memory, the shelf and the rod's making "were still refused (G16)".
+2. The sparkstone brief names the chisel's draw: it "asked no claim at all", with G57.
+3. The machines' brief has "before it changes the block it works on". It gives the fire's spread, with G58, and the
+   containers as dated facts beside the rule.
+4. The two sentences on G43 name PR #61 and PR #62 as merged.
+5. All seven "Built so far" sentences are dated and in the past tense: "When this brief was written (main at
+   a1aae13)". Each stays true when its fix merges.
+6. The three clauses on PR #46 are gone, and the briefs say that it "wrote" the reading into the concept. Item 7 of
+   the machines' brief says that PR #45 is merged.
+7. A dialogue's strength goes by the Evolution's own words, "at Glittering" and "at Glowing". The crystals' brief
+   hands the rod's making to feature 8's brief.
+
+**What it adds.** Four things that the briefs did not say before. I found each as the code has it.
+- *A dialogue asks no claim* (the crystals' brief, with a line in its "what to try"). As built:
+  Lemuria/Crystals/Dialogues.cs line 104.
+- *A fire set by hand is the caster's,* so the game holds its spread at any claim where the caster may not build (the
+  evocations' brief). As the game has it (G58).
+- *Nothing in Lemuria asks the server's PvP setting* (the evocations' brief): Wither by hand names its caster, and
+  Ignite's burning and Gale's push name nobody. As built: Lemuria/Mysteries/Withering.cs line 82, and the game's own
+  test in `EntityPlayer.ShouldReceiveDamage`.
+- *The machine's fire and its containers,* as dated facts (the machines' brief). As built (G58, G61).
+
+The first and the third are given as built and in the present tense, so the owner's merge settles them as what the
+features do. G60 puts both before the owner. The other two are given as places where the code falls short of the
+brief, and each has its flaw.
+
+**Rule 2.** No question is added, and none in the nine briefs is marked "needs an experiment", "for the owner" or
+"find out in play".
+
+**Three small things that I leave.** None is untrue, and none is worth a commit, which would void this report.
+- The two sentences on G43 say that PR #61 and PR #62 "fixed it". Each changed its check: the Motor check now takes
+  the fastest speed seen since the Motor started, and the Mysteries' room is emptied of creatures and dropped items
+  before each scene. Whether a check fails by chance again only later runs can show (G43).
+- Item 7 of the machines' brief cites G41 beside PR #45, which a reader has to look up.
+- Mason's entry of 18:34Z gives the fire and the containers both to G58. The containers are G61, and mason's next
+  entry will say so.
+
+**The order of merging.** PR #72 first. The ruled patches (G13 with G14, and G15) and the patch for R9 come after it:
+each must leave its brief "true as written" (rule 7), and as main has the briefs today each would make a "Built so
+far" sentence untrue (G59, point 5). Mason holds its patches as drafts until then. PR #72 itself depends on no other
+open PR.
+
+**A later commit voids this report** (rule 4). Mason has said that it pushes nothing more to the PR. If it ever must,
+it unassigns the owner first and tells the coordinator, and the PR goes back to the owner only once its description
+cites a new report.
+
+**For mason.** The description may now cite this report, G62, and the owner may then be assigned (rule 4).
+
+**For the coordinator.** PR #72 at 0060c11 is cleared. Nothing in it asks the owner to wait, once its description
+cites G62 and mason has assigned the owner.
+
+**For the owner.** PR #72 is ready for your merge once it is assigned to you. It changes words in six of the nine
+briefs and no code, and nothing changes in play. By merging it you also settle two things as they are built today, and
+both matter only on a shared server: twin crystals dialogue across the edge of a claim, and Ignite and Gale reach
+other players while the server's PvP is off. G60 says more on both. If you want either otherwise, say so, and the
+brief is changed first.
+
+## G63. Report under rule 6 (f): the maps of the inquisitor, the coordinator (corrected) and the planning thread
+
+**Written.** 2026-11-12 19:06Z. Three wakes of the coordinator's: at 17:58Z for the inquisitor's first map, at 18:28Z
+for its own corrected map, and at 18:40Z for the planning thread's map after the book changed.
+
+**What I read.** Each of the three maps whole, as main has it at ec0fcc4, against the Road Bible as main has it
+(checksum beginning 2fee058b149f46a2) and against the rules, on the two counts of rule 6: whether the map agrees with
+the book and the settled briefs, and whether its plan, carried out, would deliver what they set out. With the maps I
+read the entries that bear on them: the inquisitor's three, of 18:00Z, 18:01Z and 18:02Z; the coordinator's of 18:24Z,
+18:31Z and 18:33Z, and its two of 18:35Z; the record thread's of 18:32Z; the precursor's of 18:33Z; and the planning
+thread's of 17:58Z, 18:12Z and 18:49Z.
+
+**The short of it.** All three maps agree with the book, and each plan would deliver its thread's office. No blocker.
+G53 is corrected, and I close it. One clause of the coordinator's map differed from the book while it stood on main,
+from 18:28Z to 18:37Z, and was struck before I signed.
+
+**The inquisitor's first map** (26 lines, on main since 18:03Z by PR #63). It agrees.
+- The inquisitor owns no feature and no file outside its own folder, and the map says so. Its office is rule 7's, in
+  rule 7's words: the gate on a patch and the gate on a numbered step, and nothing else.
+- It is woken by the coordinator or the owner. It talks to the coordinator, or to the thread whose work it judges,
+  before it signs. Each decision gets an entry that names the PR and the commit, or for a step the commit of main.
+- It names mason as the one builder, by part 4 of the book, and it says that the book and the settled briefs outrank
+  it. It names no feature, so the briefs give nothing to hold it against.
+- Its plan is "None beyond the gates", which is the whole of what rule 7 gives it to do.
+- *Its three verdicts* are not this wake's to judge: I hold every verdict against rule 7's tests at step 1's gate
+  (rule 6 b). Read today, each names its PR and commit, what it tested, what it found and whom it heard, and each is
+  "out": PR #59 at 1c095b6, PR #61 at a61ef3a and PR #62 at 4c03155. The owner has since merged all three. I saw
+  nothing wrong in the verdicts.
+
+**The coordinator's corrected map** (on main since 18:28Z by PR #69; corrected again at 18:35Z, and on main so since
+18:37Z by PR #73). It replaces the first map whole, which G52 read and G53 found wanting.
+- *It cures G53.* The coordinator's entry of 18:24Z has: "I have now read both books whole: the rules, version 5, in
+  26 parts (last part 17:49:46Z), and the Road Bible in 24 parts (last part 18:24:33Z), as the record thread sent them
+  from main at 8897ca7." The map now names the inquisitor and both gates. The coordinator wakes the inquisitor when a
+  thread asks a verdict on a patch through it and when it reports a numbered step done, and its plan for a step runs
+  through the gate: the zip, the word that the step is done, the inquisitor, then the review thread at rule 6 (b). The
+  entry adds what it does from now on: "when the rules or the book change, I ask the record thread for the changed
+  text and read it before I act on it".
+- *It agrees with the book:* the 26 features by number and by step, all mason's; step 7 with no feature, the
+  multiplayer test before the step is reported done, and the release as the owner's.
+- *One clause differed.* As PR #69 had it, the map said of the planning thread that it "keeps the project memory".
+  Part 4 of the book has the project memory as no thread's: "No thread. Every thread reads and writes it, and it is
+  outside the record". I told the coordinator at 18:34Z, before I signed (rule 6). It answered at once that I was
+  right, and struck the clause. With it the coordinator took two smaller points, neither a difference from the book:
+  the zip goes with "anything known to be broken" (rule 3), and a verdict on a patch is asked by the patch's thread
+  through the coordinator, and may be asked by none (rules 4 and 7). Main has the map so since 18:37Z. Rule 6 has: "A
+  map that differs from the Road Bible is a blocker." I write none, because the map that I sign on does not differ. No
+  thread acted on the clause while it stood, as far as the record shows.
+- *The book changed after the coordinator read it whole,* by the owner's merges of 18:25Z and 18:26Z. Its entry of
+  18:31Z says that it asked the record thread for the changed text, and it told me at 18:34Z that it had read it. The
+  map's head still names main at 8897ca7, which is true of the day it was written.
+- *Its plan would deliver its office,* as long as the hourly limit of messages that G53 names does not starve it. Its
+  new habit of one list for the owner, in the order to merge, spares some of that.
+
+**The planning thread's map, its plan rewritten** (on main since 18:33Z by PR #70). The planning thread's entry of
+17:43Z set this rewrite for the time after PR #45 and PR #46, and G52 left the map as it stood until then. I read the
+diff against the map that G52 read, and the map whole. The change is in the plan, with one line each under what it
+needs from me and from mason. The head says that the whole map was held again against the book as main had it at
+a09f3d2, the merge of PR #45.
+- *It agrees with the book.* The planning thread owns no feature and no file outside record/, as part 4 has it. Its
+  new first point quotes the book's dated sentences rightly: part 2's on commit c07322e, part 3's on the nine briefs,
+  and part 4's table, which "names what is on main today".
+- *A map that says the book is out of date.* The first point says that four sentences of the book were overtaken
+  between 18:26Z and 18:30Z, by the merges of PR #51, PR #55 and PR #59. By the history of main that is so. Rule 5 has
+  a map never say anything different from the book, and has a thread that thinks the book wrong ask for the change and
+  leave its map as it is. I read the point on the right side of that rule. It says nothing other than the book about
+  what the project is, or about whose a feature, a folder or a file is. It says that four dated sentences are to be
+  brought up to date, and writing every change to the book is that thread's own office (the cast). The change itself
+  is PR #76, for which the coordinator woke me at 18:48Z, and which I read next.
+- *The fifth point takes the first point of G50.* Point 3 of "Where features meet" speaks only of "another feature
+  that its thread owns or has been handed", which is every feature while mason is the one builder. If the builders are
+  ever split, the same change to the book gives the other case its sentence.
+- *The sixth point* says how its own changes to the book merge: by the owner's merge wherever the diff or the
+  description cites an entry that it recorded, R1 to R18, or takes its words from a finding of mine, until the owner
+  rules on G51. That is the widest of G51's three readings, and what G48 already has.
+- *Its plan would deliver its office:* the book kept true to main after each merge, part 3 looked at again before each
+  step's first brief, and each ruling that changes the book written into it before code follows.
+
+**Two maps that did not change.** The precursor's entry of 18:33Z says that its map names the old paper by part 4,
+which did not change, and no feature, folder or step, so that it owes no wake. That is so. Mason's map was last
+changed at 18:01Z. The two changes to the book touch none of its features, folders or files, so rule 5 asks no update
+of it, and I found nothing in it that differs from the book as changed. Three points of its plan are done since: the
+rewrite of the two files, the nine briefs, and the three PRs for G43.
+
+**For the coordinator.** G53 is closed. Nothing here needs sending on but this report.
+
+## G64. Diary: the nine briefs, PR #72 and three maps are reported; PR #76 is in hand
+
+**Written.** 2026-11-12 19:06Z.
+
+**The rules and the book, and two lapses of my own.** My context was cut down to a summary three more times since G55,
+at 18:13Z, at 18:39Z and at 19:02Z.
+- *At 18:13Z.* I held the rules and the book by their checksums, found both unchanged, and read on in the briefs
+  without reading either again in full. That was a lapse: G55 says what I do after a cut, and I did not do it. I read
+  the book in full at 18:26Z, after the owner merged PR #46 (rule 5), and the rules in full only at 18:39Z. Between
+  the two cuts I worked from the summary and from the parts of the rules that I read again as I needed them: rule 6's
+  ranks at 18:17Z, rule 7 at 18:26Z and the cast at 18:33Z. In that time I sent mason and the coordinator what G56 to
+  G60 and G63 now hold. I have since held every sentence of the rules that those messages quote against the rules read
+  in full, and each is as the rules have it. It is the fault that G53 finds in the coordinator, in small, and I record
+  it as my own.
+- *At 18:39Z.* No entry was written into this file yet. The drafts of G57, G58 and G60 and of the inquisitor's map lay
+  in a scratch folder outside the repo, unpushed, against what G55 says I do with a draft. They came through the cut
+  whole. Right after it I read the rules in full, and then the book in full as main has it, before I judged anything
+  further.
+- *At 19:02Z.* The same lapse as at 18:39Z. From 18:40Z on, each draft lay in the scratch folder again, and from
+  19:00Z the nine entries stood put together in my working tree, not pushed. They came through the cut whole. After it
+  I read the rules in full, pushed the entries as they stood, at 19:03Z (commit f384286), and then read the book in
+  full, before I checked or signed anything.
+- *What I do from here.* After a cut I read both books in full and push whatever is unpushed, before I go on with
+  anything else, whatever the checksums say. And the step that writes an entry also commits it to my branch and pushes
+  it, as a draft: the checking and the signing follow as a further commit. G55 promised as much, and I did not keep
+  it, because each draft went through a scratch file to be wrapped and stayed there.
+
+**I no longer assign the owner on a record-only PR of mine.** Rule 4 has a thread assign "every PR that waits for the
+owner's merge", and a PR that changes only this file merges itself and waits for nobody. CLAUDE.md has said the same
+since the owner merged PR #51, and the planning thread's entry of 18:49Z pointed it out. Up to PR #65 I assigned the
+owner on each of mine, as the old CLAUDE.md asked. An assigned PR looks to the owner like one that waits, and the
+owner wrote today that the PRs are hard to sift.
+
+**I run the three scripts only where a report rests on them.** For this PR I ran them (below). CLAUDE.md keeps them
+under "Repository rules", and since the owner merged PR #51 that part opens: "These bind whoever writes code in the
+repo (Road Bible, part 4)." I write no code, and since PR #59 the `build` check passes a PR that changes only record/
+without them. Why not go on running them for every PR of mine: they test nothing that a change to this file can alter,
+and each PR waits three minutes for them. Where a finding rests on what they show, as G43 does, I run them and say so.
+
+**A state of main that I passed on stale.** At 18:31Z I told the coordinator that PR #59 was still open, and at 18:34Z
+I said it again. I had last looked at main at 18:29:53Z, and the owner merged PR #59 at 18:30:02Z. The coordinator
+passed my word to the owner and to three threads, and corrected it at 18:33Z, when the record thread told it better
+(its entry of 18:33Z). From here on, any state of main or of a PR that I pass on carries the time of my look.
+
+**What I did since G55.**
+- *The nine briefs.* I finished the read at 18:25Z, and sent mason nine points in four messages before I signed (rule
+  6). G56 to G61 hold what came of it.
+- *The owner's merges.* Between 18:25Z and 18:30Z the owner merged PR #46, PR #45, PR #51, PR #55, PR #61, PR #62 and
+  PR #59, in that order. At 18:31Z I told mason and the coordinator what the merge of PR #55 meant for mason's commit
+  6d1a5e2, and that nothing needed undoing.
+- *Mason's answer.* I read 6d1a5e2 whole and sent five more points at 18:32Z. Mason opened PR #72 at 18:34Z.
+- *The coordinator's map.* At 18:34Z I told the coordinator of the one clause that differed from the book (G63).
+- *PR #72.* Woken at 18:34:53Z. I read it between 18:40Z and 18:48Z. At 18:49Z I told mason that I ask for no further
+  commit and that the containers become G61, and mason agreed within the minute.
+- *The planning thread's map.* Woken at 18:40Z (G63).
+- *PR #76,* the planning thread's change to four sentences of the book. Woken at 18:48Z. I have not opened it yet, and
+  it is next.
+
+**Three choices of mine.**
+- *The containers became a flaw, G61.* At 18:25Z I had asked mason for a sentence on them "as built", and meant them
+  for the counter-view. After my ask on the fire, mason gave the fire and the containers both as dated facts beside
+  the rule that a machine changes nothing inside a claim. A dated fact beside a rule is a shortfall, and a shortfall
+  with no finding has no owner and no step. Why not leave it in the note: a note needs no answer, and the brief would
+  carry for good a fault that nobody is asked to settle. Why not ask mason to word it as the design: the game's own
+  chute would bear that out, but the choice is the owner's and not mason's or mine, and a declined flaw records it.
+- *The dialogue and the PvP setting stay in the note, G60.* The briefs give both as built, in the present tense, and I
+  asked for them so. Why not flaws: the record does not say what the owner wants in either. The old paper gives a
+  claim test to reactions from Luminous up and is silent below, and nothing in the record speaks of PvP. A flaw says
+  that something should be corrected, and I cannot say that of a choice that was never made. The note tells the owner
+  what the merge of PR #72 settles. Why not hold PR #72 for the owner's answer: a report holds nothing, and either
+  point can be changed afterwards by a change to its brief.
+- *G43 is closed.* All three of its cures are merged, PR #59, PR #61 and PR #62, and I read each diff. The skip works:
+  the check on PR #72, a record-only PR, ended green in six seconds. With all three in, the full check passed on main
+  at each of the six merges from 18:30Z to 18:50Z, and my own run of the three scripts passed at 18:53Z. A failure by
+  chance cannot be proved gone. If either check fails again without a change to the code, that is a new finding.
+
+**The checks.** I ran the three scripts on main at 15205d9 from 18:50Z to 18:53Z: setup, the build and the smoke test
+all passed. This PR's branch starts from ec0fcc4, which differs from 15205d9 only under record/, and the PR changes
+record/findings.md alone.
+
+**Status lines changed in this PR.** G7, G40 and G41 are closed by the owner's merges. G43 and G53 are closed. G16
+points to G56 for the sentence that was too wide.
+
+Next:
+- **Unfinished:** the read of PR #76, the planning thread's change to four sentences of the Road Bible (rule 6 a), at
+  commit b77768c. It changes parts 2, 3 and 4, so it goes by my read and the owner's merge (rule 4). The planning
+  thread asks me to weigh one thing in it: part 3's paragraph under the table of features 1 to 9 no longer says what
+  of R9 is built.
+- **Where it is:** this file, sent to main by a record-only PR from the branch claude/project-thread-4zobvq. The
+  report on PR #76 follows from the same branch once this PR is merged, and its entries go to that branch as drafts
+  while I write them.
+- **Waiting for:** nothing, for PR #76. After it I expect, in some order:
+  - mason's patches: G13 with G14 (PR #75, a draft), G15 (PR #78, a draft), the patch for R9, and what cures G57, G58
+    and G61, unless the owner declines them. Their verdicts are the inquisitor's, and I read every verdict at step 1's
+    gate (rule 6 b);
+  - mason's map, when it is next updated (rule 6 f);
+  - step 1's brief and the changes to other briefs that come with it (rule 6 a), where I read for G24, G41 and the
+    second point of G46;
+  - the owner's word, if the owner gives any, on G51, on G58 and G61, and on the first two points of G60.
+- **Open findings:** flaws G13 to G16, G57, G58 and G61 (mason). G59 is corrected in PR #72 at commit 0060c11, and
+  closes when that commit merges. No blocker is open.
+- **Read up to:** rulings.md R25, player-diary.md none (the file does not exist), findings.md G64.
