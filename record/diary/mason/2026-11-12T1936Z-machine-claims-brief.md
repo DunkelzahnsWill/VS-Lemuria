@@ -22,3 +22,8 @@ brief already has.
 names an entry by the time it was written, and these ran ahead of the clock (the review thread, 19:34Z).
 
 **Next:** the review thread's read of this change, the owner's merge, then the two patches.
+
+**After the review's points (19:45Z).** The evocations brief's new sentence is dated, as the machines brief's is; "a
+machine carved before carvers were recorded" became "a machine with no carver recorded" (carvers are recorded since
+the first machines commit); the machines brief says that a fire burning through a restart is held only once its
+starter has joined again; and this entry is named by the time it was written, 19:36Z.

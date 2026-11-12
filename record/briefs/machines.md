@@ -266,10 +266,12 @@ old paper differ, this brief is the record.
   is claim-checked. With the switch off, claims stop no machine. Built.
 - **A machine's fire** (the owner, R27: G58 "Fix"). A fire that a machine sets on a face is its carver's, as a fire
   set by hand is the caster's: the game's fire spreads by itself and does not spread to where its starter may not
-  build, so a machine's fire never burns into a claim its carver could not build in, whatever the switch says (as
-  for a hand's fire, feature 6). Where the game does not know the carver (one who has not joined since the server
-  last started, or a machine carved before carvers were recorded), the machine sets no fire on a face: it still
-  lights what can be lit, as a firestarter does. When this brief was written (main at a1aae13), a machine's fire had
+  build, so a machine's fire does not spread into a claim its carver could not build in, whatever the switch says
+  (as for a hand's fire, feature 6). The game knows a player only once they have joined since the server last
+  started: a fire that burns on through a restart is held only once its starter has joined again, a hand's fire
+  likewise. Where the game does not know the carver (one who has not joined since the server last started, or a
+  machine with no carver recorded), the machine sets no fire on a face: it still lights what can be lit, as a
+  firestarter does. When this brief was written (main at a1aae13), a machine's fire had
   no starter, so the game held its spread at no claim, with the switch on too (G58). The fix follows this brief as a
   patch.
 - **A machine's containers** (the owner, R27: G61 "Fix"). With the switch on, a container that lies inside a land
