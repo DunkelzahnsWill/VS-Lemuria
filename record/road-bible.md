@@ -106,7 +106,8 @@ container, are *dialoguing*, in the owner's word, and what a dialogue does climb
 
 A crack is one step of *stress*, which over-driving a crystal causes too. A cracked crystal still works, its third
 crack shatters it, and it is *repaired* by resting in a cradle. *Crystal jars* and *crystal racks* keep crystals out
-of dialogues up to Glowing. From Luminous up only a *shielded jar* holds a crystal back.
+of dialogues up to Glowing, and so does the magazine of a Memory, the module that holds further crystals for a machine
+(the owner, 2026-11-12; R32). From Luminous up only a *shielded jar* holds a crystal back.
 
 From Luminous up an unshielded crystal is also a danger to whoever holds it, carries it or stands near it, in its
 alignment's nature. That is its *exposure*: weakest at Luminous, stronger at Radiant, and in full only at Baleful. So
