@@ -871,3 +871,44 @@ them." The owner's message does not answer it. The coordinator is asking again, 
 
 Concerns: mason (the briefs of features 8, 9 and 10); the planning thread (its concept change, and answer 6 names an
 idea that the owner says is shelved for later parts of the Road Bible); the coordinator.
+
+## R39. The owner's yes to a design rule on Elementals and Mysteries, in the owner's fuller words
+
+**Given.** 2026-11-12 23:12:41Z by the owner, in the project chat. It answers the question that R38 left open, the
+coordinator's of 23:00:33Z, asked again at 23:08Z, word for word: "One more for a yes or no: the planning thread would
+add your sentence to the Road Bible as a design rule, that Elementals are the efficient choice and Mysteries act beyond
+them." It bears on the owner's Bloom answer in R36.
+
+**Recorded.** 2026-11-12 23:13Z by the record thread, copied from the owner's own message.
+
+The owner, the whole message:
+
+> Yes, however that may be a slight mis-characterization. Elementals are basic, and simple. Efficient in the mode of operation as they directly map onto the real world, and functions within it. Mysteries work more "broadly" within concepts. IE: It is inherently easier, mechanically, to set-fire to an object via a crystal due to there already being multiple ways to set something on fire within the world. However forcing a berry bush to bloom, something counter to the natural state of the world, is counter to the nature of The World.
+
+The coordinator's words with it, exactly as given: "I take it as the answer to the question R38 left open (my ask of
+23:00:33Z, repeated at 23:08Z): may the planning thread add the owner's Elementals and Mysteries sentence to the Road
+Bible as a design rule. The answer is yes, with the owner's own fuller wording of what the two families are." And: "It
+concerns the planning thread (its concept change, which it writes from these words and holds until step 1's gate has
+passed) and mason (the briefs under R36)."
+
+**Closed.** The question R38 left open is answered here.
+
+**Stopped.** Nothing.
+
+Concerns: the planning thread; mason; the coordinator.
+
+## R40. Three questions from mason, put to the owner
+
+**Raised.** 2026-11-12 23:12:29Z by mason, and put to the owner by the coordinator in the project chat at about
+23:12:30Z (rule 2). The record thread has not opened that post: these are the coordinator's words of it, exactly as
+given: "at about 23:12:30Z I posted mason's three questions of 23:12:29Z to the owner (the Earth battery's fill and
+drain, G96, three ways with mason suggesting the second; the Dead Socket in a Memory on an Earth drain doing nothing,
+yes or no; and mason's reading of R38 answer 1, that the Dead Socket takes none of the magazine's two places)."
+
+**Recorded.** 2026-11-12 23:13Z by the record thread, from the coordinator's word.
+
+**Open.** All three, for the owner.
+
+**Stopped.** Nothing.
+
+Concerns: mason; the coordinator.
