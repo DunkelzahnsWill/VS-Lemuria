@@ -41,12 +41,12 @@ the record.
 
 ### The four naked evocations
 
-5. Each is cast exactly as feature 6's are, by its rules unchanged: hold right-click 5 seconds, over-drive from 15, a
-   tenth of a full crystal a cast, nothing for a miss, the same areas and ranges by power, and claims respected
-   (feature 6). This feature holds what each does:
+5. Each is cast exactly as feature 6's are, by its rules: hold right-click 5 seconds, over-drive from 15, four
+   tenths of a full crystal a cast (feature 6, item 2; R36; R38, 4; not built yet), nothing for a miss, the same areas
+   and ranges by power, and claims respected (feature 6). This feature holds what each does:
    - **Bloom (Life),** at a plant: a crop, berry bush or fruit tree moves on one growth stage; a sapling or tree seed
-     loses one in-game day of its growing time. Each plant takes Bloom once an in-game day, whatever blooms it, hand or
-     machine (question 7, K4), so it roughly doubles a farm's pace.
+     loses one in-game day of its growing time. By hand each plant takes Bloom once an in-game day (question 7, K4), so
+     it roughly doubles a farm's pace; inside a machine there is no such limit, and the cost is the bound (item 6; R36).
    - **Wither (Death),** at a plant or the ground: a crop becomes the game's dead crop, keeping its farmland; saplings,
      tall grass, flowers, ferns and leaves wilt away, dropping what breaking them drops; grassy soil loses its grass.
      From Glowing it also withers every creature and player in its area: 1.5 damage every 5 seconds for 30 seconds, 9
@@ -59,7 +59,8 @@ the record.
      recipe comes that much closer (question 9).
    Rewind and Progress never touch what a player carries, so neither can spoil another player's food.
 6. **In machines** (question 11): a Focus or Scatter works these four as it works any crystal's evocation (feature 8),
-   for a working. A Life Focus pays only when a plant moves on, at most once a day per plant, and a machine's Life
+   for a working, at 4 times an Elemental working's cost (feature 8, item 4; R36; R38, 3; not built yet). A Life Focus
+   pays only when a plant moves on, with no limit of once a day per plant (R36; not built yet), and a machine's Life
    working pays its cost once for every 9 plants it would move on, rounded up, in full or not at all (feature 8; feature
    10's brief, item 11, R32; this feature counts the plants for feature 8, and both were built with feature 10, PR
    #156); a Death Focus with a Glowing crystal withers what stands in front of it and pays only when something is there;
@@ -127,7 +128,8 @@ Glowing).
 - No sparkglass lenses, inverted lamp or totems (K1, K3): the tools that engineer pure environments, feature 11. No
   temporal probes: the unplaced list.
 - No Mystery batteries, no Glint fed by a network, and no Bloom on animals or cradles (Quicken speeds cradles).
-- No limits for machines that Bloom beyond the rule by hand (K4) and the cost by plants in item 6 (feature 10's brief).
+- No limits for machines that Bloom beyond the cost by plants in item 6 (feature 10's brief; R36). A Glint burns its
+  Life crystal as today (R38, 6).
 
 ## What to try
 
@@ -140,7 +142,8 @@ Each place can also be built at spawn with `/lemuria mysteries test <life|death|
    temporal storm it stops. Rust: a wood-lined room far below ground with a chest of 64 rot or 16 rusty gears.
 4. Nothing else moved: a Glowing Unaligned crystal at a forge still refines into Fire; set ten potted plants beside it
    and it pauses while they stand.
-5. Bloom a crop: one stage on, and nothing more that day, even after a restart. Wither grass, leaves and a crop; with
+5. Bloom a crop: one stage on, and nothing more that day by hand, even after a restart. A full crystal makes two
+   Mystery casts, then only clicks. Wither grass, leaves and a crop; with
    a Glowing crystal, Wither a creature: 1.5 every 5 seconds for 30 seconds, a second cast restarting the count.
    Rewind a chest of spoiling food; Progress raw cheese and a sealed barrel.
 6. Carve a glass block into a Glint with the chisel and set a charged Life crystal in: light 10, or 14 with a Glowing
