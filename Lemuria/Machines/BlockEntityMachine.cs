@@ -531,6 +531,9 @@ public partial class BlockEntityMachine : BlockEntitySparkstone
         }
     }
 
+    /// <summary>When a Gather block's hour of full Death after a death nearby ends, in the world's total hours; 0 for none. For the test command.</summary>
+    public double DeathBoostUntil => deathBoostUntil;
+
     /// <summary>A death within 8 blocks gives a Gather block's Death crystals an hour of full Death, as lightning gives Sky its six (the owner, Nov 10).</summary>
     public override void OnSocketDeath(SocketCrystal crystal)
     {

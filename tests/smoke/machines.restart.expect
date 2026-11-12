@@ -6,4 +6,4 @@ Machines test: after the restart the shelf holds axe-felling-copper \(out of sto
 # Step 4 part 3: the Ice battery's count survives the restart in both stones.
 Machines test: after the restart both Ice battery stones keep the count: yes, stored more than 0: yes$
 # The audit (G13, G14): the Gather blocks of the first boot still gather at full Sky and full Death.
-Machines test: after the restart the Gather block struck under open sky gathers 200 of a day's 200; the one that heard a death gathers 200$
+Machines test: after the restart the Gather block struck under open sky gathers 200 of a day's 200; the one that heard a death keeps the hour's end it heard: yes$
