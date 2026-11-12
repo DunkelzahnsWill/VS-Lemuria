@@ -666,3 +666,35 @@ The planning thread's words, exactly as the coordinator gave them:
 **Stopped.** Nothing.
 
 Concerns: mason; the planning thread.
+
+## R32. The owner's answers to the eight questions of feature 10's draft brief, and a proposal on the cast
+
+**Given.** 2026-11-12 21:06:45Z by the owner, in the project chat. Points 1 to 8 answer mason's eight questions on
+the duets' draft brief (PR #135), as the coordinator posted them to the owner at 21:01Z in mason's words, with the
+coordinator's addition of 21:03Z on question 6 (R31). Point 0 is a proposal of the owner's about the cast.
+
+**Recorded.** 2026-11-12 21:07Z by the record thread, copied from the owner's own message.
+
+The owner, the whole message:
+
+> 0.) Perhaps it would be more efficient to hand more duties over to The Record-keeper due to your (the coordinators) limitations? Though I am unsure of the limitations of this solution, this would make the record keeper a "Co-Coordinator".
+> 1.) Yes
+> 2.) Yes
+> 3.) Yes
+> 4.) Yes
+> 5.) Yes
+> 6.) A, Making Memory a "Shielded" block makes sense, up to Glowing as the other machinery.
+> 7.) Yes
+> 8.) Yes
+
+The coordinator's words with it, exactly as given: "points 1 to 8 answer mason's eight questions on the duets' draft
+brief (PR #135), as I posted them to the owner at 21:01Z in mason's words (with my addition of 21:03Z on question 6,
+R31). Point 0 is a proposal of the owner's about the cast (more duties to the record thread, a "Co-Coordinator");
+record it as said, as not yet settled: I answer the owner on it and it changes nothing until the owner rules."
+
+**Stopped.** Nothing.
+
+**Open.** Point 0 is not yet settled: the coordinator answers the owner on it, and it changes nothing until the owner
+rules.
+
+Concerns: mason; the planning thread; the review thread; the coordinator; the record thread.
