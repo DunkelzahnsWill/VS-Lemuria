@@ -6,8 +6,9 @@ written on 2026-11-12, when Lemuria moved onto the Commandments with the Precurs
 
 It has four parts: the concept, the prototype's terms, the steps and features, and the shared list. An "R" with a
 number cites an entry of record/rulings.md, and a "G" an entry of record/findings.md. Lemuria was begun before the
-Commandments took force in it, which they did on 2026-11-12 at 03:00Z. The old paper is what was written for Lemuria
-before then and is named in part 4. The old paper is history: where it and this book differ, this book stands (R17).
+Commandments took force in it, which they did on 2026-11-12 at 03:00Z (R19). The old paper is what was written for
+Lemuria before then and is named in part 4. The old paper is history: where it and this book differ, this book stands
+(R17).
 
 
 ## Part 1. The concept
@@ -22,10 +23,18 @@ them from Glittering to Baleful, and spend their charge: first by hand in naked 
 living sparkstone that learn what you teach them, carry you in hovering and flying stone vehicles, mend themselves
 and at last raise engine citadels.
 
-The owner's idea, as parked on 2026-10-22: "growth of crystals and the shaping of stone (maybe living or
-crystal-infused stone), no GUI, indications immersive and natural (lights or symbols on the models and tools
-themselves, similar to Botania), scope from exploration into machines into spell-like technologies; look into movable
-or flying block structures."
+The mod began from an idea that the owner parked on 2026-10-22. The owner's scratchpad (part 4) holds it, entered
+there as the owner's words of that day, 20:53Z:
+
+> an "Atlantis: The Lost Empire" inspired tech mod, focusing on the growth of crystals and the shaping of stone (maybe
+> living or crystal-infused stone?). No GUI; indications should be immersive and natural (lights or symbols on the
+> models and tools themselves, similar to Botania). Scope: exploration, into machines, into spell-like or magic-like
+> technologies, in the vein of Atlantis, Castle in the Sky, or Escaflowne. Look into movable or "flying" block
+> structures.
+
+That is where Lemuria began, and it is given here as history. What has been settled since stands in the rest of this
+part, and where the two differ, the rest stands: the Journal is the one screen (standing rule 1), and multi-block
+flying structures are shelved (below).
 
 Three films give the look and the arc, and nothing else: *Atlantis: The Lost Empire* (crystals that hold power and
 light up glyphs), *Castle in the Sky* (a floating stone island run by a crystal) and *Escaflowne* (crystal-powered
@@ -111,7 +120,7 @@ never thrown in at the deep end. The owner calls the players who handle such cry
 | Sparkstone tier | What the stone adds |
 | --- | --- |
 | Awakened | Carries charge by touch, glows and hums |
-| Ascendant | *Heals*: regrows blocks taken out of its own machine, only into empty space, paid in charge, never inside another player's claim |
+| Ascendant | *Heals*: regrows blocks taken out of its own machine, only into empty space, paid in charge, and never inside another player's claim while the claims switch is on (standing rule 7) |
 | Sovereign | *Reshapes*: builds a structure it was taught, such as the *engine citadels* that large or very powerful works need to function |
 
 A sparkstone block's room for crystals is its *Complexity Rating*: lower stone has less room, and a crystal takes
@@ -146,27 +155,30 @@ hums its own note, and twins about to dialogue lose their notes to a discordant 
 
 ### The standing rules of the design
 
-These are the owner's, settled before this book, and every brief keeps them.
+These are the owner's, settled before this book, and every brief keeps them. One sentence among them is new with this
+book and says so: the last of rule 3.
 
 1. **No GUI but the Journal.** Charge is shown by glow and hum, never by a number.
 2. **Four scales, four sets of words,** so that no two can be mixed up: the growth stage (five of them); the
    Evolution (Glittering, Glowing, Luminous, Radiant, Baleful); the sparkstone tier (Awakened, Ascendant, Sovereign);
    and the charge level (empty, low, high, full).
 3. **One meaning to a word.** Each word of the mod has one meaning, in code, in the record and in chat. The old
-   glossary lists the words as they stood (part 4, in the pre-production document), and this book uses them in that
-   meaning. From here on a word's meaning is settled in the record: in this book, or in the brief of the feature it
-   belongs to.
+   glossary lists the words as they stood (part 4, in the pre-production document at its revision 247), and this book
+   uses them in that meaning. New with this book: from here on a word's meaning is settled in the record, in this book
+   or in the brief of the feature it belongs to.
 4. **Naked evocation is wasteful on purpose.** A machine doing the same work is far more efficient.
 5. **The energy line** (the owner, 2026-11-02). At the same Evolution, each newer source of charge brings more on
    average than the one before it, so no later invention is the worse choice. Stores make no charge and stay off the
    line.
 6. **One Actions-to-Charge scale** (the owner, 2026-10-28). Every action a machine does is priced on one scale, for a
    consistent economy of action.
-7. **One claims switch.** Every land claim rule in Lemuria goes through one switch, so that none can drift (the
-   owner, 2026-10-27). With it on, as it is by default, Lemuria's workings spare what lies inside another player's
-   claim. A server admin can turn it off in game. Every feature reads the same switch: with it off, every Lemuria
-   block that is used by hand also opens inside another player's claim (R9). Only a Bale storm's scars disregard
-   claims.
+7. **One claims switch.** Every land claim rule in Lemuria goes through one switch, so that none can drift (the owner,
+   2026-10-27). With it on, as it is by default, Lemuria's workings spare what lies inside another player's claim, and
+   only a Bale storm's scars do not. A server admin can turn it off in game, and every feature reads the same switch.
+   With it off, Lemuria's workings no longer spare a claim, and every Lemuria block that is used by hand also opens
+   inside another player's claim (R9). What a player breaks or places by hand inside another player's claim stays as
+   the game rules it, whatever the switch says: the owner's words open Lemuria's blocks there to use and to nothing
+   more (the card of 2026-11-10, and R9).
 8. **Multiplayer-safe from the first line.** The server holds the state and sends it to clients through the game's
    own channels, and nothing works only in single player. Server time, network traffic and the size of the zip stay
    small.
@@ -185,10 +197,10 @@ These are the owner's, settled before this book, and every brief keeps them.
 - Not multi-block flying ships. The owner shelved multi-block flying structures on 2026-10-26, and stone vehicles
   stand in their place.
 - Not a mod of screens and numbers. The Journal is the one screen.
-- Not a mod of new creatures. A Bale storm's large beasts are the game's own.
 - Not a copy of the films it looks to.
 
-Out of scope for v1.0: multi-block flying structures, and new creatures.
+Out of scope for v1.0: multi-block flying structures, and new creatures, so a Bale storm's large beasts are the game's
+own.
 
 
 ## Part 2. The prototype's terms
@@ -217,7 +229,9 @@ A feature is one part of the mod with a folder of its own in the code. The repo 
 first step (README, "Working in parallel"), and the old notes use the word that way. Each feature has:
 
 - **a number**, which is never changed and never reused;
-- **a short name**, one lowercase word, which names its folders and its brief, `record/briefs/<short name>.md`;
+- **a short name**, one lowercase word, which names its folders and its brief, `record/briefs/<short name>.md`. It is
+  a handle for the code and the record, not a name the player reads: it may be changed, by a change to this book,
+  until the feature's brief is put up, and from then on it stays, whatever the thing itself comes to be called;
 - **its owning thread**, which for every feature in this book is the builder **mason** (R5, R15);
 - **its folders**, which are the ones named for it: `Lemuria/<Short name>/` for its code, written with a capital
   first letter (`Lemuria/Crystals/` for `crystals`); every folder named `<short name>` under
@@ -226,6 +240,27 @@ first step (README, "Working in parallel"), and the old notes use the word that 
 
 A feature that is not built yet has no folders on main. They come with its first code, named as above. Within a step
 the features are numbered, not ordered: the order of building is mason's own plan, in its map (rule 5).
+
+### Where features meet
+
+Lemuria's features reach into each other. The Mysteries put their alignments into the crystals' folders, a machine's
+secret lies with the machine, and every old step from old step 1 on wrote into the Journal's folders. So this book
+says whose such work is, and what comes before it.
+
+1. **The folder decides.** What lies in a feature's folders is that feature's, whichever feature's work brings it
+   there, and that feature's brief describes it. The tests of rule 7 are held against that brief.
+2. **The briefs come first.** A brief names the existing parts its feature touches (rule 2). Where the feature's work
+   would add to or change what lies in another feature's folders, that feature's brief is changed first, the way a
+   settled brief is changed (rule 4), so that it says what its folders will hold. No code goes into a feature's
+   folders before that feature's own brief is settled and describes it (rule 2). So nothing is written in the folders
+   of features 1 to 9 for a later feature before the feature concerned has its first brief (R3) and that brief is
+   changed for what is added. Such changes may ride in the pull request that carries the new feature's brief.
+3. **The code keeps to its folders.** A pull request that carries a feature changes that feature's own folders and,
+   where its brief says so, the shared files of part 4. What the feature needs changed in another feature's folders is
+   a patch to that feature: it follows the change to that feature's brief, its verdict is "out", and it waits for the
+   owner's merge (rule 4). R23 asks the owner whether such code may instead ride in the feature's own pull request.
+   Until the owner has answered, it goes as a patch, which no reading of rule 4 forbids.
+4. **A later fix** to any of it is a patch to the feature in whose folders it lies.
 
 ### The Precursor steps
 
@@ -275,6 +310,9 @@ The steps of this book start again at 1 (R14). A step number in the old paper is
 number outside record/ on main at commit c07322e (part 2): in the code's comments, in the smoke tests and in
 README.md. So is the step number in the name of each file and folder that part 4 lists. From this book's merge on,
 writing that means an old step says "old step", as this book does, and a step number without "old" is this book's.
+Entries of record/ written before this book's merge stay as they were written, and they use both numberings: each
+number there is read by its own entry. R14 gives the two side by side, and G22 sorts the review thread's entries G1 to
+G21.
 
 | Old number | In this book | Name |
 | --- | --- | --- |
@@ -290,9 +328,10 @@ writing that means an old step says "old step", as this book does, and a step nu
 ### Steps 1 to 7
 
 Each step below ends with its *aim in play*: what the owner should be able to do in the step's zip, in the words of
-the old roadmap, which called it the step's gate. Under the Commandments it holds nothing: a step passes by rule 7,
-and the owner plays its zip when the owner can (rule 3). It is there for the "what to try" lists of the step's
-briefs. Where an entry says the old paper holds settled answers, they are history until a brief carries them.
+the old step list in "Lemuria: pre-production" (part 4), which called it the step's gate. Under the Commandments it
+holds nothing: a step passes by rule 7, and the owner plays its zip when the owner can (rule 3). It is there for the
+"what to try" lists of the step's briefs. Where an entry says the old paper holds settled answers, they are history
+until a brief carries them.
 
 #### Step 1. The duets
 
@@ -306,7 +345,7 @@ swap out the crystals needed to (safely) pan an earth battery's internal store, 
 to re-place stone into the battery automatically"; and limits on how often and how strongly machines Bloom
 (2026-11-09). The old paper sketches the duets in the note of old step 5.
 
-Aim in play: none was set. The old roadmap left it to this step's own note, so the brief's "what to try" list sets
+Aim in play: none was set. The old step list left it to this step's own note, so the brief's "what to try" list sets
 it.
 
 #### Step 2. Luminous and Radiant
@@ -379,11 +418,16 @@ Aim in play: "You find one in a new world."
 
 #### Step 7. v1.0
 
-- **Feature 27, `secrets`: The Hidden Vocabulary and the Journal, complete.** What is still missing of both by
-  then.
+This step lists no feature. All of its work lies in the folders of features built before it, or in no folder at all,
+so by this book's count none of it is a feature ("Where features meet"):
 
-Also in this step, and none of them a feature: balance, which goes by changes to the settled briefs and the patches
-that follow them (rule 4); the one multiplayer test; and the release on ModDB, which is the owner's to make.
+- **The Hidden Vocabulary and the Journal, complete:** what is still missing of both by then. A secret lies with its
+  machine and a page with the Journal (feature 3), so this goes by changes to the briefs of the features concerned and
+  the patches that follow them (rule 4).
+- **Balance,** which goes the same way.
+- **The one multiplayer test** (standing rule 10). It is played before step 7 is reported done, so that what the owner
+  says after it stands in player-diary.md and has its answer when the gate is decided (rule 7).
+- **The release on ModDB,** which is the owner's to make.
 
 Aim in play: "Two players on one server, then you release it."
 
@@ -426,6 +470,10 @@ of its own or inside one.
 There is no proto thread (R1). Each thread's diary folder is its role name in lowercase, as R5 has it:
 `record/diary/mason/`, `record/diary/precursor/`.
 
+The shared files table below names what is on main today. What mason adds outside record/ later is mason's without a
+change to this book. If the builders are ever split (R5), both tables are first brought up to date by a change to this
+book, so that every file and folder then on main is named with its one thread.
+
 ### The shared files
 
 Every file and folder outside record/ that sits in no single feature's folders. Mason owns each of them, in every
@@ -440,15 +488,15 @@ step.
 | `CakeBuild/`, `Directory.Build.props`, `Directory.Build.targets`, `Lemuria.sln`, `global.json`, `build.sh`, `build.ps1` | The build |
 | `scripts/` | Setup, the smoke test, and the pinned game version in `scripts/versions.env` |
 | `.github/workflows/build.yml` | The checks workflow, whose check is called `build`. The setup list's skip of the heavy steps for record-only pull requests is still to be made in it |
-| `README.md`, `CLAUDE.md` | They still state the old rules. Mason rewrites them to point at record/COMMANDMENTS.txt in its first pull request (R10) |
+| `README.md`, `CLAUDE.md` | They still state the old rules, which the Commandments have replaced. They also keep the repository rules for whoever writes code: CLAUDE.md under "Repository rules", and README.md under "Working in parallel". Those bind whoever writes code in the repo. Where one of them differs from the Commandments or from this book, the Commandments and this book stand. Mason rewrites both files to point at record/COMMANDMENTS.txt in its first pull request (R10), and the rewrite keeps the repository rules |
 | `LICENSE`, `.gitignore`, `.vscode/` | The MIT licence, the ignore list and the editor settings |
 
 ### The old paper
 
 The Commandments took force in Lemuria on 2026-11-12 at 03:00Z. That is the minute of the owner's message in the
-project chat that gave them to the coordinator as "the new rules to be enforced going on". The old paper is what was
-written for Lemuria before that minute and is named in the two tables below (R8, R15, R17). The tables are the whole
-of it: what they do not name is not old paper, whenever it was written.
+project chat that gave them to the coordinator as "the new rules to be enforced going on" (R19). The old paper is what
+was written for Lemuria before that minute and is named in the two tables below (R8, R15, R17). The tables are the
+whole of it: what they do not name is not old paper, whenever it was written.
 
 The precursor keeps the old paper as it was left. It is outside the record, and it is read-only history (R8): any
 thread may read it, and no thread changes it.
@@ -477,6 +525,10 @@ Project files:
 | `/mnt/project-files/lemuria-playtest/`: `step1/`, `step2/`, `step3/`, `step4/`, `step4b/`, `step4c/`, `step5a/` | The old play-test zips, with their checksums and the play-test sheets written for them (`playtest.md`, `evocations-effects.md`) |
 
 The seven play-test folders are kept as they were left, like the rest, so no new zip goes into any of them.
+
+G22 sets down the old paper as it was left. On 2026-11-12 the review thread found each of the eleven documents at the
+revision listed there, and each diary, zip and play-test sheet at the size and checksum listed there. That state is
+what this book means by the old paper, and by the old glossary of standing rule 3.
 
 ### Beside the old paper
 
