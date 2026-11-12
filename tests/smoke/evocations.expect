@@ -24,3 +24,5 @@ Evocations test: over-driven Fire at glacier ice cast yes, 9 of 9 melted to wate
 # A cast that finds nothing it can act on fizzles, costing no charge: a loaded bloomery with no chimney
 # takes the flame and stays cold (feature 6's brief, "A miss is free"; G15).
 Evocations test: Ignite aimed at a loaded bloomery with no chimney, cast no, it burns: no; with its chimney on, cast yes, it burns: yes$
+# A machine's fire is its carver's (G58): with no carver the game knows, it sets no fire on a face.
+Evocations test: a machine with no carver known aimed at bare granite, cast no, a fire on its face: no; a cast with no machine, cast yes, a fire: yes$

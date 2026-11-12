@@ -396,25 +396,38 @@ public static class Effects
         return world.NearestPlayer(cast.From.X, cast.From.Y, cast.From.Z)?.Entity;
     }
 
-    /// <summary>The game's fire on the face aimed at, as a torch sets it, in the caster's name for the audit log.</summary>
+    /// <summary>
+    /// The game's fire on the face aimed at, as a torch sets it, in the caster's name for the audit log.
+    /// A machine's fire is its carver's, so the game holds its spread at the carver's claims (G58, machines
+    /// brief, Claims, "A machine's fire"); where the game does not know the carver, or none is recorded, a
+    /// machine sets no fire on a face, and still lights what can be lit.
+    /// </summary>
     private static bool SetFire(CastContext cast, BlockSelection aimed)
     {
         var world = cast.Api.World;
         var accessor = world.BlockAccessor;
         var pos = aimed.Position.AddCopy(aimed.Face);
         var fire = world.GetBlock(FireCode);
+        var starter = Starter(cast);
+        if (cast.Machine != null && (starter == null || world.PlayerByUid(starter) == null))
+        {
+            return false;
+        }
         if (fire == null || !cast.Can(pos) || accessor.GetBlock(pos).Id != 0 || accessor.GetBlock(pos, BlockLayersAccess.Fluid).Id != 0)
         {
             return false;
         }
         accessor.SetBlock(fire.BlockId, pos);
-        accessor.GetBlockEntity(pos)?.GetBehavior<BEBehaviorBurning>()?.OnFirePlaced(aimed.Face, cast.Player?.PlayerUID);
+        accessor.GetBlockEntity(pos)?.GetBehavior<BEBehaviorBurning>()?.OnFirePlaced(aimed.Face, starter);
         if (cast.Machine != null)
         {
             cast.Api.Logger.Audit("{0} set a fire with a Fire crystal machine at {1}", cast.ActorName, pos);
         }
         return true;
     }
+
+    /// <summary>Whose fire it is for the game's claims: the carver's for a machine, else the caster's.</summary>
+    internal static string? Starter(CastContext cast) => cast.Machine != null ? cast.Machine.CarverUid : cast.Player?.PlayerUID;
 
     // ------------------------------------------------------------------ Quench
 
