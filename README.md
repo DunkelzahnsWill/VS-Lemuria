@@ -3,10 +3,14 @@
 *The Song of Stone.* A crystal and stone tech mod for Vintage Story 1.22.7: grow resonant crystals,
 refine them through their alignments, and wake sparkstone to work for you.
 
-The mod is in early development. Steps 1 to 4 are built and play-tested: finding and farming
-crystals, the Four Elementals, naked evocations, and machines with their products, logistics,
-elemental batteries and Wind Probes. The design lives in the pre-production document, and features
-arrive one step at a time, each with a play-test.
+The mod is in early development. The Precursor steps are built and play-tested: finding and farming
+crystals, the Four Elementals, naked evocations, machines with their products, logistics, elemental
+batteries and Wind Probes, and the Four Mysteries. What comes next, step by step, is in the Road Bible.
+
+**How the work is run.** The standing rules are the Commandments, [`record/COMMANDMENTS.txt`](record/COMMANDMENTS.txt).
+The design is the Road Bible, [`record/road-bible.md`](record/road-bible.md), with one brief per feature in
+`record/briefs/`. Where this file differs from either, they stand. A step number in this file, the code's
+comments and the smoke tests is an old step number (the Road Bible, part 3).
 
 | Field | Value |
 | --- | --- |
@@ -71,7 +75,8 @@ When something goes wrong, `client-main.log` in the game's `Logs` folder is the 
 ## Working in parallel
 
 Each piece of work happens on its own branch with a pull request to `main`, and the `build` check
-must be green before merging. The layout lets branches stay out of each other's files:
+must be green before merging. How each kind of pull request may merge is rule 4 of the Commandments.
+Each feature of the Road Bible (part 3) has its own folders, so branches stay out of each other's files:
 
 | What | Where it goes |
 | --- | --- |
@@ -81,6 +86,10 @@ must be green before merging. The layout lets branches stay out of each other's 
 | Assets | `Lemuria/assets/lemuria/<type>/<feature>/` (blocktypes, itemtypes, shapes, textures, sounds) |
 | JSON patches | `Lemuria/assets/lemuria/patches/<feature>-*.json` |
 | Smoke checks | `tests/smoke/<feature>.expect` and, if needed, `tests/smoke/<feature>.commands`; checks after a restart in `tests/smoke/<feature>.restart.commands` and `.restart.expect` |
+
+Code a feature needs in another feature's folders follows the change to that feature's brief, and then goes
+as a patch of its own or rides in the feature's pull request, which names each other feature it changes
+(rule 4).
 
 Shared surfaces: `Lemuria/Core/` (startup and identity, `LemuriaModSystem.ModId`), `modinfo.json`
 and `Lemuria/Lemuria.csproj` (the project already references every game assembly a feature should
