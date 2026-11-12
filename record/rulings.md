@@ -353,3 +353,40 @@ is for a later time, at the owner's word, and would then be a change to the rule
 
 Concerns: the planning thread; the review thread (rule 6 e: the owner has already spoken on the two texts
 differing).
+
+## R19. The owner's command that brought in the new rules: a new thread for the planning and the hand-over
+
+**Given.** 2026-11-12 03:00Z (03:00:29Z by the server's copy) by the owner, to the coordinator, in the project chat,
+with four attachments, the rules file among them.
+
+**Recorded.** 2026-11-12 05:21Z by the record-keeper as deputy (the cast, second tier), at the coordinator's request,
+from the server's copy of the owner's message.
+
+The owner: "Ahoy Coordinator! these are the new rules to be enforced going on, we'll need a new thread spun-up for the
+planning and hand-over for the new rules."
+
+The coordinator's note, as sent: finding G4 and the Road Bible (PR #16) lean on this moment.
+
+Concerns: every thread (the moment the rules took force in this project); the planning thread (the Road Bible, G4);
+the review thread (G4); the precursor, once it is started (what counts as the old paper).
+
+## R20. The owner's word that a record-keeper takes over the coordinator's recording
+
+**Given.** 2026-11-12 05:18Z (05:18:31Z by the server's copy) by the owner, in the message that starts the
+record-keeper's thread.
+
+**Recorded.** 2026-11-12 05:21Z by the record-keeper as deputy (the cast, second tier): the owner gave this word to
+that thread directly and did not say the coordinator would record it.
+
+The owner: "A sister thread proposed the idea: To have a record-keeper to takeover your duties in terms of recording
+your word."
+
+The coordinator's note, as sent: the coordinator started the record-keeper on this message at 05:18Z, and has asked the
+owner whether the role goes into the rules and under what name.
+
+Open: whether the role goes into the rules, and its name ("record-keeper" is provisional). Waits for the owner. Until
+the rules name the role, the record-keeper writes in the coordinator's office only as a deputy, under the cast's
+second tier.
+
+Concerns: the coordinator (its diary, finding G8); the planning thread (a change to the rules, if the owner says the
+role goes into them); the review thread (G8).
