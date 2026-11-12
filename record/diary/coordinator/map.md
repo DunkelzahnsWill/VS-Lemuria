@@ -5,7 +5,7 @@ Written 18:24Z on 2026-11-12, corrected 18:35Z, and brought up to date after PR 
 ## The features, by number
 
 All are mason's (Road Bible, part 4).
-- Features 1 to 9 (crystals, cradle, journal, sparkstone, storage, evocations, earmuffs, machines, mysteries): built in the Precursor steps. Their nine briefs are settled (PR #55, changed by PR #72). A change to one goes by the review thread's read and the owner's merge, or by the owner's command, which the review thread certifies and which may then merge itself (rule 4).
+- Features 1 to 9 (crystals, cradle, journal, sparkstone, storage, evocations, earmuffs, machines, mysteries): built in the Precursor steps. Their nine briefs are settled (PR #55, changed by PR #72, PR #96 and PR #105). A change to one goes by the review thread's read and the owner's merge, or by the owner's command, which the review thread certifies and which may then merge itself (rule 4).
 - Step 1: feature 10, duets.
 - Step 2: features 11 to 14, purity, exposure, reactions, strain.
 - Step 3: features 15 to 19, beams, ascendant, goodsbeams, supermedia, kilns.
