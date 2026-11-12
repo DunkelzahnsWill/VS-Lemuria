@@ -607,3 +607,20 @@ the coordinator gave them; the review thread's words in it are as the coordinato
 **Open.** Waits for the owner's word, "fix" or "decline".
 
 Concerns: mason; the owner.
+
+## R29. The owner's answer to R28: decline G68
+
+**Given.** 2026-11-12 19:57:34Z by the owner, in the project chat. It answers R28.
+
+**Recorded.** 2026-11-12 19:58Z by the record thread, copied from the owner's own message.
+
+The owner, the whole message:
+
+> G68.) Decline
+
+The coordinator's words with it, exactly as given: "The owner has answered R28 at 19:57:34Z; the message is attached,
+in the owner's own words."
+
+**Stopped.** Nothing. The stop R28 named, on mason's work on G68, ends with this answer.
+
+Concerns: mason; the review thread; the planning thread.
