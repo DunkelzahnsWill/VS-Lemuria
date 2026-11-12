@@ -912,3 +912,53 @@ yes or no; and mason's reading of R38 answer 1, that the Dead Socket takes none 
 **Stopped.** Nothing.
 
 Concerns: mason; the coordinator.
+
+## R41. The owner's answers to mason's three questions of R40 (the Earth battery's fill and drain; the Dead Socket)
+
+**Given.** 2026-11-12 23:16:49Z by the owner, in the project chat. It answers by number the coordinator's post of
+23:12:35Z, which put mason's three questions that R40 logs (on the owner's answers in R38; question 1 is the matter of
+G96), and asked again the question that R39 answered.
+
+**Recorded.** 2026-11-12 23:17Z by the record thread, copied from the owner's own message and from the coordinator's post.
+
+The post opened, word for word: "Mason has read your answers and has three things for you, asked together. The last
+patch for step 1 (#161) is merged." Each question below is the post's, word for word, and beside it the line of the
+owner's message that answers it. The four lines of the owner are the owner's whole message, in its order.
+
+**1. The Earth battery's fill and drain.** In a small Earth battery the fill's Earth crystal sits within 3 blocks of the
+drain's Sky crystal, so the twins dialogue. Which way?
+(a) The brief says the fill must stand more than 3 blocks from the drain, and the code stays as it is.
+(b) Sky's turn on a drain passes, like a turn with nothing to do, while an Earth twin is within 3 blocks. Panning is
+then safe in every battery, and a small room never pans.
+(c) The fill's crystals are shielded while a Memory stands on the drain.
+Mason suggests (b).
+
+> 1.) A. A player must either create a larger building or route crystals via tubes and/or memory swaps.
+
+**2. The Dead Socket in a Memory on an Earth drain.** In a Scatter the blind swap works as in a Focus. An Earth drain's
+socket holds one crystal, so a blind swap would set two crystals in the open beside the fill. Mason proposes that it
+does nothing there. Yes or no?
+
+> 2.) Swap both the crystal and the "empty space", as a "set" of crystals
+
+**3. Your answer 1.** Mason reads "Dead socket should lock into memory" as: the Dead Socket fits into the Memory and
+takes none of the magazine's two places. That fits your example, where the Memory ends with Fire and one empty place. Is
+that right?
+
+> 3.) Yes.
+
+Still open from before: may the planning thread add your Elementals and Mysteries sentence to the Road Bible as a design
+rule?
+
+> Open.) Yes, as previously stated.
+
+The coordinator's words with it, exactly as given: "Note that on question 2 the owner did not answer mason's yes or no
+as put (that the blind swap does nothing on an Earth drain): the owner's words are "Swap both the crystal and the 'empty
+space', as a 'set' of crystals". How that reads for the Earth drain is mason's to say or to ask back; I do not read it
+for mason. "Open.) Yes, as previously stated." confirms R39."
+
+**Closed.** The three questions of R40.
+
+**Stopped.** Nothing.
+
+Concerns: mason.
