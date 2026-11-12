@@ -991,3 +991,184 @@ Next:
   coordinator until it starts), G24 and G25 (the planning thread). G4 is corrected in PR #16 and closes when that
   commit merges. No blocker is open.
 - **Read up to:** rulings.md R21, player-diary.md none, findings.md G31.
+
+## G32. Report under rule 6 (e): the change to the rules that brings in the record thread (PR #21 at commit 7de344f)
+
+**Written.** 2026-11-12 06:01Z. Woken by the coordinator at 05:37Z, and told at 05:40Z that the PR is ready.
+
+**What I read.** PR #21, "Rules: version 4 brings in the record thread", branch rules/version-4, at commit
+7de344f74ee959d07c8f8693d4def98c2880cb24, its one commit, on main at 163026f. Its check "build" was green on that
+commit at 05:40Z. It was not assigned to the owner and not set to auto-merge, as rule 4 has it. Main has moved to
+25b284c since, in other files, and the branch still merges cleanly. By rule 4 a later commit voids this report, unless
+it only brings main into the branch or adds only the author's own diary entry.
+
+**What changed in the record since G31 (rule 6).** Two PRs. PR #22, merged at 05:47Z: the planning thread's halt entry
+of 05:41Z, which is in order and ends with "Next:". It says that the planning thread found R19's wrong line as well
+and told the coordinator at 05:29Z (G28). PR #23, merged at 05:58Z: my own G22 to G31. The last entry of rulings.md is
+still R21.
+
+**The short of it.** No blocker. Nothing here asks the owner to wait, and nothing asks for a change to PR #21. The
+change writes the five changes of R21 into the rules and moves the head to version 4. Every added word is the owner's,
+and no other word of the rules differs. I found no sentence of the rules that it contradicts, and no code that it
+makes wrong. R21 already binds (rule 1), so the merge only brings the file into line with what binds today. On what
+the change leaves open I raise two notes: the counter-view (G33) and two things in the wording (G34).
+
+**What the change is, read from the diff.**
+- record/COMMANDMENTS.txt differs in seven places, and the file grows from 187 lines to 189.
+  1. The head: "version 3" becomes "version 4", and the line under it "Ratified 2026-11-12. Replaces version 3
+     (2026-11-12)."
+  2. The cast: a new paragraph of 2,079 characters, after the coordinator's and before the third tier.
+  3. The cast, the coordinator's paragraph: one sentence, after "unless the owner says the coordinator will record
+     it."
+  4. The record, the diary line: ", and a record thread's writing in the coordinator's folder," inside its bracket.
+  5. Rule 1, second paragraph: ", its record thread" among the threads that a stop for everyone leaves at work.
+  6. Rule 1, third paragraph: two sentences at its end.
+  7. Rule 5, first paragraph: one sentence at its end.
+- record/diary/optimist-visionary/2026-11-12T0534Z.md is new: the planning thread's entry for this PR (rule 5).
+- Nothing outside record/ changes.
+
+**Held against the owner's word.** I took neither the PR's word for it nor R21's. I took the server's own copy of the
+owner's message of 05:20:38Z, the one I held R21 against (G22), and compared it with the file by program.
+- The owner's message has three kinds of curly mark. The rules file has no character outside plain ASCII, in version 3
+  or in version 4. With the curly marks turned into the file's plain ones, every added piece is the owner's, character
+  for character: the new paragraph whole; the sentence of change 2, placed directly after the words the owner names,
+  which stand in the file once; the first sentence of the diary line; the clause and the two sentences in rule 1; the
+  sentence in rule 5.
+- Apart from the head and those pieces, version 4 is version 3: its other 180 lines are the same, byte for byte.
+
+**What the owner's words leave to the writer.** The PR and its entry name five things. I agree with each.
+1. Plain marks for the owner's curly ones. No word differs.
+2. The diary line keeps its second sentence, "It holds the thread's map and its diary, one file to an entry (rule 5)."
+   R21 says the line "now reads" and gives one sentence. Change 4 uses "now reads" in the same way, for the clause
+   that changes, and nothing in R21 takes the map and the diary out of a thread's folder.
+3. Rule 5's new sentence stands at the end of the first paragraph. R21 names no place, and the sentence says the same
+   wherever in rule 5 it stands.
+4. The head goes to version 4, by the rules' own words: "the version number goes up each time". The date is the day of
+   R21 by the record's clock.
+5. "Its office ends" stays as it was. R21's word for change 2 is "one sentence added". The planning thread says that
+   the text the five changes were copied from has "A deputy's office ends" there. I read that text myself (the repo
+   VS-Walkers, branch claude/planning-rules-v3, commit 2fcc1b6). It and our version 4 differ in three places and no
+   more: the head, our paragraph on the precursor, and that one word. The entry's account is right (G34).
+
+**Does it contradict another rule?** I read the new words against every place that has the coordinator write, names a
+deputy, a diary or a map, or calls a stop.
+- **The coordinator's writing.** The two lines of the record on rulings.md and player-diary.md, rules 1, 3, 4, 6 and 7
+  and the inquisitor's paragraph all still say that the coordinator writes or builds. One sentence of the new
+  paragraph covers them all: "Wherever these rules have the coordinator write in rulings.md, in player-diary.md or in
+  its own folder, or build a zip, the record thread does it, and what it writes there is the coordinator's writing."
+- **Sending and waking stay the coordinator's.** The record thread "relays nothing between the threads and the owner,
+  and wakes no one". So the coordinator still sends each entry to the threads it concerns, sends the zip that the
+  record thread builds (rule 3), and makes every wake.
+- **The deputy.** The added sentence switches both deputizing sentences off while a record thread is at hand. The
+  sentences after it on a deputy's office still hold for a thread that the owner tells to record. My own "unless it is
+  deputized" in rule 6 follows the same switch.
+- **The diary and the map.** The diary line's bracket and rule 5's new sentence agree with the new paragraph. Rule 5
+  still says "The review thread is the exception" and then names a second thread that keeps no map. The two do not
+  disagree (G34). Rule 6 (f) wakes me at a first map: the record thread has none, and the coordinator has one, which
+  the new paragraph names.
+- **Rule 1.** "No stop keeps a record thread from recording" has to be there, because a stop is closed by an entry in
+  rulings.md. "A record thread's own doubt over what to write goes to the coordinator" is narrower than a stop, and it
+  does not free the coordinator from rule 1: a doubt that the coordinator cannot answer from the owner's words or its
+  own is the coordinator's to stop on.
+- **The tiers.** The paragraph stands in the second tier's text and gives the record thread no tier of its own. It
+  needs none: it "holds no office of its own", and what it may change is listed, file by file.
+- **Rule 4,** "A change to the Road Bible or to a brief that cites an entry its own author recorded waits for the
+  owner's merge". With a record thread an author no longer records the entries it cites, so the clause bites only
+  where the owner makes a thread a deputy. That is what the clause is for.
+
+**R21 at work already.** It binds from its entry, and the record thread has worked under it since 05:21Z. Its three
+PRs (#18, #19, #20) changed rulings.md, the coordinator's folder and its own diary folder, and nothing else. That is
+inside what the new paragraph allows.
+
+**The counter-view (rule 6 e).** It is G33: who reads what the coordinator's hands wrote; a list in my report at a
+step gate that goes quiet; what happens if the record thread ends unseen; the round trip that each ruling now makes;
+and the simpler cure, if there is one.
+
+**Code this change would make wrong (rule 4).** None.
+- I searched everything outside record/ for a role's name, for the name of a record file and for whatever builds a
+  zip. The only words are CLAUDE.md lines 11 and 13, version 1's rule on telling the coordinator, which G7 already
+  holds. No code, script or check names a role or a record file.
+- One thing the change hands on, though it does not make it wrong. The build makes Releases/lemuria_<version>.zip
+  (CakeBuild/Program.cs line 223). Rule 3 has a zip for the owner "named with its commit id and, for a PR, its PR
+  number". From now on the record thread builds those zips, so naming the file is its to do when the first one is
+  asked for (G26).
+
+**For the planning thread.** Cite this entry in PR #21's description as the review thread's report G32 in
+record/findings.md, then assign the owner (rule 4). The branch merges cleanly as it stands. If you bring main into it,
+this report still stands.
+
+**For the owner.** Nothing here asks you to wait or to change PR #21. When you merge it, the coordinator tells every
+thread, and each reads the rules again before it goes on (rule 4).
+
+**Open after this report.** As in G31, and nothing is added: flaws G5 (the precursor; the coordinator until it
+starts), G7 and G13 to G16 (mason; held by the coordinator until it starts), G24 and G25 (the planning thread). G4 is
+corrected in PR #16 and closes when that commit merges. No blocker is open. G33 and G34 are notes and need no answer.
+
+## G33. Note: the counter-view to the record thread (rule 6 e)
+
+**Rank.** Note. **Owning thread.** The coordinator, for the owner. **Raised in.** G32. **Status.** Needs no answer.
+
+The owner asked for this role in their own words (R20, R21), and the change writes those words and no others. So this
+holds nothing. It is what I would weigh against the role.
+
+1. **Hands that are also eyes.** The record thread writes for the coordinator, and it also "reads the repo for the
+   coordinator". The coordinator cannot see what its hands wrote except through those hands. The record thread's first
+   PR put two wrong things on main: R19's attachments (G28), and the coordinator's words in the record thread's own
+   wording under "as sent", which it found itself (PR #19). Both were put right within minutes, and its diary says so
+   plainly. The rule's guard is sound: copy from the owner's own message, and say where and when. Nobody in the
+   coordinator's office checks that guard. The check is mine: rule 4 has me read the working files at each wake, and I
+   hold each new entry against the owner's own message, as in G1 and G22.
+2. **A list that goes quiet.** Rule 6 has my report at a step gate list "every entry a deputy recorded", for the
+   owner's eye. From R21 on the record thread's entries are "the coordinator's writing" and not a deputy's. So that
+   list will be nearly empty, while no entry at all is written by the coordinator's own hand. At each step gate I will
+   say which entries the record thread wrote since the last one, and whether each matches the owner's message. That is
+   report, and the owner may tell me to leave it out.
+3. **What the record hangs on.** "A thread goes by what the coordinator last told it." If the record thread ends
+   unseen, every thread still sends the owner's words to it, no thread is deputized, and nothing is recorded until the
+   coordinator finds out and says so. The rules have the coordinator start a replacement "if it ends", and do not say
+   how it learns of it. A habit would cover it: a thread that has sent the owner's words and sees no entry on main
+   after a while tells the coordinator.
+4. **The round trip.** Until today the thread the owner spoke to recorded the word and went on. Now it sends the word
+   to two threads, the record thread opens a PR, the check runs for about three minutes, the coordinator sends the
+   entry, and then the thread may act (rule 1). That is some minutes for each ruling. I think it is worth it: R1 to
+   R18 were all recorded by the thread that then acted on them (G1), and rule 4's clause on entries "its own author
+   recorded" shows that the rules never liked that.
+5. **The simpler cure, if there is one.** The new paragraph begins "Where the coordinator cannot reach the repo". If
+   the coordinator can be given the repo, the role falls away by its own first words, and points 1 to 4 with it.
+   Whether the platform allows that is the owner's to know.
+
+## G34. Note: two things in the wording of version 4
+
+**Rank.** Note. **Owning thread.** The planning thread. **Raised in.** G32. **Status.** Needs no answer.
+
+Neither asks for a change to PR #21, which writes the owner's words and no more. Both are for the day the owner brings
+this text and the sister project's into line (R18).
+
+1. **"Its office ends".** Right after the sentence that change 2 adds, the rules go on: "Its office ends once it has
+   recorded the owner's last word to it." The sister project's text has "A deputy's office ends" there. Ours still
+   reads rightly, because the "it" of the added sentence is the deputized thread. It is one word of difference between
+   the two texts, in a sentence that both projects changed around.
+2. **"The review thread is the exception"** (rule 5). Two sentences on, the rules now name a second thread that keeps
+   no map. Nothing disagrees, since the new sentence says what a record thread keeps. But "the exception" is no longer
+   the only one.
+
+## G35. Diary: halt after the reports on PR #16 and PR #21
+
+**Written.** 2026-11-12 06:01Z.
+
+The work in hand is complete: the report G23 on PR #16 with G24 to G30, and the report G32 on PR #21 with G33 and G34.
+
+Next:
+- **Unfinished:** nothing in hand. G19 has not been tried in a run.
+- **Where it is:** this file, sent to main by a record-only PR from the branch claude/project-thread-4zobvq.
+- **Waiting for:** the coordinator's next wake. I expect, in some order:
+  - a new report on PR #16 or on PR #21, if either takes a commit that voids G23 or G32;
+  - the nine briefs of the built features (R3, rule 6 a), where I read for G12's last point, G16, G20 and G29;
+  - step 1's brief (rule 6 a), where I read for G24;
+  - the first maps (rule 6 f): the planning thread's after PR #16 merges, the coordinator's, mason's, and G5 at the
+    precursor's;
+  - the rules again, in full, once the owner merges PR #21 (rule 4).
+- **Open findings:** flaws G5 (the precursor; the coordinator until it starts), G7 and G13 to G16 (mason; held by the
+  coordinator until it starts), G24 and G25 (the planning thread). G4 is corrected in PR #16 and closes when that
+  commit merges. No blocker is open.
+- **Read up to:** rulings.md R21, player-diary.md none (the file does not exist), findings.md G35.
