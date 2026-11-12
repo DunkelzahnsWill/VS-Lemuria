@@ -35,7 +35,9 @@ old paper differ, this brief is the record.
    its front is the face toward you, so you stand where a Focus will look (a Motor's sockets toward you).
 4. **Charge.** A machine draws from the network of Active sparkstone it touches. The unit is the *working*, one
    crystal's turn: 1 charge at Glittering's power, 2 at Glowing's, 4 at the power of Luminous (Actions-to-Charge, old
-   step 4 part 2). Nothing done, nothing paid. A network that cannot pay leaves its machines idle. Machines pause
+   step 4 part 2). A Mystery's working (Life, Death, Time or Rust, feature 9) costs 4 times an Elemental's at the same
+   power: 4, 8 and 16 (R36; R38, 3 and 4), so Elementals are the efficient choice and the Mysteries act beyond them.
+   Nothing done, nothing paid. A network that cannot pay leaves its machines idle. Machines pause
    while their chunk is unloaded and do not catch up.
 5. **Context.** A machine works out what touches it (an Amplify, Memory, a shelf, a container, its network) only when
    it or a block touching it is placed or removed, and on a rod tap: it never polls.
@@ -88,8 +90,9 @@ old paper differ, this brief is the record.
      each replanted, and berries and fruit. Aimed at a tree's log it *fells* the tree through the game's own felling,
      as an axe does (only what an axe fells as a tree), its logs, sticks and saplings into the container, for one
      working for each 1, 9 or 27 logs by power, in full or not at all, leaves free.
-   - *Life, Death, Time, Rust* (feature 9's crystals): Bloom, Wither, Rewind and Progress, by the rules by hand. A plant
-     takes Bloom once an in-game day, hand or Focus (K4), and a Life working pays its cost once for every 9 plants it
+   - *Life, Death, Time, Rust* (feature 9's crystals): Bloom, Wither, Rewind and Progress, by the rules by hand. Inside a
+     machine a plant takes Bloom at every working, with no limit of once a day, while by hand the limit stays (K4; R36),
+     and a Life working pays its Mystery cost (item 4) once for every 9 plants it
      would move on, rounded up, in full or not at all, so a network that cannot pay it all blooms nothing that working
      (feature 10's brief, item 11, R32; built with feature 10, PR #156); a Death Focus with a Glowing crystal withers
      what stands in front of it (K5); a Time or Rust Focus works a container only when it has a full measure to move.
@@ -184,6 +187,13 @@ old paper differ, this brief is the record.
     Memory against a fill stone stays still. Three more things are feature 10's brief (R32), each built with feature 10
     (PR #156).
     - *Its magazine keeps its crystals out of dialogues* up to Glowing, as a jar does (feature 1).
+    - *A rod tap* on a Memory switches it between lending its pair, as below, and cycling, so a Memory holding a duet's
+      pair can cycle it like any two crystals (R36). A Memory starts lending; its look-at line says which.
+    - *A Dead Socket locked into the Memory* (R38, 1) takes none of the magazine's room. It makes the Memory swap blind:
+      at every turn everything in the machine's sockets changes places with everything in the magazine, empty places
+      too, whatever the crystals are (R38, 2). A Focus with one Fire crystal and a Memory holding Ice and Sky then holds
+      Ice and Sky, and the Memory Fire and one empty place. Twins a blind swap sets side by side in the open dialogue
+      as always. A blind Memory lends no pair. Feature 10's brief.
     - *Duets.* A Focus's Memory holding both crystals of a duet works the duet in place of cycling, the pair giving the
       turn; a Duet Module in one of the Focus's sockets holds a second pair, swapped after each duet working.
     - *Memory on an Earth drain,* on any face but the one facing into the room. The drain holds one crystal in its
@@ -276,7 +286,7 @@ old paper differ, this brief is the record.
 0.25, `DeadSocketTorque` 0.25, `DeadSocketChargePerHour` 4, `ProbePerDayGlittering` 400, `ProbePerDayGlowing` 1200,
 `ProbeCalmShare` 0.25, `BatteryChargePerBlock` 200, `BatteryReturnShare` 0.8, `BatteryPerHourGlittering` 200,
 `BatteryPerHourGlowing` 600, `BatteryFillAbove` 0.75, `BatteryDrainBelow` 0.5, `EarthChargePerStep` 50,
-`BatteryMaxSide` 7. Reaches, areas, room and the one-Amplify limit are not settings.
+`BatteryMaxSide` 7, `MysteryCostMultiplier` 4. Reaches, areas, room and the one-Amplify limit are not settings.
 
 ## Claims
 
@@ -367,6 +377,8 @@ old paper differ, this brief is the record.
     it: the fire does not spread into the claim (needs a second player; after the G58 and G61 patches).
 18. Restart: crystals in sockets, Dormant blocks and crystals, shelf items, Memory's crystals, Dead Sockets, a
     refining's progress and a battery's count are all still there.
+19. A Glittering Life Focus at a crop bed blooms it every 10 seconds, each working paying 4 charge for each 9 plants;
+    a Glittering Fire Focus lighting a firepit pays 1.
 
 ## Open questions
 

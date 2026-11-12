@@ -111,12 +111,32 @@ panning idea.
     strongly: a Life working pays its usual cost once for every 9 plants it would move on, rounded up, in full or not
     at all. A network that cannot pay it all blooms nothing that working, as a felling does (feature 8). A hand's cast
     stays as it is.
+    **Changed by R36** (the owner: "let us remove the use limit, within a machine only, for bloom-ery and raise its
+    charge consumption along with the charge consumption of all mysteries"): inside a machine the once-a-day rule goes,
+    and every Mystery working, in a machine or by hand, costs 4 times an Elemental's (R38, 3 to 5; features 6, 8 and
+    9). The charge per 9 plants stays (R38, 5), so a 3×3 field blooms every 10 seconds for 4 charge a working at
+    Glittering's power, and a Glowing Scatter's 81 plants for 36.
 
 ### What the player is told
 
 12. No Journal page in step 1. The duets are secrets of the Hidden Vocabulary, and the Hidden
     Vocabulary and the Journal are completed in step 7, by changes to the briefs concerned (the Road Bible, step 7). A
     looked-at Memory says "Duet: clay" (or the product) while it holds a pair, so a player who has found one can see it.
+
+### Memory's rod tap and blind swap (R36, R38)
+
+13. **The rod tap.** A tap of the Crystal Rod on a Memory switches it between lending a pair (item 3) and cycling as
+    any Memory does, so twin-free pairs can also simply take turns. A Memory starts lending, and its look-at line
+    says "Lends its pair" or "Cycles".
+14. **The blind swap.** A Dead Socket locks into a Memory (R38, 1), beside its magazine and taking none of its room,
+    and comes out as a Dead Socket comes out of a Motor. A Memory holding one swaps blind at every turn of its machine:
+    everything in the machine's sockets changes places with everything in its magazine, empty places included,
+    whatever the crystals are (R38, 2). The owner's example: a Focus holding one Fire crystal, its Memory holding Ice
+    and Sky; after the turn the Focus holds Ice and Sky and the Memory Fire and an empty place. A blind Memory lends no
+    pair, and the rod tap does nothing to it.
+15. **Its danger is learned.** Twins a blind swap sets side by side in the machine's sockets stand in the open and
+    dialogue as always (feature 1, item 8): nothing warns before the swap, and the player learns it by the hum (R36,
+    "let players learn via experience").
 
 ## How it is built, and what it touches
 
@@ -186,14 +206,20 @@ panning idea.
 5. Set a Duet Module into the Focus of item 1, then a Fire and a Sky crystal into the Focus (they go into the module),
    over sand: it makes clay, then fires nothing (no pottery yet); set sand in front again and it makes clay again. No
    dialogue.
-6. A Glowing Life Scatter over a field of 81 crops: they all move on one stage, and the network pays nine workings'
-   charge. The next working that day does nothing and pays nothing.
+6. A Glowing Life Scatter over a field of 81 crops: they all move on one stage, and the network pays nine Mystery
+   workings' charge, 36. Ten seconds later they move on again, for 36 more.
 7. An Earth battery's room with sand in it and its network at half or above (fill it with the admin charger), its
    drain with one Earth crystal in its socket, a Memory holding a Sky and an Unaligned crystal, a chest touching it
    and a Control Shelf with sand on it and in its input: no dialogue. Earth cannot wear with the network that full, so
    its turn passes at once. When Sky takes its turn the drain pans a sand block into the chest and the stones show 200
    less; when the Unaligned crystal takes its turn the shelf puts a sand block back.
-8. Restart: the pair stays in the Memory and the module's pair in its socket.
+8. Restart: the pair stays in the Memory and the module's pair in its socket; a panned block is still panned and the
+   shelf still puts stone back into it; a Memory's rod-tap setting and its Dead Socket stay.
+9. Tap a Memory holding Ice and Earth with the rod: it says "Cycles", and the Focus works Ice and then Earth as single
+   crystals. Tap again: clay.
+10. Lock a Dead Socket into a Focus's Memory, the Focus holding one Fire crystal and the Memory Ice and Sky: after one
+   turn the Focus holds Ice and Sky and the Memory Fire and an empty place; after the next, back again. With Earth and
+   Sky swapped in together, the warning hum.
 
 ## Open questions
 
@@ -205,5 +231,13 @@ panning idea.
 5. The Duet Module (item 8). **Answered:** R32, 5, "Yes".
 6. The Memory panning idea (items 9 and 10). **Answered:** R32, 6, way A; R31 says what it changes in the Road Bible
    (the planning thread's change to the concept, on one list with this brief).
-7. Limits on Blooming machines (item 11). **Answered:** R32, 7, "Yes".
+7. Limits on Blooming machines (item 11). **Answered:** R32, 7, "Yes"; changed by R36 and R38, 3 to 5.
+8. A battery's fill within 3 blocks of its drain (G96): the fill's Earth crystal stands in the open, so a Sky crystal in
+   the drain's socket dialogues with it in a small room. Way 1: the brief says the fill must stand more than 3 blocks
+   from the drain, and the code stays. Way 2: Sky's turn on a drain passes at once, as a turn with nothing to do,
+   while an Earth twin stands within 3 blocks, so panning is safe in every battery and a small room never pans. Way 3:
+   the fill's crystals are shielded while a Memory stands on the drain. **For the owner.** Mason offers way 2.
+9. A Dead Socket in a Memory on a drain, whose socket holds one crystal (item 10): mason proposes it does nothing
+   there, since a blind swap would set two crystals in the open beside the fill. And in a Scatter it swaps as in a
+   Focus. **For the owner.**
 8. No Journal page before step 7 (item 12). **Answered:** R32, 8, "Yes".
