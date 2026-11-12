@@ -10,7 +10,9 @@ First written on 2026-11-12, and held against the Road Bible as main had it at c
 on 2026-11-12 at 18:31Z, and its first point again at 20:08Z, after the owner had merged PR #76. The whole map was
 then held again against the Road Bible as main had it at commit 9168841. The plan's second point got its sentences on
 standing rule 7 at 20:31Z, after the owner had merged PR #108, and the whole map was held once more against the Road
-Bible, as main has it at commit 0945041.
+Bible as main had it at commit 0945041. The second point got its sentences on what keeps crystals out of dialogues at
+22:30Z, after the owner had merged PR #143, and the whole map was held again against the Road Bible, as main has it at
+commit 19fa498.
 
 ## Where I fit
 
@@ -69,7 +71,17 @@ This part is mine, and I rewrite it when the work changes.
    a claim needs a change to the concept before its brief can say so, and that change goes by the review thread's read
    and the owner's merge, or by the owner's command (rule 4). Finding G77 names, in its third point, features that
    will meet the list: reactions of twins from Luminous up (feature 13), and exposure, beams, goods beams and Storm
-   Call's lightning (features 12, 15, 17 and 18).
+   Call's lightning (features 12, 15, 17 and 18). In the same look I hold the step's features against the concept's
+   two sentences on what keeps crystals out of dialogues. Since PR #143, which the owner merged on 2026-11-12 at
+   22:06Z, the first names crystal jars, crystal racks and "the magazine of a Memory", each "up to Glowing", and it is
+   a closed list (finding G90, its eighth point). The second reads: "From Luminous up only a shielded jar holds a
+   crystal back." So where a feature is to have another thing keep crystals out of dialogues, or anything but a
+   shielded jar hold a crystal back from Luminous up, the concept is changed first, the same way, and the brief
+   follows it, as the brief of feature 10 followed PR #143. With the first such change I put to the owner whether the
+   first sentence goes on naming each holder or says it in general. Finding G90 names, in its ninth point, where the
+   two sentences are met next: feature 14 lets Luminous crystals into machines, and then "what a magazine does at
+   Luminous is that brief's first question". Part 3 names one more such place that I see today: feature 24 forges
+   Baleful crystals "in a shielded ring of the complete family", which stands Radiant twins in one ring.
 3. **The unplaced list:** when the owner places an earmark, it is placed by a change to part 3, as a feature of its
    own or inside one, as the book has it.
 4. **Whenever a ruling or an entry of player-diary.md calls for a change to the book:** that change comes before any
