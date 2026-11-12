@@ -771,3 +771,30 @@ thread at 22:20Z; the record thread did not see it itself. Closed 22:26Z by the 
 word.
 
 Concerns: mason; the review thread; the coordinator.
+
+## R36. The owner's answers on the other six points of G90
+
+**Given.** 2026-11-12 22:40:53Z by the owner, in the project chat. It answers the coordinator's post of 22:30Z, which
+showed the owner the other six points of G90 under the headings Memory, Bloom, Duet Module, claims, closed list and
+later steps; the owner's six labels answer those in order (G90 points 2, 5, 6, 7, 8 and 9).
+
+**Recorded.** 2026-11-12 22:41Z by the record thread, copied from the owner's own message.
+
+The owner, the whole message:
+
+> Memory.) perhaps on-top of cycling with a rod-tap one could, with a dead plug inserted, "force" cycling every activation "blindly" with whatever is in the machine with whatever is in the magazine?
+> Bloom.) Then let us remove the use limit, within a machine only, for bloom-ery and raise its charge consumption along with the charge consumption of all mysteries. So it is inherently more efficient to use Elementals over Mysteries, however Mysteries inherently act in ways "beyond" what an elemental can achieve. 
+> Duet.) Yes, let players learn via experience. Journal should already make clear the inherent danger.
+> Claim.) Yes that will have to wait, this is fine.
+> Concepts.) Closed form seems correct.
+> Inheritance.) this is okay, if this causes issues we can update it.
+
+The coordinator's words with it, exactly as given: "My reading, to stand as mine: Memory and Bloom each name a change
+to settled briefs (a rod tap to keep cycling, and a dead plug that forces blind cycling each activation; within a
+machine no use limit on Bloom, with a higher charge cost for Bloom and for all mysteries, so that Elementals are
+cheaper and Mysteries reach further). The numbers are not named, so the owning thread proposes them. The other four
+change nothing."
+
+**Stopped.** Nothing.
+
+Concerns: mason; the review thread; the planning thread; the coordinator.
