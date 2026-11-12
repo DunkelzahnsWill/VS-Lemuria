@@ -147,16 +147,18 @@ carrier for cargo, livestock or other players. Both hover close to the ground at
 fly.
 
 *The Pilgrim's Journal* is the mod's guide book and its one GUI: a book screen of its own, with chapters that open as
-the player finds, grows and builds, and hints at the Hidden Vocabulary. Lemuria's items stay out of the game's
-handbook, so the Journal is where they are learned. Everything else is read from the world through *indicators*:
-glow, glyph light, particles, sound, a crystal's size, its cracks. Sound is a main indicator, as the subtitle
-promises: crystals and sparkstone hum louder as their charge rises and chime when it changes level, each alignment
-hums its own note, and twins about to dialogue lose their notes to a discordant hum.
+the player finds, grows and builds, and hints at the Hidden Vocabulary. The game's handbook shows two of Lemuria's
+items, each with its recipe: the Journal itself, and the earmuffs (the owner, 2026-10-27: "just for this PPE"). Every
+other Lemuria item stays out of the handbook, so the Journal is where they are learned. Everything else is read from
+the world through *indicators*: glow, glyph light, particles, sound, a crystal's size, its cracks. Sound is a main
+indicator, as the subtitle promises: crystals and sparkstone hum louder as their charge rises and chime when it
+changes level, each alignment hums its own note, and twins about to dialogue lose their notes to a discordant hum.
 
 ### The standing rules of the design
 
-These are the owner's, settled before this book, and every brief keeps them. One sentence among them is new with this
-book and says so: the last of rule 3.
+These are the owner's, settled before this book, and every brief keeps them. What among them is not older than this
+book says so in its own place: the last sentence of rule 3, which is new with this book, and what rule 7 names as
+settled after this book's merge.
 
 1. **No GUI but the Journal.** Charge is shown by glow and hum, never by a number.
 2. **Four scales, four sets of words,** so that no two can be mixed up: the growth stage (five of them); the
@@ -174,11 +176,16 @@ book and says so: the last of rule 3.
    consistent economy of action.
 7. **One claims switch.** Every land claim rule in Lemuria goes through one switch, so that none can drift (the owner,
    2026-10-27). With it on, as it is by default, Lemuria's workings spare what lies inside another player's claim, and
-   only a Bale storm's scars do not. A server admin can turn it off in game, and every feature reads the same switch.
-   With it off, Lemuria's workings no longer spare a claim, and every Lemuria block that is used by hand also opens
-   inside another player's claim (R9). The game's own breaking and placing of blocks inside another player's claim
-   stay as the game rules them, whatever the switch says: the owner's words open Lemuria's blocks there to use and to
-   nothing more (the card of 2026-11-10, and R9).
+   only three things do not: a Bale storm's scars; a dialogue of twins below Luminous, which no claim's edge holds
+   back (as it is built and as the brief of feature 1 has it, by the owner's merge of pull request #72); and a
+   sparkstone network, which does not end at a claim's edge, for stone that touches is one network, whoever's land it
+   stands on, and stone set against it just outside a claim shares its charge (R29, on G68). The last two were settled
+   on 2026-11-12, after this book's merge. A server admin can turn the switch off in game, and every feature reads the
+   same switch. With it off, Lemuria's workings no longer spare a claim, and every Lemuria block that is used by hand
+   also opens inside another player's claim (R9). The game's own breaking and placing of blocks inside another
+   player's claim stay as the game rules them, whatever the switch says: the owner's words open Lemuria's blocks there
+   to use and to nothing more (the card of 2026-11-10, and R9). Lava that a working has made counts as the game's own
+   from then on: it runs as natural lava does, into a claim too (the owner, 2026-10-27).
 8. **Multiplayer-safe from the first line.** The server holds the state and sends it to clients through the game's
    own channels, and nothing works only in single player. Server time, network traffic and the size of the zip stay
    small.
@@ -426,8 +433,9 @@ This step lists no feature. All of its work lies in the folders of features buil
 so by this book's count none of it is a feature ("Where features meet"):
 
 - **The Hidden Vocabulary and the Journal, complete:** what is still missing of both by then. A secret lies with its
-  machine and a page with the Journal (feature 3), so this goes by changes to the briefs of the features concerned and
-  the patches that follow them (rule 4).
+  machine. A page's text lies in the lang folder of the Journal (feature 3) or of another feature, and the folder
+  decides whose it is; the page's place in the chapter list and the rule that opens it are the Journal's own. So this
+  goes by changes to the briefs of the features concerned and the patches that follow them (rule 4).
 - **Balance,** which goes the same way.
 - **The one multiplayer test** (standing rule 10). It is played before step 7 is reported done, so that what the owner
   says after it stands in player-diary.md and has its answer when the gate is decided (rule 7).
