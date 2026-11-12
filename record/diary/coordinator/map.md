@@ -1,6 +1,6 @@
 # The coordinator's map
 
-Written 18:24Z on 2026-11-12 corrected 18:35Z, and brought up to date after PR #76 merged, after I read the rules (version 5) and the Road Bible whole, as the record thread sent them from main at 8897ca7. It replaces my first map, which was written before I had read either whole (G53).
+Written 18:24Z on 2026-11-12, corrected 18:35Z, and brought up to date after PR #76 merged, after I read the rules (version 5) and the Road Bible whole, as the record thread sent them from main at 8897ca7. It replaces my first map, which was written before I had read either whole (G53).
 
 ## The features, by number
 
