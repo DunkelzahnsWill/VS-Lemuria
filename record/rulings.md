@@ -365,6 +365,10 @@ message shows beside it are the planning thread's outputs, not the owner's attac
 **Recorded.** 2026-11-12 05:21Z by the record thread (then named "record-keeper") as deputy (the cast, second tier),
 at the coordinator's request, copied from the owner's own message.
 
+**Changed in place.** 2026-11-12, after this entry first reached main by PR #18: PR #19 (merged 05:30Z) put the
+coordinator's words back exactly as given, and PR #20 (merged 05:37Z) corrected the "Given" line, which had named three
+attachments the owner never sent. The owner's words were not changed. See G28.
+
 The owner: "Ahoy Coordinator! these are the new rules to be enforced going on, we'll need a new thread spun-up for the
 planning and hand-over for the new rules."
 
@@ -381,6 +385,9 @@ the review thread (G4); the precursor, once it is started (what counts as the ol
 **Recorded.** 2026-11-12 05:21Z by the record thread as deputy (the cast, second tier): the owner gave this word to
 that thread directly and did not say the coordinator would record it.
 
+**Changed in place.** 2026-11-12, after this entry first reached main by PR #18: PR #19 (merged 05:30Z) put the
+coordinator's words back exactly as given. The owner's words were not changed. See G28.
+
 The owner: "A sister thread proposed the idea: To have a record-keeper to takeover your duties in terms of recording
 your word."
 
@@ -395,6 +402,9 @@ role goes into them); the review thread (G8).
 ## R21. The owner's command: five changes to the rules that bring in a record thread
 
 **Given.** 2026-11-12 05:20:38Z by the owner, in the project chat. It answers R20.
+
+**Changed in place.** 2026-11-12, after this entry first reached main by PR #18: PR #19 (merged 05:30Z) put the
+coordinator's words back exactly as given. The owner's words were not changed. See G28.
 
 **Recorded.** 2026-11-12 05:21Z by the record thread, copied from the owner's own message. The owner's message, whole
 and unchanged, in a plain block so that every mark shows as the owner typed it:
