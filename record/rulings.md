@@ -356,10 +356,11 @@ differing).
 
 ## R19. The owner's command that brought in the new rules: a new thread for the planning and the hand-over
 
-**Given.** 2026-11-12 03:00:29Z by the owner, to the coordinator, in the project chat. The message carries three
-attachments: the Claude Doc "Lemuria: hand-over to Commandments v2"
-(https://claude.ai/code/artifact/aadecc69-9e5c-4334-a6ad-13f3ec1f389a), a link "PR #11: the Commandments in record/"
-and a link "PR #16: the first Road Bible of Lemuria".
+**Given.** 2026-11-12 03:00:29Z by the owner, to the coordinator, in the project chat. The owner attached one file,
+the rules: COMMANDMENTS.txt, kept as the project upload uploads/hearth/66303e87-c7e8-436e-b0ed-8187559f4109, 35,772
+bytes, sha256 918dd508ea87e6a3305700c78e09792f336f23ab4e175882918565fbca4a5b02, byte for byte the same as
+record/COMMANDMENTS.txt version 2 (commit 3ef709c). The hand-over Doc and the links to PRs #11 and #16 that the
+message shows beside it are the planning thread's outputs, not the owner's attachments.
 
 **Recorded.** 2026-11-12 05:21Z by the record thread (then named "record-keeper") as deputy (the cast, second tier),
 at the coordinator's request, copied from the owner's own message.
