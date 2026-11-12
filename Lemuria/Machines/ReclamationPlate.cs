@@ -55,8 +55,10 @@ public class BlockReclamationPlate : Block
         var stack = new ItemStack(salt);
         foreach (var face in BlockFacing.ALLFACES)
         {
-            if (world.BlockAccessor.GetBlockEntity(plate.AddCopy(face)) is IBlockEntityContainer { Inventory: { } inventory } and not BlockEntitySparkstone and not BlockEntityControlShelf
-                && Stock.Put(world, inventory, stack) == null)
+            // The plate stands in for the machine under the claim rule (G61): a container a claim leaves out is not there.
+            var at = plate.AddCopy(face);
+            if (world.BlockAccessor.GetBlockEntity(at) is IBlockEntityContainer { Inventory: { } inventory } and not BlockEntitySparkstone and not BlockEntityControlShelf
+                && BlockEntityMachine.MayChange(world, plate, at) && Stock.Put(world, inventory, stack) == null)
             {
                 return;
             }

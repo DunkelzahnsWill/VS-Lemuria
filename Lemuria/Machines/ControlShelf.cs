@@ -111,6 +111,8 @@ public class BlockEntityControlShelf : BlockEntityDisplay
 
     public BlockPos OutputPos => Pos.AddCopy(Right);
 
+    public BlockPos InputPos => Pos.AddCopy(Left);
+
     private IBlockEntityContainer? Container(BlockPos pos) =>
         Api?.World.BlockAccessor.GetBlockEntity(pos) is IBlockEntityContainer { Inventory: not null } container and not Sparkstone.BlockEntitySparkstone and not BlockEntityControlShelf
             ? container
