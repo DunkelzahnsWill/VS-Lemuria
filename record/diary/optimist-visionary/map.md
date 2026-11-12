@@ -7,7 +7,8 @@ The Road Bible (record/road-bible.md) and the settled briefs outrank this map (r
 they stand, and the map is wrong.
 
 First written on 2026-11-12, and held against the Road Bible as main had it at commit ed17dad. The plan was rewritten
-on 2026-11-12 at 18:31Z, and the whole map was held again against the Road Bible as main had it at commit a09f3d2.
+on 2026-11-12 at 18:31Z, and its first point again at 20:08Z, after the owner had merged PR #76. The whole map was
+then held again against the Road Bible as main had it at commit 9168841.
 
 ## Where I fit
 
@@ -49,14 +50,15 @@ None. Features 1 to 26 of the Road Bible's part 3 are mason's.
 
 This part is mine, and I rewrite it when the work changes.
 
-1. **Sentences of the book that say what main holds.** A few sentences of the book say what main held on the day they
-   were written: in part 2, that main has not changed outside record/ since commit c07322e; in part 3, that features 1
-   to 9 have no briefs yet; and in part 4, the rows of the shared files table, which "names what is on main today".
-   When a merged PR overtakes such a sentence, I bring it up to date by a change to the book, after the merge and not
-   before, in as few changes as the merges allow, and in words that the next merge does not overtake again, where the
-   book allows it. The first four were overtaken on 2026-11-12 between 18:26Z and 18:30Z, when mason's PR #51, PR #55
-   and PR #59 were merged: the two sentences of parts 2 and 3, and in part 4 the rows on `README.md` and `CLAUDE.md`
-   and on `.github/workflows/build.yml`. My diary says where the change for them stands.
+1. **Sentences of the book that say what main holds.** A sentence of the book that says what main held on the day it
+   was written is overtaken when a later merge changes main. I bring such a sentence up to date by a change to the
+   book, after the merge and not before, in as few changes as the merges allow, and in words that the next merge does
+   not overtake again, where the book allows it. The first four were brought up to date by PR #76, which the owner
+   merged on 2026-11-12 at 19:35Z. Finding G66 names what is left of the kind, in its second and third points, and all
+   of it is still true: part 2's opening words, "Main as it stands is the prototype"; part 4's sentence that the
+   shared files table "names what is on main today", which holds while no shared file is added or taken away; and
+   "Glittering and Glowing so far" in the row of feature 1, which step 2's features will overtake. Part 2's opening
+   words I leave until part 2 is changed for another reason, and then I take the words that G66 offers for them.
 2. **Before each numbered step's first brief:** look at that step's features again, with mason, and change part 3
    first if the step is cut wrongly. My entry of 04:42Z calls the cuts of the features not yet built the least certain
    part of the book.
