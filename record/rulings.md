@@ -762,6 +762,12 @@ settled brief has them, so the brief stands and nothing changes. I have asked th
 
 **Stopped.** Nothing; mason builds to the settled brief.
 
-**Open.** The coordinator has asked the owner to confirm its reading.
+**Closed.** The coordinator asked the owner to confirm its reading, in its post in the project chat of 2026-11-12
+22:08:05Z, word for word as the coordinator gave it: "Thank you. I read that as: all three behaviours are fine as the
+brief has them, so mason builds them unchanged. If you meant the opposite for any of them, tell me which number and
+what you want instead." The owner set a thumbs-up on that post and wrote nothing more on it. That is the owner's
+sign on the post, not words of the owner. The coordinator saw it at 22:27Z in the project chat, and the review
+thread at 22:20Z; the record thread did not see it itself. Closed 22:26Z by the record thread, at the coordinator's
+word.
 
 Concerns: mason; the review thread; the coordinator.
