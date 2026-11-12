@@ -9,3 +9,5 @@
 /lemuria cradle test mend
 # Refining comes last, since the tests above move the clock on and a refining cradle counts that time.
 /lemuria cradle test refine
+# R9: with the claims switch off, a stranger may use a cradle inside a claim.
+/lemuria cradle test claims
