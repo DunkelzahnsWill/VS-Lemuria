@@ -26,6 +26,14 @@ public partial class MachinesTests
     private readonly ICoreServerAPI sapi;
     private readonly ILogger logger;
 
+    /// <summary>
+    /// The quern's fastest speed seen since the Motor scene started, sampled every 200 ms until motorcheck
+    /// (G43): a single reading at motorcheck failed whenever a slow runner had not yet ticked the mechanical
+    /// network up to speed.
+    /// </summary>
+    private float motorPeak = -1;
+    private long motorWatch;
+
     public MachinesTests(ICoreServerAPI sapi, ILogger logger)
     {
         this.sapi = sapi;
@@ -439,6 +447,17 @@ public partial class MachinesTests
         Fill(motor);
         bool powered = motor.PayMotor(0.1);
         TestSite.StorePos(sapi, MotorKey, pos);
+        motorPeak = -1;
+        if (motorWatch != 0)
+        {
+            sapi.Event.UnregisterGameTickListener(motorWatch);
+        }
+        var quernPos = pos.DownCopy();
+        motorWatch = sapi.Event.RegisterGameTickListener(_ =>
+        {
+            float now = Accessor.GetBlockEntity(quernPos)?.GetBehavior<BEBehaviorMPConsumer>()?.Network?.Speed ?? -1;
+            motorPeak = System.Math.Max(motorPeak, now);
+        }, 200);
         bool joined = Accessor.GetBlockEntity(pos.DownCopy())?.GetBehavior<BEBehaviorMPConsumer>()?.Network != null
             && Accessor.GetBlockEntity(pos.DownCopy())?.GetBehavior<BEBehaviorMPConsumer>()?.Network == motor.GetBehavior<BEBehaviorCrystalMotor>()?.Network;
         logger.Notification("Machines test: a Crystal Motor on a quern, powered: {0}, torque {1:0.00}, on the quern's network: {2}, sockets facing {3}",
@@ -464,8 +483,14 @@ public partial class MachinesTests
     {
         var pos = TestSite.ReadPos(sapi, MotorKey);
         var consumer = pos == null ? null : Accessor.GetBlockEntity(pos.DownCopy())?.GetBehavior<BEBehaviorMPConsumer>();
-        // A few seconds after it starts, the network is still spinning up toward the Motor's speed.
-        float speed = consumer?.Network?.Speed ?? -1;
+        // A few seconds after it starts, the network is still spinning up toward the Motor's speed, so the
+        // check takes the fastest speed seen since the Motor started as well as the speed now (G43).
+        if (motorWatch != 0)
+        {
+            sapi.Event.UnregisterGameTickListener(motorWatch);
+            motorWatch = 0;
+        }
+        float speed = System.Math.Max(consumer?.Network?.Speed ?? -1, motorPeak);
         logger.Notification("Machines test: the quern turns: {0}", YesNo(speed > 0.001f));
         // Then the rod switches its only crystal Dormant, as in the owner's play-test; motorstopped checks it stops.
         if (pos != null && Accessor.GetBlockEntity(pos) is BlockEntityMachine motor)
