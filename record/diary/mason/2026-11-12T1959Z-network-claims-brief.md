@@ -1,6 +1,6 @@
 # The briefs say that a network crosses a claim's edge (G68 declined)
 
-**Done.** The owner declined G68 (19:57Z, R28). The sparkstone brief, Claims, now says that a network takes no
+**Done.** The owner declined G68 (19:57Z, R29; R28 was the question). The sparkstone brief, Claims, now says that a network takes no
 account of a claim: touching blocks join whoever set them and wherever they stand, charge is shared across a claim's
 edge, and a draw or a machine's working takes from the whole network. The machines brief, "How it is built", says
 that a machine pays from its whole network, which may reach into a claim.

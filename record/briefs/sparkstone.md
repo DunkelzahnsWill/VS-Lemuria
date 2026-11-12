@@ -116,7 +116,7 @@ A network takes no account of a claim, whatever the switch says: Awakened blocks
 whoever set them down and wherever they stand, its charge is shared across a claim's edge, and a draw or a
 machine's working anywhere on it takes from the whole of it. So a block set just outside a claim, touching a
 network inside it, reaches that network's charge. The owner declined to change this (G68, "Decline", 2026-11-12
-19:57Z, R28). It is built.
+19:57Z, R29). It is built.
 
 ## What it will not do
 
