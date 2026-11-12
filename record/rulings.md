@@ -528,3 +528,18 @@ thread through the coordinator's hands, and they match the planning thread's dia
 > words, or change any of them. If you answer A, nothing changes: the rules and the Road Bible already say A.
 
 Concerns: the planning thread; the review thread; mason, once it starts.
+
+## R25. The owner confirms the coordinator's reading of R24
+
+**Given.** 2026-11-12 07:08:14Z by the owner, in the project chat.
+
+**Recorded.** 2026-11-12 07:08Z by the record thread, copied from the owner's own message.
+
+The owner: "Correct reading, good job."
+
+The coordinator's words with it, exactly as given: "The owner wrote this in answer to my post of about 06:57Z, in which
+I told the owner how I read R24: "Noted: B on the rule 4 question, with the planning thread's two sentences as drafted.
+The planning thread will put that into the rules as the next version, and it comes to you for merge after its review.
+If "4.)" meant something other than rule 4, tell me." So the reading given with R24 is now the owner's."
+
+Concerns: the planning thread; the review thread; mason, once it starts.
