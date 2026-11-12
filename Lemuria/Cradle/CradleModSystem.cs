@@ -31,6 +31,8 @@ public class CradleModSystem : ModSystem
     {
         api.RegisterBlockClass(BlockCradle.ClassCode, typeof(BlockCradle));
         api.RegisterBlockEntityClass(BlockEntityCradle.ClassCode, typeof(BlockEntityCradle));
+        // With the claims switch off, planting, setting a crystal in, harvesting and taking one out of a cradle inside a claim open to everyone (R9).
+        api.Event.OnTestBlockAccess += new CradleClaims(api).OnTestBlockAccess;
     }
 
     public override void StartServerSide(ICoreServerAPI api)
@@ -62,6 +64,10 @@ public class CradleModSystem : ModSystem
                     .BeginSubCommand("check")
                         .WithDescription("Reports the test cradles' stage, crystals and refining progress")
                         .HandleWith(_ => Test(2, 2, _ => OnTestCheck()))
+                    .EndSubCommand()
+                    .BeginSubCommand("claims")
+                        .WithDescription("Asks the game's claim test of a stranger using and breaking a cradle, with claims respected and ignored")
+                        .HandleWith(_ => TestSite.WithChunk(api, Mod.Logger, "Cradle", 2, 18, OnTestClaims))
                     .EndSubCommand()
                     .BeginSubCommand("refine")
                         .WithDescription("Sets Unaligned crystals in two cradles beside burning firepits, and refines one fully and one a quarter")
@@ -99,6 +105,43 @@ public class CradleModSystem : ModSystem
             return null;
         }
         return cradle;
+    }
+
+    /// <summary>
+    /// The game's own test, as it ends for a stranger in a claim (refused by the claim, then every mod's
+    /// answer): with the switch off, using the block opens and breaking it stays refused; with it on, both
+    /// stay refused; a block that is not Lemuria's is left alone.
+    /// </summary>
+    private void OnTestClaims(BlockPos column)
+    {
+        var pos = TestSite.Surface(sapi, column);
+        var block = sapi.World.GetBlock(new AssetLocation("lemuria:cradle-granite"));
+        var granite = sapi.World.GetBlock(new AssetLocation("game:rock-granite"));
+        var trigger = sapi.Event.GetType().GetMethod("TriggerTestBlockAccess");
+        if (block == null || granite == null || trigger == null)
+        {
+            Mod.Logger.Error("Cradle test: no lemuria:cradle-granite, or no block access event to trigger");
+            return;
+        }
+        var accessor = sapi.World.BlockAccessor;
+        accessor.SetBlock(granite.Id, pos.DownCopy());
+        accessor.SetBlock(block.Id, pos);
+        accessor.SetBlock(granite.Id, pos.EastCopy());
+        EnumWorldAccessResponse Game(BlockPos at, EnumBlockAccessFlags access) =>
+            (EnumWorldAccessResponse)trigger.Invoke(sapi.Event, new object?[] { null, new BlockSelection { Position = at.Copy() }, access, "the owner", null, EnumWorldAccessResponse.LandClaimed })!;
+        bool before = LemuriaClaims.Respect;
+        try
+        {
+            LemuriaClaims.Respect = true;
+            var respected = Game(pos, EnumBlockAccessFlags.Use);
+            LemuriaClaims.Respect = false;
+            Mod.Logger.Notification("Cradle test: with claims respected the game leaves using {0} {1}; with claims ignored using it is {2}, breaking it {3}, using raw granite {4}",
+                block.Code.Path, respected, Game(pos, EnumBlockAccessFlags.Use), Game(pos, EnumBlockAccessFlags.BuildOrBreak), Game(pos.EastCopy(), EnumBlockAccessFlags.Use));
+        }
+        finally
+        {
+            LemuriaClaims.Respect = before;
+        }
     }
 
     private void OnTestPlant(BlockPos column)
