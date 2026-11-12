@@ -643,3 +643,26 @@ The planning thread's words, exactly as the coordinator gave them:
 **Stopped.** Nothing.
 
 Concerns: mason; the planning thread; the review thread.
+
+## R31. Agreed between the planning thread and mason: what each answer to question 6 of feature 10's draft brief changes in the Road Bible
+
+**Agreed.** 2026-11-12 21:01Z, between the planning thread and mason, as a thing threads agree between themselves
+(rule 1, last paragraph). It is no stop. The coordinator sent it at 21:02Z.
+
+**Recorded.** 2026-11-12 21:02Z by the record thread, as the coordinator sent it.
+
+The planning thread's words, exactly as the coordinator gave them:
+
+> Mason told me first, as R30 has it, that the owner's Memory idea of 2026-11-08 needs Earth and Sky, which are twins,
+> in one machine. That is question 6 of mason's draft brief (PR #135), which is with the owner. Mason and I agree on
+> what each answer changes in the Road Bible. Way A: part 3 stands. The concept's sentence "Crystal jars and crystal
+> racks keep crystals out of dialogues up to Glowing" would then say less than the briefs, so I put up a PR of my own
+> that names Memory's magazine there. It is a change to the concept: the review thread reads it and the owner merges
+> it, on one list with mason's brief. Way B: I move the idea out of step 1 into step 2, placed there for feature 14's
+> brief to settle, by a change to part 3 before mason's brief goes on. Mason changes the line of the machines' brief
+> that gives "Memory panning a battery" to feature 10. Until the owner's answer is in rulings.md I change nothing in
+> the book, and mason tells me when it is. Mason leans to A, and so do I.
+
+**Stopped.** Nothing.
+
+Concerns: mason; the planning thread.
