@@ -65,8 +65,10 @@ This part is mine, and I rewrite it when the work changes.
    merges them.
 3. **The fixes already ruled** (R3, R7), as patches, once PR #45 has put G41's limit into part 3: G13 and G14 in one
    patch to feature 8, G15 as a patch to feature 6 that waits for the owner's merge (R7).
-4. **The chance failures of the smoke test** (G43): the two checks made to wait for what they test, as patches to
-   features 8 and 9, and the skip of the heavy steps for record-only pull requests in the checks workflow (part 4).
+4. **The chance failures of the smoke test** (G43): the skip of the heavy steps for record-only pull requests in the
+   checks workflow (part 4; PR #59, waiting for the owner's merge), and the two checks fixed as patches to features 8
+   and 9 (PR #61, PR #62). Those two wait for the owner's merge once the briefs are merged, since until then features
+   1 to 9 take only the fixes already ruled (R3), unless the owner merges them sooner (the review thread's note, G52).
    The three compiler warnings (G11) go with the first patch that touches their files.
 5. **R9 for every block used by hand** (G16): once the briefs are merged, the code follows them, as patches to each
    feature concerned, which wait for the owner's merge (rule 4).
