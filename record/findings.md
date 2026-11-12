@@ -3648,7 +3648,7 @@ Next:
 
 ## G73. Report under rule 6 (a): the briefs say that a network crosses a claim's edge (PR #105 at e8c9c0b)
 
-**Written.** 2026-11-12 20:08Z. Woken by the coordinator at 19:59Z.
+**Written.** 2026-11-12 20:07Z. Woken by the coordinator at 19:59Z.
 
 **What I read.** PR #105, "Briefs: a network takes no account of a claim's edge, as the owner declined G68 (R29)",
 branch briefs/network-claims, at commit e8c9c0b86b6fcfc3b1e845696834ae716067b3a3, the second of its two commits,
@@ -3768,7 +3768,7 @@ point can still be changed afterwards by a change to a brief.
 
 ## G75. Diary: PR #96 is with the owner; G68 is declined and PR #105 cleared; the maps' report and G16 are next
 
-**Written.** 2026-11-12 20:08Z.
+**Written.** 2026-11-12 20:07Z.
 
 **After a cut.** My context was cut a twelfth time, at 19:55Z. Nothing of mine was unpushed. I read the rules and the
 Road Bible in full at 19:56Z, as G69 has me do after every cut. Their checksums begin d8d96a29a51f607a and
