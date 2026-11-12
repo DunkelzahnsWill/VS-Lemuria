@@ -211,8 +211,9 @@ it "already played and merged".
 What the first build shows, and already does: the mod builds from main, it loads on a headless 1.22.7 server and
 passes the smoke test, which counts as "it loads" at the step gates (R6), and it holds every Precursor step (part 3).
 R1 was given before the owner merged pull requests #10 and #9 (R4). With them, main holds old step 5 part 1 as well,
-which R14 counts among the Precursor steps. Outside record/, main has not changed since commit c07322e, the merge of
-pull request #9 on 2026-11-12 at 03:47Z, and the full checks passed on that commit.
+which R14 counts among the Precursor steps. Outside record/, main did not change between commit c07322e, the merge of
+pull request #9 on 2026-11-12 at 03:47Z, and this book's merge, pull request #16 on 2026-11-12 at 16:52Z. The full
+checks passed on commit c07322e.
 
 No folder is the proto thread's own, because there is no proto thread. What a proto thread would have held, the first
 build that loads and the checks that prove it, is old step 0's work: `Lemuria/Core/`, the project and build files,
@@ -300,12 +301,12 @@ pull request #1.
 | 8 | `machines` | The carved forms (Gather, Refine, Focus, Scatter, Amplify, the Crystal Motor and the Wind Probe), the Crystal Rod, Quicken, the Control Shelf, Memory, the reclamation plate, the Dead Socket, felling and boring, and the Elemental batteries | 4 (all three parts), 5 part 1, and the audit's fixes |
 | 9 | `mysteries` | The Four Mysteries: how Life, Death, Time and Rust read a condition times a sign, the hour a death nearby gives Death, their four evocations (Bloom, Wither, Rewind, Progress) and Glint, the lamp lit by a Life crystal | 5 part 1 |
 
-These nine have no briefs yet. Mason writes each one's brief from the signed-off notes as built, play-test changes
-included; the review thread reads them and the owner merges them, in one batch right after this book. Until then
-they take only the fixes already ruled (R3). The last column says which old steps' notes each brief draws on. R9 is
-built for racks and jars only (pull request #10): it goes into the brief of every feature whose blocks are used by
-hand, and the code follows the briefs. The old audit's open items reach mason through record/findings.md (R7), as
-G13 to G20.
+Each of these nine has its brief, `record/briefs/<short name>.md`. Mason wrote each one from the signed-off notes as
+built, play-test changes included, and the owner merged the nine in one batch, pull request #55, on 2026-11-12 at
+18:29Z. That merge settled them (rule 2). Until then R3 held the nine to the fixes already ruled. The last column says
+which old steps' notes each brief draws on. R9 is in the brief of every feature among them whose blocks are used by
+hand, and the code follows the briefs. The old audit's open items reach mason through record/findings.md (R7), as G13
+to G20.
 
 ### Old step numbers and new
 
@@ -490,8 +491,8 @@ step.
 | `tests/smoke/core.*` | The smoke checks of the shared startup |
 | `CakeBuild/`, `Directory.Build.props`, `Directory.Build.targets`, `Lemuria.sln`, `global.json`, `build.sh`, `build.ps1` | The build |
 | `scripts/` | Setup, the smoke test, and the pinned game version in `scripts/versions.env` |
-| `.github/workflows/build.yml` | The checks workflow, whose check is called `build`. The setup list's skip of the heavy steps for record-only pull requests is still to be made in it |
-| `README.md`, `CLAUDE.md` | They still state the old rules, which the Commandments have replaced. They also keep the repository rules for whoever writes code: CLAUDE.md under "Repository rules", and README.md under "Working in parallel". Those bind whoever writes code in the repo. Where one of them differs from the Commandments or from this book, the Commandments and this book stand. Mason rewrites both files to point at record/COMMANDMENTS.txt in its first pull request (R10), and the rewrite keeps the repository rules |
+| `.github/workflows/build.yml` | The checks workflow, whose check is called `build`. For a pull request that changes only record/ it skips the heavy steps, as the Commandments' setup list has it |
+| `README.md`, `CLAUDE.md` | They point at record/COMMANDMENTS.txt (R10) and at this book. They also keep the repository rules for whoever writes code: CLAUDE.md under "Repository rules", and README.md under "Working in parallel". Those bind whoever writes code in the repo. Where one of them differs from the Commandments or from this book, the Commandments and this book stand |
 | `LICENSE`, `.gitignore`, `.vscode/` | The MIT licence, the ignore list and the editor settings |
 
 ### The old paper
