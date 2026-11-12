@@ -12,3 +12,5 @@
 /lemuria mysteries test time-cast
 /lemuria mysteries test glint
 /lemuria mysteries test machines
+# R9: with the claims switch off, a stranger may use a Glint inside a claim.
+/lemuria mysteries test claims

@@ -72,6 +72,7 @@ public class MysteriesTests
             ("time-cast", "Rewind turns spoiling meat back, never past fresh; Progress ripens cheese and moves a sealed barrel", 120, 60, Rewind),
             ("glint", "Carves glass into a Glint; its light by level and Evolution, its burn, and every crystal's light 1 to 4", 140, 40, Glint),
             ("machines", "A Life Focus blooms once; a Refine block copies Time; Time and Rust Focus blocks work a chest by the measure", 140, 60, MachinesScene),
+            ("claims", "Asks the game's claim test of a stranger using and breaking a Glint, with claims respected and ignored", 160, 40, Claims),
         };
         var test = sapi.ChatCommands.GetOrCreate(LemuriaModSystem.ModId)
             .WithDescription("Lemuria commands")
@@ -92,6 +93,41 @@ public class MysteriesTests
             .EndSubCommand()
             .EndSubCommand()
             .EndSubCommand();
+    }
+
+    /// <summary>
+    /// The game's own test, as it ends for a stranger in a claim (refused by the claim, then every mod's
+    /// answer): with the switch off, using a Glint opens and breaking it stays refused; with it on, both
+    /// stay refused; a block that is not Lemuria's is left alone (R9, G16).
+    /// </summary>
+    private void Claims(BlockPos column)
+    {
+        var pos = TestSite.Surface(sapi, column);
+        var glint = World.GetBlock(new AssetLocation(LemuriaModSystem.ModId, "glint"));
+        var trigger = sapi.Event.GetType().GetMethod("TriggerTestBlockAccess");
+        if (glint == null || trigger == null)
+        {
+            logger.Error("Mysteries test: no Glint, or no block access event to trigger");
+            return;
+        }
+        Accessor.SetBlock(Id("game:rock-granite"), pos.DownCopy());
+        Accessor.SetBlock(glint.Id, pos);
+        Accessor.SetBlock(Id("game:rock-granite"), pos.EastCopy());
+        EnumWorldAccessResponse Game(BlockPos at, EnumBlockAccessFlags access) =>
+            (EnumWorldAccessResponse)trigger.Invoke(sapi.Event, new object?[] { null, new BlockSelection { Position = at.Copy() }, access, "the owner", null, EnumWorldAccessResponse.LandClaimed })!;
+        bool before = LemuriaClaims.Respect;
+        try
+        {
+            LemuriaClaims.Respect = true;
+            var respected = Game(pos, EnumBlockAccessFlags.Use);
+            LemuriaClaims.Respect = false;
+            logger.Notification("Mysteries test: with claims respected the game leaves using a Glint {0}; with claims ignored using it is {1}, breaking it {2}, using raw granite {3}",
+                respected, Game(pos, EnumBlockAccessFlags.Use), Game(pos, EnumBlockAccessFlags.BuildOrBreak), Game(pos.EastCopy(), EnumBlockAccessFlags.Use));
+        }
+        finally
+        {
+            LemuriaClaims.Respect = before;
+        }
     }
 
     // ------------------------------------------------------------------ helpers
