@@ -2668,8 +2668,10 @@ at the block that is clicked (G69). What a network still gives across a claim's 
 ## G58. Flaw: a fire that a machine sets is nobody's, so the game lets it burn into another player's claim
 
 **Rank.** Flaw, naming step 1. **Owning thread.** Mason: the code lies in feature 6's folder, and feature 8's machines
-work through it. **Raised in.** The read of the nine briefs (G56), under the fourth point of G50. **Status.** Open.
-The owner does not decline it: the owner's word of 2026-11-12, 19:35Z, is "G58.) Fix" (R27).
+work through it. **Raised in.** The read of the nine briefs (G56), under the fourth point of G50. **Status.** Closed.
+Corrected by PR #121 at commit 3da0888, which the owner merged on 2026-11-12 at 22:05Z (merge commit 807e44b) after
+the inquisitor's verdict of "out": a machine's fire is now its carver's, and where the game does not know the carver
+the machine sets none on a face (G91). The owner had ruled "G58.) Fix" (R27).
 
 - **The code, main at 15205d9.** Where Ignite finds nothing that a flame could light, it sets the game's own fire on
   the face aimed at (`SetFire`, Lemuria/Evocations/Effects.cs from line 385) and tells the game who started it:
@@ -2784,8 +2786,10 @@ its brief.
 ## G61. Flaw: a machine's containers are asked for no claim, so its shelf draws stock from a chest in another's claim
 
 **Rank.** Flaw, naming step 1. **Owning thread.** Mason: the code lies in feature 8's folder. **Raised in.** The read
-of PR #72 (G62), from a point of the read of the nine briefs (G56). **Status.** Open. The owner does not decline it:
-the owner's word of 2026-11-12, 19:35Z, is "G61.) Fix" (R27).
+of PR #72 (G62), from a point of the read of the nine briefs (G56). **Status.** Closed. Corrected by PR #130 at commit
+242d069, which the owner merged on 2026-11-12 at 22:05Z (merge commit 57fc48f) after the inquisitor's verdict of
+"out": with the claims switch on, a container inside a claim is now a machine's only if the machine stands inside that
+same claim (G91). The owner had ruled "G61.) Fix" (R27).
 
 - **The code, main at 15205d9.** A machine's stock comes from the container at its Control Shelf's left. Its yields go
   into the container at the shelf's right or, with no shelf, into a container that touches the machine (`Input` and
@@ -5034,3 +5038,142 @@ first, the third and the fourth are cheaper to change before mason builds than a
    more than three blocks apart", with no word of the magazine, of Memory on a drain or of panning. None of those is a
    secret of the Hidden Vocabulary. The mod is not released before step 7, so nobody is misled meanwhile, but step 7's
    work has to find that page.
+
+## G91. Diary: the owner's four merges, the book read again, and G58 and G61 closed
+
+**Written.** 2026-11-12 22:25Z.
+
+**The rules and the book.** The rules are as G87 held them: version 5, 189 lines, and the checksum on main still
+begins d8d96a29a51f607a. The book changed at 22:06Z, of which below, and its checksum now begins e894a658bd7bccca. My
+context was cut a seventeenth time at 22:10Z. I read the rules in full again at 22:10Z, before anything else. The book
+I had read in full at 22:07Z, three minutes before the cut, and I read it in full once more at 22:21Z: a cut leaves me
+a summary of a book and no page of it, which is what G83 holds against the coordinator.
+
+**What main took in since G90,** which I read before anything else (rule 6).
+- *The coordinator's list of 22:05Z,* in the project chat, where I read it. It called the owner to four pull requests:
+  PR #121 and PR #130 in either order, then PR #143 before PR #135. With the list it showed three of the nine points
+  of G90, the three that G90 calls cheaper to change before mason builds than after: that a looked-at Memory names its
+  duet as soon as the pair is set, that the Fire and Earth duet gives a bit for every ore that the game smelts to an
+  ingot, "chromium, titanium, platinum and nickel among them", and that a drain with sand on its shelf pans any sand
+  brought to it. Each is true to G90. It gave a link to the whole note, and it ended: "If you are fine with all three,
+  just merge."
+- *The owner merged all four,* each at the commit that had been read, by the merge commits on main: PR #121 at
+  22:05:41Z (807e44b, whose second parent is 3da0888, the commit of the inquisitor's verdict); PR #130 at 22:05:51Z
+  (57fc48f, with 242d069, likewise); PR #143 at 22:06:10Z (8267112, with df04854, the commit of G89); and PR #135 at
+  22:06:20Z (91f0a44, with 8df74be, the commit of G88). The order is the one that G88 and G89 asked for. The duets'
+  brief is settled (rule 2), with its changes to the briefs of features 8, 9, 1 and 4, so the code of feature 10 may
+  begin. The full checks passed on main at each of the four merge commits, by the runs on GitHub.
+- *R35* (PR #151, on main at 22:09Z): the owner's message of 22:07:56Z, whole: "All three notes make sense and line-up
+  logically." I held the entry against the owner's own message in the project chat, and the words are the same. The
+  entry gives the coordinator's reading, that the owner finds the three behaviours sound as the settled brief has
+  them, and it leaves that reading open: "The coordinator has asked the owner to confirm its reading." The chat shows
+  what the entry could not yet know. The coordinator's question, of 22:08:05Z: "I read that as: all three behaviours
+  are fine as the brief has them, so mason builds them unchanged. If you meant the opposite for any of them, tell me
+  which number and what you want instead." When I read the chat at 22:20Z the owner's thumbs-up stood on that post,
+  and no further word of the owner's had followed. I take the reading as right for a second reason too: the list had
+  said "If you are fine with all three, just merge", and the owner merged before writing. So the three stand as the
+  brief has them, and R35's open line can be closed with the owner's sign, which is the record thread's to enter. The
+  other six points of G90 need no answer and have none.
+- *The entries of the other threads:* the planning thread's of 22:05Z (PR #147), the coordinator's of 22:05Z and
+  22:07Z (PR #148, PR #149), the inquisitor's of 22:07Z (PR #150), the record thread's of 22:08Z (PR #151) and the
+  precursor's of 22:09Z (PR #152). The inquisitor, the record thread and the precursor each say that they read the
+  Road Bible again after PR #143, as rule 5 asks. The coordinator read the changed sentence word for word and holds
+  the rest from a summary until its copy is there (G83). Of mason and of the planning thread no entry says so yet; I
+  look for both at my next wake. The inquisitor's last line has "GG90", the slip of the pen that G87 named.
+- *One thing in the record thread's entry bears on the rules change in hand.* It has sent the coordinator G83 and G84
+  whole, and of the rest it says: "G85 to G90 on main, read by their headings only". So at 22:08Z none of G85 to G90
+  had been sent to the coordinator word for word, an hour and more after the first of them reached main. The cast has
+  the record thread send the coordinator "each new entry of rulings.md, player-diary.md and findings.md, word for
+  word". Whether its sixty messages an hour (G53) or its other work kept them back, the entry does not say. What the
+  coordinator showed the owner of G90 came from my own message to it of 22:02Z, and it was true. I make no finding of
+  it here: it goes into the report on PR #144, where it belongs.
+- *Mason's entries* of 20:34Z and 20:52Z came to main with the two patches, its three entries on the duets' brief with
+  PR #135, and the planning thread's of 21:20Z with PR #143. I had read each in its pull request.
+
+**The concept changed, and I read the book again** (rule 5). PR #143 changed one sentence of part 1, as G89 gives it,
+and nothing else: the book has 561 lines. The coordinator told me so at 22:06:51Z, with the sentence.
+
+**G58 is closed.** What I held the merged patch against:
+- *The code on main.* `Effects.SetFire` now gives the game a starter for every fire that a machine sets:
+  `OnFirePlaced(aimed.Face, starter)`, where `Starter` is the machine's `CarverUid` for a machine's cast and the
+  caster otherwise. Before it sets anything, a machine's cast leaves `SetFire` with no fire where no carver is
+  recorded or `world.PlayerByUid(starter)` is null.
+- *The game,* the pinned 1.22.7, decompiled. `BEBehaviorBurning.TrySpreadTo` asks `PlayerByUid(startedByPlayerUid)`
+  and, where that gives a player, refuses the spread to a place where the player may not build. The patch asks the
+  same question of the same list before it sets the fire. So every fire that a machine now sets is one whose spread
+  the game tests.
+- *The briefs.* The machines' brief, Claims, "A machine's fire": "A fire that a machine sets on a face is its
+  carver's", and where the game does not know the carver "the machine sets no fire on a face: it still lights what can
+  be lit, as a firestarter does". In `Ignite` the lighting comes before `SetFire`, and the lighting of the area after
+  it is untouched. A hand's cast is as it was. `OnFirePlaced` is called in one place of Lemuria's code, so no other
+  fire passes the patch by.
+- *The test.* One new line of the smoke test: a machine with no carver, aimed at bare granite, sets no fire, and a
+  cast with no machine sets one. By the code that line fails without the fix. The full checks passed on main at
+  807e44b.
+- *What nobody has seen.* The other half: the fire of a machine whose carver the game knows, held at the edge of a
+  claim. It needs a second player, and it is item 17 of the machines' "what to try" list, for the one multiplayer test
+  (standing rule 10). I read it in the code and in the game and did not run it. The brief says itself that a fire
+  which burns on through a restart "is held only once its starter has joined again, a hand's fire likewise".
+- *How it merged.* The inquisitor's verdict was "out" at 3da0888 (its entry of 20:37Z), because the patch follows a
+  change to its brief (PR #96, rule 4), and the owner merged that commit.
+
+**G61 is closed.** What I held the merged patch against:
+- *The code on main.* A working reaches a container through `Input` and `OutputPos` of `BlockEntityMachine`, and a
+  reclamation plate through a loop of its own, and each now asks the machine's claim rule, `MayChange`, for the
+  container's place. `Input` gives the container at the shelf's left only where the rule allows it. `OutputPos`, on
+  which `Output` now rests, gives the container at the shelf's right only where the rule allows it and, for a machine
+  with no shelf, the first container touching it that the rule allows. The reclamation plate asks the same rule with
+  the plate standing in for the machine.
+- *The finding's list, and a search.* G61 named the shelf's takes, the yields and the plate. I searched Lemuria's code
+  for every reach into a container. In feature 8's folder each goes through those places: the shelf's takes and counts
+  of stock (`machine.Input`), the yields (`Route` and `Collect`), the barrel that a bucket on the shelf milks into
+  (`machine.OutputPos`), what a battery's drain wears out of its room (`Output`) and the plate's salt. The shelf still
+  listens for changes in its input wherever that stands, as mason's entry says; listening takes nothing. Outside that
+  folder, Rewind and Progress change what a container holds, and they ask the claim for its block, as they did.
+- *The brief,* Claims, "A machine's containers". `MayChange` is the rule that the brief gives, unchanged: with the
+  switch on, a place inside a claim is the machine's only if the machine stands inside that same claim, and with the
+  switch off every place is. A shelf's input in another's claim "gives nothing, so its items wait as for missing
+  stock": `Input` is null. A yield with no other container "drops where the work happened": `Collect` hands the stack
+  back and `Yield` drops it. The plate's salt "with nowhere else to go is lost": its loop ends. The game's chutes and
+  hoppers are not touched.
+- *The test.* A new smoke check sets a stranger's claim of one block over a chest beside a bare Focus and over a
+  shelf's input, with claims respected and then ignored, and the plate boils a second time with its chest claimed. The
+  claim stands in the game's own list of claims, so this fix has been run against the game's claim test, though with
+  no second player. The full checks passed on main at 57fc48f.
+- *How it merged.* The inquisitor's verdict was "out" at 242d069 (its entry of 20:56Z), for the same reason, and the
+  owner merged that commit.
+
+**What the two leave.** No flaw against mason is open, and G83, the coordinator's, is the one finding still open. Both
+patches went the way rule 4 sets for an "out". Mason's two merges by its own hand (PR #81, PR #125) and every verdict
+since the last gate wait for step 1's gate (rule 6 b).
+
+**PR #144, the rules change, is in hand.** Its head is still 2f5de71, and at 22:24Z it joined main at bfe8345 without
+a conflict. I read it once before the cut: the diff, the planning thread's entry and the description. I held its one
+clause against every sentence of version 5 in which the coordinator sends, tells, wakes or passes. At 22:17Z I put six
+things to the planning thread, before I report (rule 6): three that I would change in the text, in words of its own,
+and three smaller ones. I wait for its answer, and the report follows in the next entries.
+
+**Status lines changed in this PR.** G58: closed. G61: closed.
+
+**The three scripts.** I did not run them for this PR (G64).
+
+Next:
+- **Unfinished:** the report on PR #144, the rules change of R33 with one row of the book's part 4, read at 2f5de71
+  (rule 6 e and a). It waits for the planning thread's answer to my six things, and for my read of whatever commit
+  follows. It holds the text against the nine points of G87, gives how the one clause sorts each sentence of the
+  rules, argues the counter-view, and lists what the change makes untrue elsewhere: no code, nothing in README.md or
+  CLAUDE.md, and lines of four maps.
+- **Where it is:** this file, sent to main by a record-only PR from the branch claude/project-thread-4zobvq.
+- **Waiting for,** in some order:
+  - the planning thread's answer on PR #144, and after my report the owner's merge of it. Then I read the rules again
+    (rule 4) and hold the first copies in the project files against the repo;
+  - the coordinator's map and its diary saying that it has read both books whole, which closes G83;
+  - mason's entry and the planning thread's that each read the book again after PR #143 (rule 5), and mason's map, if
+    it changes (rule 6 f): the three small things of G79 wait for that;
+  - step 1's gate (rule 6 b): every verdict since the last gate, mason's merges of PR #81 and PR #125 by its own hand,
+    and every feature PR that changed another feature's folders;
+  - the owner's word, if the owner gives any, on G51 and on the first two points of G60.
+- **At each wake:** the checksums of the rules and the book, and what has changed in the record since this entry; both
+  books in full after a cut, and the Road Bible again when the concept changes.
+- **Open findings:** flaw G83 (the coordinator). No blocker is open.
+- **Read up to:** rulings.md R35, player-diary.md none (the file does not exist), findings.md G91.
