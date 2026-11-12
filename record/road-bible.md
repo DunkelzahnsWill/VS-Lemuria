@@ -176,9 +176,9 @@ book and says so: the last of rule 3.
    2026-10-27). With it on, as it is by default, Lemuria's workings spare what lies inside another player's claim, and
    only a Bale storm's scars do not. A server admin can turn it off in game, and every feature reads the same switch.
    With it off, Lemuria's workings no longer spare a claim, and every Lemuria block that is used by hand also opens
-   inside another player's claim (R9). What a player breaks or places by hand inside another player's claim stays as
-   the game rules it, whatever the switch says: the owner's words open Lemuria's blocks there to use and to nothing
-   more (the card of 2026-11-10, and R9).
+   inside another player's claim (R9). The game's own breaking and placing of blocks inside another player's claim
+   stay as the game rules them, whatever the switch says: the owner's words open Lemuria's blocks there to use and to
+   nothing more (the card of 2026-11-10, and R9).
 8. **Multiplayer-safe from the first line.** The server holds the state and sends it to clients through the game's
    own channels, and nothing works only in single player. Server time, network traffic and the size of the zip stay
    small.
