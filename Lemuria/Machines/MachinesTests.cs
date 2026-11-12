@@ -22,6 +22,8 @@ public partial class MachinesTests
     private const string Rock = "granite";
     private const string NetworkKey = LemuriaModSystem.ModId + "-machinestest-network";
     private const string MotorKey = LemuriaModSystem.ModId + "-machinestest-motor";
+    private const string StruckKey = LemuriaModSystem.ModId + "-machinestest-struck";
+    private const string DeathKey = LemuriaModSystem.ModId + "-machinestest-death";
 
     private readonly ICoreServerAPI sapi;
     private readonly ILogger logger;
@@ -544,7 +546,7 @@ public partial class MachinesTests
     public void GatherStrike(BlockPos column)
     {
         var origin = TestSite.Surface(sapi, column);
-        Ground(origin, 9, 12, 3);
+        Ground(origin, 12, 12, 3);
         var open = Place(origin.AddCopy(1, 0, 1), Machine.Gather, "east");
         var roofedAfter = Place(origin.AddCopy(4, 0, 1), Machine.Gather, "east");
         var roofedThen = Place(origin.AddCopy(7, 0, 1), Machine.Gather, "east");
@@ -570,5 +572,36 @@ public partial class MachinesTests
         float then = roofedThen.GatherNow(24);
         logger.Notification("Machines test: a Gather block struck under open sky gathers {0:0} of a day's {1:0}; one roofed after the strike gathers {2:0}; one roofed as the bolt landed, its roof gone again, gathers only what the sky gives: {3}",
             struck, day, after, YesNo(System.Math.Abs(then - plain) < 0.01f));
+        TestSite.StorePos(sapi, StruckKey, open.Pos);
+        // A fourth, with a Death crystal, hears a death beside it: its hour of full Death is checked after the restart.
+        var death = Place(origin.AddCopy(10, 0, 1), Machine.Gather, "east");
+        if (death == null)
+        {
+            logger.Error("Machines test: no Death Gather block");
+            return;
+        }
+        Put(death, Crystal.Death, Crystal.Glittering);
+        CrystalsModSystem.OnDeathAt(death.Pos.AddCopy(0, 1, 1));
+        TestSite.StorePos(sapi, DeathKey, death.Pos);
+    }
+
+    /// <summary>
+    /// After a restart, the Gather block struck under open sky still has its strike, and the one that
+    /// heard a death its hour: a Gather block takes both "as it does standing ones", and a standing
+    /// crystal keeps them through a restart (the audit, G13 and G14).
+    /// </summary>
+    public void StruckKept()
+    {
+        var struckPos = TestSite.ReadPos(sapi, StruckKey);
+        var deathPos = TestSite.ReadPos(sapi, DeathKey);
+        if (struckPos == null || deathPos == null
+            || Accessor.GetBlockEntity(struckPos) is not BlockEntityMachine struck
+            || Accessor.GetBlockEntity(deathPos) is not BlockEntityMachine death)
+        {
+            logger.Error("Machines test: no struck Gather block; run /lemuria machines test gatherstrike first");
+            return;
+        }
+        logger.Notification("Machines test: after the restart the Gather block struck under open sky gathers {0:0} of a day's {1:0}; the one that heard a death gathers {2:0}",
+            struck.GatherNow(24), Machine.GatherPerDay(Crystal.Glittering), death.GatherNow(24));
     }
 }

@@ -4,3 +4,5 @@
 /lemuria machines test kept
 # Step 4 part 3: a battery's count is kept in both its stones.
 /lemuria machines test batterykept
+# The audit (G13, G14): a struck Gather block keeps its strike, and one that heard a death its hour.
+/lemuria machines test struckkept
