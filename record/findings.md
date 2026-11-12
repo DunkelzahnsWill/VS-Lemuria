@@ -170,7 +170,7 @@ when the first question for it comes, which keeps the cost near nothing if the r
 ## G4. Flaw: what "the old paper" is rests on a date the rules do not give and a list that does not exist yet
 
 **Rank.** Flaw, naming step 1 (the duets, R14). **Owning thread.** The planning thread. **Raised in.** G2.
-**Status.** Open.
+**Status.** Corrected in PR #16 at commit 722d58a (G23). It closes when that commit merges.
 
 The paragraph defines the old paper as "what was written for that project before" these rules took force in it,
 gives three examples, and has the Road Bible's shared list name it and say where it lies. That leaves three things
@@ -213,7 +213,7 @@ to go by, and should take nothing else for old paper.
 ## G5. Flaw: nothing shows that the old paper is "as it was left"
 
 **Rank.** Flaw, naming step 1. **Owning thread.** The precursor. Until one is started, the coordinator.
-**Raised in.** G2. **Status.** Open.
+**Raised in.** G2. **Status.** Open. G22 gives the state of each piece as I found it on 2026-11-12.
 
 The paragraph has the precursor hold the old paper "as it was left". Nothing records how it was left, and both
 places it lies can still be written by any thread:
@@ -238,6 +238,7 @@ argument. It costs one entry. I look for it when I am woken for the precursor's 
 ## G6. Note: "precursor" now means three things in this project
 
 **Rank.** Note. **Owning thread.** The planning thread. **Raised in.** G2. **Status.** Needs no answer.
+Answered in PR #16 at commit 722d58a (G23).
 
 1. A thread: the precursor, the keeper of the old paper (this change).
 2. Steps: the "Precursor steps", old steps 0 to 4 and step 5 part 1 (R2, R14).
@@ -282,7 +283,8 @@ a builder that does not exist yet.
 
 ## G8. Flaw: the coordinator's diary holds no entry of the coordinator's own
 
-**Rank.** Flaw, naming step 1. **Owning thread.** The coordinator. **Raised in.** G2. **Status.** Open.
+**Rank.** Flaw, naming step 1. **Owning thread.** The coordinator. **Raised in.** G2. **Status.** Corrected by the
+coordinator's own entry of 2026-11-12 05:21Z, on main since PR #18 (G22).
 
 record/diary/coordinator/ on main at a83a83a holds four files, each headed "a deputy's entry, written by the
 planning thread". The coordinator has been at work under these rules since the owner brought them in at 03:00Z: it
@@ -315,7 +317,8 @@ more than a pointer then, one line from the owner in rulings.md settles it. Noth
 ## G10. Note: old step numbers live on in the code's comments
 
 **Rank.** Note. **Owning thread.** The planning thread, for the Road Bible's table of old numbers. It concerns
-mason. **Raised in.** G2. **Status.** Needs no answer.
+mason. **Raised in.** G2. **Status.** Needs no answer. Answered in PR #16 at commit 722d58a
+(G23); one gap is left, in G27.
 
 R14 starts the numbered steps again at 1, and the planning thread's entry of 03:54Z has the Road Bible say that a
 step number in an old note is an old number. Old numbers are not only in old notes. On main at a83a83a, 137 comment
@@ -522,3 +525,469 @@ Next:
 - **Open findings:** flaws G4 (the planning thread), G5 (the precursor; the coordinator until it starts), G7 and
   G13 to G16 (mason; held by the coordinator until it starts) and G8 (the coordinator). No blocker is open.
 - **Read up to:** rulings.md R18, player-diary.md none, findings.md G21.
+
+## G22. Diary: woken for the first Road Bible, and what I read
+
+**Written.** 2026-11-12 05:50Z.
+
+The coordinator woke me at 05:06Z under rule 6 (a) for PR #16, the first Road Bible. I started from G21's "Next:".
+
+**The rules.** I read version 2 in full at 05:10Z. The owner merged PR #13 at 05:18Z, so the rules on main are version
+3, and the coordinator told me so (rule 4). I read the change at 05:21Z and the whole file again before I wrote this.
+Version 3 on main is byte for byte the file that G2 read at commit 6211973 (sha256 58a4cf6c…5e5676a). So G2 stood at
+the merge. G2 listed no code that the change makes wrong, so the merge made no blocker (rule 4).
+
+**What changed in the record since G21 (rule 6).** Main went from 414f1d7 to 08410c3 by five PRs. I read each of them
+whole.
+- PR #17, merged at 05:16Z: the planning thread's halt entry of 05:08Z.
+- PR #13, merged by the owner at 05:18Z: rules version 3, with the planning thread's entry of 04:07Z that G2 read.
+- PR #18, merged at 05:26Z: R19, R20 and R21 in rulings.md; three entries in the coordinator's diary, among them the
+  coordinator's first own (05:21Z); and the first entry of a new thread, the record thread.
+- PR #19, merged at 05:30Z: the record thread put the coordinator's words in R19 to R21 back as the coordinator gave
+  them.
+- PR #20, merged at 05:37Z: R19's attachment line corrected (G28), with an entry in each of the two diaries.
+
+Main still holds no Road Bible, no brief, no map and no player-diary.md. Outside record/ it is as it was at commit
+c07322e.
+
+**R19 to R21 against the owner's own words.** One thread recorded all three, so I compared each with the server's own
+copy of the owner's message, as I did for R1 to R18 (G1).
+- R19: the message of 03:00:29Z in the project chat. The same words.
+- R20: the message of 05:18:31Z, which starts the record thread's own thread. The same words.
+- R21: the message of 05:20:38Z in the project chat. I compared R21's block with the message by program: 3,113
+  characters, every one the same, the curly marks included.
+
+R21 changes the rules, so it binds from its entry (rule 1). The coordinator told me at 05:21Z that its record thread
+is at hand. So from then on I send any word the owner gives me directly to the coordinator and the record thread, word
+for word, and I record none of it myself unless the owner tells me to. PR #21 is the change that writes R21 into the
+rules, and I am woken for it (G31).
+
+**What the coordinator answered, in its own entry of 05:21Z.**
+- G8: that entry is the coordinator's first own. It says what the coordinator did from 02:43Z on, which threads it
+  started and woke, what it has not yet sent and to whom, and what it read up to. That is what G8 asked for. I mark G8
+  corrected.
+- G12: the coordinator decided that mason's findings (G7, G11, G13 to G20) wait for mason and go to no janitor. Rule 6
+  leaves that decision to the coordinator.
+- G5: the coordinator holds it for the precursor.
+
+**The old paper as I found it.** G5 asks the precursor to record the state it takes the old paper over in. No
+precursor has started, the Road Bible now names every piece, and I had every piece open for this report. So I set down
+the state I saw. First the Claude Docs, opened between 05:17Z and 05:35Z:
+
+| Claude Doc | Revision | What I read of it at this wake |
+| --- | --- | --- |
+| Lemuria: pre-production | 247 | The concept, the glossary, the old step list, the earmarks, the lines on claims |
+| Lemuria: roadmap | 29 | Whole |
+| Lemuria step 1: Find and farm | 17 | Whole |
+| Lemuria step 2: The Four Elementals | 110 | Opened for its revision only |
+| Lemuria step 3: Naked evocations | 185 | Opened for its revision only |
+| Lemuria step 4: Machines | 114 | Opened for its revision only |
+| Lemuria step 4 part 2: Products and logistics | 101 | Extend, expansion slots, the shelf |
+| Lemuria step 4 part 3: Elemental batteries and Wind Probes | 54 | The owner's idea of 2026-11-08 |
+| Lemuria step 5: The Four Mysteries | 86 | The duets, the Duet Module, Memory, Bloom |
+| Lemuria: automation vision | 85 | The owner's earmarks of 2026-10-28 |
+| Lemuria audit: steps 0 to 5 | 43 | Whole, at G12 |
+
+The tool told me of each of these Docs that a call of mine could edit it. I changed none.
+
+Then the project files, at 05:40Z, each with its size in bytes, the time it was last written and its sha256. The ten
+old diaries in /mnt/project-files/diary/:
+
+| File | Bytes | Written | sha256 |
+| --- | --- | --- | --- |
+| lemuria-preproduction.md | 180816 | 11-12 02:48Z | 81b245e9817942cc971114d1618a2821d27b4adbc49ef14b665fbfcba9fbf56f |
+| lemuria-step0.md | 2961 | 10-26 23:21Z | e7eeb38df47767d96ec546e7a2ca5ac83a4d65cbea89211f3910efc2277a7d67 |
+| lemuria-step1.md | 3304 | 10-27 02:09Z | b9abc1e72608c3e1995654c2a99178dded71aec01d5926e2f20010d139e7754e |
+| lemuria-step2.md | 8052 | 10-27 06:59Z | f42199fdfb42d5736be84d6f52f6a2482232b07bd009e13b5e104e08b9dc8c8a |
+| lemuria-step3.md | 13060 | 10-27 23:16Z | 9246922e102ce8d2dc07b601de51796a5dc950c14c706f2ed69fe2bbe5a63b6f |
+| lemuria-step4.md | 10344 | 10-28 05:37Z | 54388d95eb7e8014f8af1a48d3aa0c376e8357e8b6ab465b3daf679e73d02b50 |
+| lemuria-step4-part2.md | 19758 | 11-02 06:25Z | 7edbdd1aa72ddf84518bf7dfd1612a7f254cf24997a1da345615e728da934092 |
+| lemuria-step4-part3.md | 6828 | 11-09 03:02Z | d72420d3b510e74d56ad36bc5e8fc5e2ab0f6c4891b1c4e694c73e709a877ee1 |
+| lemuria-step5-part1.md | 8651 | 11-12 02:44Z | 4a659f2b6020930e5712389de74395a96bf7b5e3443898c112ff516a276aa356 |
+| lemuria-critic.md | 26262 | 11-12 02:50Z | 0aaefa81d4951fbc90122069727a0c241101ba37da3d9cbe927936906985337a |
+
+The seven zips and the three sheets in /mnt/project-files/lemuria-playtest/. Each folder also holds a SHA256SUMS file,
+and each agrees with its zip:
+
+| File | Bytes | Written | sha256 |
+| --- | --- | --- | --- |
+| step1/lemuria_0.0.1.zip | 65994 | 10-27 02:07Z | fd3ca15e7120a7475cc668ef8e21289a80792727a8ab19d862c29c559766668a |
+| step2/lemuria_0.0.1.zip | 243407 | 10-27 06:47Z | b816e1496184cc6c1e8684d6f56f06833a6fb57ea0c4384fb71bf3e42a7366d2 |
+| step3/lemuria_0.0.1.zip | 355530 | 10-27 23:04Z | 084bc3f05e5fec0b31c9c6139248ff2b46aefe726edf25857c902e4d83fe90ba |
+| step3/evocations-effects.md | 5141 | 10-27 20:23Z | 197e66d4dfb15451568f69a7fdc9b6017c940eca1468421e279f239178f1160d |
+| step4/lemuria_0.0.1.zip | 419613 | 10-28 04:59Z | 5748a2582631a43dd0a1b1f706f2457ddb975981427e3f68de9983a0558ea99c |
+| step4b/lemuria_0.0.1.zip | 469672 | 11-02 06:18Z | 928e563f8c51afff2d57245f683fb0a2e6fb527f5475341f8eb34fc7bf9283e0 |
+| step4c/lemuria_0.0.1.zip | 490858 | 11-08 22:56Z | 044d885c197c6a9c4983e7cf7b8c75c174e61107f1b6c17d73c0cbc35eceb97c |
+| step4c/playtest.md | 3429 | 11-08 22:56Z | 63ccacd896372a0d6b229e5f1a18cf83e79100087aac556a56b67db29d523c64 |
+| step5a/lemuria_0.0.1.zip | 615157 | 11-10 22:12Z | 03e8a300f9b586dc04f6455b46faf01142dbbc07b1936b9361a86aea164461bc |
+| step5a/playtest.md | 2596 | 11-10 21:15Z | 8ea25a6fef5841d51c4a10740babb29fd111e1ccd40e2606c3807821ffc1e49b |
+
+The two files G5 already gave, the old audit's diary and its patch file, are unchanged since then.
+
+**Step numbers in my own entries.** The book has writing say "old step" for an old number from its merge on. In G1 to
+G21, the step that a flaw names, "step 1's gate" in G9 and "Once step 2 means" in G10 are the book's numbers. Every
+other step number there is an old number. From this entry on I write "old step" for an old number.
+
+Read up to: rulings.md R21 as corrected by PRs #19 and #20, player-diary.md none (the file does not exist),
+findings.md G21.
+
+## G23. Report under rule 6 (a): the first Road Bible (PR #16 at commit 722d58a)
+
+**Written.** 2026-11-12 05:50Z. Woken by the coordinator at 05:06Z.
+
+**What I read.** PR #16, "Road Bible: the first Road Bible of Lemuria", branch claude/project-thread-20hfvu, at commit
+722d58ac9ce7d923039d235a8b10972831caeba4, its one commit, on main at 414f1d7. It adds two files and changes no other:
+record/road-bible.md (496 lines, sha256 8d6db51d…a0e24d17) and the planning thread's entry for it,
+record/diary/optimist-visionary/2026-11-12T0442Z.md. Its check "build" was green on that commit at 05:06Z. It was not
+assigned to the owner and not set to auto-merge, as rule 4 has it. Main has moved to 08410c3 since, in other files,
+and the branch still merges cleanly. By rule 4 a later commit voids this report, unless it only brings main into the
+branch or adds only the author's own diary entry.
+
+I read the book whole, twice, and its entry. I held them against the rules, R1 to R21, every file on main outside
+record/, the old paper (G22), the owner's scratchpad and the project files that part 4 names.
+
+**The short of it.** No blocker. Nothing here asks the owner to wait: PR #16 may be merged as it stands. The book has
+the four parts the record asks for. It carries each ruling where it belongs. I found nothing of the owner's dropped
+from the old paper and nothing invented. It answers G4, G6 and G10. I raise two flaws against it, G24 (part 3) and G25
+(the concept), and three notes (G26, G27, G29). The counter-view is G30. One thing is a matter of timing and not of
+rank: G25 is in the concept, which after the merge changes only by another merge of the owner's. It is cheaper to
+correct in this PR first. That choice is the planning thread's and the owner's.
+
+**What I checked and found right.**
+- **The four parts** (the record). The concept says what Lemuria is and is not. The prototype's terms say what the
+  first build shows and that no folder is a proto thread's. The steps and features give each feature a number, its
+  owning thread and its folders. The shared list gives every file outside a feature's folders to one thread.
+- **The cut of the repo.** I sorted all 327 files outside record/ on main by the book's rule for a feature's folders.
+  296 lie in exactly one feature's folders (machines 86, crystals 74, sparkstone 35, evocations 32, cradle 17, storage
+  17, mysteries 15, earmuffs 10, journal 10). 31 are shared, and the shared files table names every one. None lies in
+  two features and none is left over.
+- **The Precursor steps.** Each PR and each merge time in the table is what GitHub shows. The first commit (2300f03,
+  2026-10-26 22:00Z) did go straight to main, on the owner's "Confirm the push here" (the old step 0 diary). The
+  column "Built in old steps" is right for each of the nine features: I compared it with the folders that each
+  PR from #2 to #10 changed.
+- **The rulings.** R1 and R6 are in part 2. R2 and R14 are in the Precursor steps and the table of old and new
+  numbers. R3, R7 and R9 are in the paragraph on the nine briefs, and R9 again in standing rule 7. R4 is under the
+  Precursor steps. R5, R10 and R15 are in part 4. R8 is in the unplaced list and in the old paper as read-only
+  history, linked. R17 is in the head and in part 4. The planning thread's entry names the three rulings it put into
+  its own words (R1, R3, R9), and I read each as it does. R11, R16 and R18 ask nothing of the book. R19 now records
+  the message that the book's "03:00Z" quotes. R20 and R21 came after the book was written, and nothing in it
+  disagrees with them.
+- **Steps 1 to 7 and features 10 to 27,** against the old step list in "Lemuria: pre-production", the roadmap, and the
+  notes of old step 4 part 2 and old step 5. Every part of old step 5 part 2 and of old steps 6 to 11 has a feature.
+  The six aims in play are the old gates, word for word. Each thing given as the owner's with a date stands in the old
+  paper under that date. The eleven entries of the unplaced list are the roadmap's eleven "Earmarks with no step yet",
+  none missing and none added.
+- **The old paper** (part 4). The eleven Claude Docs are every Lemuria Doc the project holds besides the hand-over
+  plan. The ten diaries and the seven play-test folders exist as named, and every file among them was last written
+  before 03:00Z (G22). Beside them, the art and sound folders hold their scripts, and the patch file is as G5 found
+  it.
+
+**My findings that the book answers.**
+- **G4 (flaw): corrected by this commit.** Part 4 gives the minute (03:00Z), says that "what they do not name is not
+  old paper", and gives each thing beside the old paper to a thread or to no thread, by name. I agree with the minute:
+  of the four moments G4 listed, it is the only one in the owner's own words that says from when. R19 has recorded
+  that message since (03:00:29Z), so the book could cite R19 at its next change. G4 closes when this commit merges.
+- **G6 (note): answered,** by the paragraph after the crystal cycle.
+- **G10 (note): answered,** under "Old step numbers and new". One gap is left, inside record/ (G27).
+
+**The new findings.**
+- G24, flaw, the planning thread: the book does not say whose work it is when a feature's work lies in another
+  feature's folders.
+- G25, flaw, the planning thread: in the concept, what is said on land claims does not agree with itself, and a
+  quotation is not the owner's words.
+- G26, note, for the owner: no zip holds what main holds.
+- G27, note, the planning thread: seven small things.
+- G28, flaw, the coordinator: R19's attachment line. It is corrected already.
+- G29, note, the planning thread and mason: the repository rules are in no part of the record.
+- G30, note, for the owner: the counter-view.
+
+**The working files, read since G21 (rule 6).** R19 to R21 hold the owner's words as the owner gave them (G22). R19's
+"Given" line was wrong and is corrected (G28). The coordinator now has a diary of its own (G8). The record thread is
+new, by R20 and R21: its entries say what it did and why, and name its own two errors plainly. The planning thread's
+halt entry of 05:08Z is in order and ends with "Next:".
+
+**For the planning thread.** Cite this entry in PR #16's description as the review thread's report G23 in
+record/findings.md, then assign the owner (rule 4). If you bring main into the branch, this report still stands. If
+you correct G25 in this PR first, with G24 or without it: push the commit, tell the coordinator, and I read the change
+and write a new report for the description to cite in place of this one. G24 may also follow after the merge, by a
+change to part 3 that I can certify.
+
+**For the owner.** You may merge PR #16 as it stands. Two flaws are raised against it and neither holds it. You may
+decline either in rulings.md. One of them, G25, costs a second merge of yours if it is corrected after this one, and
+one more reading of mine if it is corrected before. G26 is a thing only you can act on: no zip holds what main holds
+today, and you may ask for one.
+
+**Open after this report.** Flaws: G5 (the precursor; the coordinator until it starts), G7 and G13 to G16 (mason; held
+by the coordinator until it starts), G24 and G25 (the planning thread). G4 is corrected in PR #16 and closes when that
+commit merges. G8 and G28 are corrected. No blocker is open. Notes need no answer.
+
+## G24. Flaw: the book does not say whose work it is when a feature's work lies in another feature's folders
+
+**Rank.** Flaw, naming step 1. **Owning thread.** The planning thread. **Raised in.** G23, against part 3 of the book
+(PR #16 at commit 722d58a). **Status.** Open.
+
+The book defines a feature as "one part of the mod with a folder of its own in the code", and gives each feature the
+folders named for it. For the nine built features that cut is clean (G23). The book does not say what holds when the
+work of one feature lies in the folders of another. In Lemuria that is the usual case.
+
+- **How Lemuria was built.** PR #9 is the feature `mysteries`. Of its 2,862 changed lines, 2,446 lie in the folders of
+  `mysteries`. The other 416, in 51 files, lie in the folders of six other features: crystals 281, evocations 36,
+  cradle 32, sparkstone 26, machines 24, journal 17. PR #6 put a third of its lines into `sparkstone`. Every old step
+  from old step 1 on wrote into the Journal's folders, as the book's own table says.
+- **The book's own entries.** Feature 10 works "through Memory", which is feature 8's. Step 1 also places two things
+  "for the brief to settle" that lie in built features: panning an Earth battery's store through Memory (feature 8),
+  and limits on how machines Bloom (features 8 and 9). Feature 11's rings and refining are the cradle's and the
+  crystals' (features 2 and 1). Feature 13 has the shielded jar, and "the jar itself is built, in feature 5". Features
+  16 and 23 are tiers of sparkstone (feature 4). Feature 22 has "machines and shelves that sleep and wake" (feature
+  8). Feature 24 is a further Evolution of the crystals (feature 1).
+- **Feature 27,** `secrets`, is "the Hidden Vocabulary and the Journal, complete". The Journal is feature 3, and a
+  secret of the Hidden Vocabulary lies where its machine does. By the book's own definition feature 27 has no folder
+  of its own.
+
+Two readings are open, and they lead to different work.
+1. **The folder decides.** What is added to `Lemuria/Machines/` is feature 8's, whichever feature brings it. Then
+   feature 8's settled brief no longer describes its folders, and it is changed first, each time, by a PR that I read
+   and the owner merges (rule 4). The planning thread's entry leans on this reading: the patch gate "works only if a
+   feature's brief describes what its folders hold". The book does not say it, and a diary is not the Road Bible.
+2. **The brief decides.** What feature 10's brief describes is feature 10's, wherever it lies. Rule 2 has a brief say
+   "which existing parts it touches". Then one folder holds code that two briefs describe, and the tests of rule 7
+   lose their one answer. A later fix inside `Lemuria/Machines/` can leave feature 8's brief "true as written" and
+   break feature 10's. And at step 1's gate nobody can say whether a "patch to that feature" is still open.
+
+Two more things are open under either reading.
+- Rule 2 has "no code for a feature before its brief is settled". When step 1's code changes Memory, which brief must
+  be settled: feature 10's alone, or feature 8's as well? R3 puts the nine briefs first, "right after" the book, but
+  nothing in the book ties step 1's code to them.
+- Features 1 to 9 stand under no numbered step. The tests of rule 7 at a step gate name "every feature listed under
+  the step" and each "patch to that feature". So no gate asks whether a patch to a built feature is still open, or
+  whether it has its diary entry.
+
+**To correct it.** One paragraph under "How Lemuria counts features". It says which reading holds, what a feature's PR
+may change outside its own folders, and which briefs must be settled or changed before it does. And for feature 27,
+either its folder, or its place beside balance as work that is no feature.
+
+**When.** Before the first brief of step 1 is put up. This is part 3, so after the merge it can change by a PR that I
+certify (rule 4). It can also ride in PR #16 now. If the duets' brief reaches me first, I read it for this: a brief
+that leans on one reading while the book is silent is built on something missing.
+
+**Why not a blocker.** The next work is the nine briefs of the built features (R3), and for those the cut is by folder
+and clean. Nothing is built on the gap before step 1's brief.
+
+**What is not in doubt.** With one builder (R5), who may change which folder is settled: mason owns them all. The
+doubt is over briefs and gates.
+
+## G25. Flaw: in the concept, the sentences on land claims do not agree, and a quotation is not the owner's words
+
+**Rank.** Flaw, naming step 1. **Owning thread.** The planning thread. **Raised in.** G23, against part 1 of the book
+(PR #16 at commit 722d58a). **Status.** Open.
+
+The concept is the one part of the book where rule 1 leaves a thread no choice: "the exception never covers a reading
+of these rules or of the concept", and a question about it stops every thread. So its sentences have to agree with
+each other to the word. On land claims they do not, and one quotation is not what the book says it is.
+
+1. **Ascendant stone.** The table of sparkstone tiers says that Ascendant stone heals "never inside another player's
+   claim". Standing rule 7 says that "every land claim rule in Lemuria goes through one switch, so that none can
+   drift", and that a server admin can turn the switch off. With the switch off, one sentence has the stone heal
+   inside a claim and the other says never. The table's sentence comes from the pre-production document, where it was
+   written before the owner asked for the one switch in old step 3's play-test (2026-10-27). The code on main follows
+   the switch: `LemuriaClaims.TryAccess` is "always true while claims are off" (Lemuria/Core/LemuriaClaims.cs, lines
+   26 to 28). Feature 16's brief would have to choose between the two sentences, and rule 1 does not let it.
+2. **"Only a Bale storm's scars disregard claims."** It is the last sentence of standing rule 7, after the sentence on
+   the switch being off. As it stands it is untrue with the switch off, when by the rule's own words Lemuria's
+   workings no longer spare a claim. In the old paper it belongs to the switch being on: reactions spare claims "as
+   evocations do, so only a Bale storm reaches into claims".
+3. **What standing rule 7 leaves out.** With the switch off, "every Lemuria block that is used by hand also opens"
+   (R9). That has a limit which is the owner's too: breaking and building inside a claim are never lifted, and stay as
+   the game rules them (the owner's card of 2026-11-10, by the old audit's diary; LemuriaClaims.cs line 39). The book
+   does not carry it. The nine briefs come right after the book, and each must state R9 for its own blocks (G16).
+4. **The owner's idea of 2026-10-22.** The book gives it in quotation marks, "as parked on 2026-10-22". The words are
+   the pre-production document's shortening of it. The owner's scratchpad, which part 4 names as the owner's own,
+   holds the idea as it was parked, marked "owner's words, Oct 22 2026 20:53Z":
+
+   > an "Atlantis: The Lost Empire" inspired tech mod, focusing on the growth of crystals and the shaping of stone
+   > (maybe living or crystal-infused stone?). No GUI; indications should be immersive and natural (lights or symbols
+   > on the models and tools themselves, similar to Botania). Scope: exploration, into machines, into spell-like or
+   > magic-like technologies, in the vein of Atlantis, Castle in the Sky, or Escaflowne. Look into movable or "flying"
+   > block structures.
+
+   The book's version drops "magic-like", the question mark after the living stone, and the three films, which it
+   gives in a paragraph of its own. I did not open the owner's message of that day. The scratchpad is the nearest copy
+   I could read.
+
+**To correct it.**
+1. End the table's sentence at "paid in charge", or add "while the claims switch is on".
+2. Put the scars with the switch being on. For instance: "With it on, as it is by default, Lemuria's workings spare
+   what lies inside another player's claim, and only a Bale storm's scars do not."
+3. Add one sentence: breaking and building inside a claim stay as the game rules them, whatever the switch says.
+4. Quote the scratchpad's entry whole, or take the quotation marks away.
+
+As I read R9 and the owner's words of 2026-10-27, points 1 and 2 are corrections of wording and need no new ruling. If
+the planning thread reads them otherwise, that is a question for the owner (rule 1).
+
+**When.** This is the concept. Before the owner's merge it changes by one more commit to PR #16 and a new report of
+mine. After the merge it changes only by another PR that I read and the owner merges, or by the owner's command, and
+every thread then reads the book again (rules 4 and 5).
+
+**Why not a blocker.** Standing rule 7 says what the owner ruled, and the next work can be built on it: the nine
+briefs take R9 from it and from G16. The table's sentence waits for feature 16, in step 3.
+
+## G26. Note: no zip holds what main holds, and what the record shows as played
+
+**Rank.** Note. **Owning thread.** The coordinator, for the owner. **Raised in.** G23, at part 2 of the book.
+**Status.** Needs no answer.
+
+Part 2 makes main the prototype by R1, in whose words it is "already played and merged". The book itself says that R1
+was given before PRs #10 and #9 merged. I set down what the record shows, so that the owner has it at the merge. It
+reopens neither R1 nor R4, and it is no fault of the book.
+
+- R1's question said "you played steps 0 to 4". R4 had the owner "play and merge both" of PRs #9 and #10, and the
+  owner merged both at 03:47Z, 29 minutes after that answer.
+- The old build thread's last entry, of 02:45Z that day, lists as unfinished "the owner's play-test of step 5 part 1".
+- The newest zip, in lemuria-playtest/step5a/ (2026-11-10 22:12Z), was built from PR #9's head, commit 95889bb. It
+  does not hold PR #10. Main's code differs from it in 24 files, by 689 lines added and 33 removed. No zip was ever
+  built from PR #10, or from main since the two merged.
+- There is no player-diary.md.
+- Rule 3 has one early zip, owed by "the thread that builds the prototype". By R1 no thread does, so none is owed. The
+  next zip the rules send is step 1's, when the duets are reported done.
+
+So until step 1 is done the owner holds no build of what the book calls the prototype, and the play checks of G20
+cannot be made. The owner may ask the coordinator for a zip of main at any time. By R21 the record thread builds the
+coordinator's zips. Part 4 says where a new zip does not go: into the seven old folders. Where one does go is the
+coordinator's to name.
+
+## G27. Note: seven small things in the book
+
+**Rank.** Note. **Owning thread.** The planning thread. **Raised in.** G23. **Status.** Needs no answer.
+
+None of these changes any work. Each could ride in the next change to the book.
+
+1. **"In the words of the old roadmap, which called it the step's gate"** (part 3). The six sentences are right, word
+   for word. They stand in the old step list of "Lemuria: pre-production". The Doc that part 4 calls "Lemuria:
+   roadmap" holds no gate. A reader who follows the book's words opens the wrong Doc. The same goes for step 1's "The
+   old roadmap left it to this step's own note".
+2. **Old numbers inside record/.** The table of old and new numbers covers the old paper and everything outside
+   record/. Entries of record/ written before the book's merge mix the two: the questions in R2 and R4, the diaries,
+   and my G1 to G21 (G22 says which of mine are which). One sentence would cover them.
+3. **"Not a mod of new creatures"** stands under "What Lemuria is not", and "new creatures" stands again under "Out of
+   scope for v1.0". The old paper has it only as out of scope for v1.0. The two lines differ in strength, and the book
+   should say which it means.
+4. **The standing rules** are headed "the owner's, settled before this book". The last sentence of rule 3, "From here
+   on a word's meaning is settled in the record", is new and the planning thread's own. The owner's merge makes it the
+   owner's. I say it so that nobody takes it for older.
+5. **Short names from working names.** `goodsbeams` and `supermedia` are made from what the book itself calls working
+   names. A short name names folders and a brief. The book does not say whether a short name follows when the owner
+   renames the thing.
+6. **"Whatever is added outside record/ later"** is mason's. So the shared files table will not name a new shared file
+   unless the book is changed for it. That is harmless with one builder. If the builders are ever split (R5), the
+   table must be brought up to date first.
+7. **The old glossary.** Standing rule 3 has the book use each word in the meaning of the old glossary, "as they
+   stood". The glossary is old paper: it is outside the record, and any thread's call can still edit it (G5). I read
+   it at revision 247 (G22). Until the precursor records its revision, that number is the only anchor the record has
+   for the meaning of the book's own words.
+
+## G28. Flaw, corrected at once: R19's "Given" line named three attachments that the owner never sent
+
+**Rank.** Flaw, naming step 1. **Owning thread.** The coordinator, whose record thread wrote the entry. **Raised in.**
+G23. I told the coordinator by message before 05:30Z. **Status.** Corrected by PR #20, on main at 08410c3, which I
+read whole.
+
+R19 as it reached main in PR #18 said that the owner's message of 03:00:29Z "carries three attachments": the hand-over
+plan and links to PRs #11 and #16. None of the three existed at 03:00:29Z. The plan was written in answer to that
+message, PR #11 was opened at 03:05Z and PR #16 at 05:03Z. They are the planning thread's outputs, which the platform
+lists on the thread that the message started. The owner attached one file, the rules: the upload
+uploads/hearth/66303e87-c7e8-436e-b0ed-8187559f4109, written at 03:00:29Z, 35,772 bytes, sha256 918dd508…fbca4a5b02,
+byte for byte version 2 of the rules.
+
+It mattered because R19 is the entry that G4 and the Road Bible's "03:00Z" lean on, and what the owner sent with those
+words is what "the new rules" were.
+
+The owner's words in R19 were right from the start. The coordinator's entry of 05:21Z had the rules file right. The
+record thread changed it, and its entries of 05:21Z and 05:30Z say so plainly. R19 now names the one attachment with
+its size and its checksum, and both are what I measured.
+
+One thing more for the coordinator and its record thread, which needs no answer. R19 to R21 were changed in place
+twice after they reached main (PRs #19 and #20), and nothing inside R19 shows that it was corrected, or when. Threads
+had been sent these entries word for word before the corrections. A dated line inside the entry, and the entry sent
+again, would keep every thread's copy the same as main's.
+
+## G29. Note: the repository rules in CLAUDE.md and README.md are in no part of the record
+
+**Rank.** Note. **Owning thread.** The planning thread. It concerns mason (G7, R10). **Raised in.** G23. **Status.**
+Needs no answer.
+
+CLAUDE.md ("Repository rules") and README.md ("Working in parallel") hold working rules for whoever writes code, and
+no part of the record has them: run the three scripts before a PR and say what passed; every registered code starts
+with `lemuria`; one chat command root, `/lemuria`, with a sub-command for each feature; network channels named
+`lemuria-<feature>`; one Harmony id for each feature, unpatched in Dispose, with postfixes preferred and each patch
+explained in its PR; legacy AI task codes; and never a game file, `.cache/` or `Releases/` in a commit. Standing rules
+8 and 9 of the book carry the design behind two of these, not the rules themselves.
+
+R10 has mason rewrite both files "to point at record/COMMANDMENTS.txt", and part 4 says the same. If the rewrite drops
+these rules, they are gone. If it keeps them, they bind from two files outside record/, and rule 1 stops a thread at
+"a rule you have been told to follow" that "is not in the record". One sentence in the book would settle it: either
+the shared files table says that the two files keep the repository rules and that these bind whoever writes code, or
+the rules move into the book. I read for it when R10's PR and the nine briefs come.
+
+## G30. Note: the counter-view to the first Road Bible (rule 6 a)
+
+**Rank.** Note. **Owning thread.** The coordinator, for the owner. **Raised in.** G23. **Status.** Needs no answer.
+
+Rule 6 has me argue the counter-view to the vision set out in the book. I do not argue against the mod. The book
+carries the owner's design truly (G23). I argue against five choices in how the book is cut. Each is the planning
+thread's own by its entry, and each is open to the owner at the merge. None holds anything.
+
+1. **A feature is a folder** (the entry's decision 1). What it gives: the patch gate of rule 7 has folders and a brief
+   to test, and the repo is already cut that way. What it costs: R3's brief "from the signed-off note" becomes a brief
+   cut from several notes. `machines` draws on the three notes of old step 4, the note of old step 5 and the old
+   audit's fixes, and `journal` on every note. So no built feature's brief has one signed-off source, and the owner
+   merges nine briefs whose words nobody has signed off in that shape. I read each against all of its notes and the
+   code (G3, G12). The other cost is G24. The other way, a feature for each old step, is worse, for the reason the
+   entry gives.
+2. **The concept holds much that is not built.** Much of part 1 describes what features 11 to 25 are still to build:
+   what a dialogue does from Luminous up, exposure and PPE, the Ascendant and Sovereign tiers, teaching and the Runic
+   Tablet, both vehicles. The old paper shows how such plans fare. Old step 2's play-test brought the Crystalline
+   Chisel. Old step 3's brought the one claims switch and a Tremor that moves the real ground. The owner's answers to
+   old step 4's note added Scatter, the Crystal Motor, the Control Shelf, Memory and the reclamation plate. Each time
+   the design followed on the owner's word alone. Under the rules a brief may not differ from the concept, a doubt
+   over the concept stops every thread, and each change to it is a merge of the owner's after my reading, followed by
+   every thread reading the book again. The entry keeps the glossary out of the concept for this very reason (its
+   decision 5). The same reason speaks for holding what is not built under its step in part 3, where a change can go
+   by my certificate, and for keeping in the concept only what the whole mod stands on.
+3. **The count.** Eighteen features are still to build. Each needs a brief that I read and the owner merges, and at
+   least one PR that the owner merges. Nine more briefs come first (R3). With one builder and one unmerged feature at
+   a time (rule 3), they go one after another. That is 27 briefs and at least 18 feature PRs for the owner's hand
+   before v1.0, patches and changes to the book not counted. Seven notes carried the mod this far. The cut into
+   eighteen is the planning thread's (decision 2, "the least certain part of the book"). Fewer and larger features
+   mean fewer merges and longer briefs. The owner may want to choose the grain before step 2's cut is used.
+4. **Play comes after the merge.** Under the old rules nothing merged that the owner had not played. Under rule 3 a
+   feature merges from its description, and the zip comes when its step is done. The book keeps the old gates as "aims
+   in play" that hold nothing, which is right under rule 7. But steps 2 and 5 bring the first things that mark a world
+   for good: reactions whose effects stay "until a clean-up", and a Bale storm's scars. The owner may ask for a zip of
+   any PR (rule 3). The book could name the features for which that is wise before the merge, or leave it to each
+   brief's "what to try" list.
+5. **Step 7's gate.** Step 7 lists one feature, 27, and three things that are no feature: balance, the one multiplayer
+   test and the release. The gate of rule 7 tests features, PRs, the checks and the diaries. So step 7 passes when
+   feature 27 is merged, whether or not two players have ever met on one server, and the one multiplayer test of
+   standing rule 10 hangs on nothing. One sentence would tie it down: the test is played before step 7 is reported
+   done. Then what the owner says after it goes into player-diary.md, and the gate waits for the answer to each entry.
+
+## G31. Diary: the report on PR #16 is in, and PR #21 is next
+
+**Written.** 2026-11-12 05:50Z.
+
+The report G23, with its findings G24 to G30, is complete. I do not halt. The coordinator woke me at 05:37Z under rule
+6 (e) for PR #21, the change to the rules that writes R21 in, and told me at 05:40Z that it is ready at commit
+7de344f. I read it next. This entry ends with "Next:" so that the file is in order if I am cut short.
+
+Next:
+- **Unfinished:** the report under rule 6 (e) on PR #21 at commit 7de344f.
+- **Where it is:** this file, sent to main by a record-only PR from the branch claude/project-thread-4zobvq.
+- **Waiting for:** nothing for PR #21. After it, in some order:
+  - a new report on PR #16, if it takes a commit that voids G23;
+  - the nine briefs of the built features (R3, rule 6 a), where I read for G12's last point, G16, G20 and G29;
+  - step 1's brief, where I read for G24;
+  - the first maps (rule 6 f): the planning thread's after PR #16 merges, and G5 at the precursor's.
+- **Open findings:** flaws G5 (the precursor; the coordinator until it starts), G7 and G13 to G16 (mason; held by the
+  coordinator until it starts), G24 and G25 (the planning thread). G4 is corrected in PR #16 and closes when that
+  commit merges. No blocker is open.
+- **Read up to:** rulings.md R21, player-diary.md none, findings.md G31.
