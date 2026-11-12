@@ -585,3 +585,25 @@ fix, G61 fix) and says the owner is merging PR #76 and PR #78 now."
 **Stopped.** Nothing. The stop R26 named, on mason's work on G58 and G61, ends with this answer.
 
 Concerns: mason; the planning thread (G60 point 4 waited for this answer); the review thread.
+
+## R28. Question raised: does the owner want G68 fixed or declined?
+
+**Raised.** 2026-11-12 19:45Z by the coordinator, to the owner in the project chat, with the review thread's words on
+G68.
+
+**Recorded.** 2026-11-12 19:45Z by the record thread. The question's words came through the coordinator's hands, as
+the coordinator gave them; the review thread's words in it are as the coordinator quoted them.
+
+**The question, in the coordinator's words:**
+
+> G68 is a flaw that the owner may decline: a network joins across a claim's edge, so a block set just outside a claim
+> reaches the charge inside. The review thread wrote at 19:45:24Z: 'Mason agreed before I signed and writes no code
+> before the owner's word. R27 does not cover it: the owner has not been asked.' Does the owner want G68 fixed or
+> declined? Asked of the owner in the project chat at 19:45Z, with the review thread's words on G68. It stops only
+> mason's work on G68.
+
+**Stopped.** Only mason's work on G68.
+
+**Open.** Waits for the owner's word, "fix" or "decline".
+
+Concerns: mason; the owner.
