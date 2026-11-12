@@ -177,6 +177,51 @@ public partial class MachinesTests
             YesNo(made), YesNo(Accessor.GetBlock(crystalPos).Id == 0), rockSlot.StackSize);
     }
 
+    /// <summary>
+    /// The game's own test, as it ends for a stranger in a claim (refused by the claim, then every mod's
+    /// answer): with the switch off, using a Control Shelf opens and breaking it stays refused; with it on,
+    /// both stay refused. A placed Unaligned crystal opens only to a hand holding polished rock (R9, G16).
+    /// </summary>
+    public void Claims(BlockPos column)
+    {
+        var origin = TestSite.Surface(sapi, column);
+        Ground(origin, 3, 3, 3);
+        var shelfPos = origin.AddCopy(1, 0, 1);
+        Accessor.SetBlock(Id(LemuriaModSystem.ModId + ":controlshelf-north"), shelfPos);
+        var gatherPos = origin.AddCopy(0, 0, 1);
+        Accessor.SetBlock(World.GetBlock(Machine.Code(Machine.Gather, Rock, "north"))?.Id ?? 0, gatherPos);
+        var memoryPos = origin.AddCopy(2, 0, 1);
+        Accessor.SetBlock(Id(LemuriaModSystem.ModId + ":memory-awakened-" + Rock + "-north"), memoryPos);
+        var crystal = Crystal.BlockFor(World, Crystal.Unaligned, Crystal.Glittering);
+        var trigger = sapi.Event.GetType().GetMethod("TriggerTestBlockAccess");
+        if (Accessor.GetBlock(shelfPos) is not BlockControlShelf || Accessor.GetBlock(gatherPos) is not BlockMachine
+            || Accessor.GetBlock(memoryPos) is not BlockMachine || crystal == null || trigger == null)
+        {
+            logger.Error("Machines test: no Control Shelf, Gather block, Memory or Unaligned crystal, or no block access event to trigger");
+            return;
+        }
+        EnumWorldAccessResponse Game(BlockPos at, EnumBlockAccessFlags access) =>
+            (EnumWorldAccessResponse)trigger.Invoke(sapi.Event, new object?[] { null, new BlockSelection { Position = at.Copy() }, access, "the owner", null, EnumWorldAccessResponse.LandClaimed })!;
+        bool before = LemuriaClaims.Respect;
+        try
+        {
+            LemuriaClaims.Respect = true;
+            var respected = Game(shelfPos, EnumBlockAccessFlags.Use);
+            LemuriaClaims.Respect = false;
+            logger.Notification("Machines test: with claims respected the game leaves using a Control Shelf {0}; with claims ignored using it is {1}, breaking it {2}; using a Gather block {3}, breaking it {4}; using a Memory {5}",
+                respected, Game(shelfPos, EnumBlockAccessFlags.Use), Game(shelfPos, EnumBlockAccessFlags.BuildOrBreak),
+                Game(gatherPos, EnumBlockAccessFlags.Use), Game(gatherPos, EnumBlockAccessFlags.BuildOrBreak), Game(memoryPos, EnumBlockAccessFlags.Use));
+        }
+        finally
+        {
+            LemuriaClaims.Respect = before;
+        }
+        var rock = new ItemStack(World.GetBlock(new AssetLocation("game:rockpolished-granite")));
+        var seedling = new ItemStack(World.GetItem(new AssetLocation(LemuriaModSystem.ModId, "seedling-glittering")) ?? World.GetItem(new AssetLocation("game:stick")));
+        logger.Notification("Machines test: an Unaligned crystal opens to polished rock in hand: {0}, to another item: {1}, to an empty hand: {2}",
+            YesNo(MachinesClaims.Opens(crystal, rock)), YesNo(MachinesClaims.Opens(crystal, seedling)), YesNo(MachinesClaims.Opens(crystal, null)));
+    }
+
     // ------------------------------------------------------------------ Focus
 
     public void Focus(BlockPos column)

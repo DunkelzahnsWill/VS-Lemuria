@@ -36,3 +36,5 @@
 /lemuria machines test gatherstrike
 # A shelf's firestarter at an extinct torch and at a forge, with nobody online.
 /lemuria machines test lights
+# R9: with the claims switch off, a stranger may use a Control Shelf and make a rod inside a claim.
+/lemuria machines test claims

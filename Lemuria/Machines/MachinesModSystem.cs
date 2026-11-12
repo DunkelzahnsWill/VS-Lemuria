@@ -34,6 +34,8 @@ public class MachinesModSystem : ModSystem
         api.RegisterBlockEntityClass(BlockEntityMemory.ClassCode, typeof(BlockEntityMemory));
         api.RegisterBlockClass(BlockReclamationPlate.ClassCode, typeof(BlockReclamationPlate));
         ItemCrystalChisel.StoneCarver = new MachineCarver();
+        // With the claims switch off, a shelf and the rod's making inside a claim are open to everyone (R9).
+        api.Event.OnTestBlockAccess += new MachinesClaims(api).OnTestBlockAccess;
     }
 
     public override void StartServerSide(ICoreServerAPI api)
@@ -202,6 +204,10 @@ public class MachinesModSystem : ModSystem
                     .BeginSubCommand("batterykept")
                         .WithDescription("Reports whether the Ice battery's stones still keep its count, after a restart")
                         .HandleWith(_ => Test(-138, 36, _ => tests.BatteryKept()))
+                    .EndSubCommand()
+                    .BeginSubCommand("claims")
+                        .WithDescription("Asks the game's claim test of a stranger using a Control Shelf and making a rod, with claims respected and ignored")
+                        .HandleWith(_ => Test(-218, 20, tests.Claims))
                     .EndSubCommand()
                     .BeginSubCommand("kept")
                         .WithDescription("Reports the test shelf's items, Memory's crystals and Dead Socket, after a restart")
