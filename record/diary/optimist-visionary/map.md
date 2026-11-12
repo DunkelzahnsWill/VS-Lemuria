@@ -11,8 +11,11 @@ on 2026-11-12 at 18:31Z, and its first point again at 20:08Z, after the owner ha
 then held again against the Road Bible as main had it at commit 9168841. The plan's second point got its sentences on
 standing rule 7 at 20:31Z, after the owner had merged PR #108, and the whole map was held once more against the Road
 Bible as main had it at commit 0945041. The second point got its sentences on what keeps crystals out of dialogues at
-22:30Z, after the owner had merged PR #143, and the whole map was held again against the Road Bible, as main has it at
-commit 19fa498.
+22:30Z, after the owner had merged PR #143, and the whole map was held again against the Road Bible as main had it at
+commit 19fa498. At 23:24Z the map was brought up to date for rules version 6, which the owner merged on 2026-11-12 at
+23:00Z as PR #144, with one row of the book's part 4, and for the owner's answer in R36 to the question that the
+plan's second point had kept for the owner. The plan's sixth point got its sentences on a change that would make a
+settled brief untrue. The whole map was then held again against the Road Bible, as main has it at commit 0d72866.
 
 ## Where I fit
 
@@ -26,9 +29,11 @@ None. Features 1 to 26 of the Road Bible's part 3 are mason's.
 
 ## What I need from other threads
 
-- **The coordinator, and its record thread.** Each entry of rulings.md and player-diary.md that calls for a change to
-  the Road Bible or to the rules, sent to me as it stands. The wake of the review thread for each change I put up. A
-  question of mine to the owner goes through the coordinator.
+- **The coordinator, and its record thread.** Each entry of rulings.md and of player-diary.md that calls for a change
+  to the Road Bible or to the rules, and the wake of the review thread for each change I put up. While a record thread
+  is at hand, the record thread sends me the entries of rulings.md and of findings.md, as they stand or by their
+  number alone, and makes the wake (the cast, since version 6 of the rules). An entry of player-diary.md comes from
+  the coordinator, and a question of mine to the owner goes through the coordinator.
 - **The review thread.** Its report before a change to the rules merges, and before a change to the concept, the
   prototype's terms or the shared list merges. Its certificate on a change to the steps and features, or its report
   where such a change goes by the owner's merge (rules 4 and 6; my plan, point 6).
@@ -44,7 +49,8 @@ None. Features 1 to 26 of the Road Bible's part 3 are mason's.
 - **Mason.** Part 3 (the steps, and each feature's number, short name and folders) and part 4 (who owns what) changed
   before a brief or code would have to say otherwise (rules 1 and 3).
 - **The review thread.** Each change put up as a PR of its own, with its diary entry, and word to the coordinator once
-  it is ready (rule 6).
+  it is ready (rule 6), and the same word to the record thread while one is at hand (the cast, since version 6 of the
+  rules).
 - **The coordinator.** Word of each change to the book, so that it can tell the threads whose features, folders or
   files changed (rule 5).
 - **Whoever decides the gates** (rule 7). A part 3 that lists under each numbered step the features that the step's
@@ -74,14 +80,14 @@ This part is mine, and I rewrite it when the work changes.
    Call's lightning (features 12, 15, 17 and 18). In the same look I hold the step's features against the concept's
    two sentences on what keeps crystals out of dialogues. Since PR #143, which the owner merged on 2026-11-12 at
    22:06Z, the first names crystal jars, crystal racks and "the magazine of a Memory", each "up to Glowing", and it is
-   a closed list (finding G90, its eighth point). The second reads: "From Luminous up only a shielded jar holds a
-   crystal back." So where a feature is to have another thing keep crystals out of dialogues, or anything but a
-   shielded jar hold a crystal back from Luminous up, the concept is changed first, the same way, and the brief
-   follows it, as the brief of feature 10 followed PR #143. With the first such change I put to the owner whether the
-   first sentence goes on naming each holder or says it in general. Finding G90 names, in its ninth point, where the
-   two sentences are met next: feature 14 lets Luminous crystals into machines, and then "what a magazine does at
-   Luminous is that brief's first question". Part 3 names one more such place that I see today: feature 24 forges
-   Baleful crystals "in a shielded ring of the complete family", which stands Radiant twins in one ring.
+   a closed list (finding G90, its eighth point). The owner has answered that point: "Closed form seems correct."
+   (R36). The second reads: "From Luminous up only a shielded jar holds a crystal back." So where a feature is to have
+   another thing keep crystals out of dialogues, or anything but a shielded jar hold a crystal back from Luminous up,
+   the concept is changed first, the same way, and the brief follows it, as the brief of feature 10 followed PR #143.
+   Finding G90 names, in its ninth point, where the two sentences are met next: feature 14 lets Luminous crystals into
+   machines, and then "what a magazine does at Luminous is that brief's first question". Part 3 names one more such
+   place that I see today: feature 24 forges Baleful crystals "in a shielded ring of the complete family", which
+   stands Radiant twins in one ring.
 3. **The unplaced list:** when the owner places an earmark, it is placed by a change to part 3, as a feature of its
    own or inside one, as the book has it.
 4. **Whenever a ruling or an entry of player-diary.md calls for a change to the book:** that change comes before any
@@ -98,4 +104,6 @@ This part is mine, and I rewrite it when the work changes.
    recorded" wait for the owner's merge, and I recorded R1 to R18. Finding G51 sets out three readings of those words.
    Until the owner rules on them, I take the owner's merge for any change of mine to the book whose diff or
    description cites one of those entries. I take it as well for a change whose words come from a finding of the
-   review thread (finding G48).
+   review thread (finding G48). A change of mine that would make a settled brief untrue goes "to the owner with the
+   brief" (rule 6). So I write it, tell the brief's owning thread its words, and put it up beside that thread's change
+   to the brief, so that the coordinator can call both in one list.
