@@ -725,3 +725,21 @@ by the owner; the planning thread writes it now."
 **Stopped.** Nothing.
 
 Concerns: the planning thread; the review thread; the coordinator; the record thread.
+
+## R34. The owner asks for the co-coordinator rule, once reviewed, to hand to the sister project
+
+**Given.** 2026-11-12 21:11:18Z by the owner, in the project chat. It follows R33.
+
+**Recorded.** 2026-11-12 21:11Z by the record thread, copied from the owner's own message.
+
+The owner, the whole message:
+
+> When that ruling has been written, and reviewed for the "co-coordinator" I would like that rule (after any Q&A if any are done, and it passes internal review) so it may be handed over to your Sister Project. This will likely come up for them soon enough.
+
+The coordinator's words with it, exactly as given: "My reading: once the rules change of R33 is written and has
+passed the review thread (and any questions are answered), the owner wants its text handed to them in the project
+chat, so the owner can give it to the sister project. Nothing is sent to the sister project by us."
+
+**Stopped.** Nothing.
+
+Concerns: the planning thread; the review thread; the coordinator.
