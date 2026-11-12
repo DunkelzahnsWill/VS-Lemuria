@@ -1,38 +1,44 @@
 # Lemuria: notes for Claude sessions
 
-Read README.md first; it is the source of truth for building, testing and the parallel-work layout.
-The design is the pre-production document ("Lemuria: pre-production", linked from the project
-memory); its settled decisions are not reopened in a build thread. A question about the design goes
-to the planning thread, not into code.
+**The standing rules are the Commandments, `record/COMMANDMENTS.txt`. Read them in full before anything
+else.** Where this file or `README.md` seems to say otherwise, the Commandments and the Road Bible stand,
+and the doubt goes to the coordinator under rule 1. This file only points the way and keeps the
+repository rules below.
 
-## The Commandments (the owner's standing rules)
-
-1. **Stop the line.** Any confusion mid-process (a term with two meanings, a rule you cannot find, an
-   ask with two readings) stops all hands. Tell the coordinator, who halts every other thread and
-   tells the owner. Nobody resumes until it is settled in writing. Threads whose decisions touch
-   each other talk directly or through the coordinator.
-2. **No code before the concept is settled.** Pre-production irons out every fuzzy spot first. Ask
-   the natural follow-up questions (how it is implemented, what an action leads to) then, not mid-build.
-3. **Play-test early.** Ship a playable zip to the owner as soon as the prototype loads, and hold
-   feature work the owner has not yet seen in play.
-4. **Git goes through pull requests only.** Never push to `main`. A small fix inside one feature's
-   files with no design change may be set to auto-merge on green CI; anything larger waits for the
-   owner's merge. Threads never merge by hand or publish. Assign every PR to the owner
-   (`DunkelzahnsWill`), push every fix before calling a PR ready, and explain Git steps plainly.
-5. **Keep a diary per thread** at `/mnt/project-files/diary/<thread>.md`: one dated entry per PR or
-   decision with what was done, why, and why not another way.
+- **Your role and what you own** come from the Road Bible, `record/road-bible.md`: part 3 gives each
+  feature its number, owning thread and folders, part 4 every shared file. Outside `record/`, change only
+  what you own there or have been handed under the rules.
+- **The record** lives in `record/`. Each time you start work, read what rule 5 lists: the rules, the
+  Road Bible, the briefs of the features you will work on (`record/briefs/`), your map and your diary from
+  your last "Next:" entry, and the new entries of `rulings.md`, `player-diary.md` and `findings.md`. Keep
+  your own folder, `record/diary/<role>/`, one file to an entry. The old design notes, the roadmap and the
+  old diaries in `/mnt/project-files/diary/` are old paper: read-only history, which the record outranks.
+- **Every change reaches `main` through a pull request; never push to `main`.** How each kind of PR may
+  merge is rule 4, and that list is the authority. Threads never merge by hand and never publish. Assign
+  every PR that waits for the owner's merge to the owner (`DunkelzahnsWill`), and explain plainly any Git
+  step the owner must take.
+- **No code for a feature before its brief is settled** (rule 2), experiments on `spike/<name>` aside. One
+  unmerged feature per thread at a time (rule 3).
+- A step number in the code's comments, the smoke tests and this repo's older text is an **old** step
+  number (Road Bible, part 3, "Old step numbers and new"). Write "old step N" for one.
 
 ## Repository rules
+
+These bind whoever writes code in the repo (Road Bible, part 4).
 
 - Before opening or updating a pull request, run `scripts/setup.sh`, `./build.sh` and
   `scripts/smoke-test.sh`, and say in the PR what passed. CI runs the same three scripts as the
   `build` check.
-- Stay inside your feature's files (README, "Working in parallel"): your own `Lemuria/<Feature>/`
-  folder and ModSystem, `lang/<feature>/en.json`, your feature's asset folders,
-  `patches/<feature>-*.json` and `tests/smoke/<feature>.*`. Changes to shared files go in their own,
+- A feature's files are the folders part 3 of the Road Bible names for it: its own `Lemuria/<Feature>/`
+  folder and ModSystem, every folder named for it under `Lemuria/assets/lemuria/` (such as
+  `lang/<feature>/`), `patches/<feature>-*.json` and `tests/smoke/<feature>.*`. Code that a feature needs
+  in another feature's folders follows the change to that feature's brief, and then either goes as a
+  patch of its own or rides in the feature's PR, whose description names each other feature it changes
+  and the merged change to that feature's brief (rule 4). Changes to shared files go in their own,
   clearly described commit.
 - Never commit game DLLs, the server, or anything under `.cache/` or `Releases/`.
-- Prefix every registered code with `lemuria` (`LemuriaModSystem.ModId`).
+- Prefix every registered code with `lemuria` (`LemuriaModSystem.ModId`). Network channels are named
+  `lemuria-<feature>`.
 - Chat commands hang off the one shared root: `api.ChatCommands.GetOrCreate(LemuriaModSystem.ModId)`
   plus your own `.BeginSubCommand("<feature>")`; never `Create` the root.
 - Harmony is allowed where it adds a capability the game's API lacks (unlike Walkers). Use one
