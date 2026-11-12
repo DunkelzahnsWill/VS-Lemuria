@@ -353,3 +353,77 @@ is for a later time, at the owner's word, and would then be a change to the rule
 
 Concerns: the planning thread; the review thread (rule 6 e: the owner has already spoken on the two texts
 differing).
+
+## R19. The owner's command that brought in the new rules: a new thread for the planning and the hand-over
+
+**Given.** 2026-11-12 03:00:29Z by the owner, to the coordinator, in the project chat. The message carries three
+attachments: the Claude Doc "Lemuria: hand-over to Commandments v2"
+(https://claude.ai/code/artifact/aadecc69-9e5c-4334-a6ad-13f3ec1f389a), a link "PR #11: the Commandments in record/"
+and a link "PR #16: the first Road Bible of Lemuria".
+
+**Recorded.** 2026-11-12 05:21Z by the record thread (then named "record-keeper") as deputy (the cast, second tier),
+at the coordinator's request, copied from the owner's own message.
+
+The owner: "Ahoy Coordinator! these are the new rules to be enforced going on, we'll need a new thread spun-up for the
+planning and hand-over for the new rules."
+
+The coordinator's note, as sent: finding G4 and the Road Bible (PR #16) lean on this moment.
+
+Concerns: every thread (the moment the rules took force in this project); the planning thread (the Road Bible, G4);
+the review thread (G4); the precursor, once it is started (what counts as the old paper).
+
+## R20. The owner's word that a record-keeper takes over the coordinator's recording
+
+**Given.** 2026-11-12 05:18:31Z by the owner, in the message that starts the record thread's own thread (then named
+"record-keeper").
+
+**Recorded.** 2026-11-12 05:21Z by the record thread as deputy (the cast, second tier): the owner gave this word to
+that thread directly and did not say the coordinator would record it.
+
+The owner: "A sister thread proposed the idea: To have a record-keeper to takeover your duties in terms of recording
+your word."
+
+The coordinator's note, as sent: the coordinator started the record-keeper on this message at 05:18Z, and has asked the
+owner whether the role goes into the rules and under what name.
+
+Answered in R21: the role goes into the rules, under the name "record".
+
+Concerns: the coordinator (its diary, finding G8); the planning thread (a change to the rules, if the owner says the
+role goes into them); the review thread (G8).
+
+## R21. The owner's command: five changes to the rules that bring in a record thread
+
+**Given.** 2026-11-12 05:20:38Z by the owner, in the project chat. It answers R20.
+
+**Recorded.** 2026-11-12 05:21Z by the record thread, copied from the owner's own message. The owner's message, whole
+and unchanged, in a plain block so that every mark shows as the owner typed it:
+
+```text
+1. THE CAST, new paragraph after the coordinator’s:
+
+Where the coordinator cannot reach the repo, it has a record thread: a standing thread that is the coordinator’s hands in the repo. Its role name is “record”. The coordinator starts it, and starts a replacement if it ends. A replacement takes over the name and the diary. The coordinator tells every thread when its record thread has started and when it is no longer at hand, and tells each thread it starts later whether one is at hand. A thread goes by what the coordinator last told it, and a thread the coordinator has told nothing takes it that none is at hand. The record thread writes rulings.md and player-diary.md, and in the coordinator’s own folder, record/diary/coordinator/, the coordinator’s map and diary: the owner’s words exactly as the owner gave them, and the coordinator’s as the coordinator gives them. It copies the owner’s words from the owner’s own message wherever it can open that message, and every entry that holds the owner’s words says where and when the owner gave them. Where it cannot open the message, the entry says through whose hands the words came. It builds the zips that rule 3 has the coordinator build. Wherever these rules have the coordinator write in rulings.md, in player-diary.md or in its own folder, or build a zip, the record thread does it, and what it writes there is the coordinator’s writing. It also reads the repo for the coordinator, and sends it each new entry of rulings.md, player-diary.md and findings.md, word for word. It holds no office of its own: it decides nothing, relays nothing between the threads and the owner, and wakes no one. It changes nothing in the repo but rulings.md, player-diary.md, the coordinator’s folder and its own diary folder (rule 5), and it writes none of the central books. While a record thread is at hand, a thread to which the owner gives a ruling, a command or play feedback directly sends the owner’s words, word for word, to the coordinator and to the record thread, and the record thread records them. Such a thread records them itself, as a deputy, only if the owner tells it to.
+
+2. THE CAST, coordinator’s paragraph, one sentence added after “...unless the owner says the coordinator will record it.”:
+
+While a record thread is at hand (below), neither of these two sentences deputizes a thread: it is deputized only if the owner tells it to do the recording itself.
+
+3. THE RECORD, the diary line now reads:
+
+record/diary/<thread>/: one folder per thread, written only by that thread (a deputy’s entries in the coordinator’s diary, and a record thread’s writing in the coordinator’s folder, aside).
+
+4. Rule 1: the stop for everyone now reads “the coordinator stops every thread but itself, its record thread and the review thread”, and the paragraph after it ends with:
+
+No stop keeps a record thread from recording. A record thread’s own doubt over what to write goes to the coordinator, and the entry in doubt stays unwritten until the coordinator answers.
+
+5. Rule 5, one sentence added:
+
+A record thread keeps a diary like any other thread, and no map.
+```
+
+The coordinator's note, as sent: the owner's word on the role, five changes to the rules that make this thread the
+record thread; its role name is "record", not "record-keeper", so its diary folder is record/diary/record/. A ruling
+that changes the rules binds from its entry (rule 1), and the planning thread writes the change into the rules.
+
+Concerns: every thread (rule 1: the coordinator sends this entry to every thread at once, and to every thread that
+starts work until the change merges); the planning thread (writes the change into the rules, rule 4); the review
+thread (reads the change before it merges, rule 6 e); the record thread.
