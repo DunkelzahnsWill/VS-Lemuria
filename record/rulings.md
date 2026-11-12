@@ -743,3 +743,25 @@ chat, so the owner can give it to the sister project. Nothing is sent to the sis
 **Stopped.** Nothing.
 
 Concerns: the planning thread; the review thread; the coordinator.
+
+## R35. The owner on three points of G90: they make sense
+
+**Given.** 2026-11-12 22:07:56Z by the owner, in the project chat. It answers the three points of G90 that the
+coordinator showed the owner with its merge list of 22:05Z.
+
+**Recorded.** 2026-11-12 22:08Z by the record thread, copied from the owner's own message.
+
+The owner, the whole message:
+
+> All three notes make sense and line-up logically.
+
+The coordinator's words with it, exactly as given: "It answers the three points of G90 that I showed the owner with
+my list of 22:05Z (a Memory names a duet at once; the Fire and Earth duet gives a bit for every smeltable ore; a drain
+with sand on its shelf pans any sand brought to it). My reading: the owner finds the three behaviours sound as the
+settled brief has them, so the brief stands and nothing changes. I have asked the owner to confirm that reading".
+
+**Stopped.** Nothing; mason builds to the settled brief.
+
+**Open.** The coordinator has asked the owner to confirm its reading.
+
+Concerns: mason; the review thread; the coordinator.
