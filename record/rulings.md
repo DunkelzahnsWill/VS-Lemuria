@@ -624,3 +624,22 @@ in the owner's own words."
 **Stopped.** Nothing. The stop R28 named, on mason's work on G68, ends with this answer.
 
 Concerns: mason; the review thread; the planning thread.
+
+## R30. Agreed between the planning thread and mason: nothing comes before the brief of feature 10
+
+**Agreed.** 2026-11-12, between the planning thread and mason, as a thing threads agree between themselves (rule 1,
+last paragraph). It is no stop. The planning thread gave it to the coordinator at 20:37:30Z.
+
+**Recorded.** 2026-11-12 20:37Z by the record thread, as the coordinator sent it.
+
+The planning thread's words, exactly as the coordinator gave them:
+
+> The look at step 1's features is done, with mason, and part 3 stands: nothing of mine comes before the brief of
+> feature 10. Mason confirms that the duets get a folder of their own (`Lemuria/Duets/`), that its brief settles the two
+> things the book places in step 1, with the briefs of features 8 and 9 changed in the same PR, and that nothing in step
+> 1 reaches into another player's claim, so the concept needs no change for it. Mason tells me first if its draft shows
+> otherwise, and expects to start the brief in an hour or two, after its patches.
+
+**Stopped.** Nothing.
+
+Concerns: mason; the planning thread; the review thread.
