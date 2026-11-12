@@ -5,7 +5,8 @@ Role: mason, the one builder of Lemuria (R5, R15). This folder, record/diary/mas
 The Road Bible (record/road-bible.md) and the settled briefs outrank this map (rule 5). Where the map and they differ,
 they stand, and the map is wrong.
 
-First written on 2026-11-12, and held against the Road Bible as main had it at commit a1aae13.
+First written on 2026-11-12, and held against the Road Bible as main had it at commit a1aae13. Brought up to date on
+2026-11-12 at 19:47Z, against the Road Bible as main has it after pull request #76 (merge 5c7a8c7).
 
 ## Where I fit
 
@@ -16,7 +17,8 @@ what"). I write each feature's brief (rule 2), its code, its patches and its dia
 
 All of part 3, by number:
 - **Built in the Precursor steps:** 1 `crystals`, 2 `cradle`, 3 `journal`, 4 `sparkstone`, 5 `storage`,
-  6 `evocations`, 7 `earmuffs`, 8 `machines`, 9 `mysteries`. They have no briefs yet; I write them first (R3).
+  6 `evocations`, 7 `earmuffs`, 8 `machines`, 9 `mysteries`. Their nine briefs were merged in one batch by pull
+  request #55 on 2026-11-12 at 18:29Z, which settled them (rule 2); a change to any of them is a PR of its own.
 - **Step 1:** 10 `duets`.
 - **Step 2:** 11 `purity`, 12 `exposure`, 13 `reactions`, 14 `strain`.
 - **Step 3:** 15 `beams`, 16 `ascendant`, 17 `goodsbeams`, 18 `supermedia`, 19 `kilns`.
@@ -55,25 +57,16 @@ And the shared files of part 4: `Lemuria/Core/`, the project and build files, `s
 
 This part is mine, and I rewrite it when the work changes.
 
-1. **README.md and CLAUDE.md** rewritten to point at the Commandments, keeping the repository rules (R10, G7, G29).
-   It is my first pull request and waits for the owner's merge.
-2. **The nine briefs of the built features** (R3), in one pull request, written from the signed-off notes as built,
-   play-test changes included. Each says what the ruled fixes make true (G12): a struck Gather block keeps its strike
-   and its hour after a death through a restart (G13, G14), a Fire cast that lights nothing costs nothing (G15), and
-   with the claims switch off every Lemuria block used by hand opens in another player's claim (R9, G16). The old
-   audit's play checks go on their "what to try" lists (G20). The review thread reads them (rule 6 a) and the owner
-   merges them.
-3. **The fixes already ruled** (R3, R7), as patches, once PR #45 has put G41's limit into part 3: G13 and G14 in one
-   patch to feature 8, G15 as a patch to feature 6 that waits for the owner's merge (R7).
-4. **The chance failures of the smoke test** (G43): the skip of the heavy steps for record-only pull requests in the
-   checks workflow (part 4; PR #59, waiting for the owner's merge), and the two checks fixed as patches to features 8
-   and 9 (PR #61, PR #62). Those two wait for the owner's merge once the briefs are merged, since until then features
-   1 to 9 take only the fixes already ruled (R3), unless the owner merges them sooner (the review thread's note, G52).
-   The three compiler warnings (G11) go with the first patch that touches their files.
-5. **R9 for every block used by hand** (G16): once the briefs are merged, the code follows them, as patches to each
-   feature concerned, which wait for the owner's merge (rule 4).
-6. **Step 1, the duets (feature 10):** its brief, with the changes it needs to the machines' brief (Memory), in one
+1. **Done on 2026-11-12:** README.md and CLAUDE.md pointed at the Commandments (#51); the nine briefs (#55) and
+   their first change (#72, G59); the checks workflow's skip for record-only pull requests (#59); the chance failures
+   of the smoke test (#61, #62, G43); the ruled fixes G13 with G14 (#75) and G15 (#78); the chisel's draw (#81, G57);
+   and R9 for every block used by hand (#84, #87, #88, #92; G16).
+2. **G58 and G61,** which the owner said to fix (R27): the change to the briefs of features 8 and 6 first (#96, read
+   by the review thread, merged by the owner), then the code as patches to features 6 and 8.
+3. **G68,** a network across a claim's edge: no code before the owner's word, fix or decline.
+4. **The three compiler warnings** (G11) go with the first patch that touches their files.
+5. **Step 1, the duets (feature 10):** its brief, with the changes it needs to the machines' brief (Memory), in one
    pull request; then its code, which may carry the change to Memory with it (rule 4, R24). The brief settles the
    owner's two ideas placed in step 1 and its "what to try" list sets the aim in play.
-7. **Steps 2 to 7** one feature at a time, each brief before its code, in the order I set here when step 1 has
+6. **Steps 2 to 7** one feature at a time, each brief before its code, in the order I set here when step 1 has
    passed its gate.
