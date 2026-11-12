@@ -94,7 +94,7 @@ Machines test: a Gather block struck under open sky gathers 200 of a day's 200; 
 Machines test: a shelf's firestarter Acted, an extinct torch is now torch-basic-lit-up, a forge with nobody online burns: no; with nothing left to light it Nothing$
 # Never a pile on the ground or a bomb; a pit kiln is ground storage to the game too, and is lit.
 Machines test: the firestarter spares a pile on the ground: yes, a coal pile: yes, a bomb: yes; a pit kiln: no, a forge: no, a bloomery: no, a clay oven: no$
-# R9 (G16): with claims ignored, using a Control Shelf, a machine or a Memory opens and breaking stays refused; a placed Unaligned
+# R9 (G16): with claims ignored, using a Control Shelf, a machine, a Memory or a Crystal Motor opens and breaking stays refused; a placed Unaligned
 # crystal opens only to the polished rock that makes it a rod.
-Machines test: with claims respected the game leaves using a Control Shelf LandClaimed; with claims ignored using it is Granted, breaking it LandClaimed; using a Gather block Granted, breaking it LandClaimed; using a Memory Granted$
+Machines test: with claims respected the game leaves using a Control Shelf LandClaimed; with claims ignored using it is Granted, breaking it LandClaimed; using a Gather block Granted, breaking it LandClaimed; using a Memory Granted; using a Crystal Motor Granted, breaking it LandClaimed$
 Machines test: an Unaligned crystal opens to polished rock in hand: yes, to another item: no, to an empty hand: no$

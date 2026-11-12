@@ -35,12 +35,12 @@ public class MachinesClaims
     }
 
     /// <summary>
-    /// Whether using this block is one Machines open: any machine, the Memory among them, any Control Shelf, and a placed Unaligned crystal
+    /// Whether using this block is one Machines open: any machine, the Memory and the Crystal Motor among them, any Control Shelf, and a placed Unaligned crystal
     /// while the hand holds the polished rock that makes it a rod. Any other use of a crystal is left as
     /// it came.
     /// </summary>
     public static bool Opens(Block block, ItemStack? held) =>
-        block is BlockMachine or BlockControlShelf
+        block is BlockMachine or BlockCrystalMotor or BlockControlShelf
         || (block.HasBehavior<BlockBehaviorRodMaker>() && Crystal.AlignmentOf(block) == Crystal.Unaligned
             && held?.Block is { } rock && Sparkstone.ItemCrystalChisel.PolishedRock(rock) != null);
 }
