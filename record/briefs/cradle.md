@@ -85,9 +85,9 @@ paper differ, this brief is the record.
 
 With the claims switch on, planting, setting a crystal in, harvesting and taking one out of a cradle inside another
 player's claim need their permission, as using a chest there does. With the switch off (R9), every such use by hand
-opens there. Breaking or placing a cradle there stays as the game rules it. **Built so far:** the cradle has no claims
-code of its own, and the game refuses a use inside a claim before it asks the block, so with the switch off the use is
-still refused (G16). The fix follows this brief as a patch.
+opens there. Breaking or placing a cradle there stays as the game rules it. **When this brief was written** (main
+at a1aae13), the cradle had no claims code of its own, and the game tests a claim before a block's own interaction,
+so with the switch off the use was still refused (G16); the fix follows this brief as a patch.
 
 ## What it will not do
 
