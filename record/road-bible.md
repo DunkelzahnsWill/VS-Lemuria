@@ -552,6 +552,7 @@ What lies beside the old paper, or was written for Lemuria before that minute, a
 | The scripts that made the art and the sounds on main (`make_art.py`, `make_sounds.py`) | `/mnt/project-files/art-sound/`: `lemuria-step1/`, `lemuria-step2/`, `lemuria-step3/`, `lemuria-step4/`, `lemuria-step4b/`, `lemuria-step4c/`, `lemuria-step5a/` (old step numbers) | mason |
 | The old audit's unfinished test scenes, which G13 and G15 name | `/mnt/project-files/lemuria-critic/unfinished-tests.patch` | mason |
 | The hand-over plan, "Lemuria: hand-over to Commandments v2", written after that minute | https://claude.ai/artifact/N6nhzTfNe6FSaMn8E5SiwK | The planning thread. A working paper outside the record |
+| The copies of the Commandments and of this book that the record thread keeps for the coordinator to read (the Commandments, the cast; R33): the newest copy of each and no older one, named `COMMANDMENTS-<commit>.txt` and `road-bible-<commit>.md` with the short id of the commit of main that each was taken from | `/mnt/project-files/lemuria-books/` | The record thread, which makes each copy and takes the one it replaces away. For reading only: no thread changes a copy. Outside the record: where a copy and the repo differ, the repo stands |
 | The owner's scratchpad of parked ideas | `/mnt/project-files/owners-scratchpad.md` | The owner. No thread |
 | The owner's uploads | `/mnt/project-files/uploads/` | The owner. No thread |
 | The project memory | Kept by the platform, outside the repo | No thread. Every thread reads and writes it, and it is outside the record |
