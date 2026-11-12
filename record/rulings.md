@@ -488,6 +488,43 @@ step 1's first code."
 >
 > Both end in your merge. I recommend B. Until you say so the book holds A.
 
-**Open.** Waits for the owner.
+**Answered.** In R24, by the owner, 2026-11-12 06:56:33Z.
+
+**Changed in place.** 2026-11-12 06:57Z, after this entry first reached main by PR #29: its line "Open. Waits for
+the owner." became the line above, when R24 was written.
+
+Concerns: the planning thread; the review thread; mason, once it starts.
+
+## R24. The owner's answer to R23: B
+
+**Given.** 2026-11-12 06:56:33Z by the owner, in the project chat. It answers R23.
+
+**Recorded.** 2026-11-12 06:57Z by the record thread, copied from the owner's own message.
+
+The owner: "4.) B"
+
+The coordinator's words with it, exactly as given: "The owner wrote this after my three posts on R23: the planning
+thread's question (06:19Z), the review thread's view (G36, 06:38Z) and the planning thread's two draft sentences for
+rule 4 (about 06:51Z), the last of which ended "Answer "B" to take these words, or change any of them." I read "4.)" as
+rule 4 and "B" as the answer to R23: such code may ride in the feature's PR, and the owner takes the planning thread's
+two sentences as drafted. That reading is mine, not the owner's; I have told the owner how I read it. The planning
+thread writes the change into the rules (rule 4), and the review thread reads it before it merges (rule 6 e)."
+
+
+**The draft the owner answered.** Sent by the planning thread to the coordinator at 06:51:11Z, and posted by the
+coordinator to the owner in the project chat at about 06:51Z, in the planning thread's words; they came to the record
+thread through the coordinator's hands, and they match the planning thread's diary entry of 06:47Z on main
+(record/diary/optimist-visionary/2026-11-12T0647Z.md, by PR #32). As posted:
+
+> If you answer B, the rules should say it, as Glowie asks. I would add two sentences to rule 4, after "A change to
+> code on main that follows a change to its brief is a patch, and its verdict is "out": it waits for the owner's
+> merge.":
+>
+> Where a thread's feature needs such a change in the folders of another feature that the thread owns or has been
+> handed, the change may instead ride in the PR that carries the feature, once the change to the other feature's brief
+> is merged. That PR's description names each other feature it changes and the merged change to that feature's brief.
+>
+> That is one more pull request on the rules for you to merge, after Glowie has read it. Answer "B" to take these
+> words, or change any of them. If you answer A, nothing changes: the rules and the Road Bible already say A.
 
 Concerns: the planning thread; the review thread; mason, once it starts.
