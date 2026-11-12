@@ -60,7 +60,8 @@ paper differ, this brief is the record. A step number below with "old" is an old
      random, *cracks* 1 time in 3.
    Twins pair off one for one, nearest first. A dialogue happens only when it changes something, so empty Glowing
    twins raise no warning, and twins left together do not charge. A crystal in a jar or on a rack never dialogues
-   up to Glowing (feature 5). A crystal standing within 3 blocks of its twin does not charge.
+   up to Glowing (feature 5), nor one in a Memory's magazine (feature 8; feature 10's brief, R32; not built yet: it is
+   built with feature 10). A crystal standing within 3 blocks of its twin does not charge.
 9. **Cracks.** A crack is one step of *stress*. A cracked crystal works as before. Cracks show as hairline lines,
    deeper at the second, and a thin whine joins its note, rising at the second. The third crack shatters it in a
    burst of its colour. The chance of a crack goes by the dialogue's Evolution, not by the cracks a crystal already

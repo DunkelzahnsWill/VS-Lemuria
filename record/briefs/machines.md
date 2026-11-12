@@ -88,18 +88,21 @@ old paper differ, this brief is the record.
      each replanted, and berries and fruit. Aimed at a tree's log it *fells* the tree through the game's own felling,
      as an axe does (only what an axe fells as a tree), its logs, sticks and saplings into the container, for one
      working for each 1, 9 or 27 logs by power, in full or not at all, leaves free.
-   - *Life, Death, Time, Rust* (feature 9's crystals): Bloom, Wither, Rewind and Progress, by the rules by hand. A
-     plant takes Bloom once an in-game day, hand or Focus (K4); a Death Focus with a Glowing crystal withers what
-     stands in front of it (K5); a Time or Rust Focus works a container only when it has a full measure to move.
+   - *Life, Death, Time, Rust* (feature 9's crystals): Bloom, Wither, Rewind and Progress, by the rules by hand. A plant
+     takes Bloom once an in-game day, hand or Focus (K4), and a Life working pays its cost once for every 9 plants it
+     would move on, rounded up, in full or not at all, so a network that cannot pay it all blooms nothing that working
+     (feature 10's brief, item 11, R32; not built yet: it is built with feature 10); a Death Focus with a Glowing
+     crystal withers what stands in front of it (K5); a Time or Rust Focus works a container only when it has a full
+     measure to move.
    - *Unaligned*: Quicken (below), and the shelf's work (below).
    Each working sends a short streak of sparks in its crystal's colour to the target and plays its evocation's sound
    there, softer than a cast.
 10. **Scatter.** As a Focus, but on a flat 9×9 centred on the first block in its line, each crystal working one
-    Evolution of power below a Focus, for the same charge: a Glowing crystal at Glittering's power, with an Amplify at
-    Glowing's. A Glittering crystal does nothing in a Scatter, even amplified ("They are too weak", the owner's play).
-    Two exceptions: Sky harvests crops, berries and fruit one Evolution sooner, so a Glowing Sky crystal with an
-    Amplify harvests a 9×9 field; and Earth tills the square into farmland where nothing stands on it, raising no
-    ground. Fire sets a fire only on the block it aims at. A Scatter does not fell.
+    Evolution of power below a Focus, for the same charge (a Life working pays by plants, item 9): a Glowing crystal at
+    Glittering's power, with an Amplify at Glowing's. A Glittering crystal does nothing in a Scatter, even amplified
+    ("They are too weak", the owner's play). Two exceptions: Sky harvests crops, berries and fruit one Evolution sooner,
+    so a Glowing Sky crystal with an Amplify harvests a 9×9 field; and Earth tills the square into farmland where
+    nothing stands on it, raising no ground. Fire sets a fire only on the block it aims at. A Scatter does not fell.
 11. **Amplify,** a *module* (part 2's G5). It lifts every Focus and Scatter it touches face to face by one Evolution of
     power, and doubles the torque of every Motor it touches, each for twice the charge, but only for workings of the
     Evolution of a crystal in its own sockets or lower; an empty Amplify lifts nothing. Its crystals do no work of their
@@ -128,11 +131,12 @@ old paper differ, this brief is the record.
 
 ### Products and logistics (old step 4 part 2)
 
-15. **The Control Shelf,** `lemuria:controlshelf-{side}`, made in the grid from polished rock over a stick. Set against a
-    side of a Focus or Scatter (north, east, south or west, never its front), one to a machine. As you face it, the
-    container at its left is its *input* and the one at its right its *output*, both outside the machine; a container
-    above or below it is not its port. Glyphs on its sides and small on its roof's front mark the input (two points
-    meeting) and the output (two points parting).
+15. **The Control Shelf,** `lemuria:controlshelf-{side}`, made in the grid from polished rock over a stick. Set against
+    a side of a Focus or Scatter (north, east, south or west, never its front), one to a machine; or against an Earth
+    battery's drain that has a Memory, for its one action there (item 18). As you face it, the container at its left is
+    its *input* and the one at its right its *output*, both outside the machine; a container above or below it is not
+    its port. Glyphs on its sides and small on its roof's front mark the input (two points meeting) and the output (two
+    points parting).
     - It holds 1 to 4 items, each standing upright in its own place, shrunk to fit, a tool turned to show its outline,
       put on and taken off with a right-click.
     - On its turn an Unaligned crystal in the machine, and only an Unaligned one (G1), does the work of the first item
@@ -178,7 +182,17 @@ old paper differ, this brief is the record.
     a machine, it holds a magazine of 2 crystals (4 sockets' room), set in and taken out as sockets are. After each
     turn the crystal that just worked moves to the bottom of the magazine and the first one cycles into its place, where
     it fits; a Dormant crystal is passed over, and turning costs nothing. A stone working a battery does nothing else,
-    so Memory against a fill stone stays still. Memory widening a machine's commands, the duets, is feature 10's.
+    so Memory against a fill stone stays still. Three more things are feature 10's brief (R32), not built yet: each
+    is built with feature 10.
+    - *Its magazine keeps its crystals out of dialogues* up to Glowing, as a jar does (feature 1).
+    - *Duets.* A Focus's Memory holding both crystals of a duet works the duet in place of cycling, the pair giving the
+      turn; a Duet Module in one of the Focus's sockets holds a second pair, swapped after each duet working.
+    - *Memory on an Earth drain,* on any face but the one facing into the room. The drain holds one crystal in its
+      socket and cycles the rest, a turn with nothing to do passing at once: an Earth crystal wears the room as below,
+      for one step or until it cannot wear now; a Sky crystal pans one sand block of the room a turn into the container
+      touching the drain, at a working's cost; and an Unaligned crystal works a Control Shelf set against the drain,
+      whose one action there puts a block of the kind on the shelf from its input into the panned block nearest the
+      bottom, at a working's cost. A panned block keeps its place in the room until then (item 21).
 19. **The reclamation plate,** `lemuria:reclamationplate`, made in the grid from a copper plate over polished rock: a
     thin plate on the floor under salt water, with no charge and no crystal. When a Fire Focus, not a hand cast, boils
     salt water anywhere in the column above it, it claims the game's own salt 1 time in 4 for each block boiled, into a
@@ -193,11 +207,14 @@ old paper differ, this brief is the record.
 21. **The room.** A battery is the box between two stones: a *drain*, a Gather facing into one bottom corner, and a
     *fill*, a Focus facing into the top corner opposite. From 2×2×1 to 7×7×7, every block in it is the medium or its
     charged form and every block touching it from outside is solid, glass included; otherwise both stones rest and say
-    why. Any other Focus or Gather of that alignment facing into the room works it too. A stone working a battery does
-    only that.
+    why. One exception, feature 10's (R32; not built yet): a block its own drain panned (item 18) keeps its place in the
+    room, empty. Both stones go on working, it holds nothing, and the count they show drops by its 200 until stone is
+    put back; the drain remembers it through a restart. Any other Focus or Gather of that alignment facing into the room
+    works it too. A stone working a battery does only that.
 22. **Its Elemental.** The fill's aligned crystals name it, Fire, Ice or Earth, and crystals of any other alignment in
-    either stone sit idle (J3, J4); a fill with none, or with two Elementals, names none, and the battery rests. A
-    battery holding a count stays its Elemental until the count is spent. Sky and the Mysteries name no battery.
+    either stone sit idle (J3, J4), save a Sky and an Unaligned crystal cycled by a drain's Memory (item 18); a fill
+    with none, or with two Elementals, names none, and the battery rests. A battery holding a count stays its Elemental
+    until the count is spent. Sky and the Mysteries name no battery.
 23. **Filling and draining.** The fill takes only what lifts its network above three quarters; the drain pays back 4 in
     5 of what was stored, only while its network is below half, never past half. Each stone moves up to 200 an in-game
     hour for each Glittering crystal and 600 for each Glowing one. The two stones may sit on one network or two. A rod
@@ -214,7 +231,8 @@ old paper differ, this brief is the record.
       rock to gravel, gravel to sand, 50 a step at a Gather block's pace (ore 200, rock 150, cracked rock 100, gravel
       50). Byproducts go into a container touching the drain: the ore's pieces, and two stones when cracked rock wears
       to gravel; gravel wears to sand with no finds, since panning is Sky's (J6). With no container, or a full one, it
-      wears nothing and pays only fed charge. Its stones also show what the deposit still holds.
+      wears nothing and pays only fed charge. Its stones also show what the deposit still holds. With a Memory against
+      the drain, it also pans and puts stone back (item 18).
 
 ### The Journal
 
@@ -266,6 +284,7 @@ old paper differ, this brief is the record.
 - **What a machine does.** With the claims switch on, a machine changes nothing inside a land claim, no block, creature
   or player, unless it stands inside that same claim. Lava it makes runs as natural lava does; only the rock it melts
   is claim-checked. With the switch off, claims stop no machine. Built.
+  A machine pays from its whole network, which may reach into a claim ("How it is built"; R29).
 - **A machine's fire** (the owner, R27: G58 "Fix"). A fire that a machine sets on a face is its carver's, as a fire
   set by hand is the caster's: the game's fire spreads by itself and does not spread to where its starter may not
   build, so a machine's fire does not spread into a claim its carver could not build in, whatever the switch says
@@ -301,13 +320,15 @@ old paper differ, this brief is the record.
 
 - No Luminous crystals in machines, strain or twin duets: feature 14. No over-driving a machine or stacked Amplify
   blocks: not placed yet.
-- No duets, Duet Module, Memory widening commands, Memory panning a battery, or limits on machines that Bloom:
-  feature 10. No Extend module or beams: feature 15. No Ascendant stone, room for 8, a magazine of 3 or expansion
-  slots: feature 16. No signals, teaching, sleep and wake, ossified shelf or Runic Tablet: feature 22.
+- No duets, Duet Module, Memory widening commands, Memory on a drain or limits on machines that Bloom beyond what items
+  9, 18, 21 and 22 say of them: feature 10's brief, and built with it. No Extend module or beams: feature 15. No
+  Ascendant stone, room for 8, a magazine of 3 or expansion slots: feature 16. No signals, teaching, sleep and wake,
+  ossified shelf or Runic Tablet: feature 22.
 - No Sky or Mystery battery, and no super media or Storm Call (feature 18). No better kilns or charcoal's third rung
   (feature 19).
-- No bees, fishing or resin on the shelf, and no shelf action beyond the starter list. The bucket milks by the game's
-  default amounts (G18), which differs only for another mod's animal: left for a compatibility pass before version 1.0.
+- No bees, fishing or resin on the shelf, and no shelf action beyond the starter list and its one action on a drain
+  (item 18). The bucket milks by the game's default amounts (G18), which differs only for another mod's animal: left for
+  a compatibility pass before version 1.0.
 
 ## What to try
 

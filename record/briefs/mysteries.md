@@ -58,11 +58,13 @@ the record.
      hours: raw cheese ripens, pemmican dries, hides cure, food spoils toward rot for compost, and a sealed barrel's
      recipe comes that much closer (question 9).
    Rewind and Progress never touch what a player carries, so neither can spoil another player's food.
-6. **In machines** (question 11): a Focus or Scatter works these four as it works any crystal's evocation (feature
-   8), for a working. A Life Focus pays only when a plant moves on, at most once a day per plant; a Death Focus with a
-   Glowing crystal withers what stands in front of it and pays only when something is there; a Time or Rust Focus
-   works a container only when it has a full measure to move, so a chest kept fresh by a Glittering Time Focus costs
-   about 2 charge a day (question 12).
+6. **In machines** (question 11): a Focus or Scatter works these four as it works any crystal's evocation (feature 8),
+   for a working. A Life Focus pays only when a plant moves on, at most once a day per plant, and a machine's Life
+   working pays its cost once for every 9 plants it would move on, rounded up, in full or not at all (feature 8; feature
+   10's brief, item 11, R32; not built yet: this feature counts the plants for feature 8, and both are built with
+   feature 10); a Death Focus with a Glowing crystal withers what stands in front of it and pays only when something is
+   there; a Time or Rust Focus works a container only when it has a full measure to move, so a chest kept fresh by a
+   Glittering Time Focus costs about 2 charge a day (question 12).
 
 ### Glint
 
@@ -125,7 +127,7 @@ Glowing).
 - No sparkglass lenses, inverted lamp or totems (K1, K3): the tools that engineer pure environments, feature 11. No
   temporal probes: the unplaced list.
 - No Mystery batteries, no Glint fed by a network, and no Bloom on animals or cradles (Quicken speeds cradles).
-- No limits for machines that Bloom beyond the rule by hand (K4): feature 10's brief settles them.
+- No limits for machines that Bloom beyond the rule by hand (K4) and the cost by plants in item 6 (feature 10's brief).
 
 ## What to try
 
