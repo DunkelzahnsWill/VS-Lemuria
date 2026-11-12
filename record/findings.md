@@ -3073,3 +3073,170 @@ Next:
 - **Open findings:** flaws G13 to G16, G57, G58 and G61 (mason). G59 is corrected in PR #72 at commit 0060c11, and
   closes when that commit merges. No blocker is open.
 - **Read up to:** rulings.md R25, player-diary.md none (the file does not exist), findings.md G64.
+
+## G65. Report under rule 6 (a): four sentences of the Road Bible brought up to date (PR #76 at b77768c)
+
+**Written.** 2026-11-12 DRAFT. Woken by the coordinator at 18:48Z.
+
+**What I read.** PR #76, "Road Bible: four sentences brought up to date after the merges of PR #51, PR #55 and
+PR #59", branch road-bible/what-main-holds, at commit b77768c95bca238a4394a927691fcaec6992d17c, its one commit,
+branched from main at 15205d9. I read it whole between 19:06Z and 19:12Z: the diff of record/road-bible.md, 10 lines
+taken out and 11 added, in four places; the planning thread's entry of 18:46Z, 100 lines, which rides in the PR; and
+the description. The check "build" ended green on that commit at 18:47:25Z. At my look at 19:11Z the PR was not
+assigned, and its description says that it is never set to merge itself.
+
+**The rules and the book.** I read both again in full at 19:03Z (G64): the rules, version 5, and the book as main has
+it, whose checksum (sha256) begins 2fee058b149f46a2. The rulings end at R25.
+
+**The short of it.** Every new sentence is true. The four places are the ones that the owner's merges overtook, and I
+found no fifth. No settled brief is made untrue. No blocker, and I ask for no commit. The change touches parts 2 and 4
+of the book, so it goes by this read and the owner's merge (rule 4), and it is ready for that merge once its
+description cites this report.
+
+**The four places,** each held against the repo as main has it at de479e6.
+1. *Part 2, the sentence on commit c07322e.* It said that outside record/ main "has not changed since commit c07322e".
+   It now says that main did not change there between that commit and "this book's merge, pull request #16 on
+   2026-11-12 at 16:52Z", and, as before, that the full checks passed on c07322e. By the history of main: c07322e is
+   the merge of PR #9, at 03:47Z, and 26b3fea the merge of PR #16, at 16:52:36Z. Outside record/ the two trees are the
+   same, and no commit between them changes a file there. The first that does is the merge of PR #51, at 18:26:52Z.
+2. *Part 3, the paragraph under the table of features 1 to 9.* It began: "These nine have no briefs yet." It now says
+   that each of the nine has its brief, that mason wrote each one from the signed-off notes as built, that the owner
+   merged the nine in one batch, PR #55, at 18:29Z, and that this merge settled them (rule 2). All of that is so:
+   record/briefs/ holds nine files, one to a short name; the head of each has "The signed-off notes as built,
+   play-test changes included (R3)"; and the merge is b3cf521, of 18:29:27Z (G56). The next sentence, "Until then R3
+   held the nine to the fixes already ruled", is R3's own sentence told as past. Nothing that merged before the briefs
+   went against it: PR #61 and PR #62 merged after them.
+3. *Part 4, the row on the checks workflow.* It said that the skip of the heavy steps for record-only PRs "is still to
+   be made in it". It now says that for a PR that changes only record/ the workflow skips them, "as the Commandments'
+   setup list has it". By the file on main: on a PR whose changed files all lie under record/, its step "Decide
+   whether the heavy steps run" turns off the setup, the build, the smoke test and both uploads. The setup list has:
+   "keep the workflow running on every PR, and skip the heavy steps when only record/ changed." The check on this PR
+   itself ran six seconds.
+4. *Part 4, the row on README.md and CLAUDE.md.* It began: "They still state the old rules, which the Commandments
+   have replaced." It ended with mason's rewrite as still to come. It now begins: "They point at
+   record/COMMANDMENTS.txt (R10) and at this book." Both files do, since the owner merged PR #51 (G54). The row's
+   sentences on the repository rules stand word for word, and each file keeps the part that the row names.
+
+The diff holds these four places and nothing else, so every other line of the book is as main has it.
+
+**The clause on R9, which the planning thread asked me to weigh.** The paragraph of part 3 said: "R9 is built for
+racks and jars only (pull request #10): it goes into the brief of every feature whose blocks are used by hand, and the
+code follows the briefs." It now says: "R9 is in the brief of every feature among them whose blocks are used by hand,
+and the code follows the briefs." So the book no longer says what of R9 is built.
+- *The new sentence is true.* Six of the nine features have a block of their own: features 1, 2, 4, 5, 8 and 9. Each
+  of their briefs cites R9 and says that its blocks used by hand open inside another player's claim with the switch
+  off, on main and as PR #72 has them. The briefs of features 3 and 7 each say that theirs is "an item and no block",
+  and feature 6 has no block.
+- *I find the clause rightly dropped,* for the planning thread's two reasons and for a third. Its reasons: the clause
+  says what main holds, which the briefs now say, each for its own blocks; and the patch for R9 would overtake it. The
+  third is mine: "for racks and jars only" was too narrow on the day it was written. With the switch off, the strike
+  on a placed crystal, the Crystal Rod's taps and the chisel's carving and awakening are open already, because a held
+  item's click asks Lemuria's switch itself (G56, "One sentence of G16 was too wide"). The clause read the code as my
+  G16 did. Kept, it would be a sentence of the book that the briefs correct.
+- *What a reader loses.* The book alone no longer tells that the claims switch, turned off, does not yet do all that
+  standing rule 7 says. The briefs tell it, in their "Built so far" sentences, and G16 holds it open as a flaw. The
+  concept says what Lemuria is, and it never said what is built. I find each in its right place.
+- *The order is kept:* "the code follows the briefs". That stays true before the patch for R9 and after it.
+
+**No settled brief is made untrue** (rule 6). No brief cites any of the four places. Two briefs cite part 4, the
+crystals' for the old paper and the earmuffs' for a shared file in Lemuria/Core/, and neither of those rows is
+changed.
+
+**Which way it merges.** Part 2 is the prototype's terms and part 4 the shared list, and for both rule 4 has: "read by
+the review thread, then the owner's merge; or the owner's command." The paragraph of part 3 could be certified by
+itself, but rule 6 has: "A change that touches any other part of the Road Bible goes only by the owner's merge or the
+owner's command." So I certify nothing here, and this report is a report. The planning thread comes to the owner's
+merge by a second way as well, rule 4's sentence on "an entry its own author recorded" (G51). The PR's description
+gives both.
+
+**The counter-view** is G66. None of it stands against the change.
+
+**What I told the planning thread, and what it answered.** At 19:12Z, before I signed (rule 6), I told it what stands
+above and in G66. ANSWERHERE
+
+**A later commit voids this report** (rule 4), unless it only brings main into the branch or adds only its author's
+own diary entry. The author unassigns the owner before it pushes any other commit and tells the coordinator, and the
+PR goes back to the owner only once its description cites a new report.
+
+**For the planning thread.** The description may now cite this report, G65, and the owner may then be assigned (rule
+4).
+
+**For the coordinator.** PR #76 at b77768c is cleared. It depends on no other open PR, and none waits for it, so it
+may stand anywhere on the list for the owner. When it merges, two maps each have a line to bring up to date (G66,
+point 1).
+
+**For the owner.** PR #76 is ready for your merge once it is assigned to you. It changes four sentences of the Road
+Bible that your merges of today had made out of date, and nothing else: no rule, no feature and no code, and nothing
+in play.
+
+## G66. Note: the counter-view to PR #76, and two maps that its merge leaves behind (rule 6 a)
+
+**Rank.** Note. **Owning thread.** The coordinator. Point 1 is for mason and for the coordinator's own map, and points
+2 and 3 are for the planning thread. **Raised in.** The read of PR #76 (G65). **Status.** Needs no answer.
+
+1. **Two maps speak of the nine briefs as still to come.** Mason's map has: "They have no briefs yet; I write them
+   first (R3)." The coordinator's has: "Their nine briefs come first, in one batch (PR #55). Until the briefs merge
+   they take only the fixes already ruled (R3)." Today each says what the book says, so neither differs from it (G52,
+   G63), and rule 5 has a thread leave its map as it is until a change to the book is in. When PR #76 merges, the book
+   says that the nine briefs are settled, and both lines are left behind. Rule 5 has the coordinator tell each thread
+   whose features, folders or files changed, and each such thread update its map. I read the change so for mason: the
+   paragraph speaks of mason's nine features, part 2 of the build that mason inherited, and the two rows of mason's
+   files. I read both maps at the wake of rule 6 (f) that follows. Points 2 to 4 of mason's plan are done as well, and
+   its plan is its own to rewrite whenever it likes.
+2. **"Main as it stands is the prototype."** Part 2 still opens so. Outside record/, five files have changed on main
+   since c07322e: README.md, CLAUDE.md, the checks workflow and two files of tests. The planning thread left the
+   sentence and says why in its entry: it is still true, and no merge has overtaken it. I agree. The words are those
+   of R1's question, "Does main as it stands count as the prototype?", and the sentence cites R1. The new sentence
+   beside it now says which main that was. If part 2 is ever changed for another reason, "as it stood at this book's
+   merge" would say the same and lean on nothing.
+3. **Each sentence of this kind costs the owner a merge.** Parts 2 and 4 change only by the owner's merge or the
+   owner's command (rule 4). So a sentence there that says what main holds is a debt: when a merge overtakes it, the
+   owner pays with one more merge that changes nothing in the game, on a day when the owner wrote that the PRs are
+   hard to sift. The planning thread's new practice (its map's plan, point 1) answers this as far as words can: bring
+   such a sentence up to date after the merge, in as few changes as the merges allow, and in words that the next merge
+   does not overtake. PR #76 does that in all four places. Two sentences of the kind are left, and both are still
+   true: part 4's "The shared files table below names what is on main today", for no file outside record/ has been
+   added or taken away since c07322e, and "Glittering and Glowing so far" in the row of feature 1. Step 2's features
+   will overtake the second.
+
+## G67. Diary: PR #76 is reported, and nothing of mine is in hand
+
+**Written.** 2026-11-12 DRAFT.
+
+**What I did since G64.**
+- *PR #79* carried G56 to G64 to main at 19:07Z (merge commit c2e80f1). It was set to merge itself and not assigned.
+  At 19:09Z I told mason and the coordinator that PR #72 at 0060c11 is cleared, and I told the owner so in my thread,
+  in a few lines.
+- *The project memory.* I brought my two notes there up to date with G56 to G64, at 19:10Z.
+- *PR #76.* I read it between 19:06Z and 19:12Z, and at 19:12Z I told the planning thread what I found (G65, G66).
+- *This PR's entries went to my branch as drafts* at DRAFTTIME (commit DRAFTCOMMIT), before the planning thread had
+  answered and before I checked or signed them, as G64 says I do.
+
+**My count of the cuts was wrong.** G55 calls the cut of 17:23Z the second of the day and the one of 17:50Z the third.
+By the session's own log my context was cut ten times up to G64: at 05:10Z, 05:33Z, 06:07Z, 06:51Z, 07:17Z, 17:23Z,
+17:50Z, 18:13Z, 18:39Z and 19:02Z. My diary names the last six and none of the first four, which fall in the time when
+I wrote G22 to G44. By the same log I read the rules or the book again in full within three minutes of each of those
+four, though not both each time: both after the first, the book after the second, and the rules after the third and
+the fourth. I found this at 19:04Z, when I looked up the time of the last cut for G64. A reader of G22 to G44 should
+know that their author worked from a summary more often than those entries say.
+
+**The three scripts.** I did not run them for this PR (G64): no finding in it rests on them.
+
+Next:
+- **Unfinished:** nothing of mine. Two PRs that I have read wait for their authors, and then for the owner: PR #72 at
+  0060c11 (G62), until mason cites G62 and assigns the owner, and PR #76 at b77768c (G65), until the planning thread
+  cites G65 and assigns the owner.
+- **Where it is:** this file, sent to main by a record-only PR from the branch claude/project-thread-4zobvq.
+- **Waiting for:** a wake. I expect, in some order:
+  - mason's map and the coordinator's, when PR #76 is merged (rule 6 f; G66, point 1);
+  - a new report, if a commit that rule 4 does not let pass reaches PR #72 or PR #76 before the owner merges it;
+  - mason's patches: G13 with G14 (PR #75, a draft), G15 (PR #78, a draft), the patch for R9, and what cures G57, G58
+    and G61, unless the owner declines them. Their verdicts are the inquisitor's, and I read every verdict at step 1's
+    gate (rule 6 b);
+  - step 1's brief and the changes to other briefs that come with it (rule 6 a), where I read for G24, G41 and the
+    second point of G46;
+  - the owner's word, if the owner gives any, on G51, on G58 and G61, and on the first two points of G60.
+- **At each wake:** the rules and the book in full first, then what has changed in the record since this entry.
+- **Open findings:** flaws G13 to G16, G57, G58 and G61 (mason). G59 is corrected in PR #72 at commit 0060c11, and
+  closes when that commit merges. No blocker is open.
+- **Read up to:** rulings.md R25, player-diary.md none (the file does not exist), findings.md G67.
