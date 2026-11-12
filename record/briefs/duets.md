@@ -4,16 +4,17 @@
 
 **Its folders.** `Lemuria/Duets/` with its own `DuetsModSystem`; every folder named `duets` under
 `Lemuria/assets/lemuria/` (the Duet Module's item type, its recipe and lang); no patch file; and `tests/smoke/duets.*`
-(R30). Memory's widening lies in feature 8's folder, `Lemuria/Machines/`, and follows the change to the machines' brief
-that this PR makes (rule 4). The limits on machines that Bloom lie in feature 9's folder, `Lemuria/Mysteries/`, and
-follow the change to the mysteries' brief that this PR makes.
+(R30). Three parts of its work lie in other features' folders and follow the changes this PR makes to their briefs
+(rule 4): Memory's widening, Memory on a drain and the shelf's re-placing in feature 8's `Lemuria/Machines/`; the
+limits on machines that Bloom in feature 9's `Lemuria/Mysteries/`; and Memory's shielded magazine in feature 1's
+dialogues, `Lemuria/Crystals/`.
 
 **Written from.** The Road Bible, part 3, step 1. The owner's four duets and the Duet Module (2026-10-28), the owner's
 Memory idea (2026-11-08) and the limits on Blooming machines (K4, 2026-11-09), as the Road Bible places them. The
 old paper's sketch, read as history only: "Lemuria step 5: The Four Mysteries", "Duets (part 2, sketched)" and "Not in
-part 1". The briefs of features 1, 3, 6, 8 and 9 as they stand on main at 5e0b384, and R30. Every rule below marked
-**proposed** is mine and waits on the owner's answer in "Open questions"; nothing here is settled until the owner
-merges it (rule 2).
+part 1". The briefs of features 1, 3, 6, 8 and 9 as they stand on main at 5e0b384, R30 and R31. The owner's answers
+to the draft's eight questions (R32, 2026-11-12) settle every rule the draft proposed, as proposed, and way A for the
+panning idea.
 
 ## What the player sees and does
 
@@ -26,24 +27,24 @@ merges it (rule 2).
 2. **The four Elemental duets** are the owner's (2026-10-28). No pair is twins (Fire and Ice, Earth and Sky are), so a
    duet never dialogues:
 
-   | Duet | Makes | **Proposed:** from what, and where it goes |
+   | Duet | Makes | From what, and where it goes |
    | --- | --- | --- |
    | Ice and Earth | Clay | The block the Focus faces, if it is soil or sand, becomes the game's raw blue clay, which the player digs as the game's own |
    | Ice and Sky | Water | Fresh water drawn from the air into a liquid container at the machine's output (a barrel, a bucket, a jug) |
    | Fire and Sky | Fired clay | Raw pottery in the machine's input fired into its fired form, as the game's pit kiln fires it, into the output |
    | Fire and Earth | Metal from ore | Ore nuggets in the input extracted into the metal's bits, one bit for each nugget, into the output |
 
-3. **Proposed: where the pair sits.** Both crystals of a pair, awake, in the magazine of the Memory set against a
+3. **Where the pair sits.** Both crystals of a pair, awake, in the magazine of the Memory set against a
    Focus. A Memory holding a pair stops cycling and instead lends the pair to the machine: on each of the machine's
    turns the duet works once, from the Focus's front, in place of the crystal whose turn it was. A Memory holding no
    pair cycles as today. A Scatter works no duet: a duet works at one point, as a Focus does.
-4. **Proposed: power and charge.** A duet works at the lower of its two crystals' Evolutions, and an Amplify touching
+4. **Power and charge.** A duet works at the lower of its two crystals' Evolutions, and an Amplify touching
    the machine lifts it one Evolution for twice the charge, as for every working. It costs what both crystals would
    cost working once each, paid from the machine's network (feature 4), and nothing when it finds nothing to make (a
    miss is free, feature 6). Each crystal loses the charge it would lose working alone.
-5. **Proposed: amounts, by the Evolution the duet works at.** Glittering, Glowing, amplified Glowing: clay, one block a
+5. **Amounts, by the Evolution the duet works at.** Glittering, Glowing, amplified Glowing: clay, one block a
    working; water, 10, 20 and 40 litres; fired clay and metal, up to 4, 8 and 16 items a working.
-6. **Proposed: when a duet finds nothing.** Clay with no soil or sand faced; water with no liquid container at the
+6. **When a duet finds nothing.** Clay with no soil or sand faced; water with no liquid container at the
    output, or a full one; fired clay or metal with nothing to fire or extract in the input, or no room in the output:
    the working is a free miss, and an output with no room sends the machine Dormant as it does today (feature 8,
    question 7).
@@ -53,7 +54,7 @@ merges it (rule 2).
 ### The Duet Module
 
 8. **The Duet Module**, the owner's earmark (2026-10-28), a module (the concept: a part fitted to a machine that changes
-   what it does). **Proposed:** an item, made in the grid from a Dead Socket and a Glowing crystal of any alignment (the
+   what it does): an item, made in the grid from a Dead Socket and a Glowing crystal of any alignment (the
    crystal used up), set into one of a Focus's sockets as the Dead Socket is. It holds a second pair: after each duet
    working, Memory swaps its pair with the module's, both crystals together, so the machine alternates two duets (clay
    and then fired clay, say). It works only on a machine already working a duet: with no pair in the Memory it does
@@ -67,26 +68,31 @@ merges it (rule 2).
    Earth and Sky are twins, and twins standing within 3 blocks of each other in sockets dialogue (feature 1, item 8),
    so a Sky crystal in a drain's Memory beside its Earth crystals dialogues today; and a stone working a battery does
    only that, so Memory against a fill stone stays still (feature 8, item 18). "Safely" is the twins.
-10. **Proposed, way A (in step 1):** Memory's magazine keeps its crystals apart as a jar does, up to Glowing: a crystal
-    in the magazine never dialogues. Only the crystal in the machine's socket stands in the open, so Earth and Sky take
-    turns. A drain's Memory then cycles as for any machine: while an Earth crystal is in the socket the drain wears its
-    room as today; while a Sky crystal is in it, the drain pans the sand its wearing left, a block at a time, into the
-    container touching it, with the game's own panning drops for sand, and the panned block is gone from the room.
-    The "control crystal" is an Unaligned crystal working the drain's Control Shelf, whose shelf puts stone from its
-    input back into the room's empty blocks (feature 8's shelf, a new shelf action). **Way B:** the idea moves to step
-    2, beside strain and twin duets (feature 14), which is a change to the Road Bible's part 3 first. For the owner.
+10. **Way A** (the owner: "Making Memory a "Shielded" block makes sense, up to Glowing as the other machinery"; R31).
+    Memory's magazine keeps its crystals apart as a jar does, up to Glowing: a crystal in the magazine never dialogues,
+    and from Luminous up it holds nothing back, where feature 14's strain begins. Only the crystal in the machine's
+    socket stands in the open, so Earth and Sky take turns. Memory may stand against an Earth battery's drain, on any
+    face but the one facing into the room, and the drain's Memory then cycles as for any machine, a drain's turn being
+    one block worn, panned or put back: while an Earth crystal
+    is in the socket the drain wears its room as today; while a Sky crystal is in it, the drain pans the sand its
+    wearing left, a block at a time, into the container touching it, with the game's own panning drops for sand, and
+    the panned block is gone from the room. The "control crystal" is an Unaligned crystal in that cycle working the
+    drain's Control Shelf: on its turn the shelf puts one block of stone from its input into the room's nearest empty
+    block, from the bottom up, at a working's cost, as the shelf's one action on a drain. A Control Shelf may stand
+    against a drain for this alone. Twins in the drain's own sockets still dialogue there, so the drain holds one
+    crystal in its socket and the rest in the magazine.
 
 ### Limits for machines that Bloom
 
 11. Today a plant takes Bloom once an in-game day, whatever blooms it, hand or Focus, and a working pays a tenth of a
     crystal's charge whatever it moves on (K4; features 8 and 9). So a Glowing Scatter blooms 81 plants a day for
-    one working's charge. **Proposed:** keep the rule once a day per plant and one stage a Bloom (how often), and make a
+    one working's charge. So: keep the rule once a day per plant and one stage a Bloom (how often), and make a
     machine pay for how strongly: a Life working pays its usual cost once for every 9 plants it moves on, rounded up.
     A hand's cast stays as it is.
 
 ### What the player is told
 
-12. **Proposed:** no Journal page in step 1. The duets are secrets of the Hidden Vocabulary, and the Hidden
+12. No Journal page in step 1. The duets are secrets of the Hidden Vocabulary, and the Hidden
     Vocabulary and the Journal are completed in step 7, by changes to the briefs concerned (the Road Bible, step 7). A
     looked-at Memory says "Duet: clay" (or the product) while it holds a pair, so a player who has found one can see it.
 
@@ -98,8 +104,10 @@ merges it (rule 2).
   pair and lends it, and its look-at line; `BlockEntityMachine.WorkOnce` asks a hook before the crystal whose turn it
   is works: `MachineWork.DuetHook`, which feature 10 sets, so feature 8 never names feature 10. The hook gets the
   machine and its Memory and returns a result, or none to work as today. The Duet Module's swap happens in the hook.
-  With way A, Memory's magazine is shielded (feature 1's dialogue skips it) and the drain's Sky turn and the shelf's
-  re-placing are feature 8's battery and shelf code.
+  Memory against a drain, the drain's Sky turn (panning) and the shelf's re-placing are feature 8's battery and shelf
+  code.
+- **Feature 1 (Crystals), by the change to its brief below:** its dialogues skip a crystal in a Memory's magazine up to
+  Glowing, as they skip a jar's and a rack's.
 - **Feature 9 (Mysteries), by the change to its brief below:** Bloom counts the plants a machine's working moved on
   and hands the count back, so the machine pays by it.
 - It reads feature 1 for crystals, charge and Evolutions, feature 4 to pay, feature 6's cast context for the aim and
@@ -112,7 +120,7 @@ merges it (rule 2).
 
 ## Settings
 
-**Proposed:** `DuetWaterLitres` 10 (at Glittering; twice at Glowing, four times amplified), `DuetItemsPerWorking` 4
+`DuetWaterLitres` 10 (at Glittering; twice at Glowing, four times amplified), `DuetItemsPerWorking` 4
 (the same), `BloomPlantsPerWorking` 9.
 
 ## Claims
@@ -136,7 +144,6 @@ merges it (rule 2).
 
 ## What to try
 
-**Proposed**, to be settled with the answers:
 1. Carve a Focus facing a block of sand, set a Memory against it, and put a Glittering Ice and a Glittering Earth
    crystal in the Memory: the sand becomes raw blue clay; dig it. Take one crystal out: Memory cycles again.
 2. An Ice and Sky pair over a barrel at the output: 10 litres of water a working, 20 with Glowing crystals. With no
@@ -148,22 +155,20 @@ merges it (rule 2).
    (no pottery yet) and makes clay again.
 6. A Glowing Life Scatter over a field of 81 crops: they all move on one stage, and the network pays nine workings'
    charge. The next working that day does nothing and pays nothing.
-7. Way A only: an Earth battery's drain with a Memory holding a Sky crystal: no dialogue; when Sky takes its turn the
-   drain pans its sand into the chest.
+7. An Earth battery's drain with a Memory holding a Sky and an Unaligned crystal, and a Control Shelf with stone in its
+   input: no dialogue; when Sky takes its turn the drain pans its sand into the chest, and when the Unaligned crystal
+   takes its turn the shelf puts a block of stone back into the room.
 8. Restart: the pair stays in the Memory and the module's pair in its socket.
 
 ## Open questions
 
-1. Where a duet's pair sits, and in which machine: both in the Focus's Memory, Focus only (item 3)? **For the owner.**
-2. Clay: the faced soil or sand turns into raw blue clay in place (item 2), or is used up into clay items in the
-   output? **For the owner.**
-3. The amounts and charge (items 4 and 5): both crystals' cost, the lower Evolution, 10 litres and 4 items at
-   Glittering? **For the owner.**
-4. Metal: one bit for each nugget, and no metal from the iron ores (item 2, "What it will not do")? **For the owner.**
-5. The Duet Module (item 8): a socket fitting holding a second pair, swapped after each duet working? **For the
-   owner.**
-6. The Memory panning idea (items 9 and 10): way A in step 1, or way B, moved to step 2 by a change to part 3 first?
-   **For the owner.**
-7. Limits on Blooming machines (item 11): once a day per plant stays, and a machine pays once for every 9 plants?
-   **For the owner.**
-8. No Journal page before step 7 (item 12)? **For the owner.**
+1. Where a duet's pair sits, and in which machine (item 3). **Answered:** R32, 1, "Yes".
+2. Clay made in place from the faced soil or sand (item 2). **Answered:** R32, 2, "Yes", read as the proposal, the
+   first of the two the question named.
+3. The amounts and charge (items 4 and 5). **Answered:** R32, 3, "Yes".
+4. Metal: one bit for each nugget, none from the iron ores. **Answered:** R32, 4, "Yes".
+5. The Duet Module (item 8). **Answered:** R32, 5, "Yes".
+6. The Memory panning idea (items 9 and 10). **Answered:** R32, 6, way A; R31 says what it changes in the Road Bible
+   (the planning thread's change to the concept, on one list with this brief).
+7. Limits on Blooming machines (item 11). **Answered:** R32, 7, "Yes".
+8. No Journal page before step 7 (item 12). **Answered:** R32, 8, "Yes".

@@ -46,7 +46,8 @@ the record.
    (feature 6). This feature holds what each does:
    - **Bloom (Life),** at a plant: a crop, berry bush or fruit tree moves on one growth stage; a sapling or tree seed
      loses one in-game day of its growing time. Each plant takes Bloom once an in-game day, whatever blooms it, hand or
-     machine (question 7, K4), so it roughly doubles a farm's pace.
+     machine (question 7, K4), so it roughly doubles a farm's pace. A machine's Life working pays its cost once for
+     every 9 plants it moves on, rounded up (feature 10's brief, item 11; R32).
    - **Wither (Death),** at a plant or the ground: a crop becomes the game's dead crop, keeping its farmland; saplings,
      tall grass, flowers, ferns and leaves wilt away, dropping what breaking them drops; grassy soil loses its grass.
      From Glowing it also withers every creature and player in its area: 1.5 damage every 5 seconds for 30 seconds, 9
@@ -125,7 +126,7 @@ Glowing).
 - No sparkglass lenses, inverted lamp or totems (K1, K3): the tools that engineer pure environments, feature 11. No
   temporal probes: the unplaced list.
 - No Mystery batteries, no Glint fed by a network, and no Bloom on animals or cradles (Quicken speeds cradles).
-- No limits for machines that Bloom beyond the rule by hand (K4): feature 10's brief settles them.
+- No limit for machines that Bloom beyond the rule by hand (K4) and the cost by plants above (feature 10's brief).
 
 ## What to try
 

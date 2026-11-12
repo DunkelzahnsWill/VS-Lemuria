@@ -178,7 +178,13 @@ old paper differ, this brief is the record.
     a machine, it holds a magazine of 2 crystals (4 sockets' room), set in and taken out as sockets are. After each
     turn the crystal that just worked moves to the bottom of the magazine and the first one cycles into its place, where
     it fits; a Dormant crystal is passed over, and turning costs nothing. A stone working a battery does nothing else,
-    so Memory against a fill stone stays still. Memory widening a machine's commands, the duets, is feature 10's.
+    so Memory against a fill stone stays still. The magazine keeps its crystals out of dialogues up to Glowing, as a jar
+    does (feature 1). Memory widening a machine's commands is feature 10's brief (the duets, R32): a Focus's Memory
+    holding both crystals of a duet works the duet in place of cycling, and a Duet Module in a socket swaps a second
+    pair. Memory may also stand against an Earth battery's drain, on any face but the one facing into the room, which
+    then cycles its crystals: an Earth crystal wears, a Sky crystal pans the room's sand, and an Unaligned crystal works
+    a Control Shelf set against the drain, whose one action there puts a block of stone from its input back into the
+    room (feature 10's brief, items 9 and 10).
 19. **The reclamation plate,** `lemuria:reclamationplate`, made in the grid from a copper plate over polished rock: a
     thin plate on the floor under salt water, with no charge and no crystal. When a Fire Focus, not a hand cast, boils
     salt water anywhere in the column above it, it claims the game's own salt 1 time in 4 for each block boiled, into a
@@ -214,7 +220,8 @@ old paper differ, this brief is the record.
       rock to gravel, gravel to sand, 50 a step at a Gather block's pace (ore 200, rock 150, cracked rock 100, gravel
       50). Byproducts go into a container touching the drain: the ore's pieces, and two stones when cracked rock wears
       to gravel; gravel wears to sand with no finds, since panning is Sky's (J6). With no container, or a full one, it
-      wears nothing and pays only fed charge. Its stones also show what the deposit still holds.
+      wears nothing and pays only fed charge. Its stones also show what the deposit still holds. With a Memory against
+      it, the drain pans and puts stone back too (item 18; feature 10's brief).
 
 ### The Journal
 
@@ -265,7 +272,7 @@ old paper differ, this brief is the record.
 
 - **What a machine does.** With the claims switch on, a machine changes nothing inside a land claim, no block, creature
   or player, unless it stands inside that same claim. Lava it makes runs as natural lava does; only the rock it melts
-  is claim-checked. With the switch off, claims stop no machine. Built.
+  is claim-checked. With the switch off, claims stop no machine. Built. A machine pays from its whole network, which may reach into a claim ("How it is built"; R29).
 - **A machine's fire** (the owner, R27: G58 "Fix"). A fire that a machine sets on a face is its carver's, as a fire
   set by hand is the caster's: the game's fire spreads by itself and does not spread to where its starter may not
   build, so a machine's fire does not spread into a claim its carver could not build in, whatever the switch says
@@ -301,8 +308,8 @@ old paper differ, this brief is the record.
 
 - No Luminous crystals in machines, strain or twin duets: feature 14. No over-driving a machine or stacked Amplify
   blocks: not placed yet.
-- No duets, Duet Module, Memory widening commands, Memory panning a battery, or limits on machines that Bloom:
-  feature 10. No Extend module or beams: feature 15. No Ascendant stone, room for 8, a magazine of 3 or expansion
+- The duets, the Duet Module, Memory widening commands, Memory on a drain and the limits on machines that Bloom are
+  feature 10's brief, built in these folders where they touch them. No Extend module or beams: feature 15. No Ascendant stone, room for 8, a magazine of 3 or expansion
   slots: feature 16. No signals, teaching, sleep and wake, ossified shelf or Runic Tablet: feature 22.
 - No Sky or Mystery battery, and no super media or Storm Call (feature 18). No better kilns or charcoal's third rung
   (feature 19).
