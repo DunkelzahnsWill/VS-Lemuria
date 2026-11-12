@@ -38,6 +38,8 @@ old paper differ, this brief is the record.
    step 4 part 2). A Mystery's working (Life, Death, Time or Rust, feature 9) costs 4 times an Elemental's at the same
    power: 4, 8 and 16 (R36; R38, 3 and 4). Elementals work through what the world already does, as fire is lit in
    many ways; the Mysteries force what runs against the world's nature, as a bush made to bloom, and pay for it (R39).
+   Only the evocation costs more: a Mystery crystal as a Refine block's pattern or giving a Motor its torque costs as
+   any crystal does, and what it gathers is unchanged.
    Nothing done, nothing paid. A network that cannot pay leaves its machines idle. Machines pause
    while their chunk is unloaded and do not catch up.
 5. **Context.** A machine works out what touches it (an Amplify, Memory, a shelf, a container, its network) only when
