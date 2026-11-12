@@ -263,10 +263,24 @@ old paper differ, this brief is the record.
 
 - **What a machine does.** With the claims switch on, a machine changes nothing inside a land claim, no block, creature
   or player, unless it stands inside that same claim. Lava it makes runs as natural lava does; only the rock it melts
-  is claim-checked. With the switch off, claims stop no machine. Built. When this brief was written (main at
-  a1aae13), a fire that a machine set had no starter, so the game held its spread at no claim, with the switch on too
-  (G58); and the containers a machine, its shelf or a reclamation plate draws from or yields into asked no claim, so a
-  shelf outside a claim drew stock from an input chest just inside it.
+  is claim-checked. With the switch off, claims stop no machine. Built.
+- **A machine's fire** (the owner, R27: G58 "Fix"). A fire that a machine sets on a face is its carver's, as a fire
+  set by hand is the caster's: the game's fire spreads by itself and does not spread to where its starter may not
+  build, so a machine's fire never burns into a claim its carver could not build in, whatever the switch says (as
+  for a hand's fire, feature 6). Where the game does not know the carver (one who has not joined since the server
+  last started, or a machine carved before carvers were recorded), the machine sets no fire on a face: it still
+  lights what can be lit, as a firestarter does. When this brief was written (main at a1aae13), a machine's fire had
+  no starter, so the game held its spread at no claim, with the switch on too (G58). The fix follows this brief as a
+  patch.
+- **A machine's containers** (the owner, R27: G61 "Fix"). With the switch on, a container that lies inside a land
+  claim is a machine's only if the machine stands inside that same claim: a Control Shelf's input and output, the
+  container a machine with no shelf yields into, and the one a reclamation plate puts its salt into (the plate
+  standing in for the machine). A container the rule leaves out is not there for the machine: a shelf's input in
+  another's claim gives nothing, so its items wait as for missing stock; a yield with no other container drops where
+  the work happened, as with none touching; the plate's salt with nowhere else to go is lost. With the switch off,
+  claims stop no machine. The game's own chutes and hoppers stay as the game rules them. When this brief was written
+  (main at a1aae13), the containers asked no claim, so a shelf outside a claim drew stock from an input chest just
+  inside it (G61). The fix follows this brief as a patch.
 - **Uses by hand.** Setting crystals into a machine's sockets or Memory and taking them out, putting items on the shelf
   and taking them off, and the rod's taps (switching, turning, a crystal or a shelf item) are uses by hand of a
   Lemuria block: with the switch on they need the claim owner's permission, as a chest does, and with it off they open
@@ -324,7 +338,10 @@ old paper differ, this brief is the record.
     its crystals fill.
 16. With the claims switch off, inside someone else's claim, set a crystal into their machine and take an item off their
     shelf (needs a second player; after the R9 patch).
-17. Restart: crystals in sockets, Dormant blocks and crystals, shelf items, Memory's crystals, Dead Sockets, a
+17. With the claims switch on, set a Control Shelf outside a second player's claim with its left against a chest
+    just inside it: the shelf draws nothing from that chest. Have a Fire Focus outside the claim set a fire beside
+    it: the fire does not spread into the claim (needs a second player; after the G58 and G61 patches).
+18. Restart: crystals in sockets, Dormant blocks and crystals, shelf items, Memory's crystals, Dead Sockets, a
     refining's progress and a battery's count are all still there.
 
 ## Open questions
@@ -340,3 +357,7 @@ old paper differ, this brief is the record.
    owner's silo of 2026-11-02 burned and was dug in play (the old diary of old step 4 part 2). The old audit's reading,
    that a pile stacked by code cannot be lit by other means until its chunk reloads, stays G19's note, and "what to
    try" 8 watches the burn.
+5. Is a machine's fire to be held at a claim, and its containers asked for one (G58, G61)? **Answered:** "G58.) Fix
+   G61.) Fix", the owner's word of 2026-11-12 19:35Z (R27). Two choices are this brief's own, for the owner to
+   change if wanted: a machine whose carver the game does not know sets no fire on a face, and a container in
+   another's claim counts as no container at all.
