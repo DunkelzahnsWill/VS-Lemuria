@@ -798,3 +798,24 @@ change nothing."
 **Stopped.** Nothing.
 
 Concerns: mason; the review thread; the planning thread; the coordinator.
+
+## R37. The owner wants a read-only copy of rulings.md and findings.md
+
+**Given.** 2026-11-12 22:59:52Z by the owner, in the project chat. It answers the coordinator's post of 22:58Z, whose
+question was, word for word: "A read-only copy of rulings.md and findings.md beside the two books would end that. Do you
+want it? I suggest yes, as a small version 7 after this merge, so that nothing waits on it."
+
+**Recorded.** 2026-11-12 23:00Z by the record thread, copied from the owner's own message.
+
+The owner, the whole message:
+
+> Yes a read only copy would be most wise, I'll await the finished wording before hand-over to the other project.
+
+The coordinator's words with it, exactly as given: "My reading, to stand as mine: the owner wants the read-only copy of
+rulings.md and findings.md; the planning thread writes it as version 7 after PR #144's merge, and pushes nothing to PR
+#144, which stays cleared; the owner hands the text to the sister project only once version 7's wording is finished and
+reviewed, and I then post the finished wording whole."
+
+**Stopped.** Nothing.
+
+Concerns: the planning thread; the review thread; the record thread; the coordinator.
