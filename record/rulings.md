@@ -439,3 +439,18 @@ rules."
 Concerns: every thread (rule 1: the coordinator sends this entry to every thread at once, and to every thread that
 starts work until the change merges); the planning thread (writes the change into the rules, rule 4); the review
 thread (reads the change before it merges, rule 6 e); the record thread.
+
+## R22. The owner's word to carry on until PRs are ready for the owner's merge, or a rule needs reading
+
+**Given.** 2026-11-12 06:02:59Z by the owner, in the project chat, after the coordinator posted the review thread's
+report on PR #16 and its counter-view (G30).
+
+**Recorded.** 2026-11-12 06:03Z by the record thread, copied from the owner's own message.
+
+The owner: "Carry on until you're ready for me to start merging PR's, or need word on rule interpretation."
+
+The coordinator's words with it, exactly as given: "I take it to mean: the threads keep working without waiting on the
+owner, and I call the owner only when PRs are ready for the owner's merge or a question of how to read the rules needs
+the owner's word. That reading is mine, not the owner's. It does not answer G26 or G30."
+
+Concerns: every thread; the coordinator.
