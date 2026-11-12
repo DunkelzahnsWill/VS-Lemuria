@@ -3829,7 +3829,7 @@ Next:
 
 ## G76. Report under rule 6 (a): three loose sentences of the Road Bible made exact, with R29 (PR #108 at 34de6be)
 
-**Written.** 2026-11-12 DRAFTTIME. Woken by the coordinator at 20:08Z.
+**Written.** 2026-11-12 20:18Z. Woken by the coordinator at 20:08Z.
 
 **What I read.** PR #108, "Road Bible: three loose sentences made exact (the handbook, the claims switch, the
 Journal's pages)", branch road-bible/three-loose-sentences, at commit 34de6bedb71d18cb2373fef055b11595aa8b5cb3, its
@@ -3910,13 +3910,15 @@ on I read every brief and every piece of code so. A brief that has anything else
 player's claim while the switch is on differs from the book, unless the book is changed with it.
 
 **How it merges.** By the owner's merge, once the description cites this report and the owner is assigned (rule 4). At
-MERGETRY git joined it with main without a conflict. PR #96 and PR #105 do not touch the book, so the three can merge
-in any order. A later commit voids this report, other than one that only brings main into the branch and settles no
+20:18Z git joined it with main without a conflict. PR #96 and PR #105 do not touch the book, so the three can merge in
+any order. A later commit voids this report, other than one that only brings main into the branch and settles no
 conflict by hand outside the planning thread's own diary, or one that adds only its own diary entry. After the merge
 the concept has changed: the coordinator tells every thread, and each reads the Road Bible again before it goes on
 (rule 5). So do I.
 
-**Before I signed** I told the planning thread what I found and what G77 says, at 20:13Z. ANSWERHERE
+**Before I signed** I told the planning thread what I found and what G77 says, at 20:13Z, and asked for no commit. It
+had not answered when I signed. Nothing in this report waits on its answer, and if it sees a thing otherwise I report
+that as it comes.
 
 **For the planning thread.** Cite this report, G76 at 34de6be, in the description, and then assign the owner.
 
@@ -3946,7 +3948,8 @@ is what the concept promises once it merges, said plainly, so that nothing is se
    says why lava is not a fourth thing in the list: a fire that a working sets is held by the game's own rule as well,
    and a list of Lemuria's own doings should not hold what the game does. That reason is sound, and the paragraph
    tells the reader of lava in so many words. But a reader who stops at the count has missed one. The owner chose it
-   on 2026-10-27, by the answer "Let it run, like natural lava", to a question that warned of it.
+   on 2026-10-27, by the answer that the note of old step 3 gives as "Let it run, like natural lava", to a question
+   that warned of it.
 2. **The dialogue rises from a brief into the concept.** That twins dialogue across a claim's edge was found in the
    code, written into the brief of feature 1 as built (PR #72), and settled by the owner's merge after G60 had been
    put before the owner. The owner has never said in words that it is wanted. Until now it could be changed by a
@@ -3956,10 +3959,9 @@ is what the concept promises once it merges, said plainly, so that nothing is se
    the third crack shatters it. The twin outside suffers the same.
 3. **The list is closed below Luminous.** It names "a dialogue of twins below Luminous". So from Luminous up, twins
    must spare what lies inside a claim, the crystals in it included, or the brief of feature 13 changes the concept
-   again. The old paper gave the reactions of Luminous and Radiant crystals a claim test and said nothing of the twins
-   themselves (G60, its first point). Exposure, beams, goods beams and Storm Call's lightning each meet the same list
-   (features 12, 15, 17 and 18). That is the price of a closed list, and the planning thread takes it knowingly: "so
-   that none can drift".
+   again. The old paper gave the reactions of Luminous and Radiant crystals a claim test (G60, its first point).
+   Exposure, beams, goods beams and Storm Call's lightning each meet the same list (features 12, 15, 17 and 18). That
+   is the price of a closed list, and the planning thread takes it knowingly: "so that none can drift".
 4. **What a claim does not keep, all told.** With the switch on, and once the patches for G58 and G61 are merged, a
    claim on a server with other players keeps its blocks, creatures, players and goods from Lemuria's workings. It
    does not keep the crystals within 3 blocks of its edge from a twin, the charge of a network that touches its edge
@@ -3969,7 +3971,7 @@ is what the concept promises once it merges, said plainly, so that nothing is se
 
 ## G78. Diary: PR #105 is with the owner and PR #108 is cleared; three maps and G16 are still owed
 
-**Written.** 2026-11-12 DRAFTTIME.
+**Written.** 2026-11-12 20:18Z.
 
 **What I did since G75.**
 - *PR #109* carried G73 to G75 to main at 20:08Z (merge commit 9168841). I told mason and the coordinator in the same
@@ -3980,7 +3982,7 @@ is what the concept promises once it merges, said plainly, so that nothing is se
   G75's "Next:" is done: the planning thread had the change in hand before I could ask, and by its entry of 20:09Z its
   branch held drafts from 19:54Z on.
 - *A third map,* the planning thread's, woken at 20:08Z under rule 6 (f). It came to main by PR #110 at 20:10Z and
-  changes in the first point of its plan. I read it whole at 20:14Z and find that it does not differ from the book.
+  changes in the first point of its plan. I read it whole at 20:13Z and find that it does not differ from the book.
 - *The record since G75.* PR #110: the planning thread's entry of 20:09Z, with its map. PR #111: the coordinator's
   entry of 20:10Z. The rules, the book and the briefs did not change.
 
