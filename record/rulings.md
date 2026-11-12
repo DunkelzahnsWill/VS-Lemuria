@@ -698,3 +698,30 @@ record it as said, as not yet settled: I answer the owner on it and it changes n
 rules.
 
 Concerns: mason; the planning thread; the review thread; the coordinator; the record thread.
+
+## R33. The owner's answer on point 0 of R32: yes, more duties to the record thread, and a copy of both books
+
+**Given.** 2026-11-12 21:08:01Z by the owner, in the project chat. It answers point 0 of R32 and the coordinator's
+post to the owner of 21:07Z.
+
+**Recorded.** 2026-11-12 21:08Z by the record thread, copied from the owner's own message.
+
+The coordinator's post to the owner of 21:07Z, which this answers, word for word as the coordinator gave it:
+
+> On 0: yes, that would help, and it is yours to give because it changes the cast in the rules. My view is to do two
+> small things. First, let the record thread do directly what it now does through me: send each new ruling and finding
+> to the threads it concerns, and wake the review thread and the inquisitor. Today the rules say it "wakes no one", so
+> every such step costs two messages. Second, give me the read-only copy of the rules and the book in the project
+> files. I would keep what only I can do: talking with you, the merge lists, and starting threads. If you say "0: yes",
+> the planning thread writes both as one rules change for you to merge.
+
+The owner, the whole message:
+
+> 0.) Yes, sounds good.
+
+The coordinator's words with it, exactly as given: "Nothing changes in your duties until that rules change is merged
+by the owner; the planning thread writes it now."
+
+**Stopped.** Nothing.
+
+Concerns: the planning thread; the review thread; the coordinator; the record thread.
