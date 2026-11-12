@@ -154,7 +154,10 @@ public class ItemCrystalChisel : Item
         if (be is BlockEntityCrystal or BlockEntityCradle or BlockEntitySparkstone)
         {
             handling = EnumHandHandling.PreventDefault;
-            if (world.Side == EnumAppSide.Server)
+            // Drawing charge is a use by hand of a Lemuria block: with the claims switch on it needs the claim
+            // owner's permission, as setting a crystal into a socket does (feature 4's brief, Claims; G57).
+            var player = (byEntity as EntityPlayer)?.Player;
+            if (world.Side == EnumAppSide.Server && (player == null || LemuriaClaims.TryAccess(world, player, blockSel.Position, EnumBlockAccessFlags.Use)))
             {
                 Draw(slot, be, blockSel.Position);
             }
