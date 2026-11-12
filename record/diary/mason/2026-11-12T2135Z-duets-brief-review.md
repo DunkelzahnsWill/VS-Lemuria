@@ -21,3 +21,8 @@
 12. A turn with nothing to do passes at once; an Earth crystal's turn ends after one step or when it cannot wear now.
 
 **Next:** the review thread's report on the new commit; the owner's merge with PR #143.
+
+**Then (21:48Z), the review thread's eight small things:** nickel is in the handbook (only chromium, titanium and
+platinum bits are kept out); "What to try" 1, 5 and 7 now say what the owner sees and sets up; a drain with a Memory
+takes a single crystal in its socket; panning lowers the room's size by 200 and what is stored by what the sand held;
+a module goes only into an empty Focus and swaps nothing without a duet's pair; "below" became "in this pull request".
