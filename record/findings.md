@@ -3286,7 +3286,8 @@ Next:
 
 **Rank.** Flaw, naming step 1. **Owning thread.** Mason: the code lies in feature 4's folder, and feature 8's machines
 pay through it. **Raised in.** The read of the merged fix for G57 (PR #81 at 40f783c), for that finding's Status line
-(G69). **Status.** Open. The owner may decline it: see "Why a flaw".
+(G69). **Status.** Declined by the owner: the owner's word of 2026-11-12, 19:57Z, is "G68.) Decline" (R29). Nothing is
+to be corrected. The briefs of features 4 and 8 say it as built once PR #105 is merged (G73).
 
 - **The code, main at e33cc0c.** Lemuria/Sparkstone/SparkstoneNetworks.cs. A network is every loaded Active Awakened
   block that touches the next face to face (`NetworkOf`, from line 51), whoever set it down and wherever it stands:
@@ -3644,3 +3645,184 @@ Next:
 - **Open findings:** flaws G16, G58, G61 and G68 (mason). The patches for G16 are merged, and its Status line waits
   for my read. The owner has G58 and G61 fixed (R27), and is asked about G68 (R28). No blocker is open.
 - **Read up to:** rulings.md R28, player-diary.md none (the file does not exist), findings.md G72.
+
+## G73. Report under rule 6 (a): the briefs say that a network crosses a claim's edge (PR #105 at e8c9c0b)
+
+**Written.** 2026-11-12 20:07Z. Woken by the coordinator at 19:59Z.
+
+**What I read.** PR #105, "Briefs: a network takes no account of a claim's edge, as the owner declined G68 (R29)",
+branch briefs/network-claims, at commit e8c9c0b86b6fcfc3b1e845696834ae716067b3a3, the second of its two commits,
+branched from main at 39c393e. I read it whole: the diff of record/briefs/sparkstone.md, 6 lines added; the diff of
+record/briefs/machines.md, 2 lines added; mason's entry of 19:59Z, 15 lines, which rides in the PR; and the
+description. It takes no line out and has no code. Its first commit, dec2c9f of 19:59:08Z, gave the owner's answer as
+R28. The second, 33 seconds later, puts R29 in its place, once in each of the three files, and adds to the entry that
+R28 was the question. It changes nothing else. The check `build` ended green on e8c9c0b at 19:59:56Z. The description
+says that the owner is assigned once it cites this report.
+
+**The rules and the book.** My context was cut at 19:55Z. I read both in full again after it, at 19:56Z (G75). Neither
+has changed since G69. rulings.md ends at R29.
+
+**The owner's word.** R29, on main since 19:59Z by PR #104: "G68.) Decline", the owner's whole message, given in the
+project chat at 19:57:34Z. It answers R28, the coordinator's question whether the owner wants G68 fixed or declined.
+The coordinator's wake brought me the owner's own message as well.
+
+**The short of it.** The owner declined the flaw, so what is built stays as it is. The change writes down what is
+built, in the two briefs that G68 named. Nothing is added, and nothing changes in play. Both new sentences are true of
+the code on main, and neither says more than G68 found and the owner declined to change. I find no blocker. **PR #105
+is cleared at e8c9c0b for the owner's merge.**
+
+**The two sentences, held against the code.** Main at 8e283a9. Lemuria/Sparkstone/SparkstoneNetworks.cs is as it was
+when I wrote G68: its last change is of 2026-11-08.
+- *Feature 4, Claims, a new paragraph.* "A network takes no account of a claim, whatever the switch says: Awakened
+  blocks that touch join one network whoever set them down and wherever they stand, its charge is shared across a
+  claim's edge, and a draw or a machine's working anywhere on it takes from the whole of it. So a block set just
+  outside a claim, touching a network inside it, reaches that network's charge. The owner declined to change this
+  (G68, "Decline", 2026-11-12 19:57Z, R29). It is built." True. The file that makes a network names no claim and never
+  reads the switch, so "whatever the switch says" is right. A network is every block that touches (`NetworkOf`), its
+  blocks are kept equally full (`Update`), and the chisel's draw and a machine's payment take from the whole of it
+  (`Draw`, `TryPay`, `CanPay`). The words "a draw ... anywhere on it" say where the charge comes from, and not where a
+  draw is allowed: the paragraph above them still has the draw need the claim owner's permission with the switch on,
+  which is the fix for G57.
+- *Feature 8, "How it is built", a new line.* "A machine pays from its whole network, which may reach into a claim: a
+  network takes no account of a claim's edge (feature 4's brief, Claims; the owner declined G68, R29). Built." True,
+  by the same places of the code.
+- *The brief of feature 8, read whole.* Its rule under Claims still says: "With the claims switch on, a machine
+  changes nothing inside a land claim, no block, creature or player, unless it stands inside that same claim." G68
+  held that sentence against the charge of claimed stone. The new line is its exception, and it stands in another
+  section, next to the line that has every working claim-checked "before it changes the block it works on". Read
+  whole, the brief now says both: what a machine works on is asked of the claim, and what it pays with is not. Mason's
+  entry says why the line is not under Claims: "so it does not touch the lines PR #96 changes". I take that as a fair
+  reason, and the brief as true when it is read whole. A reader of Claims alone does not meet the exception, and mason
+  adds a pointer there when that section next changes (below).
+
+**Was the change owed?** The owner's word names no change to a brief. So this is no change at the owner's command, and
+I certify nothing: it goes by my read and the owner's merge (rule 4: "A brief: read by the review thread, then merged
+by the owner"). It is owed all the same. G68 said that if the owner declines, "the brief of feature 4 says so".
+Without it the record would hold a declined finding beside two briefs that leave the next reader to raise it again.
+Mason's entry gives the same reason: "A declined flaw is the design, so the briefs say it, as built, and a later
+reader does not raise it again."
+
+**What it leaves for the book.** Standing rule 7 says that with the switch on Lemuria's workings spare what lies
+inside another player's claim, "and only a Bale storm's scars do not". The fourth point of G60 gave that sentence to
+the planning thread as loose, for a dialogue below Luminous. By R29 a network's charge is one more thing that the
+sentence leaves out. The sentence stands in the concept, so its change is the planning thread's to write, and it goes
+by my read and the owner's merge (rule 4). It does not hold this change: rule 1 puts the book before any code that
+follows a ruling, and no code follows this one. I take it up with the planning thread and report on it separately.
+
+**Its entry.** The file is named for 19:59Z, and its first commit is of 19:59:08Z. The name agrees with the clock.
+
+**How it merges.** By the owner's merge, once the description cites this report and the owner is assigned (rule 4).
+PR #96 changes the brief of feature 8 as well, in other lines. At 20:07Z I let git join PR #105 with main, and with
+the head of PR #96: neither meets a conflict, so the owner can merge the two in either order and neither needs a new
+commit for the other. A later commit to PR #105 voids this report, other than one that only brings main into the
+branch and settles no conflict by hand outside mason's own diary, or one that adds only mason's own diary entry.
+
+**For mason.**
+1. Cite this report, G73 at e8c9c0b, in the description, and then assign the owner.
+2. The pointer under Claims. I put two remarks to you at 20:02Z, before I signed, and you answered: "I see both
+   remarks as you do, so please sign." Of the pointer you wrote that you add it "the next time the machines Claims
+   section changes", and that this "will likely be the G58/G61 patch PR, or the duets brief". It cannot be the patch
+   PR. The pointer is a change to a settled brief, so it goes the way a brief goes, by my read and the owner's merge,
+   and "A patch carries a fix and nothing more" (rule 4). A PR that changes briefs can take it, such as the one that
+   carries the duets' brief.
+3. The "what to try" lists gain no item, and none is owed: nothing new is built. The third point of G74 says what that
+   leaves.
+
+**For the coordinator.** PR #105 may go to the owner once its description cites G73 and the owner is assigned. G74 is
+its counter-view and needs no answer. G68 is declined, as its Status line now says, and is open against nobody. The
+planning thread's sentence comes as a report of its own.
+
+**For the owner.** PR #105 changes no code and nothing in play. It adds two sentences to the briefs, which say what
+you declined to change: stone that touches is one network, also across the edge of a claim. It can be merged before
+PR #96 or after it.
+
+## G74. Note: the counter-view to PR #105 (rule 6 a)
+
+**Rank.** Note. **Owning thread.** The coordinator, for the owner. **Raised in.** The read of PR #105 (G73).
+**Status.** Needs no answer.
+
+The change says what is built and what the owner declined to change, and I found it true (G73). So the counter-view is
+not that it is wrong. It is what stands settled once it merges, said plainly, so that nothing is settled unseen. Each
+point can still be changed afterwards by a change to a brief.
+
+1. **Goods are kept by a claim, and charge is not.** By R27 a machine that stands outside a claim is to take no goods
+   from a chest inside it (G61, "Fix"): PR #96 writes that into the brief, and the patch follows it. By R29 a machine
+   or a chisel outside a claim still takes charge from stone inside it. Both are the owner's word, and once PR #96 and
+   PR #105 are merged the briefs say both. A player then meets a claim that keeps what is in it from a machine outside
+   it, blocks, creatures, players and goods, and does not keep its charge.
+2. **The fix for G57 holds a stranger off by one block.** With the switch on, a stranger's draw with the chisel is
+   refused at a block inside a claim. It goes ahead one block further out, at a block that the stranger sets against
+   the network (G68). What keeps a network's charge is its owner's own care: build it one block inside the claim's
+   edge, or tap the blocks at the edge Dormant with the Crystal Rod. Nothing in the game tells a claim's owner so. The
+   Journal has one line on claims, on a page of its chapter on naked evocations: "Land another has claimed, the stone
+   will not touch, unless they let me build there." It says nothing of a network. If players should know, it is a line
+   of the Journal, by a change to a brief.
+3. **It is settled without having been seen in play.** I read G68 in the code and did not run it: it needs a claim
+   that is not the tester's own, and the owner tests in single player until the one multiplayer test (standing rule
+   10). So the owner's word rests on my account of it. The briefs gain no "what to try" item for it, so nothing brings
+   it before the owner at that test unless a line is added by then.
+4. **What later features may take from it.** R29 settles stone that touches. Beams will carry charge along a line of
+   sight (feature 15) and goods beams will carry goods (feature 17), and Ascendant stone heals "never inside another
+   player's claim while the claims switch is on" (the concept). Whether a beam crosses a claim's edge is for those
+   briefs to ask. R29 does not answer it.
+
+## G75. Diary: PR #96 is with the owner; G68 is declined and PR #105 cleared; the maps' report and G16 are next
+
+**Written.** 2026-11-12 20:07Z.
+
+**After a cut.** My context was cut a twelfth time, at 19:55Z. Nothing of mine was unpushed. I read the rules and the
+Road Bible in full at 19:56Z, as G69 has me do after every cut. Their checksums begin d8d96a29a51f607a and
+d7eb7ef18853187b, as they did before it.
+
+**What I did since G72.**
+- *PR #102* carried G70 to G72 to main at 19:52Z (merge commit 596e37e). At 19:56Z I told mason and the coordinator,
+  with the state of PR #96 at my look: its head 6b88ee5, its description citing G70 at that commit, and no assignee.
+  The coordinator's entry of 19:59Z says that it then called the owner for PR #96, with the owner assigned and G71
+  word for word.
+- *The record since G72.* PR #103 (19:52Z): the coordinator's map after my three remarks, and its entry of 19:51Z.
+  PR #104 (19:59Z): R29, one line of that map, and the coordinator's entry on the owner's answer. PR #106 (20:00Z):
+  the coordinator's entry of 19:59Z. PR #107 (20:05Z): the precursor's answer to the planning thread, which asked
+  where the note of old step 3 gives two of the owner's answers that its draft of a change to the book cites. The
+  rules, the book and the briefs did not change.
+- *R29,* the owner's "G68.) Decline" of 19:57:34Z. The coordinator sent me the owner's own message at 19:58Z and asked
+  who owes what after it. My answer of 20:02Z: mason owes the briefs of features 4 and 8 a sentence each, which is
+  PR #105; the planning thread has one sentence of the concept to make exact (G73); and nothing else that I can see.
+- *PR #105,* woken at 19:59Z under rule 6 (a). I read it at e8c9c0b, the head that mason asked me to read. G73 is the
+  report and G74 the counter-view. At 20:02Z, before I signed, I put two remarks to mason, and asked for no commit.
+  Mason answered within the minute: "I see both remarks as you do, so please sign."
+
+**Status lines changed in this PR.** G68: declined by the owner (R29). No other.
+
+**The three scripts.** I did not run them for this PR (G64). G73 rests on the two briefs and the code as read, and on
+no run.
+
+**Two maps, read again after the cut.** Mason's as PR #98 left it, and the coordinator's as PR #99, PR #100, PR #103
+and PR #104 left it. I still find neither to differ from the book. Both threads have answered my three remarks of
+19:50Z. The report is not written yet. It will hold the answers, and one thing of the coordinator's own telling: it
+gave its map's new line after PR #76 without having read the changed text of the book, and read the four places at
+19:51Z, after I asked (its entry of 19:51Z).
+
+Next:
+- **Unfinished:**
+  1. The report on the two maps (rule 6 f), as above.
+  2. Standing rule 7's sentence, "and only a Bale storm's scars do not": to take up with the planning thread, and to
+     report (G73).
+  3. The read of the four merged patches for R9 against G16, for its Status line: PR #87, PR #88, PR #84 and PR #92.
+     One question is open in it, and I put it to mason before I sign anything: whether the sockets of a carved Crystal
+     Motor open inside a claim with the switch off. Its block class is `BlockCrystalMotor`, and I have not yet found
+     the handler that names it.
+- **Where it is:** this file, sent to main by a record-only PR from the branch claude/project-thread-4zobvq. The next
+  entries go to that branch as drafts while I write them.
+- **Waiting for:** nothing, for the three things above. Beside them I expect, in some order:
+  - a new report, if a commit that rule 4 does not let pass reaches PR #96 or PR #105 before the owner merges it;
+  - mason's patches for G58 and G61, once PR #96 is merged. Each waits for the owner's merge (G70). The verdicts are
+    the inquisitor's, and I read every one at step 1's gate (rule 6 b), with mason's merge of PR #81 by its own hand;
+  - the planning thread's change to the book for the three sentences of G60, point 4 (rule 6 a), now with R29;
+  - step 1's brief and the changes to other briefs that come with it (rule 6 a), where I read for G24, G41 and the
+    second point of G46;
+  - the owner's word, if the owner gives any, on G51 and on the first two points of G60.
+- **At each wake:** the checksums of the rules and the book, and what has changed in the record since this entry; both
+  books in full after a cut.
+- **Open findings:** flaws G16, G58 and G61 (mason). The patches for G16 are merged, and its Status line waits for my
+  read. The owner has G58 and G61 fixed (R27). G68 is declined (R29). No blocker is open.
+- **Read up to:** rulings.md R29, player-diary.md none (the file does not exist), findings.md G75.
