@@ -889,7 +889,7 @@ None of these changes any work. Each could ride in the next change to the book.
 
 **Rank.** Flaw, naming step 1. **Owning thread.** The coordinator, whose record thread wrote the entry. **Raised in.**
 G23. I told the coordinator by message before 05:30Z. **Status.** Corrected by PR #20, on main at 08410c3, which I
-read whole.
+read whole. The dated lines asked for below came in PR #24, and the three entries were sent again (G38).
 
 R19 as it reached main in PR #18 said that the owner's message of 03:00:29Z "carries three attachments": the hand-over
 plan and links to PRs #11 and #16. None of the three existed at 03:00:29Z. The plan was written in answer to that
@@ -1172,3 +1172,137 @@ Next:
   coordinator until it starts), G24 and G25 (the planning thread). G4 is corrected in PR #16 and closes when that
   commit merges. No blocker is open.
 - **Read up to:** rulings.md R21, player-diary.md none (the file does not exist), findings.md G35.
+
+## G36. Note: the question R23, what the record already says on it, and the counter-view
+
+**Rank.** Note. **Owning thread.** The coordinator, for the owner. It concerns the planning thread and mason. **Raised
+in.** This entry, on reading R23, which came out of G24. **Status.** Needs no answer.
+
+R23 asks the owner how code reaches main when a feature needs it changed in another feature's folders, after that
+feature's brief is changed: on its own, as a patch (A), or in the feature's own PR (B). The planning thread recommends
+B, and the book is to hold A until the owner speaks. No stop was called, so nothing woke me for what rule 1 has me
+report at a stop: what the record already says. I report it unasked, because the question came out of my finding and
+the owner has not answered yet.
+
+**What the record says.**
+- **One sentence names the case, and by its letter it is A.** Rule 4: "A change to code on main that follows a change
+  to its brief is a patch, and its verdict is "out": it waits for the owner's merge." Memory is code on main, the
+  machines' brief is its brief, and the change follows the change to that brief.
+- **The words around it shut B out, by their letter.** A patch is "the class of PR that carries a fix to code already
+  on main", and "A patch carries a fix and nothing more." A PR that holds the duets and the change to Memory holds
+  what rule 4 calls a patch, and more.
+- **Nothing says B.** What B leans on is true as far as it goes. Rule 2 has a brief say "which existing parts it
+  touches". That phrase has work to do without B: a feature uses built parts as they are, and it touches the shared
+  files, which have no brief of their own. And no sentence keeps a feature's PR inside its own folders. The cast keeps
+  a thread inside the folders it owns, and mason owns them all (R5, R15).
+- **No ruling speaks of it.** The old steps did it as B does (PR #9, G24). They were built and merged under the old
+  rules (R4, R14), so they show a habit and no rule.
+
+So the record does not hold B, and by its letter it holds A. I do not call the question closed by that. Whether the
+sentence speaks only of a change that comes alone is a reading, and the owner gives it.
+
+**What each answer changes.**
+- **What step 1's gate tests.** Rule 7 names "a feature of the step" and each "patch to that feature". Under A the
+  change to Memory is a patch to feature 8, which stands under no numbered step in the book as it is (G24). The gate
+  then never asks whether that patch is merged or has its diary entry, though the duets need it. Only the third test,
+  on how each PR was merged, reaches it. Under B the change is in "a PR that carries a feature of the step", and every
+  test reaches it.
+- **How many PRs the owner merges, and in what order.** Under A a feature that reaches into six others, as PR #9 did,
+  comes as up to seven code PRs, each waiting for the owner. The patches go first, wherever the feature's code needs
+  them to build. Under B it is one code PR. Either way the brief of each feature reached into is changed first, by a
+  PR that I read and the owner merges.
+- **The rules' own words.** A needs none. B needs a sentence in rule 4. Without it the sentence quoted above and the
+  ruling stand side by side, and a later thread stops on them (rule 1).
+
+**The counter-view.** The planning thread recommends B. Against B:
+1. By my reading it is more than a reading: it changes what rule 4 says. If the owner says B, the ruling binds from
+   its entry, the planning thread writes the change at once, and I read it before it merges (rules 1 and 6 e). One
+   sentence after the one quoted would do. It should keep what R23 already says: the other feature's brief is changed
+   first.
+2. The owner merges a feature "from its description" (rule 3). Under B that description must name each other feature
+   the PR changes, and the merged change to its brief. Rule 4's list for a ready PR does not ask for that by name.
+
+Against A: the count and the order above, for an owner who has said to carry on until PRs are ready to merge (R22).
+And a gate that does not look at the patches which a step's features needed.
+
+I argue for neither. A is what the rules say today, and B is how Lemuria has been built. My one ask: if it is B, let
+the rules say it.
+
+**On "Stop. None called."** I raise nothing against it. The book is to hold A meanwhile, which both readings allow, so
+no thread does different work today for want of the answer. R13 was raised the same way, and the owner answered it in
+R16. What a stop would have added is this entry, before the question reached the owner.
+
+## G37. Note: the smoke test's line "the quern turns: yes" failed once on code that had not changed
+
+**Rank.** Note. **Owning thread.** Mason (held by the coordinator until mason starts). **Raised in.** This entry, from
+my own run of the checks before the PR that carries it. **Status.** Needs no answer. It becomes a finding against the
+test or the Motor if it shows again.
+
+I run the three scripts before each of my PRs. On 2026-11-12 at 06:39Z scripts/smoke-test.sh failed, on a commit that
+differs from main only in this file. The server's log has:
+- 06:38:58 "Machines test: a Crystal Motor on a quern, powered: yes, torque 0.25, on the quern's network: yes, sockets
+  facing up"
+- 06:39:05 "Machines test: the quern turns: no"
+- 06:39:06 "Machines test: the Dead Socket's quern turns: yes"
+
+The script then said "FAIL: machines.expect: no log line matches: Machines test: the quern turns: yes$". Run again on
+the same commit at 06:42Z, it passed. So did my four runs before it today, at 04:25Z, 04:37Z, 05:52Z and 06:02Z, and
+nothing outside record/ differs between any of the six.
+
+**What the check does.** `MotorCheck` (Lemuria/Machines/MachinesTests.cs, line 469) reads the speed of the quern's
+mechanical network and says "yes" above 0.001. The smoke test types one command a second, and this one comes seven
+commands after the Motor starts. The comment above the line says that the network "is still spinning up" then. So the
+line rests on timing. In the failed run the second Motor's quern, started a second later, did turn. I have not found
+out whether the first quern was only slow or was not driven at all.
+
+**Why it is worth a note.** The check "build" runs this script on every PR, record-only ones included: the book's
+shared list says that the skip for record-only PRs "is still to be made". A line that fails by chance leaves a PR red
+that was set to merge itself. I have not looked through the history of the checks for it.
+
+## G38. Diary: what I read after G35, the question R23, and PR #16 is next
+
+**Written.** 2026-11-12 06:45Z. The coordinator sent me the owner's word of 06:02:59Z at 06:06Z, R19 to R21 again at
+06:07Z and 06:08Z, R22 at 06:10Z, and R23 at 06:26Z. At 06:38Z it woke me for PR #16's new commit (rule 6 a).
+
+**The rules.** Read again in full at 06:08Z: version 3, byte for byte the file that G2 read. PR #21 is not merged yet.
+
+**What changed in the record since G32 (rule 6).** Seven PRs of the record thread, all record-only, and my own.
+- PR #24, merged at 06:06Z: a dated line, "Changed in place", in each of R19, R20 and R21. The PRs and the merge times
+  that they give are right. The coordinator sent me the three entries again, as they stand. That answers the last
+  point of G28, and its Status says so now. Also the coordinator's entries of 05:32Z and 06:00Z, and the record
+  thread's of 06:00Z.
+- PR #26, merged at 06:10Z: R22, the owner's word to carry on. I held it by program against the server's copy of the
+  owner's message of 06:02:59Z: the same, character for character. The coordinator's reading with it is marked as its
+  own. Also the coordinator's entry of 06:03Z and the record thread's of 06:07Z.
+- PR #25, merged at 06:11Z: my G32 to G35. It was set to auto-merge at 06:04Z, and its check was green at 06:07Z.
+  GitHub did not merge it, though PR #26 merged itself in that time. At 06:11Z I merged it, by rule 4: "Where these
+  rules allow auto-merge and the checks are already green, the thread may merge it." I told the coordinator.
+- PR #27 and PR #28, merged at 06:18Z and 06:22Z: the coordinator's entries of 06:14Z and 06:19Z, and the record
+  thread's of 06:14Z.
+- PR #29, merged at 06:26Z: R23, the planning thread's question to the owner out of G24, and the record thread's entry
+  of 06:20Z. R23 holds no words of the owner. The copy that the coordinator sent me has the same words as main. My
+  note on it is G36. I sent the coordinator the short of G36 by message before this PR, so that it could reach the
+  owner before the answer. The coordinator tells me that it has given my words to the owner and to the planning
+  thread.
+- PR #30, merged at 06:41Z: the coordinator's entry of 06:39Z, on my word on R23 and on PR #16's new commit.
+
+**The two PRs I have reported on.**
+- PR #21 is at commit 7de344f still. Its description cites G32, in my words and rightly, and it is assigned to the
+  owner. G32 stands.
+- PR #16 took a second commit, 84ace1d, at 06:32Z. It voids G23 (rule 4). The planning thread says that it corrects
+  G24 and G25 and answers G27 and G29. I read it next, and the new report follows in my next PR.
+
+Next:
+- **Unfinished:** the new report on PR #16 at commit 84ace1d, which I am reading. G19 has not been tried in a run.
+- **Where it is:** this file, sent to main by a record-only PR from the branch claude/project-thread-4zobvq.
+- **Waiting for:** nothing, for that report. After it, the coordinator's next wake. I expect, in some order:
+  - the owner's answer to R23, which I read against G36, and by rule 6 (e) a change to the rules if it calls for one;
+  - the rules again, in full, once the owner merges PR #21 (rule 4);
+  - the nine briefs of the built features (R3, rule 6 a), where I read for G12's last point, G16, G20 and G29;
+  - step 1's brief (rule 6 a), where I read for G24;
+  - the first maps (rule 6 f): the planning thread's after PR #16 merges, the coordinator's, mason's, and G5 at the
+    precursor's.
+- **Open findings:** flaws G5 (the precursor; the coordinator until it starts), G7 and G13 to G16 (mason; held by the
+  coordinator until it starts), G24 and G25 (the planning thread). G4 is corrected in PR #16 and closes when that
+  commit merges. No blocker is open.
+- **Read up to:** rulings.md R23, player-diary.md none (the file does not exist), findings.md G38.
