@@ -63,8 +63,8 @@ commit a1aae13. Where this brief and the old paper differ, this brief is the rec
     charge join its network's, so the network stores more and machines draw on it. A full Free block holds 450. Taken
     out, a capacitor leaves as full as its network is, so storing a crystal never drains it. It gathers nothing from its
     surroundings, an Unaligned crystal stores nothing, and a socketed crystal still dialogues with any twin within 3
-    blocks (feature 1), save one in a Memory's magazine up to Glowing (feature 8; feature 10's brief, R32; not built
-    yet: it is built with feature 10, and nothing in this feature's code changes for it).
+    blocks (feature 1), save one in a Memory's magazine up to Glowing (feature 8; feature 10's brief, R32; built with
+    feature 10, PR #156, and nothing in this feature's code changed for it).
 11. **Active and Dormant.** Every Awakened block, Free or carved, is *Active* or *Dormant*, and starts Active. A
     Dormant block is out of its network: it passes no charge, so switching one Dormant cuts a line in two, and its
     capacitors keep what they hold. Its glyphs go dark and its hum falls silent. The switch is a tap of the Crystal Rod

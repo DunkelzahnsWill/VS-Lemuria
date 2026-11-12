@@ -91,9 +91,8 @@ old paper differ, this brief is the record.
    - *Life, Death, Time, Rust* (feature 9's crystals): Bloom, Wither, Rewind and Progress, by the rules by hand. A plant
      takes Bloom once an in-game day, hand or Focus (K4), and a Life working pays its cost once for every 9 plants it
      would move on, rounded up, in full or not at all, so a network that cannot pay it all blooms nothing that working
-     (feature 10's brief, item 11, R32; not built yet: it is built with feature 10); a Death Focus with a Glowing
-     crystal withers what stands in front of it (K5); a Time or Rust Focus works a container only when it has a full
-     measure to move.
+     (feature 10's brief, item 11, R32; built with feature 10, PR #156); a Death Focus with a Glowing crystal withers
+     what stands in front of it (K5); a Time or Rust Focus works a container only when it has a full measure to move.
    - *Unaligned*: Quicken (below), and the shelf's work (below).
    Each working sends a short streak of sparks in its crystal's colour to the target and plays its evocation's sound
    there, softer than a cast.
@@ -178,12 +177,12 @@ old paper differ, this brief is the record.
     burn, one rod tap wakes the shelf, the shovel digs the charcoal and the next pit is stacked. The owner's own silo
     run of Nov 2 chopped, stacked, burned and dug (the old diary of old step 4 part 2; G19 is answered below).
 18. **Memory,** a module, `lemuria:memory-awakened-{rock}-{side}`, made in the grid, shapeless, from a block of Awakened
-    sparkstone and any Glowing crystal, both used up. Set against any face of a Focus or Scatter but its front, one to
-    a machine, it holds a magazine of 2 crystals (4 sockets' room), set in and taken out as sockets are. After each
-    turn the crystal that just worked moves to the bottom of the magazine and the first one cycles into its place, where
-    it fits; a Dormant crystal is passed over, and turning costs nothing. A stone working a battery does nothing else,
-    so Memory against a fill stone stays still. Three more things are feature 10's brief (R32), not built yet: each
-    is built with feature 10.
+    sparkstone and any Glowing crystal, both used up. Set against any face of a Focus or Scatter but its front, one to a
+    machine, it holds a magazine of 2 crystals (4 sockets' room), set in and taken out as sockets are. After each turn
+    the crystal that just worked moves to the bottom of the magazine and the first one cycles into its place, where it
+    fits; a Dormant crystal is passed over, and turning costs nothing. A stone working a battery does nothing else, so
+    Memory against a fill stone stays still. Three more things are feature 10's brief (R32), each built with feature 10
+    (PR #156).
     - *Its magazine keeps its crystals out of dialogues* up to Glowing, as a jar does (feature 1).
     - *Duets.* A Focus's Memory holding both crystals of a duet works the duet in place of cycling, the pair giving the
       turn; a Duet Module in one of the Focus's sockets holds a second pair, swapped after each duet working.
@@ -207,10 +206,10 @@ old paper differ, this brief is the record.
 21. **The room.** A battery is the box between two stones: a *drain*, a Gather facing into one bottom corner, and a
     *fill*, a Focus facing into the top corner opposite. From 2×2×1 to 7×7×7, every block in it is the medium or its
     charged form and every block touching it from outside is solid, glass included; otherwise both stones rest and say
-    why. One exception, feature 10's (R32; not built yet): a block its own drain panned (item 18) keeps its place in the
-    room, empty. Both stones go on working, it holds nothing, and the count they show drops by its 200 until stone is
-    put back; the drain remembers it through a restart. Any other Focus or Gather of that alignment facing into the room
-    works it too. A stone working a battery does only that.
+    why. One exception, feature 10's (R32; built with it, PR #156): a block its own drain panned (item 18) keeps its
+    place in the room, empty. Both stones go on working, it holds nothing, and the count they show drops by its 200
+    until stone is put back; the drain remembers it through a restart. Any other Focus or Gather of that alignment
+    facing into the room works it too. A stone working a battery does only that.
 22. **Its Elemental.** The fill's aligned crystals name it, Fire, Ice or Earth, and crystals of any other alignment in
     either stone sit idle (J3, J4), save a Sky and an Unaligned crystal cycled by a drain's Memory (item 18); a fill
     with none, or with two Elementals, names none, and the battery rests. A battery holding a count stays its Elemental
