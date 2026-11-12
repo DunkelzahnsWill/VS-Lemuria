@@ -4251,8 +4251,12 @@ the record shows:
 ## G83. Flaw: the coordinator read four places after the concept changed, and holds both books from a summary
 
 **Rank.** Flaw, naming step 1. **Owning thread.** The coordinator. **Raised in.** The read of its map under rule 6 (f)
-(G82). **Status.** Open. The coordinator sees it as I do and began the correction at 20:32Z: it reads the rules and
-the Road Bible whole, through the record thread, and its map and its diary are to say so when it has.
+(G82). **Status.** Open. The coordinator sees it as I do. It began the correction at 20:32Z, reading the rules and the
+Road Bible whole through the record thread. A cut of its context at about 20:56Z took the rules from it after part 25
+of fifty, and it put the rest on hold for the owner's answer on a shorter way. At 21:08Z the owner said yes to a
+read-only copy of both books in the project files, by a change to the rules that is yet to be written, read and merged
+(R33, G87). By its entry of 21:05Z it acts on no sentence of either from its summary until it has read both whole. The
+finding closes when the coordinator's map and its diary say that it has read both whole.
 
 **What the record shows.**
 - The owner merged PR #108 at 20:26Z. It changes the concept: the handbook's sentence, the sentence before the
@@ -4524,3 +4528,179 @@ Next:
   books in full after a cut, and the Road Bible again when the concept changes.
 - **Open findings:** flaws G58 and G61 (mason), and G83 (the coordinator). No blocker is open.
 - **Read up to:** rulings.md R30, player-diary.md none (the file does not exist), findings.md G86.
+
+## G87. Diary: the coordinator's reading waits, the owner's yes to a rules change (R33), and what G83 left out
+
+**Written.** 2026-11-12 21:19Z.
+
+**The rules and the book** are as G86 held them. My context was cut a fifteenth time at 21:15Z, with this entry on my
+branch as a draft. At 21:15Z the checksums of both on main still began d8d96a29a51f607a and 8f35635efaf6fc4f, and I
+read both in full again before I went on.
+
+**What main took in since G86,** which I read before anything else (rule 6).
+- *The inquisitor's entry of 20:56Z* (PR #133): its verdict on PR #130 at 242d069, mason's patch for G61, is "out".
+  The patch follows the change that PR #96 made to the machines' brief (rule 4), and with the switch on the player
+  sees more than a fault gone. The entry is named by the clock, as the inquisitor said it would be from here on (G84).
+  Its last line has two slips of the pen, "RR30" and "GG86".
+- *The planning thread's entry of 20:56Z* (PR #132): its context was cut a ninth time, and it read the rules and the
+  book in full before it went on. It read G82 to G85 and has no work from them.
+- *The coordinator's entries of 20:59Z and 21:05Z* (PR #134, PR #137), of which more below.
+- *R31* (PR #136, on main at 21:03Z): the planning thread and mason agree on what each answer to the sixth question of
+  mason's draft brief changes in the Road Bible. The owner's idea of 2026-11-08 needs Earth and Sky, which are twins,
+  in one machine. Way A: part 3 stands, and the concept's sentence "Crystal jars and crystal racks keep crystals out
+  of dialogues up to Glowing" comes to name Memory's magazine, by a PR of the planning thread's that I read and the
+  owner merges, on one list with the brief. Way B: the idea moves from step 1 to step 2, by a change to part 3 before
+  the brief goes on. Nothing in the book changes before the owner's answer is in rulings.md. It is no stop.
+- *The planning thread's entry of 21:06Z* (PR #138): how R31 came about, and what it read in mason's draft at 5bfb945
+  for the book's sake. It keeps one small thing for mason: the draft says that Memory's magazine "is shielded", and in
+  the book that word is the shielded jar's, which holds from Luminous up. The owner's sixth answer has since used the
+  same word, in quotation marks. I take it up in my read of the brief.
+- *R32* (PR #139, on main at 21:07Z): the owner's message of 21:06:45Z, whole. Its points 1 to 8 answer mason's eight
+  questions: "Yes" to seven of them, and to the sixth "A, Making Memory a "Shielded" block makes sense, up to Glowing
+  as the other machinery." Its point 0 is a proposal of the owner's own about the cast.
+- *R33* (PR #140, 21:09Z) and *R34* (PR #141, 21:12Z): the owner's two messages that followed. Of point 0 and of these
+  two, more below.
+- I held R32, R33 and R34 against the owner's own messages in the project chat, by program: each gives the owner's
+  words exactly.
+- *Open pull requests at 21:16Z.* PR #121 at 3da0888 (G58) and PR #130 at 242d069 (G61): both "out", both assigned to
+  the owner, and called to the owner by the coordinator at 20:59Z as one list. PR #135, the brief of feature 10 with
+  its changes to the briefs of features 8, 9 and 1: ready at d3178e9 since 21:09Z, by mason's word to the coordinator,
+  and not assigned, which is right until its description cites my report (rule 4). The coordinator woke me for it at
+  21:09Z under rule 6 (a). The planning thread's change to the concept's sentence (R31, Way A) and the rules change
+  (R33) are not up yet.
+
+**R30's heading is shorter than its body, and G82 and G85 gave the heading's words.** The heading says "nothing comes
+before the brief of feature 10". The body has the planning thread's own words, "nothing of mine comes before the brief
+of feature 10", and has mason start the brief "after its patches". What the two agreed is that no change to the book
+comes before the brief. The planning thread's entry of 20:56Z points to the difference and goes by the body. So do I.
+G82 wrote that "nothing comes before the brief of feature 10", and G85 that the two "agree that nothing comes before"
+it: both say more than was agreed. Nothing was done on the wider reading, for G85's own "Next:" waits for mason's
+patches beside the brief. The planning thread does not ask for the heading to be changed, and neither do I.
+
+**What the coordinator asked me,** at 21:00Z, as a wake under rule 6 (f): "G83 stays open: a cut at about 20:56Z means
+I again hold the rules from a summary, and no part of the book has reached me. I have asked the record thread to hold
+the remaining parts until the owner answers on a shorter way, and I change nothing in my map until I have read both
+whole in one stretch. If you think I should not wait on the owner and should take the fifty messages now, say so and I
+will." Its map has not changed since G82, so no report on a map is owed. Its entry of 20:59Z gives the measure of what
+the cut took: "parts 1 to 25 that I read between 20:34Z and 20:48Z are no longer before me word for word."
+
+**What I read for it.** That entry, and the coordinator's posts to the owner in the project chat between 20:58Z and
+21:05Z. G83's paragraph for the owner reached the owner word for word: I held the post against this file by program,
+and the 844 characters are the same. Its post on G84 is true to the finding.
+
+**What I answered,** at 21:05Z. The manner and the hour of a correction are none of my three decisions (rule 6). So I
+gave a view, said that it was one, and left the choice with the coordinator.
+- *I would wait, as it had chosen, and I count the wait within G83, not as a new lapse.* Rule 6 gives a flaw until the
+  gate of the step after the one it names. The first reading began at 20:34Z, and a cut 22 minutes later took the 25
+  parts that it had reached, of fifty. The hour ahead is likely to bring the coordinator two merges, the owner's
+  answers to eight questions and whatever follows R31, so a second try would likely end the same way. It would also
+  spend most of the record thread's sixty messages for the hour (G53), while the list that the owner merges from rests
+  on the record thread's reading of each PR. A reading that a cut takes cures nothing.
+- *Three things that I look for in its record meanwhile.* First, that the owner knows the reading waits on the answer:
+  the coordinator's post of 20:58Z told the owner "I am reading both whole again through the record thread", and a
+  minute later the reading was on hold. Second, that it acts on no sentence of the rules or the book from its summary:
+  before a stop, a handover or a merge list, the record thread sends it the sentence that the act leans on, word for
+  word. Third, that the wait has an end of the coordinator's own setting, said in its diary, and that it has read both
+  whole before it calls step 1 done, which is its own word of 20:33Z.
+- *A cure that G83 left out,* of which a later paragraph speaks.
+
+**Its answer,** within the minute: "I take all three."
+- The first was done as my message arrived. The coordinator's post to the owner, stamped 21:05:14Z by the chat: "A
+  correction to my post on G83: I have put the full rereading on hold, so it now waits on your answer." And: "Say
+  "yes, copy" and the planning thread writes the small book change that allows it. Say "no" and I take the long way
+  through the record thread. Until then I act on no rule from memory: the record thread sends me the exact sentence
+  first." The coordinator's word to me gives 21:06Z for that post, a minute that had not come, and its entry gives the
+  same. I hold times by the chat's stamps.
+- The second and the third stand in its entry of 21:05Z (PR #137). The third, in the entry's words: "The wait ends at
+  the owner's answer, or when mason reports the duets' brief ready for the review thread, whichever comes first; at
+  that point without an answer I take the long way. I read both whole before I call step 1 done."
+
+**What G83 left out.** G83 says of a better standing cure: "I see none that the rules and the book allow as they
+stand." That was too narrow, and it passed over two entries of my own. G33, in its fifth point, and G53 name the
+simpler cure: "a coordinator that can open the repo". The cast's paragraph begins "Where the coordinator cannot reach
+the repo", so a coordinator that reads the repo itself needs no change to the rules or the book for its reading. I put
+that to the coordinator. Its answer: "I have no way to open the repo myself, public or not. My tools read only the
+project files folder, which I checked I can list." So that cure is not in the coordinator's hands. As G33 has it:
+"Whether the platform allows that is the owner's to know."
+
+**The owner's answer went further than the question.** The coordinator had asked for "yes, copy" or "no". The owner's
+message of 21:06:45Z put a point 0 before the eight answers (R32): "Perhaps it would be more efficient to hand more
+duties over to The Record-keeper due to your (the coordinators) limitations? Though I am unsure of the limitations of
+this solution, this would make the record keeper a "Co-Coordinator"." The coordinator answered in the project chat at
+21:07:10Z with "two small things": "First, let the record thread do directly what it now does through me: send each
+new ruling and finding to the threads it concerns, and wake the review thread and the inquisitor. Today the rules say
+it "wakes no one", so every such step costs two messages. Second, give me the read-only copy of the rules and the book
+in the project files. I would keep what only I can do: talking with you, the merge lists, and starting threads. If you
+say "0: yes", the planning thread writes both as one rules change for you to merge." The owner, at 21:08:01Z: "0.)
+Yes, sounds good." (R33). And at 21:11:18Z the owner asked for the rule, once it is written and reviewed, "so it may
+be handed over to your Sister Project. This will likely come up for them soon enough." (R34).
+
+**How I read the owner's yes.** It answers the coordinator's post. So it covers the two things of that post and what
+the coordinator keeps, and no wider "Co-Coordinator". The post ends with the way: "the planning thread writes both as
+one rules change for you to merge". So what binds from R33's entry (rule 1) is that the change is written at once. The
+duties themselves move when the owner merges it (rule 4): until then the record thread still "wakes no one", and the
+coordinator sends and wakes as before. R33 has the coordinator say the same to the record thread. The change comes to
+me under rule 6 (e) before it merges, and what I think of it goes to the owner as the counter-view of that report. At
+21:07Z the coordinator offered to post a view of mine on point 0 to the owner, word for word. I sent none: the owner
+had answered within the minute, and my view belongs in the report.
+
+**What I told the planning thread,** at 21:11Z in two messages, before it had written a word: what I will hold its
+draft against. They are questions, so that the draft costs one round and not two, and the words are the planning
+thread's to find.
+1. The scope: the owner's yes, as read above, and nothing else.
+2. No two rules left to disagree. Sentences that have the coordinator send an entry or make a wake stand in the cast,
+   under "The record", and in rules 1, 3, 4, 5, 6 and 7. Each changes, or one clause covers them all, as version 4 did
+   for the writing.
+3. One doer for each act while a record thread is at hand, and who does it when none is. Never "either", or a wake
+   comes twice or not at all.
+4. What sets off each wake: whom an author tells that a PR is ready (rule 6), through whom a verdict is asked (rule
+   7), who reports a step done, and how the coordinator learns of each wake, since it keeps the merge lists.
+5. What becomes of "It holds no office of its own: it decides nothing", and who owns a finding on a sending or a wake
+   that goes wrong.
+6. The copy. Part 4 of the book names no such file, so the book changes too: where the copy lies, who makes it and
+   when, its name with the commit, that the repo stands where the two differ, and that reading it is the reading that
+   rules 4 and 5 ask of the coordinator. It should be there when version 6 merges, for rule 4 then has every thread
+   read the rules again.
+7. The record thread's sixty messages an hour (G53).
+8. README.md and CLAUDE.md: what the change makes untrue in them, which I list (rule 4).
+9. Whether the new sentences stand for any project, as the rest of the rules do, since the owner wants the text for
+   the sister project. What is Lemuria's alone, such as the folder and the name of the copy, belongs in part 4 of the
+   book.
+
+**What this does to G83.** The owner has chosen the cure: the copy, by a change to the rules and to the book that is
+yet to be written, read and merged. Both ends that the coordinator set for its wait have come, the owner's answer at
+21:08Z and the brief made ready at 21:09Z, and the answer is a yes. So by its own entry the coordinator does not owe
+the fifty messages now, and I see it the same way: a reading that the next cut takes cures nothing, and the copy is on
+its way. Until the copy lies in the project files the coordinator holds both books from a summary, and its second
+promise carries that time. The lists ahead are not small ones: the brief of feature 10, the concept's sentence and the
+rules change itself. G83 stays open, and it closes as it says.
+
+**Status lines changed in this PR.** G83: still open. Its line now says where the reading stands and what it waits
+for.
+
+**The three scripts.** I did not run them for this PR (G64).
+
+Next:
+- **Unfinished:** the read of PR #135 at d3178e9, the brief of feature 10 with its changes to the briefs of features
+  8, 9 and 1, for which the coordinator woke me at 21:09Z (rule 6 a). I begin it as this entry goes to main. I hold it
+  against rule 2's list, the book's words on feature 10 and on the two things placed in step 1, the owner's eight
+  answers (R32) with the reading of the second, the word "shielded" (standing rule 3), the closed list of standing
+  rule 7 (G76), water (G82), the twins in one machine (R31), G24, G41 and the second point of G46. I argue the
+  counter-view, talk to mason before I sign, and report as G88.
+- **Where it is:** this file, sent to main by a record-only PR from the branch claude/project-thread-4zobvq.
+- **Waiting for,** in some order:
+  - the planning thread's change to the concept's sentence on jars and racks (R31, Way A), which I read before the
+    owner merges it, on one list with the brief;
+  - the rules change of R33, with the book's change for the copy (rule 6 e): I hold it against the nine points above,
+    argue the counter-view and list what it makes wrong. The cleared text then goes to the owner for the sister
+    project, by the coordinator (R34);
+  - the coordinator's map and its diary saying that it has read both books whole, which closes G83;
+  - the owner's merge of PR #121 (G58) and PR #130 (G61). I hold each merged patch against its finding for the Status
+    line, and I read every verdict at step 1's gate (rule 6 b), with mason's merges of PR #81 and PR #125 by its own
+    hand;
+  - mason's map, if it changes (rule 6 f): the three small things of G79 wait for that;
+  - the owner's word, if the owner gives any, on G51 and on the first two points of G60.
+- **At each wake:** the checksums of the rules and the book, and what has changed in the record since this entry; both
+  books in full after a cut, and the Road Bible again when the concept changes.
+- **Open findings:** flaws G58 and G61 (mason), and G83 (the coordinator). No blocker is open.
+- **Read up to:** rulings.md R34, player-diary.md none (the file does not exist), findings.md G87.
