@@ -3452,3 +3452,143 @@ Next:
 - **Open findings:** flaws G16, G58, G61 and G68 (mason). The patches for G16 are merged, and its Status line waits
   for my read. The owner has G58 and G61 fixed (R27). No blocker is open.
 - **Read up to:** rulings.md R27, player-diary.md none (the file does not exist), findings.md G69.
+
+## G70. Report under rule 6 (a): the briefs of features 8 and 6 changed for the owner's "Fix" (PR #96 at 6b88ee5)
+
+**Written.** 2026-11-12 19:49Z. Woken by the coordinator at 19:39Z.
+
+**What I read.** PR #96, "Briefs: a machine's fire is its carver's, and its containers ask the claim (R27, G58, G61)",
+branch briefs/machine-claims, at commit 6b88ee55d8faac34aaa95f2c720fc106b0ec4d16, the second of its two commits,
+branched from main at 5c7a8c7. I read it whole: the diff of record/briefs/machines.md, 28 lines added and 5 taken out;
+the diff of record/briefs/evocations.md, 4 added and 2 taken out; mason's entry of 19:36Z, 29 lines, which rides in
+the PR; and the description. It has no code. I read its first commit, 3c74f6c, between 19:42Z and 19:45Z, and the
+second at 19:46Z. The check `build` ended green on 6b88ee5 at 19:45:47Z. The description says that the owner is
+assigned once it cites this report.
+
+**The rules and the book.** I read both in full after the cut of 19:28Z (G69). At this wake their checksums were the
+ones I had read: the rules as they were, and the book as the merge of PR #76 left it. rulings.md ended at R27.
+
+**The short of it.** The change says how the owner's two words are to be built, and adds nothing beside them: a
+machine's fire is held at a claim as a fire set by hand is, and a machine's containers come under the rule that the
+brief already has for everything else a machine changes. Each new sentence is true of the game and the code as I read
+them, or is a rule that the patches have yet to build and is dated as such. No other settled brief is made untrue, and
+no sentence of the Road Bible. No blocker. I asked for one commit, and mason made it before I signed. Two choices in
+the change are mason's own, and the brief and the description name both for the owner. It goes by this read and the
+owner's merge (rule 4), and it is ready for that merge once its description cites this report.
+
+**What the change says, held against the record, the code and the game.**
+- *The fire (G58).* A new bullet of the machines' brief, under Claims, gives the fire that a machine sets on a face to
+  the machine's carver, "as a fire set by hand is the caster's". The code has what that needs: a machine has kept its
+  carver since the first machines commit (c0454d3 of 2026-10-28) and hands the carver's id to every cast
+  (Lemuria/Machines/MachineWork.cs line 69). The game's part is as the brief says. Before each spread the game looks
+  the starter up, and it does not spread a fire to where that player may not build (`BEBehaviorBurning.TrySpreadTo`,
+  read in the pinned 1.22.7). The test is the game's own, so it holds "whatever the switch says". The brief of feature
+  6 has said the same of a hand's fire since PR #72 (G62).
+- *A carver the game does not know.* The game knows a player only once they have joined since the server last started:
+  its list of players is filled as each client joins. For a carver it does not know, and for a machine with no carver
+  recorded, the brief chooses: the machine "sets no fire on a face: it still lights what can be lit, as a firestarter
+  does". This is the first of mason's two choices.
+- *The containers (G61).* A second new bullet puts a machine's containers under the rule of the first: with the switch
+  on, a container inside a claim "is a machine's only if the machine stands inside that same claim". It names the
+  three places that G61 names: the Control Shelf's input and output, the container that a machine with no shelf yields
+  into, and the one that takes a reclamation plate's salt. A container that the rule leaves out "is not there for the
+  machine", and what follows is what the brief already has where a container is missing: the shelf's item goes quiet
+  as out of stock, a yield drops where the work happened (point 16), and the plate's salt is lost. This is the second
+  choice. "The game's own chutes and hoppers stay as the game rules them."
+- *The evocations' brief.* One sentence of its Claims part said that feature 8's brief tells what holds for a
+  machine's fire. It now says it itself, since the code that names a fire's starter lies in feature 6's folder: "the
+  fire it sets is its carver's, and where the game does not know the carver it sets none on a face".
+- *"What to try" and the open questions.* Item 17 is new and tries both fixes with a second player. The restart item
+  moves from 17 to 18, and nothing in the record cites either by its number. Question 5 is marked answered, in the
+  owner's words and with R27.
+
+**The one commit I asked for, and three points with it.** At 19:45Z, before I signed (rule 6), I sent mason four
+points on the first commit, 3c74f6c.
+1. The new sentence of the evocations' brief stood in a paragraph that ends "This is **built**", and nothing dated it.
+   Until the patch merges it would have been untrue to the code, as the sentences of G59 were. I asked for a commit.
+   It now goes on: "When this brief was written (main at a1aae13), a machine's fire had no starter, so the game held
+   its spread at no claim; the fix follows feature 8's brief as a patch."
+2. The machines' brief named "a machine carved before carvers were recorded". By the history there is no such machine.
+   It now says: "a machine with no carver recorded".
+3. The brief said that a machine's fire "never burns into a claim its carver could not build in". The game forgets
+   every player at a restart until they join again, so a fire that burns on through a restart is held nowhere until
+   its starter has joined, and a hand's fire likewise. I asked for no change and meant to name it in the counter-view.
+   Mason worded it into the brief: "a fire that burns on through a restart is held only once its starter has joined
+   again, a hand's fire likewise".
+4. The entry was named for 19:42Z, and its commit was made at 19:36Z (G69). It is renamed for 19:36Z.
+
+Mason's answer of 19:45Z: "all four points are in one commit, and #96's head is now 6b88ee5." I read that commit
+whole. It changes the three files in these four ways and in no other.
+
+**One thing left, for the description.** It still has the first commit's words, "never burns into a claim", and it
+names neither a machine with no carver recorded nor the restart. A description is no commit, so mason can bring it
+into line when it cites this report, and that voids nothing.
+
+**No settled brief is made untrue, and the book stands** (rule 6). Standing rule 7 has Lemuria's workings spare what
+lies inside another player's claim while the switch is on, and the change brings two more of them under that. With the
+switch off the game still holds a fire's spread, a machine's as a hand's. That is the rule's last sentence, on what
+the game itself does, as the fourth point of G50 reads it and as PR #72 settled it for a hand's fire. The brief of
+feature 6 counts containers among what a cast spares, "blocks, containers, creatures and players in the claim are
+spared", and a machine's containers now go the same way. No other brief speaks of a machine's fire or of its
+containers.
+
+**What it does not cover.** G68, the charge of a network across a claim's edge. The first bullet stands as it stood,
+with its "Built.": "a machine changes nothing inside a land claim, no block, creature or player, unless it stands
+inside that same claim". G68 says where the code falls short of that for the stone that pays. I did not ask mason to
+take it into this PR. The owner has not answered on G68, and the two fixes that the owner has asked for should not
+wait for a third. If the owner has G68 fixed, the briefs of features 4 and 8 change once more, by a PR of their own.
+
+**Which way it merges.** Rule 4 has: "A brief: read by the review thread, then merged by the owner." The route by the
+owner's command is not open here. It needs the owner's words to "name the change", and "Fix" names none of the brief's
+words. So I certify nothing: this is a report. Each patch that follows is a change to code that follows a change to
+its brief, so its verdict is "out", and it waits for the owner's merge (rule 4).
+
+**The counter-view** is G71. None of it stands against the change.
+
+**A later commit voids this report** (rule 4), unless it only brings main into the branch or adds only its author's
+own diary entry.
+
+**For mason.** The description may now cite this report, G70, with the commit it read, 6b88ee5, and the owner may then
+be assigned (rule 4).
+
+**For the coordinator.** PR #96 at 6b88ee5 is cleared. It depends on no other open PR. The patches for G58 and G61
+wait for its merge.
+
+**For the owner.** PR #96 is ready for your merge once it is assigned to you. It changes what two briefs say of a
+machine's fire and of the chests a machine uses, and no code. Its merge settles two choices that are mason's and not
+yours: a machine whose carver has not joined since the server last started sets no open fire, and a chest inside
+another player's claim counts for a machine as no chest at all. G71 says what else the merge settles.
+
+## G71. Note: the counter-view to PR #96 (rule 6 a)
+
+**Rank.** Note. **Owning thread.** The coordinator, for the owner. **Raised in.** The read of PR #96 (G70).
+**Status.** Needs no answer.
+
+The owner said "Fix" twice, and the brief had to say how. What the merge of PR #96 settles beyond those two words is
+set out here, so that nothing is settled unseen. Each point can still be changed afterwards by a change to the brief,
+and until the patches merge that costs no code.
+
+1. **Two measures in one rule.** A machine's containers go by where the machine stands, as everything else that a
+   machine changes does. Its fire goes by who carved it, because the game holds a fire by its starter and knows no
+   other measure. The two can part. A fire that a machine sets inside the claim it stands in does not spread there, if
+   its carver may not build there: a machine that a guest carved, or one that stood on the land before another player
+   claimed it. And a fire spreads wherever its carver may build, into a claim that the machine itself could change
+   nothing in. Both are what a hand's fire does.
+2. **After a restart, a machine sets no open fire until its carver has joined.** In single player nothing changes,
+   because the carver is always there. On a server, a Fire Focus or a Scatter that works while its carver is away goes
+   on lighting what can be lit. From the server's next restart, though, it sets no fire on a bare face until the day
+   its carver joins again. Mason weighed the other way and says why not: "lending the fire to the nearest player
+   online would hold it at that stranger's claims, not the carver's". A fire with no starter at all is held nowhere,
+   which is G58. A third way would have Lemuria itself ask the claims around the face. That holds a fire where it is
+   set, as the machine's rule does already, and not where it spreads.
+3. **A claim's owner is shut out with the stranger.** The rule for containers asks where the machine stands and not
+   whose it is. A player whose machine stands just outside their own claim, with its shelf against their own chest
+   inside it, gets nothing from that chest. The same holds for a machine in one claim beside a chest in a second claim
+   of the same player, as far as I read the game's claims: I did not try it. The rule for what a machine changes has
+   been so since old step 4, and the brief keeps one rule for both. The other measure, the carver's own right to use
+   the chest, would open a machine to its owner's chests wherever they stand, and it would fail at every restart until
+   the carver joins, as in point 2.
+4. **Nothing tells the player why.** A shelf whose input lies in another player's claim looks like one that is out of
+   stock, and a machine that sets no fire looks like one that found nothing to light. A hand that is refused in a
+   claim is told so by the game. Standing rule 1 allows no screen for it, so the place for a hint is the Journal,
+   whose text on machines is feature 8's.
