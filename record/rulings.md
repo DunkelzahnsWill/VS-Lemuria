@@ -566,3 +566,22 @@ the coordinator gave them; mason's words in it are as the coordinator quoted the
 **Open.** Waits for the owner's word, "fix" or "decline", on each.
 
 Concerns: mason; the owner.
+
+## R27. The owner's answer to R26: fix G58, fix G61
+
+**Given.** 2026-11-12 19:35:00Z by the owner, in the project chat. It answers R26.
+
+**Recorded.** 2026-11-12 19:35Z by the record thread, copied from the owner's own message.
+
+The owner, the whole message:
+
+> G58.) Fix
+> G61.) Fix
+> merging #76 and #78 now
+
+The coordinator's words with it, exactly as given: "The owner's message of 19:35:00Z is attached: it answers R26 (G58
+fix, G61 fix) and says the owner is merging PR #76 and PR #78 now."
+
+**Stopped.** Nothing. The stop R26 named, on mason's work on G58 and G61, ends with this answer.
+
+Concerns: mason; the planning thread (G60 point 4 waited for this answer); the review thread.
