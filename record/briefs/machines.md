@@ -60,8 +60,8 @@ old paper differ, this brief is the record.
    strength, if the Gather stands under open sky when it lands and while nothing is overhead; a death within 8 blocks
    gives its Death crystals full Death for an in-game hour (the owner, Nov 10 2026). Both are kept through a restart
    or an unloaded chunk, as a standing crystal's and a cradle's are (G13, G14). When this brief was written (main at
-   a1aae13) they were not saved, so a restart ended them; the fix follows this brief as a patch, once PR #45 merges
-   (G41). Unaligned crystals gather
+   a1aae13) they were not saved, so a restart ended them; the fix follows this brief as a patch (G41; PR #45
+   merged on 2026-11-12). Unaligned crystals gather
    nothing, and what the network has no room for is lost.
 8. **Refine.** Its aligned crystal is its pattern: every Unaligned crystal in the same block, of the pattern's
    Evolution or lower, refines into the pattern's alignment, keeping its Evolution, anywhere, in 1 in-game day for
@@ -247,7 +247,7 @@ old paper differ, this brief is the record.
 - Every working is claim-checked block by block before it changes the block it works on, and the game's audit log
   records each fire a machine starts and each block of rock it melts under its carver's name.
 - When this brief was written (main at a1aae13), the smoke test's Motor check failed by chance on a slow runner,
-  reading the quern's speed only once (G43); the fix, PR #61, follows as a patch.
+  reading the quern's speed only once (G43); PR #61 fixed it, merged on 2026-11-12.
 
 ## Settings
 
@@ -263,10 +263,10 @@ old paper differ, this brief is the record.
 
 - **What a machine does.** With the claims switch on, a machine changes nothing inside a land claim, no block, creature
   or player, unless it stands inside that same claim. Lava it makes runs as natural lava does; only the rock it melts
-  is claim-checked. A fire a machine sets has no starter, so the game's own spread of it is held at no claim: a fire
-  set outside a claim may burn into it, with the switch on too, as lava runs. The containers a machine, its shelf or
-  a reclamation plate draws from or yields into ask no claim, so a shelf outside a claim draws stock from an input
-  chest just inside it. With the switch off, claims stop no machine. All of this is as built.
+  is claim-checked. With the switch off, claims stop no machine. Built. When this brief was written (main at
+  a1aae13), a fire that a machine set had no starter, so the game held its spread at no claim, with the switch on too
+  (G58); and the containers a machine, its shelf or a reclamation plate draws from or yields into asked no claim, so a
+  shelf outside a claim drew stock from an input chest just inside it.
 - **Uses by hand.** Setting crystals into a machine's sockets or Memory and taking them out, putting items on the shelf
   and taking them off, and the rod's taps (switching, turning, a crystal or a shelf item) are uses by hand of a
   Lemuria block: with the switch on they need the claim owner's permission, as a chest does, and with it off they open
@@ -334,8 +334,7 @@ old paper differ, this brief is the record.
 2. Does R9 cover sockets, the shelf, Memory and the rod? **Answered:** R9 ("Every feature reads the same switch");
    sockets, the shelf and Memory were among the six blocks its question named, and the rod's taps are uses by hand.
 3. Does carving with the chisel and making a rod follow the switch? **Answered:** G40's first reading, which PR #46
-   writes into the concept; if PR #46 does not merge as it stands, this brief is changed to follow the concept as
-   merged.
+   wrote into the concept, merged on 2026-11-12.
 4. Can a pile that a shelf stacks be lit (G19)? **Answered** for what this feature does: by its rules nothing of a
    machine's ever lights a pile (a firestarter never does, and a pit burns from the firepit the shelf builds), and the
    owner's silo of 2026-11-02 burned and was dug in play (the old diary of old step 4 part 2). The old audit's reading,

@@ -101,7 +101,7 @@ the record.
   containers in the cube, and one creature query: about a tenth more per reading. A death checks only the crystals,
   cradles and Gathers within 8 blocks. A Glint is looked at every 30 seconds.
 - When this brief was written (main at a1aae13), the smoke test's Death Focus check failed by chance: a creature or
-  dropped item in the Focus's line takes the aim before the flower (G43); the fix, PR #62, follows as a patch.
+  dropped item in the Focus's line takes the aim before the flower (G43); PR #62 fixed it, merged on 2026-11-12.
 
 ## Settings
 

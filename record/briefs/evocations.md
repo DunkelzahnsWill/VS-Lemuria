@@ -140,11 +140,12 @@ a1aae13. Where this brief and the old paper differ, this brief is the record.
 ## Claims
 
 A naked evocation is one of Lemuria's workings (standing rule 7, on the first reading that G40 sets out and PR #46
-writes into the concept). With the claims switch on, inside another player's claim an evocation does nothing unless
+wrote into the concept). With the claims switch on, inside another player's claim an evocation does nothing unless
 they gave you access, as with building there: blocks, containers, creatures and players in the claim are spared, and
 the rest of the area still works. Lava made by Ignite runs as natural lava does, into a claim too; only the rock it
 melts is claim-checked. A fire Ignite sets is the caster's, so the game's own spread of it stops at any claim where
-the caster may not build, whatever the switch says. With the switch off, evocations no longer spare a claim. This is
+the caster may not build, whatever the switch says. A machine's cast has no caster, and feature 8's brief says what
+holds for its fire. With the switch off, evocations no longer spare a claim. This is
 **built** (`CastContext`).
 
 Nothing in Lemuria asks the server's PvP setting. Players are targets like creatures; Wither by hand names its
@@ -183,5 +184,5 @@ whatever that setting says. This is as built.
 1. A Fire cast at a block that takes the flame and stays cold: free or paid? **Answered:** free, by the note of old
    step 3 (Ignite, "my reading of the rule on misses, from the audit") and R7, where the owner's merge of the fix is
    the owner's word on that reading. This brief says it so that the fix leaves the brief true (G12, G15).
-2. Do evocations follow the claims switch? **Answered:** yes, on the record's first reading (G40), which PR #46 writes
-   into the concept; if PR #46 does not merge as it stands, this brief is changed to follow the concept as merged.
+2. Do evocations follow the claims switch? **Answered:** yes, on the record's first reading (G40), which PR #46 wrote
+   into the concept, merged on 2026-11-12.
