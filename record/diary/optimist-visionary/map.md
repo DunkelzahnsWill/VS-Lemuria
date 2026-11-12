@@ -6,7 +6,8 @@ and my diary.
 The Road Bible (record/road-bible.md) and the settled briefs outrank this map (rule 5). Where the map and they differ,
 they stand, and the map is wrong.
 
-First written on 2026-11-12, and held against the Road Bible as main had it at commit ed17dad.
+First written on 2026-11-12, and held against the Road Bible as main had it at commit ed17dad. The plan was rewritten
+on 2026-11-12 at 18:31Z, and the whole map was held again against the Road Bible as main had it at commit a09f3d2.
 
 ## Where I fit
 
@@ -24,9 +25,11 @@ None. Features 1 to 26 of the Road Bible's part 3 are mason's.
   the Road Bible or to the rules, sent to me as it stands. The wake of the review thread for each change I put up. A
   question of mine to the owner goes through the coordinator.
 - **The review thread.** Its report before a change to the rules merges, and before a change to the concept, the
-  prototype's terms or the shared list merges. Its certificate on a change to the steps and features (rules 4 and 6).
+  prototype's terms or the shared list merges. Its certificate on a change to the steps and features, or its report
+  where such a change goes by the owner's merge (rules 4 and 6; my plan, point 6).
 - **Mason.** Word, through the coordinator, when a brief or a build shows that the book would have to change: that
-  part 3 cuts a step into the wrong features, or names a feature's folders wrongly. And, if the builders are ever
+  part 3 cuts a step into the wrong features, or names a feature's folders wrongly. A line, sent to me directly, when
+  a PR of its own is merged that overtakes a sentence of the book (my plan, point 1). And, if the builders are ever
   split (R5), what then lies on main outside record/, so that both tables of part 4 are brought up to date first, as
   the book has it.
 - **The precursor.** What the old paper says, with the place, when a change to the book rests on it.
@@ -46,10 +49,14 @@ None. Features 1 to 26 of the Road Bible's part 3 are mason's.
 
 This part is mine, and I rewrite it when the work changes.
 
-1. **The three sentences that the first Road Bible owed when it merged** (findings G40 and G41, and point 3 of "Where
-   features meet" after R24). They are put up as two changes: one to part 3, for the review thread's certificate, and
-   one to the concept, for the review thread's read and the owner's merge. Until both are merged, they come before any
-   other change to the book.
+1. **Sentences of the book that say what main holds.** A few sentences of the book say what main held on the day they
+   were written: in part 2, that main has not changed outside record/ since commit c07322e; in part 3, that features 1
+   to 9 have no briefs yet; and in part 4, the rows of the shared files table, which "names what is on main today".
+   When a merged PR overtakes such a sentence, I bring it up to date by a change to the book, after the merge and not
+   before, in as few changes as the merges allow, and in words that the next merge does not overtake again, where the
+   book allows it. The first four were overtaken on 2026-11-12 between 18:26Z and 18:30Z, when mason's PR #51, PR #55
+   and PR #59 were merged: the two sentences of parts 2 and 3, and in part 4 the rows on `README.md` and `CLAUDE.md`
+   and on `.github/workflows/build.yml`. My diary says where the change for them stands.
 2. **Before each numbered step's first brief:** look at that step's features again, with mason, and change part 3
    first if the step is cut wrongly. My entry of 04:42Z calls the cuts of the features not yet built the least certain
    part of the book.
@@ -59,4 +66,14 @@ This part is mine, and I rewrite it when the work changes.
    code that follows it (rules 1 and 3). A ruling that changes what the rules say is written into them at once, as
    rule 1 has it.
 5. **If the builders are ever split (R5):** both tables of part 4 are brought up to date first, by a change to the
-   book.
+   book. The same change gives point 3 of "Where features meet" a sentence on what a feature needs changed in the
+   folders of a feature that another thread owns. As the point stands it speaks only of "another feature that its
+   thread owns or has been handed", which is every feature while mason is the one builder (finding G50, its first
+   point).
+6. **How a change of mine to the book merges.** A change to the concept, the prototype's terms or the shared list goes
+   by the review thread's read and the owner's merge, or by the owner's command (rule 4). A change to the steps and
+   features may go by the review thread's certificate, but rule 4 has a change "that cites an entry its own author
+   recorded" wait for the owner's merge, and I recorded R1 to R18. Finding G51 sets out three readings of those words.
+   Until the owner rules on them, I take the owner's merge for any change of mine to the book whose diff or
+   description cites one of those entries. I take it as well for a change whose words come from a finding of the
+   review thread (finding G48).
