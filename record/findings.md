@@ -3455,7 +3455,7 @@ Next:
 
 ## G70. Report under rule 6 (a): the briefs of features 8 and 6 changed for the owner's "Fix" (PR #96 at 6b88ee5)
 
-**Written.** 2026-11-12 19:49Z. Woken by the coordinator at 19:39Z.
+**Written.** 2026-11-12 19:51Z. Woken by the coordinator at 19:39Z.
 
 **What I read.** PR #96, "Briefs: a machine's fire is its carver's, and its containers ask the claim (R27, G58, G61)",
 branch briefs/machine-claims, at commit 6b88ee55d8faac34aaa95f2c720fc106b0ec4d16, the second of its two commits,
@@ -3592,3 +3592,55 @@ and until the patches merge that costs no code.
    stock, and a machine that sets no fire looks like one that found nothing to light. A hand that is refused in a
    claim is told so by the game. Standing rule 1 allows no screen for it, so the place for a hint is the Journal,
    whose text on machines is feature 8's.
+
+## G72. Diary: PR #96 is reported and cleared; two maps are read and their report is next; then G16
+
+**Written.** 2026-11-12 19:51Z.
+
+**What I did since G69.**
+- *PR #97* carried G68 and G69 to main at 19:42Z (merge commit 47cb038). It was set to merge itself and not assigned.
+  At 19:45Z I told the coordinator and the planning thread, and I told the owner in my thread in a few lines: that the
+  four fixes are checked and their findings closed, what G68 is, and that PR #96 was not cleared yet.
+- *PR #96,* mason's change to the briefs of features 8 and 6 for the owner's "Fix" on G58 and G61. Woken at 19:39Z. I
+  read its first commit by 19:45Z and sent mason four points. Mason pushed 6b88ee5 at 19:45Z, and I read it at 19:46Z.
+  G70 is the report and G71 the counter-view. This PR's entries went to my branch as drafts at 19:48Z (commit
+  c235f2f), before I checked or signed them.
+- *R28,* raised at 19:45Z and on main at 19:47Z (PR #99): the coordinator's question to the owner, whether G68 is to
+  be fixed or declined. It stops only mason's work on G68.
+- *Two wakes under rule 6 (f),* at 19:47Z and 19:48Z, for mason's map (PR #98, merged at 19:46Z) and the coordinator's
+  (PR #99 and PR #100, merged at 19:47Z and 19:48Z). Both were brought up to date after the merge of PR #76, as the
+  first point of G66 asked. I have read both whole against the book as that merge left it, and found neither to differ
+  from it. At 19:50Z, before I sign, I put three small things to each thread. The report follows as an entry of its
+  own, with their answers.
+
+**The rules and the book at these three wakes.** By their checksums both were as I had last read them: the rules as at
+19:28Z, and the book as the merge of PR #76 left it (G69).
+
+**The three scripts.** I did not run them for this PR (G64). G70 rests on the briefs, the code and the game as read,
+and on no run.
+
+**Status lines changed in this PR.** None.
+
+Next:
+- **Unfinished:**
+  1. The report on the two maps (rule 6 f): mason's as PR #98 left it, and the coordinator's as PR #99 and PR #100
+     left it. Both are read, and both agree with the book.
+  2. The read of the four merged patches for R9 against G16, for its Status line: PR #87, PR #88, PR #84 and PR #92.
+- **Where it is:** this file, sent to main by a record-only PR from the branch claude/project-thread-4zobvq. The next
+  entries go to that branch as drafts while I write them.
+- **Waiting for:** the answers of mason and of the coordinator on their maps, which the report will hold. After the
+  two reads I expect, in some order:
+  - a new report, if a commit that rule 4 does not let pass reaches PR #96 before the owner merges it;
+  - the owner's answer to R28, on G68;
+  - mason's patches for G58 and G61, once PR #96 is merged. Each waits for the owner's merge (G70). The verdicts are
+    the inquisitor's, and I read every one at step 1's gate (rule 6 b), with mason's merge of PR #81 by its own hand;
+  - the planning thread's change to the book for the three sentences of G60, point 4 (rule 6 a), which has G68 to
+    weigh as well;
+  - step 1's brief and the changes to other briefs that come with it (rule 6 a), where I read for G24, G41 and the
+    second point of G46;
+  - the owner's word, if the owner gives any, on G51 and on the first two points of G60.
+- **At each wake:** the checksums of the rules and the book, and what has changed in the record since this entry; both
+  books in full after a cut.
+- **Open findings:** flaws G16, G58, G61 and G68 (mason). The patches for G16 are merged, and its Status line waits
+  for my read. The owner has G58 and G61 fixed (R27), and is asked about G68 (R28). No blocker is open.
+- **Read up to:** rulings.md R28, player-diary.md none (the file does not exist), findings.md G72.
