@@ -297,11 +297,13 @@ public static class Effects
     }
 
     /// <summary>
-    /// Lights a block through the ignition interface torches use, if it can be lit now. Most of the
-    /// game's hooks read the world from whoever holds the torch, and forges, coal piles, ground storage
-    /// and bombs light only for a player, so a cast with no caster (a machine's, or the test command's)
-    /// lends the torch to a player: see <see cref="Igniter"/>. With nobody online to hold it, a block
-    /// whose hook needs a holder waits, as a torch nobody holds lights nothing.
+    /// Lights a block through the ignition interface torches use, if it can be lit now, and tells whether
+    /// it caught. Most of the game's hooks read the world from whoever holds the torch, and forges, coal
+    /// piles, ground storage and bombs light only for a player, so a cast with no caster (a machine's, or
+    /// the test command's) lends the torch to a player: see <see cref="Igniter"/>. With nobody online to
+    /// hold it, a block whose hook needs a holder waits, as a torch nobody holds lights nothing.
+    /// A block that takes the flame and stays cold, as a loaded bloomery with no chimney does, is "not
+    /// now", so a cast at it is a miss and costs nothing (feature 6's brief, "A miss is free"; G15).
     /// </summary>
     private static Lighting TryIgnite(CastContext cast, BlockPos pos)
     {
@@ -310,6 +312,12 @@ public static class Effects
         if (ignitable == null)
         {
             return Lighting.NotIgnitable;
+        }
+        // The game's pile offers to be lit even while it burns, so it is judged by whether it burns.
+        var pile = world.BlockAccessor.GetBlockEntity(pos) is BlockEntityGroundStorage storage and not BlockEntityPitKiln ? storage : null;
+        if (pile?.IsBurning == true)
+        {
+            return Lighting.NotNow;
         }
         var igniter = Igniter(cast);
         try
@@ -325,7 +333,7 @@ public static class Effects
             }
             var handling = EnumHandling.PassThrough;
             ignitable.OnTryIgniteBlockOver(igniter!, pos, IgniteSeconds, ref handling);
-            return Lighting.Lit;
+            return Caught(world, igniter, pos, pile) ? Lighting.Lit : Lighting.NotNow;
         }
         catch (NullReferenceException) when (igniter == null)
         {
@@ -335,20 +343,20 @@ public static class Effects
     }
 
     /// <summary>
-    /// Lights one block as a firestarter would, lending the flame to the same holder as a cast, and tells
-    /// whether it caught: a block that still offers to be lit afterwards, as a bloomery with no chimney
-    /// does, took the flame and stayed cold. For the Control Shelf's firestarter (step 4 part 2 note,
-    /// question 5), which pays only for what it changed. Not for a firepit, which smoulders until its
-    /// next tick and would read as cold here; the shelf lights firepits itself.
+    /// Whether a block handed the flame caught: a block that still offers to be lit afterwards took the
+    /// flame and stayed cold. A pile is judged by whether it burns, and a firepit, which only smoulders
+    /// until its next tick and still offers to be lit, counts as caught.
     /// </summary>
-    public static bool Light(CastContext cast, BlockPos pos)
+    private static bool Caught(IWorldAccessor world, EntityAgent? igniter, BlockPos pos, BlockEntityGroundStorage? pile)
     {
-        if (TryIgnite(cast, pos) != Lighting.Lit)
+        if (pile != null)
         {
-            return false;
+            return pile.IsBurning;
         }
-        var world = cast.Api.World;
-        var igniter = Igniter(cast);
+        if (world.BlockAccessor.GetBlockEntity(pos) is BlockEntityFirepit)
+        {
+            return true;
+        }
         try
         {
             // Asked of the block that is there now: a torch's flame swaps the block for its lit one.
@@ -360,6 +368,13 @@ public static class Effects
             return true;
         }
     }
+
+    /// <summary>
+    /// Lights one block as a firestarter would, lending the flame to the same holder as a cast, and tells
+    /// whether it caught, by the same test as a cast. For the Control Shelf's firestarter (old step 4 part
+    /// 2 note, question 5), which pays only for what it changed.
+    /// </summary>
+    public static bool Light(CastContext cast, BlockPos pos) => TryIgnite(cast, pos) == Lighting.Lit;
 
     /// <summary>
     /// Who holds the torch for the game's ignition hooks: the caster; for a machine, the player who carved

@@ -4,6 +4,7 @@ using Lemuria.Core;
 using Lemuria.Crystals;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
+using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
 using Vintagestory.GameContent;
@@ -542,6 +543,86 @@ public class EvocationsTests
         logger.Notification("Evocations test: over-driven Fire at glacier ice cast {0}, {1} of 9 melted to water; a Glowing one boils water: {2}; over-driven at the pool cast {3}, {4} of 9 boiled away, salt water too: {5}",
             YesNo(overdriven), Count(c, p => Fluid(p) == "water-still-7" && Solid(p) == "air"), YesNo(glowingBoils), YesNo(boiled),
             Count(d, p => Fluid(p) == "air"), YesNo(Fluid(d.AddCopy(1, 0, 1)) == "air"));
+    }
+
+    // ------------------------------------------------------------------ a flame that does not catch
+
+    private const string PileKey = LemuriaModSystem.ModId + "-evocationstest-pile";
+
+    private ItemStack Stack(string code, int quantity) => new(sapi.World.GetItem(new AssetLocation(code)), quantity);
+
+    /// <summary>Ignite at Glittering from a point at a block, with a hen holding the torch; what it aimed at and whether it cast.</summary>
+    private bool HenCasts(EntityAgent hen, Vec3d eye, BlockPos target, out bool aimed)
+    {
+        var cast = CastContext.Aim(sapi, null, hen, Crystal.Fire, 1, eye, target.ToVec3d().Add(0.5, 0.05, 0.5).SubCopy(eye));
+        aimed = cast.Block?.Position.Equals(target) == true;
+        return Effects.Apply(cast) == Effects.Outcome.Acted;
+    }
+
+    /// <summary>
+    /// A cast that finds nothing it can act on fizzles, costing no charge (step 3 note, Ignite): a block
+    /// handed the flame that does not catch is a miss. A loaded bloomery with no chimney stays cold; with
+    /// its chimney on it lights. A hen holds the torch, since the bloomery reads the world from its
+    /// holder. A pile of firewood is left for <see cref="BurningPile"/> after the restart.
+    /// </summary>
+    public void Misfire(BlockPos column)
+    {
+        var origin = TestSite.Surface(sapi, column);
+        Ground(origin.AddCopy(-1, 0, -2), 8, 5, 6);
+        var bloomeryPos = origin.AddCopy(4, 0, 0);
+        Accessor.SetBlock(Id("game:bloomerybase-north"), bloomeryPos);
+        if (Accessor.GetBlockEntity(bloomeryPos) is not BlockEntityBloomery bloomery || Spawn("game:chicken-hen", origin.ToVec3d().Add(0.5, 0, 1.5)) is not EntityAgent hen)
+        {
+            logger.Error("Evocations test: no bloomery, or no hen to hold the torch");
+            return;
+        }
+        // Filling a bloomery takes a player and its slots are closed to other mods, so it is loaded as a save loads it.
+        var tree = new TreeAttribute();
+        bloomery.ToTreeAttributes(tree);
+        var slots = tree.GetOrAddTreeAttribute("slots");
+        slots.SetItemstack("0", Stack("game:charcoal", 6));
+        slots.SetItemstack("1", Stack("game:nugget-limonite", 20));
+        bloomery.FromTreeAttributes(tree, sapi.World);
+        var eye = bloomeryPos.ToVec3d().Add(-1.5, 3, 0.5);
+        bool cold = HenCasts(hen, eye, bloomeryPos, out bool aimed);
+        bool coldBurns = bloomery.IsBurning;
+        Accessor.SetBlock(Id("game:bloomerychimney"), bloomeryPos.UpCopy());
+        // The chimney stands in the first ray's way, so the second comes in level, under it.
+        bool lit = HenCasts(hen, bloomeryPos.ToVec3d().Add(-2.5, 0.5, 0.5), bloomeryPos, out bool aimedAgain);
+        logger.Notification("Evocations test: Ignite aimed at {0} with no chimney, cast {1}, it burns: {2}; with its chimney on, cast {3}, it burns: {4}",
+            aimed && aimedAgain ? "a loaded bloomery" : "something else", YesNo(cold), YesNo(coldBurns), YesNo(lit), YesNo(bloomery.IsBurning));
+        hen.Die(EnumDespawnReason.Removed);
+        var pilePos = origin.AddCopy(4, 0, 2);
+        Accessor.SetBlock(Id("game:groundstorage"), pilePos);
+        if (Accessor.GetBlockEntity(pilePos) is BlockEntityGroundStorage pile)
+        {
+            pile.Inventory[0].Itemstack = Stack("game:firewood", 16);
+            pile.Inventory[0].MarkDirty();
+            pile.DetermineStorageProperties(null);
+            pile.MarkDirty(true);
+            TestSite.StorePos(sapi, PileKey, pilePos);
+        }
+    }
+
+    /// <summary>
+    /// After a restart, since a pile works out whether it can burn as it loads: the game's pile offers to
+    /// be lit even while it burns, and Ignite at one that already burns is a miss too.
+    /// </summary>
+    public void BurningPile()
+    {
+        var pos = TestSite.ReadPos(sapi, PileKey);
+        if (pos == null || Accessor.GetBlockEntity(pos) is not BlockEntityGroundStorage pile || Spawn("game:chicken-hen", pos.ToVec3d().Add(-3.5, 0, 0.5)) is not EntityAgent hen)
+        {
+            logger.Error("Evocations test: no test pile, or no hen to hold the torch; run /lemuria evocations test misfire first");
+            return;
+        }
+        pile.TryIgnite();
+        bool burning = pile.IsBurning;
+        bool cast = HenCasts(hen, pos.ToVec3d().Add(-1.5, 3, 0.5), pos, out bool aimed);
+        logger.Notification("Evocations test: after the restart a pile of firewood set burning burns: {0}; Ignite aimed at {1}, cast {2}",
+            YesNo(burning), aimed ? "it" : "something else", YesNo(cast));
+        pile.Extinguish();
+        hen.Die(EnumDespawnReason.Removed);
     }
 
     // ------------------------------------------------------------------ casting rules
