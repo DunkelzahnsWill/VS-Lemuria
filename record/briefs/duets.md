@@ -1,6 +1,7 @@
 # Brief: feature 10, `duets`
 
-**Feature.** Number 10 of the Road Bible's part 3, short name `duets`, in step 1, owned by mason (R5, R15). Not built.
+**Feature.** Number 10 of the Road Bible's part 3, short name `duets`, in step 1, owned by mason (R5, R15). Built in PR
+#156.
 
 **Its folders.** `Lemuria/Duets/` with its own `DuetsModSystem`; every folder named `duets` under
 `Lemuria/assets/lemuria/` (the Duet Module's item type, its recipe and lang); no patch file; and `tests/smoke/duets.*`
