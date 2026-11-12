@@ -89,6 +89,10 @@ panning idea.
       seconds, a machine's pace, and an Earth crystal's turn ends when it has worn one step or cannot wear now (its
       network at half or above, or no block left to wear), so Sky and the Unaligned crystal come round whatever the
       network holds.
+    - *The fill stands out of reach* (G96; R41, 1, "A"). The fill's Earth crystal stands in the open in its socket, so
+      a Sky crystal in the drain's socket dialogues with it when the two stand within 3 blocks of each other. Panning is
+      safe only where the fill stands more than 3 blocks from the drain: "A player must either create a larger building
+      or route crystals via tubes and/or memory swaps." Nothing in the code keeps them apart.
     - *Panning.* While a Sky crystal is in the socket, the drain pans one sand block of its room a turn, nearest first,
       at a working's cost: the block is gone, and what the game's pan gives from one whole block of sand goes into the
       container touching the drain. With no sand, no container or a full one, it is a free miss.
@@ -133,7 +137,9 @@ panning idea.
     everything in the machine's sockets changes places with everything in its magazine, empty places included,
     whatever the crystals are (R38, 2). The owner's example: a Focus holding one Fire crystal, its Memory holding Ice
     and Sky; after the turn the Focus holds Ice and Sky and the Memory Fire and an empty place. A blind Memory lends no
-    pair, and the rod tap does nothing to it.
+    pair, and the rod tap does nothing to it. On an Earth drain it swaps the same way, the drain's crystal and its
+    empty place going to the magazine as one set and the magazine's two coming out into the drain (R41, 2), so two
+    crystals then stand in the drain's sockets in the open.
 15. **Its danger is learned.** Twins a blind swap sets side by side in the machine's sockets stand in the open and
     dialogue as always (feature 1, item 8): nothing warns before the swap, and the player learns it by the hum (R36,
     "let players learn via experience").
@@ -210,7 +216,7 @@ panning idea.
    workings' charge, 36. Ten seconds later they move on again, for 36 more.
 7. An Earth battery's room with sand in it and its network at half or above (fill it with the admin charger), its
    drain with one Earth crystal in its socket, a Memory holding a Sky and an Unaligned crystal, a chest touching it
-   and a Control Shelf with sand on it and in its input: no dialogue. Earth cannot wear with the network that full, so
+   and a Control Shelf with sand on it and in its input, the fill more than 3 blocks from the drain: no dialogue. Earth cannot wear with the network that full, so
    its turn passes at once. When Sky takes its turn the drain pans a sand block into the chest and the stones show 200
    less; when the Unaligned crystal takes its turn the shelf puts a sand block back.
 8. Restart: the pair stays in the Memory and the module's pair in its socket; a panned block is still panned and the
@@ -236,8 +242,10 @@ panning idea.
    the drain's socket dialogues with it in a small room. Way 1: the brief says the fill must stand more than 3 blocks
    from the drain, and the code stays. Way 2: Sky's turn on a drain passes at once, as a turn with nothing to do,
    while an Earth twin stands within 3 blocks, so panning is safe in every battery and a small room never pans. Way 3:
-   the fill's crystals are shielded while a Memory stands on the drain. **For the owner.** Mason offers way 2.
+   the fill's crystals are shielded while a Memory stands on the drain. **Answered:** R41, 1, way 1 ("A"), item 10.
 9. A Dead Socket in a Memory on a drain, whose socket holds one crystal (item 10): mason proposes it does nothing
    there, since a blind swap would set two crystals in the open beside the fill. And in a Scatter it swaps as in a
-   Focus. **For the owner.**
+   Focus. **Answered:** R41, 2, "Swap both the crystal and the "empty space", as a "set" of crystals", read as a blind
+   swap on a drain as anywhere else (item 14); a Scatter's swap was put and not objected to.
+10. Does the Dead Socket take one of the magazine's places? **Answered:** R38, 1, and R41, 3: it does not (item 14).
 8. No Journal page before step 7 (item 12). **Answered:** R32, 8, "Yes".
