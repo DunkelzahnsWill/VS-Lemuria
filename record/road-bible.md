@@ -251,15 +251,18 @@ says whose such work is, and what comes before it.
    there, and that feature's brief describes it. The tests of rule 7 are held against that brief.
 2. **The briefs come first.** A brief names the existing parts its feature touches (rule 2). Where the feature's work
    would add to or change what lies in another feature's folders, that feature's brief is changed first, the way a
-   settled brief is changed (rule 4), so that it says what its folders will hold. No code goes into a feature's
-   folders before that feature's own brief is settled and describes it (rule 2). So nothing is written in the folders
-   of features 1 to 9 for a later feature before the feature concerned has its first brief (R3) and that brief is
-   changed for what is added. Such changes may ride in the pull request that carries the new feature's brief.
-3. **The code keeps to its folders.** A pull request that carries a feature changes that feature's own folders and,
-   where its brief says so, the shared files of part 4. What the feature needs changed in another feature's folders is
-   a patch to that feature: it follows the change to that feature's brief, its verdict is "out", and it waits for the
-   owner's merge (rule 4). R23 asks the owner whether such code may instead ride in the feature's own pull request.
-   Until the owner has answered, it goes as a patch, which no reading of rule 4 forbids.
+   settled brief is changed (rule 4), so that it says what its folders will hold. No code for a later feature goes
+   into a feature's folders before that feature's own brief is settled and describes it (rule 2). So nothing is
+   written in the folders of features 1 to 9 for a later feature before the feature concerned has its first brief (R3)
+   and that brief is changed for what is added. Such changes may ride in the pull request that carries the new
+   feature's brief.
+3. **The code may ride with the feature.** A pull request that carries a feature changes that feature's own folders
+   and, where its brief says so, the shared files of part 4. What the feature needs changed in the folders of another
+   feature that its thread owns or has been handed follows the change to that feature's brief (point 2). Once that
+   change is merged, the code may ride in the pull request that carries the feature, and that pull request's
+   description names each other feature it changes and the merged change to that feature's brief (rule 4). The owner
+   ruled so in R24, in answer to R23, and R25 confirms how R24 is read. Such code may also go on its own, as a patch
+   to the feature in whose folders it lies: its verdict is then "out", and it waits for the owner's merge (rule 4).
 4. **A later fix** to any of it is a patch to the feature in whose folders it lies.
 
 ### The Precursor steps
