@@ -113,6 +113,14 @@ public class MysteriesTests
                 Accessor.SetBlock(roof == null ? 0 : Id(roof), origin.AddCopy(x, sizeY, z));
             }
         }
+        // A wild creature or a dropped item standing in the room would be in a scene's line: a Focus aims at
+        // the first thing in its line, a creature before a block, so a Glittering Death Focus with a hen
+        // between it and its flower does nothing (G43). Every scene starts with the room empty of them.
+        foreach (var entity in World.GetEntitiesInsideCuboid(origin.AddCopy(0, -1, 0), origin.AddCopy(sizeX, sizeY + 1, sizeZ),
+            e => e is not EntityPlayer))
+        {
+            entity.Die(EnumDespawnReason.Removed);
+        }
     }
 
     private BlockEntityCradle? Cradle(BlockPos pos, string evolution = Crystal.Glittering)
