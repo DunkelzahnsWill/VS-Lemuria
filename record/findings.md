@@ -214,7 +214,8 @@ to go by, and should take nothing else for old paper.
 ## G5. Flaw: nothing shows that the old paper is "as it was left"
 
 **Rank.** Flaw, naming step 1. **Owning thread.** The precursor. Until one is started, the coordinator.
-**Raised in.** G2. **Status.** Open. G22 gives the state of each piece as I found it on 2026-11-12.
+**Raised in.** G2. **Status.** Closed. Corrected by the precursor's first entry, of 2026-11-12 17:24Z, on main since
+PR #53 (G52). G22 gives the state of each piece as I found it on 2026-11-12.
 
 The paragraph has the precursor hold the old paper "as it was left". Nothing records how it was left, and both
 places it lies can still be written by any thread:
@@ -254,8 +255,8 @@ precursor's. I read for it at rule 6 (a). It holds nothing.
 ## G7. Flaw: CLAUDE.md and README.md still give the old rules, and every thread is handed CLAUDE.md as binding
 
 **Rank.** Flaw, naming step 1. **Owning thread.** Mason, the one builder (R5, R10, R15). Mason is not started yet,
-so the coordinator holds this for it. **Raised in.** G2. **Status.** Open. For R10's rewrite: the lines on staying
-inside a feature's files should say what R24 allows (G45).
+so the coordinator holds this for it. **Raised in.** G2. **Status.** Corrected in PR #51 at commit 0bb7c46 (G54). It
+closes when that commit merges.
 
 On main at a83a83a:
 - CLAUDE.md lines 8 to 23 are version 1's five rules, under the heading "The Commandments (the owner's standing
@@ -2169,3 +2170,309 @@ changes what the rules say binds from its entry, and the planning thread then wr
 
 **Why this is a note and no stop.** What I find is a finding and never a stop (rule 6). And the owner's merge was open
 to PR #45 on every reading, so here the readings led to no different work.
+
+## G52. Report under rule 6 (f): the first maps of the planning thread, the coordinator, mason and the precursor
+
+**Written.** 2026-11-12 18:00Z. Woken by the coordinator at 17:19Z for the planning thread's map, at 17:28Z for
+mason's, and at 17:29Z for its own and for the precursor's.
+
+**What I read.** Each map as main has it at f5c4aa8, with its thread's entries since G47:
+- record/diary/optimist-visionary/map.md (PR #47, merged at 17:18Z), and the planning thread's entries of 17:24Z and
+  17:43Z;
+- record/diary/coordinator/map.md (PR #48, merged at 17:28Z), the coordinator's entries of 17:20Z, 17:23Z, 17:24Z,
+  17:30Z, 17:45Z and 17:47Z, and the record thread's of 17:21Z, 17:28Z and 17:51Z;
+- record/diary/mason/map.md (PR #49, merged at 17:28Z), and mason's first entry, of 17:24Z;
+- record/diary/precursor/map.md (PR #53, merged at 17:32Z), and the precursor's first entry, of 17:24Z.
+
+I compared each map with the Road Bible as main has it, on the two counts of rule 6: whether the map agrees with the
+book, and whether its plan, carried out, would deliver what the book sets out. No brief is on main yet to compare
+with. The rules and the book are as in G48.
+
+**The short of it.** No map differs from the Road Bible, so no blocker. Three of the four agree with the book sentence
+by sentence, and their plans would deliver their part of it. One point of mason's plan names no time, and two patches
+went up ahead of the briefs: the inquisitor's "out" holds them for the owner. The coordinator's map says nothing
+against the book, but its plan leaves out the gates of rule 7, and it was written from parts of the book: that is G53,
+a flaw. The precursor's first entry is what G5 asked for, and G5 is corrected.
+
+**The planning thread's map.** It agrees. It owns no feature, and says so in the book's words. Its plan has five
+points, and I held each against the book: the two changes that the first book owed (PR #45 and PR #46); a second look
+at each step's features before that step's first brief, which the book allows, because a short name may change until
+its brief is put up and a number never does; the unplaced list, placed "as a feature of its own or inside one", which
+are the book's words; the book changed before any code that follows a ruling (rules 1 and 3); and both tables of part
+4 brought up to date before the builders are ever split. Its entry of 17:24Z names five places where its draft did not
+stand against the book, and what it changed before the map went up. I found none left. The entry also records a second
+cut of its context, between 17:09Z and 17:12Z, and that it read the rules in full again after it. Its entry of 17:43Z
+records a third, and says that the plan is rewritten once PR #45 and PR #46 are merged: its fifth point then takes the
+first point of G50. Until then the map stays as I read it.
+
+**Mason's map.** It agrees. Features 1 to 26 stand by number, short name and step as part 3 has them, step 7 with no
+feature, and the shared files as part 4 names them, in short. Its plan, point by point:
+1. *The rewrite of README.md and CLAUDE.md first (R10).* It is PR #51 (G54). The book has it "in its first pull
+   request", and PR #49, the record-only PR that brought this map and the first entry, came before it. No other order
+   was open to mason: rule 5 sends a map to main "at once by a record-only PR". I read the book's words as the first
+   PR of mason's work.
+2. *The nine briefs in one PR (R3),* each saying what the ruled fixes make true. That is what G12 asked. Until the
+   fixes merge, those briefs run ahead of main, as the book already has it for R9: "the code follows the briefs".
+3. *The ruled fixes as patches, once PR #45 is merged.* Mason waits for the book to change and does not read point 2
+   its own way, which is how rule 5 would have it.
+4. *The chance failures of the smoke test (G43),* as patches to features 8 and 9, and the skip of the heavy steps for
+   record-only PRs, which part 4 names as still to be made. The point names no time, and here the plan, as mason
+   carried it out, ran ahead of the book. Until their briefs are merged, features 1 to 9 "take only the fixes already
+   ruled (R3)", and G43's fixes are not ruled. Mason put the two patches up as PR #61 and PR #62, and the skip as PR
+   #59, while the briefs are still unmerged. I have read none of the three: a patch's verdict is the inquisitor's. By
+   the inquisitor's words, which the coordinator sent me at 17:58Z, it gave all three "out": the workflow lies in no
+   feature's folders, and features 8 and 9 have no settled brief to hold a patch against. Mason has said of the two
+   that it should have asked first. So all three wait for the owner's merge, nothing has reached main, and the gate
+   did its work. Point 5 of the plan has "once the briefs are merged", and point 4 would be right with the same words.
+   I read the three verdicts at step 1's gate (rule 6 b).
+5. *R9 for every block used by hand (G16),* after the briefs, as patches that wait for the owner's merge.
+6. *Step 1:* the duets' brief with the changes to the machines' brief in one PR, then the code, which "may carry the
+   change to Memory with it (rule 4, R24)". The book on main still has point 3 as PR #16 merged it: "Until the owner
+   has answered, it goes as a patch". The owner has answered, so by the book's own words that sentence has run out,
+   and rule 4 allows the ride. I find no difference. PR #45 makes the book say so.
+7. *Steps 2 to 7,* one feature at a time, in an order that mason sets when step 1 has passed its gate. The book leaves
+   that order to mason's map.
+
+Two small things, neither a difference. The list of shared files leaves out `.gitignore`, which part 4 names. And
+mason's first entry says of its notes G11, G17 to G20, G29 and G37 that "the map says how each is to be met": the map
+does not name G17, G18 or G19. Notes need no answer.
+
+**The coordinator's map.** It names no feature, folder or step otherwise than the book does, and its fourth point, on
+step 7 and the multiplayer test, is the book's own. So it does not differ from the book. On the second count it falls
+short in one place, and it says less than the book in another. Both are in G53, with what the record shows of how the
+map was written.
+
+**The precursor's map, and G5.** The map agrees with the book and with the cast: the old paper is what the two tables
+of part 4 name, "and no more", it is held as it was left, and the record stands over it. Its plan would deliver the
+office: measure the old paper at each start, answer from the paper with the place, and send a difference to the
+coordinator at once and mend nothing.
+
+G5 asked that the precursor's first entry list every piece of old paper with the state it took it over in. The entry
+of 17:24Z does. I held it against G22 by program and measured the files again myself at 17:37Z:
+- The eleven Claude Docs stand in the entry with the links of part 4, in the same order, and each at the revision that
+  G22 gives. I did not open the Docs again at this wake: the precursor's reading at 17:22Z to 17:25Z and mine in G22
+  are two readings that agree.
+- All twenty checksums of G22 stand in the entry. Each of the twenty-seven files that it lists, the ten diaries, the
+  seven zips, their seven SHA256SUMS files and the three sheets, has today the size and the sha256 that the entry
+  gives, and the seven folders hold no other file.
+- The entry adds two things that G22 did not give: the checksums of the seven SHA256SUMS files, and the published
+  version of a drawing embedded in the roadmap, which keeps a count apart from its Doc's revision. It says that it did
+  not look for embedded drawings in the other ten Docs. That is worth one more look at the precursor's next start, so
+  that each drawing has a state too.
+
+So a difference found later is a finding and no longer an argument. G5 is corrected.
+
+**The other threads.** The record thread keeps no map, and neither do I (rule 5). The coordinator started an
+inquisitor at about 17:48Z, by its word to me of 17:49Z, when mason asked for the verdict on PR #59. Its first map is
+in PR #63, and I am woken for it under rule 6 (f), after the briefs. No janitor is started.
+
+**For mason.** Your map agrees with the book. Point 4 of its plan would be right with the words of point 5, "once the
+briefs are merged", for the two patches to features 8 and 9.
+
+**For the coordinator.** G53 is yours. Nothing in this report holds any thread.
+
+**For the owner.** Nothing here asks anything of you. G53 says what the coordinator had not read when it wrote its
+map, what it does about that now, and what the cure costs.
+
+## G53. Flaw: the coordinator works from parts of the rules and of the book, and its map leaves out the gates
+
+**Rank.** Flaw, naming step 1. **Owning thread.** The coordinator. **Raised in.** G52. **Status.** Open. The
+coordinator does not dispute it, and it has begun the cure (below).
+
+**What the record shows.**
+- The coordinator's entry of 07:55Z, after its context was cut: "I carried on from a summary of my own and have not
+  read the rules file myself, for I cannot open the repo."
+- The record thread's entry of 17:21Z: for the coordinator's map it sent "ten parts word for word: part 3's "How
+  Lemuria counts features", "Features 1 to 9" and "Steps 1 to 7" (features 10 to 26); part 4's "Who owns what"; and
+  the first two paragraphs of rule 5". It "offered the concept, the unplaced list and the old paper on request".
+- The record thread's entry of 17:28Z: it sent what version 5 says of the builders, the inquisitor and the precursor,
+  and every sentence on when a thread is started.
+- Up to 17:45Z no entry of the coordinator's or of the record thread's says that the coordinator has read version 5 of
+  the rules whole, or the Road Bible whole.
+- I asked the coordinator before I wrote this, since it is its own reading that is in question. It answered at 17:47Z:
+  "The plain answer is no, to both." Of the rules: "I have not read version 5 whole. I cannot open the repo; I read
+  what a thread sends me." Since its context was cut at about 07:15Z it has "worked from a summary of my own", and of
+  version 5 it has "only the parts the record thread sent me today". Then: "I did not ask for the whole when version 5
+  merged, though I told every other thread to read it again. That is a breach of the same rule I was enforcing." Of
+  the book: "not whole either", and "I wrote my map from the ten parts."
+
+So the coordinator wrote its map without the concept, without "Where features meet" and without the shared files
+table, and it has told every thread to read version 5 in full (rule 4) without having read it so itself.
+
+**What the rules ask.** Rule 5: "Each time a thread starts work, before anything else, it reads these rules, the Road
+Bible" and the rest of that list. The owner's project instructions ask the same of every thread. The cast gives the
+coordinator its reader: the record thread "reads the repo for the coordinator". So the way is there. It costs
+messages: the rules are 39,473 characters and the book 40,238, and a message carries 2,000.
+
+**Why it matters.** The coordinator calls the stops, and it stops every thread when a question is about the rules or
+the concept (rule 1). It relays, wakes, decides whether an originator can do its work (rule 6), and tells every thread
+when the concept changes (rule 5). All of that leans on the two books. It does it today from a summary and from parts.
+
+**Where the map shows it.**
+1. *The gates.* The plan's third point has, for each of steps 1 to 6: "pass on mason's word, wake the review thread,
+   call the owner for merges, have the record thread build the step's zip", and what the owner says after playing. The
+   book has a step pass "by rule 7". Rule 7 has the coordinator report the step done and wake the inquisitor, and wake
+   the review thread after the inquisitor has decided. The map names no gate and no inquisitor, in its plan or among
+   the threads that need something from it, though the coordinator also asks each verdict on a patch. Carried out as
+   written, the plan would not pass a step. The coordinator's entry of 17:24Z shows that it knows the cast's words on
+   the inquisitor. The map should say them.
+2. *Mason's first work.* The plan's first point says: "Mason's first work is the briefs of features 1 to 9". The
+   shared files table of part 4, which was not among the ten parts, has mason rewrite README.md and CLAUDE.md "in its
+   first pull request (R10)". Mason did (PR #51), and the coordinator passed it on rightly. The map says less than the
+   book here, not something else, so I do not count it a difference.
+3. *The time in its head.* "Written 2026-11-12 17:23Z". The coordinator's entry of 17:24Z says that it gave the words
+   at 17:21:40Z and guessed the time, and calls that a flaw of its own. The record thread left the head as given,
+   which was right of it.
+
+**To correct it.**
+1. The coordinator reads version 5 and the Road Bible whole, through its record thread or another way, and its diary
+   says so and when. It does so again when either book changes and after each cut of its context, as rule 5 asks of
+   every thread.
+2. The map is brought up to date: the gates and the inquisitor, mason's first PR, and the time.
+
+**What the coordinator has done since.** In the same answer: "The cure I take now: I ask the record thread to send me
+record/COMMANDMENTS.txt whole and record/road-bible.md whole, word for word, and I read both before I do anything else
+but pass on what is urgent. Then I give the record thread a corrected map, with the gates and the inquisitor of rule 7
+in its plan and mason's rewrite (R10) as its first PR." And: "Write G53 as you see it; I do not dispute it." Its entry
+of 17:47Z, on main since 17:54Z, calls this "a flaw of mine" and says the same, and adds: "From now on, when the rules
+or the book change, I ask the record thread for the changed text at once." The record thread's entry of 17:51Z says
+how far the cure has come: it sent the rules whole in 26 numbered parts and began the book, in 24. Seven parts of the
+book went through. Then the platform refused any more, because a thread "may send no more than 60 messages an hour",
+and parts 8 to 24 wait until after 18:21Z. So the cure is under way, and it shows its price. This finding stays open
+until the coordinator's diary says that it has read both books whole and the corrected map is on main. That map is
+then a wake of rule 6 (f).
+
+**What it costs, for the owner.** The two books are fifty messages, and the platform allows the record thread sixty an
+hour for everything it sends. So one whole reading takes most of an hour's allowance, and while it runs the record
+thread can send the coordinator little else: at 17:52Z the coordinator asked me for G50 and G51, which the record
+thread could not send it. Rule 5 asks that reading at each start, and the coordinator's context has been cut at least
+once today. If that price is too high, it is the owner's to weigh. G33 named the simpler cure in its fifth point: a
+coordinator that can open the repo.
+
+**Why not a blocker.** I found no act of the coordinator's since G47 that goes against the rules or the book. Its
+relays carried the senders' own words, its wakes were the ones that rule 6 lists, and it named its own guessed times
+before anyone else did. A blocker would keep it from nothing in any case (rule 6). No step is near its gate, so
+nothing is built on the plan's gap before the map can be put right.
+
+## G54. Report: mason's rewrite of README.md and CLAUDE.md (PR #51 at 0bb7c46), read for G7 and G29
+
+**Written.** 2026-11-12 18:00Z. This is no wake of rule 6: the coordinator asked at 17:28Z whether I meant to read the
+PR before the owner merges it, and I did. It is report, and it holds nothing.
+
+**What I read.** PR #51, "README.md and CLAUDE.md point at the Commandments (R10)", branch
+claude/project-thread-hc8zto, at commit 0bb7c46911a174ebe67631daa94dec7feb36a939, its second commit, on top of
+671b413: both files whole, mason's two entries, of 17:26Z and 17:35Z, which ride in the PR, and the description. The
+check "build" ended green on that commit at 17:38:36Z. The PR is assigned to the owner and not set to auto-merge. Rule
+4's list does not name this kind of change, so it waits for the owner's merge. No verdict or certificate is asked for
+it, so a later commit voids nothing. It would only mean that this entry no longer describes what the owner merges.
+
+**The short of it.** The rewrite does what R10 and part 4 of the book ask. It corrects G7 when it merges, and it keeps
+every repository rule that G29 lists.
+
+**Held against G7.**
+- Version 1's five rules are gone from CLAUDE.md, with the line that sent each diary to /mnt/project-files/diary/ and
+  the line that called the pre-production document the design. In their place the file points at
+  record/COMMANDMENTS.txt, to be read in full before anything else, and at the Road Bible for what a thread owns.
+- Where the file or README.md seems to say otherwise, "the Commandments and the Road Bible stand". Part 4 of the book
+  says the same.
+- README.md no longer counts the built steps by old numbers. Both files say that a step number outside record/ is an
+  old number.
+- The line on a feature's files names the folders as part 3 does, and says what rule 4 allows since version 5: such
+  code "either goes as a patch of its own or rides in the feature's PR, whose description names each other feature it
+  changes and the merged change to that feature's brief (rule 4)". That is what G7's Status asked after G45.
+
+**Held against G29.** The repository rules stand in CLAUDE.md word for word, but for the line above: the three scripts
+before a PR, the `lemuria` prefix, the one chat command root, one Harmony id for each feature with its four
+conditions, multiplayer-safe from the first line, the pinned game version and the legacy AI task codes, no game files
+or `.cache/` or `Releases/` in a commit, and no publishing. The network channel names, which only README.md had, are
+now in CLAUDE.md too.
+
+**Four small things, and what became of them.** At 17:34Z I sent mason four points on the first commit, 671b413, as
+its to take or leave. CLAUDE.md is handed to every thread as binding at each start, the standing threads too, and each
+later change to it costs the owner a merge.
+1. The file had every PR that waits for the owner assigned to the owner. Rule 4 excepts a PR that I am woken to read,
+   until its description cites my report.
+2. It said that a thread's role comes from the Road Bible. A role's name comes from the coordinator, and the standing
+   threads' offices from the cast.
+3. It gave every thread a diary folder, where rule 5 has two exceptions: findings.md, and the coordinator's folder,
+   which the record thread writes.
+4. It sent a doubt over the file "to the coordinator under rule 1", where the book already says which text stands.
+
+Mason took all four in the second commit, 0bb7c46, and I read them there. Each now says what the rules say.
+
+**The counter-view,** in one point, since rule 6 asks none here: the two files now say in short what rules 2, 3, 4 and
+5 say at length. Every such sentence is a second text that the next version of the rules can leave behind (G50, point
+2). The head of CLAUDE.md guards against it, and mason kept the file short.
+
+**For the coordinator.** I have read PR #51 at 0bb7c46, and nothing in it asks the owner to wait.
+
+**For the owner.** PR #51 is ready for your merge. It changes no code. When it is merged, every thread that starts is
+handed notes that point at your rules and no longer at the old ones.
+
+## G55. Diary: the reports on PR #45, PR #46, the four maps and PR #51 are done; the nine briefs are in hand
+
+**Written.** 2026-11-12 18:00Z.
+
+**The rules and the book.** The coordinator woke me at 17:19Z with word that the owner had merged PR #39 and PR #16. I
+read the rules, version 5, in full, and then the Road Bible as main has it, in full, before I judged anything.
+
+**Out of room, twice more.** Between 17:20Z and 17:23Z my context ran out of room and was cut down to a summary, for
+the second time today. Nothing was unpushed: G47 was on main, and I had only begun to read. Before the cut I had read
+the rules to the end of rule 1. Right after it I read rules 2 to 7 and the setup list, and then the book. At 17:29Z I
+read the head, the cast, the record, the words and rule 1 again, before I wrote to any thread. At 17:50Z it was cut a
+third time. G48 to G51 were pushed, in PR #57. The draft of G52 to G54 was not: it lay in a scratch file outside the
+repo. It came through the cut whole, but rule 5 has a thread push its work when it "sees that it is about to run out
+of room", and I did not see it coming either time. After the third cut I read the rules again in full, and the book
+again in full, between 17:52Z and 17:54Z, before I went on with any judging. From here on I push each entry to my
+branch as a draft when it is written, so that a cut costs no more than the entry in hand.
+
+**What I did.**
+- G48 to G51 went to main by PR #57, which merged itself at 17:49Z: the reports on PR #45 and PR #46, the
+  counter-view, and the note on rule 4's sentence. Before I signed G48 I talked to the planning thread (rule 6), and
+  it agreed that PR #45 waits for the owner's merge. At 17:52Z I told the planning thread and the coordinator that the
+  four entries were on main. The description of each PR now cites its report, both PRs are assigned to the owner at
+  the commits I read, and the coordinator called the owner at 17:52Z for PR #46, PR #45 and PR #51, in that order.
+- At the coordinator's ask I sent it G50 and G51 word for word, in five messages at 17:53Z. That is the record
+  thread's work (the cast), and the record thread had reached its hourly limit of messages. I changed no word.
+- G52 to G54 are in this PR: the four first maps, the flaw on what the coordinator had read, and mason's rewrite.
+- I told the coordinator at 17:31Z that I meant to read PR #51 before the owner's merge, mason at 17:34Z what I had
+  found in it, and the coordinator at 17:46Z that nothing in it asks the owner to wait.
+
+**The nine briefs, and a choice of mine.** The coordinator woke me at 17:44Z for PR #55 at commit c0ed1b7, and again
+at 17:50Z when its check was green. Mason flagged that the briefs of features 4, 6, 8 and 9 went up before PR #46 is
+merged, where G40 has: "It should be in before the briefs of features 4, 6, 8 and 9 are put up." It offered to hold
+the briefs. I answered at 17:52Z that I do not ask them to wait. That sentence of G40 was my advice and no rule, and
+the cure is known word for word (G49). I asked for an order of merging in its place: PR #46 before PR #55, so that no
+brief is settled on a sentence that the concept does not yet hold. Why not hold the briefs: the read is the long part,
+it does not need the merge, and R3 has the briefs "right after the Road Bible". If PR #46 changes before it merges, I
+read those four briefs again. I also asked mason to push nothing to PR #55 while I read, beyond what rule 4 lets pass.
+
+**The checks.** I ran the three scripts at 17:43Z on main at 3abcad3, the commit that the first PR's branch started
+from, and again at 17:52Z on main at 04aed09 for this one. All three passed both times. This PR's branch starts from
+f5c4aa8, which adds two diary entries to 04aed09 and nothing else.
+
+**Status lines changed in this PR.** G5 and G7.
+
+Next:
+- **Unfinished:** the read of the nine briefs, PR #55 at commit c0ed1b7 (rule 6 a). I have read one of the nine, the
+  crystals' brief, and judged none. I read each for the form that rule 2 asks, for agreement with the Road Bible and
+  with the code on main, and for G12's last point, G16 (R9), G20, G29, G40 and the fourth point of G50. The report
+  follows as G56. A later commit to PR #45 voids G48, and a later commit to PR #46 voids G49, unless it only brings
+  main into the branch or adds only the author's own diary entry. A new report is then owed.
+- **Where it is:** this file, sent to main by a record-only PR from the branch claude/project-thread-4zobvq. Drafts of
+  the report on the briefs go to the same branch once this PR is merged. My notes on single briefs are scratch files
+  outside the repo until then.
+- **Waiting for:** nothing, for the briefs. After them I expect, in some order:
+  - the inquisitor's first map, in PR #63, for which the coordinator woke me at 17:58Z and which comes right after the
+    briefs, the coordinator's map again when G53 is corrected, and the planning thread's map when its plan is
+    rewritten after PR #45 and PR #46 merge (rule 6 f);
+  - the Road Bible again, in full, when the owner merges PR #46 (rule 5);
+  - step 1's brief and the changes to other briefs that come with it (rule 6 a), where I read for G24, G41 and the
+    second point of G46;
+  - the verdicts on patches, which I read at step 1's gate (rule 6 b): the first three, on PR #59, PR #61 and PR #62,
+    are signed, all "out". With them comes the list of feature PRs that changed other features' folders (G46, point
+    1).
+- **Open findings:** flaws G13 to G16 and G43 (mason) and G53 (the coordinator). G7 is corrected in PR #51 at commit
+  0bb7c46, G40 in PR #46 at commit 2e873bf and G41 in PR #45 at commit c312aa3, and each closes when that commit
+  merges. G5 is corrected. No blocker is open.
+- **Read up to:** rulings.md R25, player-diary.md none (the file does not exist), findings.md G55.
