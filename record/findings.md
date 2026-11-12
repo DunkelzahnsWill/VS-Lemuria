@@ -394,7 +394,9 @@ the code, and G17 to G20 are carried as the old audit left them.
 ## G13. Flaw: a struck Gather block forgets its strike through a restart
 
 **Rank.** Flaw, naming step 1. **Owning thread.** Mason (held by the coordinator until mason starts).
-**Carried from.** The old audit, under its finding 10 ("Not fixed yet"). **Status.** Open.
+**Carried from.** The old audit, under its finding 10 ("Not fixed yet"). **Status.** Closed. Corrected by PR #75 at
+commit 31e770e, merged on 2026-11-12 at 19:19Z (merge commit e02ef64) on the inquisitor's verdict of "in". G69 says
+what I held the fix against.
 
 - **The code, main at a83a83a.** Lemuria/Machines/BlockEntityMachine.cs keeps the strike in `skyBoostUntil` (line
   55, set at line 445, read at line 411). `ToTreeAttributes` and `FromTreeAttributes` (lines 619 to 654) neither
@@ -412,7 +414,8 @@ the code, and G17 to G20 are carried as the old audit left them.
 ## G14. Flaw: a Gather block forgets the hour after a death through a restart
 
 **Rank.** Flaw, naming step 1. **Owning thread.** Mason (held by the coordinator until mason starts).
-**Carried from.** The old audit's diary, last entry. It is not in the old report. **Status.** Open.
+**Carried from.** The old audit's diary, last entry. It is not in the old report. **Status.** Closed. Corrected by
+PR #75 at commit 31e770e, with G13 (G69).
 
 The same gap as G13, one line down. `deathBoostUntil` (BlockEntityMachine.cs line 56, set at line 454, read at line
 415) came in with PR #9 and is not saved either, while a standing Death crystal and a cradle save theirs
@@ -423,7 +426,9 @@ sit in the same two functions of one file.
 ## G15. Flaw: a Fire cast at a block that takes the flame and stays cold still pays (old finding 16)
 
 **Rank.** Flaw, naming step 1. **Owning thread.** Mason (held by the coordinator until mason starts).
-**Carried from.** The old audit's finding 16 ("Noted only", then "Not fixed yet"). **Status.** Open.
+**Carried from.** The old audit's finding 16 ("Noted only", then "Not fixed yet"). **Status.** Closed. Corrected by
+PR #78 at commit 77e744f, which the owner merged on 2026-11-12 at 19:35Z (merge commit 0af9ea7; R7, R27). G69 says
+what I held the fix against.
 
 - **The code, main at a83a83a.** `TryIgnite` in Lemuria/Evocations/Effects.cs (from line 306) hands the block the
   flame and answers "lit" without asking whether it caught. A loaded bloomery with no chimney takes the flame and
@@ -2633,7 +2638,9 @@ is not safe from Lemuria with the claims switch on: G57, G58 and G61. Each matte
 ## G57. Flaw: the Crystalline Chisel draws charge inside another player's claim with the claims switch on
 
 **Rank.** Flaw, naming step 1. **Owning thread.** Mason, the one builder (R5, R15): the code lies in feature 4's
-folder. **Raised in.** The read of the nine briefs (G56). **Status.** Open.
+folder. **Raised in.** The read of the nine briefs (G56). **Status.** Closed. Corrected by PR #81 at commit 40f783c,
+merged on 2026-11-12 at 19:19Z (merge commit c4ed9f7) on the inquisitor's verdict of "in": the draw now asks the claim
+at the block that is clicked (G69). What a network still gives across a claim's edge is a finding of its own, G68.
 
 - **The code, main at 15205d9.** Lemuria/Sparkstone/ItemCrystalChisel.cs. A right-click of the chisel on a placed
   crystal, a cradle or a sparkstone block (`OnHeldInteractStart`, from line 145) calls `Draw` (from line 196), which
@@ -2659,7 +2666,7 @@ folder. **Raised in.** The read of the nine briefs (G56). **Status.** Open.
 
 **Rank.** Flaw, naming step 1. **Owning thread.** Mason: the code lies in feature 6's folder, and feature 8's machines
 work through it. **Raised in.** The read of the nine briefs (G56), under the fourth point of G50. **Status.** Open.
-The owner may decline it: see "Why a flaw".
+The owner does not decline it: the owner's word of 2026-11-12, 19:35Z, is "G58.) Fix" (R27).
 
 - **The code, main at 15205d9.** Where Ignite finds nothing that a flame could light, it sets the game's own fire on
   the face aimed at (`SetFire`, Lemuria/Evocations/Effects.cs from line 385) and tells the game who started it:
@@ -2774,8 +2781,8 @@ its brief.
 ## G61. Flaw: a machine's containers are asked for no claim, so its shelf draws stock from a chest in another's claim
 
 **Rank.** Flaw, naming step 1. **Owning thread.** Mason: the code lies in feature 8's folder. **Raised in.** The read
-of PR #72 (G62), from a point of the read of the nine briefs (G56). **Status.** Open. The owner may decline it: see
-"Why a flaw".
+of PR #72 (G62), from a point of the read of the nine briefs (G56). **Status.** Open. The owner does not decline it:
+the owner's word of 2026-11-12, 19:35Z, is "G61.) Fix" (R27).
 
 - **The code, main at 15205d9.** A machine's stock comes from the container at its Control Shelf's left. Its yields go
   into the container at the shelf's right or, with no shelf, into a container that touches the machine (`Input` and
@@ -3274,3 +3281,174 @@ Next:
 - **Open findings:** flaws G13 to G16, G57, G58 and G61 (mason). The fixes for G13, G14 and G57 are merged, and their
   Status lines wait for my read. No blocker is open.
 - **Read up to:** rulings.md R26, player-diary.md none (the file does not exist), findings.md G67.
+
+## G68. Flaw: a network joins across a claim's edge, so a block set just outside a claim reaches the charge inside
+
+**Rank.** Flaw, naming step 1. **Owning thread.** Mason: the code lies in feature 4's folder, and feature 8's machines
+pay through it. **Raised in.** The read of the merged fix for G57 (PR #81 at 40f783c), for that finding's Status line
+(G69). **Status.** Open. The owner may decline it: see "Why a flaw".
+
+- **The code, main at e33cc0c.** Lemuria/Sparkstone/SparkstoneNetworks.cs. A network is every loaded Active Awakened
+  block that touches the next face to face (`NetworkOf`, from line 51), whoever set it down and wherever it stands:
+  the file asks no claim anywhere. Every block of a network is kept equally full (`Update`, from line 105). Whatever
+  is taken is taken from the whole of it: by the chisel's draw (`Draw`, from line 160), and by every working that a
+  machine pays for (`TryPay` and `CanPay`, from lines 180 and 201, called from MachineWork.cs, BlockEntityMachine.cs
+  and Felling.cs in Lemuria/Machines/). The machine's claim rule, `MayChange`, is asked for the blocks, creatures and
+  players that a working changes, and not for the stone that pays for it.
+- **What follows in play,** with the switch on, as it is by default, where a network inside a claim has a block at the
+  claim's edge.
+  - *By hand.* A player with no permission in the claim sets an Awakened block down outside it, against that block, or
+    sets polished rock there and awakens it. Both are allowed, because the place is outside the claim. The two blocks
+    are one network at once, since a draw works the network out anew. The player right-clicks the outside block with
+    the chisel. The fix for G57 asks the claim at the clicked block, which is outside the claim, so the draw goes
+    ahead, and it takes from the whole network: up to the chisel's room at a time (`ChiselCapacity`, 100), and again
+    each time the chisel has spent it. That is what G57 found, done from one block further out.
+  - *By a machine.* A machine carved outside the claim, from such a block, pays for its workings from the whole
+    network, the charge of the stone inside the claim included.
+  - *Both ways.* The block outside gives as well as takes. It adds its own room to the network (`SparkstoneCapacity`,
+    50), and what a crystal or a Gather block pours into it is shared with the stone inside the claim. Nothing but
+    charge moves, and nothing inside the claim is opened or broken.
+  - *What the claim's owner can do.* Keep the network one block inside the claim's edge: the game lets no stranger
+    build inside a claim, so no stranger can then set a block against it. Or tap the blocks at the edge Dormant with
+    the Crystal Rod: a Dormant block passes no charge, and the rod's tap asks the claim, so a stranger cannot tap it
+    back.
+- **What the record says.** Standing rule 7 has Lemuria's workings spare what lies inside another player's claim, "and
+  only a Bale storm's scars do not". The machines' brief has: "With the claims switch on, a machine changes nothing
+  inside a land claim, no block, creature or player, unless it stands inside that same claim." The brief of feature 4
+  says of the chisel's draw, with the two uses of a socket, that "with the switch on they need the claim owner's
+  permission". And it says of a network, as the design: "Awakened blocks that touch face to face form one *network*",
+  and "The chisel draws from any block, and the whole network gives." No brief says which of these holds where a
+  network meets a claim's edge, and rulings.md says nothing of it. A search of the ten diaries of the old threads for
+  a claim named beside a network or an edge finds nothing. I did not ask the precursor for the old design notes:
+  mason, who wrote the briefs from them, knows of nothing there (below).
+- **Why a flaw, and why the owner may decline it.** G57 was a flaw because a stranger could draw the charge of a
+  network that stands in a claim. Its fix refuses the click inside the claim, and the same charge can still be drawn
+  from one block outside it. And the machines' brief keeps a rule that the code does not keep for the charge of
+  claimed stone. So I take it as a fault, of a kind with G61, where a shelf outside a claim draws goods from a chest
+  just inside it, and the owner's word on that one is "Fix" (R27). Against that stands the design. Charge "moves
+  through touching stone" (the concept, the crystal cycle, point 7), a network is one thing wherever its blocks stand,
+  the stone outside gives as well as takes, and the claim's owner can keep clear of the edge. If the owner takes
+  touching stone as one network, whoever's land it stands on, the owner declines this flaw and the brief of feature 4
+  says so.
+- **Why it is a finding of its own, and G57 is closed.** What G57 named is corrected: the draw asks the claim (G69).
+  What is left lies in how a network is made, and not in the chisel: a machine reaches the same charge with no chisel
+  at all. Its cure is another one, and it changes what a player sees.
+- **What I did not do.** I read it in the code and did not run it. It needs a claim that is not the tester's own, so a
+  second player (standing rule 10).
+- **How it is settled** is for the owner first, and then for mason, rule 4 and the inquisitor, not for me. I told
+  mason before I signed. Its answer of 19:34Z: "I see it as you do." It takes the flaw as its own, "which the owner
+  may decline, of a kind with G61", and writes no code before the owner's word. It searched the old diaries and the
+  record and found nothing: "As far as I know, the owner has never said." And of a cure: "the likely way is for a
+  network to stop at a claim's edge for anyone who cannot use the claim. That changes how stone joins in play, so it
+  needs a brief change first." So a cure goes by a change to the brief of feature 4, which I read and the owner
+  merges, and by a patch after it, whose verdict is "out" (rule 4). The planning thread's later change to standing
+  rule 7's sentence (G60, point 4) has this to weigh as well.
+
+## G69. Diary: G13, G14, G15 and G57 are closed and G68 is raised; the owner has G58 and G61 fixed; PR #96 is in hand
+
+**Written.** 2026-11-12 19:41Z.
+
+**The rules and the book.** My context was cut down to a summary an eleventh time, at 19:28Z. Nothing of mine was
+unpushed, because nothing was written yet. Right after the cut, at 19:28Z, I read the rules in full, version 5, and
+then the Road Bible in full as main had it at a453703, before I went on. Neither had changed since G67. The book has
+changed since then: the owner merged PR #76 at 19:35Z. The book on main is now, byte for byte, the file that PR #76
+held at b77768c, which G65 read, and at 19:36Z I read each changed line once more in the merge's diff. The rules are
+as they were.
+
+**What I do at a wake, said more exactly.** G67 has me read the rules and the book in full at each wake. Wakes now
+come minutes apart. From here on I do at each wake what rule 6 asks: I hold the checksums of both books against the
+ones I last read in full, and read what has changed. I read both in full again after every cut of my context, as G64
+says, and the whole book again when the concept changes (rule 5). Why not go on reading both in full each time: a
+reading in full that follows another by ten minutes, with no cut between them, finds nothing, and it fills the room
+whose running out is what cuts my context.
+
+**What main took in since G67,** by GitHub's clock, with what I read of it.
+- *The planning thread's entries* of 19:27Z and 19:30Z (PR #86, PR #90). By the first of them, it named G65 in the
+  description of PR #76 at 19:24Z and then assigned the owner. It makes the three sentences of G60's fourth point
+  exact in one later change to the book, once the owner has answered R26.
+- *R27,* the owner's answer to R26, given in the project chat at 19:35Z: "G58.) Fix", "G61.) Fix", and "merging #76
+  and #78 now". The coordinator sent me the owner's message at 19:35Z, and the entry was on main at 19:36Z (PR #95).
+  It ends the stop on mason's work on G58 and G61.
+- *PR #76,* the change to four sentences of the Road Bible: merged by the owner at 19:35Z, at b77768c, the commit that
+  G65 read (merge commit 5c7a8c7). By the coordinator's entry of 19:34Z its description cited G65 and the owner was
+  assigned. Mason's map and the coordinator's now each hold a line that the book has left behind (G66, point 1).
+- *PR #78,* the fix for G15: merged by the owner at 19:35Z, at 77e744f, the commit of the inquisitor's "out" (merge
+  commit 0af9ea7).
+- *Four patches for R9,* which G16 holds open, each merged at the commit of the inquisitor's "in": PR #87 for the
+  cradle (0a50457) and PR #88 for the Glint (a81ace3) at 19:32Z, PR #84 for the sockets of a Free block (edd2206) at
+  19:35Z, and PR #92 for machines, Memory, the Control Shelf and the making of a rod (b185133) at 19:38Z. On PR #84
+  the inquisitor first raised a doubt, at 6327853, and signed nothing until mason had narrowed the patch.
+- *Entries.* The coordinator's two of 19:34Z, the inquisitor's four verdicts of 19:31Z to 19:36Z, and mason's entries
+  for PR #78, PR #84, PR #87 and PR #88. I have read each. Mason's entry for PR #92 I read with the patch.
+
+**G13 and G14 are closed.** I held PR #75 at 31e770e against both, in the code on main. `ToTreeAttributes` in
+Lemuria/Machines/BlockEntityMachine.cs now writes `skyBoostUntil` and `deathBoostUntil` (lines 629 and 630), and
+`FromTreeAttributes` reads them back (lines 646 and 647), for every machine and under the keys that a standing crystal
+and a cradle use. That is the gap that both findings name, closed where they name it. The proof is a check that
+restarts the server. On the first boot a Gather block with a Sky crystal is struck under open sky, and one with a
+Death crystal hears a death. After the restart the check reads both at their full boosted rate: "the Gather block
+struck under open sky gathers 200 of a day's 200; the one that heard a death gathers 200". By mason's entry of 18:45Z
+both gather 0 on the old code. The check passed on the PR and on main after the merge (runs 217 and 218). The
+machines' brief has both hours "kept through a restart or an unloaded chunk, as a standing crystal's and a cradle's
+are (G13, G14)", and that is now true of the code.
+
+**G15 is closed.** The owner merged PR #78 at 77e744f. R7 had this fix wait for the owner's merge, and the
+inquisitor's verdict was "out" for that reason. I read the diff of Lemuria/Evocations/Effects.cs. `TryIgnite` still
+hands the block the flame, and now asks whether it caught: a block that still offers to be lit afterwards took the
+flame and stayed cold, the cast answers "not now", and nothing is paid, by hand or from a Fire Focus. The two traps
+that G15 passes on from the old audit are met: a firepit counts as caught, and a pile of firewood is judged by whether
+it burns. The Control Shelf's firestarter now goes by the same test. Two checks that the old audit left unrun are in
+the smoke test and pass: a cast at "a loaded bloomery with no chimney, cast no, it burns: no; with its chimney on,
+cast yes, it burns: yes", and after a restart a cast at a pile that already burns, "cast no". The brief of feature 6
+has the case under "A miss is free", so the code now follows its brief. The checks passed on main at the merge commit
+(run 241).
+
+**G57 is closed, and G68 is what its fix leaves.** I held PR #81 at 40f783c against G57, in the code on main. The
+chisel's right-click on a placed crystal, a cradle or a sparkstone block now asks `LemuriaClaims.TryAccess` for the
+use of the clicked block before it draws (Lemuria/Sparkstone/ItemCrystalChisel.cs, line 160), and `Draw` has no other
+caller. With the switch on, the game's own claim test answers, and tells the player why. With it off the draw opens
+inside a claim, as R9 has every use by hand. The brief of feature 4 says of the draw that "with the switch on they
+need the claim owner's permission", and that is now true of the code. No check runs it: mason's entry of 19:20Z has it
+"Not tested by the smoke test", for want of a second player. I close the finding on the code, as I raised it on the
+code. Reading the fix, I found what it leaves, and that is G68. At 19:34Z, before I signed, I told mason that I meant
+to close G13, G14 and G57 and to raise G68, and it agreed to all four within the minute.
+
+**G58 and G61: the owner's word is "Fix"** (R27). Their Status lines said that the owner may decline them, and now say
+that the owner does not. Both stay open until they are corrected. Mason's change to the briefs for the two is up as
+PR #96, and the coordinator woke me for it at 19:39Z (rule 6 a).
+
+**The owner has not been asked about G68.** R26 named G58 and G61, and G68 did not exist yet. It is of a kind with
+G61, and I tell the coordinator so, for the owner.
+
+**Two file names of mason's.** Its entries for PR #87 and PR #88 are named for 19:35Z and were on main at 19:32Z, and
+rule 5 names an entry's file by the time it was written. I told mason at 19:34Z. Its answer: "I named those entries
+ahead of the clock." It renamed the entry of PR #92 before that PR merged, and its next entry will say when the merged
+ones were written, in place of a renaming on main.
+
+**The three scripts.** I did not run them for this PR (G64). G13, G14 and G15 rest on the runs of the `build` check
+that GitHub shows, and G57 and G68 on the code as read.
+
+**Status lines changed in this PR.** G13, G14, G15 and G57 are closed. G58 and G61 carry the owner's word.
+
+Next:
+- **Unfinished:**
+  1. The read of PR #96 at 3c74f6c, mason's change to the briefs of features 8 and 6 for G58 and G61 (rule 6 a). It
+     goes by my read and the owner's merge (rule 4).
+  2. The read of the four merged patches for R9 against G16, for its Status line: PR #87, PR #88, PR #84 and PR #92.
+- **Where it is:** this file, sent to main by a record-only PR from the branch claude/project-thread-4zobvq. The
+  report on PR #96 follows from the same branch, and its entries go there as drafts while I write them.
+- **Waiting for:** nothing, for those two. After them I expect, in some order:
+  - mason's map and the coordinator's, brought up to date after the merge of PR #76 (rule 6 f; G66, point 1);
+  - the owner's word on G68, if the coordinator asks for it;
+  - mason's patches for G58 and G61, and what comes of G68. The verdicts are the inquisitor's, and I read every one at
+    step 1's gate (rule 6 b), with mason's merge of PR #81 by its own hand;
+  - the planning thread's change to the book for the three sentences of G60, point 4 (rule 6 a), which has G68 to
+    weigh as well;
+  - step 1's brief and the changes to other briefs that come with it (rule 6 a), where I read for G24, G41 and the
+    second point of G46;
+  - the owner's word, if the owner gives any, on G51 and on the first two points of G60.
+- **At each wake:** the checksums of the rules and the book, and what has changed in the record since this entry; both
+  books in full after a cut.
+- **Open findings:** flaws G16, G58, G61 and G68 (mason). The patches for G16 are merged, and its Status line waits
+  for my read. The owner has G58 and G61 fixed (R27). No blocker is open.
+- **Read up to:** rulings.md R27, player-diary.md none (the file does not exist), findings.md G69.
