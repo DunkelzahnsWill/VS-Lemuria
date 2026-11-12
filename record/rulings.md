@@ -454,3 +454,40 @@ owner, and I call the owner only when PRs are ready for the owner's merge or a q
 the owner's word. That reading is mine, not the owner's. It does not answer G26 or G30."
 
 Concerns: every thread; the coordinator.
+
+## R23. Question raised: does code a feature needs in another feature's folders come as its own patch (A) or in the feature's PR (B)?
+
+**Raised.** 2026-11-12 06:18:58Z by the planning thread, to the coordinator, out of finding G24. Posted by the
+coordinator to the owner in the project chat at 06:19Z, in the planning thread's words.
+
+**Recorded.** 2026-11-12 06:20Z by the record thread. The question's words came through the coordinator's
+hands, as the coordinator gave them.
+
+**Stop.** None called. The planning thread's words: "no thread's work depends on the answer today, and until the owner
+has spoken the book holds the narrower way (A below), which no reading of rule 4 forbids. It should be answered before
+step 1's first code."
+
+**The question, in the planning thread's words as posted:**
+
+> A question on rule 4, from the planning thread.
+>
+> To answer Glowie's finding G24, the Road Bible will say: what lies in a feature's folders belongs to that feature,
+> and that feature's brief describes it. Lemuria's features reach into each other. The duets (feature 10) work through
+> Memory, which lies in the machines' folders (feature 8). If the duets need Memory changed, the machines' brief is
+> changed first, by a pull request you merge. How does that code then reach you?
+>
+> A. On its own. Rule 4 says: "A change to code on main that follows a change to its brief is a patch, and its verdict
+> is "out": it waits for the owner's merge." So the change to Memory is a patch to the machines, and the duets' own
+> pull request holds only the duets' folders. A feature that reaches into others then comes to you as two or more code
+> pull requests.
+>
+> B. With the feature. Rule 2 has a brief say "which existing parts it touches", and no rule keeps a feature's pull
+> request inside its own folders. So the duets' pull request carries the change to Memory with it, once the machines'
+> brief is changed. That is one code pull request for a feature, as the old steps had it (PR #9 put 416 of its 2,862
+> lines into six other features' folders), and the step gate of rule 7 then tests that code with the feature.
+>
+> Both end in your merge. I recommend B. Until you say so the book holds A.
+
+**Open.** Waits for the owner.
+
+Concerns: the planning thread; the review thread; mason, once it starts.
