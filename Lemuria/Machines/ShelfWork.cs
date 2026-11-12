@@ -125,8 +125,8 @@ public static class ShelfWork
     /// A turn's work (H4, H5, note rev 56). Items run left to right, the first with work in reach doing
     /// it. An item that uses stock with none of its kind in the input goes quiet, out of stock; an item
     /// checked with nothing to do in reach goes quiet, done; a quiet or switched-off item is passed over
-    /// without a check. With a Dead Socket, any awake item out of stock sends the whole shelf Dormant
-    /// before anything works, and a Dormant shelf does nothing.
+    /// without a check. With a Dead Socket, any item out of stock, awake or already quiet for it, sends
+    /// the whole shelf Dormant before anything works, and a Dormant shelf does nothing.
     /// </summary>
     public static MachineWork.Result Work(BlockEntityMachine machine, BlockEntityControlShelf shelf, CastContext cast)
     {
@@ -140,7 +140,9 @@ public static class ShelfWork
         {
             for (int i = 0; i < items.Length; i++)
             {
-                if (items[i] != null && !shelf.IsDormant(i) && UsesStock(KindOf(items[i])) && !HasStock(machine, shelf, i))
+                // An item that ran out before the Dead Socket went in counts too; it was passed over until now.
+                if (items[i] != null && shelf.QuietOf(i) is BlockEntityControlShelf.Quiet.Awake or BlockEntityControlShelf.Quiet.OutOfStock
+                    && UsesStock(KindOf(items[i])) && !HasStock(machine, shelf, i))
                 {
                     shelf.Quieten(i, BlockEntityControlShelf.Quiet.OutOfStock);
                     return MachineWork.Result.Nothing;
@@ -750,8 +752,11 @@ public static class ShelfWork
     // ------------------------------------------------------------------ firestarter
 
     /// <summary>
-    /// A firestarter lights what one lights in reach, a built charcoal pit or a firepit with fuel in it,
-    /// but never a pile on the ground or a bomb, so a pit whose wood ran out waits instead of burning.
+    /// A firestarter lights what one lights in reach (step 4 part 2 note, question 5): a built charcoal
+    /// pit and a firepit with fuel in it, and through the hook the game's own firestarter uses a forge, a
+    /// bloomery, a pit kiln, a clay oven and the rest. Never a pile on the ground or a bomb, so a pit
+    /// whose wood ran out waits instead of burning. A forge and its like light only for a player: the
+    /// flame is lent to the machine's carver or the nearest player, and they wait while nobody is online.
     /// </summary>
     private static MachineWork.Result Light(CastContext cast, List<BlockPos> reach)
     {
@@ -773,6 +778,12 @@ public static class ShelfWork
                     firepit.igniteFuel();
                     lit = true;
                     break;
+                default:
+                    if (accessor.GetBlock(pos) is { Id: not 0 } block && !Spared(block) && Effects.Light(cast, pos))
+                    {
+                        lit = true;
+                    }
+                    break;
             }
         }
         if (!lit)
@@ -782,4 +793,10 @@ public static class ShelfWork
         Sound(cast, IgniteSound);
         return MachineWork.Result.Acted;
     }
+
+    /// <summary>
+    /// What the shelf's firestarter never lights: a pile on the ground, of firewood or of coal, and a
+    /// bomb. A pit kiln is ground storage to the game too, and is lit. Public for the test command.
+    /// </summary>
+    public static bool Spared(Block block) => block is BlockCoalPile or BlockBomb || block is BlockGroundStorage and not BlockPitkiln;
 }

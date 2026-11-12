@@ -187,6 +187,14 @@ public class MachinesModSystem : ModSystem
                         .WithDescription("A Wind Probe on a mast gathers in a set wind, is struck, and gathers nothing roofed")
                         .HandleWith(_ => Test(-154, 20, tests.Probe))
                     .EndSubCommand()
+                    .BeginSubCommand("gatherstrike")
+                        .WithDescription("One bolt and three Gather blocks: open, roofed after the strike, and roofed as it lands")
+                        .HandleWith(_ => Test(-186, 20, tests.GatherStrike))
+                    .EndSubCommand()
+                    .BeginSubCommand("lights")
+                        .WithDescription("A shelf's firestarter relights an extinct torch and waits at a forge with nobody online; what it spares")
+                        .HandleWith(_ => Test(-154, 40, tests.Lights))
+                    .EndSubCommand()
                     .BeginSubCommand("batterykept")
                         .WithDescription("Reports whether the Ice battery's stones still keep its count, after a restart")
                         .HandleWith(_ => Test(-138, 36, _ => tests.BatteryKept()))
@@ -206,10 +214,18 @@ public class MachinesModSystem : ModSystem
     private WeatherSystemServer? weather;
     private ICoreServerAPI? sapi;
 
+    /// <summary>
+    /// The landing point of the last flash a probe heard. Each flash keeps its own, and the game reports it
+    /// on every tick the flash lives, a third of a second; a network feed in between would let one strike
+    /// fill a probe twice.
+    /// </summary>
+    private Vec3d? lastFlash;
+
     private void OnLightningLanded(ref Vec3d impactPos, ref EnumHandling handling)
     {
-        if (sapi != null)
+        if (sapi != null && !ReferenceEquals(impactPos, lastFlash))
         {
+            lastFlash = impactPos;
             BlockEntityMachine.OnLightningLanded(sapi.World, impactPos);
         }
     }

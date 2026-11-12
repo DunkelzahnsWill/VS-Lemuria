@@ -73,7 +73,8 @@ public static class CrystalEnvironment
         strengths[EarthIndex] = Cap(coverStrength * walls);
 
         // Open sky: nothing above the crystal blocks rain, as the game's lightning rod tells it.
-        if (rainHeight <= pos.Y)
+        bool openSky = rainHeight <= pos.Y;
+        if (openSky)
         {
             float height = 0.5f * Math.Clamp((pos.Y - world.SeaLevel) / 60f, 0f, 1f);
             double wind = accessor.GetWindSpeedAt(pos)?.X ?? 0;
@@ -81,7 +82,8 @@ public static class CrystalEnvironment
             float rain = 0.25f * Math.Clamp(rainfall, 0f, 1f);
             strengths[SkyIndex] = Cap(height + windStrength + rain);
         }
-        if (skyBoost)
+        // A strike's six hours need the same open sky as the rest of Sky (the owner, Nov 10 2026): under a roof they give nothing.
+        if (skyBoost && openSky)
         {
             strengths[SkyIndex] = 1f;
         }
@@ -89,6 +91,9 @@ public static class CrystalEnvironment
     }
 
     private static float Cap(float value) => Math.Clamp(value, 0f, 1f);
+
+    /// <summary>Whether nothing above this spot blocks rain: the open sky that Sky reads by, and that a lightning strike counts by.</summary>
+    public static bool OpenSky(IBlockAccessor accessor, BlockPos pos) => accessor.GetRainMapHeightAt(pos.X, pos.Z) <= pos.Y;
 
     /// <summary>The heat a block gives the crystal, as the game gives it a player, divided by nothing yet: fire 10 is full strength.</summary>
     private static float HeatFrom(IWorldAccessor world, Block block, BlockPos sourcePos, BlockPos crystalPos)

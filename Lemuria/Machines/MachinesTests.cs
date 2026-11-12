@@ -187,6 +187,20 @@ public partial class MachinesTests
         float before = fire == null ? 0 : Total(fire);
         var fireResult = fire?.WorkOnce();
         float paid = fire == null ? 0 : before - Total(fire);
+        // A Fire Focus at a forge with charcoal, with nobody online: the forge's hook reads the world from
+        // whoever holds the torch and lights only for a player, so it waits, free and without an error.
+        var forgePos = origin.AddCopy(5, 0, 3);
+        Accessor.SetBlock(Id("game:forge"), forgePos);
+        if (Accessor.GetBlockEntity(forgePos) is BlockEntityForge forge)
+        {
+            forge.FuelSlot.Itemstack = new ItemStack(World.GetItem(new AssetLocation("game:charcoal")), 4);
+            forge.FuelSlot.MarkDirty();
+        }
+        var forgeFocus = Place(origin.AddCopy(1, 0, 3), Machine.Focus, "east");
+        Put(forgeFocus, Crystal.Fire, Crystal.Glittering);
+        Fill(forgeFocus);
+        var forgeResult = forgeFocus?.WorkOnce();
+        bool forgeBurns = Accessor.GetBlockEntity(forgePos) is BlockEntityForge { IsBurning: true };
         // Ice: a Focus over young flax on dry farmland, facing down.
         var field = origin.AddCopy(1, 0, 4);
         Accessor.SetBlock(Id("game:farmland-dry-medium"), field);
@@ -220,6 +234,8 @@ public partial class MachinesTests
             bool burning = Accessor.GetBlockEntity(firepitPos) is BlockEntityFirepit { IsBurning: true };
             logger.Notification("Machines test: a Fire Focus {0}, paid {1:0.0}, the firepit burns: {2}; an Ice Focus {3}, the farmland under the flax soaked: {4}",
                 fireResult, paid, YesNo(burning), iceResult, YesNo(soaked));
+            logger.Notification("Machines test: a Fire Focus at a forge with nobody online {0}, the forge burns: {1}",
+                forgeResult, YesNo(forgeBurns));
             logger.Notification("Machines test: an Earth Focus {0}, {1} of 4 columns rose 2 to the north and east, Dormant: {2}, then {3}",
                 earthResult, rose, YesNo(dormant), again);
         }, 2000);
@@ -491,5 +507,43 @@ public partial class MachinesTests
         logger.Notification("Machines test: an Unaligned Focus over a growing seedling {0}, quickened: {1}", result, YesNo(quickened));
 
         void OnQuickened(BlockEntityMachine _) => quickened = true;
+    }
+
+    // ------------------------------------------------------------------ Gather and lightning
+
+    /// <summary>
+    /// Lightning and the Gather block (step 4 note, Gather; the owner, Nov 10 2026): a strike counts only
+    /// for a Gather block under open sky as the bolt lands, and its six hours only while the sky stays
+    /// open. Three Gather blocks hear one bolt: one left open, one roofed after it, one roofed as it lands.
+    /// </summary>
+    public void GatherStrike(BlockPos column)
+    {
+        var origin = TestSite.Surface(sapi, column);
+        Ground(origin, 9, 12, 3);
+        var open = Place(origin.AddCopy(1, 0, 1), Machine.Gather, "east");
+        var roofedAfter = Place(origin.AddCopy(4, 0, 1), Machine.Gather, "east");
+        var roofedThen = Place(origin.AddCopy(7, 0, 1), Machine.Gather, "east");
+        if (open == null || roofedAfter == null || roofedThen == null || CrystalsModSystem.Server is not { } crystals)
+        {
+            logger.Error("Machines test: no Gather blocks to strike");
+            return;
+        }
+        foreach (var gather in new[] { open, roofedAfter, roofedThen })
+        {
+            Put(gather, Crystal.Sky, Crystal.Glittering);
+        }
+        int roof = Id("game:rock-granite");
+        Accessor.SetBlock(roof, roofedThen.Pos.UpCopy());
+        crystals.StrikeAt(roofedAfter.Pos.UpCopy());
+        float day = (float)Machine.GatherPerDay(Crystal.Glittering);
+        float struck = open.GatherNow(24);
+        Accessor.SetBlock(roof, roofedAfter.Pos.UpCopy());
+        float after = roofedAfter.GatherNow(24);
+        // Its roof taken away again, the third gathers what the sky gives a Gather block no bolt reached, and no more.
+        Accessor.SetBlock(0, roofedThen.Pos.UpCopy());
+        float plain = day * CrystalCharging.Strength(World, roofedThen.Pos, Crystal.Sky, Crystal.Glittering, false);
+        float then = roofedThen.GatherNow(24);
+        logger.Notification("Machines test: a Gather block struck under open sky gathers {0:0} of a day's {1:0}; one roofed after the strike gathers {2:0}; one roofed as the bolt landed, its roof gone again, gathers only what the sky gives: {3}",
+            struck, day, after, YesNo(System.Math.Abs(then - plain) < 0.01f));
     }
 }

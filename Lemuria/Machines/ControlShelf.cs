@@ -214,12 +214,14 @@ public class BlockEntityControlShelf : BlockEntityDisplay
     /// </summary>
     public void Quieten(int place, Quiet why)
     {
-        if (QuietOf(place) != Quiet.Awake)
+        bool stops = why == Quiet.OutOfStock && socket != null;
+        // An item that ran out before the Dead Socket went in is quiet already, and still stops the shelf.
+        if (QuietOf(place) != Quiet.Awake && !(stops && !asleep && QuietOf(place) == Quiet.OutOfStock))
         {
             return;
         }
         quiet[place] = why;
-        if (why == Quiet.OutOfStock && socket != null)
+        if (stops)
         {
             asleep = true;
         }
@@ -551,7 +553,8 @@ public class BlockEntityControlShelf : BlockEntityDisplay
         }
         if (ShelfWork.KindOf(stack) == ShelfWork.Kind.None)
         {
-            return PrefixOf(place + 1) != null && ShelfWork.KindOf(inventory[place + 1].Itemstack) is ShelfWork.Kind.Shovel or ShelfWork.Kind.Axe && PlugLit(place + 1);
+            // In the last place there is no tool after it, so it is an item that does nothing.
+            return place + 1 < Places && ShelfWork.KindOf(inventory[place + 1].Itemstack) is ShelfWork.Kind.Shovel or ShelfWork.Kind.Axe && PlugLit(place + 1);
         }
         return quiet[place] == Quiet.Awake;
     }

@@ -43,6 +43,9 @@ public class CrystalsModSystem : ModSystem
     private IServerNetworkChannel? serverChannel;
     private Item? strangeCrystal;
 
+    /// <summary>The landing point of the last lightning flash counted: each flash keeps its own, and the game reports it on every tick the flash lives.</summary>
+    private Vec3d? lastFlash;
+
     public Dialogues Dialogues { get; private set; } = null!;
 
     /// <summary>The client's discordant hums; null on a dedicated server.</summary>
@@ -94,7 +97,7 @@ public class CrystalsModSystem : ModSystem
         var weather = api.ModLoader.GetModSystem<WeatherSystemServer>();
         if (weather != null)
         {
-            weather.OnLightningImpactBegin += OnLightning;
+            weather.OnLightningImpactEnd += OnLightning;
         }
         api.Event.SaveGameLoaded += () =>
         {
@@ -155,10 +158,33 @@ public class CrystalsModSystem : ModSystem
         {
             return;
         }
-        var pos = impactPos.AsBlockPos;
-        foreach (var crystal in Standing.Near(pos, 16))
+        // Where the bolt landed, after any lightning rod or Wind Probe drew it in; one strike counts once.
+        if (ReferenceEquals(impactPos, lastFlash))
         {
-            crystal.OnLightning();
+            return;
+        }
+        lastFlash = impactPos;
+        StrikeAt(impactPos.AsBlockPos);
+    }
+
+    /// <summary>
+    /// A bolt landed here. Every crystal standing within 16 blocks hears it, in a cradle or a socket too,
+    /// if it stands under open sky as the bolt lands: a strike gives a roofed crystal nothing, then or
+    /// later (the owner, Nov 10 2026; step 2 note, Sky). Public for the test commands. Server only.
+    /// </summary>
+    public void StrikeAt(BlockPos landing)
+    {
+        if (Standing == null)
+        {
+            return;
+        }
+        var accessor = sapi.World.BlockAccessor;
+        foreach (var crystal in Standing.Near(landing, 16))
+        {
+            if (CrystalEnvironment.OpenSky(accessor, crystal.StandPos))
+            {
+                crystal.OnLightning();
+            }
         }
     }
 
@@ -278,6 +304,7 @@ public class CrystalsModSystem : ModSystem
 
     private const string TestPosKey = LemuriaModSystem.ModId + "-crystalstest";
     private const int TestDx = 8, TestDz = 2;
+    private const int LightningDx = 8, LightningDz = -100;
 
     private void RegisterTestCommands(ICoreServerAPI api)
     {
@@ -300,6 +327,11 @@ public class CrystalsModSystem : ModSystem
                     .BeginSubCommand("chest")
                         .WithDescription("Puts twins in a chest, and twins in a crystal jar in the same chest, lets the warning run out, and reports")
                         .HandleWith(_ => TestSite.WithChunk(api, Mod.Logger, "Crystals", TestDx, TestDz, OnTestChest))
+                    .EndSubCommand()
+                    .BeginSubCommand("lightning")
+                        .WithDescription("Aims a strike 24 blocks from a lightning rod, which draws it in, and reports which Sky crystal it boosted")
+                        .HandleWith(_ => TestSite.WithChunk(api, Mod.Logger, "Crystals", LightningDx + 32, LightningDz, _ =>
+                            TestSite.WithChunk(api, Mod.Logger, "Crystals", LightningDx, LightningDz, OnTestLightning)))
                     .EndSubCommand()
                     .BeginSubCommand("check")
                         .WithDescription("Reports the test crystal's charge and cracks, after a restart")
@@ -379,6 +411,76 @@ public class CrystalsModSystem : ModSystem
         crystal.ReadSurroundings(sapi.World.Calendar.HoursPerDay / 2.0);
         Mod.Logger.Notification("Crystals test: beside a burning firepit {0} leads at {1:0.##}; after half a day the Fire crystal is {2}, with {3} crack(s)",
             leader, strength, Level(crystal.Level), crystal.Cracks);
+    }
+
+    /// <summary>
+    /// A strike aimed at one Sky crystal, 24 blocks from a lightning rod on a mast, which draws it in: the
+    /// crystal at the rod's foot, where the bolt lands, has its six hours of full Sky, and the one at the
+    /// aim, more than 16 blocks from the landing, has not (step 2 note, The Four Elementals, Sky). A
+    /// third near the rod stands under a roof as the bolt lands and gets nothing (the owner, Nov 10 2026).
+    /// </summary>
+    private void OnTestLightning(BlockPos column)
+    {
+        var weather = sapi.ModLoader.GetModSystem<WeatherSystemServer>();
+        var rod = sapi.World.GetBlock(new AssetLocation("game:lightningrod"));
+        if (weather == null || rod == null)
+        {
+            Mod.Logger.Error("Crystals test: no weather system or lightning rod");
+            return;
+        }
+        var origin = TestSite.Surface(sapi, column);
+        var accessor = sapi.World.BlockAccessor;
+        int granite = sapi.World.GetBlock(new AssetLocation("game:rock-granite"))?.Id ?? 0;
+        // A granite strip open to the sky, with nothing above it for the rod to compete with.
+        for (int x = 0; x < 31; x++)
+        {
+            for (int z = 0; z < 3; z++)
+            {
+                accessor.SetBlock(granite, origin.AddCopy(x, -1, z));
+                for (int y = 0; y < 30; y++)
+                {
+                    accessor.SetBlock(0, origin.AddCopy(x, y, z));
+                    accessor.SetBlock(0, origin.AddCopy(x, y, z), BlockLayersAccess.Fluid);
+                }
+            }
+        }
+        // The rod nine blocks up draws a strike from (5 + 9) × 2 = 28 blocks round.
+        var mast = origin.AddCopy(28, 0, 1);
+        for (int y = 0; y < 9; y++)
+        {
+            accessor.SetBlock(granite, mast.AddCopy(0, y, 0));
+        }
+        accessor.SetBlock(rod.Id, mast.AddCopy(0, 9, 0));
+        var byRod = PlaceCrystal(origin.AddCopy(27, 0, 1), Crystal.Sky, Crystal.Glittering, 0, 0);
+        var atAim = PlaceCrystal(origin.AddCopy(3, 0, 1), Crystal.Sky, Crystal.Glittering, 0, 0);
+        var underRoof = PlaceCrystal(origin.AddCopy(24, 0, 1), Crystal.Sky, Crystal.Glittering, 0, 0);
+        accessor.SetBlock(granite, origin.AddCopy(24, 2, 1));
+        weather.SpawnLightningFlash(new Vec3d(origin.X + 3.5, origin.Y, origin.Z + 1.5));
+        bool Boosted(BlockEntityCrystal? crystal)
+        {
+            if (crystal == null)
+            {
+                return false;
+            }
+            var tree = new TreeAttribute();
+            crystal.ToTreeAttributes(tree);
+            return tree.GetDouble("skyBoostUntil") > sapi.World.Calendar.TotalHours;
+        }
+        sapi.Event.RegisterCallback(_ =>
+        {
+            Mod.Logger.Notification("Crystals test: a strike aimed 24 blocks from a lightning rod lands on the rod; the Sky crystal at its foot boosted: {0}, the one at the aim: {1}",
+                Boosted(byRod) ? "yes" : "no", Boosted(atAim) ? "yes" : "no");
+            Mod.Logger.Notification("Crystals test: a Sky crystal four blocks from the rod, under a roof as the bolt landed, boosted: {0}", Boosted(underRoof) ? "yes" : "no");
+            if (byRod == null)
+            {
+                return;
+            }
+            // The six hours need open sky, like the rest of Sky (the owner, Nov 10 2026): a roof set over the struck crystal takes them away.
+            float open = CrystalEnvironment.Read(sapi.World, byRod.Pos, Boosted(byRod))[CrystalEnvironment.SkyIndex];
+            accessor.SetBlock(granite, byRod.Pos.AddCopy(0, 2, 0));
+            float roofed = CrystalEnvironment.Read(sapi.World, byRod.Pos, Boosted(byRod))[CrystalEnvironment.SkyIndex];
+            Mod.Logger.Notification("Crystals test: the struck Sky crystal reads Sky at {0:0.##} under open sky and {1:0.##} with a roof set over it", open, roofed);
+        }, 2000);
     }
 
     private void OnTestCheck(BlockPos column)
@@ -511,7 +613,7 @@ public class CrystalsModSystem : ModSystem
             var weather = sapi.ModLoader.GetModSystem<WeatherSystemServer>();
             if (weather != null)
             {
-                weather.OnLightningImpactBegin -= OnLightning;
+                weather.OnLightningImpactEnd -= OnLightning;
             }
         }
         if (Server == this)

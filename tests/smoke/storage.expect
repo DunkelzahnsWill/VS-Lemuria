@@ -1,3 +1,10 @@
 # Replies and log lines for tests/smoke/storage.commands.
 Storage: 4 crystal jar kinds, racks in 19 rock type\(s\)
 Storage test: after the warning the rack holds fire glowing level 2 cracked 1, ice glittering level 0$
+# The claims switch (step 3 note, Claims and players; the owner, Nov 10 2026). Respected, the game's refusal stands. Ignored,
+# using a rack or a jar set down on the ground is granted and breaking them is not.
+Storage test: with claims respected the game leaves a rack LandClaimed and a jar on the ground LandClaimed; with claims ignored using the rack is Granted, breaking it LandClaimed, using the jar Granted, breaking it LandClaimed$
+# On a spot of the game's ground storage only the jar's part opens, and a crock's only for making a jar; the rest stays locked.
+Storage test: a spot with a jar, a crock and a bowl opens the jar's part: yes, the bowl's: no, the crock's with a seedling in hand: yes, with Awakened sparkstone: yes, with an empty hand: no, with a bowl: no$
+# The game tests the same click again, in the ground storage and at the click's end; those pass for that player, part and moment only.
+Storage test: the click on the jar passes the spot's own check: yes, another player's: no; with the jar taken the end of the click passes: yes, the bowl's part: no, 2001 ms later: no; a lone jar: yes, the end of its click on the air it left: yes, on a block set there since: no$

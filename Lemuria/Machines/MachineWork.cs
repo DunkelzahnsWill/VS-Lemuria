@@ -66,6 +66,7 @@ public static class MachineWork
         {
             Claim = machine.MayChange,
             ActorName = machine.CarverName,
+            CarverUid = machine.CarverUid,
             Square = scatter ? Machine.ScatterSize : 0,
             CropPower = scatter ? 2 : 3,
             Replant = true,

@@ -29,7 +29,7 @@ public static class Machine
 
     private static LemuriaConfig Config => LemuriaModSystem.Config;
 
-    /// <summary>The form after this one, or null for Free stone after the Motor.</summary>
+    /// <summary>The form after this one, or null for Free stone after the last, the Wind Probe.</summary>
     public static string? Next(string form)
     {
         int i = Array.IndexOf(Forms, form);

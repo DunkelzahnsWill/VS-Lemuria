@@ -7,6 +7,8 @@ Machines test: the rod turned the front up with 1 crystal\(s\); a sneaking tap s
 Machines test: the Crystal Rod made: yes, the crystal used up: yes, rock left 1$
 # Focus: each Elemental does its evocation's work for a tenth of a cast; Earth rises once and goes Dormant.
 Machines test: a Fire Focus Acted, paid 1\.0, the firepit burns: yes; an Ice Focus Acted, the farmland under the flax soaked: yes$
+# A forge lights only for a player: with nobody online to hold the torch, it waits, free, with no error.
+Machines test: a Fire Focus at a forge with nobody online Nothing, the forge burns: no$
 Machines test: an Earth Focus Acted, 4 of 4 columns rose 2 to the north and east, Dormant: yes, then Idle$
 # Amplify: a Glowing Sky Focus lifted to Luminous's power reaps ripe crops into a chest and replants them.
 Machines test: a Glowing Sky Focus amplified to 2 Acted; 9 of 9 ripe flax replanted, some item\(s\) in the chest$
@@ -53,10 +55,14 @@ Machines test: an Earth Focus facing east Acted, a 2×2 bored 2 deep, 8 block\(s
 # goes back as stock. Dormant items (H2): the rod never switches a prefix; a Dormant axe is passed over until woken.
 Machines test: a gravel-kept shovel Acted, gravel left 0, soil left 4; an oak-kept axe Acted, oak left 0, birch left 2, keeps oak: yes, keeps birch: no, firewood in the output 12$
 Machines test: the rod switches a prefix: no; the axe Dormant: yes, then the machine Nothing; woken: yes, then Acted$
+# Plugs (note rev 74): a prefix's plug follows its tool's; an item that does nothing has a dark plug, in the last place too.
+Machines test: gravel, a shovel, seeds and gravel on a shelf show plugs lit lit lit dark$
 # Quiet items (H4): out of stock wakes when stock arrives; done stays quiet with stock until a sneak tap, which wakes switched-off items too (Nov 2).
 Machines test: quiet seeds Acted, then Nothing: out of stock: yes, the shovel done: yes; seeds arrive and they wake: yes; 9 of 9 sown, then done: yes, still done with stock: yes; plugs dark dark dark dark; a sneak tap wakes them: yes, the switched-off shovel too: yes; plugs lit lit dark dark$
 # Fertiliser before seeds without a socket (play-test, Nov 2): the fertiliser goes quiet and the seeds sow the same turn.
 Machines test: compost then seeds, no socket, no compost in the input: Acted, compost out of stock: yes, seeds awake: yes, 9 of 9 sown$
+# A Dead Socket set in after an item has run out of stock stops the shelf as well (H5: "an item out of stock sends the whole shelf Dormant").
+Machines test: a Dead Socket set in once the compost is out of stock: Nothing, the whole shelf Dormant: yes, 0 of 9 sown$
 # The shelf's socket (H5): a Dead Socket sends the whole shelf Dormant for want of compost; compost wakes it, it feeds until done, then sows.
 Machines test: a socketed shelf with no compost Nothing, the whole shelf Dormant: yes, 0 sown; compost arrives and it wakes: yes; it feeds [0-9]+ time\(s\), compost done: yes, then Acted, 9 of 9 sown, the shelf awake: yes$
 # Step 4 part 3, Elemental batteries. The crystal decides (the owner, Nov 2, J3), and with two Elementals in the stones the
@@ -80,3 +86,11 @@ Machines test: placed gravel wears: yes, cracked rock: yes, sand: no, cobbleston
 # The Wind Probe: 2 x 1,200 x \(0.25 + 0.5\) in a day; a strike fills its crystals (400) and pours first; roofed, nothing.
 Machines test: a Wind Probe with 2 Glowing Sky crystals, sockets facing up, gathered 1800 in a day of wind 0\.5; a strike filled 400; the line took 200 of its 200, 200 left from the strike$
 Machines test: roofed, the probe gathers 0$
+# Lightning and the Gather block (the owner, Nov 10 2026): the strike counts only under open sky as the bolt lands, and its
+# six hours only while the sky stays open. 200 is a Glittering crystal's day at full strength.
+Machines test: a Gather block struck under open sky gathers 200 of a day's 200; one roofed after the strike gathers 0; one roofed as the bolt landed, its roof gone again, gathers only what the sky gives: yes$
+# The shelf's firestarter lights what one lights (step 4 part 2, question 5), paying only for what caught. A torch needs
+# nobody to hold the flame; a forge lights only for a player, so with nobody online it waits, free, with no error.
+Machines test: a shelf's firestarter Acted, an extinct torch is now torch-basic-lit-up, a forge with nobody online burns: no; with nothing left to light it Nothing$
+# Never a pile on the ground or a bomb; a pit kiln is ground storage to the game too, and is lit.
+Machines test: the firestarter spares a pile on the ground: yes, a coal pile: yes, a bomb: yes; a pit kiln: no, a forge: no, a bloomery: no, a clay oven: no$
