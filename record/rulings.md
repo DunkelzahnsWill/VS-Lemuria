@@ -819,3 +819,55 @@ reviewed, and I then post the finished wording whole."
 **Stopped.** Nothing.
 
 Concerns: the planning thread; the review thread; the record thread; the coordinator.
+
+## R38. The owner's answers to six questions on R36 (Memory's Dead Socket and blind swap; the cost of Mysteries)
+
+**Given.** 2026-11-12 23:08:33Z by the owner, in the project chat. It answers by number the coordinator's post of
+23:00:33Z, which put six questions from mason and the planning thread on the owner's Memory and Bloom answers (R36).
+
+**Recorded.** 2026-11-12 23:09Z by the record thread, copied from the owner's own message and from the coordinator's post.
+
+The coordinator's post put them under two headings. Under **Memory**, word for word: "As they read you: a rod tap
+switches a Memory between lending its pair (the duet) and cycling. A Dead Socket in the Memory makes it swap the
+machine's crystals with the magazine's every turn, blind to what they are. Twins that a blind swap sets side by side
+will dialogue, as always." Under **Bloom and the Mysteries**: "Inside a machine the once-a-day limit per plant goes."
+
+Each question below is the coordinator's, word for word, and beside it the line of the owner's message that answers it.
+The six lines of the owner are the owner's whole message, in its order.
+
+Question 1. Does the Dead Socket take one of the magazine's two places, leaving room for one crystal?
+
+> 1.) Dead socket should lock into memory
+
+Question 2. Does a blind swap move every crystal at once, or one at a time?
+
+> 2.) blind swap everything in memory with everything in the machine in question. Ex.) A focus with a single fire crystal, activates its Dead-socketed Memory, and swaps the active F crystal with an Ice and Wind crystal pair. with the empty space "transferred" to memory so Memory should only have a Fire crystal and an "empty" memory slot.
+
+Question 3. How many times an Elemental working should a Mystery working cost? With no limit, a Glowing Life Scatter
+ripens 81 flax from seed in about 90 seconds. That is about 144 charge at today's cost and about 576 at 4 times. One
+Glowing Gather crystal brings 600 a day. Mason offers 4.
+
+> 3.) Sounds reasonable
+
+Question 4. Should hand casts cost more too, or only machines? The same factor for both keeps a machine 10 times as
+efficient as the hand. Machines only, at 4 times, leaves it 2.5 times, and the Road Bible's "far more efficient" would
+need new words.
+
+> 4.) Both machines and evocations
+
+Question 5. Does the charge per 9 plants stay as well?
+
+> 5.) Sure, why not? With cost increased, a 3x3 field will produce a small but reasonable amount of output. May need to workshop other effects or perhaps a call-back to cracks and shattering over-used crystals? Hmm.
+
+Question 6. Does a Glint, which burns a Life crystal's charge as light, burn more too?
+
+> 6.) No. Though that does provoke the idea for nullifying or "filtering" the environment for better refinement, as covered previously in the most recent notes before the rule hand-over, and shelved for later parts of the roadbible.
+
+**Open.** The post's last question, for a yes or no, word for word: "One more for a yes or no: the planning thread would
+add your sentence to the Road Bible as a design rule, that Elementals are the efficient choice and Mysteries act beyond
+them." The owner's message does not answer it. The coordinator is asking again, and it stays open.
+
+**Stopped.** Nothing.
+
+Concerns: mason (the briefs of features 8, 9 and 10); the planning thread (its concept change, and answer 6 names an
+idea that the owner says is shelved for later parts of the Road Bible); the coordinator.
