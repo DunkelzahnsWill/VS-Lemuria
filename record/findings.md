@@ -2481,7 +2481,7 @@ Next:
 
 ## G56. Report under rule 6 (a): the nine briefs of the built features (PR #55 at c0ed1b7)
 
-**Written.** 2026-11-12 19:00Z. Woken by the coordinator at 17:44Z, and again at 17:50Z when the check was green.
+**Written.** 2026-11-12 19:06Z. Woken by the coordinator at 17:44Z, and again at 17:50Z when the check was green.
 
 **The owner merged PR #55 before this report was signed.** The owner merged it on 2026-11-12 at 18:29:27Z, at commit
 c0ed1b7, its one commit (merge commit b3cf521). By then I had read all nine briefs whole, and between 18:25Z and
@@ -2514,9 +2514,9 @@ a second player. I did not hold the briefs line by line against the old notes: R
 code is what I held them against. I did not check looks, sounds or colours.
 
 **The rules and the book.** The rules are version 5 throughout. The book changed twice while I read, by the owner's
-merges of PR #46 at 18:25Z and of PR #45 at 18:26Z. After PR #46 I read the book again in full (rule 5), at 18:26Z. PR
-#45's change is the diff that G48 read and nothing else. The book's checksum (sha256) now begins 2fee058b149f46a2. The
-rulings end at R25.
+merges of PR #46 at 18:25Z and of PR #45 at 18:26Z. After PR #46 I read the book again in full (rule 5), at 18:26Z.
+PR #45's change is the diff that G48 read and nothing else. The book's checksum (sha256) now begins 2fee058b149f46a2.
+The rulings end at R25.
 
 **The short of it.** The nine briefs have the form that rule 2 asks, they agree with the Road Bible, and they are true
 to the code in all but the sentences that G59 lists. No blocker. The read found three faults in the code, which are
@@ -2614,8 +2614,8 @@ Three briefs had followed my sentence, and G59 lists them. I ran none of this in
 **What I asked of mason, and what it answered.** Before I signed I sent mason nine points in four messages, at 18:25Z
 (rule 6). It took all nine in one commit, 6d1a5e2, which I read whole. After the merge I sent five more, at 18:32Z, so
 that the change to the settled briefs would need no second round: the numbers of the findings, the wording of G58 as a
-dated fact and not as the design, what had merged since, a diary entry of its own time, and the order of merging. PR
-#72 has them (G62).
+dated fact and not as the design, what had merged since, a diary entry of its own time, and the order of merging.
+PR #72 has them (G62).
 
 **For step 1's gate.** Rule 7's third test asks whether each merged PR "went the way rule 4 sets for its kind". The
 test is the inquisitor's. For PR #55 I give what I know: rule 4 has a brief "read by the review thread, then merged by
@@ -2626,9 +2626,9 @@ otherwise, the owner's acceptance in rulings.md settles it (rule 7).
 **For the coordinator.** G57, G58, G59 and G61 go to mason and to the owner, and G60 to the owner. PR #72 corrects G59
 and is the next thing for the owner's merge (G62).
 
-**For the owner.** Nothing that you merged needs undoing. The nine briefs say what is built, and one more merge, PR
-#72, puts right the sentences in them that were not exact. The read found three places where another player's claim is
-not safe from Lemuria with the claims switch on: G57, G58 and G61. Each matters only on a shared server.
+**For the owner.** Nothing that you merged needs undoing. The nine briefs say what is built, and one more merge,
+PR #72, puts right the sentences in them that were not exact. The read found three places where another player's claim
+is not safe from Lemuria with the claims switch on: G57, G58 and G61. Each matters only on a shared server.
 
 ## G57. Flaw: the Crystalline Chisel draws charge inside another player's claim with the claims switch on
 
@@ -2809,7 +2809,7 @@ of PR #72 (G62), from a point of the read of the nine briefs (G56). **Status.** 
 
 ## G62. Report under rule 6 (a): the first change to the settled briefs (PR #72 at 0060c11)
 
-**Written.** 2026-11-12 19:00Z. Woken by the coordinator at 18:34:53Z.
+**Written.** 2026-11-12 19:06Z. Woken by the coordinator at 18:34:53Z.
 
 **What I read.** PR #72, "Briefs: the first change after they settled (G56 to G59)", branch briefs/review-points, at
 commit 0060c111ebabdd4ab9214204e33bf8621f1a215e, its second commit, on top of 1f8639d, branched from main at 33193a0.
@@ -2887,7 +2887,7 @@ brief is changed first.
 
 ## G63. Report under rule 6 (f): the maps of the inquisitor, the coordinator (corrected) and the planning thread
 
-**Written.** 2026-11-12 19:00Z. Three wakes of the coordinator's: at 17:58Z for the inquisitor's first map, at 18:28Z
+**Written.** 2026-11-12 19:06Z. Three wakes of the coordinator's: at 17:58Z for the inquisitor's first map, at 18:28Z
 for its own corrected map, and at 18:40Z for the planning thread's map after the book changed.
 
 **What I read.** Each of the three maps whole, as main has it at ec0fcc4, against the Road Bible as main has it
@@ -2973,10 +2973,10 @@ rewrite of the two files, the nine briefs, and the three PRs for G43.
 
 ## G64. Diary: the nine briefs, PR #72 and three maps are reported; PR #76 is in hand
 
-**Written.** 2026-11-12 19:00Z.
+**Written.** 2026-11-12 19:06Z.
 
-**The rules and the book, and two lapses of my own.** My context was cut down to a summary twice more since G55, at
-18:13Z and at 18:39Z.
+**The rules and the book, and two lapses of my own.** My context was cut down to a summary three more times since G55,
+at 18:13Z, at 18:39Z and at 19:02Z.
 - *At 18:13Z.* I held the rules and the book by their checksums, found both unchanged, and read on in the briefs
   without reading either again in full. That was a lapse: G55 says what I do after a cut, and I did not do it. I read
   the book in full at 18:26Z, after the owner merged PR #46 (rule 5), and the rules in full only at 18:39Z. Between
@@ -2989,15 +2989,26 @@ rewrite of the two files, the nine briefs, and the three PRs for G43.
   in a scratch folder outside the repo, unpushed, against what G55 says I do with a draft. They came through the cut
   whole. Right after it I read the rules in full, and then the book in full as main has it, before I judged anything
   further.
-- *What I do from here.* After a cut I read both books in full before anything else, whatever their checksums say. And
-  I push a report's entries to my branch as soon as they are put together, before I check and sign them. This PR went
-  that way.
+- *At 19:02Z.* The same lapse as at 18:39Z. From 18:40Z on, each draft lay in the scratch folder again, and from
+  19:00Z the nine entries stood put together in my working tree, not pushed. They came through the cut whole. After it
+  I read the rules in full, pushed the entries as they stood, at 19:03Z (commit f384286), and then read the book in
+  full, before I checked or signed anything.
+- *What I do from here.* After a cut I read both books in full and push whatever is unpushed, before I go on with
+  anything else, whatever the checksums say. And the step that writes an entry also commits it to my branch and pushes
+  it, as a draft: the checking and the signing follow as a further commit. G55 promised as much, and I did not keep
+  it, because each draft went through a scratch file to be wrapped and stayed there.
 
 **I no longer assign the owner on a record-only PR of mine.** Rule 4 has a thread assign "every PR that waits for the
 owner's merge", and a PR that changes only this file merges itself and waits for nobody. CLAUDE.md has said the same
 since the owner merged PR #51, and the planning thread's entry of 18:49Z pointed it out. Up to PR #65 I assigned the
 owner on each of mine, as the old CLAUDE.md asked. An assigned PR looks to the owner like one that waits, and the
 owner wrote today that the PRs are hard to sift.
+
+**I run the three scripts only where a report rests on them.** For this PR I ran them (below). CLAUDE.md keeps them
+under "Repository rules", and since the owner merged PR #51 that part opens: "These bind whoever writes code in the
+repo (Road Bible, part 4)." I write no code, and since PR #59 the `build` check passes a PR that changes only record/
+without them. Why not go on running them for every PR of mine: they test nothing that a change to this file can alter,
+and each PR waits three minutes for them. Where a finding rests on what they show, as G43 does, I run them and say so.
 
 **A state of main that I passed on stale.** At 18:31Z I told the coordinator that PR #59 was still open, and at 18:34Z
 I said it again. I had last looked at main at 18:29:53Z, and the owner merged PR #59 at 18:30:02Z. The coordinator
@@ -3049,11 +3060,12 @@ Next:
   thread asks me to weigh one thing in it: part 3's paragraph under the table of features 1 to 9 no longer says what
   of R9 is built.
 - **Where it is:** this file, sent to main by a record-only PR from the branch claude/project-thread-4zobvq. The
-  report on PR #76 follows from the same branch once this PR is merged.
+  report on PR #76 follows from the same branch once this PR is merged, and its entries go to that branch as drafts
+  while I write them.
 - **Waiting for:** nothing, for PR #76. After it I expect, in some order:
-  - mason's patches: G13 with G14 (PR #75, a draft), G15, the patch for R9, and what cures G57, G58 and G61, unless
-    the owner declines them. Their verdicts are the inquisitor's, and I read every verdict at step 1's gate (rule 6
-    b);
+  - mason's patches: G13 with G14 (PR #75, a draft), G15 (PR #78, a draft), the patch for R9, and what cures G57, G58
+    and G61, unless the owner declines them. Their verdicts are the inquisitor's, and I read every verdict at step 1's
+    gate (rule 6 b);
   - mason's map, when it is next updated (rule 6 f);
   - step 1's brief and the changes to other briefs that come with it (rule 6 a), where I read for G24, G41 and the
     second point of G46;
