@@ -24,6 +24,7 @@ public partial class MachinesTests
     private const string MotorKey = LemuriaModSystem.ModId + "-machinestest-motor";
     private const string StruckKey = LemuriaModSystem.ModId + "-machinestest-struck";
     private const string DeathKey = LemuriaModSystem.ModId + "-machinestest-death";
+    private const string DeathHourKey = LemuriaModSystem.ModId + "-machinestest-deathhour";
 
     private readonly ICoreServerAPI sapi;
     private readonly ILogger logger;
@@ -632,6 +633,10 @@ public partial class MachinesTests
         Put(death, Crystal.Death, Crystal.Glittering);
         CrystalsModSystem.OnDeathAt(death.Pos.AddCopy(0, 1, 1));
         TestSite.StorePos(sapi, DeathKey, death.Pos);
+        // After the restart only the hour's end is checked, not what it gathers: an in-game hour is two minutes of real
+        // time, and the world's clock may pass its end before the second boot's check.
+        sapi.WorldManager.SaveGame.StoreData(DeathHourKey, System.BitConverter.GetBytes(death.DeathBoostUntil));
+        logger.Notification("Machines test: a Gather block that heard a death gathers {0:0} of a day's {1:0} in its hour", death.GatherNow(24), day);
     }
 
     /// <summary>
@@ -650,7 +655,10 @@ public partial class MachinesTests
             logger.Error("Machines test: no struck Gather block; run /lemuria machines test gatherstrike first");
             return;
         }
-        logger.Notification("Machines test: after the restart the Gather block struck under open sky gathers {0:0} of a day's {1:0}; the one that heard a death gathers {2:0}",
-            struck.GatherNow(24), Machine.GatherPerDay(Crystal.Glittering), death.GatherNow(24));
+        var stored = sapi.WorldManager.SaveGame.GetData(DeathHourKey);
+        double hour = stored is { Length: 8 } ? System.BitConverter.ToDouble(stored, 0) : -1;
+        bool kept = hour > 0 && System.Math.Abs(death.DeathBoostUntil - hour) < 0.0001;
+        logger.Notification("Machines test: after the restart the Gather block struck under open sky gathers {0:0} of a day's {1:0}; the one that heard a death keeps the hour's end it heard: {2}",
+            struck.GatherNow(24), Machine.GatherPerDay(Crystal.Glittering), kept ? "yes" : "no");
     }
 }
