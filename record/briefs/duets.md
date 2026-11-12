@@ -90,8 +90,10 @@ panning idea.
       network at half or above, or no block left to wear), so Sky and the Unaligned crystal come round whatever the
       network holds.
     - *The fill stands out of reach* (G96; R41, 1, "A"). The fill's Earth crystal stands in the open in its socket, so
-      a Sky crystal in the drain's socket dialogues with it when the two stand within 3 blocks of each other. Panning is
-      safe only where the fill stands more than 3 blocks from the drain: "A player must either create a larger building
+      a Sky crystal in the drain's socket dialogues with it when the two stand within 3 blocks of each other, counted
+      as feature 1 counts it, in every direction and diagonals included. Panning is safe only where the fill stands out
+      of that reach, 4 or more blocks from the drain along at least one of east, up and north (a fill 3 east and 3
+      north of the drain is still in reach): "A player must either create a larger building
       or route crystals via tubes and/or memory swaps." Nothing in the code keeps them apart.
     - *Panning.* While a Sky crystal is in the socket, the drain pans one sand block of its room a turn, nearest first,
       at a working's cost: the block is gone, and what the game's pan gives from one whole block of sand goes into the
@@ -216,7 +218,8 @@ panning idea.
    workings' charge, 36. Ten seconds later they move on again, for 36 more.
 7. An Earth battery's room with sand in it and its network at half or above (fill it with the admin charger), its
    drain with one Earth crystal in its socket, a Memory holding a Sky and an Unaligned crystal, a chest touching it
-   and a Control Shelf with sand on it and in its input, the fill more than 3 blocks from the drain: no dialogue. Earth cannot wear with the network that full, so
+   and a Control Shelf with sand on it and in its input, the fill 4 or more blocks from the drain along one direction: no
+   dialogue. Earth cannot wear with the network that full, so
    its turn passes at once. When Sky takes its turn the drain pans a sand block into the chest and the stones show 200
    less; when the Unaligned crystal takes its turn the shelf puts a sand block back.
 8. Restart: the pair stays in the Memory and the module's pair in its socket; a panned block is still panned and the
