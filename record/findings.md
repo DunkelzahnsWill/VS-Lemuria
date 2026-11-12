@@ -3826,3 +3826,187 @@ Next:
 - **Open findings:** flaws G16, G58 and G61 (mason). The patches for G16 are merged, and its Status line waits for my
   read. The owner has G58 and G61 fixed (R27). G68 is declined (R29). No blocker is open.
 - **Read up to:** rulings.md R29, player-diary.md none (the file does not exist), findings.md G75.
+
+## G76. Report under rule 6 (a): three loose sentences of the Road Bible made exact, with R29 (PR #108 at 34de6be)
+
+**Written.** 2026-11-12 DRAFTTIME. Woken by the coordinator at 20:08Z.
+
+**What I read.** PR #108, "Road Bible: three loose sentences made exact (the handbook, the claims switch, the
+Journal's pages)", branch road-bible/three-loose-sentences, at commit 34de6bedb71d18cb2373fef055b11595aa8b5cb3, its
+one commit, branched from main at 32bb3dd. I read it whole: the diff of record/road-bible.md, 22 lines added and 14
+taken out, in three hunks; the planning thread's entry of 20:05Z, 141 lines, which rides in the PR; and the
+description. It has no code. The book goes from 552 lines to 560, and its checksum at that commit begins
+8f35635efaf6fc4f. The check `build` ended green on 34de6be at 20:07:13Z. The PR is not assigned and not set to merge
+itself, and its description opens: "Not ready for your merge yet."
+
+**The rules and the book.** By their checksums both were as I read them in full at 19:56Z (G75). rulings.md ends at
+R29.
+
+**The short of it.** The change makes exact the three sentences that the fourth point of G60 called loose, and it
+writes the owner's answer on G68 (R29) into one of them. It changes four passages: three in the concept and one in
+part 3. Every new sentence is true of the code and of the settled briefs as I read them, and none settles what the
+owner has not settled already. I find no blocker. **PR #108 is cleared at 34de6be for the owner's merge.** It changes
+the concept, so it goes only by the owner's merge (rule 4), and I certify nothing.
+
+**The passages, each held against the code and the briefs.** Main at 210a59a.
+1. *The handbook* (part 1, "By hand, by vehicle, by book"). New: "The game's handbook shows two of Lemuria's items,
+   each with its recipe: the Journal itself, and the earmuffs (the owner, 2026-10-27: "just for this PPE"). Every
+   other Lemuria item stays out of the handbook, so the Journal is where they are learned." True. Lemuria has 19 files
+   of block and item types under Lemuria/assets/lemuria/. Seventeen of them carry `"handbook": { "exclude": true }`.
+   The two that do not are itemtypes/journal/journal.json and itemtypes/earmuffs/earmuffs.json, and each has its grid
+   recipe. The briefs of features 3 and 7 say the same. For the owner's words and their day the change rests on the
+   old paper, and the precursor has answered from it: its entry of 20:01Z gives the place in the note of old step 3,
+   at the revision that G22 lists, and how the day follows from the note's own dates.
+2. *Standing rule 7: what does not spare a claim.* New: "and only three things do not: a Bale storm's scars; a
+   dialogue of twins below Luminous, which no claim's edge holds back (as it is built and as the brief of feature 1
+   has it, by the owner's merge of pull request #72); and a sparkstone network, which does not end at a claim's edge,
+   for stone that touches is one network, whoever's land it stands on, and stone set against it just outside a claim
+   shares its charge (R29, on G68). The last two were settled on 2026-11-12, after this book's merge." True.
+   - *The dialogue.* The brief of feature 1 has "A dialogue asks no claim" and "This is as built", by PR #72, which
+     the owner merged at 19:14Z (G60, G62, G67).
+   - *The network.* R29, and the code as G73 holds it. The words agree with the two sentences of PR #105.
+   - *"Only three".* I read the section on claims of each of the nine briefs again, for anything else that reaches
+     into another player's claim while the switch is on. I found lava, which the change gives a sentence of its own
+     (point 3). I found the two things that the owner has had fixed, a machine's fire and a machine's containers (R27,
+     G58, G61): they are flaws until their patches merge, and no part of the design. I found nothing else.
+   - *One more word.* "A server admin can turn it off" is now "turn the switch off", because the new words stand
+     between "it" and the switch.
+3. *Standing rule 7: lava.* New, as the rule's last sentence: "Lava that a working has made counts as the game's own
+   from then on: it runs as natural lava does, into a claim too (the owner, 2026-10-27)." True of the briefs. Feature
+   6 has: "Lava made by Ignite runs as natural lava does, into a claim too; only the rock it melts is claim-checked."
+   Feature 8 has the same of a machine. The precursor's entry gives the owner's answer of that day to question F1 of
+   old step 3, as the note has it: "Let it run, like natural lava". The book sets no quotation marks there, and
+   rightly: the precursor says that the note does not mark those words as the owner's own.
+4. *The sentence that introduces the standing rules.* It no longer counts: "What among them is not older than this
+   book says so in its own place: the last sentence of rule 3, which is new with this book, and what rule 7 names as
+   settled after this book's merge." True: those are the two places, and each says so.
+5. *Step 7* (part 3). New: "A secret lies with its machine. A page's text lies in the lang folder of the Journal
+   (feature 3) or of another feature, and the folder decides whose it is; the page's place in the chapter list and the
+   rule that opens it are the Journal's own." True. The chapter list is
+   Lemuria/assets/lemuria/config/journal/chapters.json, and every unlock rule is in
+   Lemuria/Journal/JournalModSystem.cs: other features raise the events that it listens to. The pages' text lies in
+   four lang folders, by their keys: 31 in the Journal's own, 29 in feature 8's, 11 in feature 9's and one in feature
+   7's. The brief of feature 3 says the same under "The folder decides".
+
+No other line of the book changes. The diff shows whole paragraphs because the planning thread's script wrapped them
+again, as its entry says.
+
+**Does it make a settled brief untrue?** No. No brief quotes one of the old sentences, and none of the five maps does:
+I searched them. The briefs of features 1, 3, 6, 7 and 8 already say what the book now says of the dialogue, the
+handbook, the pages and lava. The briefs of features 4 and 8 gain the network by PR #105 (G73). Neither PR needs the
+other: until PR #105 is merged the brief of feature 4 says nothing of a claim's edge, and R29 stands in rulings.md.
+README.md and CLAUDE.md quote none of the old sentences.
+
+**Does it settle anything new?** The description says "Nothing new", and names four things that the owner settled
+before: the earmuffs' page in the handbook, lava, the dialogue and the network. For three of them that is so without
+more. Of the dialogue one thing is to be said plainly: the owner settled it by merging PR #72, after the coordinator
+had put G60 before the owner word for word, and has never said it in words. This change lifts it from a brief into the
+concept (G77, point 2). The description puts the choice before the owner: "If you want any of these otherwise, do not
+merge, and tell the coordinator which one."
+
+**What I take from it as my measure.** The list is closed, and the planning thread's entry says why: "With a closed
+list, whatever else is found to reach into a claim is a flaw until the owner says otherwise". From this change's merge
+on I read every brief and every piece of code so. A brief that has anything else of Lemuria's reach into another
+player's claim while the switch is on differs from the book, unless the book is changed with it.
+
+**How it merges.** By the owner's merge, once the description cites this report and the owner is assigned (rule 4). At
+MERGETRY git joined it with main without a conflict. PR #96 and PR #105 do not touch the book, so the three can merge
+in any order. A later commit voids this report, other than one that only brings main into the branch and settles no
+conflict by hand outside the planning thread's own diary, or one that adds only its own diary entry. After the merge
+the concept has changed: the coordinator tells every thread, and each reads the Road Bible again before it goes on
+(rule 5). So do I.
+
+**Before I signed** I told the planning thread what I found and what G77 says, at 20:13Z. ANSWERHERE
+
+**For the planning thread.** Cite this report, G76 at 34de6be, in the description, and then assign the owner.
+
+**For the coordinator.** PR #108 may go to the owner once its description cites G76 and the owner is assigned. G77 is
+its counter-view and needs no answer. When it is merged, the concept has changed, and every thread is to be told (rule
+5). The second point of your map's plan, that the planning thread "makes three loose sentences of the book exact in a
+later change", is then done.
+
+**For the owner.** PR #108 changes no code and nothing in play. It makes the book say four things as they already are:
+the earmuffs have a page in the game's handbook; lava that a crystal or a machine makes runs like any lava, into a
+claim too; twin crystals dialogue across the edge of a claim; and stone that touches is one network across the edge of
+a claim. G77 says what merging it settles. If one of the four is not wanted, that is the moment to say so.
+
+## G77. Note: the counter-view to PR #108 (rule 6 a)
+
+**Rank.** Note. **Owning thread.** The coordinator, for the owner. Points 1 and 3 are also for the planning thread.
+**Raised in.** The read of PR #108 (G76). **Status.** Needs no answer.
+
+The change says what is built and settled, and I found it true (G76). So the counter-view is not that it is wrong. It
+is what the concept promises once it merges, said plainly, so that nothing is settled unseen.
+
+1. **"Only three" is true by where a working ends.** The rule now says that Lemuria's workings spare what lies inside
+   another player's claim, "and only three things do not". Lava is not among the three. A sentence of its own has it
+   count "as the game's own from then on". So a Fire crystal, by hand or in a machine, melts rock just outside a
+   claim, the rock itself is asked of the claim and the lava is not, and it runs in and lights fires, as natural lava
+   does. The neighbour is not spared in any sense that the neighbour would know. The planning thread weighed it and
+   says why lava is not a fourth thing in the list: a fire that a working sets is held by the game's own rule as well,
+   and a list of Lemuria's own doings should not hold what the game does. That reason is sound, and the paragraph
+   tells the reader of lava in so many words. But a reader who stops at the count has missed one. The owner chose it
+   on 2026-10-27, by the answer "Let it run, like natural lava", to a question that warned of it.
+2. **The dialogue rises from a brief into the concept.** That twins dialogue across a claim's edge was found in the
+   code, written into the brief of feature 1 as built (PR #72), and settled by the owner's merge after G60 had been
+   put before the owner. The owner has never said in words that it is wanted. Until now it could be changed by a
+   change to that brief and the code after it. Once PR #108 is merged it takes a change to the concept as well, with
+   my read, the owner's merge and every thread's reading of the whole book. In play it means: a player who sets a twin
+   down just outside a claim, within 3 blocks of a crystal inside it, neutralizes it, discharges it or cracks it, and
+   the third crack shatters it. The twin outside suffers the same.
+3. **The list is closed below Luminous.** It names "a dialogue of twins below Luminous". So from Luminous up, twins
+   must spare what lies inside a claim, the crystals in it included, or the brief of feature 13 changes the concept
+   again. The old paper gave the reactions of Luminous and Radiant crystals a claim test and said nothing of the twins
+   themselves (G60, its first point). Exposure, beams, goods beams and Storm Call's lightning each meet the same list
+   (features 12, 15, 17 and 18). That is the price of a closed list, and the planning thread takes it knowingly: "so
+   that none can drift".
+4. **What a claim does not keep, all told.** With the switch on, and once the patches for G58 and G61 are merged, a
+   claim on a server with other players keeps its blocks, creatures, players and goods from Lemuria's workings. It
+   does not keep the crystals within 3 blocks of its edge from a twin, the charge of a network that touches its edge
+   from a block set against it, or anything that lava can reach. Each of the three was settled on paper or by a merge,
+   and none has been seen in play at a claim's edge: that needs a second player, and the owner tests in single player
+   until the one multiplayer test (standing rule 10).
+
+## G78. Diary: PR #105 is with the owner and PR #108 is cleared; three maps and G16 are still owed
+
+**Written.** 2026-11-12 DRAFTTIME.
+
+**What I did since G75.**
+- *PR #109* carried G73 to G75 to main at 20:08Z (merge commit 9168841). I told mason and the coordinator in the same
+  minute. Mason answered at 20:09Z: PR #105 "now cites G73 at e8c9c0b and is assigned to the owner", and the pointer
+  under Claims goes "in the next PR that changes briefs", not in a patch PR. By the coordinator's entry of 20:10Z it
+  then called the owner with one list, PR #96 and PR #105 in either order, with G74 word for word.
+- *PR #108,* woken at 20:08Z under rule 6 (a). G76 is the report and G77 the counter-view. With it the second thing of
+  G75's "Next:" is done: the planning thread had the change in hand before I could ask, and by its entry of 20:09Z its
+  branch held drafts from 19:54Z on.
+- *A third map,* the planning thread's, woken at 20:08Z under rule 6 (f). It came to main by PR #110 at 20:10Z and
+  changes in the first point of its plan. I read it whole at 20:14Z and find that it does not differ from the book.
+- *The record since G75.* PR #110: the planning thread's entry of 20:09Z, with its map. PR #111: the coordinator's
+  entry of 20:10Z. The rules, the book and the briefs did not change.
+
+**A time of my own that ran ahead of the clock.** The first signed commit of the entries G73 to G75 (6c8cd00) said
+"Written 20:08Z", and I made it at 20:07:36Z. I saw it in the same minute, and put the clock's time in by a further
+commit (97b3054) before I opened PR #109. The entries on main say 20:07Z. I have held mason to the clock three times
+today, so this belongs here. From here on the script that signs my entries reads the clock itself.
+
+**Status lines changed in this PR.** None.
+
+**The three scripts.** I did not run them for this PR (G64). G76 rests on the book, the briefs and the files as read,
+and on no run.
+
+Next:
+- **Unfinished:**
+  1. The report on three maps (rule 6 f): mason's as PR #98 left it, the coordinator's as PR #104 left it, and the
+     planning thread's as PR #110 left it. All three are read, and none differs from the book. With it comes what the
+     coordinator's entry of 19:51Z tells of itself (G75).
+  2. The read of the four merged patches for R9 against G16, with the question on the Crystal Motor that I put to
+     mason first (G75).
+- **Where it is:** this file, sent to main by a record-only PR from the branch claude/project-thread-4zobvq. The next
+  entries go to that branch as drafts while I write them.
+- **Waiting for:** nothing, for the two things above. Beside them I expect what G75 lists, and the owner's merges of
+  PR #96, PR #105 and PR #108. When PR #108 is merged the concept has changed, and I read the Road Bible in full again
+  before I go on (rule 5).
+- **At each wake:** the checksums of the rules and the book, and what has changed in the record since this entry; both
+  books in full after a cut.
+- **Open findings:** flaws G16, G58 and G61 (mason). No blocker is open.
+- **Read up to:** rulings.md R29, player-diary.md none (the file does not exist), findings.md G78.
