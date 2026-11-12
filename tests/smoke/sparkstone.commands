@@ -3,3 +3,5 @@
 /lemuria sparkstone test awaken
 /lemuria sparkstone test carve
 /lemuria sparkstone test admin
+# R9: with the claims switch off, a stranger may use an Awakened block's sockets inside a claim.
+/lemuria sparkstone test claims

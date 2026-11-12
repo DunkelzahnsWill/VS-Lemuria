@@ -4,3 +4,5 @@ Sparkstone test: awakened one and two, the tool has 50 left; the network of 2 bl
 Sparkstone test: the chisel carved cradle-granite and crystalrack-granite-north$
 Sparkstone test: the admin charger filled the ice glittering crystal, which holds 100$
 Sparkstone test: the Energy Sink emptied the ice glittering crystal, which holds 0$
+# R9 (G16): with claims ignored, using an Awakened block opens; breaking it, and any block not Lemuria's, stay refused.
+Sparkstone test: with claims respected the game leaves using an Awakened block LandClaimed; with claims ignored using it is Granted, breaking it LandClaimed, using raw granite LandClaimed$
