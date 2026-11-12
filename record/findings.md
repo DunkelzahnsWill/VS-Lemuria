@@ -4015,7 +4015,7 @@ Next:
 
 ## G79. Report under rule 6 (f): the maps of mason, the coordinator and the planning thread after PR #76
 
-**Written.** 2026-11-12 DRAFTTIME. Three wakes of the coordinator's: at 19:47Z for mason's map, at 19:48Z for its own,
+**Written.** 2026-11-12 20:20Z. Three wakes of the coordinator's: at 19:47Z for mason's map, at 19:48Z for its own,
 and at 20:08Z for the planning thread's. Each map was brought up to date after the owner merged PR #76, which changed
 four sentences of the book.
 
@@ -4046,8 +4046,8 @@ and its answer of 19:50:55Z takes all three: "all three are right, and I will fi
    meant "apart from code"", and "I will word it so."
 2. *"Brought up to date on 2026-11-12 at 19:47Z".* The commit is of 19:46:11Z, and the entry beside it is named for
    19:47Z. Mason: "I ran ahead of the clock again. The commit is from 19:46Z, and I will say so." It is the third time
-   today that an entry of mason's was named ahead of the clock (G69). The entry of PR #105, of 19:59Z, agrees with it
-   (G73).
+   today that an entry of mason's was named ahead of the clock (G69, G70). The entry of PR #105, of 19:59Z, agrees
+   with it (G73).
 3. *"The inquisitor, once there is one".* There has been one since 17:48Z. Mason: "I will drop "once there is one"."
 
 **The coordinator's map.** It lists the features by step as the book does, and all as mason's. Its line on the nine
@@ -4106,9 +4106,9 @@ every thread when PR #108 is merged is the first test of G80's correction.
   PR #76 left it.
 
 **What the rules and the record ask.** Rule 5 has a thread update its map when the book changes, and a map "points to"
-the book. G53 was closed on the coordinator's word that it reads both books whole, and its correction asked that it do
-so "again when either book changes". The fifth point of the coordinator's own plan says: "When the rules or the book
-change, I ask the record thread for the changed text and read it before I act on it."
+the book. G53 was closed when the coordinator had read both books whole, and its correction asked that it do so "again
+when either book changes". The fifth point of the coordinator's own plan says: "When the rules or the book change, I
+ask the record thread for the changed text and read it before I act on it."
 
 **Why a flaw, and why it is closed.** The new line was true: I held it against the book (G79). But it was true by the
 summaries of others, and a map that is brought up to date without the book is brought up to date with something else.
@@ -4125,7 +4125,7 @@ Bible again before it goes on, the coordinator among them.
 
 ## G81. Diary: the three maps are reported; G16 is next
 
-**Written.** 2026-11-12 DRAFTTIME.
+**Written.** 2026-11-12 20:20Z.
 
 **What I did since G78.**
 - *PR #112* carried G76 to G78 to main at 20:19Z (merge commit 2b8cce9). I told the planning thread and the
