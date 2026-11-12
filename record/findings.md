@@ -446,12 +446,11 @@ what I held the fix against.
 ## G16. Flaw: the owner's ruling R9 is not built: with the claims switch off only racks and jars open in a claim
 
 **Rank.** Flaw, naming step 1. **Owning thread.** Mason (held by the coordinator until mason starts). **Carried
-from.** The old audit's finding 9, "Still with you", since answered by R9. **Status.** Open, for one use only: with
-the switch off, the sockets of a carved Crystal Motor inside a claim are still refused. Every other use that G56 lists
-is built, by four patches merged on 2026-11-12 between 19:32Z and 19:38Z, each on the inquisitor's verdict of "in":
-PR #87, PR #88, PR #84 and PR #92. G85 says what I held them against. Mason's patch for the Motor is PR #125 at
-3ef063c: it has the inquisitor's verdict of "in" and a green check, and it was not yet merged when this was written.
-One sentence below was too wide: G56 says for which uses the lift is needed.
+from.** The old audit's finding 9, "Still with you", since answered by R9. **Status.** Closed. Corrected by five
+patches, each merged on 2026-11-12 on the inquisitor's verdict of "in": PR #87, PR #88, PR #84 and PR #92 between
+19:32Z and 19:38Z, and PR #125 at commit 3ef063c at 20:52Z (merge commit c5da519), for the sockets of a carved Crystal
+Motor, which the first four had left refused. G85 says what I held them against, and G86 how the fifth merged. One
+sentence below was too wide: G56 says for which uses the lift is needed.
 
 - **The ruling.** R9, the owner: "Every feature reads the same switch". With the claims switch off, every Lemuria
   block used by hand opens inside another player's claim.
@@ -4479,3 +4478,49 @@ Next:
 - **Open findings:** flaws G16 (for the Motor alone, until PR #125 is merged), G58 and G61 (mason), and G83 (the
   coordinator). No blocker is open.
 - **Read up to:** rulings.md R30, player-diary.md none (the file does not exist), findings.md G85.
+
+## G86. Diary: G16 is closed; PR #125 merged at the commit that I held
+
+**Written.** 2026-11-12 20:55Z.
+
+**PR #125 is merged,** at 20:52:36Z by GitHub's clock (merge commit c5da519), two minutes after G85 reached main. Its
+second parent is 3ef063c: the commit of the inquisitor's verdict of "in" (its entry named for 20:41Z) and the one that
+I read, built and ran (G85). No commit came after the verdict. Outside record/, main at c5da519 and the commit 3ef063c
+are the same to the byte, and the merge changed four files on main and nothing else: `MachinesClaims.cs`,
+`MachinesTests.cs`, `tests/smoke/machines.expect` and mason's own entry of 20:39Z. So main holds what I ran, and I
+close G16 without another reading, as G85 said.
+
+**How it merged.** By mason's own hand, as the merge commit says: "A patch with the inquisitor's "in" at 3ef063c
+(record/diary/inquisitor/2026-11-12T2041Z.md) and the build check green, merged by its thread under rule 4." Rule 4:
+"Where these rules allow auto-merge and the checks are already green, the thread may merge it." The check on 3ef063c
+was green at 20:42Z. It is the second patch that mason has merged so, after PR #81, and I look at both with every
+verdict at step 1's gate (rule 6 b).
+
+**The full checks on main** at c5da519 began at 20:52Z. They passed at 20:55Z, by the run on GitHub.
+
+**With G16, the four flaws carried from the old audit are closed:** G13 and G14 (PR #75), G15 (PR #78) and G16
+(PR #84, PR #87, PR #88, PR #92 and PR #125). The audit's other open items, G17 to G20, are notes. What G85 says of
+the first four patches holds for the fifth: none of the lifts has been seen in play, which needs a second player in a
+claim (standing rule 10).
+
+**Status lines changed in this PR.** G16: closed.
+
+**The three scripts.** I did not run them for this PR (G64).
+
+Next:
+- **Unfinished:** nothing in hand.
+- **Where it is:** this file, sent to main by a record-only PR from the branch claude/project-thread-4zobvq.
+- **Waiting for,** as in G85, less PR #125:
+  - the coordinator's word that it has read both books whole, with its map and its diary saying so, for G83's Status;
+  - mason's patches for G58 (feature 6; PR #121, "out" at 3da0888, with the owner) and for G61 (feature 8), each
+    through the inquisitor and then the owner's merge (G70). I hold each merged patch against its finding for the
+    Status line, and I read every verdict at step 1's gate (rule 6 b), with mason's merges of PR #81 and PR #125 by
+    its own hand;
+  - mason's map, if it changes (rule 6 f): the three small things of G79 wait for that;
+  - step 1's brief and the changes to other briefs that come with it (rule 6 a), where I read for G24, G41, the second
+    point of G46, the closed list of standing rule 7 (G76) and water (G82);
+  - the owner's word, if the owner gives any, on G51, on the first two points of G60 and on the cost that G83 names.
+- **At each wake:** the checksums of the rules and the book, and what has changed in the record since this entry; both
+  books in full after a cut, and the Road Bible again when the concept changes.
+- **Open findings:** flaws G58 and G61 (mason), and G83 (the coordinator). No blocker is open.
+- **Read up to:** rulings.md R30, player-diary.md none (the file does not exist), findings.md G86.
