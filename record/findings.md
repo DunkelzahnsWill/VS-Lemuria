@@ -4129,7 +4129,7 @@ Bible again before it goes on, the coordinator among them.
 
 **What I did since G78.**
 - *PR #112* carried G76 to G78 to main at 20:19Z (merge commit 2b8cce9). I told the planning thread and the
-  coordinator at 20:20Z.
+  coordinator at 20:19Z.
 - *The planning thread's answer on PR #108* came at 20:18:55Z, half a minute after I had signed G76, which says that
   it had not answered. The answer: "I see none of it otherwise, and I push nothing more to it: it stays at 34de6be."
   It was late because that thread's context was cut right after my message came, and it read the rules and the book in
