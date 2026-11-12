@@ -2697,8 +2697,8 @@ The owner may decline it: see "Why a flaw".
 ## G59. Flaw: sentences of the settled briefs that were not true to the code, or that a merged PR had overtaken
 
 **Rank.** Flaw, naming step 1. **Owning thread.** Mason, who wrote the briefs and owns their features. **Raised in.**
-The read of the nine briefs (G56), against the briefs as the owner settled them at c0ed1b7. **Status.** Corrected in
-PR #72 at commit 0060c11 (G62). It closes when that commit merges.
+The read of the nine briefs (G56), against the briefs as the owner settled them at c0ed1b7. **Status.** Closed.
+Corrected in PR #72 at commit 0060c11 (G62), which the owner merged on 2026-11-12 at 19:14Z (merge commit de479e6).
 
 No later work is built on these yet, so none is a blocker. But each is a sentence of a settled brief, and a settled
 brief is what the inquisitor holds a patch against (rule 7), so they should not stay.
@@ -3086,7 +3086,9 @@ the description. The check "build" ended green on that commit at 18:47:25Z. At m
 assigned, and its description says that it is never set to merge itself.
 
 **The rules and the book.** I read both again in full at 19:03Z (G64): the rules, version 5, and the book as main has
-it, whose checksum (sha256) begins 2fee058b149f46a2. The rulings end at R25.
+it, whose checksum (sha256) begins 2fee058b149f46a2. The rulings end at R25. While I wrote this, the owner merged
+PR #72, at 19:14Z, and the coordinator's entry of 19:12Z reached main. I read that entry, and the six briefs that
+PR #72 changed are on main line for line as G62 read them.
 
 **The short of it.** Every new sentence is true. The four places are the ones that the owner's merges overtook, and I
 found no fifth. No settled brief is made untrue. No blocker, and I ask for no commit. The change touches parts 2 and 4
@@ -3125,8 +3127,8 @@ code follows the briefs." It now says: "R9 is in the brief of every feature amon
 and the code follows the briefs." So the book no longer says what of R9 is built.
 - *The new sentence is true.* Six of the nine features have a block of their own: features 1, 2, 4, 5, 8 and 9. Each
   of their briefs cites R9 and says that its blocks used by hand open inside another player's claim with the switch
-  off, on main and as PR #72 has them. The briefs of features 3 and 7 each say that theirs is "an item and no block",
-  and feature 6 has no block.
+  off, as main has them since the owner merged PR #72 at 19:14Z, and as they stood before it. The briefs of features 3
+  and 7 each say that theirs is "an item and no block", and feature 6 has no block.
 - *I find the clause rightly dropped,* for the planning thread's two reasons and for a third. Its reasons: the clause
   says what main holds, which the briefs now say, each for its own blocks; and the patch for R9 would overtake it. The
   third is mine: "for racks and jars only" was too narrow on the day it was written. With the switch off, the strike
@@ -3181,8 +3183,8 @@ in play.
    says that the nine briefs are settled, and both lines are left behind. Rule 5 has the coordinator tell each thread
    whose features, folders or files changed, and each such thread update its map. I read the change so for mason: the
    paragraph speaks of mason's nine features, part 2 of the build that mason inherited, and the two rows of mason's
-   files. I read both maps at the wake of rule 6 (f) that follows. Points 2 to 4 of mason's plan are done as well, and
-   its plan is its own to rewrite whenever it likes.
+   files. I read both maps at the wake of rule 6 (f) that follows. Points 2 and 4 of mason's plan are done as well,
+   and its plan is its own to rewrite whenever it likes.
 2. **"Main as it stands is the prototype."** Part 2 still opens so. Outside record/, five files have changed on main
    since c07322e: README.md, CLAUDE.md, the checks workflow and two files of tests. The planning thread left the
    sentence and says why in its entry: it is still true, and no merge has overtaken it. I agree. The words are those
@@ -3209,6 +3211,10 @@ in play.
   in a few lines.
 - *The project memory.* I brought my two notes there up to date with G56 to G64, at 19:10Z.
 - *PR #76.* I read it between 19:06Z and 19:12Z, and at 19:12Z I told the planning thread what I found (G65, G66).
+- *PR #72 is merged, and G59 is closed.* The owner merged it at 19:14Z, at commit 0060c11, the commit that G62 read
+  (merge commit de479e6). By the coordinator's entry of 19:12Z its description cited G62 and the owner was assigned
+  when the coordinator called the owner for it, at 19:09Z. The coordinator told me of the merge at 19:16Z, and I then
+  read main myself.
 - *This PR's entries went to my branch as drafts* at DRAFTTIME (commit DRAFTCOMMIT), before the planning thread had
   answered and before I checked or signed them, as G64 says I do.
 
@@ -3222,21 +3228,22 @@ know that their author worked from a summary more often than those entries say.
 
 **The three scripts.** I did not run them for this PR (G64): no finding in it rests on them.
 
+**Status line changed in this PR.** G59 is closed.
+
 Next:
-- **Unfinished:** nothing of mine. Two PRs that I have read wait for their authors, and then for the owner: PR #72 at
-  0060c11 (G62), until mason cites G62 and assigns the owner, and PR #76 at b77768c (G65), until the planning thread
-  cites G65 and assigns the owner.
+- **Unfinished:** nothing of mine. PR #76 at b77768c (G65) waits for the planning thread to cite G65 and assign the
+  owner, and then for the owner's merge.
 - **Where it is:** this file, sent to main by a record-only PR from the branch claude/project-thread-4zobvq.
 - **Waiting for:** a wake. I expect, in some order:
   - mason's map and the coordinator's, when PR #76 is merged (rule 6 f; G66, point 1);
-  - a new report, if a commit that rule 4 does not let pass reaches PR #72 or PR #76 before the owner merges it;
-  - mason's patches: G13 with G14 (PR #75, a draft), G15 (PR #78, a draft), the patch for R9, and what cures G57, G58
-    and G61, unless the owner declines them. Their verdicts are the inquisitor's, and I read every verdict at step 1's
-    gate (rule 6 b);
+  - a new report, if a commit that rule 4 does not let pass reaches PR #76 before the owner merges it;
+  - mason's patches. Three are up since 19:15Z and wait for the inquisitor's verdicts: PR #75 at 31e770e (G13 with
+    G14), PR #78 at 77e744f (G15) and PR #81 at 40f783c (G57). The patch for R9 is to come. Mason writes nothing for
+    G58 and G61 until the owner says whether each is fixed or declined, which the coordinator asked the owner at
+    19:15Z. The verdicts are the inquisitor's, and I read every one at step 1's gate (rule 6 b);
   - step 1's brief and the changes to other briefs that come with it (rule 6 a), where I read for G24, G41 and the
     second point of G46;
   - the owner's word, if the owner gives any, on G51, on G58 and G61, and on the first two points of G60.
 - **At each wake:** the rules and the book in full first, then what has changed in the record since this entry.
-- **Open findings:** flaws G13 to G16, G57, G58 and G61 (mason). G59 is corrected in PR #72 at commit 0060c11, and
-  closes when that commit merges. No blocker is open.
+- **Open findings:** flaws G13 to G16, G57, G58 and G61 (mason). No blocker is open.
 - **Read up to:** rulings.md R25, player-diary.md none (the file does not exist), findings.md G67.
