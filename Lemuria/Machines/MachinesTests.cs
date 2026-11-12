@@ -192,12 +192,15 @@ public partial class MachinesTests
         Accessor.SetBlock(World.GetBlock(Machine.Code(Machine.Gather, Rock, "north"))?.Id ?? 0, gatherPos);
         var memoryPos = origin.AddCopy(2, 0, 1);
         Accessor.SetBlock(Id(LemuriaModSystem.ModId + ":memory-awakened-" + Rock + "-north"), memoryPos);
+        // A Crystal Motor is no BlockMachine (it turns the game's axles), so it is named on its own (G16).
+        var motorPos = origin.AddCopy(1, 0, 2);
+        Accessor.SetBlock(World.GetBlock(Machine.Code(Machine.Motor, Rock, "north"))?.Id ?? 0, motorPos);
         var crystal = Crystal.BlockFor(World, Crystal.Unaligned, Crystal.Glittering);
         var trigger = sapi.Event.GetType().GetMethod("TriggerTestBlockAccess");
         if (Accessor.GetBlock(shelfPos) is not BlockControlShelf || Accessor.GetBlock(gatherPos) is not BlockMachine
-            || Accessor.GetBlock(memoryPos) is not BlockMachine || crystal == null || trigger == null)
+            || Accessor.GetBlock(memoryPos) is not BlockMachine || Accessor.GetBlock(motorPos) is not BlockCrystalMotor || crystal == null || trigger == null)
         {
-            logger.Error("Machines test: no Control Shelf, Gather block, Memory or Unaligned crystal, or no block access event to trigger");
+            logger.Error("Machines test: no Control Shelf, Gather block, Memory, Crystal Motor or Unaligned crystal, or no block access event to trigger");
             return;
         }
         EnumWorldAccessResponse Game(BlockPos at, EnumBlockAccessFlags access) =>
@@ -208,9 +211,10 @@ public partial class MachinesTests
             LemuriaClaims.Respect = true;
             var respected = Game(shelfPos, EnumBlockAccessFlags.Use);
             LemuriaClaims.Respect = false;
-            logger.Notification("Machines test: with claims respected the game leaves using a Control Shelf {0}; with claims ignored using it is {1}, breaking it {2}; using a Gather block {3}, breaking it {4}; using a Memory {5}",
+            logger.Notification("Machines test: with claims respected the game leaves using a Control Shelf {0}; with claims ignored using it is {1}, breaking it {2}; using a Gather block {3}, breaking it {4}; using a Memory {5}; using a Crystal Motor {6}, breaking it {7}",
                 respected, Game(shelfPos, EnumBlockAccessFlags.Use), Game(shelfPos, EnumBlockAccessFlags.BuildOrBreak),
-                Game(gatherPos, EnumBlockAccessFlags.Use), Game(gatherPos, EnumBlockAccessFlags.BuildOrBreak), Game(memoryPos, EnumBlockAccessFlags.Use));
+                Game(gatherPos, EnumBlockAccessFlags.Use), Game(gatherPos, EnumBlockAccessFlags.BuildOrBreak), Game(memoryPos, EnumBlockAccessFlags.Use),
+                Game(motorPos, EnumBlockAccessFlags.Use), Game(motorPos, EnumBlockAccessFlags.BuildOrBreak));
         }
         finally
         {
