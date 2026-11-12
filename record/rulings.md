@@ -367,7 +367,7 @@ at the coordinator's request, copied from the owner's own message.
 The owner: "Ahoy Coordinator! these are the new rules to be enforced going on, we'll need a new thread spun-up for the
 planning and hand-over for the new rules."
 
-The coordinator's note, as sent: finding G4 and the Road Bible (PR #16) lean on this moment.
+The coordinator's words with it, exactly as given: "Finding G4 and the Road Bible (PR #16) lean on this moment."
 
 Concerns: every thread (the moment the rules took force in this project); the planning thread (the Road Bible, G4);
 the review thread (G4); the precursor, once it is started (what counts as the old paper).
@@ -383,8 +383,8 @@ that thread directly and did not say the coordinator would record it.
 The owner: "A sister thread proposed the idea: To have a record-keeper to takeover your duties in terms of recording
 your word."
 
-The coordinator's note, as sent: the coordinator started the record-keeper on this message at 05:18Z, and has asked the
-owner whether the role goes into the rules and under what name.
+The coordinator's words with it, exactly as given: "Note with it that the coordinator started the record-keeper on it at
+05:18Z and has asked the owner whether the role goes into the rules and under what name."
 
 Answered in R21: the role goes into the rules, under the name "record".
 
@@ -420,9 +420,10 @@ No stop keeps a record thread from recording. A record thread’s own doubt over
 A record thread keeps a diary like any other thread, and no map.
 ```
 
-The coordinator's note, as sent: the owner's word on the role, five changes to the rules that make this thread the
-record thread; its role name is "record", not "record-keeper", so its diary folder is record/diary/record/. A ruling
-that changes the rules binds from its entry (rule 1), and the planning thread writes the change into the rules.
+The coordinator's words with it, exactly as given: "The owner's word on your role is attached (project chat,
+2026-11-12 05:20:38Z): five changes to the rules that make you the record thread. Your role name is "record", not
+"record-keeper", so your diary folder is record/diary/record/." And: "The planning thread writes the change into the
+rules."
 
 Concerns: every thread (rule 1: the coordinator sends this entry to every thread at once, and to every thread that
 starts work until the change merges); the planning thread (writes the change into the rules, rule 4); the review
