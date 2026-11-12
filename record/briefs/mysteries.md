@@ -46,8 +46,7 @@ the record.
    (feature 6). This feature holds what each does:
    - **Bloom (Life),** at a plant: a crop, berry bush or fruit tree moves on one growth stage; a sapling or tree seed
      loses one in-game day of its growing time. Each plant takes Bloom once an in-game day, whatever blooms it, hand or
-     machine (question 7, K4), so it roughly doubles a farm's pace. A machine's Life working pays its cost once for
-     every 9 plants it moves on, rounded up (feature 10's brief, item 11; R32).
+     machine (question 7, K4), so it roughly doubles a farm's pace.
    - **Wither (Death),** at a plant or the ground: a crop becomes the game's dead crop, keeping its farmland; saplings,
      tall grass, flowers, ferns and leaves wilt away, dropping what breaking them drops; grassy soil loses its grass.
      From Glowing it also withers every creature and player in its area: 1.5 damage every 5 seconds for 30 seconds, 9
@@ -59,11 +58,13 @@ the record.
      hours: raw cheese ripens, pemmican dries, hides cure, food spoils toward rot for compost, and a sealed barrel's
      recipe comes that much closer (question 9).
    Rewind and Progress never touch what a player carries, so neither can spoil another player's food.
-6. **In machines** (question 11): a Focus or Scatter works these four as it works any crystal's evocation (feature
-   8), for a working. A Life Focus pays only when a plant moves on, at most once a day per plant; a Death Focus with a
-   Glowing crystal withers what stands in front of it and pays only when something is there; a Time or Rust Focus
-   works a container only when it has a full measure to move, so a chest kept fresh by a Glittering Time Focus costs
-   about 2 charge a day (question 12).
+6. **In machines** (question 11): a Focus or Scatter works these four as it works any crystal's evocation (feature 8),
+   for a working. A Life Focus pays only when a plant moves on, at most once a day per plant, and a machine's Life
+   working pays its cost once for every 9 plants it would move on, rounded up, in full or not at all (feature 8; feature
+   10's brief, item 11, R32; not built yet: this feature counts the plants for feature 8, and both are built with
+   feature 10); a Death Focus with a Glowing crystal withers what stands in front of it and pays only when something is
+   there; a Time or Rust Focus works a container only when it has a full measure to move, so a chest kept fresh by a
+   Glittering Time Focus costs about 2 charge a day (question 12).
 
 ### Glint
 
@@ -126,7 +127,7 @@ Glowing).
 - No sparkglass lenses, inverted lamp or totems (K1, K3): the tools that engineer pure environments, feature 11. No
   temporal probes: the unplaced list.
 - No Mystery batteries, no Glint fed by a network, and no Bloom on animals or cradles (Quicken speeds cradles).
-- No limit for machines that Bloom beyond the rule by hand (K4) and the cost by plants above (feature 10's brief).
+- No limits for machines that Bloom beyond the rule by hand (K4) and the cost by plants in item 6 (feature 10's brief).
 
 ## What to try
 

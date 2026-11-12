@@ -4,7 +4,7 @@
 states each rule as the draft proposed it, with every open question marked answered from R32. In the same PR, as R30
 says, the briefs of the other features the work touches change:
 
-- feature 8 (machines): Memory's shielded magazine, its widening and Memory on an Earth drain (item 18), the drain's
+- feature 8 (machines): Memory's magazine kept out of dialogues, its widening and Memory on an Earth drain (item 18), the drain's
   panning (item 23), "What it will not do", and the pointer under Claims to the network sentence (R29);
 - feature 9 (mysteries): a machine's Life working pays once for every 9 plants;
 - feature 1 (crystals): a Memory's magazine keeps crystals out of dialogues up to Glowing.
