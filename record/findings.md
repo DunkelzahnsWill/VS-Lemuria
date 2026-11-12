@@ -5981,3 +5981,224 @@ often and how strongly machines Bloom"; the planning thread's change to the conc
 gate (rule 6 b). The owner has not yet spoken on G51 or on G60 points 1 and 2. Nothing is unpushed: my branch is
 claude/project-thread-4zobvq, and this entry goes to main by its record-only PR. Last entries read: rulings.md R41;
 findings.md G99, my own; player-diary.md is not on main.
+
+## G100. Report under rule 6 (e) and (a): rules version 7, with one row of the book's shared list (PR #171 at d44874c)
+
+**Written.** 2026-11-12 23:42Z. Woken by the record thread at 23:17Z for the first commit, at 23:30Z for the second
+and at 23:36Z for the third.
+
+**What I read.** PR #171, rules version 7, branch rules/version-7, the planning thread's, with its description as it
+stands at the third commit. It has three commits: bf7c6e2 of 23:07Z, 6de0047 of 23:29Z and d44874c of 23:35Z. It
+changes record/COMMANDMENTS.txt in three places and one row of record/road-bible.md, and it adds three entries of the
+planning thread's, of 23:07Z, 23:29Z and 23:35Z: 262 lines in, 4 out. I read the first commit whole between 23:22Z and
+23:26Z, with its entry, and then the second and the third each as a diff against the one before, with their entries.
+The check `build` passed on d44874c at 23:36Z. The PR is not assigned, by its description it is never set to merge by
+itself, and it joins main at 0ad0690 without a conflict.
+
+**The rules and the book.** My context was cut a twentieth time at 23:29Z, between the first commit and the second. At
+23:31Z I read the rules in full as the second commit has them, and then the Road Bible in full as the PR has it. By a
+program the PR's rules are version 6 as main has it but for the three places below, and its book is the book on main
+but for the one row, so that reading is also my reading of both as they are in force. The third commit changes one
+clause of one sentence and nothing else. On main the rules have 193 lines and 43,462 characters, with a checksum that
+begins e24e82285a0e441e, and the book has 562 lines and 42,181 characters (9fd75aae44f10c4d). At d44874c the rules
+have 195 lines and 44,355 characters (53ec0b2dfdf25e95), and the book 562 lines and 42,264 characters
+(e90f56afa40bc990). Both are plain ASCII.
+
+**The owner's word.** R37, given on 2026-11-12 at 22:59:52Z in the project chat: "Yes a read only copy would be most
+wise, I'll await the finished wording before hand-over to the other project." It answers the coordinator's question of
+22:58Z: "A read-only copy of rulings.md and findings.md beside the two books would end that. Do you want it? I suggest
+yes, as a small version 7 after this merge, so that nothing waits on it." What it would end is the sending that the
+first point of G93 names: under version 6 the record thread "sends it each new entry of rulings.md, player-diary.md
+and findings.md, word for word", by message. Rule 4 has a change to the rules "written by the planning thread at the
+owner's word", and R37 is that word. The hand-over is R34's.
+
+**The change.**
+- *The head:* version 7, and "Ratified 2026-11-12. Replaces version 6 (2026-11-12)."
+- *One sentence of the record thread's paragraph* gains an end. It read that the record thread "sends it each new
+  entry of rulings.md, player-diary.md and findings.md, word for word." It goes on now: "or tells it of the entry
+  where a copy of the file holds it (below)."
+- *One new paragraph of the cast,* of four sentences and 823 characters, after the paragraph on the copies of the two
+  books. Its first sentence: "The record thread keeps for the coordinator a copy of rulings.md and a copy of
+  findings.md as well, in the same place, and all that the paragraph above says of a copy of a book holds for a copy
+  of either file, except that the coordinator need not read one in full." The other three are held below.
+- *One row of the book's part 4,* under "Beside the old paper". It named two copies and names four: "The copies of the
+  Commandments, of this book, of rulings.md and of findings.md that the record thread keeps for the coordinator to
+  read (the Commandments, the cast; R33, R37)". The two new names are `rulings-<commit>.md` and
+  `findings-<commit>.md`. The place, the keeper and the terms are as they were.
+
+A program compared both files with main line by line. No other line of the rules or of the book changes.
+
+**Which way it goes.** A change to the rules goes by my read and the owner's merge (rule 4). The row is of the shared
+list, which goes the same way: "read by the review thread, then the owner's merge". So one PR, one read and one merge
+serve both, as with PR #144.
+
+**What I put to the planning thread, and how it was met.** Three things in two rounds, each before I signed.
+1. *When the coordinator reads.* The first commit had the coordinator read a named entry "before it acts on it", and
+   called that the reading that rule 5 asks of it. Rule 5 has every thread read every new entry at each start, and
+   under version 6 each entry reached the coordinator by message, so it had read each when it came. The coordinator is
+   told of every entry, and it cannot know that one bears on its next act unless it reads it. G96 asks a note with
+   step 1's zip, and by the first text the coordinator could have sent that zip with G96 unread. The owner's yes ends
+   a sending. Nobody asked the owner whether the coordinator may read less, and G83 was that fault. The second commit
+   has "before it goes on", which is what rules 4 and 5 say of a reading that waits for nothing.
+2. *Against what an entry is new.* The first commit had the record thread tell "the number of each entry that is new
+   or changed in it", and did not say new against what. The planning thread's first entry read a first copy as all
+   new. The second commit counts from what the coordinator has had.
+3. *What counts as had.* The second commit's words were "that the coordinator has not yet been sent or told of".
+   Threads tell the coordinator of entries all day. I tell it that a report is on main and what it says, and I tell
+   the record thread the same. Read so, the record thread could leave such an entry off its list, and the coordinator
+   would then go by my summary. The word before it was loose in the same way, for the cast has a thread "sent an entry
+   by its number alone". The third commit names the two ways in which an entry reaches the coordinator whole: "that
+   the coordinator has not yet been sent word for word, or told of with the name of a copy". The wording is mine, and
+   the planning thread took it as it stood. Its entry of 23:35Z: "A thread's summary of an entry is neither, and an
+   entry's number alone is neither."
+
+The planning thread answered each within minutes and changed the text by a script, with an entry for each commit. Its
+entries of 23:07Z and 23:29Z give the paragraph as their own commits had it, and each later entry says which points of
+the earlier no longer hold.
+
+**The new paragraph as it stands, held against the rest of the rules.**
+- *Its first sentence* gives the two files' copies the terms of the books' copies by pointing at the paragraph above.
+  I read each sentence of that paragraph for a file: a first copy as soon as there is none, and a new one "at each
+  merge that changes" the file; named with the commit of main; told to the coordinator by its name; the older one
+  taken away; for reading only; no part of the record; and after a merge the coordinator "reads no earlier one". Each
+  holds for a file as it holds for a book. The one that does not is excepted in the sentence itself: the coordinator
+  "need not read one in full".
+- *Its second sentence* says which entries the record thread names with a copy: "the number of each entry in that copy
+  that the coordinator has not yet been sent word for word, or told of with the name of a copy, and of each that has
+  changed since." So a first copy names what came after the last sending by message, and each later copy what is new
+  in it. The passive is right. Before the record thread's time entries reached the coordinator by other hands, and the
+  coordinator's own entry of 05:21Z has "Read up to: rulings.md R18, findings.md G21". The words "changed since" cover
+  an entry whose Status line changes. Under version 6 such an entry was no "new entry" and had no sending of its own,
+  so version 7 is the tighter of the two there.
+- *Its third sentence:* "The coordinator reads each such entry in that copy, or in a later one, before it goes on, and
+  that is the reading of the entry that these rules ask of the coordinator (rule 5)." The words "or in a later one"
+  are needed, since a copy is taken away when the next is made. Rule 5's reading at each start is served better than
+  before. After a cut of its context the coordinator can read an entry again in the copy, where its entry of 19:12Z
+  has it ask the record thread to send the parts of G60 again.
+- *Its fourth sentence* is the way back: "While the record thread keeps these copies, it sends the coordinator no
+  entry of the two files word for word, unless the coordinator asks for one." It also settles the one place where two
+  sentences could have disagreed, the changed sentence of the record thread's paragraph, which now points here.
+- *What stays by message.* An entry of player-diary.md, which the changed sentence still names with the other two and
+  the new paragraph does not. The record thread's word of each wake and of its cause. And everything that the cast has
+  the record thread send to the threads, which this PR does not touch: a thread is still sent an entry "once it is on
+  main", whole or by its number.
+- *The word to the owner* stays the coordinator's. Rule 6: "The coordinator sends every finding to its owning thread
+  and the owner." From the merge on it copies a finding for the owner from a file, and no longer from parts of 2,000
+  characters that a cut can take from it.
+
+**The row of the Road Bible.** It is the row that PR #144 added, with two more names in it and R37 beside R33. It sits
+in the list of what lies beside the old paper and is not old paper. The place is still
+`/mnt/project-files/lemuria-books/`, which from the merge on holds two files that are no books. The row says what lies
+there, so the folder's name misleads no one who reads the row. The rules' new paragraph says "in the same place", and
+the row is where that place is named, so the two agree. The concept is not touched, so rule 5 does not have every
+thread read the book again.
+
+**What the change makes wrong or untrue elsewhere** (rule 4, and rule 6 at (e)).
+- *Code:* none. Nothing outside record/ names the copies or their folder, by a search of main, and nothing in the mod
+  sends or reads an entry.
+- *README.md and CLAUDE.md:* neither says how an entry reaches the coordinator. CLAUDE.md names the record thread
+  once, for the coordinator's folder, and that stays true.
+- *The briefs:* none.
+- *The coordinator's map* has: "sends me each new R, P and G entry and the changed text of the rules and the book".
+  From the merge on that is untrue of the R and G entries. Its head names the two copies that it read, and both books
+  get new copies at the merge. The map should change within the hour of the merge, for the reason that G92 gave for
+  the lines of version 6: after a cut the coordinator reads its map to know what it does. A map is not code, so rule 4
+  makes no blocker of it, and the changed row makes it a cause under rule 6 (f) in any case.
+- *The other four maps* say nothing that it overtakes. The planning thread's has the record thread send it entries "as
+  they stand or by their number alone", which is the sending to threads, and that stays.
+- *The record thread* keeps no map. Its diary goes on saying what it has sent and whom it has woken.
+
+**The short of it.** The change is true to the owner's yes and adds nothing beyond what makes the copy work. Its text
+had three loose places, and the second and third commits mend them. I find no blocker and no flaw. **PR #171 is
+cleared at d44874c for the owner's merge.** The counter-view is G101.
+
+**What follows its merge.**
+- The coordinator tells every thread that the rules have changed, and each reads them again in full before it goes on
+  (rule 4).
+- The record thread makes a new copy of each book, since both change, and a first copy of rulings.md and of
+  findings.md. With the names of those two it tells the coordinator the entries that it has not had by message. The
+  coordinator reads both books whole, and those entries, before it goes on.
+- The coordinator's map changes (above), and I am woken for it (rule 6 f).
+- I hold the four copies against the repo by their checksums at my next wake after they are made (G93, its fifth
+  point). At 23:37Z today the folder held the two copies of 3ee7d9d and nothing else, and both were exact.
+- The planning thread sends the coordinator the whole text as merged, for the owner to hand to the sister project
+  (R34, R37).
+
+**How it merges.** By the owner's merge (rule 4), once its description cites this report and the owner is assigned. A
+later commit voids this report, other than one that brings main in or adds the planning thread's own entry.
+
+**For the planning thread.** PR #171 is cleared at d44874c. Cite G100 in its description, assign the owner, and tell
+the coordinator and the record thread. G101 asks nothing of the text as it stands. Its second point is the owner's to
+answer, and if the owner says yes to it before the merge, I read again.
+
+**For the coordinator.** PR #171 may go on your list once its description cites G100 and the owner is assigned. At its
+merge your map changes: the line on what the record thread sends you, and the head. G101 is for the owner, and its
+second point is the one that the owner can still act on.
+
+**For the record thread.** Nothing changes for you until the owner merges. Then: a new copy of each book, a first copy
+of each of the two files, and with their names the numbers of the entries that the coordinator has not been sent word
+for word.
+
+**For the owner.** PR #171 changes no code and nothing in play. It ends the sending of every ruling and finding to the
+coordinator by message. The record thread keeps a copy of the two files beside the two books and tells the coordinator
+which entries are new, and the coordinator reads them there before it goes on. The wording was tightened twice at my
+asking, and the text in the PR is the finished wording that you are waiting for. Merging it is safe at any time. After
+the merge every thread reads the rules again.
+
+## G101. Note: the counter-view to rules version 7 (rule 6 e and a)
+
+**Rank.** Note. **Owning thread.** The coordinator, for the owner. **Raised in.** The read of PR #171 (G100).
+**Status.** Needs no answer.
+
+The change is true to the owner's yes, and its text is sound as the third commit has it (G100). So the counter-view is
+again what the change costs and what it leaves as it was, said before the owner merges it and hands it on (R34, R37).
+The second point is the one that can still be acted on.
+
+1. **It ends a sending and lightens no reading, and that is my doing.** The first commit would have let the
+   coordinator read an entry only before it acted on it. I asked for the reading as each entry comes, because the
+   owner was asked for a copy and for nothing more, and a coordinator that acts on what it was told of an entry is G83
+   again. The price should be said. The coordinator's context is the scarce thing: its own entries of 19:12Z and
+   23:06Z each name a cut. From the merge on every ruling and every finding still goes through that context whole, and
+   G93 said of the copy: "It spares the record thread's messages and not the coordinator's context". A coordinator
+   that read less would be a change of its office. While rule 6 has it send every finding to the owner, there is
+   little that it could leave unread. That would be the owner's to say, and I do not ask for it.
+2. **player-diary.md is the one file of three without a copy, and play is about to begin.** The owner's yes named two
+   files, and the planning thread kept to them, rightly. But the coordinator reported step 1 done at 23:32Z, and rule
+   3 then sends the step's zip to the owner. So the first entries of player-diary.md are near. Each will go back to
+   the coordinator by message, word for word, while rulings and findings come by copy: three files and two ways. What
+   a copy would spare is smaller here than for findings, because the coordinator hears the owner's words on play
+   before anyone and gives them to the record thread. It would spare the entry's way back, and it would give the
+   coordinator a place to read an entry again after a cut. The planning thread's entry of 23:24Z has the cost of
+   adding the file, at the owner's word: "one file's name in the rules' new paragraph and one in the row". Before the
+   merge that is one more commit and one more read of mine. After it, it is a version 8, with one more reading of the
+   whole rules by every thread (the third point). If the owner would rather merge now, nothing breaks: an entry by
+   message is how every entry came until today.
+3. **Each version is read whole by every thread.** Version 7 changes five sentences that bind two threads, the record
+   thread and the coordinator. Rule 4 has every thread read all 44,355 characters again before it goes on. Versions 3
+   to 6 merged between 05:18Z and 23:00Z today, and this would be the fifth change of the text in a day. One text that
+   every thread has read whole is what the rules are for, and I would not have a thread read less of it. But the price
+   is paid for each version and not for each sentence, so small changes are best gathered. That is one more reason to
+   settle the second point before this merge and not after it.
+4. **The coordinator's words to the owner will come from a copy that nothing holds against the repo.** G93's fifth
+   point stands, and it weighs more now. A copy lies in a folder that every thread can write to. Until now a wrong
+   copy could mislead the coordinator about a book. From the merge on the coordinator copies each finding for the
+   owner out of a copy of findings.md. A copy that differed from the repo would put before the owner words that the
+   record does not hold. By the rule "the repo stands", but nobody would see the two differ. Today 22 merges changed
+   findings.md and 27 changed rulings.md, and a copy is replaced at each, so I can hold only the copies that stand at
+   my own wakes. A guard that needs no rule: the record thread gives the beginning of the checksum with each copy's
+   name, as it gave it to me for the two books at 23:09Z, and whoever can compute one can then hold the file against
+   it.
+5. **What nobody has tried yet.** The measure of what the coordinator has had is kept in two places: the record
+   thread's diary, which says what it has sent, and the coordinator's own "Read up to". Both threads have their
+   contexts cut. Where the two disagree, the text has no rule of its own, and the record thread's doubt goes to the
+   coordinator, as every doubt of its does. I think that enough. The first copies will show it.
+6. **For the sister project** (R34, R37). The text to hand over is version 6's, as the seventh point of G93 lists it,
+   with the one changed sentence and the one new paragraph. Three things should go with it. The new paragraph leans on
+   the one before it, "all that the paragraph above says of a copy of a book", so the two travel together and in that
+   order. That project's Road Bible names four copies in its shared list, as Lemuria's row now does. And its rule 5
+   asks the reading of entries that the third sentence cites. I have not read the sister project's rules, and it is
+   not mine to. The owner hands the text over, and we send nothing there.
+7. **The root is where it was** (G93, its eighth point). The coordinator cannot open the repo, and each version gives
+   it one more way around that. The rules grow from 43,462 characters to 44,355. The record thread's part of the cast
+   grows from 6,045 characters to 6,936, which is more than half of the cast. A coordinator that could open the repo
+   would need none of it.
