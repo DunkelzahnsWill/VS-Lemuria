@@ -3076,7 +3076,7 @@ Next:
 
 ## G65. Report under rule 6 (a): four sentences of the Road Bible brought up to date (PR #76 at b77768c)
 
-**Written.** 2026-11-12 DRAFT. Woken by the coordinator at 18:48Z.
+**Written.** 2026-11-12 19:22Z. Woken by the coordinator at 18:48Z.
 
 **What I read.** PR #76, "Road Bible: four sentences brought up to date after the merges of PR #51, PR #55 and
 PR #59", branch road-bible/what-main-holds, at commit b77768c95bca238a4394a927691fcaec6992d17c, its one commit,
@@ -3086,16 +3086,19 @@ the description. The check "build" ended green on that commit at 18:47:25Z. At m
 assigned, and its description says that it is never set to merge itself.
 
 **The rules and the book.** I read both again in full at 19:03Z (G64): the rules, version 5, and the book as main has
-it, whose checksum (sha256) begins 2fee058b149f46a2. The rulings end at R25. While I wrote this, the owner merged
-PR #72, at 19:14Z, and the coordinator's entry of 19:12Z reached main. I read that entry, and the six briefs that
-PR #72 changed are on main line for line as G62 read them.
+it, whose checksum (sha256) begins 2fee058b149f46a2. The rulings ended at R25 when I read the PR. While I wrote this
+report, main moved from c2e80f1 to c4ed9f7. The owner merged PR #72, at 19:14Z, and the six briefs that it changed are
+on main line for line as G62 read them. R26, of 19:15Z, is the coordinator's question to the owner on G58 and G61, and
+bears on nothing here. Mason's patches PR #75 and PR #81 merged at 19:19Z, on the inquisitor's verdicts of "in". I
+read each entry of the record that came with these merges (G67). None of them touches the book, the briefs' words on
+R9, the checks workflow, README.md or CLAUDE.md.
 
 **The short of it.** Every new sentence is true. The four places are the ones that the owner's merges overtook, and I
 found no fifth. No settled brief is made untrue. No blocker, and I ask for no commit. The change touches parts 2 and 4
 of the book, so it goes by this read and the owner's merge (rule 4), and it is ready for that merge once its
 description cites this report.
 
-**The four places,** each held against the repo as main has it at de479e6.
+**The four places,** each held against the repo as main had it at 19:16Z, at de479e6.
 1. *Part 2, the sentence on commit c07322e.* It said that outside record/ main "has not changed since commit c07322e".
    It now says that main did not change there between that commit and "this book's merge, pull request #16 on
    2026-11-12 at 16:52Z", and, as before, that the full checks passed on c07322e. By the history of main: c07322e is
@@ -3155,7 +3158,10 @@ gives both.
 **The counter-view** is G66. None of it stands against the change.
 
 **What I told the planning thread, and what it answered.** At 19:12Z, before I signed (rule 6), I told it what stands
-above and in G66. ANSWERHERE
+above and in G66. It answered at 19:20Z: "I see none of it otherwise. Please sign it so as G65. I push nothing to
+PR #76: it stays at b77768c." It agrees with the two points of G66 that are for it. It takes the three sentences that
+G60 names in its fourth point into one later change to the book, a PR of its own, which goes by my read and the
+owner's merge.
 
 **A later commit voids this report** (rule 4), unless it only brings main into the branch or adds only its author's
 own diary entry. The author unassigns the owner before it pushes any other commit and tells the coordinator, and the
@@ -3186,12 +3192,13 @@ in play.
    paragraph speaks of mason's nine features, part 2 of the build that mason inherited, and the two rows of mason's
    files. I read both maps at the wake of rule 6 (f) that follows. Points 2 and 4 of mason's plan are done as well,
    and its plan is its own to rewrite whenever it likes.
-2. **"Main as it stands is the prototype."** Part 2 still opens so. Outside record/, five files have changed on main
-   since c07322e: README.md, CLAUDE.md, the checks workflow and two files of tests. The planning thread left the
-   sentence and says why in its entry: it is still true, and no merge has overtaken it. I agree. The words are those
-   of R1's question, "Does main as it stands count as the prototype?", and the sentence cites R1. The new sentence
-   beside it now says which main that was. If part 2 is ever changed for another reason, "as it stood at this book's
-   merge" would say the same and lean on nothing.
+2. **"Main as it stands is the prototype."** Part 2 still opens so. Outside record/, ten files have changed on main
+   since c07322e, as main has it at c4ed9f7: README.md, CLAUDE.md, the checks workflow, and seven files of code and
+   tests in the folders of features 4, 8 and 9. The planning thread left the sentence and says why in its entry: it is
+   still true, and no merge has overtaken it. I agree. The words are those of R1's question, "Does main as it stands
+   count as the prototype?", and the sentence cites R1. The new sentence beside it now says which main that was. If
+   part 2 is ever changed for another reason, "as it stood at this book's merge" would say the same and lean on
+   nothing.
 3. **Each sentence of this kind costs the owner a merge.** Parts 2 and 4 change only by the owner's merge or the
    owner's command (rule 4). So a sentence there that says what main holds is a debt: when a merge overtakes it, the
    owner pays with one more merge that changes nothing in the game, on a day when the owner wrote that the PRs are
@@ -3202,9 +3209,9 @@ in play.
    outside record/ has been added or taken away since c07322e, and "Glittering and Glowing so far" in the row of
    feature 1. Step 2's features will overtake the second.
 
-## G67. Diary: PR #76 is reported, and nothing of mine is in hand
+## G67. Diary: PR #76 is reported; the merged fixes for G13, G14 and G57 are read next
 
-**Written.** 2026-11-12 DRAFT.
+**Written.** 2026-11-12 19:22Z.
 
 **What I did since G64.**
 - *PR #79* carried G56 to G64 to main at 19:07Z (merge commit c2e80f1). It was set to merge itself and not assigned.
@@ -3216,8 +3223,25 @@ in play.
   (merge commit de479e6). By the coordinator's entry of 19:12Z its description cited G62 and the owner was assigned
   when the coordinator called the owner for it, at 19:09Z. The coordinator told me of the merge at 19:16Z, and I then
   read main myself.
-- *This PR's entries went to my branch as drafts* at DRAFTTIME (commit DRAFTCOMMIT), before the planning thread had
-  answered and before I checked or signed them, as G64 says I do.
+- *This PR's entries went to my branch as drafts* at 19:16Z (commit c4530db), before the planning thread had answered
+  and before I checked or signed them, as G64 says I do.
+- *The planning thread answered at 19:20Z* (G65), and asked one thing back. Its later change to the book will make
+  standing rule 7's sentence exact for a dialogue below Luminous (G60, point 4): should that wait for more of the
+  owner's word than the merge of PR #72? My answer, which I send once this entry is on main: I do not ask it to wait
+  for more on the dialogue, because that change goes by the owner's merge and its description puts the choice before
+  the owner. But R26 is open, and the owner's answer may add to the same sentence: a declined G58 or G61 would be one
+  more thing that does not spare a claim, and the briefs already have lava run into a claim by the owner's old answer.
+  One change after that answer would serve the sentence better than two. I read the change when it is drafted (rule 6
+  a).
+- *Three verdicts and two merged patches.* The inquisitor signed three verdicts between 19:18Z and 19:20Z, on main by
+  PR #83: PR #75 at 31e770e "in", PR #81 at 40f783c "in", and PR #78 at 77e744f "out". PR #75 (G13 with G14) and
+  PR #81 (G57) merged at 19:19Z, each at the commit of its verdict (merge commits e02ef64 and c4ed9f7). By mason's
+  word, which the coordinator passed to me at 19:19Z, mason merged PR #81 itself, under rule 4's sentence: "Where
+  these rules allow auto-merge and the checks are already green, the thread may merge it." I have read the three
+  verdicts and mason's two entries. The verdicts and both merges I hold against rule 7 and rule 4 at step 1's gate
+  (rule 6 b). The two fixes I hold against G13, G14 and G57 next, for their Status lines, in an entry of its own.
+- *R26,* of 19:15Z, is the coordinator's question to the owner: are G58 and G61 fixed or declined? It stops only
+  mason's work on those two.
 
 **My count of the cuts was wrong.** G55 calls the cut of 17:23Z the second of the day and the one of 17:50Z the third.
 By the session's own log my context was cut ten times up to G64: at 05:10Z, 05:33Z, 06:07Z, 06:51Z, 07:17Z, 17:23Z,
@@ -3232,19 +3256,21 @@ know that their author worked from a summary more often than those entries say.
 **Status line changed in this PR.** G59 is closed.
 
 Next:
-- **Unfinished:** nothing of mine. PR #76 at b77768c (G65) waits for the planning thread to cite G65 and assign the
-  owner, and then for the owner's merge.
+- **Unfinished:** the Status lines of G13, G14 and G57. Their fixes merged at 19:19Z, and I hold each against its
+  finding next. PR #76 at b77768c (G65) waits for the planning thread to cite G65 and assign the owner, and then for
+  the owner's merge.
 - **Where it is:** this file, sent to main by a record-only PR from the branch claude/project-thread-4zobvq.
-- **Waiting for:** a wake. I expect, in some order:
+- **Waiting for:** nothing, for the three Status lines. After them I expect, in some order:
   - mason's map and the coordinator's, when PR #76 is merged (rule 6 f; G66, point 1);
   - a new report, if a commit that rule 4 does not let pass reaches PR #76 before the owner merges it;
-  - mason's patches. Three are up since 19:15Z and wait for the inquisitor's verdicts: PR #75 at 31e770e (G13 with
-    G14), PR #78 at 77e744f (G15) and PR #81 at 40f783c (G57). The patch for R9 is to come. Mason writes nothing for
-    G58 and G61 until the owner says whether each is fixed or declined, which the coordinator asked the owner at
-    19:15Z. The verdicts are the inquisitor's, and I read every one at step 1's gate (rule 6 b);
+  - mason's other patches. PR #78 at 77e744f (G15) has its verdict, "out", and waits for the owner's merge. The patch
+    for R9 is in the making, on the branch fix/r9-sockets. Mason writes nothing for G58 and G61 until the owner
+    answers R26. The verdicts are the inquisitor's, and I read every one at step 1's gate (rule 6 b);
+  - the planning thread's change to the book for the three sentences of G60, point 4 (rule 6 a);
   - step 1's brief and the changes to other briefs that come with it (rule 6 a), where I read for G24, G41 and the
     second point of G46;
   - the owner's word, if the owner gives any, on G51, on G58 and G61, and on the first two points of G60.
 - **At each wake:** the rules and the book in full first, then what has changed in the record since this entry.
-- **Open findings:** flaws G13 to G16, G57, G58 and G61 (mason). No blocker is open.
-- **Read up to:** rulings.md R25, player-diary.md none (the file does not exist), findings.md G67.
+- **Open findings:** flaws G13 to G16, G57, G58 and G61 (mason). The fixes for G13, G14 and G57 are merged, and their
+  Status lines wait for my read. No blocker is open.
+- **Read up to:** rulings.md R26, player-diary.md none (the file does not exist), findings.md G67.
