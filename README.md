@@ -52,7 +52,8 @@ The build takes about 10 seconds, the smoke test under a minute.
   checks `tests/smoke/*.restart.expect` against that boot's log (`data/Logs-restart/`), so a feature
   can check what it saved. The world and logs stay in `.cache/smoke/` afterwards.
 - **CI.** `.github/workflows/build.yml` runs the same three scripts on every pull request and every
-  commit on `main`; its check is called `build`. Every run that gets as far as a zip keeps it as an
+  commit on `main`; its check is called `build`. A pull request that changes only `record/` passes it
+  without the three scripts, so the record's working files merge without waiting on the build. Every run that gets as far as a zip keeps it as an
   artifact named `lemuria_<version>.zip`, also when the smoke test fails, and every run keeps the
   server logs (artifact `smoke-test-logs`).
 
