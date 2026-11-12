@@ -1,0 +1,32 @@
+{
+	"code": "glint",
+	"class": "lemuria-glint",
+	"entityClass": "lemuria-glint",
+	"attributes": {
+		"handbook": { "exclude": true }
+	},
+	"shape": { "base": "game:block/glass/framed" },
+	"textures": {
+		"material": { "base": "game:block/glass/plain" }
+	},
+	"creativeinventory": { "general": ["*"], "decorative": ["*"] },
+	"drawtype": "json",
+	"renderPass": "Transparent",
+	"blockmaterial": "Glass",
+	"lightHsv": [9, 2, 0],
+	"lightAbsorption": 0,
+	"replaceable": 100,
+	"resistance": 0.25,
+	"sideopaque": { "all": false },
+	"sidesolid": { "all": true },
+	"vertexFlags": { "zOffset": 2, "shiny": true },
+	"sounds": {
+		"place": "game:player/buildhigh",
+		"break": "game:block/glass",
+		"hit": "game:block/glass",
+		"walk": "game:walk/glass*"
+	},
+	"drops": [
+		{ "type": "block", "code": "lemuria:glint", "quantity": { "avg": 1, "var": 0 } }
+	]
+}

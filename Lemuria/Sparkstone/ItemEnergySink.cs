@@ -44,6 +44,8 @@ public class ItemEnergySink : Item
             case BlockEntityCrystal crystal when crystal.IsAligned:
                 crystal.SetCharge(0);
                 return $"{crystal.Alignment} {crystal.Evolution} crystal";
+            case Mysteries.BlockEntityGlint glint when glint.Empty():
+                return $"{glint.Alignment} {glint.Evolution} crystal in the Glint";
             case BlockEntitySparkstone stone when SparkstoneModSystem.Networks != null:
                 return $"sparkstone network of {SparkstoneModSystem.Networks.Empty(stone)} block(s)";
             default:

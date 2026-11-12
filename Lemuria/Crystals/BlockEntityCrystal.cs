@@ -27,6 +27,7 @@ public class BlockEntityCrystal : BlockEntity, IStandingCrystal
     private bool warning;
     private bool sparking;
     private double skyBoostUntil;
+    private double deathBoostUntil;
     private double lastHours;
     private int lightLevel = -1;
 
@@ -60,7 +61,8 @@ public class BlockEntityCrystal : BlockEntity, IStandingCrystal
         get
         {
             var hsv = Block.LightHsv;
-            byte v = IsAligned ? Crystal.LightLevel(Evolution, Level) : hsv[2];
+            // Every crystal lights 1 to 4 by charge level, Unaligned at 4 (step 5 note, K2).
+            byte v = Crystal.LightLevel(Evolution, Level);
             return new[] { hsv[0], hsv[1], v };
         }
     }
@@ -133,7 +135,8 @@ public class BlockEntityCrystal : BlockEntity, IStandingCrystal
         float strength = 0;
         if (!TwinNear && charge < Capacity)
         {
-            strength = CrystalCharging.Strength(Api.World, Pos, Alignment!, Evolution, Alignment == Crystal.Sky && now < skyBoostUntil);
+            strength = CrystalCharging.Strength(Api.World, Pos, Alignment!, Evolution, Alignment == Crystal.Sky && now < skyBoostUntil,
+                Alignment == Crystal.Death && now < deathBoostUntil);
         }
         SetSparking(strength > 0);
         if (strength > 0)
@@ -245,6 +248,15 @@ public class BlockEntityCrystal : BlockEntity, IStandingCrystal
         }
     }
 
+    public void OnDeathNearby()
+    {
+        if (Alignment == Crystal.Death)
+        {
+            deathBoostUntil = Api.World.Calendar.TotalHours + CrystalCharging.DeathHours;
+            ReadSurroundings();
+        }
+    }
+
     /// <summary>
     /// Relights the block when its light level changed, as the cradle does: the light that went away
     /// is removed first, and exchanging the block for itself adds the new light. Runs on the server and
@@ -306,6 +318,7 @@ public class BlockEntityCrystal : BlockEntity, IStandingCrystal
         tree.SetBool("warning", warning);
         tree.SetBool("sparking", sparking);
         tree.SetDouble("skyBoostUntil", skyBoostUntil);
+        tree.SetDouble("deathBoostUntil", deathBoostUntil);
         tree.SetFloat("grace", (float)LemuriaModSystem.Config.DialogueGraceSeconds);
     }
 
@@ -320,6 +333,7 @@ public class BlockEntityCrystal : BlockEntity, IStandingCrystal
         warning = tree.GetBool("warning");
         sparking = tree.GetBool("sparking");
         skyBoostUntil = tree.GetDouble("skyBoostUntil");
+        deathBoostUntil = tree.GetDouble("deathBoostUntil");
         if (Api?.Side == EnumAppSide.Client)
         {
             float grace = tree.GetFloat("grace", 30);

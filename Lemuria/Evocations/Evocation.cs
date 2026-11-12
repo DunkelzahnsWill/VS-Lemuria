@@ -18,17 +18,28 @@ public static class Evocation
     public const string Tremor = "tremor";
     public const string Gale = "gale";
 
-    /// <summary>The naked evocation of an Elemental; null for Unaligned, which commands through the chisel instead.</summary>
+    // The Mysteries' evocations (design note "Lemuria step 5: The Four Mysteries"); their effects live in
+    // the Mysteries feature, which registers them in Effects.More.
+    public const string Bloom = "bloom";
+    public const string Wither = "wither";
+    public const string Rewind = "rewind";
+    public const string Progress = "progress";
+
+    /// <summary>The naked evocation of an aligned crystal; null for Unaligned, which commands through the chisel instead.</summary>
     public static string? Of(string alignment) => alignment switch
     {
         Crystal.Fire => Ignite,
         Crystal.Ice => Quench,
         Crystal.Earth => Tremor,
         Crystal.Sky => Gale,
+        Crystal.Life => Bloom,
+        Crystal.Death => Wither,
+        Crystal.Time => Rewind,
+        Crystal.Rust => Progress,
         _ => null,
     };
 
-    /// <summary>Whether a held collectible casts: a Fire, Ice, Earth or Sky crystal.</summary>
+    /// <summary>Whether a held collectible casts: any aligned crystal, Elemental or Mystery.</summary>
     public static bool Casts(CollectibleObject? collectible) =>
         Crystal.IsAligned(collectible) && Of(Crystal.AlignmentOf(collectible!)) != null;
 

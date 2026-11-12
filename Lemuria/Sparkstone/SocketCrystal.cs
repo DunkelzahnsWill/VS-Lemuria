@@ -124,6 +124,8 @@ public class SocketCrystal : IStandingCrystal
 
     public void OnLightning() => stone.OnSocketLightning(this);
 
+    public void OnDeathNearby() => stone.OnSocketDeath(this);
+
     public void ToTreeAttributes(ITreeAttribute tree)
     {
         tree.SetItemstack("stack", Stack);

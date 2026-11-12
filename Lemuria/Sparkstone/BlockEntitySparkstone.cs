@@ -148,6 +148,11 @@ public class BlockEntitySparkstone : BlockEntity
     {
     }
 
+    /// <summary>A creature died within 8 blocks of a crystal in a socket (step 5).</summary>
+    public virtual void OnSocketDeath(SocketCrystal crystal)
+    {
+    }
+
     // ------------------------------------------------------------------ Active and Dormant
 
     /// <summary>

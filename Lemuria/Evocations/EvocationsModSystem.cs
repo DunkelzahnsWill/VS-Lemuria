@@ -134,6 +134,10 @@ public class EvocationsModSystem : ModSystem
         Evocation.Quench => new AssetLocation(LemuriaModSystem.ModId, "sounds/evocations/hiss"),
         Evocation.Tremor => new AssetLocation(LemuriaModSystem.ModId, "sounds/evocations/rumble"),
         Evocation.Gale => new AssetLocation(LemuriaModSystem.ModId, "sounds/evocations/gust"),
+        Evocation.Bloom => new AssetLocation(LemuriaModSystem.ModId, "sounds/evocations/bloom"),
+        Evocation.Wither => new AssetLocation(LemuriaModSystem.ModId, "sounds/evocations/wither"),
+        Evocation.Rewind => new AssetLocation(LemuriaModSystem.ModId, "sounds/evocations/rewind"),
+        Evocation.Progress => new AssetLocation(LemuriaModSystem.ModId, "sounds/evocations/progress"),
         _ => null,
     };
 

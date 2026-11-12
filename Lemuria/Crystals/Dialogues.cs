@@ -10,7 +10,7 @@ using Vintagestory.API.Server;
 namespace Lemuria.Crystals;
 
 /// <summary>
-/// Twins and dialogues (design note, Twins and dialogues). Fire and Ice, and Earth and Sky, dialogue
+/// Twins and dialogues (design note, Twins and dialogues). Fire and Ice, Earth and Sky, and since step 5 Life and Death and Time and Rust, dialogue
 /// when they stand within 3 blocks of each other, or lie in one container, where everything a player
 /// carries counts as one (cursor and crafting grid included, a crystal jar's slots excluded). After
 /// DialogueGraceSeconds of discordant hum the dialogue acts at the average of the two Evolutions,
@@ -221,7 +221,7 @@ public class Dialogues
         var candidates = new List<(Unit A, Unit B, int Distance)>();
         foreach (var a in units)
         {
-            if (a.Alignment != Crystal.Fire && a.Alignment != Crystal.Earth)
+            if (!Crystal.IsFirstTwin(a.Alignment))
             {
                 continue;
             }

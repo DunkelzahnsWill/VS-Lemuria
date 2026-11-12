@@ -53,6 +53,7 @@ public partial class BlockEntityMachine : BlockEntitySparkstone
     private double lastMotorHours = -1;
     private float gathered;
     private double skyBoostUntil;
+    private double deathBoostUntil;
     private bool motorPowered;
 
     public string Form => Block?.Variant["form"] ?? Machine.Gather;
@@ -401,9 +402,21 @@ public partial class BlockEntityMachine : BlockEntitySparkstone
         double hours = forHours ?? (lastGatherHours < 0 ? 0 : Math.Max(0, now - lastGatherHours));
         lastGatherHours = now;
         float before = gathered;
+        // One reading of the place for all its crystals; a strike's or a death's hour shows only to its own kind.
+        float[]? read = null;
         foreach (var crystal in Working.Where(c => c.IsAligned))
         {
-            float strength = CrystalCharging.Strength(Api.World, Pos, crystal.Alignment!, crystal.Evolution, crystal.Alignment == Crystal.Sky && now < skyBoostUntil);
+            read ??= CrystalEnvironment.Read(Api.World, Pos, false);
+            var raw = (float[])read.Clone();
+            if (crystal.Alignment == Crystal.Sky && now < skyBoostUntil && OpenSky)
+            {
+                raw[CrystalEnvironment.SkyIndex] = 1f;
+            }
+            if (crystal.Alignment == Crystal.Death && now < deathBoostUntil)
+            {
+                raw[CrystalEnvironment.DeathIndex] = 1f;
+            }
+            float strength = CrystalCharging.Strength(raw, crystal.Alignment!, crystal.Evolution);
             gathered += (float)(Machine.GatherPerDay(crystal.Evolution) * strength * hours / Api.World.Calendar.HoursPerDay);
         }
         if (gathered > before)
@@ -430,6 +443,15 @@ public partial class BlockEntityMachine : BlockEntitySparkstone
         if (Form == Machine.Gather && crystal.Alignment == Crystal.Sky)
         {
             skyBoostUntil = Api.World.Calendar.TotalHours + CrystalCharging.LightningHours;
+        }
+    }
+
+    /// <summary>A death within 8 blocks gives a Gather block's Death crystals an hour of full Death, as lightning gives Sky its six (the owner, Nov 10).</summary>
+    public override void OnSocketDeath(SocketCrystal crystal)
+    {
+        if (Form == Machine.Gather && crystal.Alignment == Crystal.Death)
+        {
+            deathBoostUntil = Api.World.Calendar.TotalHours + CrystalCharging.DeathHours;
         }
     }
 

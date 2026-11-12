@@ -6,20 +6,45 @@ using Vintagestory.GameContent;
 namespace Lemuria.Crystals;
 
 /// <summary>
-/// Reads the four environments round a refining cradle or a charging crystal and gives each Elemental
-/// a strength from 0 to 1 (design note, The four environments and Purity). Every reading is the game's
-/// own: heat sources and their fall-off, the climate's temperature and rainfall, wind, and the rain
-/// map that tells open sky. About 250 block reads and one climate reading per call.
+/// Reads the environments round a refining cradle or a charging crystal and gives each alignment a
+/// strength from 0 to 1 (design note, The four environments and Purity). Every Elemental reading is the
+/// game's own: heat sources and their fall-off, the climate's temperature and rainfall, wind, and the
+/// rain map that tells open sky. About 250 block reads and one climate reading per call, the Mysteries counting their signs among the same blocks. Since step 5
+/// the four Mysteries are read too, by the feature that owns them (<see cref="Mysteries"/>), so a
+/// reading has eight strengths and purity weighs all eight.
 /// </summary>
 public static class CrystalEnvironment
 {
     public const int FireIndex = 0, IceIndex = 1, EarthIndex = 2, SkyIndex = 3;
+    public const int LifeIndex = 4, DeathIndex = 5, TimeIndex = 6, RustIndex = 7;
+
+    /// <summary>How many strengths a reading has: the four Elementals, then the four Mysteries.</summary>
+    public const int Count = 8;
+
+    /// <summary>
+    /// The Mysteries' count of one reading: it sees every block of the same walk the Elementals read, so
+    /// the cube is walked once, then fills Life, Death, Time and Rust.
+    /// </summary>
+    public interface IMysteryCount
+    {
+        /// <summary>One block of the cube, its solid and fluid layers, at this many steps from the centre.</summary>
+        void Visit(BlockPos at, Block solid, Block fluid, int distance);
+
+        /// <summary>Fills the four Mystery strengths once the walk is done.</summary>
+        void Finish(float[] strengths);
+    }
+
+    /// <summary>Starts the Mysteries' count for one reading; set by the Mysteries feature, or null when they read nothing.</summary>
+    public static System.Func<IWorldAccessor, BlockPos, IMysteryCount>? Mysteries { get; set; }
 
     /// <summary>How far the reading looks in every direction, diagonals included: a 5x5x5 cube.</summary>
     public const int Reach = 2;
 
-    /// <summary>Strengths of Fire, Ice, Earth and Sky before twins cancel, each capped at 1.</summary>
-    public static float[] Read(IWorldAccessor world, BlockPos pos, bool skyBoost)
+    /// <summary>
+    /// Strengths of Fire, Ice, Earth, Sky, Life, Death, Time and Rust before twins cancel, each capped at
+    /// 1. A lightning strike's boost makes Sky full; a death nearby makes Death full (step 5 note, A death nearby).
+    /// </summary>
+    public static float[] Read(IWorldAccessor world, BlockPos pos, bool skyBoost, bool deathBoost = false)
     {
         var accessor = world.BlockAccessor;
         var climate = accessor.GetClimateAt(pos, EnumGetClimateMode.NowValues);
@@ -31,6 +56,7 @@ public static class CrystalEnvironment
         int stone = 0;
         int around = 0;
         var tmp = new BlockPos(pos.dimension);
+        var mysteries = Mysteries?.Invoke(world, pos);
         // Every environment reads the same 5x5x5 cube round the crystal (the owner, step 2 play-test).
         for (int dx = -Reach; dx <= Reach; dx++)
         {
@@ -42,6 +68,7 @@ public static class CrystalEnvironment
                     var solid = accessor.GetBlock(tmp, BlockLayersAccess.Solid);
                     var fluid = accessor.GetBlock(tmp, BlockLayersAccess.Fluid);
                     heat += HeatFrom(world, solid, tmp, pos) + HeatFrom(world, fluid, tmp, pos);
+                    mysteries?.Visit(tmp, solid, fluid, Math.Abs(dx) + Math.Abs(dy) + Math.Abs(dz));
                     if (dx == 0 && dy == 0 && dz == 0)
                     {
                         continue;
@@ -59,7 +86,7 @@ public static class CrystalEnvironment
             }
         }
 
-        var strengths = new float[4];
+        var strengths = new float[Count];
         float hotAir = 0.5f * Math.Clamp((temperature - 25f) / 10f, 0f, 1f);
         strengths[FireIndex] = Cap(heat / 10f + hotAir);
 
@@ -86,6 +113,15 @@ public static class CrystalEnvironment
         if (skyBoost && openSky)
         {
             strengths[SkyIndex] = 1f;
+        }
+        mysteries?.Finish(strengths);
+        for (int i = LifeIndex; i < Count; i++)
+        {
+            strengths[i] = Cap(strengths[i]);
+        }
+        if (deathBoost)
+        {
+            strengths[DeathIndex] = 1f;
         }
         return strengths;
     }
@@ -115,13 +151,20 @@ public static class CrystalEnvironment
 
     private static bool IsSnowOrIce(Block block) => block.Id != 0 && (block.BlockMaterial == EnumBlockMaterial.Snow || block.BlockMaterial == EnumBlockMaterial.Ice);
 
-    /// <summary>Twins cancel: Ice is taken from Fire and Fire from Ice, Sky from Earth and Earth from Sky.</summary>
+    /// <summary>
+    /// Twins cancel: Ice is taken from Fire and Fire from Ice, Sky from Earth and Earth from Sky, Death
+    /// from Life and Life from Death, Rust from Time and Time from Rust.
+    /// </summary>
     public static float[] CancelTwins(float[] s) => new[]
     {
         Math.Max(0, s[FireIndex] - s[IceIndex]),
         Math.Max(0, s[IceIndex] - s[FireIndex]),
         Math.Max(0, s[EarthIndex] - s[SkyIndex]),
         Math.Max(0, s[SkyIndex] - s[EarthIndex]),
+        Math.Max(0, s[LifeIndex] - s[DeathIndex]),
+        Math.Max(0, s[DeathIndex] - s[LifeIndex]),
+        Math.Max(0, s[TimeIndex] - s[RustIndex]),
+        Math.Max(0, s[RustIndex] - s[TimeIndex]),
     };
 
     /// <summary>
@@ -133,17 +176,17 @@ public static class CrystalEnvironment
     {
         var s = CancelTwins(raw);
         int best = 0;
-        for (int i = 1; i < 4; i++)
+        for (int i = 1; i < Count; i++)
         {
             if (s[i] > s[best])
             {
                 best = i;
             }
         }
-        alignment = Crystal.Elementals[best];
+        alignment = Crystal.AllAligned[best];
         strength = s[best];
         float others = 0;
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < Count; i++)
         {
             if (i != best)
             {
@@ -155,5 +198,5 @@ public static class CrystalEnvironment
         return strength > 0 && strength >= minimum && strength >= ratio * others;
     }
 
-    public static int IndexOf(string alignment) => Array.IndexOf(Crystal.Elementals, alignment);
+    public static int IndexOf(string alignment) => Array.IndexOf(Crystal.AllAligned, alignment);
 }

@@ -35,8 +35,11 @@ public class BlockEntityCradle : BlockEntity, IStandingCrystal
     /// <summary>Hum strength (0 to 1) by stage, Empty to Ripe.</summary>
     private static readonly float[] Hum = { 0f, 0f, 0.1f, 0.2f, 0.3f, 0.4f, 0.5f };
 
-    /// <summary>Light level by stage, Empty to Ripe; a candle is 7, a torch 14.</summary>
-    private static readonly byte[] Light = { 0, 0, 0, 0, 0, 2, 5 };
+    /// <summary>
+    /// Light level by stage, Empty to Ripe; a candle is 7, a torch 14. A growing crystal gives at most 1,
+    /// the faintest crystal light (step 5 note, K2); a ripe one lights as the crystal it is.
+    /// </summary>
+    private static readonly byte[] Light = { 0, 0, 0, 0, 0, 1, 1 };
 
     private static readonly AssetLocation ChimeSound = new(LemuriaModSystem.ModId, "sounds/crystals/chime");
     private static readonly AssetLocation RingSound = new(LemuriaModSystem.ModId, "sounds/crystals/ring");
@@ -61,6 +64,7 @@ public class BlockEntityCradle : BlockEntity, IStandingCrystal
     private double nextMendTotalHours;
     private double lastReadHours;
     private double skyBoostUntil;
+    private double deathBoostUntil;
     private float dialogueSeconds;
     private bool warning;
     /// <summary>What the sparks show: the alignment refining or charging, or null for none.</summary>
@@ -429,7 +433,7 @@ public class BlockEntityCradle : BlockEntity, IStandingCrystal
             return;
         }
         bool boost = now < skyBoostUntil;
-        var raw = CrystalEnvironment.Read(Api.World, Pos, boost);
+        var raw = CrystalEnvironment.Read(Api.World, Pos, boost, now < deathBoostUntil);
         bool passes = CrystalEnvironment.Lead(raw, Crystal.Rank(Evolution), out var leader, out var strength);
         if (!CrystalAligned)
         {
@@ -598,7 +602,20 @@ public class BlockEntityCradle : BlockEntity, IStandingCrystal
         }
     }
 
-    /// <summary>Takes up to this much charge out of the resting crystal and returns what it gave. Server only.</summary>
+    /// <summary>
+    /// A creature died within 8 blocks (step 5 note, A death nearby): a resting Death crystal, or an
+    /// Unaligned one refining, has full Death for an in-game hour. Server only.
+    /// </summary>
+    public void OnDeathNearby()
+    {
+        if (crystal == null || (CrystalAligned && Alignment != Crystal.Death))
+        {
+            return;
+        }
+        deathBoostUntil = Api.World.Calendar.TotalHours + CrystalCharging.DeathHours;
+        ReadSurroundings();
+    }
+
     /// <summary>Fills a resting aligned crystal to full at once, for the admin charger; false when there is none. Server only.</summary>
     public bool FillCharge()
     {
@@ -618,6 +635,7 @@ public class BlockEntityCradle : BlockEntity, IStandingCrystal
         return true;
     }
 
+    /// <summary>Takes up to this much charge out of the resting crystal and returns what it gave. Server only.</summary>
     public float TakeCharge(float max)
     {
         if (!CrystalAligned)
@@ -680,7 +698,7 @@ public class BlockEntityCradle : BlockEntity, IStandingCrystal
             return new[] { hsv[0], hsv[1], v };
         }
         var ripe = RipeCrystalBlock();
-        // A ripe Glowing crystal lights at its own 7, a Glittering one at the stage's 5.
+        // A ripe crystal lights as an Unaligned crystal does (4); the stages before it at most 1.
         byte level = stage == Ripe ? Math.Max(Light[stage], ripe?.LightHsv[2] ?? (byte)0) : Light[stage];
         return new[] { ripe?.LightHsv[0] ?? (byte)0, ripe?.LightHsv[1] ?? (byte)0, level };
     }
@@ -776,6 +794,7 @@ public class BlockEntityCradle : BlockEntity, IStandingCrystal
         tree.SetDouble("refineProgress", refineProgress);
         tree.SetDouble("nextMendTotalHours", nextMendTotalHours);
         tree.SetDouble("skyBoostUntil", skyBoostUntil);
+        tree.SetDouble("deathBoostUntil", deathBoostUntil);
         tree.SetFloat("dialogueSeconds", dialogueSeconds);
         tree.SetBool("warning", warning);
         if (sparkAlignment != null)
@@ -801,6 +820,7 @@ public class BlockEntityCradle : BlockEntity, IStandingCrystal
         refineProgress = tree.GetDouble("refineProgress");
         nextMendTotalHours = tree.GetDouble("nextMendTotalHours");
         skyBoostUntil = tree.GetDouble("skyBoostUntil");
+        deathBoostUntil = tree.GetDouble("deathBoostUntil");
         dialogueSeconds = tree.GetFloat("dialogueSeconds");
         warning = tree.GetBool("warning");
         sparkAlignment = tree.GetString("sparkAlignment");

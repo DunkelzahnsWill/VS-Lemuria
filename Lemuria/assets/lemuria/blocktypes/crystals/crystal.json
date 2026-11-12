@@ -4,7 +4,7 @@
 	"entityClass": "lemuria-crystal",
 	"behaviors": [{ "name": "OmniAttachable", "properties": { "facingCode": "position" } }],
 	"variantgroups": [
-		{ "code": "alignment", "states": ["unaligned", "fire", "ice", "earth", "sky"] },
+		{ "code": "alignment", "states": ["unaligned", "fire", "ice", "earth", "sky", "life", "death", "time", "rust"] },
 		{ "code": "evolution", "states": ["glittering", "glowing"] },
 		{ "code": "position", "states": ["up", "down"], "loadFromProperties": "game:abstract/horizontalorientation" }
 	],
@@ -43,16 +43,15 @@
 	"maxstacksize": 32,
 	"storageFlags": 131073,
 	"lightHsvByType": {
-		"*-unaligned-glittering-*": [10, 1, 5],
-		"*-unaligned-glowing-*": [10, 1, 7],
-		"*-fire-glittering-*": [62, 7, 2],
-		"*-fire-glowing-*": [62, 7, 3],
-		"*-ice-glittering-*": [40, 6, 2],
-		"*-ice-glowing-*": [40, 6, 3],
-		"*-earth-glittering-*": [4, 5, 2],
-		"*-earth-glowing-*": [4, 5, 3],
-		"*-sky-glittering-*": [37, 1, 2],
-		"*-sky-glowing-*": [37, 1, 3]
+		"*-unaligned-*": [10, 1, 4],
+		"*-fire-*": [62, 7, 1],
+		"*-ice-*": [40, 6, 1],
+		"*-earth-*": [4, 5, 1],
+		"*-sky-*": [37, 1, 1],
+		"*-life-*": [9, 2, 1],
+		"*-death-*": [47, 5, 1],
+		"*-time-*": [32, 4, 1],
+		"*-rust-*": [3, 6, 1]
 	},
 	"lightAbsorption": 0,
 	"drawtype": "json",
@@ -69,7 +68,11 @@
 		"*-fire-*": { "walk": "game:walk/stone", "place": "game:block/ceramicplace", "break": "game:block/ceramicbreak", "hit": "game:block/ceramichit", "ambient": "lemuria:sounds/crystals/hum-fire", "ambientBlockCount": 1, "ambientMaxDistanceMerge": 32 },
 		"*-ice-*": { "walk": "game:walk/stone", "place": "game:block/ceramicplace", "break": "game:block/ceramicbreak", "hit": "game:block/ceramichit", "ambient": "lemuria:sounds/crystals/hum-ice", "ambientBlockCount": 1, "ambientMaxDistanceMerge": 32 },
 		"*-earth-*": { "walk": "game:walk/stone", "place": "game:block/ceramicplace", "break": "game:block/ceramicbreak", "hit": "game:block/ceramichit", "ambient": "lemuria:sounds/crystals/hum-earth", "ambientBlockCount": 1, "ambientMaxDistanceMerge": 32 },
-		"*-sky-*": { "walk": "game:walk/stone", "place": "game:block/ceramicplace", "break": "game:block/ceramicbreak", "hit": "game:block/ceramichit", "ambient": "lemuria:sounds/crystals/hum-sky", "ambientBlockCount": 1, "ambientMaxDistanceMerge": 32 }
+		"*-sky-*": { "walk": "game:walk/stone", "place": "game:block/ceramicplace", "break": "game:block/ceramicbreak", "hit": "game:block/ceramichit", "ambient": "lemuria:sounds/crystals/hum-sky", "ambientBlockCount": 1, "ambientMaxDistanceMerge": 32 },
+		"*-life-*": { "walk": "game:walk/stone", "place": "game:block/ceramicplace", "break": "game:block/ceramicbreak", "hit": "game:block/ceramichit", "ambient": "lemuria:sounds/crystals/hum-life", "ambientBlockCount": 1, "ambientMaxDistanceMerge": 32 },
+		"*-death-*": { "walk": "game:walk/stone", "place": "game:block/ceramicplace", "break": "game:block/ceramicbreak", "hit": "game:block/ceramichit", "ambient": "lemuria:sounds/crystals/hum-death", "ambientBlockCount": 1, "ambientMaxDistanceMerge": 32 },
+		"*-time-*": { "walk": "game:walk/stone", "place": "game:block/ceramicplace", "break": "game:block/ceramicbreak", "hit": "game:block/ceramichit", "ambient": "lemuria:sounds/crystals/hum-time", "ambientBlockCount": 1, "ambientMaxDistanceMerge": 32 },
+		"*-rust-*": { "walk": "game:walk/stone", "place": "game:block/ceramicplace", "break": "game:block/ceramicbreak", "hit": "game:block/ceramichit", "ambient": "lemuria:sounds/crystals/hum-rust", "ambientBlockCount": 1, "ambientMaxDistanceMerge": 32 }
 	},
 	"drops": [
 		{ "type": "block", "code": "lemuria:crystal-{alignment}-{evolution}-up", "quantity": { "avg": 1, "var": 0 } }

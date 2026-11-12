@@ -27,6 +27,8 @@ namespace Lemuria.Journal;
 /// Step 4 (design note "Lemuria step 4: Machines", The Pilgrim's Journal): chapter 5 opens the first
 /// time a player carves a machine; the hidden page "Quicken" opens for a machine's carver the first
 /// time their Focus or Scatter quickens a cradle, while they are online.
+/// Step 5 (design note "Lemuria step 5: The Four Mysteries"): the Four Mysteries chapter opens with the
+/// Four Elementals, so a player learns every sign as they learn refining, also when they opened that before.
 /// </summary>
 public class JournalModSystem : ModSystem
 {
@@ -42,6 +44,7 @@ public class JournalModSystem : ModSystem
     public const string ControlShelf = "controlshelf";
     public const string Quicken = "quicken";
     public const string Batteries = "batteries";
+    public const string FourMysteries = "fourmysteries";
 
     private static readonly AssetLocation ChaptersAsset = new(LemuriaModSystem.ModId, "config/journal/chapters.json");
 
@@ -131,7 +134,10 @@ public class JournalModSystem : ModSystem
     {
         var unlocked = StoredUnlocks(player);
         // The Control Shelf's and the batteries' chapters open with Crystal Machines, also for a player who opened that before they existed.
-        if (unlocked.Contains(BasicVocabulary) && (unlocked.Add(ControlShelf) | unlocked.Add(Batteries)))
+        bool added = unlocked.Contains(BasicVocabulary) && (unlocked.Add(ControlShelf) | unlocked.Add(Batteries));
+        // The Four Mysteries open with the Four Elementals, also for a player who opened those before step 5.
+        added |= unlocked.Contains(FourElementals) && unlocked.Add(FourMysteries);
+        if (added)
         {
             player.ServerData.CustomPlayerData[PlayerDataKey] = string.Join(",", unlocked);
         }
@@ -143,6 +149,7 @@ public class JournalModSystem : ModSystem
         if (player is IServerPlayer serverPlayer)
         {
             Unlock(serverPlayer, FourElementals);
+            Unlock(serverPlayer, FourMysteries);
         }
     }
 
@@ -203,6 +210,7 @@ public class JournalModSystem : ModSystem
                     continue;
                 }
                 Unlock(player, FourElementals);
+                Unlock(player, FourMysteries);
                 if (Crystal.Level(Crystal.GetCharge(stack), Crystal.Capacity(Crystal.EvolutionOf(stack.Collectible))) == Crystal.Full)
                 {
                     Unlock(player, LivingStone);
