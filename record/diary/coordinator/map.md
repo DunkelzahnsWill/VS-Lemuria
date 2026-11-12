@@ -1,35 +1,35 @@
 # The coordinator's map
 
-Written 2026-11-12 17:23Z by the coordinator, in its own words, by the hand of the record thread (R20, R21). The Road Bible (record/road-bible.md) and the settled briefs outrank this map. It points to them and adds only my own plan beneath. Where it seems to say anything different, they are right and this map is wrong.
+Written 18:24Z on 2026-11-12, after I read the rules (version 5) and the Road Bible whole, as the record thread sent them from main at 8897ca7. It replaces my first map, which was written before I had read either whole (G53).
 
-## My features
+## The features, by number
 
-None. I own no feature, no folder and no file outside record/diary/coordinator/. Every feature in part 3 of the Road Bible, numbers 1 to 26, is mason's (Road Bible part 4, "Who owns what"; R5, R15).
+All are mason's (Road Bible, part 4).
+- Features 1 to 9 (crystals, cradle, journal, sparkstone, storage, evocations, earmuffs, machines, mysteries): built in the Precursor steps. Their nine briefs come first, in one batch (PR #55). Until the briefs merge they take only the fixes already ruled (R3).
+- Step 1: feature 10, duets.
+- Step 2: features 11 to 14, purity, exposure, reactions, strain.
+- Step 3: features 15 to 19, beams, ascendant, goodsbeams, supermedia, kilns.
+- Step 4: features 20 and 21, vehicles, flight.
+- Step 5: features 22 to 25, teaching, sovereign, baleful, balestorms.
+- Step 6: feature 26, ruins.
+- Step 7, v1.0: no feature. The one multiplayer test is played before the step is reported done. The release on ModDB is the owner's.
 
-## The threads I need something from
+## The threads I need, and that need me
 
-- The record thread: it writes my words into the repo (rulings.md, player-diary.md, this map and my diary), builds the zips of rule 3, and sends me each new entry of rulings.md and findings.md word for word, since I cannot open the repo.
-- The review thread: its reports and certificates under rule 6, and its findings, which I pass on.
-- The planning thread: changes to the rules and to the Road Bible, and word of when each of its PRs is ready for a wake or for the owner.
-- mason: word of each PR that is ready for a wake or for the owner, and of each step it holds to be done (features 1 to 26).
-- precursor: word of what the old paper holds, when a thread asks.
-- The owner: rulings, merges of the PRs that rule 4 gives to the owner, and what the owner says after playing.
+- The owner: merges, rulings, play. I call the owner only when a PR is ready for the owner's merge or a rule needs the owner's reading (R22).
+- The record thread: my hands in the repo (R20, R21). It writes rulings.md, player-diary.md, this map and my diary in my words, builds the zips, and sends me each new R, P and G entry and the changed text of the rules and the book.
+- The planning thread: writes changes to the rules and the Road Bible, and keeps the project memory.
+- The review thread: I wake it at each of rule 6 (a) to (g) and send its findings to their owning threads and the owner.
+- The inquisitor: decides the two gates of rule 7. I wake it when a thread asks a verdict on a patch and when I report a numbered step done, and I pass each signed decision to the threads it concerns.
+- Mason: builds everything outside record/. Its first PR was the rewrite of README.md and CLAUDE.md (R10, PR #51), then the nine briefs (PR #55).
+- The precursor: keeps the old paper. No code.
+- The janitor: not started. I create it when a fix passes to it (rule 6).
+Every thread needs me to carry its words to the others, to wake the review thread and the inquisitor, and to tell it when the rules or the book change.
 
-## The threads that need something from me
+## My plan
 
-- Every thread: its role name when I start it; each ruling and finding that concerns it, in the sender's own words; word when the rules change, when the concept changes, and when the Road Bible changes its features, folders or files (rules 4 and 5).
-- The review thread: its wakes under rule 6.
-- The record thread: every word of the owner's, with the owner's message attached, and my diary entries.
-- mason: the findings I hold for it until it starts (G7, G11, G13 to G20, G29, G37, G43).
-- precursor: the findings I hold for it until it starts (G5, and G22 as far as it concerns the old paper).
-- The owner: a call when a PR is ready for the owner's merge or a rule needs the owner's reading (R22), and each counter-view of the review thread's.
-
-## My own plan
-
-I build nothing, so this is my plan for my office, in the order of the Road Bible's steps.
-
-1. Now: start mason and precursor, each with its role name. Mason's first work is the briefs of features 1 to 9, in one batch (Road Bible part 3, "Features 1 to 9").
-2. Wake the review thread for the nine briefs; call the owner when they are ready to merge.
-3. Step 1 (feature 10), then steps 2 to 6 (features 11 to 26) in the book's order: for each, pass on mason's word, wake the review thread, call the owner for merges, have the record thread build the step's zip, and have what the owner says after playing written into player-diary.md.
-4. Step 7: report the step done only after the one multiplayer test is played and its answer stands in player-diary.md. The release is the owner's.
-5. Throughout: keep the record through the record thread, and stop the line under rule 1 when a rule is unclear.
+1. Now. PR #46, #45, #51 and #59 wait for the owner's merge, #46 first. When #46 merges I tell every thread, and each reads the book again (rule 5). When #45 merges I tell mason, which then writes the ruled patches (G13 with G14, G15), and I ask the inquisitor for a verdict on each.
+2. The nine briefs (PR #55). The review thread reads them (rule 6 a). When mason has cited the report and assigned the owner, I call the owner. The order is #46, then #55, then PR #61 and #62 unless the owner merges those sooner. After the briefs, R9 goes into the code by the briefs, and the planning thread brings the book up to date where merged PRs have overtaken it.
+3. Steps 1 to 6, each the same way. Mason puts up the briefs of the step's features; I wake the review thread (a); the owner merges. Mason builds each feature; the owner merges it. For each patch I ask the inquisitor: "in" merges itself, "out" or no verdict goes to the owner. When every feature of the step is merged and no PR of the step is open, I have the record thread build the zip of main with the "what to try" lists and send it to the owner (rule 3), I report the step done, and I wake the inquisitor for the gate on the step (rule 7). Pass or hold, I then wake the review thread to read what the inquisitor found (rule 6 b), and I send its report to the owner, with the inquisitor's list of PRs that needed the owner's merge if the history cannot show whose hand merged. After a hold I wake the inquisitor again when what failed is made good. The next step starts no code, experiments aside, until the step before has passed its gate.
+4. Step 7. No feature: changes to briefs and the patches that follow them, balance, the multiplayer test before I report the step done, then the gate as above. The owner releases.
+5. Always. I log each question for the owner in rulings.md through the record thread and stop the threads rule 1 names. I send each R, P and G entry to the threads it concerns. Each word the owner says of play goes to player-diary.md and to the thread that owns it. If main is broken I tell the owner and name the thread that repairs it. When the rules or the book change, I ask the record thread for the changed text and read it before I act on it.
