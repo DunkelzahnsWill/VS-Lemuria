@@ -36,7 +36,8 @@ old paper differ, this brief is the record.
 4. **Charge.** A machine draws from the network of Active sparkstone it touches. The unit is the *working*, one
    crystal's turn: 1 charge at Glittering's power, 2 at Glowing's, 4 at the power of Luminous (Actions-to-Charge, old
    step 4 part 2). A Mystery's working (Life, Death, Time or Rust, feature 9) costs 4 times an Elemental's at the same
-   power: 4, 8 and 16 (R36; R38, 3 and 4), so Elementals are the efficient choice and the Mysteries act beyond them.
+   power: 4, 8 and 16 (R36; R38, 3 and 4). Elementals work through what the world already does, as fire is lit in
+   many ways; the Mysteries force what runs against the world's nature, as a bush made to bloom, and pay for it (R39).
    Nothing done, nothing paid. A network that cannot pay leaves its machines idle. Machines pause
    while their chunk is unloaded and do not catch up.
 5. **Context.** A machine works out what touches it (an Amplify, Memory, a shelf, a container, its network) only when
