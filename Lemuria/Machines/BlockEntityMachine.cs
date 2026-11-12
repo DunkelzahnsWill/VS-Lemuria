@@ -625,6 +625,9 @@ public partial class BlockEntityMachine : BlockEntitySparkstone
             tree.SetFloat("probeStruck", struck);
         }
         BatteryToTree(tree);
+        // A Gather block keeps its strike and death hours through a restart, as a standing crystal does (G13, G14).
+        tree.SetDouble("skyBoostUntil", skyBoostUntil);
+        tree.SetDouble("deathBoostUntil", deathBoostUntil);
         if (carverUid != null)
         {
             tree.SetString("carverUid", carverUid);
@@ -640,6 +643,8 @@ public partial class BlockEntityMachine : BlockEntitySparkstone
         StoppedFull = tree.GetBool("stoppedFull");
         struck = tree.GetFloat("probeStruck");
         BatteryFromTree(tree);
+        skyBoostUntil = tree.GetDouble("skyBoostUntil");
+        deathBoostUntil = tree.GetDouble("deathBoostUntil");
         contextDirty = true;
         if (Api?.Side == EnumAppSide.Client && Form == Machine.Motor)
         {
