@@ -188,11 +188,11 @@ old paper differ, this brief is the record.
     - *Duets.* A Focus's Memory holding both crystals of a duet works the duet in place of cycling, the pair giving the
       turn; a Duet Module in one of the Focus's sockets holds a second pair, swapped after each duet working.
     - *Memory on an Earth drain,* on any face but the one facing into the room. The drain holds one crystal in its
-      socket and cycles the rest: an Earth crystal wears the room as below; a Sky crystal pans one sand block of the
-      room a turn into the container touching the drain, at a working's cost; and an Unaligned crystal works a Control
-      Shelf set against the drain, whose one action there puts a block of the kind on the shelf from its input into the
-      panned block nearest the bottom, at a working's cost. A panned block keeps its place in the room until then
-      (item 21).
+      socket and cycles the rest, a turn with nothing to do passing at once: an Earth crystal wears the room as below,
+      for one step or until it cannot wear now; a Sky crystal pans one sand block of the room a turn into the container
+      touching the drain, at a working's cost; and an Unaligned crystal works a Control Shelf set against the drain,
+      whose one action there puts a block of the kind on the shelf from its input into the panned block nearest the
+      bottom, at a working's cost. A panned block keeps its place in the room until then (item 21).
 19. **The reclamation plate,** `lemuria:reclamationplate`, made in the grid from a copper plate over polished rock: a
     thin plate on the floor under salt water, with no charge and no crystal. When a Fire Focus, not a hand cast, boils
     salt water anywhere in the column above it, it claims the game's own salt 1 time in 4 for each block boiled, into a

@@ -81,7 +81,11 @@ panning idea.
     - *Memory on a drain.* Memory may stand against an Earth battery's drain, on any face but the one facing into the
       room. The drain then holds one crystal in its socket and the rest in the magazine (twins in its own sockets still
       dialogue there), and the Memory cycles them as for any machine, a drain's turn being one block worn, panned or
-      put back. While an Earth crystal is in the socket the drain wears its room as today.
+      put back. While an Earth crystal is in the socket the drain wears its room as today. A turn with nothing to do
+      passes at once to the next crystal, as a Dormant crystal is passed over: the Memory looks every 10 seconds, a
+      machine's pace, and an Earth crystal's turn ends when it has worn one step or cannot wear now (its network at
+      half or above, or no block left to wear), so Sky and the Unaligned crystal come round whatever the network
+      holds.
     - *Panning.* While a Sky crystal is in the socket, the drain pans one sand block of its room a turn, nearest first,
       at a working's cost: the block is gone, and what the game's pan gives from one whole block of sand goes into the
       container touching the drain. With no sand, no container or a full one, it is a free miss.

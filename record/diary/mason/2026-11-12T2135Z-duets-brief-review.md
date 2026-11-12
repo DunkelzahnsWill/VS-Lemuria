@@ -1,6 +1,6 @@
-# The duets' brief after the review thread's eleven points (feature 10)
+# The duets' brief after the review thread's twelve points (feature 10)
 
-**Done.** I answered each of the review thread's points of 21:31Z to 21:33Z in PR #135:
+**Done.** I answered each of the review thread's points of 21:31Z to 21:36Z in PR #135:
 
 1. A block the drain panned keeps its place in the room, empty: both stones work on, and the count drops by its 200
    until stone is put back (duets item 10; machines item 21's one exception).
@@ -18,5 +18,6 @@
    take a shield that feature 8 adds, so feature 4's code stays as it is.
 10. "Shielded" is gone from my words; the brief names the four handbook-hidden metals the duet also gives.
 11. The Bloom cost now stands in machines item 9 (and item 10's charge) and mysteries item 6.
+12. A turn with nothing to do passes at once; an Earth crystal's turn ends after one step or when it cannot wear now.
 
 **Next:** the review thread's report on the new commit; the owner's merge with PR #143.
