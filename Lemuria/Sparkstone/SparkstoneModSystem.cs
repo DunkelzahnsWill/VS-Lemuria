@@ -29,6 +29,8 @@ public class SparkstoneModSystem : ModSystem
         api.RegisterItemClass(ItemEnergySink.ClassCode, typeof(ItemEnergySink));
         api.RegisterBlockClass(BlockSparkstone.ClassCode, typeof(BlockSparkstone));
         api.RegisterBlockEntityClass(BlockEntitySparkstone.ClassCode, typeof(BlockEntitySparkstone));
+        // With the claims switch off, an Awakened block's sockets inside a claim are open to everyone (R9).
+        api.Event.OnTestBlockAccess += new SparkstoneClaims(api).OnTestBlockAccess;
     }
 
     public override void StartServerSide(ICoreServerAPI api)
@@ -63,12 +65,51 @@ public class SparkstoneModSystem : ModSystem
                         .WithDescription("Fills an empty placed Ice crystal with the admin charger")
                         .HandleWith(_ => TestSite.WithChunk(api, Mod.Logger, "Sparkstone", 26, 2, OnTestAdmin))
                     .EndSubCommand()
+                    .BeginSubCommand("claims")
+                        .WithDescription("Asks the game's claim test of a stranger using and breaking an Awakened block, with claims respected and ignored")
+                        .HandleWith(_ => TestSite.WithChunk(api, Mod.Logger, "Sparkstone", 30, 2, OnTestClaims))
+                    .EndSubCommand()
                     .BeginSubCommand("check")
                         .WithDescription("Reports the test network's charge, after a restart")
                         .HandleWith(_ => TestSite.WithChunk(api, Mod.Logger, "Sparkstone", 18, 2, _ => OnTestCheck()))
                     .EndSubCommand()
                 .EndSubCommand()
             .EndSubCommand();
+    }
+
+    /// <summary>
+    /// The game's own test, as it ends for a stranger in a claim (refused by the claim, then every mod's
+    /// answer): with the switch off, using an Awakened block opens and breaking it stays refused; with it
+    /// on, both stay refused; a block that is not Lemuria's is left alone.
+    /// </summary>
+    private void OnTestClaims(BlockPos column)
+    {
+        var pos = TestSite.Surface(sapi, column);
+        var stone = sapi.World.GetBlock(new AssetLocation(LemuriaModSystem.ModId, "sparkstone-awakened-granite"));
+        var trigger = sapi.Event.GetType().GetMethod("TriggerTestBlockAccess");
+        if (stone == null || trigger == null)
+        {
+            Mod.Logger.Error("Sparkstone test: no Awakened granite, or no block access event to trigger");
+            return;
+        }
+        var accessor = sapi.World.BlockAccessor;
+        accessor.SetBlock(stone.Id, pos);
+        accessor.SetBlock(sapi.World.GetBlock(new AssetLocation("game:rock-granite"))!.Id, pos.EastCopy());
+        EnumWorldAccessResponse Game(BlockPos at, EnumBlockAccessFlags access) =>
+            (EnumWorldAccessResponse)trigger.Invoke(sapi.Event, new object?[] { null, new BlockSelection { Position = at.Copy() }, access, "the owner", null, EnumWorldAccessResponse.LandClaimed })!;
+        bool before = LemuriaClaims.Respect;
+        try
+        {
+            LemuriaClaims.Respect = true;
+            var respected = Game(pos, EnumBlockAccessFlags.Use);
+            LemuriaClaims.Respect = false;
+            Mod.Logger.Notification("Sparkstone test: with claims respected the game leaves using an Awakened block {0}; with claims ignored using it is {1}, breaking it {2}, using raw granite {3}",
+                respected, Game(pos, EnumBlockAccessFlags.Use), Game(pos, EnumBlockAccessFlags.BuildOrBreak), Game(pos.EastCopy(), EnumBlockAccessFlags.Use));
+        }
+        finally
+        {
+            LemuriaClaims.Respect = before;
+        }
     }
 
     private void OnTestAwaken(BlockPos column)
