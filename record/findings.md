@@ -253,7 +253,8 @@ precursor's. I read for it at rule 6 (a). It holds nothing.
 ## G7. Flaw: CLAUDE.md and README.md still give the old rules, and every thread is handed CLAUDE.md as binding
 
 **Rank.** Flaw, naming step 1. **Owning thread.** Mason, the one builder (R5, R10, R15). Mason is not started yet,
-so the coordinator holds this for it. **Raised in.** G2. **Status.** Open.
+so the coordinator holds this for it. **Raised in.** G2. **Status.** Open. For R10's rewrite: the lines on staying
+inside a feature's files should say what R24 allows (G45).
 
 On main at a83a83a:
 - CLAUDE.md lines 8 to 23 are version 1's five rules, under the heading "The Commandments (the owner's standing
@@ -1180,7 +1181,7 @@ Next:
 
 **Rank.** Note. **Owning thread.** The coordinator, for the owner. It concerns the planning thread and mason. **Raised
 in.** This entry, on reading R23, which came out of G24. **Status.** Needs no answer. The owner answered R23 with B
-(R24, G39).
+(R24, G39), and PR #39 writes that into rule 4 as version 5 (G45).
 
 R23 asks the owner how code reaches main when a feature needs it changed in another feature's folders, after that
 feature's brief is changed: on its own, as a patch (A), or in the feature's own PR (B). The planning thread recommends
@@ -1657,3 +1658,246 @@ Next:
   the coordinator until it starts), G40 and G41 (the planning thread). G4, G24 and G25 are corrected in PR #16 at
   commit 84ace1d and close when that commit merges. No blocker is open.
 - **Read up to:** rulings.md R24, player-diary.md none (the file does not exist), findings.md G44.
+
+## G45. Report under rule 6 (e): the change to the rules that lets code ride in a feature's PR (PR #39 at c2a7e64)
+
+**Written.** 2026-11-12 07:49Z. Woken by the coordinator at 07:32Z, with the planning thread's own words of 07:32:10Z
+that the PR is ready.
+
+**What I read.** PR #39, "Rules: version 5 lets code ride in a feature's pull request", branch rules/version-5, at
+commit c2a7e64976402516c8bca0b08e391cddf0cc9ade, its one commit, on top of main at 957cb2b. Its check "build" ended
+green on that commit at 07:31:49Z. It is not assigned to the owner. At 07:49Z it was still open with that check green,
+so it is not set to auto-merge, as rule 4 has it. Main has moved to 011cf88 since, in other files, and the branch
+still merges cleanly. By rule 4 a later commit voids this report, unless it only brings main into the branch or adds
+only the author's own diary entry.
+
+**The rules.** Read again in full at this wake, before anything else: version 4 as main has it, 189 lines, the file
+that G44 read (sha256 084d4307ca14cd82f004448b2ed70a1b2ac10f9e0c8f6c8440dd091df7178f03). This report is held against
+version 4 and against R24, which binds from its entry (rule 1).
+
+**What changed in the record since G44 (rule 6).**
+- PR #36, merged at 07:14Z: R25, with the coordinator's entries of 07:08Z and 07:09Z and the record thread's of
+  07:08Z. The owner's words in R25, "Correct reading, good job.", are the owner's message of 07:08:14Z, character for
+  character. The post of the coordinator that the owner answered stands in R25 word for word: I read both in the
+  project chat (below).
+- PR #37, merged at 07:16Z: my own G39 to G44.
+- PR #38 and PR #40, merged at 07:26Z and 07:36Z: the coordinator's entries of 07:21Z and 07:32Z and the record
+  thread's of 07:22Z. The coordinator posted G42 to the owner whole at 07:21:54Z, as the project chat shows, and holds
+  G43 for mason.
+- PR #41, merged at 07:38Z: the planning thread's entry of 07:32Z, which halts and ends with "Next:". It gives its
+  reasons for handing PR #16 to the owner as it stands, and says what that costs. It also holds drafts of the three
+  sentences that are to change after PR #16 merges. They are in no branch, and I report nothing on them here: each
+  comes to me when its PR is put up.
+- The last entry of rulings.md is R25. There is still no player-diary.md, no brief, no map and no Road Bible on main.
+
+**The other PR I have reported on.** PR #16 is at commit 84ace1d still, so G39 stands. Its description was changed at
+07:24Z. It cites G39, in my words and rightly, and sets out the three sentences that change after the merge (G40, G41,
+and point 3 after R24). It is assigned to the owner.
+
+**The short of it.** No blocker. Nothing here asks the owner to wait, and nothing asks for a change to PR #39. The
+change adds to rule 4 the two sentences that the owner took as drafted (R24, R25), at the place the draft names, and
+moves the head to version 5. No other word of the rules differs. I found no sentence of the rules that it contradicts,
+and no code that it makes wrong. R24 already binds (rule 1), so the merge only brings the file into line with what
+binds today. It also answers the one ask of G36: "if it is B, let the rules say it." What I would weigh against the
+two sentences is the counter-view, G46. It holds nothing.
+
+**What the change is, read from the diff.**
+- record/COMMANDMENTS.txt differs in three of its 189 lines, and grows by 345 bytes.
+  1. The head: "version 4" becomes "version 5", and the line under it "Ratified 2026-11-12. Replaces version 4
+     (2026-11-12)."
+  2. Rule 4, the paragraph that begins "A patch carries a fix and nothing more.": two sentences at its end.
+- record/diary/optimist-visionary/2026-11-12T0725Z.md is new: the planning thread's entry for this PR (rule 5).
+- Nothing outside record/ changes.
+
+The end of that paragraph in version 5. The first sentence is version 4's last, and the other two are new:
+
+> A change to code on main that follows a change to its brief is a patch, and its verdict is "out": it waits for the
+> owner's merge. Where a thread's feature needs such a change in the folders of another feature that the thread owns
+> or has been handed, the change may instead ride in the PR that carries the feature, once the change to the other
+> feature's brief is merged. That PR's description names each other feature it changes and the merged change to that
+> feature's brief.
+
+**Held against the owner's word.** I took neither the PR's word for it nor R24's. I read the project chat itself, from
+06:18Z to its last message at 07:24Z, and held the server's copy of its messages against the file by program.
+- The coordinator had put three posts before the owner: the planning thread's question with the two ways A and B
+  (06:19:04Z), my view on it in my own words, which is G36 in short (06:38:19Z), and the planning thread's draft
+  (06:51:16Z). The draft names the sentence of rule 4 that the new words stand after, gives the two sentences, and
+  says: "Answer "B" to take these words, or change any of them."
+- The owner answered "4.) B" at 06:56:33Z. The coordinator posted how it read that at 06:56:53Z, and asked to be told
+  if "4.)" meant something other than rule 4. The owner answered "Correct reading, good job." at 07:08:14Z. So the
+  owner took the draft and changed none of it. R24 and R25 hold the owner's two messages and the coordinator's second
+  post as the chat has them. Of the post with the draft, R24 holds the quoted part: the planning thread's words, and
+  all of it that bears on the rules.
+- The text that version 5 adds to rule 4 is 344 characters. It stands in the post of 06:51:16Z, as the owner saw it,
+  once and character for character. The sentence that the post names as the place stands in rule 4 once, and in
+  version 5 the two sentences follow it directly and end the paragraph.
+- Apart from the head and that addition, version 5 is version 4: 186 lines are the same, byte for byte, and line 101
+  is version 4's line with the two sentences at its end. The file is plain ASCII as before and ends with one newline
+  (sha256 d8d96a29a51f607ae995a82feee38f33f7c1e1947fd4d9c8ea029a30555522b1).
+
+**What the owner's word leaves to the writer.** The PR and its entry name two things. I agree with both.
+1. The head goes to version 5, by the rules' own words: "the version number goes up each time". The date is the day of
+   R24 by the record's clock, as version 4 has the day of R21 (G32).
+2. The two sentences go on in the paragraph on the patch and begin no new one. The draft names the sentence they stand
+   after, and "such a change" has to find that sentence right before it.
+
+**Does it contradict another rule?** I read the two sentences against every place in the rules that speaks of a patch,
+of a feature's PR, of a brief that changes, or of the folders a thread may change.
+- **The words "patch" and "fix".** A patch is "the class of PR that carries a fix to code already on main". The change
+  that rides is no PR of its own, so it is no patch, and the gate on a patch (rule 7) is never asked about it. For the
+  change that comes alone the sentence before still holds: a patch, and its verdict is "out".
+- **Rule 4's list.** "A feature: merged by the owner." The PR in which the change rides is a feature's PR. So both
+  ways end in the owner's merge, and no way to main is opened that does without it.
+- **The order of book and code.** Rule 4 has "that brief is changed first", and rules 1 and 3 have the book changed
+  "before any code follows". The new sentence keeps that order and says it more exactly: "once the change to the other
+  feature's brief is merged".
+- **The cast.** "Outside record/, a thread changes only the folders and files it owns under the Road Bible, or has
+  been handed under these rules." The new sentence carries the same bound, in the words of rule 7's gate on a patch:
+  "owns or has been handed". It loosens nothing. A feature's PR still never reaches into another thread's folders.
+- **Rule 2.** "No code for a feature before its brief is settled". Before the code rides, both briefs are settled: the
+  feature's own, and the other feature's with its change merged.
+- **Rule 3.** "A thread may have one feature that is not yet merged". The code that rides is part of that one
+  feature's PR, so the count stays.
+- **Rule 4, "A PR is ready when".** That list is not made longer. The second new sentence adds a duty for one kind of
+  PR and binds by itself. Who looks whether it was kept is the first point of G46.
+- **Rule 7, the gate on a step.** Not touched, and it now reaches further. Code that rides is in "a PR that carries a
+  feature of the step", so all five tests reach it. Under way A the change is a patch to a feature that may stand
+  under no numbered step, and then only the third test reaches it (G36).
+
+**What may ride, by the letter.** "such a change" points back to "A change to code on main that follows a change to
+its brief". So the two sentences open one case. The planning thread's entry reads them the same way: "the new
+sentences open that one case and no other".
+- What may ride is code in the folders of another feature that the same thread owns or has been handed, once the
+  change to that feature's brief is merged.
+- A fix that leaves the other feature's brief true as written follows no change to a brief. The two sentences do not
+  speak of it, and nothing changes for it.
+- The shared files are no feature's folders. Nothing changes for them either.
+- "may instead" leaves the first way open: any such change can still come alone, as a patch with the verdict "out".
+
+**Code this change would make wrong (rule 4).** None.
+- The change opens a second way and forbids nothing that version 4 allows. So nothing that is on main can stand
+  against it, however it came there.
+- I searched everything outside record/ for whatever names or tests the folders that a PR may change. No code, script
+  or check does. The workflow (.github/workflows/build.yml) and the three scripts build and test the whole project,
+  and none of them looks at which files a PR changed.
+- Two texts outside the record speak of it: CLAUDE.md lines 30 to 33, "Stay inside your feature's files", and
+  README.md under "Working in parallel", "The layout lets branches stay out of each other's files". They are narrower
+  than version 5 and not against it: the new sentence says "may", and a thread that keeps each PR to one feature's
+  files breaks no rule. G7 already holds both files, R10 has mason rewrite them in its first PR, and the book in PR
+  #16 says that the Commandments stand where the two files differ from them. For that rewrite: those lines should say
+  what R24 allows. G7's Status says so now. As in G2 and G32, the two files do not go on the list: neither is code,
+  and what they say here is narrower than the new sentence and breaks nothing.
+
+**What the change leaves behind in the record.** One sentence, and it is known.
+- The Road Bible in PR #16, part 3, "Where features meet", point 3, still has such code go "as a patch", "Until the
+  owner has answered" (G39). PR #16's description says so now. The planning thread changes the point after the merge,
+  by a change to part 3 that comes to me for the certificate (its entry of 07:32Z). Until then R24 binds (rule 1).
+- G36 says that by its letter rule 4 holds A. That was said of version 4, and G36's Status says so now.
+
+**The planning thread's entry and the PR's description.** I held what they say against the record and the diff. They
+are right in all that I could check: the three lines that differ, the two checksums, how the words were copied, what
+G36 asked, and the quotation from G36. For each part of the two sentences the entry says what it is for and why not
+another word, and for each sentence of the rules that it leaves alone it says why. I agree with each. It also says two
+things of its author that a reader could not otherwise know. Its context was cut down to a summary between 07:13Z and
+07:16Z, and it read the rules again in full after that. And the "07:19Z" at the head of two of its messages was a time
+it had not read: the one that reached me is stamped 07:18:43Z. That is how rule 5 would have a diary be.
+
+**For the planning thread.** Cite this entry in PR #39's description as the review thread's report G45 in
+record/findings.md, then assign the owner (rule 4). The branch merges cleanly as it stands. If you bring main into it,
+this report still stands.
+
+**For the owner.** Nothing here asks you to wait or to change PR #39. PR #16 and PR #39 share no file, so you can
+merge them in either order. When you merge PR #39, the coordinator tells every thread, and each reads the rules again
+before it goes on (rule 4). No code becomes a blocker at that merge.
+
+**Open after this report.** As in G44, and nothing is added: flaws G5 (the precursor; the coordinator until it
+starts), G7, G13 to G16 and G43 (mason; held by the coordinator until it starts), G40 and G41 (the planning thread).
+G4, G24 and G25 are corrected in PR #16 at commit 84ace1d and close when that commit merges. No blocker is open. G46
+is a note and needs no answer.
+
+## G46. Note: the counter-view to version 5 (rule 6 e)
+
+**Rank.** Note. **Owning thread.** The coordinator, for the owner. It concerns mason. **Raised in.** G45. **Status.**
+Needs no answer.
+
+The owner chose B with the case against it in hand: the coordinator had posted my view to the owner, in my own words,
+eighteen minutes before the answer (G45). And the change writes the words that the owner took, and no others. So this
+holds nothing. G36 argued the choice between A and B, and I do not argue it again. This is what I would weigh against
+the two sentences as they stand.
+
+1. **Two duties that no gate tests.** The sentences set an order, the other feature's brief first, and a duty, that
+   the description names each other feature and the merged change to its brief. Rule 4's list asks one thing of a
+   feature's PR: the owner's merge. No verdict is asked on it, and I am not woken for it. So before the merge only the
+   author looks whether both were kept, and the owner merges the PR "from its description" (rule 3), which is the very
+   text in question. After the merge, rule 7's third test asks whether the PR "went the way rule 4 sets for its kind".
+   As I read that test, the owner's merge meets it. Under A nothing had to be named: each such change came alone, in a
+   PR whose whole diff lay in one feature's folders. What I will do: at each step gate (rule 6 b) I read the diffs of
+   the step's feature PRs, list each one that changed another feature's folders, and say whether its description named
+   them and whether the change to each brief was merged first. That is report, and the owner may tell me to leave it
+   out. A help that costs mason one line: the description gives the changed folders, feature by feature, as a program
+   lists them from the diff.
+2. **A brief runs ahead of main while the feature is in the making.** From the merge of the change to the machines'
+   brief, that brief describes a Memory that main does not hold, until the duets' PR merges. Under A the patch could
+   follow the brief at once. Under B the gap lasts as long as the feature takes. In that time a reader of the brief
+   cannot tell "not built yet" from "untrue", and a patch to the same feature is judged against a brief that main does
+   not yet meet (rule 7: it "leaves that feature's brief true as written"). If the feature's PR is given up or
+   reverted, each brief it reached into stays ahead until it is changed back, which takes the owner's merge or the
+   owner's command (rule 4). A help that costs a clause: each such change to a brief names the feature that brings the
+   code. I will look for that when the changes to the briefs come to me (rule 6 a).
+3. **One PR, one fate.** The code that rides and the feature merge together and are reverted together. Under A the
+   owner could merge a patch and hold the feature, or take a feature back and keep its patches. Under B what the owner
+   does not like in the change to Memory holds the whole of the duets. "may instead" keeps the cure at hand: the owner
+   can still ask for any one change to come alone, as a patch.
+4. **The saving lasts as long as the one builder.** The code that rides must lie in the folders of a feature "that the
+   thread owns or has been handed". Mason owns every feature (R5, R15), so in Lemuria every case is covered today. R5
+   leaves a later split of the builders open. From such a split on, a feature that reaches into another builder's
+   folders goes back to way A, as that builder's patch, with the outcome in rulings.md before either acts (rule 1).
+   The bound is the cast's own and no fault of the sentence. It is a cost to count on the day a split is weighed.
+5. **Two rule texts, one more difference.** The owner means to bring this text and the sister project's into line at a
+   later time (R18). These two sentences are one more place to compare then. Neither the planning thread nor I have
+   read the sister project's text for them.
+
+## G47. Diary: halt after the report on PR #39
+
+**Written.** 2026-11-12 07:49Z.
+
+**The rules.** At this wake I read them again in full before anything else, between 07:33Z and 07:36Z: version 4 as
+main has it, the file that G44 read. Version 5 is PR #39's. Its two sentences bind already, as R24 (rule 1).
+
+**Out of room.** Between 07:15Z and 07:17Z my context ran out of room and was cut down to a summary. G44, with its
+"Next:", was written and pushed before that, at 07:12Z, and nothing was unpushed. I went on from the summary, from G44
+and from the record.
+
+**What I did since G44.**
+- PR #37, with G39 to G44, merged itself at 07:16Z. Its check was green at the first run.
+- The planning thread wrote to me that it takes the second way of G39: no further commit to PR #16. At 07:21Z I told
+  it and the coordinator that G39 was on main, with three facts for what follows: that PR #16's description still
+  spoke of R23 as open, which it has since put right; that I can certify the change to part 3 only if it touches part
+  3 alone (rule 6); and that I hold point 3 against what rule 4 says on main at that commit.
+- I held R25 against the owner's own message, and at this wake R24 and R25 against the project chat itself (G45).
+- The coordinator woke me at 07:32Z for PR #39 (rule 6 e). The report is G45, and the counter-view is G46.
+
+**The checks before this PR.** I ran the three scripts at 07:41Z on main at 011cf88, the commit this PR's branch
+starts from. All three passed, and the smoke test did not fail on either of the two lines that failed by chance
+earlier today (G43).
+
+**Status lines changed in this PR.** G7 and G36, each citing G45.
+
+Next:
+- **Unfinished:** nothing of this wake. A later commit to PR #39 voids G45, and a later commit to PR #16 voids G39,
+  unless it only brings main into the branch or adds only the author's own diary entry. A new report is then owed.
+- **Where it is:** this file, sent to main by a record-only PR from the branch claude/project-thread-4zobvq.
+- **Waiting for:** the coordinator's next wake. I expect, in some order:
+  - the rules again, in full, once the owner merges PR #39 (rule 4);
+  - after the owner merges PR #16, the change to part 3 for G41 and for point 3 after R24, which I certify if it
+    touches part 3 alone, after talking to the planning thread or the coordinator (rule 6);
+  - the change to the concept for G40 (rule 6 a), which I read and the owner merges;
+  - the first maps (rule 6 f): the planning thread's after PR #16 merges, the coordinator's, mason's, and G5 at the
+    precursor's;
+  - the nine briefs of the built features (R3, rule 6 a), where I read for G12's last point, G16, G20, G29 and G40;
+  - step 1's brief and the changes to other briefs that come with it (rule 6 a), where I read for G24, G41 and the
+    second point of G46.
+- **Open findings:** flaws G5 (the precursor; the coordinator until it starts), G7, G13 to G16 and G43 (mason; held by
+  the coordinator until it starts), G40 and G41 (the planning thread). G4, G24 and G25 are corrected in PR #16 at
+  commit 84ace1d and close when that commit merges. No blocker is open.
+- **Read up to:** rulings.md R25, player-diary.md none (the file does not exist), findings.md G47.
