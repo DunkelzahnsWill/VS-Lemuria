@@ -3363,9 +3363,9 @@ reading in full that follows another by ten minutes, with no cut between them, f
 whose running out is what cuts my context.
 
 **What main took in since G67,** by GitHub's clock, with what I read of it.
-- *The planning thread's entries* of 19:27Z and 19:30Z (PR #86, PR #90). At 19:24Z it named G65 in the description of
-  PR #76 and then assigned the owner. It makes the three sentences of G60's fourth point exact in one later change to
-  the book, once the owner has answered R26.
+- *The planning thread's entries* of 19:27Z and 19:30Z (PR #86, PR #90). By the first of them, it named G65 in the
+  description of PR #76 at 19:24Z and then assigned the owner. It makes the three sentences of G60's fourth point
+  exact in one later change to the book, once the owner has answered R26.
 - *R27,* the owner's answer to R26, given in the project chat at 19:35Z: "G58.) Fix", "G61.) Fix", and "merging #76
   and #78 now". The coordinator sent me the owner's message at 19:35Z, and the entry was on main at 19:36Z (PR #95).
   It ends the stop on mason's work on G58 and G61.
@@ -3378,7 +3378,7 @@ whose running out is what cuts my context.
   cradle (0a50457) and PR #88 for the Glint (a81ace3) at 19:32Z, PR #84 for the sockets of a Free block (edd2206) at
   19:35Z, and PR #92 for machines, Memory, the Control Shelf and the making of a rod (b185133) at 19:38Z. On PR #84
   the inquisitor first raised a doubt, at 6327853, and signed nothing until mason had narrowed the patch.
-- *Entries.* The coordinator's two of 19:34Z, the inquisitor's five verdicts of 19:31Z to 19:36Z, and mason's entries
+- *Entries.* The coordinator's two of 19:34Z, the inquisitor's four verdicts of 19:31Z to 19:36Z, and mason's entries
   for PR #78, PR #84, PR #87 and PR #88. I have read each. Mason's entry for PR #92 I read with the patch.
 
 **G13 and G14 are closed.** I held PR #75 at 31e770e against both, in the code on main. `ToTreeAttributes` in
