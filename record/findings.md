@@ -3648,7 +3648,7 @@ Next:
 
 ## G73. Report under rule 6 (a): the briefs say that a network crosses a claim's edge (PR #105 at e8c9c0b)
 
-**Written.** 2026-11-12 DRAFTTIME. Woken by the coordinator at 19:59Z.
+**Written.** 2026-11-12 20:08Z. Woken by the coordinator at 19:59Z.
 
 **What I read.** PR #105, "Briefs: a network takes no account of a claim's edge, as the owner declined G68 (R29)",
 branch briefs/network-claims, at commit e8c9c0b86b6fcfc3b1e845696834ae716067b3a3, the second of its two commits,
@@ -3659,8 +3659,8 @@ R28. The second, 33 seconds later, puts R29 in its place, once in each of the th
 R28 was the question. It changes nothing else. The check `build` ended green on e8c9c0b at 19:59:56Z. The description
 says that the owner is assigned once it cites this report.
 
-**The rules and the book.** My context was cut at 19:55Z. I read both in full again after it, the rules at 19:56Z and
-the book at 19:57Z (G75). Neither has changed since G69. rulings.md ends at R29.
+**The rules and the book.** My context was cut at 19:55Z. I read both in full again after it, at 19:56Z (G75). Neither
+has changed since G69. rulings.md ends at R29.
 
 **The owner's word.** R29, on main since 19:59Z by PR #104: "G68.) Decline", the owner's whole message, given in the
 project chat at 19:57:34Z. It answers R28, the coordinator's question whether the owner wants G68 fixed or declined.
@@ -3704,7 +3704,7 @@ reader does not raise it again."
 
 **What it leaves for the book.** Standing rule 7 says that with the switch on Lemuria's workings spare what lies
 inside another player's claim, "and only a Bale storm's scars do not". The fourth point of G60 gave that sentence to
-the planning thread as loose, for a dialogue below Luminous. By R29 a network's charge is a second thing that the
+the planning thread as loose, for a dialogue below Luminous. By R29 a network's charge is one more thing that the
 sentence leaves out. The sentence stands in the concept, so its change is the planning thread's to write, and it goes
 by my read and the owner's merge (rule 4). It does not hold this change: rule 1 puts the book before any code that
 follows a ruling, and no code follows this one. I take it up with the planning thread and report on it separately.
@@ -3712,7 +3712,7 @@ follows a ruling, and no code follows this one. I take it up with the planning t
 **Its entry.** The file is named for 19:59Z, and its first commit is of 19:59:08Z. The name agrees with the clock.
 
 **How it merges.** By the owner's merge, once the description cites this report and the owner is assigned (rule 4).
-PR #96 changes the brief of feature 8 as well, in other lines. At 20:03Z I let git join PR #105 with main, and with
+PR #96 changes the brief of feature 8 as well, in other lines. At 20:07Z I let git join PR #105 with main, and with
 the head of PR #96: neither meets a conflict, so the owner can merge the two in either order and neither needs a new
 commit for the other. A later commit to PR #105 voids this report, other than one that only brings main into the
 branch and settles no conflict by hand outside mason's own diary, or one that adds only mason's own diary entry.
@@ -3723,7 +3723,8 @@ branch and settles no conflict by hand outside mason's own diary, or one that ad
    remarks as you do, so please sign." Of the pointer you wrote that you add it "the next time the machines Claims
    section changes", and that this "will likely be the G58/G61 patch PR, or the duets brief". It cannot be the patch
    PR. The pointer is a change to a settled brief, so it goes the way a brief goes, by my read and the owner's merge,
-   and "A patch carries a fix and nothing more" (rule 4). The PR that carries the duets' brief can take it.
+   and "A patch carries a fix and nothing more" (rule 4). A PR that changes briefs can take it, such as the one that
+   carries the duets' brief.
 3. The "what to try" lists gain no item, and none is owed: nothing new is built. The third point of G74 says what that
    leaves.
 
@@ -3744,21 +3745,22 @@ The change says what is built and what the owner declined to change, and I found
 not that it is wrong. It is what stands settled once it merges, said plainly, so that nothing is settled unseen. Each
 point can still be changed afterwards by a change to a brief.
 
-1. **Goods are kept by a claim, and charge is not.** By R27 a machine that stands outside a claim no longer takes
-   goods from a chest inside it (G61, "Fix"). By R29 a machine or a chisel outside a claim still takes charge from
-   stone inside it. Both are the owner's word, and once PR #96 and PR #105 are merged the briefs say both. A player
-   then meets a claim that keeps its blocks, its creatures and its goods from another player's machines, and does not
-   keep its charge.
-2. **The fix for G57 holds a stranger off by one block.** The chisel's draw is refused at a block inside a claim. It
-   goes ahead one block further out, at a block that the stranger sets against the network (G68). What keeps a
-   network's charge is its owner's own care: build it one block inside the claim's edge, or tap the blocks at the edge
-   Dormant with the Crystal Rod. Nothing in the game tells a claim's owner so. The Journal's pages say nothing of a
-   network and a claim. If players should know, it is a line of the Journal, by a change to a brief.
+1. **Goods are kept by a claim, and charge is not.** By R27 a machine that stands outside a claim is to take no goods
+   from a chest inside it (G61, "Fix"): PR #96 writes that into the brief, and the patch follows it. By R29 a machine
+   or a chisel outside a claim still takes charge from stone inside it. Both are the owner's word, and once PR #96 and
+   PR #105 are merged the briefs say both. A player then meets a claim that keeps what is in it from a machine outside
+   it, blocks, creatures, players and goods, and does not keep its charge.
+2. **The fix for G57 holds a stranger off by one block.** With the switch on, a stranger's draw with the chisel is
+   refused at a block inside a claim. It goes ahead one block further out, at a block that the stranger sets against
+   the network (G68). What keeps a network's charge is its owner's own care: build it one block inside the claim's
+   edge, or tap the blocks at the edge Dormant with the Crystal Rod. Nothing in the game tells a claim's owner so. The
+   Journal has one line on claims, on a page of its chapter on naked evocations: "Land another has claimed, the stone
+   will not touch, unless they let me build there." It says nothing of a network. If players should know, it is a line
+   of the Journal, by a change to a brief.
 3. **It is settled without having been seen in play.** I read G68 in the code and did not run it: it needs a claim
    that is not the tester's own, and the owner tests in single player until the one multiplayer test (standing rule
-   10). An answer on paper is the lightest of the three kinds in rule 2, and what is found in play outweighs it. The
-   briefs gain no "what to try" item for it, so nothing brings it before the owner at that test unless a line is added
-   by then.
+   10). So the owner's word rests on my account of it. The briefs gain no "what to try" item for it, so nothing brings
+   it before the owner at that test unless a line is added by then.
 4. **What later features may take from it.** R29 settles stone that touches. Beams will carry charge along a line of
    sight (feature 15) and goods beams will carry goods (feature 17), and Ascendant stone heals "never inside another
    player's claim while the claims switch is on" (the concept). Whether a beam crosses a claim's edge is for those
@@ -3766,11 +3768,11 @@ point can still be changed afterwards by a change to a brief.
 
 ## G75. Diary: PR #96 is with the owner; G68 is declined and PR #105 cleared; the maps' report and G16 are next
 
-**Written.** 2026-11-12 DRAFTTIME.
+**Written.** 2026-11-12 20:08Z.
 
-**After a cut.** My context was cut a twelfth time, at 19:55Z. Nothing of mine was unpushed. I read the rules in full
-at 19:56Z and the Road Bible in full at 19:57Z, as G69 has me do after every cut. Their checksums begin
-d8d96a29a51f607a and d7eb7ef18853187b, as they did before it.
+**After a cut.** My context was cut a twelfth time, at 19:55Z. Nothing of mine was unpushed. I read the rules and the
+Road Bible in full at 19:56Z, as G69 has me do after every cut. Their checksums begin d8d96a29a51f607a and
+d7eb7ef18853187b, as they did before it.
 
 **What I did since G72.**
 - *PR #102* carried G70 to G72 to main at 19:52Z (merge commit 596e37e). At 19:56Z I told mason and the coordinator,
