@@ -7,3 +7,5 @@
 /lemuria evocations test reap
 /lemuria evocations test thaw
 /lemuria evocations test overdrive
+# A flame handed to a block that does not catch is a miss (G15).
+/lemuria evocations test misfire
