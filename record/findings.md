@@ -4704,3 +4704,333 @@ Next:
   books in full after a cut, and the Road Bible again when the concept changes.
 - **Open findings:** flaws G58 and G61 (mason), and G83 (the coordinator). No blocker is open.
 - **Read up to:** rulings.md R34, player-diary.md none (the file does not exist), findings.md G87.
+
+## G88. Report under rule 6 (a): the brief of feature 10, the duets, with four briefs changed (PR #135 at 8df74be)
+
+**Written.** 2026-11-12 22:00Z. Woken by the coordinator at 21:09Z.
+
+**What I read.** PR #135, "Briefs: the duets (feature 10), with the changes to features 8, 9, 1 and 4", branch
+briefs/duets, at commit 8df74be7d8942feb43a2d7ebd1ec8f81bb5ace3e, the last of its seven commits, branched from main at
+9dd8258. I read it whole, and at three of its commits. At d3178e9, which mason reported ready at 21:09Z: the brief,
+the diffs of three other briefs and mason's two entries. At baebc04, of 21:36Z, whole again: record/briefs/duets.md,
+new, then 201 lines; the diffs of machines.md, mysteries.md, crystals.md and sparkstone.md against main; mason's three
+entries; and the description. At 8df74be, of 21:48Z: the diff against baebc04, which I also held word by word by
+program. It changes the eight places named below, adds a paragraph to mason's entry of 21:35Z, and changes nothing
+else. The brief now has 208 lines. The PR holds no code. The check `build` ended green on 8df74be at 21:48Z. The PR is
+not assigned, which is right until its description cites this report (rule 4).
+
+**The rules and the book.** My context was cut a sixteenth time at 21:43Z, between the two later reads. I read both in
+full again at 21:44Z, before I went on. Their checksums on main begin d8d96a29a51f607a and 8f35635efaf6fc4f, as in
+G87. rulings.md ends at R34. Since G87 main has taken in one thing, the planning thread's entry of 21:46Z (PR #145):
+its context was cut a tenth time, it read the rules and the book in full after it, and its two changes, PR #143 and
+PR #144, wait for my reports. Outside record/, main has not changed since PR #125 (3ef063c, 20:39Z).
+
+**The owner's word.** R32, the owner's message of 21:06:45Z. Its points 1 to 8 answer mason's eight questions as the
+coordinator posted them to the owner at 21:00:53Z in mason's words, with its addition of 21:02:47Z on the sixth, which
+came from the planning thread. I found that post again in the project chat and held the brief against each question as
+the owner read it. The questions were short, and the brief says more than each. So for each: what was asked, and what
+the brief adds.
+1. Asked: "A duet's pair sits awake in the Memory of a Focus (no Scatter). That Memory stops cycling and the duet
+   works on the machine's turn." Answer: "Yes". Item 3 has it. It adds what gives the turn: the pair does, so a Focus
+   with no crystal of its own works a duet once every 10 seconds, and the Focus's own crystals sit idle while the
+   Memory holds a pair.
+2. Asked: "Ice+Earth clay: the faced soil or sand turns into the game's raw blue clay in place (or, instead, is used
+   up into clay items in the output)." Answer: "Yes". Item 2 has the first of the two. Of that reading, below.
+3. Asked: "the duet costs both crystals' working cost and works at the lower Evolution. Water is 10/20/40 litres a
+   working; fired clay and metal up to 4/8/16 items (Glittering/Glowing/amplified)." Answer: "Yes". Items 4 and 5 have
+   it, with clay at one block a working.
+4. Asked: "Fire+Earth metal: one metal bit for each ore nugget, and nothing from the iron ores (the game makes a bloom
+   from those)." Answer: "Yes". Item 2 has it, and names the ores: every one whose nugget the game smelts to an ingot,
+   chromium, titanium, platinum and nickel among them (G90, its third point).
+5. Asked: "The Duet Module: a socket fitting made from a Dead Socket and a Glowing crystal. It holds a second pair,
+   and Memory swaps the two pairs after each duet working." Answer: "Yes". Item 8 has it. It adds that the module goes
+   only into a Focus with no crystal in its sockets, that crystals set into that Focus then go into the module, that
+   its pair stands in the open, that nothing swaps while it holds no duet's pair, and that swapping costs nothing.
+6. Asked: "Way A: Memory's magazine keeps crystals apart as a jar does, so they take turns in step 1, and an Unaligned
+   crystal working the drain's shelf puts stone back." Answer: "A, Making Memory a "Shielded" block makes sense, up to
+   Glowing as the other machinery." Item 10 has it, up to Glowing. It adds how: the drain's socket holds a single
+   crystal; a turn with nothing to do passes at once; a Sky crystal pans one sand block a turn, at a working's cost; a
+   panned block keeps its place in the room, whose size drops by its 200; charge fed into sand is lost when the sand
+   is panned; and the shelf puts back sand, gravel, cobblestone, cracked rock or raw rock, at a working's cost.
+7. Asked: "Bloom limits: keep once a day per plant, and a machine pays once for every 9 plants it moves on." Answer:
+   "Yes". Item 11 has it, rounded up, and paid in full or not at all.
+8. Asked: "No Journal page for the duets before step 7, so feature 3's brief does not change now." Answer: "Yes". Item
+   12 has it, and adds one line that a looked-at Memory shows while it holds a pair, "Duet: clay" (G90, its first
+   point).
+
+**The reading of question 2.** The coordinator's post asked the owner to answer 'by number, "ok" for the proposal or
+your own word'. The question gave the proposal and then, in brackets and after "or, instead", another way. "Yes" takes
+the proposal. Rule 1 asks for two reasonable readings that lead to different work, and I see one. I told the
+coordinator and mason so at 21:32Z. The brief marks the question answered and says how it read the answer, and the
+description says it again in a line of its own, "A reading". So the owner merges it knowing the reading, or says
+otherwise first.
+
+**The short of it.** The brief says the five things that rule 2 asks of it, and its "what to try" list has eight
+items. Each of its eight questions is marked answered and cites R32. It gives the duets a folder of their own,
+`Lemuria/Duets/`, and settles the two things that the book places in step 1 for it, the owner's Memory idea and the
+limits on machines that Bloom, as R30 has it. Where its work will lie in another feature's folders, that feature's
+brief changes in the same PR (part 3 of the book, "Where features meet", point 2), and each new sentence there says
+that it is not built yet. Nothing in it reaches into another player's claim. I find no blocker and no flaw. **PR #135
+is cleared at 8df74be for the owner's merge**, after PR #143 (G89).
+
+**What I put to mason before I wrote this, and what came of it.** At 21:31Z to 21:35Z, on d3178e9, twelve points in
+five messages. Mason answered at 21:36Z with the commits 4f045f6 and baebc04, and each point is met:
+1. A battery's room with a panned-out block rests today, and the machines' item 21 said so. Item 21 now has one
+   exception, a block that the room's own drain panned.
+2. The machines' items 22 and 15 and its "What it will not do" would have been left untrue (crystals of another
+   alignment "sit idle"; a shelf stands only against a Focus or Scatter; "no shelf action beyond the starter list").
+   All three now say it, and the brief says which kind the shelf puts back.
+3. The sparkstone brief's item 10 said that a socketed crystal still dialogues, and was not in the PR. It is now, with
+   one sentence changed, and feature 4's code does not change for it.
+4. The new sentences in the other briefs read as built (the second point of G46). Each now says "not built yet", and
+   that it is built with feature 10.
+5. What gives a Focus its turn when no crystal stands in its own sockets was not said, and "what to try" 1 puts none
+   there. Item 3 now says it: the pair gives the turn.
+6. Where the Duet Module's pair sits, how it is set and whether it dialogues were not said. Item 8 now says all three:
+   in the module, set as into the Focus, and in the open. So the sentence of PR #143 needs no further holder.
+7. Costs. Panning had no price and no yield, one sentence had each crystal lose the charge where the network pays, a
+   working was "a tenth of a crystal's charge", and nothing said what happens when a network cannot pay for 81 plants.
+   All four are put right.
+8. The Claims sentence had nothing set down in the world "except clay", while the shelf sets stone. It now names the
+   drain's panning and the shelf's putting back, inside the battery's own room.
+9. Folders. The plant count ran through feature 6's code, and a magazine's crystals are registered by feature 4's. The
+   brief now has feature 8 ask feature 9 for the count, and feature 1's `Dialogues` take a shield that feature 8 adds,
+   so that "None of it touches feature 4's folder or feature 6's".
+10. Mason's own words called the magazine "shielded" (standing rule 3; of that word, G89). They no longer do.
+11. A reader who looks for what a machine's Bloom costs looks in the machines' items 9 and 10 and the mysteries' item
+    6. The rule stands there now.
+12. What ends a drain's turn when its crystal has nothing to do was not said. It now passes at once.
+
+At 21:47Z, on baebc04, eight small things in one message. Mason took all eight at 21:48Z, with 8df74be:
+1. Item 2 said that the game keeps nickel bits out of its handbook. It keeps out the chromium, titanium and platinum
+   bits, and the brief now says that. The slip came from my own wording at 21:32Z.
+2. "What to try" 1 ended "Memory cycles again", with nothing in the Focus's own sockets, where the owner would have
+   seen nothing. It now says so: "the Focus does nothing until a crystal stands in its own socket".
+3. "What to try" 5 had the machine make clay a second time from a block that was clay by then. It now has sand set
+   again.
+4. "What to try" 7 did not say that the room must hold sand, nor that Sky's turn comes at once only with the network
+   at half or above. It now says both, with the admin charger for the second.
+5. "The drain then holds one crystal in its socket" read as a rule, and the bracket after it as none. It is a rule
+   now, with its reason: "two crystals in its sockets would stand in the open, where twins dialogue".
+6. Which number of "Stored 1,000 of 5,200" drops was not clear. Now: the room's size by 200, and what is stored "by
+   what the panned sand held, so charge fed into sand is lost when it is panned".
+7. The Duet Module's edges. Now: "the module goes only into a Focus with no crystal in its sockets", and "When the
+   module holds no duet's pair (one crystal, or two that make no duet), nothing swaps and the Memory's pair works
+   alone."
+8. "by the change to its brief below", four times, with nothing below. Now "in this pull request". The PR's title now
+   names feature 4 too.
+
+**Held against the code,** as main has it at 28f9e6d, and against the game pinned in scripts/versions.env, 1.22.7.
+- *The turn.* `BlockEntityMachine.WorkOnce` returns idle when no crystal stands awake in the machine's own sockets,
+  and Memory's `Rotate` is called only after such a crystal's working. So a Focus with empty sockets has no turn
+  today, and the brief's "the pair gives the turn" is new and is said.
+- *The magazine.* `BlockEntityMemory` is a sparkstone block with a magazine of 2, and its crystals are
+  `SocketCrystal`s that feature 4's `BlockEntitySparkstone` registers as standing crystals. So they dialogue today, as
+  item 9 says. `Dialogues.ShieldedInventoryClasses` is how feature 5's racks keep crystals out, and
+  `SocketCrystal.Stone` is public, so a shield "that holds a `SocketCrystal` whose stone is a Memory" needs nothing
+  changed in feature 4's folder.
+- *Fittings.* By `BlockEntityMachine.Accepts` only a Motor's sockets take a fitting today. A Focus that takes a Duet
+  Module is new code in feature 8's folder, and the machines' item 18 now covers it.
+- *The room.* `Battery.Check` rests a room that holds a block which is not its medium, air among them, and a room that
+  holds a block its stone may not change. The first is why item 21 needed its exception. The second is why neither
+  panning nor putting back reaches into another player's claim.
+- *The drain.* It wears 50 a step at a Gather block's pace, 200 a day for a Glittering crystal, only with a container
+  touching it and only while its network is below half. So "its network at half or above" is the right test for
+  "cannot wear now", and a step takes a Glittering crystal six in-game hours.
+- *The cost.* `MachineWork.Work` charges `Machine.WorkCost`, a tenth of a hand's cast and twice that with an Amplify,
+  from the machine's network, and only when the working did something. So "a tenth of a cast each", "paid from the
+  machine's network in full or not at all" and "a miss is free" are as built.
+- *Bloom.* `MysteryEffects.Bloom` lies in feature 9's folder and takes feature 6's `CastContext`. The brief has
+  feature 8 ask feature 9 for the count, and nothing passes through feature 6's code.
+- *The metals.* The game's `nugget.json` smelts limonite, hematite and magnetite to an iron bloom, and every other ore
+  nugget to an ingot: copper, gold, lead, tin, zinc, silver and bismuth, and chromium, platinum, titanium and nickel.
+  Its `metalbit.json` makes a bit of every metal and keeps the chromium, platinum and titanium bits out of the
+  handbook. So item 2's list is true.
+
+**The other four briefs.** Feature 8, machines: items 9, 10, 15, 18, 21, 22 and 23, "What it will not do", and a line
+under Claims that points to the sentence on a network, which mason owed since G73. Feature 9, mysteries: item 6 and
+one line of "What it will not do". I held the rest of that file by program: its re-wrapped lines say what they said.
+Feature 1, crystals: item 8. Feature 4, sparkstone: item 10. The description names all four, as rule 4 asks of it. The
+briefs of the other five features change in no line. I searched them for sentences on dialogues, on Memory and on
+Bloom that this work would make untrue, and found none.
+
+**What the brief leaves to the build.** A brief cannot say every edge, and rule 1's exception is there for the rest: a
+choice that leaves the book and the brief true as written is mason's to make and to log, and one that the player will
+see goes on the "what to try" list of the feature's PR. Two that I can see: what the player is told when a module or a
+second crystal is refused, and what becomes of a drain that already holds two crystals when a Memory is set against
+it.
+
+**How it merges.** By the owner's merge, once its description cites this report and the owner is assigned (rule 4), on
+one list with PR #143, and that one first (R31; G89). At 21:51Z I let git join PR #135, PR #143 and PR #144 with main
+at 28f9e6d: no conflict. A later commit to PR #135 voids this report, other than one that only brings main into the
+branch and settles no conflict by hand outside mason's own diary, or one that adds only mason's own diary entry.
+
+**For mason.**
+1. Cite this report, G88 at 8df74be, in the description. Then assign the owner and tell the coordinator.
+2. "What to try" 5 begins at "the Focus of item 1". After item 1's last step a crystal stands in that Focus's own
+   socket and its Memory holds one crystal, and a module goes only into a Focus with none. The list of the feature's
+   PR can say so. The brief need not change for it.
+3. The code in the folders of features 8, 9 and 1 may ride in the feature's PR once this one is merged, and that PR's
+   description then names each of the three and this change to its brief (rule 4). The brief promises that feature 4's
+   folder and feature 6's stay untouched. If the build finds that one of them must change, its brief changes first.
+
+**For the coordinator.** PR #135 may go to the owner once its description cites G88 and the owner is assigned, after
+PR #143 on the same list. G90 is the counter-view to both. It needs no answer and holds nothing, but its first, third
+and fourth points are cheaper to weigh before the build than after it. With the owner's merge the brief is settled,
+and rule 2 then lets the code of feature 10 begin.
+
+**For the owner.** PR #135 holds no code, and nothing changes in play until mason builds it. You answered eight short
+questions, and the brief fills each of them in: the list under "The owner's word" above says what it adds to each. It
+reads your "Yes" to question 2 as the proposal, clay made in place. I found it true to your answers, to the Road Bible
+and to the code it will be built on. Three of the things it adds are yours to weigh, and G90 gives them: a Memory
+names a duet's product as soon as the pair is set, the Fire and Earth duet also gives chromium, titanium, platinum and
+nickel, and with sand on its shelf the drain pans any sand that is brought to it. If you merge it as it is, they stand
+as written, and each can still be changed by a change to the brief.
+
+## G89. Report under rule 6 (a): the concept names the magazine of a Memory (PR #143 at df04854)
+
+**Written.** 2026-11-12 22:00Z. Woken by the coordinator at 21:25Z.
+
+**What I read.** PR #143, "Road Bible: the concept names Memory's magazine (your answer A to question 6 of the duets'
+brief)", branch road-bible/memory-magazine, at commit df048546b19717fb29046f5f4c8a30e9bd07f566, its one commit, of
+21:21Z, branched from main at 7c6aee5. I read it whole: the diff of record/road-bible.md, one line out and two in; the
+planning thread's entry of 21:20Z, 56 lines, which rides in it; and the description. Its check `build` is green, and
+it is not assigned and not set to merge by itself. The rules and the book are as G88 holds them.
+
+**The change.** One sentence of part 1, under "Evolution, and the danger that climbs with it". It was: "*Crystal jars*
+and *crystal racks* keep crystals out of dialogues up to Glowing." It becomes: "*Crystal jars* and *crystal racks*
+keep crystals out of dialogues up to Glowing, and so does the magazine of a Memory, the module that holds further
+crystals for a machine (the owner, 2026-11-12; R32)." The sentence after it stands as it was: "From Luminous up only a
+*shielded jar* holds a crystal back." I held the file by program: 561 lines, every other line as on main, none over
+118 outside the tables, plain ASCII.
+
+**Which part, and which way.** Part 1 is the concept, and rule 4 has it "read by the review thread, then the owner's
+merge; or the owner's command". The owner's answer names no words for the book, so this is no change at the owner's
+command, and I certify nothing: it goes by this report and the owner's merge. R31 has the planning thread and mason
+agree on it for way A, and the coordinator told the owner of it at 21:02:47Z, before the owner answered, as "one small
+extra PR for you to merge beside the brief".
+
+**Held against the owner's word and the briefs.** The owner, R32, point 6: "A, Making Memory a "Shielded" block makes
+sense, up to Glowing as the other machinery." Way A as it was asked: "Memory's magazine keeps crystals apart as a jar
+does".
+- *The magazine, and not the block.* The sentence names the magazine. That is what the question asked and what the
+  briefs say at 8df74be: the duets' item 10 ("a crystal in the magazine never dialogues"), the machines' item 18, the
+  crystals' item 8 and the sparkstone's item 10. The crystal that a Memory has cycled into the machine's socket stands
+  in the open, which is how Earth and Sky take turns.
+- *Up to Glowing.* The owner's limit, in the words that the book already has for jars and racks. The next sentence
+  keeps "only a *shielded jar*" for Luminous and above, and the brief says the same from its side: "from Luminous up
+  it holds nothing back".
+- *The gloss,* "the module that holds further crystals for a machine". Part 1 names Memory nowhere else. The gloss is
+  true to the machines' item 18 ("Memory, a module", with "a magazine of 2 crystals") and to the concept's own word
+  for a module.
+- *No further holder.* Before I wrote this I asked mason whether the Duet Module keeps its pair out of dialogues: if
+  it did, the sentence would have to name it. It does not. The duets' item 8 at 8df74be: "The module holds the second
+  pair in the open, as sockets do; it does not keep them out of dialogues."
+
+**The owner's word "Shielded".** The owner's answer calls Memory a "Shielded" block, in quotation marks, and the
+sentence does not use the word. I think that is right, by standing rule 3, which gives a word one meaning. In the book
+"shielded" belongs to the shielded jar, the one thing that holds a crystal back from Luminous up. A magazine called
+shielded would be read as holding there too, and neither the owner's "up to Glowing" nor the brief says that. The
+sentence cites R32, where the owner's word stands. The description tells the owner so in plain words and offers to add
+the word.
+
+**The short of it.** The sentence says what the owner answered and no more, in the words of the briefs that rest on
+it. I find no blocker and no flaw. **PR #143 is cleared at df04854 for the owner's merge**, before PR #135.
+
+**The order.** The planning thread would have this change merged before the brief, "so that the book is never behind a
+settled brief". I agree: for the minutes between the two merges the other order would leave a settled brief saying
+more than the concept does. Git does not care: at 21:51Z it joined PR #143, PR #135 and PR #144 with main at 28f9e6d
+without a conflict. PR #144 changes another part of the same file, so the book has 562 lines once both are in.
+
+**What follows its merge.** The concept has changed. The coordinator tells every thread, and each reads the Road Bible
+again before it goes on (rule 5). So do I.
+
+**How it merges.** By the owner's merge, once its description cites this report and the owner is assigned (rule 4). A
+later commit to PR #143 voids this report, other than one that only brings main into the branch and settles no
+conflict by hand outside the planning thread's own diary, or one that adds only its own diary entry.
+
+**For the planning thread.** Cite this report, G89 at df04854, in the description. Then assign the owner and tell the
+coordinator, for one list with PR #135, this one first. The eighth point of G90 is the counter-view that I told you at
+21:32Z.
+
+**For the coordinator.** PR #143 may go to the owner once its description cites G89 and the owner is assigned: first
+on the list, then PR #135. After its merge every thread reads the book again (rule 5).
+
+**For the owner.** PR #143 changes one sentence of the Road Bible and nothing in play. It writes your answer to
+question 6 into the concept: the magazine of a Memory keeps crystals out of dialogues up to Glowing, beside jars and
+racks. Your word "Shielded" is left out on purpose, because in the book that word is the shielded jar's, which holds
+from Luminous up. If you want the word in the sentence, say so and the planning thread adds it.
+
+## G90. Note: the counter-view to PR #135 and PR #143 (rule 6 a)
+
+**Rank.** Note. **Owning thread.** The coordinator, for the owner. **Raised in.** The reads of PR #135 and PR #143
+(G88, G89). **Status.** Needs no answer.
+
+Both changes are true to the owner's answers, and I found no fault in either (G88, G89). So the counter-view is not
+that they are wrong. It is what stands settled once they merge that the eight short questions did not show, said
+plainly, so that nothing is settled unseen. Each point can still be changed afterwards by a change to a brief, and the
+first, the third and the fourth are cheaper to change before mason builds than after.
+
+1. **The secret names itself.** The duets' item 1 says of a duet's product: "nothing in the game names it, and the
+   player finds it by setting the pair together". Item 12 has a looked-at Memory say "Duet: clay", or the product,
+   "while it holds a pair". So the game names the product the moment the pair is set, before the machine has made
+   anything and with nothing there to make it from. Four pairs of Elementals are not twins, and all four are duets: a
+   player who holds the four Elementals and one Memory reads all four products within a minute. The concept has the
+   Hidden Vocabulary "found only through odd experiments or builds". Another way would keep the line for a Memory
+   whose pair has made its product once. That serves the reason the brief gives for the line, "so a player who has
+   found one can see it", and leaves the finding to the player.
+2. **A Memory can no longer cycle two different Elementals that are not twins.** Six pairs can be made of the four
+   Elementals: two are twins, and the other four are the four duets. From the build on, a Memory "holding a pair stops
+   cycling", and the Focus's own crystals "sit idle". So whenever two such crystals come to lie in one magazine, the
+   cycle stops there and the duet works, wanted or not, and nothing tells the Memory to go on cycling. The owner said
+   yes to "That Memory stops cycling"; what the question did not show is that it is the only thing such a Memory can
+   then do. A machine built today around such a cycle will change what it does. If a way to keep cycling is wanted, a
+   rod tap on the Memory for one, it is a line of the brief.
+3. **The first duet hands out the game's last metals.** The question said "one metal bit for each ore nugget, and
+   nothing from the iron ores", and named no ore. The brief gives a bit for every ore that the game smelts to an
+   ingot. Besides copper, tin, zinc, lead, silver, gold and bismuth, those are chromium, titanium, platinum and
+   nickel. The game's own data smelts their nuggets only at 1,907, 1,668, 1,770 and 1,325 degrees, where copper asks
+   1,084, and it keeps the bits of the first three out of its handbook. A Fire and an Earth crystal at Glittering, the
+   first Evolution, turn their nuggets into bits ten seconds at a time. On a server that runs other mods beside this
+   one, those metals may be worth more than they are in the game alone. Other ways: the seven common metals now and
+   the other four at a higher Evolution, or as written, knowingly. Mason named the four in the brief when I asked, and
+   left the rule as the owner answered it, which is right: the choice is the owner's.
+4. **The drain becomes a pan for any sand that is brought to it.** The owner's idea was to "pan an earth battery's
+   internal store" and to "re-place stone into the battery automatically". The brief lets the shelf put back "sand,
+   gravel, cobblestone, cracked rock or raw rock". With rock on the shelf, each block is first worn down for its
+   charge at a Gather block's pace, and panned when it is sand. With sand on the shelf, and the drain's network at
+   half or above, Earth's turn passes at once: every cycle the drain pans one block and the shelf sets the next. Sand
+   from a chest then becomes what the game's pan gives from a whole block, for two workings' charge a block, with
+   nothing worn and no charge gained. "What to try" 7 shows exactly that. If the owner wants only the first, the list
+   of kinds loses sand. If both, nothing changes, and the owner knows that panning by hand ends for whoever builds
+   one.
+5. **The limit on machines that Bloom is a price, and a low one.** The book places in step 1 "limits on how often and
+   how strongly machines Bloom". How often stays as it is built, once a day for each plant. How strongly becomes a
+   cost, one working for every 9 plants. For a Glowing Scatter over 81 crops that is nine workings a day, 18 charge at
+   the 2 that a Glowing working costs, where one Glowing crystal in a Gather block brings 600 a day. A network with
+   charge to spare does not feel it, and the field still moves on every day. The owner answered "Yes" to the question
+   as it was put. If a limit that is felt was meant, fewer plants to a working or a field that rests, this is not it.
+6. **What stands in the open around a Duet Module.** Inside the machine "no twins meet in the open". The module's pair
+   itself stands in the open, as sockets do, and with two duets that share no alignment, clay and fired clay, all four
+   Elementals stand there by turns. So an Elemental crystal in any socket within 3 blocks of that Focus meets its twin
+   at every other working and dialogues as built: at Glittering both turn Unaligned. "What to try" 5 says "No
+   dialogue", which is true of the machine standing alone. A player will learn the rest by losing crystals, unless the
+   Journal says it.
+7. **Nothing brings the claim sentences before the owner.** The brief says that clay is never made in another player's
+   claim, that a duet uses a container there only as feature 8 rules it, and that a battery's room which reaches into
+   a claim rests. None of the three can be seen in single player, and the "what to try" list has no item for them.
+   They rest on feature 8's rule and on code that I read (G88). As with the third point of G74, they wait for the one
+   multiplayer test (standing rule 10), and a line for that test is owed by then.
+8. **The concept's sentence is a closed list** (PR #143). It names jars, racks and the magazine of a Memory. Each
+   further thing that is to keep crystals apart, another module or a vehicle's part, will cost a change to the
+   concept: my read, the owner's merge, and a reading of the whole book by every thread (rule 5). An open form would
+   cost nothing later, and it would be the looseness that PR #108 took out of three other sentences of the book. The
+   planning thread chose the closed form knowingly (its entry of 21:46Z), and I think rightly. The owner should know
+   the price.
+9. **What later steps inherit.** The magazine holds "up to Glowing", and "from Luminous up it holds nothing back,
+   where feature 14's strain begins". Machines take no Luminous crystal yet. When feature 14 lets them in, every drain
+   with a Memory holds twins by design, so what a magazine does at Luminous is that brief's first question. And until
+   step 7 completes the Journal, its page on machines goes on saying "Twins still quarrel in machines, so I keep them
+   more than three blocks apart", with no word of the magazine, of Memory on a drain or of panning. None of those is a
+   secret of the Hidden Vocabulary. The mod is not released before step 7, so nobody is misled meanwhile, but step 7's
+   work has to find that page.
