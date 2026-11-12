@@ -28,6 +28,8 @@ public class MysteriesModSystem : ModSystem
     {
         api.RegisterBlockClass(BlockGlint.ClassCode, typeof(BlockGlint));
         api.RegisterBlockEntityClass(BlockEntityGlint.ClassCode, typeof(BlockEntityGlint));
+        // With the claims switch off, a Glint inside a claim is open to everyone (R9).
+        api.Event.OnTestBlockAccess += new MysteriesClaims(api).OnTestBlockAccess;
         // Both sides read the Mysteries, as both read the Elementals; only the server acts on it.
         CrystalEnvironment.Mysteries = MysteryEnvironment.Count;
     }
