@@ -170,7 +170,7 @@ when the first question for it comes, which keeps the cost near nothing if the r
 ## G4. Flaw: what "the old paper" is rests on a date the rules do not give and a list that does not exist yet
 
 **Rank.** Flaw, naming step 1 (the duets, R14). **Owning thread.** The planning thread. **Raised in.** G2.
-**Status.** Corrected in PR #16 at commit 722d58a (G23). It closes when that commit merges.
+**Status.** Corrected in PR #16 (G23), and still so at its commit 84ace1d (G39). It closes when that commit merges.
 
 The paragraph defines the old paper as "what was written for that project before" these rules took force in it,
 gives three examples, and has the Road Bible's shared list name it and say where it lies. That leaves three things
@@ -318,7 +318,7 @@ more than a pointer then, one line from the owner in rulings.md settles it. Noth
 
 **Rank.** Note. **Owning thread.** The planning thread, for the Road Bible's table of old numbers. It concerns
 mason. **Raised in.** G2. **Status.** Needs no answer. Answered in PR #16 at commit 722d58a
-(G23); one gap is left, in G27.
+(G23), and the gap that G27 named at commit 84ace1d (G39).
 
 R14 starts the numbered steps again at 1, and the planning thread's entry of 03:54Z has the Road Bible say that a
 step number in an old note is an old number. Old numbers are not only in old notes. On main at a83a83a, 137 comment
@@ -724,7 +724,8 @@ commit merges. G8 and G28 are corrected. No blocker is open. Notes need no answe
 ## G24. Flaw: the book does not say whose work it is when a feature's work lies in another feature's folders
 
 **Rank.** Flaw, naming step 1. **Owning thread.** The planning thread. **Raised in.** G23, against part 3 of the book
-(PR #16 at commit 722d58a). **Status.** Open.
+(PR #16 at commit 722d58a). **Status.** Corrected in PR #16 at commit 84ace1d (G39). It closes when that commit
+merges. One sentence of the correction is G41, and the last point of this entry stays with the owner (G36).
 
 The book defines a feature as "one part of the mod with a folder of its own in the code", and gives each feature the
 folders named for it. For the nine built features that cut is clean (G23). The book does not say what holds when the
@@ -779,7 +780,8 @@ doubt is over briefs and gates.
 ## G25. Flaw: in the concept, the sentences on land claims do not agree, and a quotation is not the owner's words
 
 **Rank.** Flaw, naming step 1. **Owning thread.** The planning thread. **Raised in.** G23, against part 1 of the book
-(PR #16 at commit 722d58a). **Status.** Open.
+(PR #16 at commit 722d58a). **Status.** Corrected in PR #16 at commit 84ace1d (G39). It closes when that commit
+merges. The new last sentence of standing rule 7 is G40.
 
 The concept is the one part of the book where rule 1 leaves a thread no choice: "the exception never covers a reading
 of these rules or of the concept", and a question about it stops every thread. So its sentences have to agree with
@@ -858,6 +860,7 @@ coordinator's to name.
 ## G27. Note: seven small things in the book
 
 **Rank.** Note. **Owning thread.** The planning thread. **Raised in.** G23. **Status.** Needs no answer.
+Answered in PR #16 at commit 84ace1d (G39).
 
 None of these changes any work. Each could ride in the next change to the book.
 
@@ -913,7 +916,7 @@ again, would keep every thread's copy the same as main's.
 ## G29. Note: the repository rules in CLAUDE.md and README.md are in no part of the record
 
 **Rank.** Note. **Owning thread.** The planning thread. It concerns mason (G7, R10). **Raised in.** G23. **Status.**
-Needs no answer.
+Needs no answer. Answered in PR #16 at commit 84ace1d (G39).
 
 CLAUDE.md ("Repository rules") and README.md ("Working in parallel") hold working rules for whoever writes code, and
 no part of the record has them: run the three scripts before a PR and say what passed; every registered code starts
@@ -1176,7 +1179,8 @@ Next:
 ## G36. Note: the question R23, what the record already says on it, and the counter-view
 
 **Rank.** Note. **Owning thread.** The coordinator, for the owner. It concerns the planning thread and mason. **Raised
-in.** This entry, on reading R23, which came out of G24. **Status.** Needs no answer.
+in.** This entry, on reading R23, which came out of G24. **Status.** Needs no answer. The owner answered R23 with B
+(R24, G39).
 
 R23 asks the owner how code reaches main when a feature needs it changed in another feature's folders, after that
 feature's brief is changed: on its own, as a patch (A), or in the feature's own PR (B). The planning thread recommends
@@ -1236,7 +1240,7 @@ R16. What a stop would have added is this entry, before the question reached the
 
 **Rank.** Note. **Owning thread.** Mason (held by the coordinator until mason starts). **Raised in.** This entry, from
 my own run of the checks before the PR that carries it. **Status.** Needs no answer. It becomes a finding against the
-test or the Motor if it shows again.
+test or the Motor if it shows again. A second line failed the same way at 06:58Z: G43.
 
 I run the three scripts before each of my PRs. On 2026-11-12 at 06:39Z scripts/smoke-test.sh failed, on a commit that
 differs from main only in this file. The server's log has:
@@ -1306,3 +1310,350 @@ Next:
   coordinator until it starts), G24 and G25 (the planning thread). G4 is corrected in PR #16 and closes when that
   commit merges. No blocker is open.
 - **Read up to:** rulings.md R23, player-diary.md none (the file does not exist), findings.md G38.
+
+## G39. Report under rule 6 (a): the first Road Bible again (PR #16 at commit 84ace1d)
+
+**Written.** 2026-11-12 07:12Z. Woken by the coordinator at 06:38Z, after the planning thread told it that PR #16 was
+ready again.
+
+**What I read.** PR #16, "Road Bible: the first Road Bible of Lemuria", branch claude/project-thread-20hfvu, at commit
+84ace1d56b3e733d88f5ea7b2e9a770b5dac35b2, its second commit, on top of 722d58a. That commit voided G23 (rule 4). I
+read the diff between the two commits line by line, then the book whole as it now stands (record/road-bible.md, 548
+lines, sha256 5a9388188b9b335ad8025387818ab46b03d28f2c3fd65548661155cdb4206360), and the planning thread's entry for
+the commit, record/diary/optimist-visionary/2026-11-12T0629Z.md, which rides in the PR. The check "build" ended green
+on that commit at 06:34:58Z. The PR is not assigned to the owner and not set to auto-merge, as rule 4 has it. Its
+description was changed at 06:43Z, in the section on R23. A description is no commit, and I read it as it stands. Main
+has moved to b9fe918 since, in other files, and the branch still merges cleanly. By rule 4 a later commit voids this
+report, unless it only brings main into the branch or adds only the author's own diary entry.
+
+**The rules.** The owner merged PR #21 while I read. I read the rules again in full, version 4, before I went on
+(G44), and this report is held against version 4. No sentence that I cite from rules 1 to 7 differs between version 3
+and version 4.
+
+**What changed in the record since G38 (rule 6).**
+- PR #31, merged at 06:49Z: my own G36 to G38.
+- PR #21, merged by the owner at 06:52:24Z as 5f49680: the rules, version 4, with the planning thread's entry of
+  05:34Z. The file is byte for byte the one that G32 read at commit 7de344f. G32 found no code that the change makes
+  wrong, so nothing became a blocker at the merge (rule 4).
+- PR #32 and PR #34, merged at 06:53Z and 07:02Z: the planning thread's entries of 06:47Z and 06:55Z. The first holds
+  two sentences that it would put up for rule 4 if the owner answers B to R23, and says that nothing is written into
+  the rules for them.
+- PR #33, merged at 07:03Z: the coordinator's entry of 06:55Z and the record thread's. Its check failed once by chance
+  (G43).
+- PR #35, merged at 07:10Z: R24, the owner's answer to R23, with the coordinator's entry of 06:57Z and the record
+  thread's. The owner's words in R24, "4.) B", are the owner's message of 06:56:33Z, character for character: I read
+  the message itself. R24 also holds the coordinator's reading, marked as its own (B, with the two sentences that the
+  planning thread drafted for rule 4), and those two sentences as they were posted to the owner. They are the same as
+  in the planning thread's entry of 06:47Z. R23 is marked answered, with a dated line.
+- At 07:08:14Z the owner confirmed the coordinator's reading in the project chat: "Correct reading, good job." I read
+  that message too. The record thread enters it as R25, which is not on main yet.
+
+**The short of it.** No blocker, and nothing here holds the owner's merge. The second commit corrects G24 and G25 and
+answers G27 and G29, as the planning thread says, and I held each correction against its source. I raise two new
+flaws, both small and both the planning thread's: one sentence of the concept (G40) and one of part 3 (G41). The
+owner's answer to R23 came while I read, and it overtakes point 3 of the new section. So three places in the book are
+due a change, whichever way the book merges. The counter-view is G42.
+
+**G25, the concept, held against its sources.**
+1. *Ascendant stone.* The row now ends "and never inside another player's claim while the claims switch is on
+   (standing rule 7)". It agrees with rule 7.
+2. *The scars.* They now stand with the switch on: "Lemuria's workings spare what lies inside another player's claim,
+   and only a Bale storm's scars do not." That is where the old paper has them.
+3. *The switch off.* Standing rule 7 now says what holds then. I held it against R9, against the owner's card of
+   2026-11-10 as the two old diaries have it, and against the code. The card speaks of use: "With the switch off,
+   anyone may use racks and jars inside a claim." R9 widens that to "every Lemuria block used by hand". The code lifts
+   the game's lock for use and for nothing else (`LemuriaClaims.MayLift`). The book says that "the owner's words open
+   Lemuria's blocks there to use and to nothing more". That is more careful than G25 was, which called the limit "the
+   owner's too": the words "breaking them stays as the game rules it" are the old planning thread's, in the note of
+   old step 3. The new last sentence has a fault of wording, which is G40.
+4. *The owner's idea of 2026-10-22.* It is quoted whole. I held the quotation against line 12 of
+   /mnt/project-files/owners-scratchpad.md by program: 465 characters, and the same. The book claims no more than it
+   can show: the scratchpad "holds it, entered there as the owner's words of that day". I did not open the owner's
+   message of that day, and neither did the planning thread. The sentence after the quotation gives the idea as
+   history and names the two places where the concept has since gone another way, the one screen and the flying
+   structures. I looked for a third and found none.
+
+**G24, part 3: "Where features meet".** The new section says which reading holds (the folder decides), what comes
+first (the briefs), and what a feature's PR may change. That is what G24 asked for.
+- Point 1 gives the tests of rule 7 one answer: the brief of the feature in whose folders the code lies.
+- Point 2 answers the first of G24's two further points. Before step 1's code changes Memory, feature 8 has its first
+  brief (R3), and that brief is changed for what is added. One sentence of point 2 says more than it means: G41.
+- Point 3 holds way A and names R23. The owner has answered since (below).
+- Feature 27 is gone, and step 7 lists no feature. The numbers 10 to 26 each stand once, under steps 1 to 6, and I
+  found no sentence that still counts eighteen features or names a feature 27. What follows for step 7's gate is in
+  G42.
+- G24's last point was that features 1 to 9 stand under no numbered step. The planning thread's entry says that the
+  book cannot cure it, because the tests are rule 7's. I agree. It stays with the owner as G36 has it.
+
+**Point 3 and the owner's answer to R23.** Point 3 ends: "R23 asks the owner whether such code may instead ride in the
+feature's own pull request. Until the owner has answered, it goes as a patch, which no reading of rule 4 forbids." The
+owner has answered, with B (R24). R24 binds from its entry (rule 1), the planning thread writes the change to rule 4
+at once, and that change comes to me under rule 6 (e). Rule 1 also has the book changed "before any code follows the
+ruling". No such code is near: the nine briefs come first, and then the duets' brief. So the merge need not wait for
+point 3. But from R24 on, point 3 says what no longer holds, in its heading, "The code keeps to its folders", and in
+the sentence that sends such code "as a patch". The planning thread's entry of 06:29Z plans that change for after the
+merge. It was written before the answer.
+
+**G27 and G29, the notes.** Each of G27's seven things is answered as the planning thread's entry says. The aims in
+play are now "in the words of the old step list in "Lemuria: pre-production"", and that list does head each of them
+"Gate". One sentence covers the old numbers in entries of record/. New creatures stand once, as out of scope for v1.0.
+The one sentence among the standing rules that is new says so. A short name stays once its feature's brief is put up.
+The tables of part 4 are brought up to date before the builders are ever split. The old paper and the old glossary are
+tied to the state that G22 sets down, the glossary to revision 247 of its document. G22 does list what the book says
+it lists: eleven Docs with their revisions, and the ten diaries, seven zips and three sheets with size and checksum.
+For G29, the shared files table now says that CLAUDE.md and README.md keep the repository rules, that these bind
+whoever writes code, that the Commandments and the book stand where one of them differs, and that mason's rewrite
+keeps them. The minute the rules took force cites R19, in the head of the book and in part 4.
+
+**What I did not check.** The owner's message of 2026-10-22, as said. And I ran none of the code for this report: the
+five places that G40 names are read from main.
+
+**For the planning thread.** Two ways are open.
+1. *Correct before the merge.* One more commit can hold all three places: the last sentence of standing rule 7 (G40),
+   the one sentence of point 2 (G41), and point 3 after R24. It voids this report (rule 4). I read that one commit as
+   soon as the coordinator wakes me, and the owner then merges a book that owes nothing.
+2. *Merge as it stands.* Cite this entry in PR #16's description as the review thread's report G39 in
+   record/findings.md, then assign the owner (rule 4). After the merge, G41 and point 3 go by one change to part 3,
+   which I can certify. G40 lies in the concept: it goes by another PR that I read and the owner merges, or by the
+   owner's command, and every thread then reads the book again (rules 4 and 5).
+
+The first costs the owner one merge, and the threads one more round before the book is ready. The second lets the
+owner merge now and mason start, and costs the owner one more merge or a command. Either way G41 should be in before
+mason puts up the first of the ruled fixes, and G40 before the briefs of features 4, 6, 8 and 9 are put up. The choice
+is the planning thread's and the owner's.
+
+**For the owner.** Nothing here asks you to wait. If you merge PR #16 as it stands, three places in it are changed
+after it, and one of those changes needs your merge or your word. If the planning thread corrects first, PR #16 comes
+to you once, complete.
+
+**Open after this report.** Flaws G5 (the precursor; the coordinator until it starts), G7, G13 to G16 and G43 (mason;
+held by the coordinator until it starts), G40 and G41 (the planning thread). G4, G24 and G25 are corrected in PR #16
+at commit 84ace1d and close when that commit merges. No blocker is open. G42 is a note and needs no answer.
+
+## G40. Flaw: the new last sentence of standing rule 7 says "by hand", the book's own mark of a naked evocation
+
+**Rank.** Flaw, naming step 1. **Owning thread.** The planning thread. **Raised in.** G39, against part 1 of the book
+(PR #16 at commit 84ace1d). **Status.** Open.
+
+The sentence is new with the second commit and answers the third point of G25: "What a player breaks or places by hand
+inside another player's claim stays as the game rules it, whatever the switch says: the owner's words open Lemuria's
+blocks there to use and to nothing more (the card of 2026-11-10, and R9)." The sentence before it says: "With it off,
+Lemuria's workings no longer spare a claim".
+
+What it means to say is right, and the planning thread's entry gives the reason for the two words: "with the switch
+off, Lemuria's workings do break and place blocks inside a claim, as when a Tremor raises the ground there. Without
+"by hand" the new sentence would contradict the one before it." So "by hand" is there to keep the game's own breaking
+and placing apart from Lemuria's workings.
+
+In this book the two words do not do that. "By hand" is the book's own mark of a naked evocation:
+- "spend their charge: first by hand in naked evocations" (What Lemuria is);
+- "Each alignment has one *naked evocation*, its single use by hand" (The crystal cycle, 6);
+- "A naked evocation is an alignment's one working by hand" (By hand, by vehicle, by book);
+- feature 6 is "Casting by hand".
+
+And an evocation breaks and places. The table of alignments has "Tremor: raises a pillar or mound" and "Wither:
+withers plants". So the Tremor of the entry's own example is, in the book's words, a working by hand that places
+blocks. With the switch off, one sentence has it reach into a claim, as one of "Lemuria's workings". The next has it
+stay "as the game rules it, whatever the switch says", as what a player places by hand.
+
+**Two readings, and different work.**
+1. The last sentence speaks of the game's own breaking and placing of blocks, about which Lemuria's code is never
+   asked. A naked evocation and the Crystalline Chisel in a player's hand are workings, and they follow the switch.
+2. The last sentence speaks of everything that a player does in person, a naked evocation included. Then only what
+   machines do follows the switch.
+
+Under the first reading the briefs of features 4, 6, 8 and 9 are written as built. Under the second, main is wrong in
+five places, each of which asks the switch before a player's own act changes a block: `CastContext.Can`
+(Lemuria/Evocations/CastContext.cs), `ItemCrystalChisel.Carve` and `Awaken` (Lemuria/Sparkstone/ItemCrystalChisel.cs),
+`MachineCarver.Strike` and `BlockBehaviorRodMaker.Make` (Lemuria/Machines/).
+
+**What the book itself, the code and the old paper say.** The first reading, on every count.
+- The rule's own first sentence: "Every land claim rule in Lemuria goes through one switch, so that none can drift".
+  Under the second reading one claim rule of Lemuria's would not go through it.
+- The head of the standing rules: "One sentence among them is new with this book and says so: the last of rule 3."
+  Under the second reading this sentence would be new as well, because it would change what is built.
+- The old paper: "One switch covers every claim rule in Lemuria, from evocations to the chisel, racks and jars" (the
+  note of old step 3, given there as the owner's of 2026-10-27, 20:50Z).
+- The code, as above, and the planning thread's entry, as quoted.
+
+**Why I raise it all the same.** It is the concept, where rule 1 leaves a thread no choice: "the exception never
+covers a reading of these rules or of the concept", and a question about it stops every thread. Mason writes the
+briefs of features 4, 6, 8 and 9 next, and each must say what its workings do inside a claim. A builder who holds
+these two sentences against each other word for word has a doubt, and there a doubt is a stop for everyone. Standing
+rule 3 of the same book asks for "One meaning to a word".
+
+**My part in it.** G25 proposed the sentence without the two words: "breaking and building inside a claim stay as the
+game rules them, whatever the switch says". That was worse, and the planning thread saw it. The gap is in my proposal
+as much as in the book.
+
+**To correct it.** Name the game's own breaking and placing, and drop "by hand". For instance: "The game's own
+breaking and placing of blocks inside another player's claim stay as the game rules them, whatever the switch says:
+the owner's words open Lemuria's blocks there to use and to nothing more (the card of 2026-11-10, and R9)."
+
+**When.** As with G25. Before the owner's merge it changes by one more commit to PR #16 and a new report of mine.
+After the merge it changes only by another PR that I read and the owner merges, or by the owner's command, and every
+thread then reads the book again (rules 4 and 5). It should be in before the briefs of features 4, 6, 8 and 9 are put
+up. I read those briefs for it either way.
+
+**Why not a blocker.** One reading has the rule's own first sentence, the code, the old paper and the author's entry
+behind it, and the next work can be built on it. If a thread stops on the sentence all the same, this entry says what
+the record already holds on the question (rule 1).
+
+## G41. Flaw: one sentence of "Where features meet" shuts out the fixes that R3 and R7 let in
+
+**Rank.** Flaw, naming step 1. **Owning thread.** The planning thread. It concerns mason. **Raised in.** G39, against
+part 3 of the book (PR #16 at commit 84ace1d). **Status.** Open.
+
+Point 2 of the new section says: "No code goes into a feature's folders before that feature's own brief is settled and
+describes it (rule 2)." Further down, part 3 says of the nine built features, which have no briefs yet: "Until then
+they take only the fixes already ruled (R3)."
+
+By their letter the two disagree. The fixes already ruled are R7's: "The two unbuilt fixes and PR #9's unsaved death
+hour then go as patches. Finding 16 changes what you notice in play, so it waits for your merge." They are G13, G14
+and G15. Each is code that goes into the folders of a built feature, G13 and G14 into feature 8's and G15 into feature
+6's, before that feature has a brief.
+
+The planning thread's entry shows what the sentence is for: "So the nine briefs of R3 come before any such code",
+which is code that a later feature needs in a built feature's folders. The book's next sentence has that limit in its
+own words, "for a later feature". The sentence itself has none. It is also wider than the rule it cites, which says
+"experiments aside".
+
+**The work it would change.** R3 lets the three fixes go before the nine briefs are merged. A mason that reads point 2
+by its letter holds them back until then, or stops on the two sentences (rule 1).
+
+**To correct it.** Give the sentence the limit that its neighbour has. For instance: "No code for a later feature goes
+into a feature's folders before that feature's own brief is settled and describes it (rule 2)." Or keep it whole and
+add "the fixes already ruled aside (R3)".
+
+**When.** Before mason puts up the first of the three fixes. It is part 3. It can ride in PR #16 now, or after the
+merge in a change that I certify (rule 4), together with what the owner's answer to R23 changes in point 3.
+
+**Why not a blocker.** R3 and R7 are the owner's own words and stand in rulings.md, and the book repeats R3 in the
+same part. The next work, the nine briefs, is not built on the sentence.
+
+## G42. Note: the counter-view to the Road Bible's second commit (rule 6 a)
+
+**Rank.** Note. **Owning thread.** The coordinator, for the owner. **Raised in.** G39. **Status.** Needs no answer.
+
+G30 argued against five choices in the first commit. It stands: the second commit changed nothing for its first four
+points, which are the owner's to weigh. Here I argue against four things that the second commit added. Two of them it
+took from me. None holds anything.
+
+1. **The folder decides, so a brief describes a folder.** It is the right cure for the gate (G24), and it has a price.
+   What the player meets as one thing is written in as many briefs as it has folders: the duets will stand in their
+   own brief and, for all that Memory does for them, in the machines'. And a built feature's brief does not rest once
+   it is settled. Every later feature that reaches into its folders changes it first, by a PR that I read and the
+   owner merges. PR #9 reached into six features. The book lets such changes ride with the new feature's brief, which
+   saves merges and leaves the reading. The other way to pay less is to reach in less: a feature keeps its work in its
+   own folders and asks of the other only a small opening. The book does not ask a brief for that. It could: where a
+   brief names an existing part that its feature changes, the brief says why that work cannot lie in the feature's own
+   folders.
+2. **Step 7 lists no feature.** G24 offered this, and I did not say then what follows. The first and second tests of
+   rule 7's step gate, and half of the fifth, speak of "every feature listed under the step" and of PRs that carry "a
+   feature of the step". With no feature they test nothing. Step 7 then passes on how the PRs since step 6's gate were
+   merged, on the checks, and on the answers in player-diary.md. Its own work, the Hidden Vocabulary and the Journal
+   made complete and the balance, goes as changes to briefs and as patches to features of other steps and of none, and
+   no test asks whether those are merged. What stands in for the tests: the coordinator, who reports the step done; my
+   comparison of the step with the book at rule 6 (b); and the owner, who alone releases. It costs little, because no
+   step follows step 7 and the release is the owner's own act. If the owner wants more, step 7's entry can name what
+   must be merged before the step is reported done, by a change to part 3 when the step is near.
+3. **One play before a gate.** The sentence that the multiplayer test "is played before step 7 is reported done" is my
+   own proposal (G30, point 5), and the planning thread took it. The owner should see what it does: it is the one
+   place in the book where a play of the owner's stands before a gate. Rule 3 says of the owner's play of a step's zip
+   that it "holds no gate". The planning thread's entry says why the two do not collide: the test is work that the
+   step itself lists, as the old step list had it. I agree. The owner may strike the sentence at the merge, as the
+   PR's description says.
+4. **History in the concept.** The owner's idea of 2026-10-22 now stands in the concept whole, with two things in it
+   that the concept has since overruled: "No GUI", and the "flying" block structures. One sentence fences them off,
+   and as far as I can see the fence holds (G39). The other way was to keep the concept to what binds and to name the
+   idea in part 4, beside the scratchpad that holds it. The owner's own first words at the head of the owner's book
+   may well be worth the fence. I say only that the concept is the one part where every sentence can stop every
+   thread.
+
+## G43. Flaw: the smoke test fails by chance, and each failure holds a PR that should merge itself
+
+**Rank.** Flaw, naming step 1. **Owning thread.** Mason (held by the coordinator until mason starts). **Raised in.**
+This entry. It takes G37 further. **Status.** Open.
+
+G37 said of one failed run that it "becomes a finding against the test or the Motor if it shows again". It has shown
+again, on another line.
+
+- **06:39Z, my own run** (G37): "Machines test: the quern turns: no". The next run passed on the same commit.
+- **06:58Z, the check "build" on PR #33,** a record-only PR of the record thread's. I have this from the record
+  thread, through the coordinator, in its words. The log had "Mysteries test: a Death Focus Nothing, the flower is
+  flower-lupine-blue-free, 0 item(s) in the chest touching it", and the script said "FAIL: mysteries.expect: no log
+  line matches: Mysteries test: a Death Focus Acted, the flower is gone, [1-9][0-9]* item\(s\) in the chest touching
+  it". It ran the job again once and changed no code. I saw that second run of the job (run 43171611369) start at
+  06:59:30Z and end green at 07:02:16Z. I could not open the log of the first run: the tool gives me a job's last run
+  only.
+
+Nothing outside record/ differs between main today and commit c07322e of 03:47Z, so no change to the code lies between
+the runs that passed and the two that failed.
+
+**The two checks.** They are not alike. `MotorCheck` reads the quern's speed seven one-second commands after the Motor
+starts, so it rests on timing (G37). The Death Focus check (Lemuria/Mysteries/MysteriesTests.cs, lines 774 to 787)
+sets down a flower, a Focus above it, a chest and a charged Death crystal, and calls `WorkOnce()` in the same command.
+It waits for nothing. What differed between two runs of the same code I have not found out.
+
+**What it costs.** The check "build" runs the whole smoke test on every PR, record-only ones included: the book's
+shared list says that the setup list's skip of the heavy steps "is still to be made". Every entry of the record
+reaches main by a PR that merges itself when that check is green. A failure by chance leaves such a PR open until a
+thread sees it and runs the job again. PR #33 stood so until 07:03Z, and the entry that carries the owner's answer to
+R23 waited behind it (the coordinator's words). At a step gate the same chance can fail "the latest run of the full
+checks on main" (rule 7).
+
+**To correct it.** Two things, and either helps alone. The skip that the setup list names, so that a record-only PR
+does not run the smoke test at all. And the two checks made to wait for what they test.
+
+**Whose it is.** The scripts, the checks workflow and the two test files are mason's, under the book's shared list and
+features 8 and 9. Mason has not started, so the coordinator holds this with G7 and G13 to G16. Until it is corrected,
+a red check on a PR that changes nothing outside record/ cannot come from that PR.
+
+**Why not a blocker.** Nothing is built on it, and a second run has cleared each failure so far.
+
+## G44. Diary: the second report on PR #16; the rules are version 4; the owner has answered R23
+
+**Written.** 2026-11-12 07:12Z.
+
+**The rules.** The owner merged PR #21 at 06:52:24Z, and the coordinator told me at 06:54Z. I read the rules again in
+full before I went on, at about 06:56Z: version 4, 189 lines, byte for byte the file of commit 7de344f that G32 read
+(sha256 084d4307ca14cd82f004448b2ed70a1b2ac10f9e0c8f6c8440dd091df7178f03). What R21 asked of me is now the rules' own
+text: a word that the owner gives me directly goes, word for word, to the coordinator and to the record thread, and I
+record none of it myself.
+
+**What I did at this wake.** The coordinator woke me at 06:38Z for PR #16's second commit (rule 6 a). The report is
+G39, with two flaws for the planning thread (G40, G41) and the counter-view (G42). On the way the smoke test failed by
+chance a second time, on a PR of the record thread's (G43). What changed in the record since G38 is listed in G39.
+
+**The planning thread's two sentences for rule 4.** They stand in its entry of 06:47Z, and the coordinator sent them
+to me at 06:51Z "for your knowledge; nothing is asked". I have read them and report nothing on them here. They come to
+me under rule 6 (e) when the change to the rules is put up, and I read it then against G36, against the owner's answer
+and against the owner's own message.
+
+**The owner's answer to R23.** R24 is on main since 07:10Z, and I held it against the owner's own message (G39). The
+coordinator also sent me the owner's second message, of 07:08:14Z, and I read it myself in the project chat. R25 is to
+hold it. Both messages were given to the coordinator and not to me, so I had nothing to send on.
+
+**PR #35 stood green and unmerged.** Its check was green at 07:06:30Z, and at 07:10Z it had not merged itself, as my
+PR #25 had not (G38). I told the coordinator, for the record thread. It merged at 07:10:45Z. I do not know by whose
+hand.
+
+**Status lines changed in this PR.** G4, G10, G24, G25, G27, G29, G36 and G37, each citing the entry that changed it.
+
+Next:
+- **Unfinished:** nothing of this wake. If the planning thread makes a third commit to PR #16, G39 is void and a new
+  report is owed.
+- **Where it is:** this file, sent to main by a record-only PR from the branch claude/project-thread-4zobvq.
+- **Waiting for:** the coordinator's next wake. I expect, in some order:
+  - a third commit to PR #16, if the planning thread corrects G40 and G41 before the merge (rule 6 a);
+  - the change to rule 4 that R24 calls for, as version 5 (rule 6 e), read against G36, R24 and R25;
+  - the change to part 3 that follows it, in point 3 of "Where features meet", which I certify if it touches part 3
+    alone (rule 4);
+  - the nine briefs of the built features (R3, rule 6 a), where I read for G12's last point, G16, G20, G29 and G40;
+  - step 1's brief (rule 6 a), where I read for G24 and G41;
+  - the first maps (rule 6 f): the planning thread's after PR #16 merges, the coordinator's, mason's, and G5 at the
+    precursor's.
+- **Open findings:** flaws G5 (the precursor; the coordinator until it starts), G7, G13 to G16 and G43 (mason; held by
+  the coordinator until it starts), G40 and G41 (the planning thread). G4, G24 and G25 are corrected in PR #16 at
+  commit 84ace1d and close when that commit merges. No blocker is open.
+- **Read up to:** rulings.md R24, player-diary.md none (the file does not exist), findings.md G44.
