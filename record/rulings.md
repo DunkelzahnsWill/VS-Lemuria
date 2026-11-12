@@ -227,3 +227,100 @@ has open. That is the case today: the planning thread's entries ride in PR #11, 
 **Stopped.** Nothing. Until it is answered the planning thread keeps to its one branch.
 
 **Open.** Waits for the owner. Concerns every thread, and the coordinator for what it tells each thread it starts.
+
+## R14. The owner's answer to R12, first question: the steps after the Precursor steps start again at step 1
+
+**Answered.** 2026-11-12 03:48Z by the owner, by choosing an option on the first card quoted in R12. The words are
+the card's, written by the planning thread; the owner chose among them and typed none.
+
+**Recorded.** 2026-11-12 03:53Z by the planning thread as deputy.
+
+The card asked: "Number the steps after the Precursor steps: old numbers, or from 1?"
+
+The owner chose "Start again at step 1", which the card explained as: "Precursor steps are the same and pass the same
+way, but the duets become step 1 and old steps 6 to 11 become 2 to 7, with a table from old numbers to new in the
+Road Bible."
+
+"The same" and "the same way" point at the card's other option, which read: "Old steps 0 to 4 and step 5 part 1 are
+Precursor steps, passed by your word with their merged PRs accepted, and the Road Bible goes on at step 5 (the
+duets), so old notes' numbers stay true."
+
+Concerns: the planning thread (the Road Bible's steps); the inquisitor (rule 7: the owner's word passes the Precursor
+steps and accepts their merged PRs); every thread that reads an old note, where a step number is an old number.
+
+## R15. The owner's answer to R12, second question: the Precursor thread is the keeper of the old paper
+
+**Answered.** 2026-11-12 03:49Z by the owner, by choosing an option on the second card quoted in R12. The words are
+the card's, written by the planning thread; the owner chose among them and typed none.
+
+**Recorded.** 2026-11-12 03:53Z by the planning thread as deputy.
+
+The card asked: "Say what the Precursor thread is: the one builder, or a thread beside it?"
+
+The owner chose "Keeper of the old paper, no code", which the card explained as: "Precursor holds the old notes,
+roadmap and diaries and owns no code, mason owns every folder, and since the rules have no such role I would write a
+rules change at your word."
+
+Deputy's note: R14 and R15 together answer R12, so the stop called there is closed by the owner's ruling. This entry
+adds a role that the rules do not have. By rule 1 it binds from this entry, and the planning thread writes the change
+to the rules at once (rule 4: read by the review thread before it merges, then the owner's merge).
+
+Concerns: the planning thread (the change to the rules; the cast in the Road Bible); the coordinator (which threads
+it starts: one builder, "mason", and the precursor; and, by rule 1, sending this entry to every thread at once and to
+every thread that starts work until the change merges); the review thread (rule 6 e).
+
+## R16. The owner's answer to R13: a thread may push to extra branches of its own
+
+**Answered.** 2026-11-12 03:49Z by the owner, by choosing an option on the card quoted in R13. The words are the
+card's, written by the planning thread; the owner chose among them and typed none.
+
+**Recorded.** 2026-11-12 03:53Z by the planning thread as deputy.
+
+The card asked: "Let each thread push to extra branches of its own?"
+
+The owner chose "Allow extra branches", which the card explained as: "A thread can keep several PRs open at once, as
+rules 2, 3 and 5 expect: a waiting feature, its next brief, an experiment, and a record-only PR for each diary entry."
+
+Concerns: every thread; the coordinator, which passes this entry on to each thread it starts, because a thread is
+started with one branch and told to keep to it unless the owner says otherwise.
+
+## R17. The owner's yes to the paragraph that adds the precursor to the rules
+
+**Raised.** 2026-11-12 03:55Z by the planning thread, to the owner, in a message in its thread. It follows from R15,
+which has the planning thread write a change to the rules.
+
+**Answered.** 2026-11-12 03:57Z by the owner, in a message in the planning thread.
+
+**Recorded.** 2026-11-12 04:01Z by the planning thread as deputy.
+
+**The question, word for word.** The planning thread's message, whole:
+
+> Got the other two as well. All three answers are recorded as R14 to R16, and the stop is lifted.
+>
+> **One thing from you: is this the Precursor you mean?** The rules have no such role, so this is the paragraph I
+> would add to the cast, on the fourth tier beside the builders and the inquisitor:
+>
+> > The precursor: the keeper of the old paper, in a project that was begun before these rules took force in it. The
+> > old paper is what was written for that project before then, such as its design notes, its roadmap and its
+> > diaries. The Road Bible's shared list names it and says where it lies. It is outside the record and it is
+> > history: where it and the record differ, the record stands. The precursor holds the old paper as it was left and
+> > changes none of it. When the owner or a thread asks what the old paper says, the precursor answers from the paper
+> > and cites the place, and writes the answer in its diary. It owns no code and no features, builds nothing and
+> > decides nothing. Its role name is "precursor". A project begun under these rules has no old paper and no
+> > precursor.
+>
+> Your words gave me "keeper", "holds the old notes, roadmap and diaries" and "owns no code". The tier, the answering
+> of questions and "the record stands" are my additions. Say yes, or tell me what to change. After that it goes to
+> Glowie to read and then to you to merge, as version 3.
+>
+> Meanwhile I'm starting the Road Bible, with mason as the one builder and the duets as step 1.
+
+The owner: "Yes, go ahead."
+
+Deputy's note: this is the owner's word for a change to the rules (rule 4). The planning thread writes the paragraph
+above into the cast's fourth tier, word for word, raises the version to 3 and changes nothing else. The review thread
+reads the change before it merges (rule 6 e), and it then waits for the owner's merge.
+
+Concerns: the planning thread (the change to the rules); the review thread (rule 6 e); the coordinator (the wake of
+the review thread once the change's PR is ready, and, when the change merges, telling every thread, each of which
+then reads the rules again, rule 4); the precursor, once it is started.
