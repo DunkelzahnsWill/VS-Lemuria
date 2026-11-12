@@ -2,20 +2,23 @@
 
 **The standing rules are the Commandments, `record/COMMANDMENTS.txt`. Read them in full before anything
 else.** Where this file or `README.md` seems to say otherwise, the Commandments and the Road Bible stand,
-and the doubt goes to the coordinator under rule 1. This file only points the way and keeps the
+and the coordinator is told so the file can be put right. This file only points the way and keeps the
 repository rules below.
 
-- **Your role and what you own** come from the Road Bible, `record/road-bible.md`: part 3 gives each
+- **What you own** comes from the Road Bible, `record/road-bible.md`: part 3 gives each
   feature its number, owning thread and folders, part 4 every shared file. Outside `record/`, change only
-  what you own there or have been handed under the rules.
+  what you own there or have been handed under the rules. Your role's name comes from the coordinator,
+  and the standing threads' offices from the Commandments' cast.
 - **The record** lives in `record/`. Each time you start work, read what rule 5 lists: the rules, the
   Road Bible, the briefs of the features you will work on (`record/briefs/`), your map and your diary from
   your last "Next:" entry, and the new entries of `rulings.md`, `player-diary.md` and `findings.md`. Keep
-  your own folder, `record/diary/<role>/`, one file to an entry. The old design notes, the roadmap and the
+  your own folder, `record/diary/<role>/`, one file to an entry, but where rule 5 says otherwise (the
+  review thread's diary is `findings.md`, and the record thread writes the coordinator's folder). The old design notes, the roadmap and the
   old diaries in `/mnt/project-files/diary/` are old paper: read-only history, which the record outranks.
 - **Every change reaches `main` through a pull request; never push to `main`.** How each kind of PR may
   merge is rule 4, and that list is the authority. Threads never merge by hand and never publish. Assign
-  every PR that waits for the owner's merge to the owner (`DunkelzahnsWill`), and explain plainly any Git
+  every PR that waits for the owner's merge to the owner (`DunkelzahnsWill`), but a PR the review thread
+  is woken to read only once its description cites the review's report, as rule 4 says; and explain plainly any Git
   step the owner must take.
 - **No code for a feature before its brief is settled** (rule 2), experiments on `spike/<name>` aside. One
   unmerged feature per thread at a time (rule 3).
