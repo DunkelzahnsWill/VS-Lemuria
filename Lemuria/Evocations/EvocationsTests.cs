@@ -592,6 +592,20 @@ public class EvocationsTests
         logger.Notification("Evocations test: Ignite aimed at {0} with no chimney, cast {1}, it burns: {2}; with its chimney on, cast {3}, it burns: {4}",
             aimed && aimedAgain ? "a loaded bloomery" : "something else", YesNo(cold), YesNo(coldBurns), YesNo(lit), YesNo(bloomery.IsBurning));
         hen.Die(EnumDespawnReason.Removed);
+        // A machine's fire is its carver's (G58): with no carver the game knows, a machine's Ignite at
+        // bare granite sets no fire on its face, where a cast with no machine does.
+        var floor = origin.AddCopy(1, -1, -1);
+        var flameAt = floor.UpCopy();
+        var above = floor.ToVec3d().Add(0.5, 3, 0.5);
+        var machineCast = CastContext.Aim(sapi, null, null, Crystal.Fire, 1, above, new Vec3d(0, -1, 0), new MachineCast { ActorName = "a test machine" });
+        bool machineActed = Effects.Apply(machineCast) == Effects.Outcome.Acted;
+        bool machineFire = Accessor.GetBlock(flameAt).Code?.Path == "fire";
+        Accessor.SetBlock(0, flameAt);
+        bool handActed = CastAt(Crystal.Fire, 1, above, floor.ToVec3d().Add(0.5, 0.9, 0.5), out _);
+        bool handFire = Accessor.GetBlock(flameAt).Code?.Path == "fire";
+        Accessor.SetBlock(0, flameAt);
+        logger.Notification("Evocations test: a machine with no carver known aimed at bare granite, cast {0}, a fire on its face: {1}; a cast with no machine, cast {2}, a fire: {3}",
+            YesNo(machineActed), YesNo(machineFire), YesNo(handActed), YesNo(handFire));
         var pilePos = origin.AddCopy(4, 0, 2);
         Accessor.SetBlock(Id("game:groundstorage"), pilePos);
         if (Accessor.GetBlockEntity(pilePos) is BlockEntityGroundStorage pile)
