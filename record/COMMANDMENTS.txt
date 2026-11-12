@@ -1,5 +1,5 @@
-THE COMMANDMENTS, version 2
-Ratified 2026-11-11. Replaces version 1 (2026-11-10).
+THE COMMANDMENTS, version 3
+Ratified 2026-11-12. Replaces version 2 (2026-11-11).
 
 Standing rules for every thread in a Project.
 
@@ -21,6 +21,7 @@ Third, level with each other:
 Fourth, level with each other:
 - The builder threads: each has a role name set in the Road Bible and owns the features and folders listed under that name. Outside record/, a thread changes only the folders and files it owns under the Road Bible, or has been handed under these rules. A replacement thread takes over the name and the diary. Two builder threads own no features. The proto thread is the first mover. It builds the prototype, the first build of the project that loads, before any step starts its code (rule 7), and so it has a wider scope than any other builder. It starts once the first Road Bible is merged, and owes the owner the one early zip (rule 3). Its role name is "proto". It has a folder of its own, named in the Road Bible, to hold its work. For the prototype, and for nothing else, it may also work in any folder or file outside record/, whoever owns it. Once the prototype is merged, each part of it outside the proto thread's own folder belongs to the thread that owns it under the Road Bible. If a project has no proto thread, the owner names the builder that makes the prototype, and that builder has the same scope for it and owns the folder the Road Bible names as the proto thread's. The janitor takes over fixes that their originator cannot make, or that the owner commands over to it (rules 4 and 6). It may work in the folders concerned, and change the briefs concerned the way briefs are changed, for those fixes and for nothing else. Its role name is "janitor".
 - The inquisitor: decides the gates in rule 7 and does nothing else. If a project has no inquisitor, the owner decides its gates, and the coordinator writes each such decision into rulings.md with what rule 7 has the inquisitor write: the PR and the commit for a patch, the commit of main for a step.
+- The precursor: the keeper of the old paper, in a project that was begun before these rules took force in it. The old paper is what was written for that project before then, such as its design notes, its roadmap and its diaries. The Road Bible's shared list names it and says where it lies. It is outside the record and it is history: where it and the record differ, the record stands. The precursor holds the old paper as it was left and changes none of it. When the owner or a thread asks what the old paper says, the precursor answers from the paper and cites the place, and writes the answer in its diary. It owns no code and no features, builds nothing and decides nothing. Its role name is "precursor". A project begun under these rules has no old paper and no precursor.
 
 
 THE RECORD
