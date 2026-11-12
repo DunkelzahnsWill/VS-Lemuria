@@ -100,7 +100,8 @@ the record.
 - **Cost.** A reading adds one daylight read, counts of signs among the blocks already read, a look into the
   containers in the cube, and one creature query: about a tenth more per reading. A death checks only the crystals,
   cradles and Gathers within 8 blocks. A Glint is looked at every 30 seconds.
-- The smoke test's Death Focus check fails by chance (G43); its fix follows as a patch, with the waits.
+- When this brief was written (main at a1aae13), the smoke test's Death Focus check failed by chance: a creature or
+  dropped item in the Focus's line takes the aim before the flower (G43); PR #62 fixed it, merged on 2026-11-12.
 
 ## Settings
 
@@ -114,9 +115,9 @@ Glowing).
   evocation (feature 6). With the claims switch off, claims spare nothing, by feature 6's rule.
 - **The Glint.** With the switch on, setting a crystal into a Glint inside another player's claim, or taking one out,
   needs their permission, as a chest does. With the switch off it opens there (R9). Breaking or placing a Glint there
-  stays as the game rules it. **Built so far:** the Glint asks the switch, but the game refuses a use inside a claim
-  before it asks the block, so with the switch off the use is still refused (G16). The fix follows this brief as a
-  patch.
+  stays as the game rules it. **When this brief was written** (main at a1aae13), the Glint asked the switch, but the
+  game tests a claim before a block's own interaction, so with the switch off the use was still refused (G16); the
+  fix follows this brief as a patch.
 
 ## What it will not do
 

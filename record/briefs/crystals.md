@@ -52,11 +52,11 @@ paper differ, this brief is the record. A step number below with "old" is an old
    ages, or a player's inventory, where everything carried counts as one container, the cursor and crafting grid
    included. When twins meet, both notes fall silent under a *discordant hum*, two tones a semitone apart that beat
    faster and louder, where the crystals stand, at the chest or around the player. If they are still together 30
-   seconds later, the dialogue acts at the average of the two Evolutions, rounded down (Glittering 1, Glowing 2),
-   never below 1, and both suffer it:
-   - level 1 (Glittering with Glittering or Glowing): both *neutralize*, turning Unaligned of their own Evolution and
-     losing any charge, with one dull thud;
-   - level 2 (Glowing with Glowing): both *discharge*, losing all charge with a crackle, and one of them, picked at
+   seconds later, the dialogue acts at the average of the two Evolutions, rounded down, never below Glittering, and
+   both suffer it:
+   - at Glittering (Glittering with Glittering or Glowing): both *neutralize*, turning Unaligned of their own
+     Evolution and losing any charge, with one dull thud;
+   - at Glowing (Glowing with Glowing): both *discharge*, losing all charge with a crackle, and one of them, picked at
      random, *cracks* 1 time in 3.
    Twins pair off one for one, nearest first. A dialogue happens only when it changes something, so empty Glowing
    twins raise no warning, and twins left together do not charge. A crystal in a jar or on a rack never dialogues
@@ -135,10 +135,13 @@ In `ModConfig/lemuria.json`, read by the server: `FindChanceSmall` 0.04, `FindCh
 
 Every claim rule goes through the one claims switch (standing rule 7, `Lemuria/Core/`). With the switch on, the
 strike on a placed crystal inside another player's claim needs their permission, as using a block there does. With
-the switch off (R9), every use by hand of a placed crystal there opens: the strike, and the Crystal Rod's making
-(feature 8). Breaking or placing a crystal there stays as the game rules it, whatever the switch says (the card of
-2026-11-10, and R9). **Built so far:** the strike asks the switch, but the game refuses a use inside a claim before it
-asks the block, so with the switch off the use is still refused (G16). The fix follows this brief as a patch.
+the switch off (R9), it opens there. The strike is a held crystal's click, which the game does not test, and it asks
+the switch itself: this is built. The Crystal Rod's making from a placed crystal is feature 8's, and its brief says
+what holds for it. Breaking or placing a crystal there stays as the game rules it, whatever the switch says (the card
+of 2026-11-10, and R9).
+
+A dialogue asks no claim: a twin set down outside a claim, within 3 blocks of a crystal inside it (placed, in a
+cradle, in a socket or in a Glint), dialogues with it as with any twin, and both suffer it. This is as built.
 
 ## What it will not do
 
@@ -167,11 +170,12 @@ asks the block, so with the switch off the use is still refused (G16). The fix f
 10. Break ruin loot vessels of the ore and tool kinds: now and then a precursor crystal, a Mystery about half as often
     as an Elemental.
 11. With the claims switch off (`/lemuria claims off`), in another player's claim, strike a chisel on their placed
-    Unaligned crystal: it works (needs a second player; after the R9 patch).
+    Unaligned crystal: it works (needs a second player). Set a twin just outside their claim within 3 blocks of
+    their crystal: they dialogue.
 
 ## Open questions
 
-1. Is "every Lemuria block used by hand opens" with the switch off meant for the strike on a placed crystal and the
-   rod's making? **Answered:** R9, "Every feature reads the same switch".
+1. Is "every Lemuria block used by hand opens" with the switch off meant for the strike on a placed crystal?
+   **Answered:** R9, "Every feature reads the same switch".
 2. The Mysteries' loot rates: **answered** for now (the owner, 2026-11-10: half, for testing); revisiting them waits on
    the unplaced list, not on this brief.
