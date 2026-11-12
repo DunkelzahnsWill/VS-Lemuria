@@ -144,8 +144,10 @@ wrote into the concept). With the claims switch on, inside another player's clai
 they gave you access, as with building there: blocks, containers, creatures and players in the claim are spared, and
 the rest of the area still works. Lava made by Ignite runs as natural lava does, into a claim too; only the rock it
 melts is claim-checked. A fire Ignite sets is the caster's, so the game's own spread of it stops at any claim where
-the caster may not build, whatever the switch says. A machine's cast has no caster, and feature 8's brief says what
-holds for its fire. With the switch off, evocations no longer spare a claim. This is
+the caster may not build, whatever the switch says. A machine's cast has no caster: the fire it sets is its
+carver's, and where the game does not know the carver it sets none on a face, as feature 8's brief says (R27, G58).
+When this brief was written (main at a1aae13), a machine's fire had no starter, so the game held its spread at no
+claim; the fix follows feature 8's brief as a patch. With the switch off, evocations no longer spare a claim. This is
 **built** (`CastContext`).
 
 Nothing in Lemuria asks the server's PvP setting. Players are targets like creatures; Wither by hand names its
