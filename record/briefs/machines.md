@@ -246,6 +246,8 @@ old paper differ, this brief is the record.
   while no base comes near it.
 - Every working is claim-checked block by block before it changes the block it works on, and the game's audit log
   records each fire a machine starts and each block of rock it melts under its carver's name.
+- A machine pays from its whole network, which may reach into a claim: a network takes no account of a claim's edge
+  (feature 4's brief, Claims; the owner declined G68, R28). Built.
 - When this brief was written (main at a1aae13), the smoke test's Motor check failed by chance on a slow runner,
   reading the quern's speed only once (G43); PR #61 fixed it, merged on 2026-11-12.
 

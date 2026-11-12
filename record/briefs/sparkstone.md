@@ -112,6 +112,12 @@ interaction, so with the switch off a socket's use was still refused (G16); and 
 all, so with the switch on a stranger could draw charge from a crystal, a cradle's crystal or a network inside
 another player's claim (G57). Both fixes follow this brief as patches.
 
+A network takes no account of a claim, whatever the switch says: Awakened blocks that touch join one network
+whoever set them down and wherever they stand, its charge is shared across a claim's edge, and a draw or a
+machine's working anywhere on it takes from the whole of it. So a block set just outside a claim, touching a
+network inside it, reaches that network's charge. The owner declined to change this (G68, "Decline", 2026-11-12
+19:57Z, R28). It is built.
+
 ## What it will not do
 
 - No Ascendant or Sovereign stone, room for 8 or 16, healing or reshaping: features 16 and 23.
