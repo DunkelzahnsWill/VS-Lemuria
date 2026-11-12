@@ -394,7 +394,9 @@ the code, and G17 to G20 are carried as the old audit left them.
 ## G13. Flaw: a struck Gather block forgets its strike through a restart
 
 **Rank.** Flaw, naming step 1. **Owning thread.** Mason (held by the coordinator until mason starts).
-**Carried from.** The old audit, under its finding 10 ("Not fixed yet"). **Status.** Open.
+**Carried from.** The old audit, under its finding 10 ("Not fixed yet"). **Status.** Closed. Corrected by PR #75 at
+commit 31e770e, merged on 2026-11-12 at 19:19Z (merge commit e02ef64) on the inquisitor's verdict of "in". G69 says
+what I held the fix against.
 
 - **The code, main at a83a83a.** Lemuria/Machines/BlockEntityMachine.cs keeps the strike in `skyBoostUntil` (line
   55, set at line 445, read at line 411). `ToTreeAttributes` and `FromTreeAttributes` (lines 619 to 654) neither
@@ -412,7 +414,8 @@ the code, and G17 to G20 are carried as the old audit left them.
 ## G14. Flaw: a Gather block forgets the hour after a death through a restart
 
 **Rank.** Flaw, naming step 1. **Owning thread.** Mason (held by the coordinator until mason starts).
-**Carried from.** The old audit's diary, last entry. It is not in the old report. **Status.** Open.
+**Carried from.** The old audit's diary, last entry. It is not in the old report. **Status.** Closed. Corrected by
+PR #75 at commit 31e770e, with G13 (G69).
 
 The same gap as G13, one line down. `deathBoostUntil` (BlockEntityMachine.cs line 56, set at line 454, read at line
 415) came in with PR #9 and is not saved either, while a standing Death crystal and a cradle save theirs
@@ -423,7 +426,9 @@ sit in the same two functions of one file.
 ## G15. Flaw: a Fire cast at a block that takes the flame and stays cold still pays (old finding 16)
 
 **Rank.** Flaw, naming step 1. **Owning thread.** Mason (held by the coordinator until mason starts).
-**Carried from.** The old audit's finding 16 ("Noted only", then "Not fixed yet"). **Status.** Open.
+**Carried from.** The old audit's finding 16 ("Noted only", then "Not fixed yet"). **Status.** Closed. Corrected by
+PR #78 at commit 77e744f, which the owner merged on 2026-11-12 at 19:35Z (merge commit 0af9ea7; R7, R27). G69 says
+what I held the fix against.
 
 - **The code, main at a83a83a.** `TryIgnite` in Lemuria/Evocations/Effects.cs (from line 306) hands the block the
   flame and answers "lit" without asking whether it caught. A loaded bloomery with no chimney takes the flame and
@@ -2633,7 +2638,9 @@ is not safe from Lemuria with the claims switch on: G57, G58 and G61. Each matte
 ## G57. Flaw: the Crystalline Chisel draws charge inside another player's claim with the claims switch on
 
 **Rank.** Flaw, naming step 1. **Owning thread.** Mason, the one builder (R5, R15): the code lies in feature 4's
-folder. **Raised in.** The read of the nine briefs (G56). **Status.** Open.
+folder. **Raised in.** The read of the nine briefs (G56). **Status.** Closed. Corrected by PR #81 at commit 40f783c,
+merged on 2026-11-12 at 19:19Z (merge commit c4ed9f7) on the inquisitor's verdict of "in": the draw now asks the claim
+at the block that is clicked (G69). What a network still gives across a claim's edge is a finding of its own, G68.
 
 - **The code, main at 15205d9.** Lemuria/Sparkstone/ItemCrystalChisel.cs. A right-click of the chisel on a placed
   crystal, a cradle or a sparkstone block (`OnHeldInteractStart`, from line 145) calls `Draw` (from line 196), which
@@ -2659,7 +2666,7 @@ folder. **Raised in.** The read of the nine briefs (G56). **Status.** Open.
 
 **Rank.** Flaw, naming step 1. **Owning thread.** Mason: the code lies in feature 6's folder, and feature 8's machines
 work through it. **Raised in.** The read of the nine briefs (G56), under the fourth point of G50. **Status.** Open.
-The owner may decline it: see "Why a flaw".
+The owner does not decline it: the owner's word of 2026-11-12, 19:35Z, is "G58.) Fix" (R27).
 
 - **The code, main at 15205d9.** Where Ignite finds nothing that a flame could light, it sets the game's own fire on
   the face aimed at (`SetFire`, Lemuria/Evocations/Effects.cs from line 385) and tells the game who started it:
@@ -2774,8 +2781,8 @@ its brief.
 ## G61. Flaw: a machine's containers are asked for no claim, so its shelf draws stock from a chest in another's claim
 
 **Rank.** Flaw, naming step 1. **Owning thread.** Mason: the code lies in feature 8's folder. **Raised in.** The read
-of PR #72 (G62), from a point of the read of the nine briefs (G56). **Status.** Open. The owner may decline it: see
-"Why a flaw".
+of PR #72 (G62), from a point of the read of the nine briefs (G56). **Status.** Open. The owner does not decline it:
+the owner's word of 2026-11-12, 19:35Z, is "G61.) Fix" (R27).
 
 - **The code, main at 15205d9.** A machine's stock comes from the container at its Control Shelf's left. Its yields go
   into the container at the shelf's right or, with no shelf, into a container that touches the machine (`Input` and
@@ -3274,3 +3281,65 @@ Next:
 - **Open findings:** flaws G13 to G16, G57, G58 and G61 (mason). The fixes for G13, G14 and G57 are merged, and their
   Status lines wait for my read. No blocker is open.
 - **Read up to:** rulings.md R26, player-diary.md none (the file does not exist), findings.md G67.
+
+## G68. Flaw: a network joins across a claim's edge, so a block set just outside a claim reaches the charge inside
+
+**Rank.** Flaw, naming step 1. **Owning thread.** Mason: the code lies in feature 4's folder, and feature 8's machines
+pay through it. **Raised in.** The read of the merged fix for G57 (PR #81 at 40f783c), for that finding's Status line
+(G69). **Status.** Open. The owner may decline it: see "Why a flaw".
+
+- **The code, main at e33cc0c.** Lemuria/Sparkstone/SparkstoneNetworks.cs. A network is every loaded Active Awakened
+  block that touches the next face to face (`NetworkOf`, from line 51), whoever set it down and wherever it stands:
+  the file asks no claim anywhere. Every block of a network is kept equally full (`Update`, from line 105). Whatever
+  is taken is taken from the whole of it: by the chisel's draw (`Draw`, from line 160), and by every working that a
+  machine pays for (`TryPay` and `CanPay`, from lines 180 and 201, called from MachineWork.cs, BlockEntityMachine.cs
+  and Felling.cs in Lemuria/Machines/). The machine's claim rule, `MayChange`, is asked for the blocks, creatures and
+  players that a working changes, and not for the stone that pays for it.
+- **What follows in play,** with the switch on, as it is by default, where a network inside a claim has a block at the
+  claim's edge.
+  - *By hand.* A player with no permission in the claim sets an Awakened block down outside it, against that block, or
+    sets polished rock there and awakens it. Both are allowed, because the place is outside the claim. The two blocks
+    are one network at once, since a draw works the network out anew. The player right-clicks the outside block with
+    the chisel. The fix for G57 asks the claim at the clicked block, which is outside the claim, so the draw goes
+    ahead, and it takes from the whole network: up to the chisel's room at a time (`ChiselCapacity`, 100), and again
+    each time the chisel has spent it. That is what G57 found, done from one block further out.
+  - *By a machine.* A machine carved outside the claim, from such a block, pays for its workings from the whole
+    network, the charge of the stone inside the claim included.
+  - *Both ways.* The block outside gives as well as takes. It adds its own room to the network (`SparkstoneCapacity`,
+    50), and what a crystal or a Gather block pours into it is shared with the stone inside the claim. Nothing but
+    charge moves, and nothing inside the claim is opened or broken.
+  - *What the claim's owner can do.* Keep the network one block inside the claim's edge: the game lets no stranger
+    build inside a claim, so no stranger can then set a block against it. Or tap the blocks at the edge Dormant with
+    the Crystal Rod: a Dormant block passes no charge, and the rod's tap asks the claim, so a stranger cannot tap it
+    back.
+- **What the record says.** Standing rule 7 has Lemuria's workings spare what lies inside another player's claim, "and
+  only a Bale storm's scars do not". The machines' brief has: "With the claims switch on, a machine changes nothing
+  inside a land claim, no block, creature or player, unless it stands inside that same claim." The brief of feature 4
+  says of the chisel's draw, with the two uses of a socket, that "with the switch on they need the claim owner's
+  permission". And it says of a network, as the design: "Awakened blocks that touch face to face form one *network*",
+  and "The chisel draws from any block, and the whole network gives." No brief says which of these holds where a
+  network meets a claim's edge, and rulings.md says nothing of it. A search of the ten diaries of the old threads for
+  a claim named beside a network or an edge finds nothing. I did not ask the precursor for the old design notes:
+  mason, who wrote the briefs from them, knows of nothing there (below).
+- **Why a flaw, and why the owner may decline it.** G57 was a flaw because a stranger could draw the charge of a
+  network that stands in a claim. Its fix refuses the click inside the claim, and the same charge can still be drawn
+  from one block outside it. And the machines' brief keeps a rule that the code does not keep for the charge of
+  claimed stone. So I take it as a fault, of a kind with G61, where a shelf outside a claim draws goods from a chest
+  just inside it, and the owner's word on that one is "Fix" (R27). Against that stands the design. Charge "moves
+  through touching stone" (the concept, the crystal cycle, point 7), a network is one thing wherever its blocks stand,
+  the stone outside gives as well as takes, and the claim's owner can keep clear of the edge. If the owner takes
+  touching stone as one network, whoever's land it stands on, the owner declines this flaw and the brief of feature 4
+  says so.
+- **Why it is a finding of its own, and G57 is closed.** What G57 named is corrected: the draw asks the claim (G69).
+  What is left lies in how a network is made, and not in the chisel: a machine reaches the same charge with no chisel
+  at all. Its cure is another one, and it changes what a player sees.
+- **What I did not do.** I read it in the code and did not run it. It needs a claim that is not the tester's own, so a
+  second player (standing rule 10).
+- **How it is settled** is for the owner first, and then for mason, rule 4 and the inquisitor, not for me. I told
+  mason before I signed. Its answer of 19:34Z: "I see it as you do." It takes the flaw as its own, "which the owner
+  may decline, of a kind with G61", and writes no code before the owner's word. It searched the old diaries and the
+  record and found nothing: "As far as I know, the owner has never said." And of a cure: "the likely way is for a
+  network to stop at a claim's edge for anyone who cannot use the claim. That changes how stone joins in play, so it
+  needs a brief change first." So a cure goes by a change to the brief of feature 4, which I read and the owner
+  merges, and by a patch after it, whose verdict is "out" (rule 4). The planning thread's later change to standing
+  rule 7's sentence (G60, point 4) has this to weigh as well.
