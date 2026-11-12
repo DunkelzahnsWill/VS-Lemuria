@@ -8,7 +8,9 @@ they stand, and the map is wrong.
 
 First written on 2026-11-12, and held against the Road Bible as main had it at commit ed17dad. The plan was rewritten
 on 2026-11-12 at 18:31Z, and its first point again at 20:08Z, after the owner had merged PR #76. The whole map was
-then held again against the Road Bible as main had it at commit 9168841.
+then held again against the Road Bible as main had it at commit 9168841. The plan's second point got its sentences on
+standing rule 7 at 20:31Z, after the owner had merged PR #108, and the whole map was held once more against the Road
+Bible, as main has it at commit 0945041.
 
 ## Where I fit
 
@@ -61,7 +63,13 @@ This part is mine, and I rewrite it when the work changes.
    words I leave until part 2 is changed for another reason, and then I take the words that G66 offers for them.
 2. **Before each numbered step's first brief:** look at that step's features again, with mason, and change part 3
    first if the step is cut wrongly. My entry of 04:42Z calls the cuts of the features not yet built the least certain
-   part of the book.
+   part of the book. In the same look I hold the step's features against standing rule 7. Since PR #108, which the
+   owner merged on 2026-11-12 at 20:26Z, the rule names the "only three things" of Lemuria's that do not spare another
+   player's claim while the switch is on, and every brief keeps the standing rules. So a feature that is to reach into
+   a claim needs a change to the concept before its brief can say so, and that change goes by the review thread's read
+   and the owner's merge, or by the owner's command (rule 4). Finding G77 names, in its third point, features that
+   will meet the list: reactions of twins from Luminous up (feature 13), and exposure, beams, goods beams and Storm
+   Call's lightning (features 12, 15, 17 and 18).
 3. **The unplaced list:** when the owner places an earmark, it is placed by a change to part 3, as a feature of its
    own or inside one, as the book has it.
 4. **Whenever a ruling or an entry of player-diary.md calls for a change to the book:** that change comes before any
