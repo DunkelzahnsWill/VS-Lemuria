@@ -93,8 +93,10 @@ and 9 too. Its code follows as a patch, once this change merges; where an item b
       a drain's turn being one block worn, panned or put back. While an Earth crystal is in the socket the drain wears
       its room as today. A turn with nothing to do passes at once to the next crystal, as a Dormant crystal is passed
       over: the Memory looks every 10 seconds, a machine's pace, and an Earth crystal's turn ends when it has worn one
-      step or cannot wear now (its network at half or above, or no block left to wear), so Sky and the Unaligned crystal
-      come round whatever the network holds.
+      step, after a look in which it paid stored charge back, or when it cannot wear now (its network at half or above,
+      or no block left to wear), so Sky and the Unaligned crystal come round whatever the network holds. A drain that
+      already holds two crystals when a Memory is set against it works as a drain with none, and its Memory sits still
+      until one is taken out, unless the Memory is blind (item 14).
     - *The fill stands out of reach* (G96; R41, 1, "A"). The fill's Earth crystal stands in the open in its socket, so
       a Sky crystal in the drain's socket dialogues with it when the two stand within 3 blocks of each other, counted
       as feature 1 counts it, in every direction and diagonals included. Panning is safe only where the fill stands out
@@ -106,9 +108,9 @@ and 9 too. Its code follows as a patch, once this change merges; where an item b
       container touching the drain. With no sand, no container or a full one, it is a free miss.
     - *The room with a hole.* A block a drain panned keeps its place in the room: both stones go on working, it holds
       nothing, and the room's size in the count the stones show drops by its 200 ("Stored 1,000 of 5,200") until stone
-      is put back; what is stored drops by what the panned sand held, so charge fed into sand is lost when it is panned.
-      The drain remembers the blocks it panned, through a restart. Any other empty block still rests the room (feature
-      8, item 21).
+      is put back; what is stored drops by an even share, the count divided by the room's weak blocks, so charge fed
+      into sand is lost when it is panned. The drain remembers the blocks it panned, through a restart. Any other empty
+      block still rests the room (feature 8, item 21).
     - *Putting stone back,* the "control crystal". An Unaligned crystal in the drain's cycle works a Control Shelf set
       against the drain. The shelf's one action on a drain: it puts one block from its input, of the kind standing on
       the shelf (sand, gravel, cobblestone, cracked rock or raw rock), into the panned block nearest the bottom, at a
