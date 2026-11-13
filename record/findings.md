@@ -6202,3 +6202,393 @@ The second point is the one that can still be acted on.
    it one more way around that. The rules grow from 43,462 characters to 44,355. The record thread's part of the cast
    grows from 6,045 characters to 6,936, which is more than half of the cast. A coordinator that could open the repo
    would need none of it.
+
+## G102. Report under rule 6 (a): a twelfth standing rule, on Elementals and Mysteries (PR #184 at e499793)
+
+**Written.** 2026-11-13 00:15Z. Woken by the record thread on 2026-11-12 at 23:50Z.
+
+**What I read.** PR #184, branch road-bible/standing-rule-12, the planning thread's, with its description as it stood
+at 00:10Z on 2026-11-13. It has two commits. 0f1b71c of 23:32Z changes the Road Bible in two places and adds the
+planning thread's entry of 23:32Z. e499793 of 23:48Z adds its entry of 23:48Z and nothing else. In all 200 lines in
+and 2 out, in 3 files; of the book, 10 in and 2 out. I read the diff of the book, both entries and the description
+whole. The check `build` passed on e499793 at 23:49Z. The PR is not assigned, by its description it is never set to
+merge by itself, and it joins main at eb0b6b1 without a conflict, as it joins PR #171 and PR #182.
+
+**The rules and the book.** My context was cut a twenty-first time on 2026-11-12 at 23:54Z. In the same minute I read
+the rules in full, version 6 as main has it, and then the Road Bible in full as main has it, and I held both
+checksums: e24e82285a0e441e and 9fd75aae44f10c4d. The book as the PR has it has 570 lines and 43,050 characters
+(2a612373026ee8c8). By a program it is the book on main but for the two places below.
+
+**The owner's words.** The coordinator asked: "One more for a yes or no: the planning thread would add your sentence
+to the Road Bible as a design rule, that Elementals are the efficient choice and Mysteries act beyond them." The owner
+answered on 2026-11-12 at 23:12:41Z, the whole message (R39): "Yes, however that may be a slight mis-characterization.
+Elementals are basic, and simple. Efficient in the mode of operation as they directly map onto the real world, and
+functions within it. Mysteries work more "broadly" within concepts. IE: It is inherently easier, mechanically, to
+set-fire to an object via a crystal due to there already being multiple ways to set something on fire within the
+world. However forcing a berry bush to bloom, something counter to the natural state of the world, is counter to the
+nature of The World." And at 23:16:49Z (R41): "Open.) Yes, as previously stated." The sentence that the question calls
+the owner's is R36's, on Bloom: "So it is inherently more efficient to use Elementals over Mysteries, however
+Mysteries inherently act in ways "beyond" what an elemental can achieve." R38 has what the price may say: to mason's
+offer of 4 times, "3.) Sounds reasonable"; to whether the hand pays more too, "4.) Both machines and evocations"; to
+whether a Glint burns more, "6.) No."
+
+**The change.** Both places are in part 1, under "The standing rules of the design".
+- *A twelfth rule,* after rule 11. Its heading: "**Elementals are basic, and Mysteries work more broadly** (the owner,
+  2026-11-12, after this book's merge; R36, R38 and R39)." Its text: "The Elementals are basic and simple: they map
+  directly onto the world and the functions within it, and that makes them efficient in how they work. The Mysteries
+  work more broadly, within concepts. It is inherently easier to set fire to an object with a crystal, because the
+  world already has multiple ways to set something on fire, than to force a berry bush to bloom, which runs counter to
+  the natural state of the world. So a Mystery's evocation, cast by hand or worked by a machine, costs more charge
+  than an Elemental's cast or worked the same way at the same Evolution. How much more is for the briefs to say, and a
+  machine's price stays on the one scale of rule 6."
+- *The head of the list,* which says what among the standing rules is not older than the book. It named two things and
+  names three: "the last sentence of rule 3, which is new with this book, what rule 7 names as settled after this
+  book's merge, and rule 12, which the owner gave after it." I had asked for that place at 23:43Z, and the first
+  commit already had it.
+
+**Which way it goes.** It changes the concept, so it goes by my read and then the owner's merge (rule 4). It does not
+go by the owner's command: the owner's words name no change to the book, and the planning thread wrote the rule from
+them. So the test here is not whether the change matches a command. It is whether the rule is true to what the owner
+said, and the owner's merge then settles its words.
+
+**The rule held against the owner's words.**
+- *Its first two sentences* are R39's, almost word for word. Three words of the owner's are left out: "real", of the
+  world; "mechanically"; and "IE:". The planning thread says why in its entry and tells the owner so in the
+  description, with the offer to put any of them back. I see nothing lost. The book says "the world" of the game's
+  world throughout, and a "real world" in the concept would raise the question which world is meant.
+- *Its third sentence* makes one comparison of the owner's two sentences on fire and on the berry bush, and keeps them
+  as an example. It does not say that every Mystery runs counter to the world, and that is right, since the owner did
+  not say it (G104, its first point).
+- *The owner's short form is gone.* The owner called it "a slight mis-characterization". So the rule does not say that
+  Elementals are the efficient choice, and it does not use R36's word, that the Mysteries act beyond the Elementals.
+  Where R36 and R39 differ, R39 is the later and the fuller, and the rule follows it.
+- *Its fourth sentence* is the price, from R36 and R38: the owner raises "the charge consumption of all mysteries",
+  and has the hand pay as well as a machine. The rule prices "a Mystery's evocation" and nothing else of a Mystery
+  crystal. That reading is the planning thread's, and it fits the owner's "No" on the Glint. What it leaves to the
+  briefs is G104's second point.
+- *The words "the same way at the same Evolution"* are the planning thread's own, and they are needed. An over-driven
+  cast costs twice, an Amplify doubles a working's cost, and a crystal in a Scatter works one Evolution of power lower
+  for the same charge. Without those words a brief would seem to break the rule wherever an over-driven Elemental cast
+  costs more than a plain Mystery one. With them I found no place in the briefs, as main has them or as PR #182 has
+  them, where the rule is broken once the price is in: by hand 40 and 80 against 10 and 20, in a machine 4, 8 and 16
+  against 1, 2 and 4, and in a Scatter a Glowing Mystery crystal's 8 against a Glowing Elemental's 2.
+- *It names no number.* The owner's "Sounds reasonable" was to mason's 4, and the 4 stays in the briefs. No other
+  standing rule gives a price as a number either: rule 4 says "far more efficient", and the ten is the briefs'.
+- *Its last words,* "a machine's price stays on the one scale of rule 6", keep rules 6 and 12 from seeming to
+  disagree: the Mysteries' price is a factor on the one scale and no second scale.
+
+**Held against the other eleven standing rules, and the rest of the book.**
+- Rule 2: the rule uses "Evolution" as the scale's own word. Rule 3: it uses "evocation" of a machine's working as
+  well as of a cast. The book's table has "Naked evocation" for the hand's, and part 3 has "their four evocations" for
+  the workings themselves, so the word keeps its one meaning.
+- Rule 4: "A machine doing the same work is far more efficient." With the same factor by hand and in a machine, a
+  machine stays ten times ahead for a Mystery as for an Elemental. That was the reason given to the owner with R38's
+  fourth question.
+- Rule 5 is of sources of charge. The rule says nothing of what a Mystery crystal gathers, and the briefs leave it as
+  it is.
+- Rules 1 and 7 to 11 are not touched.
+- Elsewhere the book speaks of price only in the crystal cycle ("It is wasteful on purpose") and in step 1, which
+  places "limits on how often and how strongly machines Bloom" there "for the brief to settle". Both stay true. The
+  brief that settles the second is PR #182.
+
+**What the change makes untrue elsewhere** (rule 6).
+- *The settled briefs.* Every brief keeps the standing rules, and three on main do not keep this one. The brief of
+  feature 6 has every cast spend "a tenth of a full crystal". The brief of feature 9 has each Mystery cast for "a
+  tenth of a full crystal a cast" and worked by a machine "as it works any crystal's evocation (feature 8), for a
+  working". The brief of feature 8 prices a working by its power alone. PR #182 mends all three and the brief of
+  feature 10 with them. So rule 6 applies: "a change that makes a settled brief untrue goes to the owner with the
+  brief".
+- *The code* prices a cast and a working by the crystal's Evolution alone (`Evocation.Cost`, `Machine.WorkCost`). It
+  follows the briefs, by mason's patch after PR #182, whose verdict is out by rule 4.
+- *The Journal's built pages:* three of them, which PR #182 now names.
+- *Step 1's zip,* lemuria_0.0.1_74b1c9b.zip, was built before any of this. In it a Mystery costs what an Elemental
+  costs.
+- *README.md, CLAUDE.md and the five maps:* none speaks of a working's price, and none counts the standing rules, by a
+  search. The planning thread's map already says how a change that makes a brief untrue goes up.
+
+**The two entries.** The entry of 23:32Z says that the change is held, which it was until the coordinator called for
+it after the gate. The entry of 23:48Z says what came after and puts one sentence of the first right: "The standing
+rules name no number elsewhere either" was too wide, since rule 2 counts five growth stages and rule 7 three things.
+What holds is that no standing rule gives a price as a number, and the description says it so. The planning thread
+places the owner's thought in R38's fifth answer nowhere, because it "ends in a question" and is no earmark, and it
+tells the owner so. I agree with that.
+
+**What I put to the planning thread.** At 00:03Z on 2026-11-13 I told it that I find no fault and ask no change, and
+what I meant to write: the clearance to go only with PR #182, the two notes of G104 on the reason and on the reading
+of "all mysteries", and that I had asked mason to cite the rule in its briefs and not to restate the owner's reason in
+wider words. It answered at 00:10Z, after a cut of its own context and a new reading of both books. It agrees with all
+of it and asks no change. It also saw one thing more exactly than I had put it: the rule has no word such as only. It
+prices the evocation and says nothing of a Mystery crystal as a Refine block's pattern or in a Motor, so "the owner's
+merge of PR #184 settles neither place". Its description had said more than the rule in two places, and it put both
+right at 00:10Z, with no commit: the description now says that the rule is silent on those two places, that PR #182
+has both cost as any crystal, and that the record has no word of the owner's on them. I name them for the owner in
+G103.
+
+**The short of it.** The rule is true to the owner's words, it keeps the other eleven, and its guard words hold
+against the briefs. I find no blocker and no flaw. **PR #184 is cleared at e499793 for the owner's merge, together
+with PR #182 and before it.** Merged alone it would leave three settled briefs untrue. The counter-view is G104, which
+takes both PRs together.
+
+**What follows its merge.**
+- The concept has changed. The coordinator tells every thread, and each reads the Road Bible again in full before it
+  goes on (rule 5).
+- The record thread makes a new copy of the book for the coordinator.
+- PR #182 merges next, in the same sitting. Until it does, three settled briefs do not keep rule 12, and after it two
+  briefs cite a rule that the book then has.
+- Mason's patch follows the briefs and waits for the owner's merge.
+
+**How it merges.** By the owner's merge (rule 4), once its description cites this report and the owner is assigned. A
+later commit voids this report, other than one that brings main in or adds the planning thread's own entry.
+
+**For the planning thread.** PR #184 is cleared at e499793. Cite G102 in its description, assign the owner, and tell
+the coordinator and the record thread. G104 asks nothing of the text.
+
+**For the coordinator.** PR #184 goes on your list only with PR #182, and before it. PR #182 is cleared at 32ed4cc by
+G103, so both can go on one list. If the owner merges PR #171, PR #184 and PR #182 in one sitting, every thread reads
+each book once and not twice (G101, its third point).
+
+**For the record thread.** At the merge the book changes, so a new copy of it is due. If PR #171 has merged by then,
+its four copies are due as well.
+
+**For the owner.** PR #184 writes your yes of R39 into the Road Bible as a twelfth design rule, in your own fuller
+words: Elementals are basic and simple and map onto the world, Mysteries work more broadly, within concepts, and so a
+Mystery's evocation costs more charge than an Elemental's, by hand and in a machine. It names no number: the 4 times
+stays in mason's briefs, where balance can move it. Three of your words are left out, "real", "mechanically" and
+"IE:", and the planning thread puts any of them back at your word. It changes nothing in play by itself. Please merge
+it only together with mason's briefs, PR #182, which the coordinator will put on one list with it.
+
+## G103. Report under rule 6 (a): five briefs changed for Memory and the Mysteries' price (PR #182 at 32ed4cc)
+
+**Written.** 2026-11-13 00:15Z. Woken by the record thread on 2026-11-12 at 23:40Z.
+
+**What I read.** PR #182, branch briefs/r36-change, mason's, with its description as rewritten at 00:10Z on
+2026-11-13. It has seven commits. The first, 96ec8d1 of 23:39Z, I read whole, with R35 to R41 word for word. The next
+four, 59bed33, f9e6d3a, 606c72c and 3464cda of 00:04Z to 00:05Z, and the last two, c9de726 and 32ed4cc of 00:09Z, I
+read as diffs against what I had read. The PR changes five settled briefs, those of features 10, 8, 9, 6 and 3
+(duets.md, machines.md, mysteries.md, evocations.md and journal.md), and adds one entry of mason's, which grew with
+each round: 239 lines in and 63 out, in 6 files. It holds no code. The check `build` passed on 32ed4cc at 00:10Z. The
+PR is not assigned, by its description it is not set to merge itself, and it joins main at eb0b6b1 and PR #184 without
+a conflict.
+
+**The rules and the book.** As in G102: both read in full on 2026-11-12 at 23:54Z, after the twenty-first cut of my
+context.
+
+**What I held it against.** The owner's words of R36, R38, R39 and R41. The standing rules, and the twelfth as PR #184
+has it. Step 1's words in the book. The five briefs that it does not change, searched for sentences that it would
+overtake. The code on main: `MachineWork`, `Machine.WorkCost`, `Evocation.Cost`, the machine's turn in
+`BlockEntityMachine`, `BlockEntityMemory`, the drain's turn, and `MysteryEffects`. And the Journal's pages as built.
+
+**Which way it goes.** It changes settled briefs, so it goes by my read and then the owner's merge (rule 4). It cannot
+go by the owner's command and merge itself: the owner's answers name ideas, mason wrote the briefs' words, and twelve
+choices of mason's are in them.
+
+**The change, by the owner's answers.**
+- *The rod's click* (R36; R38's preamble: "a rod tap switches a Memory between lending its pair (the duet) and
+  cycling"). A right-click of the Crystal Rod on a Memory, anywhere but on a crystal in it, switches it between
+  lending and cycling. A Memory starts lending, and its look-at line says which.
+- *The blind swap* (R36; R38, 1 and 2; R41, 2 and 3). A Dead Socket locks into a Memory and takes none of the
+  magazine's two places. The Memory then swaps everything in the machine's sockets with everything in its magazine,
+  "empty places included, whatever the crystals are". The brief keeps the owner's example. It also says when the swap
+  comes, what fits, what does not move, and what an Earth drain does with two crystals (below).
+- *The Mysteries' price* (R36; R38, 3 to 6; R39). A Mystery's cast spends 40 and 80 where an Elemental's spends 10 and
+  20, and a Mystery's working costs 4, 8 and 16 where an Elemental's costs 1, 2 and 4. A Glint burns as it did. The
+  charge for every 9 plants stays.
+- *Bloom in a machine* (R36: "let us remove the use limit, within a machine only"). Inside a machine a plant takes
+  Bloom at every working, and by hand still once an in-game day.
+- *The fill out of reach* (G96; R41, 1). Panning is safe only where the fill stands out of the drain's reach of 3
+  blocks, and the brief counts that reach as G96 asked, with the owner's words beside it. The code does not change for
+  it.
+- *What is built on a drain.* Item 10 of the duets' brief now says three things that the code does and that mason had
+  logged as choices: a third end of an Earth crystal's turn, the even share that panned sand loses, and a drain with
+  two crystals leaving a plain Memory still.
+- *Three pages of the Journal* that the patch would otherwise leave untrue are now in the briefs of features 9 and 3.
+
+**What I put to mason, and how it was met.** Three rounds, each before I signed, and mason answered each within
+minutes.
+1. *At 00:02Z, fifteen points on the first commit.* The weightiest:
+   - Two charge figures were half of what the briefs' own rule gives. A Glowing Scatter's 81 plants were said to cost
+     36. A Scatter's crystal works one Evolution of power lower "for the same charge", and the code prices by the
+     crystal's Evolution, so it is 9 times 8, which is 72. Mason's own figures to the owner agree with 72: "about 144
+     charge at today's cost and about 576 at 4 times", for eight workings. And the figure of 4 for a field of 3 by 3
+     at Glittering's power fitted no machine. The brief now has 72, 8 for a Glowing Focus's 3 by 3, and 4 for the one
+     plant of a Glittering Focus.
+   - A chest kept fresh was still "about 2 charge a day". It is now about 8.
+   - Three built pages of the Journal would go untrue, and no brief said that they change: chapter 9, page 5, "Each
+     plant takes it once a day, whether my hand or a machine gives it."; its page 10, "a Mystery crystal works as an
+     Elemental does"; and chapter 4, page 5, "Each working spends a tenth of a full crystal, so ten empty it". All
+     three are now named, and the brief of feature 3 joined the PR for the last.
+   - The brief placed the whole patch in the folders of features 8 and 6. The rule of once a day sits inside feature
+     9's `MysteryEffects`, so that folder changes too, and the brief now says so.
+   - The blind swap left the build to guess: what happens when a machine holds more crystals than the magazine takes,
+     what gives the turn when a swap empties the sockets, whether the second of two crystals ever works before they go
+     back, what becomes of a Duet Module, and what a drain does with two crystals. Three sentences of the briefs had a
+     drain hold one crystal and no more. Each is answered now, and the three sentences have their exception.
+   - "What to try" 9 could not be done: by "what to try" 1 a Focus with nothing in its own socket "does nothing until
+     a crystal stands in its own socket".
+   - Item 15 cited the owner's "let players learn via experience" for the blind swap. The owner gave that on the Duet
+     Module. It now cites what the owner was told of the blind swap itself: "Twins that a blind swap sets side by side
+     will dialogue, as always".
+   - Two briefs restated the owner's reason for the price more widely than R39 gives it. Both now cite standing rule
+     12 and restate nothing.
+2. *At 00:05Z, from my read of the build for step 1's gate:* mason's choices 7 and 8 of 22:37Z, which the player sees
+   on a drain. This was no finding, since rule 1 does not have a brief edited for a choice. The brief was open, and it
+   says them now.
+3. *At 00:09Z, three small things on the fifth commit.* The description still told the first commit. "What to try" 9
+   ended in a click that makes clay only at one turn in three. And "what to try" 10 had twins dialogue "if they stay
+   30 seconds", when by the brief's own rule they part after about 10. That led to one more rule: "A turn the network
+   cannot pay is not worked". All three are mended.
+
+**Mason's readings of the owner's words, which the owner's merge settles.** Mason lists twelve choices in its entry,
+and each is in the briefs. These are the ones that the owner should see before merging.
+1. *When a blind Memory swaps.* The owner's word was "every activation", and the coordinator's words to the owner were
+   "every turn". The brief has it swap when every awake crystal in the machine's sockets has worked once. With one
+   crystal in the machine, as in the owner's example, the three are the same. With two, both work before they go back.
+   Mason's entry: "The obvious "after each working" would leave the second of two crystals never working."
+2. *A turn that the network cannot pay does not count.* So on a network with too little charge the crystals stay where
+   the swap set them, and twins among them dialogue after 30 seconds.
+3. *Room.* The swap happens only where each set fits. A machine that holds three or four Glittering crystals does not
+   swap.
+4. *Only crystals move.* A Dead Socket in a machine's socket stays, and a blind Memory beside a Focus that holds a
+   Duet Module does nothing.
+5. *The Earth drain.* The owner's answer was "Swap both the crystal and the "empty space", as a "set" of crystals".
+   Mason reads it as a swap on a drain as anywhere else, and I see no second reading that would lead to other work.
+   The drain then works its two crystals in turn and swaps.
+6. *Only the evocation costs more.* The owner's words were "the charge consumption of all mysteries". The brief has a
+   Mystery crystal "as a Refine block's pattern or giving a Motor its torque" cost "as any crystal does". Standing
+   rule 12 says nothing of those two places, and nobody put them to the owner.
+7. *A machine's Bloom still marks the plant for the day,* so a hand's cast that day finds it bloomed. The machine does
+   not read the mark.
+8. *Two settings hold the one factor,* `MysteryCostMultiplier` for machines and `MysteryCastCostMultiplier` for the
+   hand, both 4.
+
+**Held against the standing rules and the book.**
+- Rule 4: by hand 40 against a machine's 4, and 80 against 8, so a machine stays ten times ahead. Rule 5: what a
+  Mystery crystal gathers is unchanged. Rule 6: the price is a factor on the one scale. Rule 7: locking a Dead Socket
+  into a Memory and the rod's click on a Memory are named among the uses by hand, so R9 covers them.
+- Rule 12 is cited in three places and does not exist until PR #184 merges. So the order is PR #184 first.
+- Rule 3: the new words (to lend, to cycle, to swap blind) are settled in the brief of the feature that they belong
+  to, as the rule's last sentence asks.
+- Step 1's words in the book place "limits on how often and how strongly machines Bloom" there "for the brief to
+  settle". The brief settles them anew: no limit on how often inside a machine, and the price for how strongly. The
+  book stays true, since it says where the limits are settled and not what they are.
+
+**What the change makes untrue elsewhere** (rule 6).
+- *The code.* Every part that is not built says "not built yet" where it stands. The patch follows the briefs, in the
+  folders of features 3, 6, 8 and 9, and its verdict is out by rule 4, so it waits for the owner's merge.
+- *The Journal's built pages:* the three above, until the patch.
+- *Step 1's zip,* lemuria_0.0.1_74b1c9b.zip, holds none of this. Whoever plays it sees a Memory with no rod click and
+  no Dead Socket, Mysteries at the Elementals' price, and Bloom once a day in a machine.
+- *Mason's map* has nothing of this in its plan. That is for the report on step 1's gate.
+- *README.md and CLAUDE.md:* nothing.
+
+**Small things, none of which holds the PR.**
+- The description says of the twins: "The owner learns this by experience, as R38 put it." It is the player who learns
+  it, and the words on learning are R36's.
+- In the duets' brief, "How it is built" points to the Journal's pages as "below". They are described in the briefs of
+  features 3 and 9.
+- Whether a turn in which a crystal can do nothing by its form, a Glittering crystal in a Scatter for one, counts as
+  worked for a blind swap is not said. It is left to the build, as a choice to log.
+- Item 3 of the duets' brief still says that a Memory holding a pair "stops cycling and lends the pair". That is true
+  of a Memory as it starts, and item 13 has the switch.
+- The brief of feature 3 keeps "no numbers on the page" among what the Journal will not do, and the built pages give
+  figures of charge, "about 2 a day" for one. That is older than this PR. The brief should say what those words mean
+  at its next change.
+
+**The short of it.** The change is true to the owner's answers. Where the owner's words left a thing open, the brief
+now says what happens, and the report names each such place for the owner. The figures are right, and every unbuilt
+part is marked. I find no blocker and no flaw. **PR #182 is cleared at 32ed4cc for the owner's merge, after PR #184.**
+The counter-view is G104.
+
+**What follows its merge.**
+- G96 closes: its correction is the brief's, as the owner chose. I change its Status at my next report.
+- Mason's patch follows, and waits for the owner's merge. I read it at my first wake after it merges.
+- A new zip is owed once main has changed outside record/.
+
+**How it merges.** By the owner's merge (rule 4), once its description cites this report and the owner is assigned. A
+later commit voids this report, other than one that brings main in or adds mason's own entry.
+
+**For mason.** PR #182 is cleared at 32ed4cc. Cite G103 in its description, assign the owner, and tell the coordinator
+and the record thread. The first two small things above need no commit and can wait for the patch.
+
+**For the coordinator.** PR #184 and then PR #182, on one list. With the list, the owner should have the eight
+readings above in plain words, the first and the sixth before the others. G104 is for the owner.
+
+**For the planning thread.** Mason's two sentences on the reason are gone, and the briefs cite your rule. Your
+description quotes PR #182 at 96ec8d1, and the commit to quote now is 32ed4cc.
+
+**For the owner.** PR #182 writes your answers on Memory and on Bloom into five briefs. It changes no code and nothing
+in play: the code follows as a patch that you merge afterwards. Three places are mason's reading of your words, and
+your merge settles them. A blind Memory swaps when every crystal in the machine has worked once, where you said "every
+activation": with one crystal that is the same, and with two both work before they go back. Only a Mystery's evocation
+costs 4 times: a Mystery crystal in a Motor, or as a Refine block's pattern, costs what any crystal costs. And a plant
+that a machine has bloomed counts as bloomed for your hand that day. If you want any of these otherwise, tell the
+coordinator. A brief can be changed before the merge or after it.
+
+## G104. Note: the counter-view to PR #184 and PR #182 (rule 6 a)
+
+**Rank.** Note. **Owning thread.** The coordinator, for the owner. **Raised in.** The reads of PR #184 and PR #182
+(G102, G103). **Status.** Needs no answer.
+
+Both changes are true to the owner's words, and I found no fault in either as they stand (G102, G103). So the
+counter-view is again what stands settled once they merge that the owner's short answers did not show. Each point can
+still be changed afterwards by a change to a brief, and the third and the fourth are cheaper to weigh before mason
+builds than after.
+
+1. **The reason and the price are cut at different places.** The owner's reason is that Elementals "directly map onto
+   the real world" and that forcing a bush to bloom is "counter to the natural state of the world". The price goes by
+   family: R36 raises "the charge consumption of all mysteries". Held one by one, the two do not match. Progress
+   "moves slow changes on", so that cheese ripens and food rots, which the world does by itself. Wither kills what
+   dies anyway. And Tremor, an Elemental, raises a pillar of stone where the world raises none. The rule is right to
+   follow R36, and the planning thread says of its own text: "Its "So" is no test for a single evocation." But a later
+   brief that brings a new working cannot find its price from the reason. It goes by the family. If the owner meant
+   the price to follow the reason working by working, this rule is not that rule.
+2. **The words "all mysteries" are read as the evocation alone.** A Glint burns no more, by the owner's "No". Beyond
+   that, the brief has a Mystery crystal cost "as any crystal does" in two places that nobody put to the owner: giving
+   a Motor its torque, and as a Refine block's pattern. The second is how Mystery crystals are made in number, for
+   half of the new crystal's capacity, as for an Elemental. So from the merge on the Mysteries are dearer to use and
+   no dearer to make. That may be exactly what is wanted. It was not asked.
+3. **With the daily limit gone, the price is the one brake on a machine's Bloom, and it is a light one.** Mason's
+   figures to the owner: a Glowing Life Scatter "ripens 81 flax from seed in about 90 seconds", for "about 576 at 4
+   times", where "One Glowing Gather crystal brings 600 a day". So one crystal's day pays for one field, a battery of
+   7 by 7 by 7 holds the charge for more than a hundred, and the wait for a harvest is a minute and a half. The same
+   holds for all that Bloom moves on: a berry bush or a fruit tree goes on a stage at every working, and a sapling
+   loses an in-game day every 10 seconds. The owner said "Sounds reasonable" to the figures, and then wondered about
+   more: "May need to workshop other effects or perhaps a call-back to cracks and shattering over-used crystals? Hmm."
+   That thought is placed nowhere, rightly, since it ends in a question. It is the only other brake that anyone has
+   named. "What to try" 6 of the duets' brief shows the pace, and the owner will know in a minute of play whether 4 is
+   the number.
+4. **A blind swap's twins hum while the machine is fed, and are lost when it starves.** Twins that a swap brings in
+   work once each and go back, after about 10 seconds. A dialogue needs 30. So in a machine that is paid, twins never
+   do more than hum, however long it runs. They are caught together when the network cannot pay, because an unpaid
+   turn does not count, and then they dialogue. The owner was told: "Twins that a blind swap sets side by side will
+   dialogue, as always". That is true by the letter. In play the dialogue comes at one moment only, when the charge
+   runs out, and perhaps when nobody is there to hear the hum. For players whom the owner calls magical nuclear
+   engineers that may be the right danger. It follows from the owner's idea and from feature 1's 30 seconds, under any
+   reading of "every activation", and the brief's "what to try" 10 now shows both halves.
+5. **The Dead Socket takes back what way A gave.** The owner made the magazine a shield, so that twins take turns and
+   never meet. A Dead Socket in the same Memory sets them out side by side. On an Earth drain it keeps a Sky crystal
+   in the open beside the fill for its own turn and for its neighbour's, where plain cycling has it there for its own
+   turn only. So G96's reach weighs more under a blind swap, and the brief leaves it to the player: "the fill out of
+   reach is the player's to see to".
+6. **One block, four behaviours, and no page.** A Memory now cycles, lends a pair, cycles a pair after the rod's
+   click, or swaps blind, and its look-at line is all that tells them apart. The Journal has no page for any of it
+   before step 7, by the owner's "Yes" in R32. The rod's click mends what the second point of G90 named, a Memory that
+   stops cycling unasked. But the mend is a secret too: a player whose cycle has stopped must already know the
+   gesture. On the owner's own test that is no matter. On a server with other players it is one until step 7.
+7. **By hand a Mystery is now limited twice.** A plant takes Bloom from the hand once a day, and a full crystal makes
+   two casts where an Elemental makes ten. The owner's "within a machine only" and "Both machines and evocations" say
+   so, and standing rule 4 wants the hand wasteful. But the hand is where a player first meets a Mystery, since
+   chapter 9 opens with The Four Elementals, long before a first machine. Whether two casts are enough to learn what
+   an evocation does is for play, and "what to try" 5 of the Mysteries' brief has it.
+8. **Twelve choices went into the briefs, and none was put to the owner as a question.** Nine questions were put, in
+   two rounds (R38, R41). A brief is where a choice is settled, by the owner's merge, so nothing is amiss. But the
+   first choice departs from the words that the owner was shown, "every turn", and the owner merges from a
+   description. G103 lists the eight that matter, so that the merge settles them seen and not unseen.
+9. **The rule binds the briefs, and a server's setting can undo it.** The factor lives in two settings. A server can
+   set either to 1, and standing rule 12 then does not hold there, as `MachineCostShare` can undo standing rule 4
+   today. Set apart, the two undo rule 4's ten for the Mysteries alone. And because the rule stands in the concept,
+   balance may move the factor in step 7 but may not bring it to 1 without a change to the concept. That is what the
+   owner said yes to, and it is said here once.
+10. **One sitting.** Three PRs wait for the owner now: rules version 7 (PR #171), the concept (PR #184) and the briefs
+    (PR #182). After the first every thread reads the rules whole, and after the second the book whole. Merged in one
+    sitting, each thread reads each once (G101, its third point).
