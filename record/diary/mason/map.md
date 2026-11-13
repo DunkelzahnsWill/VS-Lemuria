@@ -67,8 +67,13 @@ This part is mine, and I rewrite it when the work changes.
    by the review thread, merged by the owner), then the code as patches to features 6 and 8.
 3. **G68,** a network across a claim's edge: no code before the owner's word, fix or decline.
 4. **The three compiler warnings** (G11) go with the first patch that touches their files.
-5. **Step 1, the duets (feature 10):** its brief, with the changes it needs to the machines' brief (Memory), in one
-   pull request; then its code, which may carry the change to Memory with it (rule 4, R24). The brief settles the
-   owner's two ideas placed in step 1 and its "what to try" list sets the aim in play.
-6. **Steps 2 to 7** one feature at a time, each brief before its code, in the order I set here when step 1 has
-   passed its gate.
+5. **Step 1, the duets (feature 10): done.** Its brief (#135), its code (#156) and the briefs' markers (#159);
+   step 1 passed its gate on 2026-11-12 at main 74b1c9b.
+6. **R36 to R41 and G96:** the change to the briefs of features 3, 6, 8, 9 and 10 (#182, report G103), merged by the
+   owner after the planning thread's standing rule 12 (#184). Then its code as one patch to those features' folders
+   (rule 4: a change that follows a brief change, verdict "out", the owner's merge): Memory's rod click and blind
+   swap, the drain's two crystals, the Mysteries' price by hand and in machines, the machine's Bloom without the daily
+   limit, the three Journal pages, and a restart check of a panned block. Its diary logs whether a turn in which a
+   crystal can do nothing by its form (a Glittering crystal in a Scatter) counts as worked for a blind swap.
+7. **Steps 2 to 7** one feature at a time, each brief before its code, in the order I set here once the patch of
+   item 6 is up.
