@@ -150,9 +150,9 @@ and 9 too. Its code follows as a patch, once this change merges; where an item b
     places included, whatever the crystals are. The owner's example: a Focus holding one Fire crystal, its Memory
     holding Ice and Sky; after the swap the Focus holds Ice and Sky and the Memory Fire and an empty place.
     - *When it swaps.* The machine's crystals take their turns as always, each awake crystal in its sockets working
-      once; when the last of them has worked, the Memory swaps, and the crystals swapped in take their turns. A turn
-      the network cannot pay is not worked, as a Duet Module does not swap after a working left unpaid, so crystals
-      swapped in stay until each has worked: on a network with too little charge they stay where the swap set them. A machine
+      once; when the last of them has worked, the Memory swaps, and the crystals swapped in take their turns. A turn the
+      network cannot pay is not worked, as a Duet Module does not swap after a working left unpaid, so crystals swapped
+      in stay until each has worked: on a network with too little charge they stay where the swap set them. A machine
       with no awake crystal in its sockets swaps at its next look, every 10 seconds, so an empty Focus beside a full
       blind Memory fills at once, and two empty sets do nothing. Swapping costs nothing.
     - *Room.* The swap happens only where each set fits where it goes: the magazine takes 2 crystals, so a machine
