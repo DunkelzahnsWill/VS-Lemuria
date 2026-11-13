@@ -150,7 +150,9 @@ and 9 too. Its code follows as a patch, once this change merges; where an item b
     places included, whatever the crystals are. The owner's example: a Focus holding one Fire crystal, its Memory
     holding Ice and Sky; after the swap the Focus holds Ice and Sky and the Memory Fire and an empty place.
     - *When it swaps.* The machine's crystals take their turns as always, each awake crystal in its sockets working
-      once; when the last of them has worked, the Memory swaps, and the crystals swapped in take their turns. A machine
+      once; when the last of them has worked, the Memory swaps, and the crystals swapped in take their turns. A turn
+      the network cannot pay is not worked, as a Duet Module does not swap after a working left unpaid, so crystals
+      swapped in stay until each has worked: on a network with too little charge they stay where the swap set them. A machine
       with no awake crystal in its sockets swaps at its next look, every 10 seconds, so an empty Focus beside a full
       blind Memory fills at once, and two empty sets do nothing. Swapping costs nothing.
     - *Room.* The swap happens only where each set fits where it goes: the magazine takes 2 crystals, so a machine
@@ -258,11 +260,13 @@ and 9 too. Its code follows as a patch, once this change merges; where an item b
 8. Restart: the pair stays in the Memory and the module's pair in its socket; a panned block is still panned and the
    shelf still puts stone back into it; a Memory's rod-tap setting and its Dead Socket stay.
 9. A Focus over sand holding a Fire crystal, its Memory holding Ice and Earth: clay. Right-click the Memory with the
-   rod: it says "Cycles", and the Focus works Fire, Ice and Earth in turn as single crystals. Right-click again: clay.
+   rod: it says "Cycles", and the Focus works Fire, Ice and Earth in turn as single crystals. Right-click again while
+   Fire is working, with Ice and Earth both in the magazine: clay.
 10. Lock a Dead Socket into a Focus's Memory, the Focus holding one Fire crystal and the Memory Ice and Sky: Fire
     works, then the Focus holds Ice and Sky and the Memory Fire and an empty place; Ice and Sky each work once, then
-    Fire comes back. Set Earth and Sky in the Memory instead: when they are swapped in, the warning hum, and if they
-    stay 30 seconds, the dialogue.
+    Fire comes back. Set Earth and Sky in the Memory instead: when they are swapped in, the warning hum, and they part
+    again after about 10 seconds. Empty the network, or cut it, while they stand in the Focus: they cannot work, so
+    they stay, and after 30 seconds they dialogue.
 
 ## Open questions
 
