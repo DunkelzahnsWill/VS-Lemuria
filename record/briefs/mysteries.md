@@ -60,12 +60,13 @@ the record.
    Rewind and Progress never touch what a player carries, so neither can spoil another player's food.
 6. **In machines** (question 11): a Focus or Scatter works these four as it works any crystal's evocation (feature 8),
    for a working, at 4 times an Elemental working's cost (feature 8, item 4; R36; R38, 3; not built yet). A Life Focus
-   pays only when a plant moves on, with no limit of once a day per plant (R36; not built yet), and a machine's Life
+   pays only when a plant moves on, with no limit of once a day per plant (R36; not built yet), though its Bloom still
+   marks the plant for the hand's limit (item 5), and a machine's Life
    working pays its cost once for every 9 plants it would move on, rounded up, in full or not at all (feature 8; feature
    10's brief, item 11, R32; this feature counts the plants for feature 8, and both were built with feature 10, PR
    #156); a Death Focus with a Glowing crystal withers what stands in front of it and pays only when something is there;
    a Time or Rust Focus works a container only when it has a full measure to move, so a chest kept fresh by a Glittering
-   Time Focus costs about 2 charge a day (question 12).
+   Time Focus costs about 8 charge a day at the Mysteries' price (question 12; not built yet).
 
 ### Glint
 
@@ -86,7 +87,10 @@ the record.
 
 11. Chapter 9, "The Four Mysteries" (10 pages), opens with The Four Elementals (feature 3's unlock rule). Its text is
     this feature's, in `lang/mysteries/`: each Mystery's place and sign, a page for each evocation saying what to aim
-    at and what power changes, and Glint, written as instructions.
+    at and what power changes, and Glint, written as instructions. With R36 two pages change (not built yet): page 5
+    says a plant takes Bloom once a day from the hand, and a machine gives it as often as it pays; page 10 says that in
+    machines a Mystery crystal works as an Elemental does but at four times the charge, that a chest kept fresh costs
+    about 8 a day, and that a machine's Bloom has no daily limit.
 
 ## How it is built, and what it touches
 

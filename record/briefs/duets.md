@@ -20,9 +20,9 @@ panning idea.
 
 **Changed after it settled** by a second PR, from the owner's answers on Memory and Bloom (R36), on six questions about
 them (R38), on the reason Mysteries cost more (R39, and the Road Bible's standing rule 12 beside this PR), and on three
-more (R41), with the correction of G96: Memory's rod tap and blind swap (items 13 to 15), the Mysteries' price and
-machines that Bloom (item 11), and the fill out of reach (item 10). This change touches the briefs of features 6, 8 and
-9 too. Its code follows as a patch, once this change merges; where an item below is not built yet, it says so.
+more (R41), with the correction of G96: Memory's rod click and blind swap (items 13 to 15), the Mysteries' price and
+machines that Bloom (item 11), and the fill out of reach (item 10). This change touches the briefs of features 3, 6, 8
+and 9 too. Its code follows as a patch, once this change merges; where an item below is not built yet, it says so.
 
 ## What the player sees and does
 
@@ -89,12 +89,12 @@ machines that Bloom (item 11), and the fill out of reach (item 10). This change 
     sockets stand in the open, so Earth and Sky take turns.
     - *Memory on a drain.* Memory may stand against an Earth battery's drain, on any face but the one facing into the
       room. The drain's socket holds a single crystal and the magazine the rest, since two crystals in its sockets would
-      stand in the open, where twins dialogue. The Memory cycles them as for any machine, a drain's turn being one block
-      worn, panned or put back. While an Earth crystal is in the socket the drain wears its room as today. A turn with
-      nothing to do passes at once to the next crystal, as a Dormant crystal is passed over: the Memory looks every 10
-      seconds, a machine's pace, and an Earth crystal's turn ends when it has worn one step or cannot wear now (its
-      network at half or above, or no block left to wear), so Sky and the Unaligned crystal come round whatever the
-      network holds.
+      stand in the open, where twins dialogue (but a blind Memory, item 14). The Memory cycles them as for any machine,
+      a drain's turn being one block worn, panned or put back. While an Earth crystal is in the socket the drain wears
+      its room as today. A turn with nothing to do passes at once to the next crystal, as a Dormant crystal is passed
+      over: the Memory looks every 10 seconds, a machine's pace, and an Earth crystal's turn ends when it has worn one
+      step or cannot wear now (its network at half or above, or no block left to wear), so Sky and the Unaligned crystal
+      come round whatever the network holds.
     - *The fill stands out of reach* (G96; R41, 1, "A"). The fill's Earth crystal stands in the open in its socket, so
       a Sky crystal in the drain's socket dialogues with it when the two stand within 3 blocks of each other, counted
       as feature 1 counts it, in every direction and diagonals included. Panning is safe only where the fill stands out
@@ -117,17 +117,15 @@ machines that Bloom (item 11), and the fill out of reach (item 10). This change 
 
 ### Limits for machines that Bloom
 
-11. Today a plant takes Bloom once an in-game day, whatever blooms it, hand or Focus, and a working pays a tenth of a
-    cast whatever it moves on (K4; features 8 and 9). So a Glowing Scatter blooms 81 plants a day for one working's
-    charge. So: keep the rule once a day per plant and one stage a Bloom (how often), and make a machine pay for how
-    strongly: a Life working pays its usual cost once for every 9 plants it would move on, rounded up, in full or not
-    at all. A network that cannot pay it all blooms nothing that working, as a felling does (feature 8). A hand's cast
-    stays as it is.
-    **Changed by R36** (not built yet) (the owner: "let us remove the use limit, within a machine only, for bloom-ery
-    and raise its charge consumption along with the charge consumption of all mysteries"): inside a machine the
-    once-a-day rule goes, and every Mystery working, in a machine or by hand, costs 4 times an Elemental's (R38, 3 to 5;
-    features 6, 8 and 9). The charge per 9 plants stays (R38, 5), so a 3×3 field blooms every 10 seconds for 4 charge a
-    working at Glittering's power, and a Glowing Scatter's 81 plants for 36.
+11. **What holds now.** A machine's Life working moves each plant it reaches one stage on at every working, with no
+    limit of once a day (R36), and pays its Mystery cost (4 times an Elemental's, feature 8, item 4; R38, 3) once for
+    every 9 plants it would move on, rounded up, in full or not at all (R32; R38, 5). A network that cannot pay it all
+    blooms nothing that working, as a felling does (feature 8). So a Glowing Life Focus blooms its 3×3 every 10
+    seconds for 8 charge, and a Glowing Scatter, its crystal paid at Glowing's 2 whatever power it works at (feature
+    8, item 10), its 81 plants for 72. By hand a plant still takes Bloom once an in-game day (K4), and a cast costs
+    four tenths of a crystal (feature 6, item 2; R38, 4). A machine's Bloom still marks the plant as bloomed that day,
+    so a hand's cast that day finds it bloomed; the machine does not read the mark. Only the price and the machine's
+    limit are not built yet: the count by 9 plants is (PR #156).
 
 ### What the player is told
 
@@ -139,20 +137,35 @@ machines that Bloom (item 11), and the fill out of reach (item 10). This change 
 
 13. **The rod tap.** A right-click of the Crystal Rod on a Memory, anywhere but on a crystal in it, switches it
     between lending a pair (item 3) and cycling as any Memory does, so the two crystals of a duet can also simply take
-    turns. A Memory has no front to turn, so the click is free for this; a click on a crystal still makes it Dormant
+    turns, a cycling Memory working as item 18 of feature 8 says. A Memory has no front to turn, so the click is free
+    for this; a click on a crystal still makes it Dormant
     and a sneaking click still switches the block Active or Dormant (feature 8, item 6). A Memory starts lending, and
     its look-at line says "Lends its pair" or "Cycles".
-14. **The blind swap.** A Dead Socket locks into a Memory (R38, 1), beside its magazine and taking none of its room,
-    and comes out as a Dead Socket comes out of a Motor. A Memory holding one swaps blind at every turn of its machine:
-    everything in the machine's sockets changes places with everything in its magazine, empty places included,
-    whatever the crystals are (R38, 2). The owner's example: a Focus holding one Fire crystal, its Memory holding Ice
-    and Sky; after the turn the Focus holds Ice and Sky and the Memory Fire and an empty place. A blind Memory lends no
-    pair, and the rod tap does nothing to it. On an Earth drain it swaps the same way, the drain's crystal and its
-    empty place going to the magazine as one set and the magazine's two coming out into the drain (R41, 2), so two
-    crystals then stand in the drain's sockets in the open.
+14. **The blind swap.** A Dead Socket locks into a Memory (R38, 1; R41, 3): right-click the Memory with a Dead Socket
+    in hand, as a crystal is set in; it takes none of the magazine's room, shows as a dark plug on the Memory's face,
+    and comes out as a Dead Socket comes out of a Motor. Its look-at line says "Swaps blind". A Memory holding one
+    swaps blind (R38, 2): everything in the machine's sockets changes places with everything in its magazine, empty
+    places included, whatever the crystals are. The owner's example: a Focus holding one Fire crystal, its Memory
+    holding Ice and Sky; after the swap the Focus holds Ice and Sky and the Memory Fire and an empty place.
+    - *When it swaps.* The machine's crystals take their turns as always, each awake crystal in its sockets working
+      once; when the last of them has worked, the Memory swaps, and the crystals swapped in take their turns. A machine
+      with no awake crystal in its sockets swaps at its next look, every 10 seconds, so an empty Focus beside a full
+      blind Memory fills at once, and two empty sets do nothing. Swapping costs nothing.
+    - *Room.* The swap happens only where each set fits where it goes: the magazine takes 2 crystals, so a machine
+      holding three or four Glittering crystals does not swap, and works its own crystals as though the Memory were not
+      there, until it holds two or fewer.
+    - *What it leaves.* Only crystals move. A Dead Socket in a machine's socket stays. A Focus holding a Duet Module
+      holds no crystal of its own (item 8), so a blind Memory beside it does nothing.
+    - *Lending.* A blind Memory lends no pair: a duet's pair swapped into the sockets works as two crystals, and the
+      rod's click (item 13) does nothing to it.
+    - *On an Earth drain* (R41, 2) the drain's crystal and its empty place go to the magazine as one set and the
+      magazine's two come out into the drain's sockets. The drain then works each of its two crystals for one turn in
+      turn, as its single crystal works (item 10), and swaps when both have worked; so two crystals stand in the drain's
+      sockets in the open, and the fill out of reach is the player's to see to.
 15. **Its danger is learned.** Twins a blind swap sets side by side in the machine's sockets stand in the open and
-    dialogue as always (feature 1, item 8): nothing warns before the swap, and the player learns it by the hum (R36,
-    "let players learn via experience").
+    dialogue as always (feature 1, item 8): nothing warns before the swap, and the player learns it by the hum. The
+    owner was told so in R38's preamble ("Twins that a blind swap sets side by side will dialogue, as always") and
+    let it stand.
 
 ## How it is built, and what it touches
 
@@ -179,12 +192,14 @@ machines that Bloom (item 11), and the fill out of reach (item 10). This change 
   ingot; the iron ores, whose smelted stack is a bloom, give nothing), and a raw item's pit-kiln firing names its
   fired form.
 - Saved: nothing of its own. The pair and the module's pair are crystals in sockets, saved as today.
-- **For R36 (not built yet),** all in feature 8's and feature 6's folders, by the changes to their briefs in this PR:
+- **For R36 (not built yet),** in the folders of features 3, 6, 8 and 9, by the changes to their briefs in this PR:
   `BlockEntityMemory` keeps whether it lends or cycles and whether a Dead Socket is locked in, both saved, and a blind
   swap swaps the machine's sockets with its magazine, places and all; `ItemCrystalRod`'s tap on a Memory switches it;
-  `MachineWork` prices a Mystery working at `MysteryCostMultiplier` times an Elemental's and stops asking feature 9 for
-  the once-a-day rule inside a machine; feature 6's casting prices a Mystery cast at `MysteryCastCostMultiplier` times
-  an Elemental's. No code of feature 10's own folder changes.
+  `MachineWork` prices a Mystery working at `MysteryCostMultiplier` times an Elemental's; feature 9's
+  `MysteryEffects.Bloom` and `BloomCount`, which hold the once-a-day rule, skip it when a machine is the source and
+  still mark the plant; the drain's turn learns to work two crystals in turn; feature 6's casting prices a Mystery cast
+  at `MysteryCastCostMultiplier` times an Elemental's; and three Journal pages change (features 3 and 9, below). No
+  code of feature 10's own folder changes.
 - **Cost.** One hook call on each Focus turn, which looks at the Memory already found; a duet working looks at one
   block or one container, as a working does today.
 
@@ -230,7 +245,8 @@ machines that Bloom (item 11), and the fill out of reach (item 10). This change 
    over sand: it makes clay, then fires nothing (no pottery yet); set sand in front again and it makes clay again. No
    dialogue.
 6. A Glowing Life Scatter over a field of 81 crops: they all move on one stage, and the network pays nine Mystery
-   workings' charge, 36. Ten seconds later they move on again, for 36 more.
+   workings' charge, 72. Ten seconds later they move on again, for 72 more. Bloom one of them by hand: it has bloomed
+   today.
 7. An Earth battery's room with sand in it and its network at half or above (fill it with the admin charger), its drain
    with one Earth crystal in its socket, a Memory holding a Sky and an Unaligned crystal, a chest touching it and a
    Control Shelf with sand on it and in its input, the fill 4 or more blocks from the drain along one direction: no
@@ -239,11 +255,12 @@ machines that Bloom (item 11), and the fill out of reach (item 10). This change 
    puts a sand block back.
 8. Restart: the pair stays in the Memory and the module's pair in its socket; a panned block is still panned and the
    shelf still puts stone back into it; a Memory's rod-tap setting and its Dead Socket stay.
-9. Tap a Memory holding Ice and Earth with the rod: it says "Cycles", and the Focus works Ice and then Earth as single
-   crystals. Tap again: clay.
-10. Lock a Dead Socket into a Focus's Memory, the Focus holding one Fire crystal and the Memory Ice and Sky: after one
-    turn the Focus holds Ice and Sky and the Memory Fire and an empty place; after the next, back again. With Earth and
-    Sky swapped in together, the warning hum.
+9. A Focus over sand holding a Fire crystal, its Memory holding Ice and Earth: clay. Right-click the Memory with the
+   rod: it says "Cycles", and the Focus works Fire, Ice and Earth in turn as single crystals. Right-click again: clay.
+10. Lock a Dead Socket into a Focus's Memory, the Focus holding one Fire crystal and the Memory Ice and Sky: Fire
+    works, then the Focus holds Ice and Sky and the Memory Fire and an empty place; Ice and Sky each work once, then
+    Fire comes back. Set Earth and Sky in the Memory instead: when they are swapped in, the warning hum, and if they
+    stay 30 seconds, the dialogue.
 
 ## Open questions
 

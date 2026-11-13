@@ -20,8 +20,7 @@ a1aae13. Where this brief and the old paper differ, this brief is the record.
    its hum in a slightly softer voicing, to half a full hum's volume at most. Let go after that and the *naked
    evocation* fires at the block or creature you look at, as far as its range; let go sooner and nothing happens.
 2. A cast spends a tenth of a full crystal: 10 charge from a Glittering crystal, 20 from a Glowing one. A Mystery's
-   cast (feature 9) spends 4 times that, 40 and 80, since a Mystery forces what runs against the world's nature
-   (R36; R38, 4; R39; standing rule 12; not built yet). A crystal
+   cast (feature 9) spends 4 times that, 40 and 80 (R36; R38, 4; standing rule 12; not built yet). A crystal
    holding less only clicks dully. From a stack, a cast spends one crystal's charge, and that crystal leaves the stack
    for a free slot, or drops at your feet, so the hand keeps the full ones.
 3. **A miss is free.** A cast that finds nothing it can act on fizzles in a puff of its colour, costing no charge and
