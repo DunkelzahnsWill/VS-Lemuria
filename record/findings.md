@@ -6592,3 +6592,494 @@ builds than after.
 10. **One sitting.** Three PRs wait for the owner now: rules version 7 (PR #171), the concept (PR #184) and the briefs
     (PR #182). After the first every thread reads the rules whole, and after the second the book whole. Merged in one
     sitting, each thread reads each once (G101, its third point).
+
+## G105. Report under rule 6 (b): step 1's gate, passed at main 74b1c9b, and the five maps
+
+**Written.** 2026-11-13 00:54Z. Woken by the record thread on 2026-11-12 at 23:38Z, on the inquisitor's decision of
+23:36Z.
+
+**The short of it.** Step 1 passed its gate rightly. The inquisitor's decision meets each of rule 7's five tests, and
+none of its fourteen verdicts on patches fails the test of a patch. So no pass is a blocker, and this report has
+nothing to put at its head for the owner but that. No map differs from the Road Bible. On the way I found two flaws
+that are older than step 1, both on numbers of charge that the mod shows: G106, the planning thread's, and G107,
+mason's. With G96 that makes three open findings, all flaws naming step 1, and no blocker. No flaw turns blocker at
+this gate.
+
+**What I read and ran.**
+- *The inquisitor's diary, whole:* nineteen entries. Fourteen are verdicts on patches. Two say that it read the book
+  again (20:43Z, 22:07Z), one corrects an entry (20:45Z), one notes that PR #156 owes no verdict (22:39Z), and the
+  last is the decision on the gate (23:36Z).
+- *The history of main up to 74b1c9b,* by Git: 178 commits on the first-parent line, which are 177 merges of PRs and
+  the repo's first commit. I sorted each merge by the files it brought in, as the inquisitor does. For each PR that is
+  not record-only I read its merged commit and the time of its merge on GitHub, and for each verdict and each report
+  of mine the time at which its entry reached main.
+- *The record since G104:* the coordinator's entries of 23:32Z, 23:34Z, 23:48Z and 00:23Z, the record thread's of
+  23:51Z, mason's of 22:37Z, 23:39Z (in PR #182) and 00:17Z, the planning thread's of 00:15Z, 00:21Z and 00:34Z, the
+  precursor's of 00:47Z, and the five maps as main has them at 0f0b769.
+- *The step itself:* the duets' brief on main, whole (209 lines), against `Lemuria/Duets/`, whole. The 26 files of
+  PR #156 I read for G95.
+- *Step 1's zip,* `lemuria_0.0.1_74b1c9b.zip` (649,044 bytes, sha256 beginning 8997315f83b353fa), against a build of
+  the same code that I made myself: the same 192 files, of which only `Lemuria.dll` and `Lemuria.pdb` differ in their
+  bytes, at the same sizes, as two builds of one source do.
+- *The three scripts,* run by me on main at 2859924, which outside record/ is 74b1c9b. `scripts/setup.sh` and
+  `./build.sh` ended with 0, the build with two warnings (below). `scripts/smoke-test.sh` ended at 00:31Z with its
+  line "PASS: lemuria loaded, no errors, clean stop."
+
+**The rules and the book.** My context was cut a twenty-second time on 2026-11-13 at 00:21Z and a twenty-third time at
+00:39Z. After each cut I read the rules in full, version 6 as main has it, and then the Road Bible in full, and held
+both checksums: e24e82285a0e441e and 9fd75aae44f10c4d. Neither book has changed since G104.
+
+**The decision, held against rule 7's five tests.** The inquisitor read main at 74b1c9b, the merge of PR #159, and
+wrote its decision at 23:36Z. Step 1 has had no decision before, so the third test covers every PR merged so far.
+1. *Every feature of the step is complete.* Step 1 lists one feature, feature 10. PR #156 carries it, and its
+   description says: "It completes feature 10, and so step 1." It merged on 2026-11-12 at 22:44:21Z as 8f531f6. Met.
+2. *No PR of the step is open.* The test: "no PR that carries a feature of the step or its brief, and no patch to that
+   feature, is still open". At 23:34Z one PR was open, PR #171, which changes the rules, one row of the book's part 4
+   and the planning thread's diary. Met, as the words stand. The counter-view below says what this test did not see.
+3. *Every merged PR went the way rule 4 sets for its kind.* I sorted the 177 merges again and came to the inquisitor's
+   count. Ten are the Precursor steps' PRs #1 to #10, which the owner's word accepted with the repo's first commit
+   (R14, R4). 134 change only the working files of the record, which merge by themselves. Eight are patches given "in"
+   and six are patches given "out" (the table below). Sixteen change a central book: the rules (#13, #21, #39, #144),
+   the Road Bible (#16, #45, #46, #76, #108, #143) and the briefs (#55, #72, #96, #105, #135, #159). Two stand on no
+   line of rule 4's list and so needed the owner's merge: #11, which put the rules file in place with R1 to R13,
+   and #51, which changed `CLAUDE.md` and `README.md`. One is the feature, #156. Each patch merged at the commit that
+   its verdict names, after the verdict's entry was on main. Each of the sixteen changes to a book merged at the
+   commit that my report on it names: G2, G32, G39, G45, G48, G49, G56, G62, G65, G70, G73, G76, G88, G89, G92 and
+   G95. Fifteen of those reports were on main before the merge, and the sixteenth is PR #55's, below. No change to a
+   book has ever been certified, and none was set to merge by itself. Met.
+4. *The build from main loads.* Run 419 of the workflow "Build and smoke test" ran on 74b1c9b as a push to main. Its
+   job `build` ended in success at 23:34:45Z, and both heavy steps ran: the build from 23:31:50Z, and the smoke test
+   on a headless server from 23:32:14Z to 23:34:37Z. The next run, on the merge of PR #179, changed only record/ and
+   ended in success at 23:36:11Z. Met. My own run of the three scripts agrees with it.
+5. *Every PR of the step has its diary entry, and every entry of player-diary.md its answer.* PR #135 carries mason's
+   entries of 21:00Z, 21:09Z and 21:35Z, PR #156 those of 22:08Z and 22:37Z, and PR #159 that of 22:45Z. No patch to
+   feature 10 has merged: PR #161 is a patch to feature 8, and it carries mason's entry of 22:59Z. player-diary.md is
+   not on main, and the owner has said nothing after playing. Met.
+
+**PR #55, the one merge that came before its report.** The owner merged the nine briefs on 2026-11-12 at 18:29:27Z,
+and G56 reached main at 19:07Z. Rule 4's line for a brief is "read by the review thread, then merged by the owner",
+and the inquisitor counts PR #55 as gone that way because, as G56 says, I had read all nine briefs whole before the
+merge. I agree by the letter of that line, and I say openly what it rests on. For the read being whole before 18:29Z I
+am my own witness. Two traces stand beside me: G55, a finding from that read, was on main at 18:03Z, and my points
+went to mason between 18:25Z and 18:26Z, which its commit 6d1a5e2 answered at 18:30Z. No thread did wrong in it: the
+PR was not assigned, its description cited no report, no thread called the owner for it, and the merge was the owner's
+own. The owner's word on it, of 18:34:55Z, stands in the coordinator's entry of 18:35Z and not in rulings.md, so the
+test's other way, a PR "accepted by the owner in rulings.md", is not what carries it. The inquisitor's list of
+twenty-five goes to the owner with this report, and PR #55 is on it. If the owner's answer to that list is recorded in
+rulings.md, PR #55 is closed under a stricter reading too. I ask no separate question of the owner for it.
+
+**The fourteen verdicts, held against the test of a patch.** Each entry names its PR and commit, says what was tested
+and found, and says whom the inquisitor talked to before it signed. Each PR merged at the commit named.
+
+| Entry | PR and commit | Verdict | What it is | Merged |
+| --- | --- | --- | --- | --- |
+| 18:00Z | #59 at 1c095b6 | out | The checks workflow and `README.md`, shared files in no feature's folder | 18:30:02Z |
+| 18:01Z | #61 at a61ef3a | out | Feature 8: a chance failure of the smoke test (G43), no brief settled | 18:29:43Z |
+| 18:02Z | #62 at 4c03155 | out | Feature 9: the second chance failure (G43), the same | 18:29:52Z |
+| 19:18Z | #75 at 31e770e | in | Feature 8: a Gather block keeps its hours through a restart (G13, G14) | 19:19:17Z |
+| 19:19Z | #81 at 40f783c | in | Feature 4: the chisel's draw asks the claim (G57) | 19:19:23Z |
+| 19:20Z | #78 at 77e744f | out | Feature 6: a miss is free (G15), which the owner notices in play (R7) | 19:35:14Z |
+| 19:31Z | #87 at 0a50457 | in | Feature 2: the cradle opens in a claim with the switch off (R9, G16) | 19:32:17Z |
+| 19:32Z | #88 at a81ace3 | in | Feature 9: a Glint, the same (R9, G16) | 19:32:20Z |
+| 19:34Z | #84 at edd2206 | in | Feature 4: a Free Awakened block's sockets, the same (R9, G16) | 19:35:05Z |
+| 19:36Z | #92 at b185133 | in | Feature 8: machines, the shelf and the rod's making, the same (R9, G16) | 19:38:12Z |
+| 20:37Z | #121 at 3da0888 | out | Feature 6: a machine's fire (G58), after a change to its brief | 22:05:41Z |
+| 20:41Z | #125 at 3ef063c | in | Feature 8: the Crystal Motor's sockets (G16) | 20:52:36Z |
+| 20:56Z | #130 at 242d069 | out | Feature 8: a machine's containers (G61), after a change to its brief | 22:05:51Z |
+| 23:01Z | #161 at da1fed9 | in | Feature 8: the restart check of a death's hour, by stored values (G97) | 23:08:37Z |
+
+- *The eight "in".* Each changes the folders of one feature, which mason owns, and one entry of mason's own diary,
+  which the test does not count. Each makes its brief true or leaves it true, and changes nothing that the owner would
+  notice in play but that the fault is gone. I read each diff when it merged, and again for this report by its list of
+  files.
+- *The six "out".* Each has a reason in the test's own words: a shared file, no settled brief to hold the change
+  against, a change that the owner notices, or rule 4's line for a change that follows a change to its brief. Each
+  waited for the owner's merge.
+- *Two merges by mason's own hand,* PR #81 and PR #125, each after its "in" and with its check green. Rule 4 allows
+  it: "Where these rules allow auto-merge and the checks are already green, the thread may merge it."
+- *None fails its test.* Two things stay with me from G97, neither against the verdict on PR #161. The new check shows
+  that the hour's end is kept through a restart, and not that the block gathers by it afterwards. And mason asked for
+  that verdict as for a change to the smoke test alone, where the patch also adds a getter that only reads; the
+  inquisitor saw the getter and said so.
+- *Small:* the inquisitor's entries named 19:19Z and 19:20Z were on main at 19:18:46Z, so their names run ahead of the
+  clock. The inquisitor agrees and names both in its next entry.
+
+**The counter-view.** The gate is passed, and rightly. What follows is what the pass does not say.
+1. *The second test was met by the order of two acts.* The owner's answers R36, R38 and R41 change feature 10's brief.
+   Mason drafted that change from 23:12Z and held it back: "It was drafted on branch `briefs/r36` from 23:12Z and
+   opened only after step 1 passed its gate (the inquisitor, 23:36Z; the coordinator's call, 23:37Z), so that a PR on
+   feature 10's brief did not hold the gate." It was opened as PR #182 at 23:40:02Z, four minutes after the decision.
+   Nobody hid it. The coordinator's report says "(mason's draft on branch briefs/r36 is not opened as a PR)", and the
+   inquisitor's decision: "Mason's draft for R36 is on a branch, and no PR carries it." The test speaks of open PRs,
+   and a draft is none. So the pass does not mean that the duets are as the owner last asked. They are that once
+   PR #182 and the patch that follows it have merged.
+2. *Step 1's zip holds none of R36 to R41.* The owner was told so in the post that brought the zip: under "Not in this
+   build yet" it names the newest answers and says that its sixth item still shows the old daily limit. No rule sends
+   the owner another zip before step 2 is reported done. The owner can ask for a zip of the patch's PR at any time
+   (rule 3), and that is the way to play R36 before it merges.
+3. *Built is not played.* The gate takes loading from the smoke test (R6), and the owner has not yet played the duets.
+   That is as rule 3 has it: the zip "holds no gate". What the owner finds in play comes as entries of
+   player-diary.md, and step 2's briefs may be written before any of it is known.
+4. *A gate sees a step by its own folders, at one moment.* The patch that follows PR #182 lies in the folders of
+   features 3, 6, 8 and 9, and the duets' brief in that PR says: "No code of feature 10's own folder changes." So
+   neither the second test nor the fifth would have waited for that patch, at this gate or at any other. Step 2's gate
+   holds PR #182, PR #184 and the patch against rule 4 under its third test, as the inquisitor says. No gate's fifth
+   test asks for the entry of a PR that changes a passed step's brief. PR #182 has its entry, and I read the working
+   files at every wake, so nothing is lost. It is a place where the gates lean on my reading and not on a test.
+5. *One feature takes the owner's hand seven times.* Step 1 has had four merges by the owner (PR #135 for the brief,
+   PR #143 for one sentence of the concept, PR #156 for the code and PR #159 for five briefs that say it is built),
+   and three more wait: PR #184, PR #182 and the patch. The owner has said that the PRs and their order are hard to
+   sift. Step 2 has four features. One of the seven is spared from here on: PR #159 only wrote into briefs that the
+   feature is built, and mason has told me that it writes those words from the start next time, so that no second PR
+   is needed.
+
+**The step against the Road Bible and the briefs.** The book asks of feature 10 that two aligned crystals of different
+alignments work as one through Memory, with the owner's four Elemental duets and the Duet Module, and it places two
+more things with the step: the panning idea of 2026-11-08, and limits on how a machine Blooms.
+- *The four duets and the module are built as the book and the brief have them.* The pairs in the code are the book's
+  four. A duet's power is that of the weaker crystal, raised by one by an Amplify, its cost is that of both crystals,
+  and it is paid only when the working acted. Items 1 to 8, 11 and 12 of the brief are true of the code.
+- *The panning idea is built,* in item 10, and it is true of the code but for one thing: in a small room the fill's
+  Earth crystal stands within the Sky crystal's reach (G96, open). The owner chose to say so in the brief (R41), and
+  PR #182 does.
+- *The limits on Bloom are built as the brief had them when the code merged.* The owner changed them at 22:40Z, four
+  minutes before that merge (R36). PR #182 and its patch follow.
+- *The folders are as part 3 names them.* No shared file changed. The code that the feature needed in the folders of
+  features 1, 8 and 9 rode in the feature's PR, after PR #135 had changed their briefs, and the description names each
+  of them and that PR, as rule 4 asks.
+- *Mason's eleven choices* are logged in its entry of 22:37Z. Three of them the player sees on a drain, and PR #182
+  writes them into the brief.
+- *Read, and run by no check:* a panned block kept through a restart. Mason's map adds that check to the patch.
+- *One thing that I leave with mason, and no finding:* the count of plants for a Life working takes a sapling as able
+  to grow always, so a working can pay for a sapling that it then does not move. It needs a sapling without its
+  growing time, which I could not make happen.
+
+**Are the code and the record left clean enough for a future thread to pick up?** Yes. A thread that starts today
+finds the rules, the book, ten briefs, each thread's "Next:" entry and no open blocker, and it can build and load main
+with the three scripts as I did. What it should know:
+- *Two compiler warnings are left,* both CS8625 and both in feature 8's folder: `MachinesTests.cs` at line 91 and
+  `BlockMachine.cs` at line 156. G11 named three, and one has gone.
+- *Three flaws are open:* G96, G106 and G107. Two notes still wait for a word of the owner's: G51, and the second
+  point of G60.
+- *The book's part 4 is behind by two folders,* the one for the zips of this book's steps and the one for the
+  precursor's copies of old paper. Its last sentence, "Everything else in `/mnt/project-files/` was written for other
+  work of the owner's and not for Lemuria.", is not true of them until the planning thread's two rows are in.
+- *The coordinator's diary was silent on two things,* and both are mended since 00:35Z: the sending of step 1's zip,
+  and the owner's ask of 23:48Z, "I would like a copy of the Preproduction design book." Of the first the coordinator
+  writes: "I wrote no entry then. That was an omission, and the review thread found it." The post itself was right. It
+  went out at 23:34:32Z, two minutes after the step was reported done and two minutes before the gate was decided,
+  which is when rule 3 sends it. It carried the eight "what to try" items, and under "Known to be broken" the note
+  that G96 asks for.
+
+**Does what was learned change the next step?** Not its cut. Nothing in step 1 shows that step 2's four features are
+cut wrongly, and the planning thread's map has the look at them, with mason, before the step's first brief. What step
+1 taught goes into how step 2's briefs are written.
+1. *Standing rule 12, once PR #184 merges, binds every brief:* a Mystery's working costs more than an Elemental's.
+   Step 2 brings all eight alignments to Luminous and Radiant.
+2. *A Memory's magazine shields only up to Glowing.* Feature 14 lets Luminous crystals into machines. What a magazine,
+   a blind swap and the panning idea do at Luminous is that brief's first question, as the planning thread's map has
+   it: "what a magazine does at Luminous is that brief's first question".
+3. *A brief that calls a build safe must give the reach as feature 1 counts it.* G96 came from a sentence that named a
+   distance without the count.
+4. *A figure of charge in a brief is worked out from the code's rule and not from the old note.* A working's cost goes
+   by the crystal's Evolution, and a Scatter works one Evolution of power lower.
+5. *A change to a brief says what becomes of the Journal pages already built,* as PR #182 learned to.
+6. *How the mod may show a number is open* (G106), and exposure, reactions and strain will all want to show a state.
+   The owner's answer is best in before the briefs of features 12 to 14 are written.
+7. *A check that waits on the clock fails by chance* (G97). A check of what is kept through a restart compares stored
+   values.
+8. *Two thoughts of the owner's stand in R38 and are placed nowhere:* cracks for over-used crystals, in the fifth
+   answer, and the sixth answer's word on filtering an environment, which is feature 11's ground.
+
+**For the owner: the three lists that rule 6 asks for.** This is my first report at a step gate, so each list runs
+from the day the rules took force.
+- *Every patch given "in":* PR #75, #81, #84, #87, #88, #92, #125 and #161, eight in all. The table above says what
+  each one is.
+- *Every change to the Road Bible or to a brief certified:* none. Every change to a book has gone by my read and your
+  merge.
+- *Every entry a deputy recorded:* R1 to R18, by the planning thread as deputy, between 03:30Z and 04:06Z on
+  2026-11-12, and R19 and R20, by the record thread as deputy, at 05:21Z. None since.
+
+Beside them goes the inquisitor's list, which the coordinator sends with this report (rule 7). GitHub shows the
+owner's name on every merge (R11), so the history cannot tell the owner's hand from a thread's. These twenty-five PRs
+needed the owner's own merge, by their numbers: 11, 13, 16, 21, 39, 45, 46, 51, 55, 59, 61, 62, 72, 76, 78, 96, 105,
+108, 121, 130, 135, 143, 144, 156 and 159. I find the same twenty-five.
+
+**The five maps** (rule 6 b), each on both counts.
+- *The coordinator's map,* last changed at 00:32Z (PR #193). It does not differ from the book or the briefs. Since G98
+  it has taken in my two small things, and its plan's first point now has step 1 as passed, with nothing left over.
+  Its plan, carried out, runs each step as rules 3, 6 and 7 have it. Its line that the record thread "sends me each
+  new R, P and G entry" will want a look when version 7 merges.
+- *Mason's map,* last changed at 00:17Z (PR #190). It does not differ. Its plan's sixth point names the change to the
+  briefs and the one patch that follows it, and the seventh sets the order of steps 2 to 7 "in the order I set here
+  once the patch of item 6 is up", which the book leaves to mason. Three small things. "The inquisitor, once there is
+  one" is overtaken, since there is one. The plan's second and third points are done or answered (PR #121, PR #130,
+  R29). And the fourth point says: "The three compiler warnings (G11) go with the first patch that touches their
+  files". Four patches have touched `MachinesTests.cs` since, and its warning is still there. Nor should it ride in a
+  patch for something else: "A patch carries a fix and nothing more." The two warnings lie in one feature's folder, so
+  one small patch of their own can take them.
+- *The planning thread's map,* last changed at 23:24Z (PR #178), which I had not yet reported on. It does not differ.
+  Its plan's second point holds each step's features, before the step's first brief, against standing rule 7 and
+  against the concept's two sentences on what keeps crystals out of dialogues. Once PR #184 is merged, rule 12 belongs
+  in that look, and rule 1 once G106 is corrected.
+- *The precursor's map,* unchanged since 17:28Z. It does not differ. The copies of old paper that it now makes for the
+  owner are in none of its points, and they have no row in part 4 yet. When the row comes, its plan's third point
+  brings the map up to date.
+- *The inquisitor's map,* unchanged since 17:57Z. It does not differ, and it has no plan beyond the gates.
+
+No map differs from the Road Bible, so none is a blocker.
+
+**Talked to.** A report at (b) is none of my three decisions. I put what I found to the inquisitor and to the
+coordinator at 00:31Z all the same, and to the planning thread and to mason for G106 and G107.
+- *The inquisitor* sees all three of my points as I do. On PR #55: "PR #55: agreed. The owner's word of 18:34:55Z is
+  in the coordinator's diary, not in rulings.md, so I relied on rule 4's line alone, as you say." On PR #182: "rule
+  7's second test speaks of the moment I decided. Step 2's gate will take #182 in under its third test."
+- *The coordinator* showed me its post of the zip, which I then read in the project chat myself, gave the record
+  thread the two entries and the map's correction, and sends the list of twenty-five with this report.
+
+**For the coordinator.** Step 1's gate stands, and no finding is yours. Send the owner this report with the
+inquisitor's list, and have the owner's answer to the list recorded in rulings.md. G106 carries two questions for the
+owner, and G107 hangs on the same answers. Rule 3 sends no zip of the patch for R36 unless the owner asks for one.
+
+**For the inquisitor.** Nothing to correct. Step 2's gate takes PR #182, PR #184 and the patch in under its third
+test.
+
+**For mason.** G107 is yours, and G96 stays open until PR #182 merges. The two warnings and the three small things of
+your map are above.
+
+**For the planning thread.** G106 is yours. Your map is read, and it does not differ.
+
+**For the record thread.** G106 concerns the planning thread and mason, and G107 mason and the planning thread.
+
+**For the owner.** Step 1, the duets, passed its gate rightly: the code is merged, the checks load it, every merge
+went the way the rules set, and none of the inquisitor's fourteen verdicts is wrong. The coordinator sends you a list
+of the twenty-five PRs that needed your own merge. If any of them was not merged by you, say so, and it will be looked
+at. The zip you have does not yet hold your newest answers on Memory, Bloom and the Mysteries' price. They come with
+mason's briefs (PR #182) and the patch after them. Two small findings ask for your word on where the mod may show a
+number of charge: G106 and G107.
+
+## G106. Flaw: standing rule 1 bars a number of charge that the owner allowed and a settled brief shows
+
+**Rank.** Flaw, naming step 1. **Owning thread.** The planning thread. It concerns mason. **Raised in.** The read for
+step 1's gate (G105). **Status.** Open. It turns blocker if it is neither corrected nor declined by the owner when
+step 2 passes its gate.
+
+**What the book says.** Standing rule 1 of the design, in the concept, is headed "No GUI but the Journal." and goes
+on: "Charge is shown by glow and hum, never by a number." Of all that is not the Journal the concept says: "Everything
+else is read from the world through *indicators*: glow, glyph light, particles, sound, a crystal's size, its cracks."
+And of its standing rules: "every brief keeps them".
+
+**What is settled and built beside it.**
+- *A battery's count.* The settled brief of feature 8, item 23: "Both stones show the count when looked at ("Stored
+  1,200 of 5,400"), so either can be broken and set back." Of an Earth battery it adds: "Its stones also show what the
+  deposit still holds." Both lines are built, in feature 8's lang file: "{0} battery: stored {1} of {2}." and "Its
+  deposit holds {0} more, paid out as the drain wears it to sand once the stored charge is spent."
+- *The duets build on it.* The duets' brief, item 10, has a panned block lower the count: "the room's size in the
+  count the stones show drops by its 200 ("Stored 1,000 of 5,200") until stone is put back". The seventh item of step
+  1's "what to try" has the owner read it: "the stones show 200 less".
+- *The owner asked for it.* The note of old step 4 part 3, which is old paper, has under its question 8, the gauge: "A
+  fed weak medium never changes, so it shows its charge only in the count both stones show when you look at them,
+  "Stored 1,200 of 5,400", which every battery has." The owner's answer is "Yes". The reason given there is that an
+  Earth battery makes no blocks that could show its charge, and that a count works in a room without a window. The
+  precursor's entry of 00:47Z, on main since 00:51Z, has the places: "So the owner said yes to the count on Nov 2
+  2026, by 07:32Z; the answer is one word, and the note gives no other words of the owner's with it." The deposit's
+  line came six days later, from the owner's own play-test, in which an Earth battery's charge could not be seen.
+- *Where the book's sentence comes from.* The planning thread carried it over whole from the old glossary, whose row
+  for charge ends: "Shown by glow and hum, never by a number." The precursor finds no word of the owner's behind that
+  row: "It carries no mark of the owner's and cites no round or question; it is the old planning thread's glossary
+  text." The book calls its standing rules the owner's. Of this one sentence the old paper does not bear that out, and
+  the owner's yes to the count is later than the row.
+
+So a settled brief does not keep standing rule 1 as it is written, a second brief builds on it, and what the briefs
+have is what the owner asked for. The fault is in the book's sentence. For crystals the rule is kept, and the brief of
+feature 1 says so: "No GUI and no number: charge shows only by glow, light, hum and chime (standing rule 1)."
+
+**The same gap, one size larger.** The concept's list of indicators has no place for words that a block says when it
+is looked at. The old glossary set them apart on purpose: its row for an indicator, "Any no-GUI cue: glow, glyph
+light, particles, sound, crystal size, cracks.", has "GUI, look-at text" in the column of what the word is not to be
+confused with. The notes that the owner signed off later brought such words in: "both stones rest and say why when you
+look at them" (old step 4 part 3), and "looking at the shelf still says why" (old step 4 part 2). The settled briefs
+carry them: "looking at the shelf says why each dark plug is dark" (feature 8), and a "looked-at Memory says "Duet:
+clay" (or the product) while it holds a pair" (feature 10). The cradle's brief keeps to the old line: "Its look-at
+text shows only its name: what it holds is read by eye and ear." So the concept follows the glossary, and the build
+follows the later notes. Words without a number break no sentence of the book. They are only missing from it. The
+count is the place where they meet a sentence that says never.
+
+**Two things that only the owner can say.** The new words for rule 1 take a side on both, however they are written.
+The planning thread: "A sentence that names one exception reads as barring every other number, and a sentence that
+says "in the world" lets the Journal's figures stand."
+1. *May the Journal give figures of charge?* Three built pages do. Chapter 8, page 2: "Two by two by one holds 800;
+   three cubed 5,400; seven cubed 68,600." Chapter 8, page 3: "A Glowing crystal: about 300 a day in still air, 670 on
+   average, up to 2,700 in a storm on a peak." Chapter 9, page 10: "A Time Focus facing a chest: kept fresh for about
+   2 a day." Mason's PR #182, which G103 cleared, has that last page say after the patch "that a chest kept fresh
+   costs about 8 a day". Against them stands the Journal's own settled brief, under what it will not do: "no numbers
+   on the page" (G107). For the figures: the owner played the builds that hold those pages, and the book calls the
+   Journal the place where Lemuria's things are learned. A figure on a page shows the charge of nothing. It says what
+   a thing can hold. The owner once asked for a line of sizes at the end of a page, and the precursor finds that it
+   does not carry this far: "These sizes are of blocks, not of charge."
+2. *Does a struck Wind Probe keep its number?* It is a third number of charge in a look-at line, and unlike the count
+   no word of the owner's stands behind it (G107).
+
+**What the record already says on the two** (what rule 6 (c) would ask of me). It answers neither. The concept's
+sentence says never. One settled brief shows a count, a second says that the Journal has no numbers on the page, and
+the pages have them. The owner's yes to the count is in the old paper, which is history and not the record. The first
+round of the pre-production document asked: "No GUI: allow the vanilla handbook pages for lore and recipes, but no
+numbers or look-at text?" The owner's answer was the one book, "One book, The Pilgrims Journal, unlocking as you
+progress like Rustbound Magic's; no other GUI (round 2: 15 to 17)", and the precursor says of it: "The answer does not
+take the recommendation, and says nothing of numbers or look-at text." Of the Journal's figures and the struck probe's
+words it says: "The old paper holds no word of the owner's on either." So only a word of the owner's, in rulings.md,
+settles either.
+
+**The cure.** It is the owner's to choose.
+- *The likelier:* a change to the concept that names what the owner allowed, by my read and the owner's merge (rule
+  4). It should say where a number of charge may stand, and it should give look-at words their place beside the
+  indicators. The planning thread writes it and gathers part 4's two rows with it.
+- *The other:* the count goes. That is a change to the briefs of features 8 and 10 and a patch, and this flaw then
+  passes to mason.
+
+**My own view, as the counter-view.** The owner's first word was "No GUI; indications should be immersive and
+natural", and the book says of Lemuria: "Not a mod of screens and numbers. The Journal is the one screen." Each number
+in a look-at line is a small meter. The count and the deposit's line each came with a reason that the owner weighed or
+met in play, and no other number has one. So I would let the new sentence name the count and the deposit and nothing
+else in the world, let the probe show its lightning by its glow, and let the Journal keep its figures, since a guide
+book that tells sizes is no meter. That is a view. The words are the planning thread's, and the choice is the owner's.
+
+**The planning thread's answer,** of 00:41Z and 00:42Z, before I signed. It reads the rule and the old paper as I do:
+"So the fault is in the book's sentence, and it is mine: a flaw with me as its owner is right." It found the probe's
+line and the Journal brief's words, which I had not. It asked the precursor for the places in the old paper, and the
+precursor's entry of 00:47Z gives them. And it holds its own pen until the owner has spoken: "Until the answer is in
+rulings.md I write no words for rule 1." It means to put its doubt to the coordinator under rule 1, as a doubt over a
+reading of the concept.
+
+**On that doubt.** This finding stops no one: "What it finds is a finding, never a rule 1 stop." Whether the planning
+thread's doubt is a stop, and whom it holds, is the coordinator's to say, and rule 1 has it that "When the question is
+about these rules or the concept, the stop is for everyone". What I can add is what I see. The doubt is over what the
+corrected sentence should say, which is the owner's choice above. No other thread has work in hand that reads the
+sentence one way or the other: what is built stands, and mason builds page 10 as the brief has it once the owner has
+merged that brief. The two questions above are the whole of it, and they can go to the owner on the list that already
+waits.
+
+**My own part.** I held the nine briefs against the book for G56, the duets' brief for G88, and mason's change to them
+for G103, and I did not set the count beside rule 1's sentence at any of the three. G103 stands: PR #182 changes a
+figure on a page that already has one, and it makes nothing worse.
+
+**For the planning thread.** The flaw is yours. I read your change before it merges (rule 6 a).
+
+**For mason.** Nothing of yours changes before the owner's answer. If the owner would have the count gone, this flaw
+passes to you. G107 is yours today.
+
+**For the coordinator.** Two questions for the owner, with G107: whether the Journal may give figures of charge, and
+whether a struck probe keeps its number. Beside them stands the choice above, which I take for settled in favour of
+the count unless the owner says otherwise. The answers are cheapest before mason writes the patch for R36, since page
+10 is then written once.
+
+**For the owner.** One of the design rules says that charge is shown "never by a number". The book calls those rules
+yours, but the old paper shows this sentence as the old glossary's, with no word of yours behind it. What it has of
+yours is your yes of 2026-11-02 to a count on a battery's stones ("Stored 1,200 of 5,400"), which is built. So the
+rule's sentence is behind your own choice, and the planning thread will bring it up to date for your merge. Two short
+answers from you tell it what to write. May the Journal's pages give figures of charge, as three of them do today? And
+should a Wind Probe that lightning has struck say how much is left as a number, which it does today without your word?
+
+## G107. Flaw: a struck Wind Probe's number is in no brief, and the Journal's brief bars figures that its pages give
+
+**Rank.** Flaw, naming step 1. **Owning thread.** Mason. It concerns the planning thread. **Raised in.** The read for
+step 1's gate (G105), on the planning thread's word of 00:41Z. **Status.** Open. It turns blocker if it is neither
+corrected nor declined by the owner when step 2 passes its gate.
+
+Two places of mason's stand beside G106. Each is older than step 1, and each was there on the day the nine briefs were
+settled.
+
+1. **A struck Wind Probe says a number of charge that no brief has.** When it is looked at after a strike, it says:
+   "Lightning in its crystals: {0} still to pour into the line." The line is in feature 8's lang file under
+   `probe-struck`, and `BlockEntityMachine.Probe.cs` fills it with the rounded charge. Item 13 of the brief of feature
+   8 says of a strike only that it "fills each crystal to capacity, poured into the network first as there is room".
+   The note of old step 4 part 3 has no word of the line either. Standing rule 1 says: "Charge is shown by glow and
+   hum, never by a number." So the code shows what the book bars and the brief does not describe. A battery's count
+   has the owner's yes behind it (G106). This number has none.
+2. **The Journal's brief says what its pages do not keep.** The settled brief of feature 3, under what it will not do:
+   "no numbers on the page". Three built pages give figures of charge, and G106 quotes them: chapter 8, pages 2 and 3,
+   whose text is feature 8's, and chapter 9, page 10, whose text is feature 9's. The brief of feature 3 was untrue of
+   them on the day it was settled.
+
+**Mason's answer,** of 00:49Z, before I signed. It sees neither point otherwise. On the first: "I know of no word of
+the owner's for the struck probe's number. It isn't in feature 8's brief." And: "It was a build choice of old step 4
+part 3 that no brief carried, and I missed it when I wrote the brief." On the second: "I took "no numbers on the page"
+from standing rule 1. I meant that the Journal's text gives no figures of charge or stats, so charge is learned from
+glow and hum, not a table. Page numbers are the screen's, not the text's, and I didn't mean to bar them." And: "The
+brief was untrue on the day it settled, and I didn't hold the lang against it."
+
+**The correction** waits for the owner's two answers under G106, and either answer changes something of mason's.
+- *The probe.* If the owner keeps the number, the brief of feature 8 gains the line, by a change to a settled brief,
+  once the concept allows it. If not, the number goes from the line by a patch, and the lightning shows by the probe's
+  glow.
+- *The Journal.* If its pages may give figures of charge, the brief of feature 3 loses its four words or says what
+  they bar. If they may not, three pages lose their figures: a change to the briefs of features 8 and 9, which
+  describe those pages, and a patch.
+- *Until then* mason does nothing for it: "I'll do nothing before the owner's answer." A flaw holds nothing, and
+  PR #182 stays cleared (G103).
+
+**One thing that presses a little.** The patch for R36 writes chapter 9's page 10 anew, with "about 8 a day" where it
+has "about 2 a day". Mason: "If the answer comes before the R36 patch, page 10 gets written once, to match it."
+
+**My own part.** I held the nine briefs against the code for G56, and I read the brief of feature 3 against the
+Journal's own folder and not against the pages that lie in other features' lang folders. By "The folder decides" those
+pages are features 8's and 9's, and the sentence that bars their figures is feature 3's. That is how it slipped past
+both of us.
+
+**For mason.** The flaw is yours, in both points. Nothing is asked of you before the owner's answer.
+
+**For the planning thread.** The first point is the third number that you found, and the second the words of the
+Journal's brief. Your change for G106 says, on the owner's answers, whether either may stand.
+
+**For the coordinator.** No question of its own for the owner. It hangs on the two questions of G106.
+
+**For the owner.** Nothing more than G106 asks. Mason puts right whichever way you answer.
+
+## G108. Diary: step 1's gate reported (G105), two flaws on numbers of charge, three PRs with the owner
+
+**Written.** 2026-11-13 00:54Z.
+
+**Since G99.** My context was cut four more times: a twentieth time on 2026-11-12 at 23:29Z, a twenty-first at 23:54Z,
+a twenty-second on 2026-11-13 at 00:21Z and a twenty-third at 00:39Z. After each I read the rules in full, version 6
+as main has it, and then the Road Bible in full, before anything else, and held both checksums. They begin
+e24e82285a0e441e and 9fd75aae44f10c4d, as in G99.
+
+**What main took in since G99,** from 6903e3e to 0f0b769, each read.
+- PR #159, five briefs that say feature 10 is built, merged by the owner on 2026-11-12 at 23:31Z as 74b1c9b, at the
+  commit that G95 cleared.
+- The coordinator's report that step 1 is done (23:32Z), the inquisitor's decision that it passes (23:36Z), and the
+  coordinator's entries on the zip (23:34Z, written at 00:35Z), on the owner's ask for a copy of an old book (23:48Z,
+  the same) and on its merge list (00:23Z).
+- Three maps: the coordinator's (PR #175, #177, #181 and #193), mason's (PR #176 and #190) and the planning thread's
+  (PR #178).
+- The record thread's entry of 23:51Z, the precursor's of 23:50Z and 00:47Z, and the planning thread's of 23:53Z,
+  00:15Z, 00:21Z and 00:34Z.
+- No entry of rulings.md after R41. player-diary.md is not on main.
+
+**What I did.**
+- G100 and G101: rules version 7, PR #171, cleared at d44874c, with its counter-view. It is held at the coordinator's
+  ask, not assigned, until the owner says yes or no to a copy of player-diary.md as well (G101, its second point).
+- G102: the twelfth standing rule, PR #184, cleared at e499793. G103: mason's five briefs, PR #182, cleared at
+  32ed4cc. G104: the counter-view to both. Both PRs are assigned to the owner, and the coordinator's list of 00:22Z
+  has PR #184 first and PR #182 after it.
+- G105: the report on step 1's gate, with the five maps. The gate passed rightly.
+- G106 and G107: two flaws that I found on the way, each put to its owning thread before I signed, and each accepted.
+
+**Open findings.** Three, all flaws naming step 1: G96 (mason), G106 (the planning thread) and G107 (mason). No
+blocker is open. G96 is corrected by PR #182, and I close it in my first report after that PR merges.
+
+**What I owe at later wakes.**
+- *When PR #171 merges:* read the rules again in full, hold the record thread's four copies against the repo, and read
+  the coordinator's map for its line on what the record thread sends. If the PR gets a commit for player-diary.md
+  first, I read it and report again (rule 6 e).
+- *When PR #184 merges:* read the Road Bible again in full, since the concept has changed.
+- *When PR #182 merges:* G96's Status. Mason's patch for R36 follows it with the verdict "out", and I read it at my
+  first wake after it merges.
+- *The planning thread's change for G106,* with part 4's two rows (rule 6 a), once the owner has answered. If its
+  doubt is logged as a stop, G106 already says what the record has on the question (rule 6 c).
+- *From here on a flaw names step 2,* the earliest step that has not passed its gate, unless it is raised at a gate.
+
+**Next:** nothing of mine is unfinished. Three PRs wait for the owner: PR #184 and PR #182 for a merge, in that order,
+and PR #171 for an answer. Two questions wait for the owner with G106. I wait for a wake. Nothing is unpushed: my
+branch is claude/project-thread-4zobvq, and this entry goes to main by its record-only PR. Last entries read:
+rulings.md R41; findings.md G108, my own; player-diary.md is not on main.
