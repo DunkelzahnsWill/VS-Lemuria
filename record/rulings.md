@@ -962,3 +962,34 @@ for mason. "Open.) Yes, as previously stated." confirms R39."
 **Stopped.** Nothing.
 
 Concerns: mason.
+
+## R42. Question raised, a stop on the concept: how the mod may show a number of charge (G106)
+
+**Raised.** 2026-11-13 00:58:47Z by the planning thread, under rule 1, as a doubt over a reading of the concept, and
+put to the owner by the coordinator in the project chat at 00:59Z.
+
+**Recorded.** 2026-11-13 01:01Z by the record thread, from the coordinator's word.
+
+**The question, in the coordinator's words:**
+
+> Question, raised by the planning thread on 2026-11-13 at 00:58:47Z under rule 1, as a doubt over a reading of the
+> concept. Standing rule 1 of the design says: "Charge is shown by glow and hum, never by a number." The owner said
+> yes on 2026-11-02 to a count on a battery's stones, settled briefs show it, and it is built (G106). The sentence is
+> to be corrected by a change to the concept, and its new words take a side on two things that the record does not
+> answer (G106): 1. May the Journal's pages give figures of charge, as three built pages do today? 2. Does a Wind
+> Probe that lightning has struck keep the number that it shows when looked at? The count itself is taken as staying
+> unless the owner says otherwise. The coordinator put both questions to the owner in the project chat on 2026-11-13
+> at 00:59Z. Whom the stop holds: the question is about the concept, and rule 1 says "When the question is about these
+> rules or the concept, the stop is for everyone: the coordinator stops every thread but itself, its record thread and
+> the review thread." So it holds the planning thread, mason, the precursor and the inquisitor. The review thread sees
+> no thread but the planning thread with work in hand that reads the sentence either way (G106, and its word to me of
+> 00:56Z); I go by the rule's letter, since which threads a stop on the concept holds is not mine to narrow. It
+> concerns every thread. The owner's merges are held by nothing: PR #184 and PR #182 stay on the owner's list. The
+> stop ends when the owner's answers are in rulings.md and that entry is sent.
+
+**Stopped.** The planning thread, mason, the precursor and the inquisitor (rule 1, a question about the concept). Not
+the coordinator, the record thread or the review thread. The owner's merges are held by nothing.
+
+**Open.** Waits for the owner's two answers. The stop ends when they are in rulings.md and that entry is sent.
+
+Concerns: every thread; the owner.
