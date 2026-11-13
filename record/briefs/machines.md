@@ -230,8 +230,7 @@ old paper differ, this brief is the record.
     facing into the room works it too. A stone working a battery does only that.
 22. **Its Elemental.** The fill's aligned crystals name it, Fire, Ice or Earth, and crystals of any other alignment in
     either stone sit idle (J3, J4), save a Sky and an Unaligned crystal cycled or swapped by a drain's Memory (item
-    18); a fill
-    with none, or with two Elementals, names none, and the battery rests. A battery holding a count stays its Elemental
+    18); a fill with none, or with two Elementals, names none, and the battery rests. A battery holding a count stays its Elemental
     until the count is spent. Sky and the Mysteries name no battery.
 23. **Filling and draining.** The fill takes only what lifts its network above three quarters; the drain pays back 4 in
     5 of what was stored, only while its network is below half, never past half. Each stone moves up to 200 an in-game
