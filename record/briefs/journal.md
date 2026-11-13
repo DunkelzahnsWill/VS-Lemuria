@@ -44,7 +44,9 @@ paper differ, this brief is the record.
    only: what to build and set, never how the player gets about to do it (the owner, 2026-11-02). The author's mix-up
    of Light and Life may slip in once. It says "vug", not geode, and "a handful of seedlings" (old step 1's
    play-test). Quicken is the first page of the Hidden Vocabulary and is named only once it is found; Crystal
-   Machines' last page hints at it without naming it.
+   Machines' last page hints at it without naming it. Naked Evocations' fifth page says a working spends a tenth of a
+   full crystal, so ten empty it; with R36 it adds that some crystals met later spend four times as much (feature 6,
+   item 2; R38, 4; not built yet).
 
 ## Where the Journal meets other features
 

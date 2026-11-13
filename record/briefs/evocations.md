@@ -19,7 +19,8 @@ a1aae13. Where this brief and the old paper differ, this brief is the record.
 1. Hold right-click with a charged aligned crystal in hand. It *winds up* for 5 seconds, its own note swelling over
    its hum in a slightly softer voicing, to half a full hum's volume at most. Let go after that and the *naked
    evocation* fires at the block or creature you look at, as far as its range; let go sooner and nothing happens.
-2. A cast spends a tenth of a full crystal: 10 charge from a Glittering crystal, 20 from a Glowing one. A crystal
+2. A cast spends a tenth of a full crystal: 10 charge from a Glittering crystal, 20 from a Glowing one. A Mystery's
+   cast (feature 9) spends 4 times that, 40 and 80 (R36; R38, 4; standing rule 12; not built yet). A crystal
    holding less only clicks dully. From a stack, a cast spends one crystal's charge, and that crystal leaves the stack
    for a free slot, or drops at your feet, so the hand keeps the full ones.
 3. **A miss is free.** A cast that finds nothing it can act on fizzles in a puff of its colour, costing no charge and
@@ -109,8 +110,8 @@ a1aae13. Where this brief and the old paper differ, this brief is the record.
   its source instead of a player (`CastContext`), so a Focus or Scatter does exactly what a cast does, at a tenth of
   the charge, under feature 8's rules (its reach, its containers, its claim rule, a felling, the shelf).
 - **The Mysteries (feature 9)** cast Bloom, Wither, Rewind and Progress through this casting, unchanged: the wind-up,
-  over-drive, cost, range and area above are this feature's; what each of the four does lies in feature 9's folder
-  (`Effects.More`, a table that feature fills) and feature 9's brief describes it.
+  over-drive, cost (four times an Elemental's, item 2), range and area above are this feature's; what each of the four
+  does lies in feature 9's folder (`Effects.More`, a table that feature fills) and feature 9's brief describes it.
 - **Feature 1's crystal** gets its casting from this feature's patch, `evocations-crystal.json`.
 - **The Journal (feature 3)** opens Naked Evocations when a cast acts; this feature raises the event.
 
@@ -133,9 +134,9 @@ a1aae13. Where this brief and the old paper differ, this brief is the record.
 
 ## Settings
 
-`CastWindUpSeconds` 5, `OverdriveSeconds` 15, `CastCostShare` 0.1, `OverdriveCostMultiplier` 2,
-`OverdriveCrackChance` 0.33, `EvocationRangeGlittering` 8, `EvocationRangeStep` 4, `TremorRise` 2,
-`GalePushGlittering` 6, `GalePanningYield` 0.5. The area is not a setting.
+`CastWindUpSeconds` 5, `OverdriveSeconds` 15, `CastCostShare` 0.1, `MysteryCastCostMultiplier` 4,
+`OverdriveCostMultiplier` 2, `OverdriveCrackChance` 0.33, `EvocationRangeGlittering` 8, `EvocationRangeStep` 4,
+`TremorRise` 2, `GalePushGlittering` 6, `GalePanningYield` 0.5. The area is not a setting.
 
 ## Claims
 

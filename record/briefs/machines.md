@@ -35,8 +35,11 @@ old paper differ, this brief is the record.
    its front is the face toward you, so you stand where a Focus will look (a Motor's sockets toward you).
 4. **Charge.** A machine draws from the network of Active sparkstone it touches. The unit is the *working*, one
    crystal's turn: 1 charge at Glittering's power, 2 at Glowing's, 4 at the power of Luminous (Actions-to-Charge, old
-   step 4 part 2). Nothing done, nothing paid. A network that cannot pay leaves its machines idle. Machines pause
-   while their chunk is unloaded and do not catch up.
+   step 4 part 2). A Mystery's working (Life, Death, Time or Rust, feature 9) costs 4 times an Elemental's at the same
+   power: 4, 8 and 16 (R36; R38, 3 and 4; standing rule 12; not built yet). Only the evocation costs more: a Mystery
+   crystal as a Refine block's pattern or giving a Motor its torque costs as any crystal does, and what it gathers is
+   unchanged. Nothing done, nothing paid. A network that cannot pay leaves its machines idle. Machines pause while their
+   chunk is unloaded and do not catch up.
 5. **Context.** A machine works out what touches it (an Amplify, Memory, a shelf, a container, its network) only when
    it or a block touching it is placed or removed, and on a rod tap: it never polls.
 
@@ -50,6 +53,8 @@ old paper differ, this brief is the record.
      clicked). A Free block has no front to turn.
    - Right-click a crystal in a machine's socket: it is *Dormant* and sits out its turn, its plug dark, until the next
      right-click (part 2's question 1: "Dormant", never "rest", which is the cradle's).
+   - Right-click a Memory anywhere but on a crystal in it: it switches between lending a duet's pair and cycling
+     (item 18; not built yet).
    - Every tap makes the machine read what touches it again.
 
 ### The verbs
@@ -88,11 +93,12 @@ old paper differ, this brief is the record.
      each replanted, and berries and fruit. Aimed at a tree's log it *fells* the tree through the game's own felling,
      as an axe does (only what an axe fells as a tree), its logs, sticks and saplings into the container, for one
      working for each 1, 9 or 27 logs by power, in full or not at all, leaves free.
-   - *Life, Death, Time, Rust* (feature 9's crystals): Bloom, Wither, Rewind and Progress, by the rules by hand. A plant
-     takes Bloom once an in-game day, hand or Focus (K4), and a Life working pays its cost once for every 9 plants it
-     would move on, rounded up, in full or not at all, so a network that cannot pay it all blooms nothing that working
-     (feature 10's brief, item 11, R32; built with feature 10, PR #156); a Death Focus with a Glowing crystal withers
-     what stands in front of it (K5); a Time or Rust Focus works a container only when it has a full measure to move.
+   - *Life, Death, Time, Rust* (feature 9's crystals): Bloom, Wither, Rewind and Progress, by the rules by hand. Inside
+     a machine a plant takes Bloom at every working, with no limit of once a day, while by hand the limit stays (K4;
+     R36), and a Life working pays its Mystery cost (item 4) once for every 9 plants it would move on, rounded up, in
+     full or not at all, so a network that cannot pay it all blooms nothing that working (feature 10's brief, item 11,
+     R32; built with feature 10, PR #156); a Death Focus with a Glowing crystal withers what stands in front of it (K5);
+     a Time or Rust Focus works a container only when it has a full measure to move.
    - *Unaligned*: Quicken (below), and the shelf's work (below).
    Each working sends a short streak of sparks in its crystal's colour to the target and plays its evocation's sound
    there, softer than a cast.
@@ -181,17 +187,28 @@ old paper differ, this brief is the record.
     machine, it holds a magazine of 2 crystals (4 sockets' room), set in and taken out as sockets are. After each turn
     the crystal that just worked moves to the bottom of the magazine and the first one cycles into its place, where it
     fits; a Dormant crystal is passed over, and turning costs nothing. A stone working a battery does nothing else, so
-    Memory against a fill stone stays still. Three more things are feature 10's brief (R32), each built with feature 10
-    (PR #156).
+    Memory against a fill stone stays still. Five more things are feature 10's brief (R32; R36, R38 and R41): the first,
+    the fourth and the fifth below were built with feature 10 (PR #156), and the rod's click and the Dead Socket are not
+    built yet.
     - *Its magazine keeps its crystals out of dialogues* up to Glowing, as a jar does (feature 1).
+    - *A rod's right-click* (not built yet) on a Memory, but not on a crystal in it, switches it between lending its
+      pair, as below, and cycling, so a Memory holding a duet's pair can cycle it like any two crystals (R36). A Memory
+      starts lending; its look-at line says which.
+    - *A Dead Socket locked into the Memory* (R38, 1; R41, 3; not built yet) takes none of the magazine's room. It makes
+      the Memory swap blind: when every awake crystal in the machine's sockets has worked once, everything in its
+      sockets changes places with everything in the magazine, empty places too, whatever the crystals are (R38, 2),
+      where each set fits; a drain works its two crystals in turn. Feature 10's brief, items 14 and 15, says when it
+      swaps, what fits and what it leaves. Twins a blind swap sets side by side in the open dialogue as always. A blind
+      Memory lends no pair.
     - *Duets.* A Focus's Memory holding both crystals of a duet works the duet in place of cycling, the pair giving the
       turn; a Duet Module in one of the Focus's sockets holds a second pair, swapped after each duet working.
     - *Memory on an Earth drain,* on any face but the one facing into the room. The drain holds one crystal in its
-      socket and cycles the rest, a turn with nothing to do passing at once: an Earth crystal wears the room as below,
-      for one step or until it cannot wear now; a Sky crystal pans one sand block of the room a turn into the container
-      touching the drain, at a working's cost; and an Unaligned crystal works a Control Shelf set against the drain,
-      whose one action there puts a block of the kind on the shelf from its input into the panned block nearest the
-      bottom, at a working's cost. A panned block keeps its place in the room until then (item 21).
+      socket, or two under a blind Memory, and cycles the rest, a turn with nothing to do passing at once: an Earth
+      crystal wears the room as below, for one step or until it cannot wear now; a Sky crystal pans one sand block of
+      the room a turn into the container touching the drain, at a working's cost; and an Unaligned crystal works a
+      Control Shelf set against the drain, whose one action there puts a block of the kind on the shelf from its input
+      into the panned block nearest the bottom, at a working's cost. A panned block keeps its place in the room until
+      then (item 21).
 19. **The reclamation plate,** `lemuria:reclamationplate`, made in the grid from a copper plate over polished rock: a
     thin plate on the floor under salt water, with no charge and no crystal. When a Fire Focus, not a hand cast, boils
     salt water anywhere in the column above it, it claims the game's own salt 1 time in 4 for each block boiled, into a
@@ -199,7 +216,8 @@ old paper differ, this brief is the record.
 20. **The Dead Socket,** `lemuria:deadsocket`, made in the grid from copper nails and strips over polished rock: a
     fitting for one socket of a Motor, giving a Glittering crystal's torque, 0.25, for 4 charge an in-game hour from its
     line, an Amplify doubling both. It stores nothing and stops as soon as its line is cut, empty or Dormant. In the
-    shelf's socket it is the shelf's stop (above); in any other socket it does nothing.
+    shelf's socket it is the shelf's stop (above); locked into a Memory it makes the Memory swap blind (item 18; not
+    built yet); in any other socket it does nothing.
 
 ### Elemental batteries (old step 4 part 3)
 
@@ -211,9 +229,9 @@ old paper differ, this brief is the record.
     until stone is put back; the drain remembers it through a restart. Any other Focus or Gather of that alignment
     facing into the room works it too. A stone working a battery does only that.
 22. **Its Elemental.** The fill's aligned crystals name it, Fire, Ice or Earth, and crystals of any other alignment in
-    either stone sit idle (J3, J4), save a Sky and an Unaligned crystal cycled by a drain's Memory (item 18); a fill
-    with none, or with two Elementals, names none, and the battery rests. A battery holding a count stays its Elemental
-    until the count is spent. Sky and the Mysteries name no battery.
+    either stone sit idle (J3, J4), save a Sky and an Unaligned crystal cycled or swapped by a drain's Memory (item 18);
+    a fill with none, or with two Elementals, names none, and the battery rests. A battery holding a count stays its
+    Elemental until the count is spent. Sky and the Mysteries name no battery.
 23. **Filling and draining.** The fill takes only what lifts its network above three quarters; the drain pays back 4 in
     5 of what was stored, only while its network is below half, never past half. Each stone moves up to 200 an in-game
     hour for each Glittering crystal and 600 for each Glowing one. The two stones may sit on one network or two. A rod
@@ -253,7 +271,8 @@ old paper differ, this brief is the record.
   does, with the machine as its source); feature 9's evocations reach it through feature 6. It raises the events
   feature 3 listens to: a machine carved, a cradle quickened.
 - Saved: each block's crystals with charge and cracks, Active or Dormant and Dormant crystals, a Refine block's
-  progress, shelf items and whether each is Dormant or quiet and why, Memory's crystals, Dead Sockets, a battery's
+  progress, shelf items and whether each is Dormant or quiet and why, Memory's crystals, whether it lends or cycles and
+  its locked-in Dead Socket, Dead Sockets, a battery's
   count, the rock each Fire block was and the block an Earth drain wears; a machine's form and front are in its code.
 - **Cost.** A Focus or Scatter casts one line every 10 seconds for each crystal, four at most, and one working touches
   at most 27 blocks in a Focus or 81 in a Scatter; a Gather reads its surroundings every 30 seconds; a Refine block
@@ -276,7 +295,7 @@ old paper differ, this brief is the record.
 0.25, `DeadSocketTorque` 0.25, `DeadSocketChargePerHour` 4, `ProbePerDayGlittering` 400, `ProbePerDayGlowing` 1200,
 `ProbeCalmShare` 0.25, `BatteryChargePerBlock` 200, `BatteryReturnShare` 0.8, `BatteryPerHourGlittering` 200,
 `BatteryPerHourGlowing` 600, `BatteryFillAbove` 0.75, `BatteryDrainBelow` 0.5, `EarthChargePerStep` 50,
-`BatteryMaxSide` 7. Reaches, areas, room and the one-Amplify limit are not settings.
+`BatteryMaxSide` 7, `MysteryCostMultiplier` 4. Reaches, areas, room and the one-Amplify limit are not settings.
 
 ## Claims
 
@@ -304,7 +323,8 @@ old paper differ, this brief is the record.
   (main at a1aae13), the containers asked no claim, so a shelf outside a claim drew stock from an input chest just
   inside it (G61). The fix follows this brief as a patch.
 - **Uses by hand.** Setting crystals into a machine's sockets or Memory and taking them out, putting items on the shelf
-  and taking them off, and the rod's taps (switching, turning, a crystal or a shelf item) are uses by hand of a
+  and taking them off, locking a Dead Socket into a Memory, and the rod's taps (switching, turning, a Memory, a
+  crystal or a shelf item) are uses by hand of a
   Lemuria block: with the switch on they need the claim owner's permission, as a chest does, and with it off they open
   inside another player's claim (R9). Making a rod from a placed crystal and carving with the chisel are Lemuria's
   workings in a player's hand: with the switch on they check that the player may build there, and with it off they
@@ -367,6 +387,8 @@ old paper differ, this brief is the record.
     it: the fire does not spread into the claim (needs a second player; after the G58 and G61 patches).
 18. Restart: crystals in sockets, Dormant blocks and crystals, shelf items, Memory's crystals, Dead Sockets, a
     refining's progress and a battery's count are all still there.
+19. A Glittering Life Focus at a crop blooms that one plant every 10 seconds for 4 charge a working; a Glowing one
+    blooms the 3×3 in front of it for 8; a Glittering Fire Focus lighting a firepit pays 1.
 
 ## Open questions
 
