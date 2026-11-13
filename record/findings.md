@@ -7083,3 +7083,264 @@ blocker is open. G96 is corrected by PR #182, and I close it in my first report 
 and PR #171 for an answer. Two questions wait for the owner with G106. I wait for a wake. Nothing is unpushed: my
 branch is claude/project-thread-4zobvq, and this entry goes to main by its record-only PR. Last entries read:
 rulings.md R41; findings.md G108, my own; player-diary.md is not on main.
+
+## G109. Report under rule 6 (c): the stop of R42, and what the record already says on a number of charge
+
+**Written.** 2026-11-13 01:40Z. Woken by the record thread on 2026-11-13 at 01:00:52Z, on the coordinator's word, for
+the stop that R42 logs.
+
+**The short of it.** R42 puts two questions to the owner. On the first, whether the Journal's pages may give figures
+of charge, the record does not answer: its letter says no, but the letter is weak there, and two readings stand. On
+the second, whether a struck Wind Probe keeps its number, the whole record points one way: as it stands, the number
+has no leave. What only the owner can say on the second is whether to give it leave now, and that is a new choice and
+no reading. G106 said of the two "It answers neither.", and R42 has that from me. For the second it was too short, and
+this report puts it right. Nothing here changes whom the stop holds or what the owner was asked. Both questions are
+with the owner, and the coordinator leaves both there.
+
+**What I read.**
+- *After a twenty-fourth cut of my context,* on 2026-11-13 at 01:03Z: the rules in full, version 6, and then the Road
+  Bible in full, before anything else. Both checksums are as in G108.
+- *R42,* word for word, on main since 01:02Z, and the entries that the stop brought: mason's and the inquisitor's of
+  01:00Z, the precursor's of 01:01Z, and the planning thread's of 01:05Z, which has its doubt in its own words. With
+  them the coordinator's entry on its post to the owner and the record thread's entry, both named for 01:00Z.
+- *The coordinator's two posts to the owner* in the project chat, of 00:58:50Z and 00:59:15Z. They ask what G106 asks,
+  and they give my own view as a view that holds nothing. The owner had not answered when I signed: at 01:39Z the chat
+  held nothing after the second of them.
+- *For the question itself:* every entry of rulings.md, R1 to R42, searched by program for a word on numbers, figures,
+  look-at text, pages, the count and the probe, and each hit read; the ten briefs the same way; all 61 pages of the
+  Journal, sentence by sentence, for digits and for shares; every line of the lang files that fills in a value; the
+  probe's code; every diary, searched for the same words; my own findings G1 to G108; and the three open PRs, which
+  stand at the commits that G100, G102 and G103 read.
+- *The answers to what I put to two threads before signing:* the coordinator's of 01:15Z and the planning thread's of
+  01:37Z, in three parts. The planning thread names places that I had not, and they are in the lists below.
+
+**The question,** as R42 has it in the coordinator's words: "1. May the Journal's pages give figures of charge, as
+three built pages do today? 2. Does a Wind Probe that lightning has struck keep the number that it shows when looked
+at?" And beside the two: "The count itself is taken as staying unless the owner says otherwise." The planning thread's
+entry of 01:05Z has the doubt as it told it: "Any words that I write for it take a side on two things that the record
+does not answer, and a reading of the concept is never a free choice (rule 1)."
+
+**What the record says on the count,** since both questions lean on it.
+- The concept, standing rule 1: "Charge is shown by glow and hum, never by a number." Of its standing rules the book
+  says: "every brief keeps them".
+- Two settled briefs, each merged by the owner, do not keep it. Feature 8, item 23: "Both stones show the count when
+  looked at ("Stored 1,200 of 5,400"), so either can be broken and set back." Of an Earth battery: "Its stones also
+  show what the deposit still holds." Feature 10, item 10, has a panned block lower "the room's size in the count the
+  stones show".
+- No ruling speaks of the count. The owner's yes to it is in the old paper, which is history.
+
+So the record contradicts itself on the count, and that is G106. It is the one place where the record itself sets the
+letter of rule 1 aside.
+
+**What the record says on the first question, the Journal's figures.**
+- *The concept reads both ways.* Rule 1 is headed "No GUI but the Journal." and goes on: "Charge is shown by glow and
+  hum, never by a number." Read widely, no number of charge stands anywhere in the mod. The book says what Lemuria is
+  not, "Not a power-grid mod with cables and meters." and "Not a mod of screens and numbers.", and standing rule 2
+  gives charge four words and no figure: "the charge level (empty, low, high, full)". Read narrowly, the sentence
+  speaks of how a thing in the world shows its charge, and a page that says what a room can hold shows the charge of
+  nothing. The book itself sets the Journal apart from the world: "Every other Lemuria item stays out of the handbook,
+  so the Journal is where they are learned. Everything else is read from the world through indicators".
+- *One settled brief says no, by its letter.* The brief of feature 3, under what the Journal will not do: "no numbers
+  on the page". Mason, who wrote it, meant figures of charge (G107): "I meant that the Journal's text gives no figures
+  of charge or stats, so charge is learned from glow and hum, not a table."
+- *Two more settled briefs keep the units of charge from the player.* The brief of feature 1, item 6, is headed
+  "Charge, read without a number." and says that a Glittering crystal "holds 100 charge (units nobody sees)". The
+  brief of feature 6, item 2, has the units as the design's own, "A cast spends a tenth of a full crystal: 10 charge
+  from a Glittering crystal, 20 from a Glowing one.", and the page that teaches the cast gives the share and leaves
+  the units out: "Each working spends a tenth of a full crystal, so ten empty it". The planning thread found this
+  second place.
+- *Why I do not take these letters for the answer.* Five things, each in the record. First, mason took the four words
+  from rule 1 and not from the owner (G107), so the brief is no second voice beside the rule: it is the wide reading
+  written down once more. Second, the words were never held against the pages, by mason or by me (G107), and mason
+  says of them: "The brief was untrue on the day it settled, and I didn't hold the lang against it." Third, the nine
+  briefs were to say what is built: the book has it that mason wrote each "from the signed-off notes as built,
+  play-test changes included", by the owner's answer R3. Fourth, the Journal's brief itself says whose those pages
+  are: "The text of a chapter whose lang lies in another feature's folder is that feature's, and its brief describes
+  it". The briefs of features 8 and 9, which describe them, bar no figure, and feature 8's item 23 gives the page's
+  own figures as facts of the design, after the words "Each block holds 200". Fifth, the units that "nobody sees" are
+  seen since the count, by the owner's own choice: the brief of feature 1 was behind the build there on the day it
+  settled.
+- *The pages.* Three give figures of charge, and G106 quotes them: chapter 8, pages 2 and 3, and chapter 9, page 10.
+  No page of chapters 1 to 7 gives one: those chapters tell of charge in shares. So figures in units begin with the
+  chapter on batteries, which came with the count, and its first page sends the reader there: "Look at either stone
+  for its count." The figures on its second page are in the units that the stones show.
+- *A change not yet merged takes one side.* PR #182, which G103 cleared, has the brief of feature 9 say that chapter
+  9's page 10 says "that a chest kept fresh costs about 8 a day". It leaves the four words of the Journal's brief as
+  they are. More on it below.
+- *No ruling speaks of it.* R1 to R41 hold no word on a number of charge, on a figure in the Journal or on look-at
+  text. R36 has the owner's one sentence on what the Journal is for: "Journal should already make clear the inherent
+  danger." It says nothing of figures.
+- *The old paper,* by the precursor's entry of 00:47Z, which is in the record: "The old paper holds no word of the
+  owner's on either."
+
+So on the first question two readings stand. Each is reasonable, and they lead to different work: the rule's new
+words, the Journal's brief, and three pages. The record does not answer it, and the owner rules (rule 1).
+
+**What the record says on the second question, the struck probe's number.**
+- *The concept bars it under either reading.* The line is "Lightning in its crystals: {0} still to pour into the
+  line.", and it is read off a block in the world. Wide or narrow, that is charge shown by a number.
+- *No brief has it.* Item 13 of the brief of feature 8 says of a strike only that it "fills each crystal to capacity,
+  poured into the network first as there is room", and the brief's play step for it says only that the probe "is
+  struck and its crystals fill". Part 3 of the book has it that what lies in a feature's folders is that feature's,
+  "and that feature's brief describes it". This line is described nowhere.
+- *No text of the mod tells the player of it,* as the planning thread found. The Journal sends the reader to a
+  battery's count, and of a probe it says only "a strike fills its crystals". The probe's own description says the
+  same: "a strike of lightning fills them".
+- *No ruling speaks of it,* and no entry of any diary before today.
+- *The old paper has nothing for it.* The precursor says of the line's words that they "are nowhere in the old paper".
+- *Mason, whose code it is* (G107): "It was a build choice of old step 4 part 3 that no brief carried, and I missed it
+  when I wrote the brief."
+- *What speaks for it* is the code alone, and one likeness: the count is a number in a look-at line too. But the count
+  was put to the owner with a reason, in the old note's words: "A fed weak medium never changes, so it shows its
+  charge only in the count both stones show when you look at them". That reason does not reach a probe, whose crystals
+  stand on its top under the open sky.
+
+So on the second question I find no two readings, and no place in the record that gives the number leave. As the
+record stands, its answer is no. That is the record's letter and not the owner's word: the owner was never asked
+before today, and is asked now. If the owner gives the number leave, it is a new exception beside the count, and the
+concept and the brief of feature 8 are changed before anything else follows (rule 1). Until the owner does, the letter
+stands: the rule's new words would name the count and the deposit's line and no third number, and the first point of
+G107 would be corrected by taking the number out of the line.
+
+**Whether that closes half of the stop** is the coordinator's to say, since rule 1 has it: "If the record already
+answers it, the coordinator closes the stop with an entry in rulings.md that cites the place". The places would be
+standing rule 1 and item 13 of the brief of feature 8. I put this report's first two points to the coordinator and to
+the planning thread before signing. The planning thread's answer of 01:37Z: it tried five readings under which the
+number might stay, and "None holds." Of the one thing that speaks for the number, that the line was in the builds
+which the owner played, it says: "That is silence: no word of the owner's, and no note, sheet or brief has the line."
+And of its own word to the coordinator, that the record answers neither: it "was too wide for the probe". The
+coordinator's answer of 01:15Z: "I leave both halves with the owner and close neither from the record." Its reason:
+"the probe's half is a new choice that only the owner can make". For today I see it the same way: both questions were
+with the owner before I was woken, the first holds the stop whatever becomes of the second, and an entry that takes
+the number out an hour before the owner says to keep it would cost more than it saves.
+
+**What each answer changes,** so that the owner's words can be applied as soon as they come.
+- *The Journal may give figures:* rule 1's new words say so, or speak of the world alone. The Journal's brief loses
+  its four words or says what they bar. The three pages stay, and PR #182's sentence on page 10 is right as written.
+- *It may not:* three pages lose their figures. Where a brief names a figure on a page, that brief is changed first,
+  and then a patch follows. On main today neither the brief of feature 8 nor that of feature 9 names a figure on a
+  page. The brief of feature 9 will, once PR #182 is merged, and its sentence on page 10 is then put right before the
+  patch for R36 writes that page.
+- *A fringe that the new words must settle either way.* Nine pages, by my count and by the planning thread's, tell of
+  charge as a share or a multiple and give no figure: "a tenth of a full crystal", "four in five", "for twice the
+  charge". Nobody has doubted those, and PR #182 names one of them in the Journal's own brief: "Naked Evocations'
+  fifth page says a working spends a tenth of a full crystal, so ten empty it". The brief's four words, read at their
+  letter, would bar these too, and with them the sizes in blocks and the "about 75 logs" of a charcoal burn. So if the
+  owner's answer is no, the new sentence should say that it means figures of charge, in the units that a battery's
+  count shows, unless the owner says that the shares go too.
+- *The probe keeps its number:* the concept names it, the brief of feature 8 gains the line, and the code stays.
+- *It does not:* the number goes by a patch. The line need not go with it. Its words "still to pour into the line" can
+  stand with no figure, as a resting battery's stones "say why", once look-at words have their place in the concept
+  (G106).
+
+**PR #182 and the stop.** The owner's merges are held by nothing, and rightly: a stop holds threads. One thing should
+be plain before that merge. On main no brief says that a page of the Journal tells of charge by a number. PR #182
+would be the first to say it, in the planning thread's count "in units once, and as a part or a multiple in two
+briefs", and one of the two is the Journal's own brief, which keeps its four words. Its description says of the pages
+only this: "Three Journal pages change to match". It does not set that beside the four words, and neither did my
+report: G103 did not see it. So the merge is no answer to R42's first question, and I ask that no thread reads it as
+one. The coordinator: "I will read the merge of PR #182 as no answer to question 1". G103 stands, since the PR changes
+a figure where a figure is and makes nothing worse (G106). If the owner's answer is no, the brief of feature 9 is
+changed once more before the patch for R36, and that is the order rule 1 sets: "If the ruling changes what the Road
+Bible or a brief says, that book is changed first".
+
+**What the stop holds today,** from the entries of the four threads.
+- *The planning thread:* nothing in hand but the words for G106. PR #171 waits for the owner's yes or no in any case,
+  and of a step there it says: "I ask the coordinator first whether the stop holds that step."
+- *Mason:* one small patch for the last two compiler warnings, built and pushed to a branch and not opened; the patch
+  for R36, which waits for PR #182's merge and after it for the stop's end; and G107.
+- *The inquisitor:* no verdict and no gate while the stop lasts.
+- *The precursor:* nothing in hand.
+
+The stop costs little while the owner's merges are still to come. It costs more from the minute PR #182 merges, since
+the patch that carries the owner's answers R36 to R41 into the game cannot begin before the stop ends.
+
+**The counter-view,** which holds nothing.
+1. *If the owner answers the first question and not the second.* The coordinator's word for that case: "If the owner
+   answers one and not the other, I ask again for the other and the stop stays." I would have it otherwise then. A
+   stop rests on a doubt between two readings: "If two reasonable readings of a term, a rule or an ask would lead to
+   different work". On the second question I find one reading, and a choice that the owner has not yet made is no
+   doubt over what the record means. With the first answered, the planning thread can write the rule's new words by
+   the record's letter, mason leaves the probe's line alone until the owner speaks, as a flaw lets it, and the second
+   question goes on as a plain question to the owner. The price is a second change to the concept if the owner later
+   keeps the number. What a stop would add at that hour is four held threads. It is the coordinator's to say, and I
+   say this once.
+2. *The stop holds the keeper of the old paper* on the very question that the stop is about. The precursor's answer on
+   what the old paper holds came at 00:47Z, before the stop. Had the stop come first, its own entry says what would
+   have followed: it waits for the entry that ends the stop, "which lets me resume; then questions on what the old
+   paper says". The coordinator narrows nothing there, and offers to put a needed question to the owner: "I do not
+   read that leave into the rule myself." That is right by the letter. The rules except one thread from every stop by
+   name: "No stop keeps a record thread from recording, sending or waking." A like sentence for the precursor's
+   answers would cost nothing and could shorten a stop. It is a thought for the next change to the rules, and the
+   owner's to want or not.
+3. *The letter of rule 1 is wider than this question,* as G106 said beforehand: four threads stop for a doubt that one
+   of them has work on. The coordinator went by the letter and said why: "I go by the rule's letter, since which
+   threads a stop on the concept holds is not mine to narrow." I raise nothing against that. Today the cost is one
+   small patch. On a day when a step is in the building it would be the step.
+4. *My own view of the two answers* is in G106 and has not changed: the Journal keeps its figures, the probe tells of
+   its lightning without a number, and the rule names the count and the deposit's line and nothing else in the world.
+
+**My own part.** G106 says of the two questions: "It answers neither." The planning thread's doubt and R42 both have
+that from me. For the first question it holds. For the second it was too short. I had set down that the concept says
+never and that no word of the owner's stands behind the probe's number, and I did not draw the plain end of it: as the
+record stands, the number has no leave, and what is asked of the owner there is a new choice.
+
+**One small thing for mason,** for the day G107 is corrected, and nothing before it. The three words "units nobody
+sees" in the brief of feature 1 want a look then, whichever way the owner answers: since the count, a player sees
+those units on a battery's stones.
+
+**For the coordinator.** The record does not answer the first question, and the owner rules. On the second its letter
+is no, and you leave that with the owner too, which for today I think right. The counter-view's first point is for the
+hour when one answer comes without the other. The merge of PR #182 answers nothing of R42.
+
+**For the planning thread.** Nothing is asked of you while the stop holds. When it ends: if the owner has said nothing
+of the probe's number, the record's letter is that the rule names no third number. If the owner's answer on the
+Journal is no, see the fringe above before you write the sentence.
+
+**For mason.** Nothing is asked of you while the stop holds. The small thing above rides with G107.
+
+**For the owner.** Four threads wait on two short answers from you, and your merges wait on nothing. The first
+question is the one that only you can settle: may the Journal's pages give figures of charge, as three do today? On
+the second, a struck Wind Probe's number, the record as it stands gives the number no leave, and the coordinator still
+asks you, because you were never asked. Merging PR #182 answers neither question.
+
+## G110. Diary: the stop of R42 reported (G109); both questions stay with the owner
+
+**Written.** 2026-11-13 01:40Z.
+
+**Since G108.** The record thread woke me on 2026-11-13 at 01:00:52Z under rule 6 (c), for the stop that R42 logs. My
+context was cut a twenty-fourth time at 01:03Z. After it I read the rules in full, version 6 as main has it, and then
+the Road Bible in full, before anything else, and held both checksums. They begin e24e82285a0e441e and
+9fd75aae44f10c4d, as in G108.
+
+**What main took in since G108,** from c20b3b1 to 1f0b831, each read.
+- R42, the stop, by PR #200 at 01:02Z.
+- The entries that the stop brought: mason's (PR #199) and the inquisitor's (PR #201) of 01:00Z, the precursor's of
+  01:01Z (PR #202) and the planning thread's of 01:05Z (PR #203).
+- The coordinator's entry on its post to the owner and the record thread's entry, both named for 01:00Z (PR #198).
+- No entry of rulings.md after R42. player-diary.md is not on main.
+
+**What I did.** G109: the report on what the record already says on R42's two questions. Before signing I put its
+first two points to the coordinator and to the planning thread. Both see them as I do, and the coordinator leaves both
+questions with the owner. The planning thread named places in the record that I had not, and the report has them.
+
+**Open findings.** Three, as in G108, all flaws naming step 1: G96 (mason), G106 (the planning thread) and G107
+(mason). No blocker is open. G109 raises no finding. It corrects one sentence of G106, which stays as it was written.
+
+**What I owe at later wakes.**
+- *When the owner's answers to R42 are in rulings.md:* read the entry. Then the planning thread's change to the
+  concept for G106, with part 4's two rows, before it merges (rule 6 a), and mason's changes to the briefs for G107,
+  the same way.
+- *When PR #171 merges:* read the rules again in full, hold the record thread's four copies against the repo, and read
+  the coordinator's map for its line on what the record thread sends. If the PR gets a commit for player-diary.md
+  first, I read it and report again (rule 6 e).
+- *When PR #184 merges:* read the Road Bible again in full, since the concept has changed.
+- *When PR #182 merges:* G96's Status. Mason's patch for R36 follows it once the stop has ended, with the verdict
+  "out", and I read it at my first wake after it merges.
+- *From here on a flaw names step 2,* the earliest step that has not passed its gate, unless it is raised at a gate.
+
+**Next:** nothing of mine is unfinished. The stop of R42 holds the planning thread, mason, the precursor and the
+inquisitor, and it does not hold me. Two questions wait for the owner under R42, and three PRs: PR #184 and PR #182
+for a merge, in that order, and PR #171 for an answer. I wait for a wake. Nothing is unpushed: my branch is
+claude/project-thread-4zobvq, and this entry goes to main by its record-only PR. Last entries read: rulings.md R42;
+findings.md G110, my own; player-diary.md is not on main.
